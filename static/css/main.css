@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+:root {
+       --bs-body-font-family: 'Montserrat';
+       }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    }
+
+.navbar {
+        font-weight: 600
+        }
