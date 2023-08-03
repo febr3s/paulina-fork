@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}{{country_name}}{% endblock %}
+
+{% block content %}
+<div class="container-fluid w-75 p-3">
+    <h2 class="ms-2"><a href="{{country_image_link}}" target="_blank"><img src="{{country_image}}" height="30"></a>
+        {{country_name}}'s copyright term</h2>
+
+    <table class="table">
+        <tbody>
+        {% for term in country_copyright_terms %}
+        {% if 'en' in term.labels %}
+        <tr>
+            <th scope="row">{{country_name}} is part of</th>
+            <td><a href="{{ url_for('term_page', term_id=term.id) }}">{{ term.labels['en'] }}</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+{% endblock %}

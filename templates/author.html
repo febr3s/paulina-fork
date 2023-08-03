@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}{{author_name}}{% endblock %}
+
+{% block content %}
+<div class="container-fluid w-75 p-3">
+<h2 class="ms-2">{{author_name}}
+  <a href="{{ url_for('works_list', author_id=author_id) }}" role="button" class="btn btn-outline-primary">Seach works</a>
+
+</h2>
+
+<table class="table table-light">
+  <tbody>
+    <tr>
+      <th scope="row">Image</th>
+      <td><a href="{{author_image_link}}" target="_blank"><img src="{{author_image}}" height="100"></a></td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td>{{author_description}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Nationality</th>
+      <td>{{author_nationality}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Gender</th>
+      <td>{{author_gender}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Date of birth</th>
+      <td>{{author_date_of_birth}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Occupation</th>
+      <td>{{author_occupation}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Place of birth</th>
+      <td>{{author_place_of_birth}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Country of birth</th>
+      <td>{{author_country_of_birth}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Date of death</th>
+      <td>{{author_date_of_death}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Age</th>
+      <td>{{author_age}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Wikipedia link</th>
+      <td><a href="{{author_wikipedia_link}}" target="_blank">{{author_wikipedia_link}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Commons link</th>
+      <td><a href="{{author_commons_link}}" target="_blank">{{author_commons_link}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Wikisource link</th>
+      <td><a href="{{author_wikisource_link}}" target="_blank">{{author_wikisource_link}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Wikiquote link</th>
+      <td><a href="{{author_wikiquote_link}}" target="_blank">{{author_wikiquote_link}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Is in public domain?</th>
+      <td>{{author_is_in_public_domain}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Missing/wrong data?</th>
+      <td><a href="{{author_wikidata_link}}" target="_blank">Edit Wikidata item</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+{% endblock %}

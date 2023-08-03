@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}List of {{term_name}}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid w-75 p-3">
+  <h2 class="p-3">List of {{term_name}}</h2>
+    <div class="list-group p-3">
+        {% for country in term_countries %}
+        {% if 'en' in country.labels %}
+        <a href="{{ url_for('country_page', country_data=country.id) }}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ country.labels['en'] }}</h5>
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+
+    </div>
+</div>
+
+{% endblock %}
