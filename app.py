@@ -54,8 +54,8 @@ def author_page(author_data):
     if request.method == "POST":
         return searchform(search_request)
     else:
-       # try:
-        author = pdclasses.Author(author_data)  # If a user enters a URL with a Q of a non human, this renders it anyway
+        # try:
+        author = pdclasses.Author(author_data)  # If user enters a URL with a Q of a non human, this renders it anyway.
         return render_template(
             "author.html", author_name=print_field(author.name),
             author_id=print_field(author.wikidata_item_id),
@@ -159,4 +159,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
+    # app.run(debug=True)
