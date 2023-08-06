@@ -52,8 +52,10 @@
 
   <footer class="mt-auto">
        <div class="text-bg-light text-center p-3">
-      {{ now.year }} - Public Domain Searcher - <a href="https://www.wikidata.org">Powered by Wikidata</a>
-    </div>
+           <p><a href="https://gitlab.wikimedia.org/toolforge-repos/paulina" target="_blank">
+               <img src="{{ url_for('static', filename='images/gitlab-logo-500.svg') }}" alt="GitLab logo" width="40" height="40"></a></p>
+           <p>{{ now.year }} - Public Domain Searcher - <a href="https://www.wikidata.org" target="_blank">Powered by Wikidata</a></p>
+       </div>
 
   </footer>
 </body>
