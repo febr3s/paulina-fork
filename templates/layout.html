@@ -39,8 +39,8 @@
 
       {% block searchform %}
       <div class="container-fluid w-100 p-3" style="max-width:512px;">
-          <form class="d-flex" role="search" method="POST">
-              <input class="form-control me-2" type="search" name="search-input" placeholder="Search for an author" aria-label="Search">
+          <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
+              <input class="form-control me-2" type="search" name="query" placeholder="Search for an author" aria-label="Search">
               <button class="btn btn-outline-primary" type="submit">Search</button>
           </form>
       </div>

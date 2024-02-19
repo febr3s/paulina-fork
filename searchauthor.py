@@ -23,8 +23,8 @@ def search_author(user_search):
 
     if not generator_list:
         return None
-    elif len(generator_list) == 1:
-        return generator_list[0].id
+    # elif len(generator_list) == 1:
+    #     return generator_list[0].id
     else:
         # Order the results by decreasing number of sitelinks
         results_with_number_of_sitelinks = {}
