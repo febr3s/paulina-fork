@@ -3,6 +3,7 @@ from pywikibot import pagegenerators as pg
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
 import squeries  # local module with SPARQL queries
+import requests
 
 wikidata_site = pywikibot.Site('wikidata', 'wikidata')
 wikipedia_site = pywikibot.Site("en", "wikipedia")
@@ -332,13 +333,19 @@ class Term:
 
     # Method to get list of countries by copyright term
     def getCountries(self):
+        query_url_prefix = 'https://query.wikidata.org/sparql?query='
         query_for_countries = squeries.query_for_countries_by_copyright_term.format(qname=self.wikidata_term_id)
-        generator = pg.WikidataSPARQLPageGenerator(query_for_countries, site=wikidata_site)
-        list_generator = list(generator)
-        if not list_generator:
-            query_for_countries = squeries.query_for_countries_by_copyright_term_2.format(qname=self.wikidata_term_id)
-            list_generator = pg.WikidataSPARQLPageGenerator(query_for_countries, site=wikidata_site)
-        return list_generator
+        query_for_countries = requests.utils.quote(query_for_countries)  # URL encoded
+        request_json_format = '&format=json'
+        url_query_countries_by_copyright_term = query_url_prefix + query_for_countries + request_json_format
+        headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+        query_results = requests.get(url_query_countries_by_copyright_term, headers=headers
+                                     # , timeout=1    # If IPv6 doesn't work, force time out and use IPv4
+                                     )
+        query_results = query_results.json()
+        query_results = query_results["results"]["bindings"]
+        query_results.sort(key=lambda e: e['itemLabel']['value'])
+        return query_results
 
 
 if __name__ == "__main__":

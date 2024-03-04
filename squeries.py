@@ -38,27 +38,4 @@ WHERE {{
 }}
 '''
 
-
-query_for_countries_by_copyright_term = ''' SELECT ?item ?itemLabel
-
-WHERE {{
-  
-  VALUES ?term {{ wd:{qname} }} .
-        
-  ?term ( wdt:P1001) ?item
-  
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }}
-}}
-'''
-
-query_for_countries_by_copyright_term_2 = ''' SELECT ?item ?itemLabel
-
-WHERE {{
-
-  VALUES ?term {{ wd:{qname} }} .
-
-  ?term ( wdt:P150) ?item
-
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }}
-}}
-'''
+query_for_countries_by_copyright_term = ''' SELECT ?item ?itemLabel WHERE {{ VALUES ?term {{ wd:{qname} }} . ?term ( wdt:P1001|wdt:P150 ) ?item SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} }}'''

@@ -8,10 +8,11 @@
   <h2 class="p-3">List of {{term_name}}</h2>
     <div class="list-group p-3">
         {% for country in term_countries %}
-        {% if 'en' in country.labels %}
-        <a href="{{ url_for('country_page', country_data=country.id) }}" class="list-group-item list-group-item-action">
+        {% if "itemLabel" in country %}
+        <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
+           class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ country.labels['en'] }}</h5>
+                <h5 class="mb-1">{{ country['itemLabel']['value'] }}</h5>
             </div>
         </a>
         {% endif %}
