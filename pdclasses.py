@@ -54,6 +54,21 @@ def build_date(date_input):
                 return None
 
 
+def retrieve_query(query, qname):
+    query_url_prefix = 'https://query.wikidata.org/sparql?query='
+    query = query.format(qname=qname)
+    query = requests.utils.quote(query)  # URL encoded
+    request_json_format = '&format=json'
+    query_url = query_url_prefix + query + request_json_format
+    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    query_results = requests.get(query_url, headers=headers
+                                 # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                 )
+    query_results = query_results.json()
+    query_results = query_results["results"]["bindings"]
+    return query_results
+
+
 class Author:
     """A class for authors."""
 
@@ -170,18 +185,13 @@ class Author:
                 return rd.relativedelta(self.date_of_death, self.date_of_birth).years  # If born AC, dates are datetime objects
 
     def getWorks(self):
-        query_for_works = squeries.query_for_works.format(qname=self.wikidata_item_id)
-        generator = pg.WikidataSPARQLPageGenerator(query_for_works, site=wikidata_site)
+        works = retrieve_query(squeries.query_for_works, self.wikidata_item_id)
+        return works
 
-        list_of_works = []
-        for work in generator:
-            if 'en' in work.labels:  # Display only works that have a label
-                work_info = [work.labels['en'], work.id, False]
-                internet_archive_id = work.get()["claims"].get("P724")
-                if 'enwikisource' in work.sitelinks or internet_archive_id:  # Check if there are links to access the work
-                    work_info[2] = True
-                list_of_works.append(work_info)
-        return list_of_works
+        # OLD CODE TO CHECK IF THERE ARE LINKS TO ACCESS THE WORK
+        #         internet_archive_id = work.get()["claims"].get("P724")
+        #         if 'enwikisource' in work.sitelinks or internet_archive_id:
+        #             work_info[2] = True
 
 
 class Work:
@@ -308,13 +318,6 @@ class Country:
     def getCopyrightTerm(self):
         query_for_term = squeries.query_for_country_copyright_term.format(qname=self.wikidata_country_id)
         generator = pg.WikidataSPARQLPageGenerator(query_for_term, site=wikidata_site)
-
-        # list_of_terms = []
-        # for term in generator:
-        #     if 'en' in term.labels:  # Display only terms that have a label
-        #         term_info = [term.labels['en'], term.id]
-        #         list_of_terms.append(term_info)
-        # return list_of_terms
         return generator
 
 
@@ -333,19 +336,8 @@ class Term:
 
     # Method to get list of countries by copyright term
     def getCountries(self):
-        query_url_prefix = 'https://query.wikidata.org/sparql?query='
-        query_for_countries = squeries.query_for_countries_by_copyright_term.format(qname=self.wikidata_term_id)
-        query_for_countries = requests.utils.quote(query_for_countries)  # URL encoded
-        request_json_format = '&format=json'
-        url_query_countries_by_copyright_term = query_url_prefix + query_for_countries + request_json_format
-        headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
-        query_results = requests.get(url_query_countries_by_copyright_term, headers=headers
-                                     # , timeout=1    # If IPv6 doesn't work, force time out and use IPv4
-                                     )
-        query_results = query_results.json()
-        query_results = query_results["results"]["bindings"]
-        query_results.sort(key=lambda e: e['itemLabel']['value'])
-        return query_results
+        countries = retrieve_query(squeries.query_for_countries_by_copyright_term, self.wikidata_term_id)
+        return countries
 
 
 if __name__ == "__main__":

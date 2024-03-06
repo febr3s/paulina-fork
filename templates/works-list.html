@@ -14,12 +14,12 @@
     <h2 class="p-3">List of works by {{author_name}}</h2>
         <div class="list-group p-3">
         {% for work in author_works %}
-        <a href="{{ url_for('work_page', work_data=work[1]) }}" class="list-group-item list-group-item-action">
+        <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}"
+           class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{ work[0] }}
-            {% if work[2] %} <span title="Available for download">⬇</span>️{% endif %}
-            </h5>
+            <h5 class="mb-1">{{ work['itemLabel']['value'] }}</h5>
             </div>
+            <p class="mb-1">{% if work['itemDescription'] %} {{ work['itemDescription']['value'] }} {% endif %}</p>
         </a>
         {% endfor %}
         </div>
