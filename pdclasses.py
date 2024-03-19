@@ -35,7 +35,7 @@ def build_field(wikidata_statement):
 
 
 def build_date(date_input):
-    """Build a datetime.date object from a pywikibot timestamp"""
+    """Builds a datetime.date object from a pywikibot timestamp"""
     try:  # This try and except handles the case in which the date is unknown
         year = date_input[0].getTarget().year
     except AttributeError:
@@ -55,6 +55,7 @@ def build_date(date_input):
 
 
 def retrieve_query(query, qname):
+    """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
     query_url_prefix = 'https://query.wikidata.org/sparql?query='
     query = query.format(qname=qname)
     query = requests.utils.quote(query)  # URL encoded
@@ -156,17 +157,25 @@ class Author:
                 return "Unknown due to lack of available dates of birth and death"
             elif not isinstance(self.date_of_birth, datetime.date):  # born BC
                 return True
-            elif self.date_of_birth.year < (datetime.date.today().year - 170):  # authors born in a date that assures is in public domain
+            elif self.date_of_birth.year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
                 return True
+            elif (datetime.date.today().year - 180) <= self.date_of_birth.year < (datetime.date.today().year - 90):
+                return "Consult individual works"  # author born in a date that makes it impossible to determine copyright status worldwide.
             else:
-                return False  # authors that are alive or whose works may still be in private domain
+                return False  # authors that are alive or whose works are probably in private domain worldwide
 
         elif not isinstance(self.date_of_death, datetime.date):  # died BC
             return True
         else:
             year_of_death = self.date_of_death.year
-            if year_of_death < (datetime.date.today().year - 70):
+            if year_of_death < (datetime.date.today().year - 100):  # author works are in public domain worldwide
                 return True
+            elif (datetime.date.today().year - 100) <= year_of_death < (datetime.date.today().year - 50):
+                return "Consult individual works"  # author works are in public domain in some countries
+            elif ("film director" in self.occupation
+                  or "photographer" in self.occupation) and self.date_of_birth.year < (datetime.date.today().year - 80):
+                return "Consult individual works"   # This is to address works whose copyright
+                # term is measured in years after being made available.
             else:
                 return False
 
