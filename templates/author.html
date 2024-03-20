@@ -69,7 +69,18 @@
     </tr>
     <tr>
       <th scope="row">In public domain?</th>
-      <td>{{author_is_in_public_domain}}</td>
+      <td>
+        {% if author_is_in_public_domain == 'Yes' %}
+        <span class="badge text-bg-success">&check;</span> {{author_is_in_public_domain}}
+        {% elif author_is_in_public_domain == 'No' %}
+        <span class="badge text-bg-danger">&cross;</span> {{author_is_in_public_domain}}
+        {% elif author_is_in_public_domain == 'Consult individual works' %}
+        <a href="{{ url_for('works_list', author_id=author_id) }}">{{author_is_in_public_domain}}</a>
+        {% elif author_is_in_public_domain == 'Unknown' %}
+        <span class="badge text-bg-warning">&#9888;</span> Unknown due to lack of available dates of birth and death.
+        <a href="{{ url_for('works_list', author_id=author_id) }}">Consult individual works</a>
+        {% endif %}
+      </td>
     </tr>
     <tr>
       <th scope="row">Missing/wrong data?</th>

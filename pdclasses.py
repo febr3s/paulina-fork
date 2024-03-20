@@ -154,7 +154,7 @@ class Author:
     def isInPublicDomain(self):
         if self.date_of_death is None:
             if self.date_of_birth is None:
-                return "Unknown due to lack of available dates of birth and death"
+                return "Unknown"
             elif not isinstance(self.date_of_birth, datetime.date):  # born BC
                 return True
             elif self.date_of_birth.year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
