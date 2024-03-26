@@ -1,40 +1,27 @@
-import pywikibot
-from pywikibot import pagegenerators as pg
-import squeries  # local module with SPARQL queries
-
-
-wikidata_site = pywikibot.Site('wikidata', 'wikidata')
+import requests
 
 
 def search_author(user_search):
-    search = user_search
-
-    searchgenerator = pg.WikibaseSearchItemPageGenerator(search, site=wikidata_site, total=100)
-    query_list = []
-    for qresult in searchgenerator:
-        query_list.append(qresult.id)
-    string_query = "wd:" + " wd:".join(query_list)
-    query_for_humans = squeries.query_for_humans.format(qname=string_query)
-    query_generator = pg.WikidataSPARQLPageGenerator(query_for_humans, site=wikidata_site)
-
-    generator_list = []
-    for result in query_generator:
-        generator_list.append(result)
-
-    if not generator_list:
-        return None
-    # elif len(generator_list) == 1:
-    #     return generator_list[0].id
-    else:
-        # Order the results by decreasing number of sitelinks
-        results_with_number_of_sitelinks = {}
-        for result in generator_list:
-            sitelinks = len(result.sitelinks)
-            results_with_number_of_sitelinks[result] = sitelinks
-        sorted_list = sorted(results_with_number_of_sitelinks.items(), key=lambda item: item[1], reverse=True)
-
-        final_results = []
-        for result in sorted_list:
-            if 'en' in result[0].labels and 'en' in result[0].descriptions:
-                final_results.append((result[0].labels['en'], result[0].descriptions['en'], result[0].id))
-        return final_results
+    search = requests.utils.quote(user_search)  # URL encoded
+    search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
+    search_url_suffix = "%20haswbstatement:P31=Q5|P31=Q21070568&prop=entityterms&wbetlanguage=en&format=json"
+    search_url = search_url_prefix + search + search_url_suffix
+    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    search_response = requests.get(search_url, headers=headers
+                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                   )
+    search_results = search_response.json()
+    try:
+        search_results = search_results["query"]["pages"]
+    except KeyError:  # If there are no pages, return an empty list
+        return []
+    search_results_list = list(search_results.values())
+    ordered_results = sorted(search_results_list, key=lambda x: x["index"])
+    final_results = []
+    for item in ordered_results:
+        try:
+            if item["entityterms"]["label"]:
+                final_results.append(item)
+        except KeyError:  # If there is no label, exclude
+            pass
+    return final_results

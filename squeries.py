@@ -1,19 +1,5 @@
 # SPARQL queries module
 
-query_for_humans = ''' SELECT ?item ?itemLabel
-
-WHERE
-{{
-    VALUES ?type {{  wd:Q5 wd:Q21070568  }}
-    
-    ?item wdt:P31 ?type .
-
-    VALUES ?item {{ {qname} }}
-
-    SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}  
-}}
-        '''
-
 query_for_works = '''SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE {{ ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 ) wd:{qname} . ?item rdfs:label ?itemLabel . FILTER(lang(?itemLabel) = "en") . MINUS {{ VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} ?item wdt:P31 ?typeOfItem . }} SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} }} ORDER BY ASC(?itemLabel)'''
 
 query_for_country_copyright_term = ''' SELECT ?item ?itemLabel

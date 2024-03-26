@@ -33,9 +33,9 @@ def results():
     if search_request == "" or len(search_request) == 1:
         return render_template("no-results.html")
     search_result = searchauthor.search_author(search_request)
-    if isinstance(search_result, list):
+    if len(search_result) > 0:
         return render_template('results.html', list_of_authors=search_result)
-    elif search_result is None:
+    else:
         return render_template("no-results.html")
 
 
