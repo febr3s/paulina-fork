@@ -54,10 +54,10 @@ def build_date(date_input):
                 return None
 
 
-def retrieve_query(query, qname):
+def retrieve_query(query, qname, **kwargs):
     """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
     query_url_prefix = 'https://query.wikidata.org/sparql?query='
-    query = query.format(qname=qname)
+    query = query.format(qname=qname, **kwargs)
     query = requests.utils.quote(query)  # URL encoded
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
@@ -193,8 +193,8 @@ class Author:
             else:
                 return rd.relativedelta(self.date_of_death, self.date_of_birth).years  # If born AC, dates are datetime objects
 
-    def getWorks(self):
-        works = retrieve_query(squeries.query_for_works, self.wikidata_item_id)
+    def getWorks(self, lang):
+        works = retrieve_query(squeries.query_for_works, self.wikidata_item_id, lang=lang)
         return works
 
         # OLD CODE TO CHECK IF THERE ARE LINKS TO ACCESS THE WORK
@@ -205,7 +205,7 @@ class Author:
 
 class Work:
     """A class for cultural works."""
-    def __init__(self, wikidata_work_id):
+    def __init__(self, wikidata_work_id, title_lang):
         self.wikidata_work_id = wikidata_work_id
 
         self.wikidata_work_item = pywikibot.ItemPage(wikidata_site, wikidata_work_id)
@@ -215,7 +215,9 @@ class Work:
         self.instance_of = build_field(self.wikidata_work_item.get()["claims"].get("P31"))
 
         if 'en' in self.wikidata_work_item.labels:
-            self.title = self.wikidata_work_item.labels['en']
+            self.title = self.wikidata_work_item.labels['en']  # Show the title in English if "en" label available
+        elif title_lang in self.wikidata_work_item.labels:
+            self.title = self.wikidata_work_item.labels[title_lang]  # Otherwise, show the title in the browser language
         else:
             self.title = None
 
@@ -347,48 +349,3 @@ class Term:
     def getCountries(self):
         countries = retrieve_query(squeries.query_for_countries_by_copyright_term, self.wikidata_term_id)
         return countries
-
-
-if __name__ == "__main__":
-    def print_profile():
-        print(f"Name: {author.name}")
-        print(f"Description: {author.description}")
-        print(f"Nationality: {author.nationality}")
-        print(f"Gender: {author.gender}")
-        print(f"Date of birth: {author.date_of_birth}")
-        print(f"Occupation: {author.occupation}")
-        print(f"Place of birth: {author.place_of_birth}")
-        print(f"Country of birth: {author.country_of_birth}")
-        print(f"Date of death: {author.date_of_death}")
-        print(f"Age of author: {author.ageOfAuthor()} years")
-        print(f"Image: {author.image}")
-        print(f"Wikipedia link: {author.wikipedia_link}")
-        print(f"Wikimedia Commons link: {author.commons_link}")
-        print(f"Wikisource link: {author.wikisource_link}")
-        print(f"Wikiquote link: {author.wikiquote_link}")
-        print(f"Are the author's works in public domain?: {author.isInPublicDomain()}")
-        print(f"Did you find wrong information? Correct it in Wikidata: {author.wikidata_link}")
-        print()
-
-
-    def print_works():
-        print("Loading. It can take some time...")
-        works_retrieved = author.getWorks()
-        print("\nLIST OF WORKS:\n")
-        for work in works_retrieved:
-            work_title = work[0]
-            work_link = work[1]
-            print(f"{work_title}: {work_link}")
-
-
-    author_wikidata_item = 'Q692'
-
-    author = Author(author_wikidata_item)
-
-    print_profile()
-
-    show_author_works = input("Do you want to look for the author's works? Y/N: ").lower()
-    if show_author_works in ["y", "yes"]:
-        print_works()
-    else:
-        print("\nGood bye.")
