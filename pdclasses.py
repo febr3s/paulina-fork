@@ -54,10 +54,10 @@ def build_date(date_input):
                 return None
 
 
-def retrieve_query(query, qname, **kwargs):
+def retrieve_query(query, **kwargs):
     """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
     query_url_prefix = 'https://query.wikidata.org/sparql?query='
-    query = query.format(qname=qname, **kwargs)
+    query = query.format(**kwargs)
     query = requests.utils.quote(query)  # URL encoded
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
@@ -194,7 +194,7 @@ class Author:
                 return rd.relativedelta(self.date_of_death, self.date_of_birth).years  # If born AC, dates are datetime objects
 
     def getWorks(self, lang):
-        works = retrieve_query(squeries.query_for_works, self.wikidata_item_id, lang=lang)
+        works = retrieve_query(squeries.query_for_works, qname=self.wikidata_item_id, lang=lang)
         return works
 
         # OLD CODE TO CHECK IF THERE ARE LINKS TO ACCESS THE WORK
@@ -327,9 +327,8 @@ class Country:
 
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):
-        query_for_term = squeries.query_for_country_copyright_term.format(qname=self.wikidata_country_id)
-        generator = pg.WikidataSPARQLPageGenerator(query_for_term, site=wikidata_site)
-        return generator
+        copyright_term = retrieve_query(squeries.query_for_country_copyright_term, qname=self.wikidata_country_id)
+        return copyright_term
 
 
 class Term:
@@ -347,5 +346,5 @@ class Term:
 
     # Method to get list of countries by copyright term
     def getCountries(self):
-        countries = retrieve_query(squeries.query_for_countries_by_copyright_term, self.wikidata_term_id)
+        countries = retrieve_query(squeries.query_for_countries_by_copyright_term, qname=self.wikidata_term_id)
         return countries

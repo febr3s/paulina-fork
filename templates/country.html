@@ -10,10 +10,16 @@
     <table class="table">
         <tbody>
         {% for term in country_copyright_terms %}
-        {% if 'en' in term.labels %}
+        {% if "itemLabel" in term %}
         <tr>
             <th scope="row">{{country_name}} is part of</th>
-            <td><a href="{{ url_for('term_page', term_id=term.id) }}">{{ term.labels['en'] }}</a></td>
+            <td><a href="{{ url_for('term_page', term_id=term['item']['value'].split('/')[-1]) }}">
+                {{ term['itemLabel']['value'] }}</a>
+                {% if term['appliesToParts']['value'] != '' %}
+                <br>
+                Applies to {{ term['appliesToParts']['value'] }}
+                {% endif %}
+            </td>
         </tr>
         {% endif %}
         {% endfor %}
