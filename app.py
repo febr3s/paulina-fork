@@ -122,6 +122,7 @@ def work_page(work_data):
             work_wikipedia_link=print_field(work.wikipedia_link),
             work_wikisource_link=print_field(work.wikisource_link),
             work_internet_archive_link=print_field(work.internet_archive_link),
+            work_full_work_link=print_field(work.full_work_link),
             work_wikidata_link=print_field(work.wikidata_link),
             work_copyright_status=print_field(work.getCopyrightStatus())
         )

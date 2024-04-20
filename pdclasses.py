@@ -280,6 +280,11 @@ class Work:
         else:
             self.internet_archive_link = "https://archive.org/details/" + internet_archive_ID[0].getTarget()
 
+        full_work_available_at = self.wikidata_work_item.get()["claims"].get("P953")
+        if full_work_available_at is None:
+            self.full_work_link = None
+        else:
+            self.full_work_link = full_work_available_at[0].getTarget()
 
     def getCopyrightStatus(self):  # Improve this: when copyright status is None, try to estimate it by author's death or publication date
         copyright_status_statement = self.wikidata_work_item.get()["claims"].get('P6216')

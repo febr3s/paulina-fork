@@ -44,12 +44,19 @@
       <th scope="row">Wikipedia link</th>
       <td><a href="{{work_wikipedia_link}}" target="_blank">{{work_wikipedia_link}}</a></td>
     </tr>
-    {% if work_wikisource_link or work_internet_archive_link %}
+    {% if work_wikisource_link or work_internet_archive_link or work_full_work_link %}
     <tr>
       <th scope="row">Access work</th>
       <td>
+        {% if work_wikisource_link %}
         <p><a href="{{work_wikisource_link}}" target="_blank">{{work_wikisource_link}}</a></p>
+        {% endif %}
+        {% if work_internet_archive_link %}
         <p><a href="{{work_internet_archive_link}}" target="_blank">{{work_internet_archive_link}}</a></p>
+        {% endif %}
+        {% if work_full_work_link %}
+        <p><a href="{{work_full_work_link}}" target="_blank">{{work_full_work_link}}</a></p>
+        {% endif %}
       </td>
     </tr>
     {% endif %}
