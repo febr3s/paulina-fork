@@ -201,7 +201,6 @@ class Author:
                 work['downloads'] = True
             else:
                 work['downloads'] = False
-        print(works)
         return works
 
 
