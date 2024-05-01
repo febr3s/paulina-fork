@@ -1,5 +1,4 @@
 import pywikibot
-from pywikibot import pagegenerators as pg
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
 import squeries  # local module with SPARQL queries
@@ -195,12 +194,15 @@ class Author:
 
     def getWorks(self, lang):
         works = retrieve_query(squeries.query_for_works, qname=self.wikidata_item_id, lang=lang)
+        for work in works:  # Check if there are links to access the work
+            if (int(work['wikisourceFullWork']['value']) > 0
+                    or int(work['iaDownloads']['value']) > 0
+                    or int(work['otherDownloads']['value']) > 0):
+                work['downloads'] = True
+            else:
+                work['downloads'] = False
+        print(works)
         return works
-
-        # OLD CODE TO CHECK IF THERE ARE LINKS TO ACCESS THE WORK
-        #         internet_archive_id = work.get()["claims"].get("P724")
-        #         if 'enwikisource' in work.sitelinks or internet_archive_id:
-        #             work_info[2] = True
 
 
 class Work:
