@@ -11,41 +11,52 @@ wikisource_site = pywikibot.Site("en", "wikisource")
 wikiquote_site = pywikibot.Site("en", "wikiquote")
 
 
-def build_field(wikidata_statement):
+def build_field(wikidata_statement, data_type="wikidata_item"):
     """Function to return a field from a Wikidata statement.
     If the statement does not exist, it returns None.
-    If the statement exists and has a preferred value, return the preferred value.
-    If the statement exists and does not have a preferred value, print all values."""
+    If the statement exists and has a preferred value, it returns the preferred value.
+    If the statement exists and does not have a preferred value, it prints the first value.
+    The 'data_type' parameter can be 'wikidata_item' or 'date'"""
     if wikidata_statement is None:  # If statement doesn't exist
         return None
     else:  # If statement exists, check if there is a preferred value
         dictionary_of_claims = {}
         for claim in wikidata_statement:
-            claim_target = claim.getTarget()
-            claim_rank = claim.getRank()
+            if data_type == "wikidata_item":
+                claim_target = claim.get('value', {}).get('content')
+            elif data_type == "date":
+                claim_target = claim.get('value', {}).get('content', {}).get('time')
+            claim_rank = claim.get('rank')
             dictionary_of_claims[claim_target] = claim_rank
             if claim_rank == "preferred":
                 break
 
         if "preferred" in dictionary_of_claims.values():
-            return [key.labels["en"] for key, value in dictionary_of_claims.items() if value == "preferred"][0]
+            if data_type == "wikidata_item":
+                return [retrieve_item(key, data_type="labels").get("en")
+                        for key, value in dictionary_of_claims.items() if value == "preferred"][0]
+            elif data_type == "date":
+                return build_date([key for key, value in dictionary_of_claims.items()
+                                   if value == "preferred"][0])
         else:
-            return [key.labels["en"] for key, value in dictionary_of_claims.items()][0]
+            if data_type == "wikidata_item":
+                return [retrieve_item(key, data_type="labels").get("en")
+                        for key, value in dictionary_of_claims.items()][0]
+            elif data_type == "date":
+                return build_date([key for key, value in dictionary_of_claims.items()][0])
 
 
 def build_date(date_input):
-    """Builds a datetime.date object from a pywikibot timestamp"""
+    """Builds a datetime.date object from a Wikidata timestamp"""
     try:  # This try and except handles the case in which the date is unknown
-        year = date_input[0].getTarget().year
+        year = int(date_input[:5])
     except AttributeError:
         return None
-    if int(year) < 1:  # If date is BC, datetime module can't handle it
-        return int(year)  # For simplicity, dates BC have year precision
+    if year < 1:  # If date is BC, datetime module can't handle it
+        return year  # For simplicity, dates BC have year precision
     else:
-        month = date_input[0].getTarget().month
-        day = date_input[0].getTarget().day
         try:
-            return datetime.date(year, month, day)
+            return datetime.datetime.strptime(date_input, '+%Y-%m-%dT%H:%M:%SZ').date()
         except:
             try:
                 return datetime.date(year, 1, 1)  # Try to catch the year if date is not standard
@@ -69,86 +80,69 @@ def retrieve_query(query, **kwargs):
     return query_results
 
 
+def retrieve_item(wikidata_item_id, data_type="item"):
+    """Takes a Q identifier and returns the item full data or the item labels in case the optional argument
+    'data-type' is set to 'labels'"""
+    item_url_prefix = "https://www.wikidata.org/w/rest.php/wikibase/v0/entities/items/"
+    if data_type == "labels":
+        item_url_suffix = "/labels"
+    else:
+        item_url_suffix = ""
+    item_url = item_url_prefix + wikidata_item_id + item_url_suffix
+    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    item_response = requests.get(item_url, headers=headers
+                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                   )
+    item_attributes = item_response.json()
+    return item_attributes
+
+
 class Author:
     """A class for authors."""
-
     def __init__(self, wikidata_item_id):
-
         self.wikidata_item_id = wikidata_item_id
+        self.wikidata_item = retrieve_item(wikidata_item_id, data_type="item")
+        self.wikidata_link = "https://www.wikidata.org/wiki/" + wikidata_item_id
+        self.name = self.wikidata_item.get('labels', {}).get('en')
+        self.description = self.wikidata_item.get('descriptions', {}).get('en')
+        self.wikipedia_link = self.wikidata_item.get('sitelinks', {}).get('enwiki', {}).get('url')
+        self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
+        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get('enwikisource', {}).get('url')
+        self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get('enwikiquote', {}).get('url')
+        self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
+        self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
+        self.date_of_birth = build_field(self.wikidata_item.get('statements', {}).get('P569'), data_type="date")
+        self.date_of_death = build_field(self.wikidata_item.get('statements', {}).get('P570'), data_type="date")
 
-        self.wikidata_item = pywikibot.ItemPage(wikidata_site, wikidata_item_id)
-
-        self.wikidata_link = self.wikidata_item.full_url()
-
-        if 'en' in self.wikidata_item.labels:
-            self.name = self.wikidata_item.labels['en']
-        else:
-            self.name = None
-
-        if 'en' in self.wikidata_item.descriptions:
-            self.description = self.wikidata_item.descriptions['en']
-        else:
-            self.description = None
-
-        if 'enwiki' in self.wikidata_item.sitelinks:
-            self.wikipedia_link = pywikibot.Page(wikipedia_site, self.wikidata_item.getSitelink('enwiki')).full_url()
-        else:
-            self.wikipedia_link = None
-
-        if 'commonswiki' in self.wikidata_item.sitelinks:
-            self.commons_link = pywikibot.Page(commons_site, self.wikidata_item.getSitelink('commonswiki')).full_url()
-        else:
-            self.commons_link = None
-
-        if 'enwikisource' in self.wikidata_item.sitelinks:
-            self.wikisource_link = pywikibot.Page(wikisource_site, self.wikidata_item.getSitelink('enwikisource')).full_url()
-        else:
-            self.wikisource_link = None
-
-        if 'enwikiquote' in self.wikidata_item.sitelinks:
-            self.wikiquote_link = pywikibot.Page(wikiquote_site, self.wikidata_item.getSitelink('enwikiquote')).full_url()
-        else:
-            self.wikiquote_link = None
-
-        self.nationality = build_field(self.wikidata_item.get()["claims"].get("P27"))
-
-        self.gender = build_field(self.wikidata_item.get()["claims"].get("P21"))
-
-        date_of_birth = self.wikidata_item.get()["claims"].get('P569')
-        if date_of_birth is None:
-            self.date_of_birth = None
-        else:
-            self.date_of_birth = build_date(date_of_birth)
-
-        date_of_death = self.wikidata_item.get()["claims"].get('P570')
-        if date_of_death is None:
-            self.date_of_death = None
-        else:
-            self.date_of_death = build_date(date_of_death)
-
-        occupations = self.wikidata_item.get()["claims"].get('P106')
+        occupations = self.wikidata_item.get('statements', {}).get('P106')
         if occupations is None:
             self.occupation = None
         else:
-            self.occupation = [occupation.getTarget().labels["en"] for occupation in occupations]
+            occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
+            occupations_labels = retrieve_query(squeries.query_for_labels_of_list_of_items,
+                                                qnames="wd:" + " wd:".join(occupations_ids))
+            self.occupation = [occupation_item.get('itemLabel', {}).get('value')
+                               for occupation_item in occupations_labels]
 
-        self.place_of_birth = build_field(self.wikidata_item.get()["claims"].get("P19"))
+        place_of_birth = self.wikidata_item.get('statements', {}).get('P19')
+        self.place_of_birth = build_field(place_of_birth)
 
         # Country of birth is built taking the place of birth and looking in what country it is.
-        try:
-            self.country_of_birth = build_field(self.wikidata_item.get()
-                                                       ["claims"].get('P19')[0].getTarget().get()["claims"].get(
-                'P17'))
-        except TypeError:  # if there's no statement for place of birth, its value is None and the try statement gives a TypeError
+        if place_of_birth:
+            place_of_birth_Q = place_of_birth[0].get('value', {}).get('content')
+            country_of_birth = retrieve_query(squeries.query_for_country_of_birth, qname=place_of_birth_Q)
+            self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+        else:
             self.country_of_birth = None
 
-        image = self.wikidata_item.get()["claims"].get('P18')
+        image = self.wikidata_item.get('statements', {}).get('P18')
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Image_is_needed_female.svg/240px-Image_is_needed_female.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
         else:
-            self.image = image[0].getTarget().get_file_url()
-            self.image_link = image[0].getTarget().get_file_url()
+            image_file_name = image[0]["value"]["content"]
+            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
+            self.image_link = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name
 
     def isInPublicDomain(self):
         if self.date_of_death is None:

@@ -35,7 +35,7 @@ WHERE
 {{ 
   VALUES ?term {{ wd:{qname} }} . 
   ?term ( wdt:P1001|wdt:P150 ) ?item . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
 }} 
 ORDER BY ASC(?itemLabel)
 '''
@@ -57,4 +57,18 @@ WHERE
 GROUP BY ?item ?itemLabel
 '''
 
+query_for_country_of_birth = '''
+SELECT DISTINCT ?item ?itemLabel 
+WHERE {{ 
+  wd:{qname} wdt:P17 ?item . 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
+}}
+'''
 
+query_for_labels_of_list_of_items = '''
+SELECT DISTINCT ?item ?itemLabel 
+WHERE {{ 
+  VALUES ?item {{ {qnames} }} .  
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} 
+}}
+'''

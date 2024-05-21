@@ -63,7 +63,7 @@ def results():
 
 @app.route("/author/<author_data>")
 def author_page(author_data):
-    try:
+    # try:
         author = pdclasses.Author(author_data)  # If user enters a URL with a Q of a non-human, this renders it anyway.
         return render_template(
             "author.html", author_name=print_field(author.name),
@@ -86,8 +86,8 @@ def author_page(author_data):
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
             author_wikidata_link=print_field(author.wikidata_link)
         )
-    except:  # If the Q number doesn't match any item
-        abort(404)
+    # except:  # If the Q number doesn't match any item
+    #     abort(404)
 
 
 @app.route("/works-list/<author_id>")
