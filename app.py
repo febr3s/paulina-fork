@@ -35,6 +35,8 @@ def print_field(field):
         return "Yes"
     elif field is False:
         return "No"
+    elif isinstance(field, dict):  # For dates
+        return field["date string"]
     else:
         return field
 

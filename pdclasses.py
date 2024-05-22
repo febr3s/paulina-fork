@@ -11,58 +11,77 @@ wikisource_site = pywikibot.Site("en", "wikisource")
 wikiquote_site = pywikibot.Site("en", "wikiquote")
 
 
-def build_field(wikidata_statement, data_type="wikidata_item"):
+def build_field(wikidata_statement):
     """Function to return a field from a Wikidata statement.
     If the statement does not exist, it returns None.
     If the statement exists and has a preferred value, it returns the preferred value.
-    If the statement exists and does not have a preferred value, it prints the first value.
-    The 'data_type' parameter can be 'wikidata_item' or 'date'"""
+    If the statement exists and does not have a preferred value, it prints the first value."""
     if wikidata_statement is None:  # If statement doesn't exist
         return None
     else:  # If statement exists, check if there is a preferred value
         dictionary_of_claims = {}
         for claim in wikidata_statement:
-            if data_type == "wikidata_item":
-                claim_target = claim.get('value', {}).get('content')
-            elif data_type == "date":
-                claim_target = claim.get('value', {}).get('content', {}).get('time')
+            claim_target = claim.get('value', {}).get('content')
             claim_rank = claim.get('rank')
             dictionary_of_claims[claim_target] = claim_rank
             if claim_rank == "preferred":
                 break
 
-        if "preferred" in dictionary_of_claims.values():
-            if data_type == "wikidata_item":
-                return [retrieve_item(key, data_type="labels").get("en")
-                        for key, value in dictionary_of_claims.items() if value == "preferred"][0]
-            elif data_type == "date":
-                return build_date([key for key, value in dictionary_of_claims.items()
-                                   if value == "preferred"][0])
-        else:
-            if data_type == "wikidata_item":
-                return [retrieve_item(key, data_type="labels").get("en")
-                        for key, value in dictionary_of_claims.items()][0]
-            elif data_type == "date":
-                return build_date([key for key, value in dictionary_of_claims.items()][0])
+        if "preferred" in dictionary_of_claims.values():  # If there is a preferred value
+            return [retrieve_item(key, data_type="labels").get("en")
+                    for key, value in dictionary_of_claims.items() if value == "preferred"][0]
+
+        else:  # If there is not a preferred value
+            return [retrieve_item(key, data_type="labels").get("en")
+                    for key, value in dictionary_of_claims.items()][0]
 
 
-def build_date(date_input):
+def build_date(wikidata_statement):
     """Builds a datetime.date object from a Wikidata timestamp"""
-    try:  # This try and except handles the case in which the date is unknown
-        year = int(date_input[:5])
-    except AttributeError:
+    if wikidata_statement is None:  # If statement doesn't exist
         return None
-    if year < 1:  # If date is BC, datetime module can't handle it
-        return year  # For simplicity, dates BC have year precision
-    else:
-        try:
-            return datetime.datetime.strptime(date_input, '+%Y-%m-%dT%H:%M:%SZ').date()
-        except:
-            try:
-                return datetime.date(year, 1, 1)  # Try to catch the year if date is not standard
-            except:
-                return None
+    else:  # If statement exists, check if there is a preferred value
+        list_of_claims = []
+        chosen_date_info = None
+        for claim in wikidata_statement:
+            claim_date = claim.get('value', {}).get('content', {}).get('time')
+            claim_precision = claim.get('value', {}).get('content', {}).get('precision')
+            claim_rank = claim.get('rank')
+            if claim_rank == "preferred":
+                chosen_date_info = {"claim date": claim_date, "claim precision": claim_precision}
+                break
+            else:
+                list_of_claims.append({"claim date": claim_date, "claim precision": claim_precision})
 
+        if chosen_date_info is None:
+            chosen_date_info = list_of_claims[0]
+
+        date = chosen_date_info["claim date"]
+        precision = chosen_date_info["claim precision"]
+
+        try:  # This try and except handles the case in which the date is unknown
+            year = int(date[:5])
+        except AttributeError:
+            return None
+        month = int(date[6:8])
+        day = int(date[9:11])
+        if year < 1:  # If date is BC, datetime module can't handle it
+            return {"date object": year, "date string": f"{year}"}  # For simplicity, dates BC have year precision
+        else:
+            if precision == 11:  # Day precision
+                return {"date object": datetime.date(year, month, day), "date string": f"{year}-{month}-{day}"}
+            elif precision == 10:  # Month precision
+                return {"date object": datetime.date(year, month, 1), "date string": f"{year}-{month}"}
+            elif precision == 9:  # Year precision
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
+            elif precision == 8:  # Decade precision
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (decade)"}
+            elif precision == 7:  # Century precision
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (century)"}
+            elif precision == 6:  # Millennium precision
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (millennium)"}
+            else:
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
 
 def retrieve_query(query, **kwargs):
     """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
@@ -111,8 +130,8 @@ class Author:
         self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get('enwikiquote', {}).get('url')
         self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
-        self.date_of_birth = build_field(self.wikidata_item.get('statements', {}).get('P569'), data_type="date")
-        self.date_of_death = build_field(self.wikidata_item.get('statements', {}).get('P570'), data_type="date")
+        self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
+        self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
 
         occupations = self.wikidata_item.get('statements', {}).get('P106')
         if occupations is None:
@@ -148,25 +167,25 @@ class Author:
         if self.date_of_death is None:
             if self.date_of_birth is None:
                 return "Unknown"
-            elif not isinstance(self.date_of_birth, datetime.date):  # born BC
+            elif not isinstance(self.date_of_birth["date object"], datetime.date):  # born BC
                 return True
-            elif self.date_of_birth.year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
+            elif self.date_of_birth["date object"].year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
                 return True
-            elif (datetime.date.today().year - 180) <= self.date_of_birth.year < (datetime.date.today().year - 90):
+            elif (datetime.date.today().year - 180) <= self.date_of_birth["date object"].year < (datetime.date.today().year - 90):
                 return "Consult individual works"  # author born in a date that makes it impossible to determine copyright status worldwide.
             else:
                 return False  # authors that are alive or whose works are probably in private domain worldwide
 
-        elif not isinstance(self.date_of_death, datetime.date):  # died BC
+        elif not isinstance(self.date_of_death["date object"], datetime.date):  # died BC
             return True
         else:
-            year_of_death = self.date_of_death.year
+            year_of_death = self.date_of_death["date object"].year
             if year_of_death < (datetime.date.today().year - 100):  # author works are in public domain worldwide
                 return True
             elif (datetime.date.today().year - 100) <= year_of_death < (datetime.date.today().year - 50):
                 return "Consult individual works"  # author works are in public domain in some countries
             elif ("film director" in self.occupation
-                  or "photographer" in self.occupation) and self.date_of_birth.year < (datetime.date.today().year - 80):
+                  or "photographer" in self.occupation) and self.date_of_birth["date object"].year < (datetime.date.today().year - 80):
                 return "Consult individual works"   # This is to address works whose copyright
                 # term is measured in years after being made available.
             else:
@@ -174,17 +193,17 @@ class Author:
 
     def ageOfAuthor(self):
         if self.date_of_death is None:
-            if not isinstance(self.date_of_birth, datetime.date) or self.date_of_birth.year < (datetime.date.today().year - 110):
+            if not isinstance(self.date_of_birth["date object"], datetime.date) or self.date_of_birth["date object"].year < (datetime.date.today().year - 110):
                 return "Unknown"  # Dead authors without date of death, and authors with date of birth and death unavailable
             else:
-                return rd.relativedelta(datetime.date.today(), self.date_of_birth).years  # Age of living authors
+                return rd.relativedelta(datetime.date.today(), self.date_of_birth["date object"]).years  # Age of living authors
         else:
-            if not isinstance(self.date_of_death, datetime.date):
-                return self.date_of_death - self.date_of_birth  # If died BC, dates are integers
-            elif isinstance(self.date_of_death, datetime.date) and not isinstance(self.date_of_birth, datetime.date):
-                return self.date_of_death.year - self.date_of_birth  # If born BC and died AC, date types are mixed
+            if not isinstance(self.date_of_death["date object"], datetime.date):
+                return self.date_of_death["date object"] - self.date_of_birth["date object"]  # If died BC, dates are integers
+            elif isinstance(self.date_of_death["date object"], datetime.date) and not isinstance(self.date_of_birth["date object"], datetime.date):
+                return self.date_of_death["date object"].year - self.date_of_birth["date object"]  # If born BC and died AC, date types are mixed
             else:
-                return rd.relativedelta(self.date_of_death, self.date_of_birth).years  # If born AC, dates are datetime objects
+                return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
 
     def getWorks(self, lang):
         works = retrieve_query(squeries.query_for_works, qname=self.wikidata_item_id, lang=lang)
