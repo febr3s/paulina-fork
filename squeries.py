@@ -72,3 +72,15 @@ WHERE {{
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} 
 }}
 '''
+
+query_for_copyright_status_of_work = '''
+SELECT DISTINCT ?cstatus ?cstatusLabel ?jurisdiction ?jurisdictionLabel ?jurisdictionIsInstanceOf ?jurisdictionIsInstanceOfLabel 
+WHERE {{ 
+  VALUES ?jurisdictionIsInstanceOf {{ wd:Q63705939 wd:Q6256 }} . 
+  wd:{qname} p:P6216 ?cstatusStatement . 
+  ?cstatusStatement ps:P6216 ?cstatus . 
+  OPTIONAL {{ ?cstatusStatement pq:P1001 ?jurisdiction . }} 
+  ?jurisdiction wdt:P31 ?jurisdictionIsInstanceOf . 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
+}}
+'''

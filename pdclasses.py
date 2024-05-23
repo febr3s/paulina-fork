@@ -161,7 +161,7 @@ class Author:
         else:
             image_file_name = image[0]["value"]["content"]
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
-            self.image_link = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name
+            self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
 
     def isInPublicDomain(self):
         if self.date_of_death is None:
@@ -221,32 +221,27 @@ class Work:
     """A class for cultural works."""
     def __init__(self, wikidata_work_id, title_lang):
         self.wikidata_work_id = wikidata_work_id
+        self.wikidata_work_item = retrieve_item(wikidata_work_id, data_type="item")
+        self.wikidata_link = "https://www.wikidata.org/wiki/" + wikidata_work_id
+        self.instance_of = build_field(self.wikidata_work_item.get('statements', {}).get('P31'))
 
-        self.wikidata_work_item = pywikibot.ItemPage(wikidata_site, wikidata_work_id)
-
-        self.wikidata_link = self.wikidata_work_item.full_url()
-
-        self.instance_of = build_field(self.wikidata_work_item.get()["claims"].get("P31"))
-
-        if 'en' in self.wikidata_work_item.labels:
-            self.title = self.wikidata_work_item.labels['en']  # Show the title in English if "en" label available
-        elif title_lang in self.wikidata_work_item.labels:
-            self.title = self.wikidata_work_item.labels[title_lang]  # Otherwise, show the title in the browser language
+        if self.wikidata_work_item.get('labels', {}).get('en') is not None:
+            self.title = self.wikidata_work_item.get('labels', {}).get('en')
+        elif self.wikidata_work_item.get('labels', {}).get(title_lang) is not None:
+            self.title = self.wikidata_work_item.get('labels', {}).get(title_lang)
         else:
             self.title = None
 
-        if 'en' in self.wikidata_work_item.descriptions:
-            self.description = self.wikidata_work_item.descriptions['en']
-        else:
-            self.description = None
+        self.description = self.wikidata_work_item.get('descriptions', {}).get('en')
 
-        image = self.wikidata_work_item.get()["claims"].get('P18')
+        image = self.wikidata_work_item.get('statements', {}).get('P18')
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/464px-Placeholder_book.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
         else:
-            self.image = image[0].getTarget().get_file_url()
-            self.image_link = image[0].getTarget().get_file_url()
+            image_file_name = image[0]["value"]["content"]
+            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
+            self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
 
         types_of_author = {"creator": "P170",
                            "author": "P50",
@@ -262,65 +257,50 @@ class Work:
 
         dict_of_authors = {}
         for type_of_author, value in types_of_author.items():
-            authors = self.wikidata_work_item.get()["claims"].get(value)
+            authors = self.wikidata_work_item.get('statements', {}).get(value)
             if authors is not None:
-                dict_of_authors[type_of_author] = [{"name": author.getTarget().labels["en"], "ID": author.getTarget().id} for author in authors]
-
+                dict_of_authors[type_of_author] = [{"name": retrieve_item(author.get('value', {}).get('content'), data_type="labels").get("en"),
+                                                    "ID": author.get('value', {}).get('content')} for author in authors]
         self.authors = dict_of_authors
 
-        self.country_of_origin = build_field(self.wikidata_work_item.get()["claims"].get("P495"))
+        self.country_of_origin = build_field(self.wikidata_work_item.get('statements', {}).get('P495'))
+        self.language = build_field(self.wikidata_work_item.get('statements', {}).get('P407'))
+        self.publication_date = build_date(self.wikidata_work_item.get('statements', {}).get('P577'))
+        self.wikipedia_link = self.wikidata_work_item.get('sitelinks', {}).get('enwiki', {}).get('url')
+        self.wikisource_link = self.wikidata_work_item.get('sitelinks', {}).get('enwikisource', {}).get('url')
 
-        self.language = build_field(self.wikidata_work_item.get()["claims"].get("P407"))
-
-        publication_date = self.wikidata_work_item.get()["claims"].get('P577')
-        if publication_date is None:
-            self.publication_date = None
-        else:
-            self.publication_date = build_date(publication_date)
-
-        if 'enwiki' in self.wikidata_work_item.sitelinks:
-            self.wikipedia_link = pywikibot.Page(wikipedia_site, self.wikidata_work_item.getSitelink('enwiki')).full_url()
-        else:
-            self.wikipedia_link = None
-
-        if 'enwikisource' in self.wikidata_work_item.sitelinks:
-            self.wikisource_link = pywikibot.Page(wikisource_site, self.wikidata_work_item.getSitelink('enwikisource')).full_url()
-        else:
-            self.wikisource_link = None
-
-        internet_archive_ID = self.wikidata_work_item.get()["claims"].get("P724")
+        internet_archive_ID = self.wikidata_work_item.get('statements', {}).get('P724')
         if internet_archive_ID is None:
             self.internet_archive_link = None
         else:
-            self.internet_archive_link = "https://archive.org/details/" + internet_archive_ID[0].getTarget()
+            self.internet_archive_link = "https://archive.org/details/" + internet_archive_ID[0].get('value', {}).get('content')
 
-        full_work_available_at = self.wikidata_work_item.get()["claims"].get("P953")
+        full_work_available_at = self.wikidata_work_item.get('statements', {}).get('P953')
         if full_work_available_at is None:
             self.full_work_link = None
         else:
-            self.full_work_link = full_work_available_at[0].getTarget()
+            self.full_work_link = full_work_available_at[0].get('value', {}).get('content')
 
     def getCopyrightStatus(self):  # Improve this: when copyright status is None, try to estimate it by author's death or publication date
-        copyright_status_statement = self.wikidata_work_item.get()["claims"].get('P6216')
-        if not copyright_status_statement:
+        copyright_status_response = retrieve_query(squeries.query_for_copyright_status_of_work,
+                                                   qname=self.wikidata_work_id)
+        if not copyright_status_response:
             return None
         else:
             copyright_status = []
-            for claim in copyright_status_statement:
+            for claim in copyright_status_response:
                 try:
                     status_dict = {
-                        'status': claim.getTarget().labels["en"],
-                        'applies_to_jurisdiction_label': claim.qualifiers['P1001'][0].getTarget().labels["en"],
-                        'applies_to_jurisdiction_id': claim.qualifiers['P1001'][0].getTarget().id,
-                        'jurisdiction_is_instance_of': claim.qualifiers['P1001'][0].getTarget().get()['claims']["P31"][0].getTarget().id
+                        'status': claim.get('cstatusLabel', {}).get('value'),
+                        'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
+                        'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1],
+                        'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1]
                         }
                     copyright_status.append(status_dict)
                 except:
                     pass
             return copyright_status
-
-        # Other attributes to be created: identifiers, etc
-        # form of creative work, genre, Gutenberg link, etc
+        # Other attributes to be created: identifiers, form of creative work, genre, Gutenberg link, etc
 
 
 class Country:
