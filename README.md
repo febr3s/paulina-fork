@@ -5,7 +5,7 @@ and works in the public domain using Wikidata and Python.
 
 ## Requirements
 * Python 3.10 or later.
-* Python modules: flask, pywikibot, python-dateutil, requests.
+* Python modules: flask, python-dateutil, requests.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
 ## Website
@@ -20,4 +20,4 @@ Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.a
 This software is under a GNU Affero General Public License Version 3.
 
 ---
-*Documentation under construction.*
+*Documentation under construction. Read more at [Paulina's page on Wikidata](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina).*
