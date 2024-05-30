@@ -58,9 +58,9 @@ def results():
         return render_template("no-results.html")
     search_result = searchauthor.search_author(search_request)
     if len(search_result) > 0:
-        return render_template('results.html', list_of_authors=search_result)
+        return render_template('results.html', list_of_authors=search_result, search_request=search_request)
     else:
-        return render_template("no-results.html")
+        return render_template("no-results.html", search_request=search_request)
 
 
 @app.route("/author/<author_data>")
