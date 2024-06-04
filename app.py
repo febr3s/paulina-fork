@@ -3,6 +3,8 @@ import pdclasses
 import searchauthor
 import datetime
 
+import squeries
+
 app = Flask(__name__)
 
 SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
@@ -51,9 +53,11 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/results", methods=["GET"])
+@app.route("/results")
 def results():
     search_request = request.args.get("query")
+    if search_request is None:
+        return redirect(url_for('home'))
     if search_request == "" or len(search_request) == 1:
         return render_template("no-results.html")
     search_result = searchauthor.search_author(search_request)
@@ -158,6 +162,17 @@ def term_page(term_id):
     except:  # If the Q number doesn't match any item
         abort(404)
 
+
+@app.route("/countries/")
+def countries_main():
+    countries_info = pdclasses.retrieve_query(squeries.query_for_all_countries_info)
+    for country in countries_info:
+        if country.get('terms', {}).get('value'):
+            country['terms']['value'] = country['terms']['value'].replace('countries with ', "")
+        else:
+            country['terms']['value'] = "Unknown term"
+    return render_template("countries.html",
+                           countries_info=countries_info)
 
 @app.context_processor
 def inject_now():

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Countries and terms{% endblock %}
+
+{% block searchform %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid w-100 p-3">
+    <h2 class="p-3">Countries and terms</h2>
+    <p class="p-3">This grid indicates the period after which works enter the public domain in each country.
+    The period indicated is post mortem auctoris.
+    By clicking on each country, you can access more information about the country.</p>
+    <div class="container text-center">
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+            {% for country in countries_info %}
+            <div class="col">
+                <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
+                class="list-group-item list-group-item-action">
+                    <div class="p-3 border">
+                        <p>
+                            <img src="
+                            {{ country.get('flag', {}).get('value') }}" height="20">
+                            <strong>{{ country['itemLabel']['value'] }}</strong>
+                        </p>
+                        <p> {{ country['terms']['value'] }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
