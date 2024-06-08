@@ -95,8 +95,8 @@ def works_list(author_id):
         return render_template(
             "works-list.html",
             author_name=author.name,
-            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works with label in English
-        )                                                            # or in the browser language
+            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
+        )
 
     except:  # If the Q number doesn't match any item
         abort(404)
@@ -105,7 +105,7 @@ def works_list(author_id):
 @app.route("/work/<work_data>")
 def work_page(work_data):
     try:
-        work = pdclasses.Work(work_data)  # Make and work object with the work ID and browser language
+        work = pdclasses.Work(work_data)  # Make a work object
         return render_template(
             "work.html", work_title=print_field(work.title),
             work_description=print_field(work.description),

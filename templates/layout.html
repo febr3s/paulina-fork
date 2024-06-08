@@ -1,5 +1,11 @@
 <!DOCTYPE html>
+{% if CURRENT_LANGUAGE == 'en' %}
 <html lang="en">
+{% elif CURRENT_LANGUAGE == 'es' %}
+<html lang="es">
+{% else %}
+<html lang="en">
+{% endif %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
