@@ -1,42 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, abort
+from flask_babel import Babel, _
+import datetime
 import pdclasses
 import searchauthor
-import datetime
-
+import languages
 import squeries
 
 app = Flask(__name__)
 
-SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
-                       "ay", "az", "ba", "be", "bg", "bh", "bi", "bm", "bn",
-                       "bo", "br", "bs", "ca", "ce", "ch", "co", "cr", "cs",
-                       "cu", "cv", "cy", "da", "de", "dv", "dz", "ee", "el",
-                       "en", "eo", "es", "et", "eu", "fa", "ff", "fi", "fj",
-                       "fo", "fr", "fy", "ga", "gd", "gl", "gn", "gu", "gv",
-                       "ha", "he", "hi", "ho", "hr", "ht", "hu", "hy", "hz",
-                       "ia", "id", "ie", "ig", "ii", "ik", "io", "is", "it",
-                       "iu", "ja", "jv", "ka", "kg", "ki", "kj", "kk", "kl",
-                       "km", "kn", "ko", "kr", "ks", "ku", "kv", "kw", "ky",
-                       "la", "lb", "lg", "li", "ln", "lo", "lt", "lv", "mg",
-                       "mh", "mi", "mk", "ml", "mn", "mo", "mr", "ms", "mt",
-                       "my", "na", "nb", "ne", "ng", "nl", "nn", "no", "nr",
-                       "nv", "ny", "oc", "oj", "om", "or", "os", "pa", "pi",
-                       "pl", "ps", "pt", "qu", "rm", "rn", "ro", "ru", "rw",
-                       "sa", "sc", "sd", "se", "sg", "sh", "si", "sk", "sl",
-                       "sm", "sn", "so", "sq", "sr", "ss", "st", "su", "sv",
-                       "sw", "ta", "te", "tg", "th", "ti", "tk", "tl", "tn",
-                       "to", "tr", "ts", "tt", "tw", "ty", "ug", "uk", "ur",
-                       "uz", "ve", "vi", "vo", "wa", "wo", "xh", "yi", "yo",
-                       "za", "zh", "zu"]
+app.config.from_pyfile('config.py')
 
+babel = Babel(app, locale_selector=languages.get_locale)
 
 def print_field(field):
     if field is None:
         return ""
-    elif field is True:
-        return "Yes"
-    elif field is False:
-        return "No"
     elif isinstance(field, dict) and field.get("date string"):  # For dates
         return field["date string"]
     else:
@@ -48,6 +26,11 @@ def home():
     return render_template("home.html")
 
 
+# @app.route('/language/<language>')
+# def set_language(language=None):
+#     session['language'] = language
+#     return redirect(url_for('home'))
+
 @app.route("/about/")
 def about():
     return render_template("about.html")
@@ -56,8 +39,17 @@ def about():
 @app.route("/results")
 def results():
     search_request = request.args.get("query")
+    language = request.args.get("language")
     if search_request is None:
-        return redirect(url_for('home'))
+        referer = request.headers.get('Referer')
+        if referer is not None:
+            if referer.startswith(url_for('home', _external=True)):
+                path_string = referer.split("?")[-1].split("&")[0]
+                return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
+            else:
+                return redirect(url_for('home'))
+        else:
+            return redirect(url_for('home'))
     if search_request == "" or len(search_request) == 1:
         return render_template("no-results.html")
     search_result = searchauthor.search_author(search_request)
@@ -100,11 +92,10 @@ def author_page(author_data):
 def works_list(author_id):
     try:
         author = pdclasses.Author(author_id)
-        browser_lang = request.accept_languages.best_match(SUPPORTED_LANGUAGES)  # Detect browser language
         return render_template(
             "works-list.html",
             author_name=author.name,
-            author_works=print_field(author.getWorks(browser_lang))  # Get list of works with label in English
+            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works with label in English
         )                                                            # or in the browser language
 
     except:  # If the Q number doesn't match any item
@@ -114,8 +105,7 @@ def works_list(author_id):
 @app.route("/work/<work_data>")
 def work_page(work_data):
     try:
-        browser_lang = request.accept_languages.best_match(SUPPORTED_LANGUAGES)  # Detect browser language
-        work = pdclasses.Work(work_data, browser_lang)  # Make and work object with the work ID and browser language
+        work = pdclasses.Work(work_data)  # Make and work object with the work ID and browser language
         return render_template(
             "work.html", work_title=print_field(work.title),
             work_description=print_field(work.description),
@@ -165,18 +155,23 @@ def term_page(term_id):
 
 @app.route("/countries/")
 def countries_main():
-    countries_info = pdclasses.retrieve_query(squeries.query_for_all_countries_info)
+    countries_info = pdclasses.retrieve_query(squeries.query_for_all_countries_info, lang=languages.get_locale())
     for country in countries_info:
         if country.get('terms', {}).get('value'):
             country['terms']['value'] = country['terms']['value'].replace('countries with ', "")
         else:
-            country['terms']['value'] = "Unknown term"
+            country['terms']['value'] = _("Unknown term")
     return render_template("countries.html",
                            countries_info=countries_info)
 
 @app.context_processor
 def inject_now():
     return {'now': datetime.datetime.utcnow()}
+
+
+@app.context_processor
+def inject_conf_var():
+    return {"CURRENT_LANGUAGE": languages.get_locale()}
 
 
 @app.errorhandler(404)

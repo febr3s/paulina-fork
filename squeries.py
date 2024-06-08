@@ -9,10 +9,10 @@ WHERE
   {{ SELECT DISTINCT ?item 
    WHERE
      {{ 
-       VALUES ?languages {{ "en" "{lang}" }}.                                                                                                           
+       VALUES ?languages {{ "{lang}" "en" }}.                                                                                                           
        ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 ) wd:{qname} . 
        ?item rdfs:label ?itemLabel .
-       FILTER ( lang ( ?itemLabel ) = ?languages ) . 
+       FILTER ( LANG( ?itemLabel ) = ?languages ) . 
        MINUS {{ 
          VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} 
          ?item wdt:P31 ?typeOfItem . }} 
@@ -23,7 +23,7 @@ WHERE
   OPTIONAL {{
   ?wikisource schema:about ?item .
   ?wikisource schema:isPartOf <https://en.wikisource.org/> . }}  
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en, {lang}" . }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en" . }} 
 }} 
 GROUP BY ?item ?itemLabel ?itemDescription 
 ORDER BY ASC ( ?itemLabel )
@@ -35,7 +35,7 @@ WHERE
 {{ 
   VALUES ?term {{ wd:{qname} }} . 
   ?term ( wdt:P1001|wdt:P150 ) ?item . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en" . }} 
 }} 
 ORDER BY ASC(?itemLabel)
 '''
@@ -50,7 +50,7 @@ WHERE
   ?item p:P1001 ?countryStatement . 
   ?countryStatement ps:P1001 wd:{qname} . 
   OPTIONAL {{ ?countryStatement pq:P518 ?part . }} 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en" . 
                             ?item rdfs:label ?itemLabel . 
                             ?part rdfs:label ?partLabel . }} 
 }} 
@@ -81,7 +81,7 @@ WHERE
     ?term wdt:P279 wd:Q108698760 . 
     ?term wdt:P1001 ?item . }} 
   OPTIONAL {{ ?item wdt:P41 ?flag . }} 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en". 
                             ?item rdfs:label ?itemLabel . 
                             ?term rdfs:label ?termLabel . 
                             ?item schema:description ?itemDescription . }} 
@@ -296,7 +296,7 @@ query_for_country_of_birth = '''
 SELECT DISTINCT ?item ?itemLabel 
 WHERE {{ 
   wd:{qname} wdt:P17 ?item . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en" . }} 
 }}
 '''
 
@@ -304,7 +304,7 @@ query_for_labels_of_list_of_items = '''
 SELECT DISTINCT ?item ?itemLabel 
 WHERE {{ 
   VALUES ?item {{ {qnames} }} .  
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en". }} 
 }}
 '''
 
@@ -316,6 +316,30 @@ WHERE {{
   ?cstatusStatement ps:P6216 ?cstatus . 
   OPTIONAL {{ ?cstatusStatement pq:P1001 ?jurisdiction . }} 
   ?jurisdiction wdt:P31 ?jurisdictionIsInstanceOf . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en" . }} 
 }}
 '''
+
+query_for_authors_of_a_work = '''
+SELECT DISTINCT ?typeOfAuthor ?typeOfAuthorLabel ?author ?authorLabel 
+WHERE 
+{{ 
+  VALUES ?typeOfAuthor {{ wd:P170 wd:P50 wd:P57 wd:P58 wd:P84 wd:P86 wd:P87 wd:P110 wd:P676 wd:P943 }} . 
+  ?typeOfAuthor wikibase:directClaim ?typeOfAuthorProp . 
+  wd:{qname} ?typeOfAuthorProp ?author . 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, en". }} 
+}}
+'''
+
+# keys_for_types_of_author = {
+#     "creator": "P170",
+#     "author": "P50",
+#     "director": "P57",
+#     "screenwriter": "P58",
+#     "architect": "P84",
+#     "composer": "P86",
+#     "librettist": "P87",
+#     "illustrator": "P110",
+#     "lyrics_by": "P676",
+#     "programmer": "P943"
+# }

@@ -9,15 +9,15 @@
 <table class="table">
   <tbody>
     <tr>
-      <th scope="row">Image</th>
+      <th scope="row">{{ _('Image') }}</th>
       <td><a href="{{work_image_link}}" target="_blank"><img src="{{work_image}}" height="100"></a></td>
     </tr>
     <tr>
-      <th scope="row">Description</th>
+      <th scope="row">{{ _('Description') }}</th>
       <td>{{work_description}}</td>
     </tr>
     <tr>
-      <th scope="row">Author/s</th>
+      <th scope="row">{{ _('Author/s') }}</th>
       <td>
         {% for type_of_author, authors in work_authors.items() %}
         <p class="mb-1"> {{ type_of_author }}:
@@ -29,24 +29,24 @@
       </td>
     </tr>
     <tr>
-      <th scope="row">Publication date</th>
+      <th scope="row">{{ _('Publication date') }}</th>
       <td>{{work_publication_date}}</td>
     </tr>
     <tr>
-      <th scope="row">Language</th>
+      <th scope="row">{{ _('Language') }}</th>
       <td>{{work_language}}</td>
     </tr>
     <tr>
-      <th scope="row">Country of origin</th>
+      <th scope="row">{{ _('Country of origin') }}</th>
       <td>{{work_country}}</td>
     </tr>
     <tr>
-      <th scope="row">Wikipedia link</th>
+      <th scope="row">{{ _('Wikipedia link') }}</th>
       <td><a href="{{work_wikipedia_link}}" target="_blank">{{work_wikipedia_link}}</a></td>
     </tr>
     {% if work_wikisource_link or work_internet_archive_link or work_full_work_link %}
     <tr>
-      <th scope="row">Access work</th>
+      <th scope="row">{{ _('Access work') }}</th>
       <td>
         {% if work_wikisource_link %}
         <p><a href="{{work_wikisource_link}}" target="_blank">{{work_wikisource_link}}</a></p>
@@ -61,10 +61,10 @@
     </tr>
     {% endif %}
     <tr>
-      <th scope="row">Copyright status</th>
+      <th scope="row">{{ _('Copyright status') }}</th>
       <td>
         {% for claim in work_copyright_status %}
-        <p class="mb-1"> {{ claim['status'] }} in
+        <p class="mb-1"> {{ claim['status'] }} {{ _('in') }}
           {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
           <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
             {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
@@ -73,12 +73,11 @@
             {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
           {% endif %}
         {% endfor %}
-        </ul>
       </td>
     </tr>
     <tr>
-      <th scope="row">Missing/wrong data?</th>
-      <td><a href="{{work_wikidata_link}}" target="_blank">Edit Wikidata item</a></td>
+      <th scope="row">{{ _('Missing/wrong data?') }}</th>
+      <td><a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></td>
     </tr>
   </tbody>
 </table>

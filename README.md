@@ -5,7 +5,7 @@ and works in the public domain using Wikidata and Python.
 
 ## Requirements
 * Python 3.10 or later.
-* Python modules: flask, python-dateutil, requests.
+* Python modules: flask, Flask-Babel, python-dateutil, requests.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
 ## Website

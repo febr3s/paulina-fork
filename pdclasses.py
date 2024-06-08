@@ -1,7 +1,9 @@
+from flask_babel import _
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
-import squeries  # local module with SPARQL queries
 import requests
+import squeries  # local module with SPARQL queries
+import languages
 
 
 def build_field(wikidata_statement):
@@ -21,11 +23,11 @@ def build_field(wikidata_statement):
                 break
 
         if "preferred" in dictionary_of_claims.values():  # If there is a preferred value
-            return [retrieve_item(key, data_type="labels").get("en")
+            return [retrieve_item(key, data_type="labels").get(languages.get_locale())
                     for key, value in dictionary_of_claims.items() if value == "preferred"][0]
 
         else:  # If there is not a preferred value
-            return [retrieve_item(key, data_type="labels").get("en")
+            return [retrieve_item(key, data_type="labels").get(languages.get_locale())
                     for key, value in dictionary_of_claims.items()][0]
 
 
@@ -116,9 +118,9 @@ class Parent:
         self.wikidata_item_id = wikidata_item_id
         self.wikidata_item = retrieve_item(wikidata_item_id, data_type="item")
         self.wikidata_link = "https://www.wikidata.org/wiki/" + wikidata_item_id
-        self.name = self.wikidata_item.get('labels', {}).get('en')
-        self.description = self.wikidata_item.get('descriptions', {}).get('en')
-        self.wikipedia_link = self.wikidata_item.get('sitelinks', {}).get('enwiki', {}).get('url')
+        self.name = self.wikidata_item.get('labels', {}).get(languages.get_locale())
+        self.description = self.wikidata_item.get('descriptions', {}).get(languages.get_locale())
+        self.wikipedia_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wiki', {}).get('url')
 
 
 class Author(Parent):
@@ -126,8 +128,8 @@ class Author(Parent):
     def __init__(self, wikidata_item_id):
         super().__init__(wikidata_item_id)
         self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
-        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get('enwikisource', {}).get('url')
-        self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get('enwikiquote', {}).get('url')
+        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
+        self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikiquote', {}).get('url')
         self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
@@ -139,7 +141,9 @@ class Author(Parent):
         else:
             occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
             occupations_labels = retrieve_query(squeries.query_for_labels_of_list_of_items,
-                                                qnames="wd:" + " wd:".join(occupations_ids))
+                                                qnames="wd:" + " wd:".join(occupations_ids),
+                                                lang=languages.get_locale()
+                                                )
             self.occupation = [occupation_item.get('itemLabel', {}).get('value')
                                for occupation_item in occupations_labels]
 
@@ -149,7 +153,10 @@ class Author(Parent):
         # Country of birth is built taking the place of birth and looking in what country it is.
         if place_of_birth:
             place_of_birth_Q = place_of_birth[0].get('value', {}).get('content')
-            country_of_birth = retrieve_query(squeries.query_for_country_of_birth, qname=place_of_birth_Q)
+            country_of_birth = retrieve_query(squeries.query_for_country_of_birth,
+                                              qname=place_of_birth_Q,
+                                              lang=languages.get_locale()
+                                              )
             self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
         else:
             self.country_of_birth = None
@@ -193,10 +200,10 @@ class Author(Parent):
 
     def ageOfAuthor(self):
         if self.date_of_birth is None:
-            return "Unknown"  # Authors with date of birth unavailable
+            return _('Unknown')  # Authors with date of birth unavailable
         if self.date_of_death is None:
             if not isinstance(self.date_of_birth["date object"], datetime.date) or self.date_of_birth["date object"].year < (datetime.date.today().year - 110):
-                return "Unknown"  # Dead authors without date of death
+                return _('Unknown')  # Dead authors without date of death
             else:
                 return rd.relativedelta(datetime.date.today(), self.date_of_birth["date object"]).years  # Age of living authors
         else:
@@ -221,14 +228,14 @@ class Author(Parent):
 
 class Work(Parent):
     """A class for cultural works."""
-    def __init__(self, wikidata_item_id, title_lang):
+    def __init__(self, wikidata_item_id):
         super().__init__(wikidata_item_id)
         self.instance_of = build_field(self.wikidata_item.get('statements', {}).get('P31'))
 
-        if self.wikidata_item.get('labels', {}).get('en') is not None:
-            self.title = self.wikidata_item.get('labels', {}).get('en')
-        elif self.wikidata_item.get('labels', {}).get(title_lang) is not None:
-            self.title = self.wikidata_item.get('labels', {}).get(title_lang)
+        if self.wikidata_item.get('labels', {}).get(languages.get_locale()) is not None:
+            self.title = self.wikidata_item.get('labels', {}).get(languages.get_locale())
+        elif self.wikidata_item.get('labels', {}).get("en") is not None:
+            self.title = self.wikidata_item.get('labels', {}).get("en")
         else:
             self.title = None
 
@@ -241,30 +248,25 @@ class Work(Parent):
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
 
-        types_of_author = {"creator": "P170",
-                           "author": "P50",
-                           "director": "P57",
-                           "screenwriter": "P58",
-                           "architect": "P84",
-                           "composer": "P86",
-                           "librettist": "P87",
-                           "illustrator": "P110",
-                           "lyrics_by": "P676",
-                           "programmer": "P943"
-                           }
-
+        query_for_authors_response = retrieve_query(squeries.query_for_authors_of_a_work,
+                                                   qname=wikidata_item_id,
+                                                   lang=languages.get_locale()
+                                                   )
         dict_of_authors = {}
-        for type_of_author, value in types_of_author.items():
-            authors = self.wikidata_item.get('statements', {}).get(value)
-            if authors is not None:
-                dict_of_authors[type_of_author] = [{"name": retrieve_item(author.get('value', {}).get('content'), data_type="labels").get("en"),
-                                                    "ID": author.get('value', {}).get('content')} for author in authors]
+        for result in query_for_authors_response:
+            type_of_author = result.get('typeOfAuthorLabel', {}).get('value')
+            if type_of_author not in dict_of_authors:
+                dict_of_authors[type_of_author] = [{"name": result.get('authorLabel', {}).get('value'),
+                                                    "ID": result.get('author', {}).get('value').split("/")[-1]}]
+            else:
+                dict_of_authors[type_of_author].append({"name": result.get('authorLabel', {}).get('value'),
+                                                        "ID": result.get('author', {}).get('value').split("/")[-1]})
         self.authors = dict_of_authors
 
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
         self.language = build_field(self.wikidata_item.get('statements', {}).get('P407'))
         self.publication_date = build_date(self.wikidata_item.get('statements', {}).get('P577'))
-        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get('enwikisource', {}).get('url')
+        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
 
         internet_archive_ID = self.wikidata_item.get('statements', {}).get('P724')
         if internet_archive_ID is None:
@@ -280,7 +282,9 @@ class Work(Parent):
 
     def getCopyrightStatus(self):  # Improve this: when copyright status is None, try to estimate it by author's death or publication date
         copyright_status_response = retrieve_query(squeries.query_for_copyright_status_of_work,
-                                                   qname=self.wikidata_item_id)
+                                                   qname=self.wikidata_item_id,
+                                                   lang=languages.get_locale()
+                                                   )
         if not copyright_status_response:
             return None
         else:
@@ -315,7 +319,10 @@ class Country(Parent):
 
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):
-        copyright_term = retrieve_query(squeries.query_for_country_copyright_term, qname=self.wikidata_item_id)
+        copyright_term = retrieve_query(squeries.query_for_country_copyright_term,
+                                        qname=self.wikidata_item_id,
+                                        lang=languages.get_locale()
+                                        )
         return copyright_term
 
 
@@ -326,5 +333,8 @@ class Term(Parent):
 
     # Method to get list of countries by copyright term
     def getCountries(self):
-        countries = retrieve_query(squeries.query_for_countries_by_copyright_term, qname=self.wikidata_item_id)
+        countries = retrieve_query(squeries.query_for_countries_by_copyright_term,
+                                   qname=self.wikidata_item_id,
+                                   lang=languages.get_locale()
+                                   )
         return countries

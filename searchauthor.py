@@ -1,11 +1,14 @@
 import requests
+import languages
 
 
 def search_author(user_search):
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
-    search_url_suffix = "%20haswbstatement:P31=Q5|P31=Q21070568&prop=entityterms&wbetlanguage=en&format=json"
-    search_url = search_url_prefix + search + search_url_suffix
+    search_url_suffix = "%20haswbstatement:P31=Q5|P31=Q21070568&prop=entityterms&wbetlanguage="
+    search_language = languages.get_locale()
+    search_format = "&format=json"
+    search_url = search_url_prefix + search + search_url_suffix + search_language + search_format
     headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4

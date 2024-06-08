@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
-{% block title %}Results{% endblock %}
+{% block title %}{{ _('Results') }}{% endblock %}
 
 {% block content %}
 
 <div class="container-fluid w-75 p-3">
-    <h2 class="p-3">Search results</h2>
+    <h2 class="p-3">{{ _('Search results') }}</h2>
     <div class="list-group p-3">
         {% for author in list_of_authors %}
         <a href="{{ url_for('author_page', author_data=author['title']) }}" class="list-group-item list-group-item-action">
