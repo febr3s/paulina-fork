@@ -66,9 +66,18 @@
       {% block searchform %}
       <div class="container-fluid w-100 p-3" style="max-width:512px;">
           <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
-              <input class="form-control me-2" type="search" name="query"
-                     placeholder="{{ _('Search for an author') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
-              <button class="btn btn-outline-primary" type="submit">{{ _('Search') }}</button>
+              <select class="form-select me-2" style="width: 25%;" name="type_of_search">
+                  {% if not type_of_search or type_of_search == 'author' %}
+                  <option value="author" selected>{{ _('Author') }}</option>
+                  <option value="work">{{ _('Work') }}</option>
+                  {% elif type_of_search == 'work' %}
+                  <option value="author">{{ _('Author') }}</option>
+                  <option value="work" selected>{{ _('Work') }}</option>
+                  {% endif %}
+              </select>
+              <input class="form-control me-2" style="width:60%;" type="search" name="query"
+                     placeholder="{{ _('Search with Paulina') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
+              <button class="btn btn-outline-primary" style="width: 25%;" type="submit">{{ _('Search') }}</button>
           </form>
       </div>
       {% endblock %}

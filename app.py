@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, abort
 from flask_babel import Babel, _
 import datetime
+
+# Local modules
 import pdclasses
-import searchauthor
+import search
 import languages
 import squeries
 
@@ -15,6 +17,10 @@ babel = Babel(app, locale_selector=languages.get_locale)
 def print_field(field):
     if field is None:
         return ""
+    elif field == "novalue":
+        return _("No value")
+    elif field == "somevalue":
+        return _("Unknown value")
     elif isinstance(field, dict) and field.get("date string"):  # For dates
         return field["date string"]
     else:
@@ -26,11 +32,6 @@ def home():
     return render_template("home.html")
 
 
-# @app.route('/language/<language>')
-# def set_language(language=None):
-#     session['language'] = language
-#     return redirect(url_for('home'))
-
 @app.route("/about/")
 def about():
     return render_template("about.html")
@@ -38,26 +39,49 @@ def about():
 
 @app.route("/results")
 def results():
-    search_request = request.args.get("query")
-    language = request.args.get("language")
-    if search_request is None:
-        referer = request.headers.get('Referer')
-        if referer is not None:
-            if referer.startswith(url_for('home', _external=True)):
-                path_string = referer.split("?")[-1].split("&")[0]
-                return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
+    try:
+        type_of_search = request.args.get("type_of_search")
+        search_request = request.args.get("query")
+        language = request.args.get("language")
+        if search_request is None:
+            referer = request.headers.get('Referer')
+            if referer is not None:
+                if referer.startswith(url_for('home', _external=True)):
+                    path_string = "&".join(referer.split("?")[-1].split("&")[0:2])
+                    return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
+                else:
+                    return redirect(url_for('home'))
             else:
                 return redirect(url_for('home'))
-        else:
-            return redirect(url_for('home'))
-    if search_request == "" or len(search_request) == 1:
-        return render_template("no-results.html")
-    search_result = searchauthor.search_author(search_request)
-    if len(search_result) > 0:
-        return render_template('results.html', list_of_authors=search_result, search_request=search_request)
-    else:
-        return render_template("no-results.html", search_request=search_request)
-
+        elif search_request == "" or len(search_request) == 1:
+            return render_template("no-results.html",
+                                   search_request=search_request,
+                                   type_of_search=type_of_search)
+        elif len(search_request) > 1:
+            if type_of_search == "author":
+                search_result = search.search_author(search_request)
+                if len(search_result) > 0:
+                    return render_template('results.html',
+                                           list_of_authors=search_result,
+                                           search_request=search_request,
+                                           type_of_search=type_of_search)
+                else:
+                    return render_template("no-results.html",
+                                           search_request=search_request,
+                                           type_of_search=type_of_search)
+            elif type_of_search == "work":
+                search_result = search.search_work(search_request)
+                if len(search_result) > 0:
+                    return render_template('results.html',
+                                           list_of_works=search_result,
+                                           search_request=search_request,
+                                           type_of_search=type_of_search)
+                else:
+                    return render_template("no-results.html",
+                                           search_request=search_request,
+                                           type_of_search=type_of_search)
+    except:
+        abort(404)
 
 @app.route("/author/<author_data>")
 def author_page(author_data):
@@ -155,7 +179,7 @@ def term_page(term_id):
 
 @app.route("/countries/")
 def countries_main():
-    countries_info = pdclasses.retrieve_query(squeries.query_for_all_countries_info, lang=languages.get_locale())
+    countries_info = squeries.retrieve_query(squeries.query_for_all_countries_info, lang=languages.get_locale())
     for country in countries_info:
         if country.get('terms', {}).get('value'):
             country['terms']['value'] = country['terms']['value'].replace('countries with ', "")

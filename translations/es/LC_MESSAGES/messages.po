@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-08 16:05-0300\n"
-"PO-Revision-Date: 2024-06-08 16:08-0300\n"
+"POT-Creation-Date: 2024-06-14 15:26-0300\n"
+"PO-Revision-Date: 2024-06-14 15:27-0300\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -19,11 +19,31 @@ msgstr ""
 "Generated-By: Babel 2.15.0\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: app.py:163
+#: app.py:21
+msgid "No value"
+msgstr "Sin valor"
+
+#: app.py:23
+msgid "Unknown value"
+msgstr "Valor desconocido"
+
+#: app.py:187
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: pdclasses.py:203 pdclasses.py:206
+#: pdclasses.py:82
+msgid "(decade)"
+msgstr "(década)"
+
+#: pdclasses.py:84
+msgid "(century)"
+msgstr "(siglo)"
+
+#: pdclasses.py:86
+msgid "(millennium)"
+msgstr "(milenio)"
+
+#: pdclasses.py:199 pdclasses.py:202
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -239,7 +259,7 @@ msgstr "Aplica a %(countries)s"
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/home.html:8 templates/layout.html:84
+#: templates/home.html:8 templates/layout.html:93
 msgid "Paulina: Data for the Public Domain"
 msgstr "Paulina: Datos para el dominio público"
 
@@ -297,19 +317,27 @@ msgstr "Paulina"
 msgid "Select"
 msgstr "Elegir"
 
-#: templates/layout.html:70
-msgid "Search for an author"
-msgstr "Buscar autor/a"
+#: templates/layout.html:71 templates/layout.html:74
+msgid "Author"
+msgstr "Autor/a"
 
-#: templates/layout.html:70 templates/layout.html:71
+#: templates/layout.html:72 templates/layout.html:75
+msgid "Work"
+msgstr "Obra"
+
+#: templates/layout.html:79
+msgid "Search with Paulina"
+msgstr "Buscar con Paulina"
+
+#: templates/layout.html:79 templates/layout.html:80
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/layout.html:83
+#: templates/layout.html:92
 msgid "GitLab logo"
 msgstr "Logo de GitLab"
 
-#: templates/layout.html:85
+#: templates/layout.html:94
 msgid "Powered by Wikidata"
 msgstr "Basado en datos de Wikidata"
 
@@ -328,6 +356,10 @@ msgstr "Resultados"
 #: templates/results.html:8
 msgid "Search results"
 msgstr "Resultados de búsqueda"
+
+#: templates/results.html:27 templates/works-list.html:23
+msgid "Available for download"
+msgstr "Disponible para descargar"
 
 #: templates/term.html:3 templates/term.html:8
 #, python-format
@@ -384,6 +416,5 @@ msgstr "Agrégala a Wikidata"
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
 
-#: templates/works-list.html:23
-msgid "Available for download"
-msgstr "Disponible para descargar"
+#~ msgid "Search for an author"
+#~ msgstr "Buscar autor/a"

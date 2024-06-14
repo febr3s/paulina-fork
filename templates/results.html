@@ -7,6 +7,7 @@
 <div class="container-fluid w-75 p-3">
     <h2 class="p-3">{{ _('Search results') }}</h2>
     <div class="list-group p-3">
+        {% if list_of_authors %}
         {% for author in list_of_authors %}
         <a href="{{ url_for('author_page', author_data=author['title']) }}" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
@@ -16,6 +17,21 @@
             {{ author['entityterms']['description'][0] }}{% endif %}</p>
         </a>
         {% endfor %}
+        {% endif %}
+        {% if list_of_works %}
+        {% for work in list_of_works %}
+        <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">
+            {{ work['itemLabel']['value'] }}
+            {% if work['downloads'] %} <span title="{{ _('Available for download') }}">⬇</span>️{% endif %}
+        </h5>
+        </div>
+        <p class="mb-1">{% if work['itemDescription'] %}
+            {{ work['itemDescription']['value'] }}{% endif %}</p>
+        </a>
+        {% endfor %}
+        {% endif %}
 
     </div>
 

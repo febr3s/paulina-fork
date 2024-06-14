@@ -2,7 +2,9 @@ from flask_babel import _
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
 import requests
-import squeries  # local module with SPARQL queries
+
+# Local modules
+import squeries
 import languages
 
 
@@ -16,7 +18,11 @@ def build_field(wikidata_statement):
     else:  # If statement exists, check if there is a preferred value
         dictionary_of_claims = {}
         for claim in wikidata_statement:
-            claim_target = claim.get('value', {}).get('content')
+            claim_info = claim.get("value")
+            if claim_info["type"] in ["novalue", "somevalue"]:
+                claim_target = claim_info["type"]
+            else:
+                claim_target = claim_info.get("content")
             claim_rank = claim.get('rank')
             dictionary_of_claims[claim_target] = claim_rank
             if claim_rank == "preferred":
@@ -27,8 +33,11 @@ def build_field(wikidata_statement):
                     for key, value in dictionary_of_claims.items() if value == "preferred"][0]
 
         else:  # If there is not a preferred value
-            return [retrieve_item(key, data_type="labels").get(languages.get_locale())
-                    for key, value in dictionary_of_claims.items()][0]
+            first_claim = next(iter(dictionary_of_claims))
+            if first_claim in ["novalue", "somevalue"]:
+                return first_claim
+            else:
+                return retrieve_item(first_claim, data_type="labels").get(languages.get_locale())
 
 
 def build_date(wikidata_statement):
@@ -56,7 +65,7 @@ def build_date(wikidata_statement):
 
         try:  # This try and except handles the case in which the date is unknown
             year = int(date[:5])
-        except AttributeError:
+        except TypeError:
             return None
         month = int(date[6:8])
         day = int(date[9:11])
@@ -70,29 +79,13 @@ def build_date(wikidata_statement):
             elif precision == 9:  # Year precision
                 return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
             elif precision == 8:  # Decade precision
-                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (decade)"}
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} " + _("(decade)")}
             elif precision == 7:  # Century precision
-                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (century)"}
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} " + _("(century)")}
             elif precision == 6:  # Millennium precision
-                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} (millennium)"}
+                return {"date object": datetime.date(year, 1, 1), "date string": f"{year} " + _("(millennium)")}
             else:
                 return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
-
-
-def retrieve_query(query, **kwargs):
-    """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
-    query_url_prefix = 'https://query.wikidata.org/sparql?query='
-    query = query.format(**kwargs)
-    query = requests.utils.quote(query)  # URL encoded
-    request_json_format = '&format=json'
-    query_url = query_url_prefix + query + request_json_format
-    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
-    query_results = requests.get(query_url, headers=headers
-                                 # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                 )
-    query_results = query_results.json()
-    query_results = query_results["results"]["bindings"]
-    return query_results
 
 
 def retrieve_item(wikidata_item_id, data_type="item"):
@@ -140,7 +133,7 @@ class Author(Parent):
             self.occupation = None
         else:
             occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
-            occupations_labels = retrieve_query(squeries.query_for_labels_of_list_of_items,
+            occupations_labels = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
                                                 qnames="wd:" + " wd:".join(occupations_ids),
                                                 lang=languages.get_locale()
                                                 )
@@ -153,11 +146,14 @@ class Author(Parent):
         # Country of birth is built taking the place of birth and looking in what country it is.
         if place_of_birth:
             place_of_birth_Q = place_of_birth[0].get('value', {}).get('content')
-            country_of_birth = retrieve_query(squeries.query_for_country_of_birth,
-                                              qname=place_of_birth_Q,
-                                              lang=languages.get_locale()
-                                              )
-            self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+            if place_of_birth_Q:
+                country_of_birth = squeries.retrieve_query(squeries.query_for_country_of_birth,
+                                                  qname=place_of_birth_Q,
+                                                  lang=languages.get_locale()
+                                                  )
+                self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+            else:
+                self.country_of_birth = None
         else:
             self.country_of_birth = None
 
@@ -215,7 +211,7 @@ class Author(Parent):
                 return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
 
     def getWorks(self, lang):
-        works = retrieve_query(squeries.query_for_works, qname=self.wikidata_item_id, lang=lang)
+        works = squeries.retrieve_query(squeries.query_for_works_by_an_author, qname=self.wikidata_item_id, lang=lang)
         for work in works:  # Check if there are links to access the work
             if (int(work['wikisourceFullWork']['value']) > 0
                     or int(work['iaDownloads']['value']) > 0
@@ -248,7 +244,7 @@ class Work(Parent):
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
 
-        query_for_authors_response = retrieve_query(squeries.query_for_authors_of_a_work,
+        query_for_authors_response = squeries.retrieve_query(squeries.query_for_authors_of_a_work,
                                                    qname=wikidata_item_id,
                                                    lang=languages.get_locale()
                                                    )
@@ -281,7 +277,7 @@ class Work(Parent):
             self.full_work_link = full_work_available_at[0].get('value', {}).get('content')
 
     def getCopyrightStatus(self):  # Improve this: when copyright status is None, try to estimate it by author's death or publication date
-        copyright_status_response = retrieve_query(squeries.query_for_copyright_status_of_work,
+        copyright_status_response = squeries.retrieve_query(squeries.query_for_copyright_status_of_work,
                                                    qname=self.wikidata_item_id,
                                                    lang=languages.get_locale()
                                                    )
@@ -319,7 +315,7 @@ class Country(Parent):
 
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):
-        copyright_term = retrieve_query(squeries.query_for_country_copyright_term,
+        copyright_term = squeries.retrieve_query(squeries.query_for_country_copyright_term,
                                         qname=self.wikidata_item_id,
                                         lang=languages.get_locale()
                                         )
@@ -333,7 +329,7 @@ class Term(Parent):
 
     # Method to get list of countries by copyright term
     def getCountries(self):
-        countries = retrieve_query(squeries.query_for_countries_by_copyright_term,
+        countries = squeries.retrieve_query(squeries.query_for_countries_by_copyright_term,
                                    qname=self.wikidata_item_id,
                                    lang=languages.get_locale()
                                    )
