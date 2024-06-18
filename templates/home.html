@@ -3,36 +3,71 @@
 {% block title %}{{ _('Home') }}{% endblock %}
 
 {% block presentation %}
-<div class="p-3 m-3 bg-primary text-white">
-  <div class="container-fluid w-75 pt-4" style="max-width:800px;">
-    <h2 class="text-center">{{ _('Paulina: Data for the Public Domain') }}</h2>
-    <p class="text-center">{{ _('Discover the cultural heritage of humanity and help to improve the information about it.') }}</p>
+<!--Paulina's logo-->
+<div class="container-fluid pt-3">
+  {% if CURRENT_LANGUAGE == 'en' %}
+  <div class="text-center">
+      <img src="{{ url_for('static', filename='images/logo-paulina-en.svg') }}" alt="{{ _('Paulina logo') }}" style="max-width:300px;">
   </div>
-
+  {% elif CURRENT_LANGUAGE == 'es' %}
+  <div class="text-center">
+      <img src="{{ url_for('static', filename='images/logo-paulina-es.svg') }}" alt="{{ _('Paulina logo') }}" style="max-width:300px;">
+  </div>
+  {% else %}
+  <div class="text-center">
+      <img src="{{ url_for('static', filename='images/logo-paulina-en.svg') }}" alt="{{ _('Paulina logo') }}" style="max-width:300px;">
+  </div>
+  {% endif %}
 </div>
-      {% endblock %}
+{% endblock %}
 
 {% block content %}
-
-<div class="text-center m-3 p-3">
+<!--Color boxes-->
+<div class="m-3 p-3">
   <div class="row">
-    <div class="col p-2 m-2">
-      <div class="shadow p-3 mb-3 bg-white rounded h-100">
-      <h3>{{ _('Search interface') }}</h3>
-      <p>{{ _('Paulina Project aims to create a global and multilingual search interface for authors and works in the public domain using Wikidata and Python. This is a preliminary version of the tool.') }}</p>
-        </div>
+    <div class="col-md p-2 m-2">
+      <div class="text-center p-3 mb-3 border border-black h-75" style="background-color: #f46527; max-height: 60%;">
+        <h3>{{ _('Discover authors') }}</h3>
+        <p>{{ _('Paulina is a simple search tool to discover authors from all over the world and learn about their works.') }}</p>
+      </div>
+      <p class="my-4">
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #f46527;"
+        href="{{ url_for('author_page', author_data='Q47152') }}">{{ _('Mary Shelley') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #f46527;"
+        href="{{ url_for('author_page', author_data='Q229613') }}">{{ _('Carlos Gardel') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #f46527;"
+        href="{{ url_for('author_page', author_data='Q11560527') }}">{{ _('Kiyohara Yukinobu') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #f46527;"
+        href="{{ url_for('author_page', author_data='Q7154948') }}">{{ _('Paulina Luisi') }}</a>
+      </p>
     </div>
-    <div class="col p-2 m-2">
-      <div class="shadow p-3 mb-3 bg-white rounded h-100">
-      <h3>{{ _('Local tools') }}</h3>
-      <p>{{ _('This search interface is part of a larger project to facilitate the creation of national, regional or thematic versions of the tool, according to the needs of each community.') }}</p>
-        </div>
+    <div class="col-md p-2 m-2">
+      <div class="text-center p-3 mb-3 border border-black h-75" style="background-color:#fcdb1a; max-height: 60%;">
+        <h3>{{ _('Find works') }}</h3>
+        <p>{{ _('Easily find information on cultural works from all disciplines of art and knowledge found on Wikidata.') }}</p>
+      </div>
+      <p class="my-4">
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #fcdb1a;"
+        href="{{ url_for('work_page', work_data='Q2271021') }}">{{ _('The Araucaniad') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #fcdb1a;"
+        href="{{ url_for('work_page', work_data='Q1629456') }}">{{ _('Orlando: A Biography') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #fcdb1a;"
+        href="{{ url_for('work_page', work_data='Q151599') }}">{{ _('Metropolis') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #fcdb1a;"
+        href="{{ url_for('work_page', work_data='Q27950888') }}">{{ _('Pampa') }}</a>
+      </p>
     </div>
-    <div class="col p-2 m-2">
-      <div class="shadow p-3 mb-3 bg-white rounded h-100">
-      <h3>{{ _('Wikidata') }}</h3>
-      <p>{{ _('We use data tools as participatory research instruments to help improve information about the public domain on Wikidata and, through it, on the Internet.') }}</p>
-        </div>
+    <div class="col-md p-2 m-2">
+      <div class="text-center p-3 mb-3 border border-black h-75" style="background-color:#29a4e2; max-height: 60%;">
+        <h3>{{ _('Learn about the public domain') }}</h3>
+        <p>{{ _('Find out which works are in the public domain in different countries and access the versions available online.') }}</p>
+      </div>
+      <p class="my-4">
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #29a4e2;"
+        href="{{ url_for('term_page', term_id='Q114763455') }}">{{ _('Countries with 50 years post mortem auctoris') }}</a>
+        <a class="btn border-black rounded-pill pill-shadow" style="--bs-btn-color: black; --bs-btn-hover-bg: white; --bs-btn-active-bg: white; --bs-btn-bg: #29a4e2;"
+        href="{{ url_for('term_page', term_id='Q73560261') }}">{{ _('Countries with 70 years post mortem auctoris') }}</a>
+      </p>
     </div>
   </div>
 </div>

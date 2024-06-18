@@ -3,30 +3,28 @@
 {% block title %}{{country_name}}{% endblock %}
 
 {% block content %}
-<div class="container-fluid w-75 p-3">
-    <h2 class="ms-2"><a href="{{country_image_link}}" target="_blank"><img src="{{country_image}}" height="30"></a>
-        {{ _("%(country_name)s's copyright term", country_name=country_name) }}</h2>
+<div class="container-fluid col-12 col-xl-9 p-2">
+  <h2 class="mb-4 p-1"><a href="{{country_image_link}}" target="_blank"><img src="{{country_image}}" height="30"></a>
+    {{ _("%(country_name)s's copyright term", country_name=country_name) }}</h2>
 
-    <table class="table">
-        <tbody>
-        {% for term in country_copyright_terms %}
-        {% if "itemLabel" in term %}
-        <tr>
-            <th scope="row">{{ _("%(country_name)s is part of", country_name=country_name) }}</th>
-            <td><a href="{{ url_for('term_page', term_id=term['item']['value'].split('/')[-1]) }}">
-                {{ term['itemLabel']['value'] }}</a>
-                {% if term['appliesToParts']['value'] != '' %}
-                <br>
-                {{ _('Applies to %(countries)s', countries=term['appliesToParts']['value']) }}
-                {% endif %}
-            </td>
-        </tr>
+  <table class="table table-light p-1">
+    <tbody>
+    {% for term in country_copyright_terms %}
+    {% if "itemLabel" in term %}
+    <tr>
+      <th scope="row">{{ _("%(country_name)s is part of", country_name=country_name) }}</th>
+      <td><a href="{{ url_for('term_page', term_id=term['item']['value'].split('/')[-1]) }}">
+        {{ term['itemLabel']['value'] }}</a>
+        {% if term['appliesToParts']['value'] != '' %}
+        <br>
+        {{ _('Applies to %(countries)s', countries=term['appliesToParts']['value']) }}
         {% endif %}
-        {% endfor %}
-        </tbody>
-    </table>
-
-
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
 
 </div>
 {% endblock %}

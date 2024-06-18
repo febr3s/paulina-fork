@@ -5,9 +5,9 @@
 {% block searchform %}{% endblock %}
 
 {% block content %}
-<div class="container-fluid w-50 p-3">
-    <h2>{{ _('Page not found') }}</h2>
+<div class="container-fluid col-12 col-xl-6 p-2">
+    <h2 class="mb-4 p-1">{{ _('Page not found') }}</h2>
     {% set home_page %}<a href="{{ url_for('home') }}"> {{ _('home page') }}</a>{% endset %}
-    <p>{{ _('Please go to the %(home_page)s and try again.', home_page=home_page) }}</p>
+    <p class="p-1">{{ _('Please go to the %(home_page)s and try again.', home_page=home_page) }}</p>
 </div>
 {% endblock %}

@@ -4,16 +4,16 @@
 
 {% block content %}
 
-<div class="container-fluid w-75 p-3">
+<div class="container-fluid col-12 col-xl-9 p-2">
 
     {% if not author_works %}
-    <h2 class="p-3">{{ _('No works by %(author_name)s were found', author_name=author_name) }}</h2>
+    <h2 class="mb-4 p-1">{{ _('No works by %(author_name)s were found', author_name=author_name) }}</h2>
     <p>{{ _('Missing information?') }}
         <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blank">{{ _('Add it to Wikidata') }}</a>.</p>
 
     {% else %}
-    <h2 class="p-3">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
-        <div class="list-group p-3">
+    <h2 class="mb-4 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
+        <div class="list-group p-1">
         {% for work in author_works %}
         <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}"
            class="list-group-item list-group-item-action">

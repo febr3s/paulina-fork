@@ -7,93 +7,152 @@
 <html lang="en">
 {% endif %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{% endblock %} - {{ _('Paulina') }}</title>
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{% endblock %} - {{ _('Paulina') }}</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+          crossorigin="anonymous"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 </head>
-<body class="d-flex flex-column min-vh-100">
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">{{ _('Home') }}</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems" aria-controls="menuItems" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='images/home-paulina.png') }}" width="30" height="30"
+           class="d-inline-block align-top" alt="{{ _('Home') }}">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems"
+            aria-controls="menuItems" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuItems">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}">{{ _('About') }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="form" action="" method="GET">
+        <select class="form-select me-1 border-black shadow-none" name="language">
+          {% if CURRENT_LANGUAGE == 'en' %}
+          <option value="en" selected>English</option>
+          <option value="es">Español</option>
+          {% elif CURRENT_LANGUAGE == 'es' %}
+          <option value="en">English</option>
+          <option value="es" selected>Español</option>
+          {% else %}
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          {% endif %}
+        </select>
+        <button class="btn border-black" style="--bs-btn-color: black; --bs-btn-hover-bg: #71c3ec; --bs-btn-bg: #29a4e2;"
+                type="submit">{{ _('Select') }}
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+{% block presentation %}
+{% endblock %}
+<div class="container p-3">
+  {% block searchform %}
+  <div class="container-fluid w-100 py-4" style="max-width:600px;">
+    <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
+      <select class="form-select border-black border-end-0 shadow-none" style="color: black; max-width:6.5em; background-color:#29a4e2;" name="type_of_search">
+        {% if not type_of_search or type_of_search == 'author' %}
+        <option value="author" selected>{{ _('Author') }}</option>
+        <option value="work">{{ _('Work') }}</option>
+        {% elif type_of_search == 'work' %}
+        <option value="author">{{ _('Author') }}</option>
+        <option value="work" selected>{{ _('Work') }}</option>
+        {% endif %}
+      </select>
+      <input class="form-control border-black border-end-0 shadow-none" type="search" name="query"
+             placeholder="{{ _('Search with Paulina') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
+      <button class="btn border-black border-start-0 p-2" style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;" type="submit">
+        <img src="{{ url_for('static', filename='images/search.svg') }}" width="20" height="20" alt="{{ _('Search') }}">
       </button>
-      <div class="collapse navbar-collapse" id="menuItems">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('about') }}">{{ _('About') }}</a>
+    </form>
+  </div>
+  {% endblock %}
+
+  {% block content %}
+  {% endblock %}
+</div>
+
+<div class="text-bg-light mt-4">
+  <div class="container text-center p-3">
+    <div class="row">
+      <div class="col-md p-2 m-2">
+        <p><strong>{{ _('Paulina is supported by:') }}</strong></p>
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://www.articaonline.com" target="_blank" class="link-dark">{{ _('Ártica - Online Cultural Center') }}</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
+          <li>
+            <a href="https://www.creativecommons.uy" target="_blank" class="link-dark">{{ _('Creative Commons Uruguay') }}</a>
           </li>
-          <li class="nav-item">
-            <form class="d-flex" role="form" action="" method="GET">
-              <select class="form-select me-1" name="language">
-                {% if CURRENT_LANGUAGE == 'en' %}
-                <option value="en" selected>English</option>
-                <option value="es">Español</option>
-                {% elif CURRENT_LANGUAGE == 'es' %}
-                <option value="en">English</option>
-                <option value="es" selected>Español</option>
-                {% else %}
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                {% endif %}
-              </select>
-              <button class="btn btn-outline-primary" type="submit">{{ _('Select') }}</button>
-            </form>
+          <li>
+            <a href="https://data.org.uy" target="_blank" class="link-dark">{{ _('Data Uruguay') }}</a>
+          </li>
+          <li>
+            <a href="https://wikimedistas.uy" target="_blank" class="link-dark">{{ _('Wikimedistas de Uruguay') }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md p-2 m-2">
+        <p><strong>{{ _('About Paulina') }}</strong></p>
+        <ul class="list-unstyled">
+          <li>
+            <a href="{{ url_for('about') }}" class="link-dark">{{ _('About') }}</a>
+          </li>
+          <li>
+            <a href="https://gitlab.wikimedia.org/toolforge-repos/paulina" target="_blank" class="link-dark">{{ _("Source code") }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md p-2 m-2">
+        <p><strong>{{ _('Help') }}</strong></p>
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Paulina" target="_blank" class="link-dark">{{ _('Documentation') }}</a>
+          </li>
+          <li>
+            <a href="{{ url_for('countries_main') }}" class="link-dark">{{ _('Countries and terms') }}</a>
           </li>
         </ul>
       </div>
     </div>
-  </nav>
-
-  <div class="container p-3">
-
-      {% block presentation %}
-      {% endblock %}
-
-      {% block searchform %}
-      <div class="container-fluid w-100 p-3" style="max-width:512px;">
-          <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
-              <select class="form-select me-2" style="width: 25%;" name="type_of_search">
-                  {% if not type_of_search or type_of_search == 'author' %}
-                  <option value="author" selected>{{ _('Author') }}</option>
-                  <option value="work">{{ _('Work') }}</option>
-                  {% elif type_of_search == 'work' %}
-                  <option value="author">{{ _('Author') }}</option>
-                  <option value="work" selected>{{ _('Work') }}</option>
-                  {% endif %}
-              </select>
-              <input class="form-control me-2" style="width:60%;" type="search" name="query"
-                     placeholder="{{ _('Search with Paulina') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
-              <button class="btn btn-outline-primary" style="width: 25%;" type="submit">{{ _('Search') }}</button>
-          </form>
-      </div>
-      {% endblock %}
-
-      {% block content %}
-      {% endblock %}
   </div>
+</div>
+<footer>
+  <div class="text-center p-2" style="background-color: #f46527;">
+    <a href="/">
+    {% if CURRENT_LANGUAGE == 'en' %}
+    <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+    {% elif CURRENT_LANGUAGE == 'es' %}
+    <img src="{{ url_for('static', filename='images/logo-paulina-mono-es.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+    {% else %}
+    <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+    {% endif %}
+    </a>
+    <p>{{ now.year }} - {{ _('Paulina: Data for the Public Domain') }}.
+      <a href="https://www.wikidata.org" target="_blank" class="link-dark">{{ _('Powered by Wikidata.') }}</a></p>
+  </div>
+</footer>
 
-  <footer class="mt-auto">
-       <div class="text-bg-light text-center p-3">
-           <p><a href="https://gitlab.wikimedia.org/toolforge-repos/paulina" target="_blank">
-               <img src="{{ url_for('static', filename='images/gitlab-logo-500.svg') }}" alt="{{ _('GitLab logo') }}" width="40" height="40"></a></p>
-           <p>{{ now.year }} - {{ _('Paulina: Data for the Public Domain') }} -
-               <a href="https://www.wikidata.org" target="_blank">{{ _('Powered by Wikidata') }}</a></p>
-       </div>
-
-  </footer>
 </body>
 </html>

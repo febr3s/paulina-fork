@@ -3,11 +3,11 @@
 {% block title %}{{work_title}}{% endblock %}
 
 {% block content %}
-<div class="container-fluid w-75 p-3">
-<h2 class="ms-2">{{work_title}}</h2>
+<div class="container-fluid col-12 col-xl-9 p-2">
+  <h2 class="mb-4 p-1">{{work_title}}</h2>
 
-<table class="table">
-  <tbody>
+  <table class="table table-light p-1">
+    <tbody>
     <tr>
       <th scope="row">{{ _('Image') }}</th>
       <td><a href="{{work_image_link}}" target="_blank"><img src="{{work_image}}" height="100"></a></td>
@@ -21,9 +21,9 @@
       <td>
         {% for type_of_author, authors in work_authors.items() %}
         <p class="mb-1"> {{ type_of_author }}:
-           {% for author in authors %}
-            <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>&nbsp;
-           {% endfor %}
+          {% for author in authors %}
+          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>&nbsp;
+          {% endfor %}
         </p>
         {% endfor %}
       </td>
@@ -68,10 +68,10 @@
           {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
           <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
             {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
-          {% else %}
-          <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
-            {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
-          {% endif %}
+        {% else %}
+        <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+          {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
+        {% endif %}
         {% endfor %}
       </td>
     </tr>
@@ -79,8 +79,8 @@
       <th scope="row">{{ _('Missing/wrong data?') }}</th>
       <td><a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
 </div>
 {% endblock %}

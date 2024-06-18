@@ -4,20 +4,20 @@
 
 {% block content %}
 
-<div class="container-fluid w-75 p-3">
-  <h2 class="p-3">{{ _('List of %(term_name)s', term_name=term_name) }}</h2>
-    <div class="list-group p-3">
-        {% for country in term_countries %}
-        {% if "itemLabel" in country %}
-        <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
-           class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ country['itemLabel']['value'] }}</h5>
-            </div>
-        </a>
-        {% endif %}
-        {% endfor %}
-    </div>
+<div class="container-fluid col-12 col-xl-9 p-2">
+  <h2 class="mb-4 p-1">{{ _('List of %(term_name)s', term_name=term_name) }}</h2>
+  <div class="list-group p-1">
+    {% for country in term_countries %}
+    {% if "itemLabel" in country %}
+    <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
+       class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ country['itemLabel']['value'] }}</h5>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

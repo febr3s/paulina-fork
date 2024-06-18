@@ -1,16 +1,48 @@
 @font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat-VariableFont_wght.ttf");
+  font-family: "Lato";
+  src: url("../fonts/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
 }
 
 :root {
-       --bs-body-font-family: 'Montserrat';
-       }
+  --bs-body-font-family: 'Lato', sans-serif;
+  --bs-border-radius: 0;
+}
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    }
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
 
 .navbar {
-        font-weight: 600
-        }
+  font-weight: 700;
+}
+
+.pill-shadow {
+  box-shadow: 5px 5px;
+}
+
+.country-card:hover {
+  background-color: #f8f9fa;
+}
