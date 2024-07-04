@@ -87,8 +87,8 @@ def results():
 def author_page(author_data):
     try:
         author = pdclasses.Author(author_data)  # If user enters a URL with a Q of a non-human, this renders it anyway.
-        return render_template(
-            "author.html", author_name=print_field(author.name),
+        return render_template("author.html",
+            author_name=print_field(author.name),
             author_id=print_field(author.wikidata_item_id),
             author_description=print_field(author.description),
             author_nationality=print_field(author.nationality),
@@ -117,9 +117,8 @@ def author_page(author_data):
 def works_list(author_id):
     try:
         author = pdclasses.Author(author_id)
-        return render_template(
-            "works-list.html",
-            author_name=author.name,
+        return render_template("works-list.html",
+            author_name=print_field(author.name),
             author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
         )
 
@@ -131,8 +130,8 @@ def works_list(author_id):
 def work_page(work_data):
     try:
         work = pdclasses.Work(work_data)  # Make a work object
-        return render_template(
-            "work.html", work_title=print_field(work.title),
+        return render_template("work.html",
+            work_title=print_field(work.title),
             work_description=print_field(work.description),
             work_image=print_field(work.image),
             work_image_link=print_field(work.image_link),
@@ -156,11 +155,12 @@ def work_page(work_data):
 def country_page(country_data):
     try:
         country = pdclasses.Country(country_data)
-        return render_template(
-            "country.html", country_name=print_field(country.name),
+        return render_template("country.html",
+            country_name=print_field(country.name),
             country_copyright_terms=print_field(country.getCopyrightTerm()),
-            country_image=print_field(country.image),
-            country_image_link=print_field(country.image_link)
+            country_flag_image=print_field(country.flag_image),
+            country_flag_image_link=print_field(country.flag_image_link),
+            country_flag_image_alt_text=print_field(country.flag_image_alt_text)
         )
     except:  # If the Q number doesn't match any item
         abort(404)
@@ -172,7 +172,7 @@ def term_page(term_id):
         term = pdclasses.Term(term_id)
         return render_template(
             "term.html",
-            term_name=term.name,
+            term_name=print_field(term.name),
             term_countries=print_field(term.getCountries())
         )
     except:  # If the Q number doesn't match any item
@@ -188,7 +188,9 @@ def countries_main():
         else:
             country['terms']['value'] = _("Unknown term")
     return render_template("countries.html",
-                           countries_info=countries_info)
+                           countries_info=print_field(countries_info)
+                           )
+
 
 @app.context_processor
 def inject_now():

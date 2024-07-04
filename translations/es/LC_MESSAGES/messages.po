@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-04 17:52-0300\n"
-"PO-Revision-Date: 2024-07-04 17:59-0300\n"
+"POT-Creation-Date: 2024-07-04 19:19-0300\n"
+"PO-Revision-Date: 2024-07-04 19:20-0300\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -76,6 +76,11 @@ msgstr ""
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Imagen de %(title)s."
+
+#: pdclasses.py:323 templates/countries.html:22
+#, python-format
+msgid "Flag of %(country_name)s."
+msgstr "Bandera de %(country_name)s."
 
 #: templates/404.html:3
 msgid "404 error"
@@ -379,17 +384,17 @@ msgid ""
 "country."
 msgstr "Haciendo clic en un país, se accede a más información acerca del país."
 
-#: templates/country.html:8
+#: templates/country.html:10
 #, python-format
 msgid "%(country_name)s's copyright term"
 msgstr "Plazo de derecho de autor de %(country_name)s"
 
-#: templates/country.html:15
+#: templates/country.html:17
 #, python-format
 msgid "%(country_name)s is part of"
 msgstr "%(country_name)s es parte de"
 
-#: templates/country.html:20
+#: templates/country.html:22
 #, python-format
 msgid "Applies to %(countries)s"
 msgstr "Aplica a %(countries)s"

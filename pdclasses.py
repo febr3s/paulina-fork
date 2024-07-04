@@ -311,14 +311,16 @@ class Country(Parent):
     """A class for countries."""
     def __init__(self, wikidata_item_id):
         super().__init__(wikidata_item_id)
-        image = self.wikidata_item.get('statements', {}).get('P41')
-        if image is None:
-            self.image = None
-            self.image_link = None
+        flag_image = self.wikidata_item.get('statements', {}).get('P41')
+        if flag_image is None:
+            self.flag_image = None
+            self.flag_image_link = None
         else:
-            image_file_name = image[0]["value"]["content"]
-            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=200&height=30'
-            self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
+            flag_image_file_name = flag_image[0]["value"]["content"]
+            flag_image_file_name = requests.utils.quote(flag_image_file_name)
+            self.flag_image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + flag_image_file_name + '&width=200&height=30'
+            self.flag_image_link = 'https://commons.wikimedia.org/wiki/File:' + flag_image_file_name
+            self.flag_image_alt_text = _('Flag of %(country_name)s.', name=self.name)
 
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):

@@ -18,7 +18,8 @@
            class="list-group-item list-group-item-action">
           <div class="text-center border border-black country-card p-3 h-100">
             <p>
-              <img src="{{ country.get('flag', {}).get('value') }}" height="20">
+              <img src="{{ country.get('flag', {}).get('value') }}"
+                   alt="{{ _('Flag of %(country_name)s.', country_name=country.get('itemLabel', {}).get('value')) }}" height="20">
             </p>
             <p>
               <strong>{{ country['itemLabel']['value'] }}</strong>
