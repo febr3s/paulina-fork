@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}{% endblock %} - {{ _('Paulina') }}</title>
   <!-- Bootstrap 5 -->
@@ -44,7 +44,7 @@
           <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
         </li>
       </ul>
-      <form class="d-flex" role="form" action="" method="GET">
+      <form class="d-flex" action="{{ url_for(request.endpoint, **request.view_args) }}" method="GET">
         <select class="form-select me-1 border-black shadow-none" name="language">
           {% if CURRENT_LANGUAGE == 'en' %}
           <option value="en" selected>English</option>

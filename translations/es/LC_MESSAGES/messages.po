@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-17 22:36-0300\n"
-"PO-Revision-Date: 2024-06-17 22:44-0300\n"
+"POT-Creation-Date: 2024-07-04 17:52-0300\n"
+"PO-Revision-Date: 2024-07-04 17:59-0300\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -27,7 +27,7 @@ msgstr "Sin valor"
 msgid "Unknown value"
 msgstr "Valor desconocido"
 
-#: app.py:187
+#: app.py:189
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
@@ -43,9 +43,39 @@ msgstr "(siglo)"
 msgid "(millennium)"
 msgstr "(milenio)"
 
-#: pdclasses.py:199 pdclasses.py:202
+#: pdclasses.py:164
+msgid ""
+"Image of a generic human silhouette. The text above it indicates that there "
+"is no free image of the person available, and that if you own one, you can "
+"click on the placeholder link."
+msgstr ""
+"Imagen de una silueta humana genérica. El texto sobre ella indica que no hay "
+"disponible una imagen libre de la persona, y que si posees una, puedes hacer "
+"clic en el enlace del cartel."
+
+#: pdclasses.py:170
+#, python-format
+msgid "Image of %(name)s."
+msgstr "Imagen de %(name)s."
+
+#: pdclasses.py:202 pdclasses.py:205
 msgid "Unknown"
 msgstr "Desconocido"
+
+#: pdclasses.py:245
+msgid ""
+"Image of a generic work. The text above it indicates that there is no free "
+"image of the work available, and that if you own one, you can click on the "
+"placeholder link to upload it."
+msgstr ""
+"Imagen de una obra genérica. El texto sobre ella indica que no hay "
+"disponible una imagen libre de la obra, y que si posees una, puedes hacer "
+"clic en el enlace del cartel para subirla."
+
+#: pdclasses.py:252
+#, python-format
+msgid "Image of %(title)s."
+msgstr "Imagen de %(title)s."
 
 #: templates/404.html:3
 msgid "404 error"

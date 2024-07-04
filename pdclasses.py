@@ -161,10 +161,13 @@ class Author(Parent):
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Image_is_needed_female.svg/240px-Image_is_needed_female.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
+            self.image_alt_text = _('Image of a generic human silhouette. The text above it indicates that there is no free image of the person available, and that if you own one, you can click on the placeholder link.')
         else:
             image_file_name = image[0]["value"]["content"]
+            image_file_name = requests.utils.quote(image_file_name)
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
+            self.image_alt_text = _('Image of %(name)s.', name=self.name)
 
     def isInPublicDomain(self):
         if self.date_of_death is None:
@@ -239,10 +242,14 @@ class Work(Parent):
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/464px-Placeholder_book.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
+            self.image_alt_text = _('Image of a generic work. The text above it indicates that there is no free image of the work available, and that if you own one, you can click on the placeholder link to upload it.')
+
         else:
             image_file_name = image[0]["value"]["content"]
+            image_file_name = requests.utils.quote(image_file_name)
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
+            self.image_alt_text = _('Image of %(title)s.', title=self.title)
 
         query_for_authors_response = squeries.retrieve_query(squeries.query_for_authors_of_a_work,
                                                    qname=wikidata_item_id,

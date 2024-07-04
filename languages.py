@@ -27,4 +27,10 @@ SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
 def get_locale():
     if 'language' in request.args:
         session['language'] = request.args.get('language')
-    return session.get('language', request.accept_languages.best_match(SUPPORTED_LANGUAGES))
+        return session.get('language')
+    else:
+        browser_language = request.accept_languages.best_match(SUPPORTED_LANGUAGES)
+        if browser_language is None:
+            return "en"
+        else:
+            return browser_language
