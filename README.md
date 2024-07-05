@@ -9,12 +9,13 @@ and works in the public domain using Wikidata and Python.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
 ## Website
-Public alpha version available at <https://paulina.toolforge.org/>.
+Public beta version available at <https://paulina.toolforge.org/>.
 
 ## Credits
 Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.articaonline.com), 
 [Creative Commons Uruguay](https://www.creativecommons.uy), [Data Uruguay](https://data.org.uy) and 
-[Wikimedistas de Uruguay](https://wikimedistas.uy).
+[Wikimedistas de Uruguay](https://wikimedistas.uy). In June 2024 the project [received support](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/Rapid_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_con_Wikidata_(ID:_22592697)) 
+from the Wikimedia Community Fund.
 
 ## License
 This software is under a GNU Affero General Public License Version 3.
