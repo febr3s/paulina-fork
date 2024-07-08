@@ -29,12 +29,16 @@ def print_field(field):
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",
+                           title=_("Home")
+                           )
 
 
 @app.route("/about/")
 def about():
-    return render_template("about.html")
+    return render_template("about.html",
+                           title=_("About")
+                           )
 
 
 @app.route("/results")
@@ -55,6 +59,7 @@ def results():
                 return redirect(url_for('home'))
         elif search_request == "" or len(search_request) == 1:
             return render_template("no-results.html",
+                                   title=_("No results found"),
                                    search_request=search_request,
                                    type_of_search=type_of_search)
         elif len(search_request) > 1:
@@ -62,22 +67,26 @@ def results():
                 search_result = search.search_author(search_request)
                 if len(search_result) > 0:
                     return render_template('results.html',
+                                           title=_("Results"),
                                            list_of_authors=search_result,
                                            search_request=search_request,
                                            type_of_search=type_of_search)
                 else:
                     return render_template("no-results.html",
+                                           title=_("No results found"),
                                            search_request=search_request,
                                            type_of_search=type_of_search)
             elif type_of_search == "work":
                 search_result = search.search_work(search_request)
                 if len(search_result) > 0:
                     return render_template('results.html',
+                                           title=_("Results"),
                                            list_of_works=search_result,
                                            search_request=search_request,
                                            type_of_search=type_of_search)
                 else:
                     return render_template("no-results.html",
+                                           title=_("No results found"),
                                            search_request=search_request,
                                            type_of_search=type_of_search)
     except:
@@ -88,6 +97,7 @@ def author_page(author_data):
     try:
         author = pdclasses.Author(author_data)  # If user enters a URL with a Q of a non-human, this renders it anyway.
         return render_template("author.html",
+            title=print_field(author.name),
             author_name=print_field(author.name),
             author_id=print_field(author.wikidata_item_id),
             author_description=print_field(author.description),
@@ -118,6 +128,7 @@ def works_list(author_id):
     try:
         author = pdclasses.Author(author_id)
         return render_template("works-list.html",
+            title=_('List of works') + " - " + print_field(author.name),
             author_name=print_field(author.name),
             author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
         )
@@ -131,6 +142,7 @@ def work_page(work_data):
     try:
         work = pdclasses.Work(work_data)  # Make a work object
         return render_template("work.html",
+            title=print_field(work.title),
             work_title=print_field(work.title),
             work_description=print_field(work.description),
             work_image=print_field(work.image),
@@ -156,6 +168,7 @@ def country_page(country_data):
     try:
         country = pdclasses.Country(country_data)
         return render_template("country.html",
+            title=print_field(country.name),
             country_name=print_field(country.name),
             country_copyright_terms=print_field(country.getCopyrightTerm()),
             country_flag_image=print_field(country.flag_image),
@@ -170,8 +183,8 @@ def country_page(country_data):
 def term_page(term_id):
     try:
         term = pdclasses.Term(term_id)
-        return render_template(
-            "term.html",
+        return render_template("term.html",
+            title=_('List of %(term_name)s', term_name=print_field(term.name)),
             term_name=print_field(term.name),
             term_countries=print_field(term.getCountries())
         )
@@ -188,6 +201,7 @@ def countries_main():
         else:
             country['terms']['value'] = _("Unknown term")
     return render_template("countries.html",
+                           title=_('Countries and terms'),
                            countries_info=print_field(countries_info)
                            )
 
@@ -204,7 +218,9 @@ def inject_conf_var():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html',
+                           title=_('404 error')
+                           ), 404
 
 
 if __name__ == "__main__":

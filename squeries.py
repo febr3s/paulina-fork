@@ -10,7 +10,7 @@ def retrieve_query(query, **kwargs):
     query = requests.utils.quote(query)  # URL encoded
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
-    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     query_results = requests.get(query_url, headers=headers
                                  # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                  )

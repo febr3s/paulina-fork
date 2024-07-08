@@ -12,7 +12,7 @@ def search_author(user_search):
     search_language = languages.get_locale()
     search_format = "&format=json"
     search_url = search_url_prefix + search + search_url_suffix + search_language + search_format
-    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
@@ -39,7 +39,7 @@ def search_work(user_search):
     search_language = languages.get_locale()
     search_format = "&format=json"
     search_url = search_url_prefix + search + search_url_suffix + search_language + search_format
-    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )

@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ _('List of %(term_name)s', term_name=term_name) }}{% endblock %}
-
 {% block content %}
 
 <div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">{{ _('List of %(term_name)s', term_name=term_name) }}</h2>
+  <h2 class="mb-4 p-1">{{ title }}</h2>
   <div class="list-group p-1">
     {% for country in term_countries %}
     {% if "itemLabel" in country %}

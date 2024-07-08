@@ -97,7 +97,7 @@ def retrieve_item(wikidata_item_id, data_type="item"):
     else:
         item_url_suffix = ""
     item_url = item_url_prefix + wikidata_item_id + item_url_suffix
-    headers = {'user-agent': 'PaulinaApp/0.1 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     item_response = requests.get(item_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
