@@ -25,12 +25,12 @@ SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
                        "uz", "ve", "vi", "vo", "wa", "wo", "xh", "yi", "yo",
                        "za", "zh", "zu"]
 def get_locale():
-    if 'language' in request.args:
-        session['language'] = request.args.get('language')
-        return session.get('language')
+    if "language" in request.args:
+        session["language"] = request.args.get("language")
+        return session.get("language")
     else:
         browser_language = request.accept_languages.best_match(SUPPORTED_LANGUAGES)
         if browser_language is None:
-            return "en"
+            return session.get("language", "en")
         else:
-            return browser_language
+            return session.get("language", browser_language)
