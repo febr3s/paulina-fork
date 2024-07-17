@@ -8,6 +8,15 @@ and works in the public domain using Wikidata and Python.
 * Python modules: flask, Flask-Babel, python-dateutil, requests.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
+## Config file
+
+You must copy the `config-sample.py` file to `config.py`. In this file you must uncomment the first line and enter a secret key, e.g.:
+
+`SECRET_KEY = "YourSecretKeyHere"`
+
+The secret key is for the session cookie. The session cookie is necessary so that the language choice is persistent throughout the session.
+
+
 ## Website
 Public beta version available at <https://paulina.toolforge.org/>.
 
