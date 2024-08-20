@@ -9,6 +9,3 @@ __pycache__/
 
 # Ignore Babel config file
 /babel.cfg
-
-# Ignore .pot translation template file
-/messages.pot
