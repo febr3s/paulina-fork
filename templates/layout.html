@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-{% if CURRENT_LANGUAGE == 'en' %}
-<html lang="en">
-{% elif CURRENT_LANGUAGE == 'es' %}
-<html lang="es">
+{% if CURRENT_LANGUAGE in ['en', 'es', 'pt'] %}
+<html lang="{{ CURRENT_LANGUAGE }}">
 {% else %}
 <html lang="en">
 {% endif %}
@@ -60,12 +58,19 @@
           {% if CURRENT_LANGUAGE == 'en' %}
           <option value="en" selected>English</option>
           <option value="es">Español</option>
+          <option value="pt">Português</option>
           {% elif CURRENT_LANGUAGE == 'es' %}
           <option value="en">English</option>
           <option value="es" selected>Español</option>
+          <option value="pt">Português</option>
+          {% elif CURRENT_LANGUAGE == 'pt' %}
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="pt" selected>Português</option>
           {% else %}
           <option value="en">English</option>
           <option value="es">Español</option>
+          <option value="pt">Português</option>
           {% endif %}
         </select>
         <button class="btn border-black" style="--bs-btn-color: black; --bs-btn-hover-bg: #71c3ec; --bs-btn-bg: #29a4e2;"
