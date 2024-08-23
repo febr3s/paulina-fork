@@ -3,6 +3,7 @@
 
 from flask import request, session
 
+
 SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
                        "ay", "az", "ba", "be", "bg", "bh", "bi", "bm", "bn",
                        "bo", "br", "bs", "ca", "ce", "ch", "co", "cr", "cs",
@@ -24,6 +25,17 @@ SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
                        "to", "tr", "ts", "tt", "tw", "ty", "ug", "uk", "ur",
                        "uz", "ve", "vi", "vo", "wa", "wo", "xh", "yi", "yo",
                        "za", "zh", "zu"]
+
+""" Add more translated languages to this dictionary when new translations become available.
+Item key is language 2 letter code. Value is language name in its own language.
+English must be the first item of the dictionary. 
+Other languages are ordered by alphabetical order."""
+TRANSLATED_LANGUAGES = {"en": "English",
+                        "es": "Español",
+                        "pt": "Português"
+                        }
+
+
 def get_locale():
     if "language" in request.args:
         session["language"] = request.args.get("language")

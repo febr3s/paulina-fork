@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% if CURRENT_LANGUAGE in ['en', 'es', 'pt'] %}
+{% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
 <html lang="{{ CURRENT_LANGUAGE }}">
 {% else %}
 <html lang="en">
@@ -55,23 +55,14 @@
       </ul>
       <form class="d-flex" method="GET">
         <select class="form-select me-1 border-black shadow-none" name="language">
-          {% if CURRENT_LANGUAGE == 'en' %}
-          <option value="en" selected>English</option>
-          <option value="es">Español</option>
-          <option value="pt">Português</option>
-          {% elif CURRENT_LANGUAGE == 'es' %}
-          <option value="en">English</option>
-          <option value="es" selected>Español</option>
-          <option value="pt">Português</option>
-          {% elif CURRENT_LANGUAGE == 'pt' %}
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="pt" selected>Português</option>
-          {% else %}
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="pt">Português</option>
+          {% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
+          <option value="{{ CURRENT_LANGUAGE }}" selected>{{ TRANSLATED_LANGUAGES[CURRENT_LANGUAGE] }}</option>
           {% endif %}
+          {% for language in TRANSLATED_LANGUAGES %}
+          {% if language != CURRENT_LANGUAGE %}
+          <option value="{{ language }}">{{ TRANSLATED_LANGUAGES[language] }}</option>
+          {% endif %}
+          {% endfor %}
         </select>
         <button class="btn border-black" style="--bs-btn-color: black; --bs-btn-hover-bg: #71c3ec; --bs-btn-bg: #29a4e2;"
                 type="submit">{{ _('Select') }}

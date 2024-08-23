@@ -212,8 +212,9 @@ def inject_now():
 
 
 @app.context_processor
-def inject_conf_var():
-    return {"CURRENT_LANGUAGE": languages.get_locale()}
+def inject_language():
+    return {"CURRENT_LANGUAGE": languages.get_locale(),
+            "TRANSLATED_LANGUAGES": languages.TRANSLATED_LANGUAGES}
 
 
 @app.errorhandler(404)
@@ -224,5 +225,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run()
-    # app.run(debug=True)
+    # app.run()
+    app.run(debug=True)
