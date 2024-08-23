@@ -32,6 +32,7 @@ English must be the first item of the dictionary.
 Other languages are ordered by alphabetical order."""
 TRANSLATED_LANGUAGES = {"en": "English",
                         "es": "Español",
+                        "nb": "Norsk bokmål",
                         "pt": "Português"
                         }
 

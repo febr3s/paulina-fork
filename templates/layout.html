@@ -78,7 +78,7 @@
   {% block searchform %}
   <div class="container-fluid w-100 py-4" style="max-width:600px;">
     <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
-      <select class="form-select border-black border-end-0 shadow-none" style="color: black; max-width:6.5em; background-color:#29a4e2;" name="type_of_search">
+      <select class="form-select border-black border-end-0 shadow-none" style="color: black; max-width:7.0em; background-color:#29a4e2;" name="type_of_search">
         {% if not type_of_search or type_of_search == 'author' %}
         <option value="author" selected>{{ _('Author') }}</option>
         <option value="work">{{ _('Work') }}</option>
