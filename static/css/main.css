@@ -39,8 +39,23 @@ h3 {
   font-weight: 700;
 }
 
-.pill-shadow {
+.pill-custom {
   box-shadow: 5px 5px;
+  --bs-btn-color: black;
+  --bs-btn-hover-bg: white;
+  --bs-btn-active-bg: white;
+}
+
+.pill-custom.orange {
+  --bs-btn-bg: #f46527;
+}
+
+.pill-custom.yellow {
+  --bs-btn-bg: #fcdb1a;
+}
+
+.pill-custom.lightblue {
+  --bs-btn-bg: #29a4e2;
 }
 
 .country-card:hover {
