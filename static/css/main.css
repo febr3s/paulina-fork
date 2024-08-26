@@ -61,3 +61,26 @@ h3 {
 .country-card:hover {
   background-color: #f8f9fa;
 }
+
+.list-group {
+  --bs-list-group-border-color: #717171;
+  --bs-list-group-bg: #f8f9fa;
+  --bs-list-group-action-hover-bg: #fcdb1a;
+  --bs-list-group-action-active-bg: #f46527;
+}
+
+.list-group-item:hover {
+  outline: 2px solid black;
+  outline-offset: -1px;
+}
+
+.form-select.search {
+  color: black;
+  max-width:7.0em;
+  background-color:#29a4e2;
+  transition: background-color .15s ease-in-out;
+}
+
+.form-select.search:hover {
+  background-color: #71c3ec;
+}
