@@ -76,7 +76,7 @@ h3 {
 
 .form-select.search {
   color: black;
-  max-width:7.0em;
+  width: fit-content;
   background-color:#29a4e2;
   transition: background-color .15s ease-in-out;
 }
