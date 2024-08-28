@@ -3,7 +3,7 @@ This project aims to build a global and multilingual search interface for author
 and works in the public domain using Wikidata and Python.
 
 ## Requirements
-* Python 3.10 or later.
+* Python 3.11 or later.
 * Python modules: flask, Flask-Babel, python-dateutil, requests.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
@@ -21,7 +21,6 @@ The public beta version is available at <https://paulina.toolforge.org/>.
 **Translations**: You can [help translate Paulina](https://hosted.weblate.org/projects/paulina/paulina-app/) on Weblate.
 
 **Issues**: Request a feature, report a bug or suggest other tasks on the Paulina [Phabricator project](https://phabricator.wikimedia.org/project/profile/7320/).
-
 
 ## Credits
 Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.articaonline.com), 
