@@ -17,8 +17,11 @@ The secret key is for the session cookie. The session cookie is necessary so tha
 ## Website
 The public beta version is available at <https://paulina.toolforge.org/>.
 
-## Help translate Paulina
-You can help translate Paulina by going to [our project's translation repository on Weblate](https://hosted.weblate.org/projects/paulina/paulina-app/).
+## Contribute to the project
+**Translations**: You can [help translate Paulina](https://hosted.weblate.org/projects/paulina/paulina-app/) on Weblate.
+
+**Issues**: Request a feature, report a bug or suggest other tasks on the Paulina [Phabricator project](https://phabricator.wikimedia.org/project/profile/7320/).
+
 
 ## Credits
 Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.articaonline.com), 
@@ -27,7 +30,7 @@ Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.a
 from the Wikimedia Community Fund.
 
 ## License
-This software is under a GNU Affero General Public License Version 3.
+This software is under a [GNU Affero General Public License Version 3](https://www.gnu.org/licenses/agpl-3.0.html).
 
 ---
 *Documentation under construction. Read more at [Paulina's page on Wikidata](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina).*
