@@ -208,7 +208,7 @@ def countries_main():
 
 @app.context_processor
 def inject_now():
-    return {'now': datetime.datetime.utcnow()}
+    return {'now': datetime.datetime.now(datetime.timezone.utc)}
 
 
 @app.context_processor
