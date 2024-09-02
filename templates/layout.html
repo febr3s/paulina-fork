@@ -34,11 +34,16 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+
+<!-- Navigation bar -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="{{ url_for('static', filename='images/home-paulina.png') }}" width="30" height="30"
-           class="d-inline-block align-top" alt="{{ _('Home') }}">
+      {% set home_paulina = url_for('static',filename='images/home-paulina.png') %}
+      {% set isotype_paulina = url_for('static',filename='images/isotype-paulina.png') %}
+      <img src="{{ home_paulina }}"
+           onmouseover="this.src='{{isotype_paulina}}';" onmouseout="this.src='{{home_paulina}}';"
+           width="30" height="30" class="d-inline-block align-top" alt="{{ _('Home') }}">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems"
             aria-controls="menuItems" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +79,10 @@
 
 {% block presentation %}
 {% endblock %}
+
 <div class="container p-3">
+
+  <!-- Search form -->
   {% block searchform %}
   <div class="container-fluid w-100 py-4" style="max-width:600px;">
     <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
@@ -98,8 +106,10 @@
 
   {% block content %}
   {% endblock %}
+
 </div>
 
+<!-- Pre-footer widgets -->
 <div class="text-bg-light mt-4">
   <div class="container text-center p-3">
     <div class="row">
@@ -145,6 +155,8 @@
     </div>
   </div>
 </div>
+
+<!-- Footer -->
 <footer>
   <div class="text-center p-2" style="background-color: #f46527;">
     <a href="/">
