@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# Finnish translations for PROJECT.
 # Copyright (C) 2024 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-08 20:45-0300\n"
+"POT-Creation-Date: 2024-09-04 12:55-0300\n"
 "PO-Revision-Date: 2024-08-28 14:27+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/fi/>\n"
 "Language: fi\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/paulina"
+"/paulina-app/fi/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: app.py:21
 msgid "No value"
@@ -28,11 +27,11 @@ msgstr "Ei arvoa"
 msgid "Unknown value"
 msgstr "Tuntematon arvo"
 
-#: app.py:33 templates/layout.html:43
+#: app.py:33 templates/layout.html:46
 msgid "Home"
 msgstr "Alku"
 
-#: app.py:40 templates/layout.html:52 templates/layout.html:131
+#: app.py:40 templates/layout.html:55 templates/layout.html:137
 msgid "About"
 msgstr "Tietoa projektista"
 
@@ -57,12 +56,12 @@ msgstr "Luettelo %(term_name)s"
 msgid "Unknown term"
 msgstr "Tuntematon tekijänoikeuden kesto"
 
-#: app.py:204 templates/countries.html:7 templates/layout.html:55
-#: templates/layout.html:145
+#: app.py:204 templates/countries.html:7 templates/layout.html:58
+#: templates/layout.html:154
 msgid "Countries and terms"
 msgstr "Maat ja tekijänoikeuden kestot"
 
-#: app.py:222
+#: app.py:223
 msgid "404 error"
 msgstr "404-virhe"
 
@@ -84,9 +83,9 @@ msgid ""
 "there is no free image of the person available, and that if you own one, "
 "you can click on the placeholder link."
 msgstr ""
-"Henkilön mallikuva. Yllä oleva tekstin mukaan kyseisestä henkilöstä ei ole "
-"saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit ladata sen "
-"klikkaamalla mallikuvan linkkiä."
+"Henkilön mallikuva. Yllä oleva tekstin mukaan kyseisestä henkilöstä ei "
+"ole saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit "
+"ladata sen klikkaamalla mallikuvan linkkiä."
 
 #: pdclasses.py:170
 #, python-format
@@ -103,8 +102,8 @@ msgid ""
 "free image of the work available, and that if you own one, you can click "
 "on the placeholder link to upload it."
 msgstr ""
-"Teoksen mallikuva. Yllä olevan tekstin mukaan teoksesta ei ole saatavilla "
-"avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
+"Teoksen mallikuva. Yllä olevan tekstin mukaan teoksesta ei ole saatavilla"
+" avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
 "klikkaamalla mallikuvan linkkiä."
 
 #: pdclasses.py:252
@@ -130,7 +129,7 @@ msgstr "aloitussivu"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Mene %(home_page)s ja yritä uudelleen."
 
-#: templates/about.html:7 templates/layout.html:128
+#: templates/about.html:7 templates/layout.html:134
 msgid "About Paulina"
 msgstr "Tietoa Paulinasta"
 
@@ -138,19 +137,19 @@ msgstr "Tietoa Paulinasta"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:114
+#: templates/about.html:9 templates/layout.html:120
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - online-kulttuurikeskus"
 
-#: templates/about.html:10 templates/layout.html:117
+#: templates/about.html:10 templates/layout.html:123
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:120
+#: templates/about.html:11 templates/layout.html:126
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:123
+#: templates/about.html:12 templates/layout.html:129
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -185,11 +184,11 @@ msgid ""
 "country."
 msgstr ""
 "Paulina kutsuu sinut tutustumaan ihmiskunnan kulttuuriperintöön. Se on "
-"monikielinen työkalu, joka perustuu %(wikidata_link)s. Sen avulla voit etsiä "
-"henkilöitä ja selvittää, onko heillä vapaasti saatavilla olevia "
+"monikielinen työkalu, joka perustuu %(wikidata_link)s. Sen avulla voit "
+"etsiä henkilöitä ja selvittää, onko heillä vapaasti saatavilla olevia "
 "tekijänoikeudettomia teoksia. Paulina auttaa myös ymmärtämään "
-"tekijänoikeuden ehtoja ja päättelemään, milloin teos tulee public domainiin "
-"kussakin maassa."
+"tekijänoikeuden ehtoja ja päättelemään, milloin teos tulee public "
+"domainiin kussakin maassa."
 
 #: templates/about.html:20
 msgid ""
@@ -207,9 +206,9 @@ msgid ""
 "through it, on the Internet."
 msgstr ""
 "Joskus käytetyt tiedot voivat sisältää virheitä tai olla epätäydellisiä. "
-"Paulina auttaa tunnistamaan puutteita ja epätarkkuuksia kulttuuriperintöä "
-"koskevissa tiedoissa ja kutsuu sinut parantamaan Wikidatan ja sen kautta "
-"Internetin tietoja."
+"Paulina auttaa tunnistamaan puutteita ja epätarkkuuksia kulttuuriperintöä"
+" koskevissa tiedoissa ja kutsuu sinut parantamaan Wikidatan ja sen kautta"
+" Internetin tietoja."
 
 #: templates/about.html:22
 msgid "Local tools"
@@ -222,8 +221,8 @@ msgid ""
 "needs of each community."
 msgstr ""
 "Tämä verkkosivusto on osa laajempaa hanketta, jonka tarkoituksena on "
-"helpottaa työkalun kansallisten, alueellisten tai temaattisten versioiden "
-"luomista kunkin yhteisön tarpeiden mukaan."
+"helpottaa työkalun kansallisten, alueellisten tai temaattisten versioiden"
+" luomista kunkin yhteisön tarpeiden mukaan."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -235,8 +234,8 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
-"Paulinaa tukevat %(artica_link)s, %(cc_uruguay_link)s, %(data_uruguay_link)s "
-"ja %(wm_uruguay_link)s."
+"Paulinaa tukevat %(artica_link)s, %(cc_uruguay_link)s, "
+"%(data_uruguay_link)s ja %(wm_uruguay_link)s."
 
 #: templates/about.html:26
 msgid "Content licenses"
@@ -248,8 +247,8 @@ msgid ""
 "All data in the pages about authors, works, countries and terms come from"
 " Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"Kaikki kirjoittajia, teoksia, maita ja termejä koskevien sivujen tiedot ovat "
-"peräisin Wikidatasta, ja ne ovat %(CC0_link)s-ehtojen mukaisia."
+"Kaikki kirjoittajia, teoksia, maita ja termejä koskevien sivujen tiedot "
+"ovat peräisin Wikidatasta, ja ne ovat %(CC0_link)s-ehtojen mukaisia."
 
 #: templates/about.html:28
 #, python-format
@@ -257,8 +256,8 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
-"Tämän verkkosivuston tekstit ja muu alkuperäinen sisältö ovat %(ccbysa_link)"
-"s alaisia."
+"Tämän verkkosivuston tekstit ja muu alkuperäinen sisältö ovat "
+"%(ccbysa_link)s alaisia."
 
 #: templates/about.html:29
 #, python-format
@@ -268,10 +267,10 @@ msgid ""
 " or in the public domain. We recommend consulting the information of each"
 " content on Wikimedia Commons."
 msgstr ""
-"Tekijöitä, teoksia, maita ja termejä käsittelevillä sivuilla olevat kuvat ja "
-"mediat ovat peräisin %(wm_commons_link)s-sivuilta, ja ne ovat eri avoimien "
-"lisenssien alaisia tai tekijänoikeudettomia. Suosittelemme tutustumaan "
-"kunkin kohteen tietoihin Wikimedia Commonsissa."
+"Tekijöitä, teoksia, maita ja termejä käsittelevillä sivuilla olevat kuvat"
+" ja mediat ovat peräisin %(wm_commons_link)s-sivuilta, ja ne ovat eri "
+"avoimien lisenssien alaisia tai tekijänoikeudettomia. Suosittelemme "
+"tutustumaan kunkin kohteen tietoihin Wikimedia Commonsissa."
 
 #: templates/about.html:30
 msgid ""
@@ -285,8 +284,8 @@ msgstr ""
 "teokset ovat avoimesti saatavilla yleensä siksi, että ne ovat "
 "tekijänoikeudettomia tai avoimesti lisensoituja, mutta jotkin niistä "
 "saattavat olla tekijänoikeuden alaisia joillakin lainkäyttöalueilla. "
-"Suosittelemme tutustumaan kunkin teoksen tietoihin sivustoilla, joilla ne "
-"sijaitsevat."
+"Suosittelemme tutustumaan kunkin teoksen tietoihin sivustoilla, joilla ne"
+" sijaitsevat."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -298,94 +297,94 @@ msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
 "the %(repository_link)s."
 msgstr ""
-"Paulina on vapaa ohjelmisto. Se on julkaistu lisenssillä %(agpl_link)s. Käy "
-"osoitteessa %(repository_link)s."
+"Paulina on vapaa ohjelmisto. Se on julkaistu lisenssillä %(agpl_link)s. "
+"Käy osoitteessa %(repository_link)s."
 
-#: templates/author.html:9
+#: templates/author.html:8
 msgid "Search works"
 msgstr "Etsi teoksia"
 
-#: templates/author.html:16 templates/work.html:10
+#: templates/author.html:15 templates/work.html:10
 msgid "Image"
 msgstr "Kuva"
 
-#: templates/author.html:20 templates/work.html:14
+#: templates/author.html:19 templates/work.html:14
 msgid "Description"
 msgstr "Kuvaus"
 
-#: templates/author.html:24
+#: templates/author.html:23
 msgid "Nationality"
 msgstr "Kansallisuus"
 
-#: templates/author.html:28
+#: templates/author.html:27
 msgid "Gender"
 msgstr "Sukupuoli"
 
-#: templates/author.html:32
+#: templates/author.html:31
 msgid "Date of birth"
 msgstr "Syntymäaika"
 
-#: templates/author.html:36
+#: templates/author.html:35
 msgid "Occupation"
 msgstr "Ammatti"
 
-#: templates/author.html:40
+#: templates/author.html:39
 msgid "Place of birth"
 msgstr "Syntymäpaikka"
 
-#: templates/author.html:44
+#: templates/author.html:43
 msgid "Country of birth"
 msgstr "Syntymämaa"
 
-#: templates/author.html:48
+#: templates/author.html:47
 msgid "Date of death"
 msgstr "Kuolinaika"
 
-#: templates/author.html:52
+#: templates/author.html:51
 msgid "Age"
 msgstr "Ikä"
 
-#: templates/author.html:56 templates/work.html:42
+#: templates/author.html:55 templates/work.html:42
 msgid "Wikipedia link"
 msgstr "Wikipedia-linkki"
 
-#: templates/author.html:60
+#: templates/author.html:59
 msgid "Commons link"
 msgstr "Wikimedia Commons -linkki"
 
-#: templates/author.html:64
+#: templates/author.html:63
 msgid "Wikisource link"
 msgstr "Wikiaineisto-linkki"
 
-#: templates/author.html:68
+#: templates/author.html:67
 msgid "Wikiquote link"
 msgstr "Wikisitaatit-linkki"
 
-#: templates/author.html:72
+#: templates/author.html:71
 msgid "In public domain?"
 msgstr "Onko tekijänoikeuksista vapaa?"
 
-#: templates/author.html:75
+#: templates/author.html:74
 msgid "Yes"
 msgstr "On"
 
-#: templates/author.html:77
+#: templates/author.html:76
 msgid "No"
 msgstr "Ei ole"
 
-#: templates/author.html:79 templates/author.html:82
+#: templates/author.html:78 templates/author.html:81
 msgid "Consult individual works."
 msgstr "Tutustu yksittäisiin teoksiin."
 
-#: templates/author.html:81
+#: templates/author.html:80
 msgid "Unknown due to lack of available dates of birth and death."
 msgstr "Tuntematon, koska syntymä- ja kuolinpäivät puuttuvat."
 
-#: templates/author.html:87 templates/work.html:77
+#: templates/author.html:86 templates/work.html:77
 msgid "Missing/wrong data?"
 msgstr "Puuttuvat/väärät tiedot?"
 
-#: templates/author.html:88 templates/work.html:78
+#: templates/author.html:87 templates/work.html:78
 msgid "Edit Wikidata item"
 msgstr "Muokkaa Wikidata-kohdetta"
 
@@ -423,8 +422,8 @@ msgid "Applies to %(countries)s"
 msgstr "Koskee %(countries)s"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:156 templates/layout.html:158
-#: templates/layout.html:160
+#: templates/layout.html:167 templates/layout.html:169
+#: templates/layout.html:171
 msgid "Paulina logo"
 msgstr "Paulina-logo"
 
@@ -504,15 +503,15 @@ msgstr "Maat, joissa on 50 vuotta post mortem auctoris -sääntö"
 msgid "Countries with 70 years post mortem auctoris"
 msgstr "Maat, joissa on 70 vuotta post mortem auctoris -sääntö"
 
-#: templates/layout.html:14
+#: templates/layout.html:12
 msgid "Paulina"
 msgstr "Paulina"
 
-#: templates/layout.html:26 templates/layout.html:163
+#: templates/layout.html:24 templates/layout.html:174
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Tietoa public domainia varten"
 
-#: templates/layout.html:30
+#: templates/layout.html:28
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
 "is a multilingual tool, powered by Wikidata, that allows you to search "
@@ -526,43 +525,47 @@ msgstr ""
 "helpottaa myös tekijänoikeusehtojen ymmärtämistä ja auttaa tietämään, "
 "milloin teos tulee public domainiin kussakin maassa."
 
-#: templates/layout.html:72
+#: templates/layout.html:73
 msgid "Select"
 msgstr "Valitse"
 
-#: templates/layout.html:87 templates/layout.html:90
+#: templates/layout.html:91 templates/layout.html:94
 msgid "Author"
 msgstr "Kirjoittaja"
 
-#: templates/layout.html:88 templates/layout.html:91
+#: templates/layout.html:92 templates/layout.html:95
 msgid "Work"
 msgstr "Teos"
 
-#: templates/layout.html:95
+#: templates/layout.html:99
 msgid "Search with Paulina"
 msgstr "Etsi Paulinan avulla"
 
-#: templates/layout.html:95 templates/layout.html:97
+#: templates/layout.html:99 templates/layout.html:101
 msgid "Search"
 msgstr "Etsi"
 
-#: templates/layout.html:111
+#: templates/layout.html:117
 msgid "Paulina is supported by:"
 msgstr "Paulinaa tukevat:"
 
-#: templates/layout.html:134
+#: templates/layout.html:140
 msgid "Source code"
 msgstr "Lähdekoodi"
 
-#: templates/layout.html:139
+#: templates/layout.html:143
+msgid "Help translate"
+msgstr ""
+
+#: templates/layout.html:148
 msgid "Help"
 msgstr "Apu"
 
-#: templates/layout.html:142
+#: templates/layout.html:151
 msgid "Documentation"
 msgstr "Dokumentaatio"
 
-#: templates/layout.html:164
+#: templates/layout.html:175
 msgid "Powered by Wikidata."
 msgstr "Toimii Wikidatan avulla."
 
@@ -623,3 +626,4 @@ msgstr "Lisää se Wikidataan"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Luettelo %(author_name)s teoksista"
+
