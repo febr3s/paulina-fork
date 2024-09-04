@@ -7,15 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-08 20:45-0300\n"
-"PO-Revision-Date: 2024-07-08 20:44-0300\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2024-09-04 13:03-0300\n"
+"PO-Revision-Date: 2024-09-04 20:31+0000\n"
+"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/es/>\n"
 "Language: es\n"
-"Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.7.2-rc\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app.py:21
@@ -26,11 +28,11 @@ msgstr "Sin valor"
 msgid "Unknown value"
 msgstr "Valor desconocido"
 
-#: app.py:33 templates/layout.html:43
+#: app.py:33 templates/layout.html:46
 msgid "Home"
 msgstr "Inicio"
 
-#: app.py:40 templates/layout.html:52 templates/layout.html:131
+#: app.py:40 templates/layout.html:55 templates/layout.html:137
 msgid "About"
 msgstr "Acerca de"
 
@@ -55,12 +57,12 @@ msgstr "Lista de %(term_name)s"
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:204 templates/countries.html:7 templates/layout.html:55
-#: templates/layout.html:145
+#: app.py:204 templates/countries.html:7 templates/layout.html:58
+#: templates/layout.html:154
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:222
+#: app.py:223
 msgid "404 error"
 msgstr "Error 404"
 
@@ -78,13 +80,13 @@ msgstr "(milenio)"
 
 #: pdclasses.py:164
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that "
-"there is no free image of the person available, and that if you own one, "
-"you can click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that there "
+"is no free image of the person available, and that if you own one, you can "
+"click on the placeholder link."
 msgstr ""
-"Imagen de una silueta humana genérica. El texto sobre ella indica que no "
-"hay disponible una imagen libre de la persona, y que si posees una, "
-"puedes hacer clic en el enlace del cartel."
+"Imagen de una silueta humana genérica. El texto sobre ella indica que no hay "
+"disponible una imagen libre de la persona, y que si posees una, puedes hacer "
+"clic en el enlace del cartel."
 
 #: pdclasses.py:170
 #, python-format
@@ -97,13 +99,13 @@ msgstr "Desconocido"
 
 #: pdclasses.py:245
 msgid ""
-"Image of a generic work. The text above it indicates that there is no "
-"free image of the work available, and that if you own one, you can click "
-"on the placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no free "
+"image of the work available, and that if you own one, you can click on the "
+"placeholder link to upload it."
 msgstr ""
 "Imagen de una obra genérica. El texto sobre ella indica que no hay "
-"disponible una imagen libre de la obra, y que si posees una, puedes hacer"
-" clic en el enlace del cartel para subirla."
+"disponible una imagen libre de la obra, y que si posees una, puedes hacer "
+"clic en el enlace del cartel para subirla."
 
 #: pdclasses.py:252
 #, python-format
@@ -128,7 +130,7 @@ msgstr "página de inicio"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Por favor, ir a la %(home_page)s e intentar nuevamente."
 
-#: templates/about.html:7 templates/layout.html:128
+#: templates/about.html:7 templates/layout.html:134
 msgid "About Paulina"
 msgstr "Acerca de Paulina"
 
@@ -136,19 +138,19 @@ msgstr "Acerca de Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:114
+#: templates/about.html:9 templates/layout.html:120
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centro Cultural Online"
 
-#: templates/about.html:10 templates/layout.html:117
+#: templates/about.html:10 templates/layout.html:123
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:120
+#: templates/about.html:11 templates/layout.html:126
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:123
+#: templates/about.html:12 templates/layout.html:129
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -175,32 +177,30 @@ msgstr "repositorio de código del proyecto"
 #: templates/about.html:18
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
-"search for people and find out if they have freely accessible works in "
-"the public domain. It also facilitates the understanding of copyright "
-"terms and helps to know when a work enters the public domain in each "
-"country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
+"for people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina invita a aprender sobre el patrimonio cultural de la humanidad. "
-"Es una herramienta multilingüe, basada en datos de %(wikidata_link)s, que"
-" permite buscar personas y consultar si tienen obras libremente "
-"accesibles en dominio público. También facilita la comprensión de los "
-"plazos de derecho de autor y ayuda a saber cuándo una obra entra en "
-"dominio público en cada país."
+"Paulina invita a aprender sobre el patrimonio cultural de la humanidad. Es "
+"una herramienta multilingüe, basada en datos de %(wikidata_link)s, que "
+"permite buscar personas y consultar si tienen obras libremente accesibles en "
+"dominio público. También facilita la comprensión de los plazos de derecho de "
+"autor y ayuda a saber cuándo una obra entra en dominio público en cada país."
 
 #: templates/about.html:20
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database"
-" maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database "
+"maintained by the Wikimedia Foundation."
 msgstr ""
 "Paulina se alimenta de los datos de Wikidata, la base de datos libre y "
 "colaborativa mantenida por la Fundación Wikimedia."
 
 #: templates/about.html:21
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete."
-" Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete. "
+"Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
@@ -216,12 +216,12 @@ msgstr "Herramientas locales"
 #: templates/about.html:23
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the "
-"needs of each community."
+"national, regional or thematic versions of the tool, according to the needs "
+"of each community."
 msgstr ""
-"Este sitio web es parte de un proyecto más amplio para facilitar la "
-"creación de versiones nacionales, regionales o temáticas de la "
-"herramienta, de acuerdo a las necesidades de cada comunidad."
+"Este sitio web es parte de un proyecto más amplio para facilitar la creación "
+"de versiones nacionales, regionales o temáticas de la herramienta, de "
+"acuerdo a las necesidades de cada comunidad."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -243,11 +243,11 @@ msgstr "Licencias de los contenidos"
 #: templates/about.html:27
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from"
-" Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from "
+"Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"Todos los datos en las páginas de autores, obras, países y plazos "
-"provienen de Wikidata y están bajo la %(CC0_link)s."
+"Todos los datos en las páginas de autores, obras, países y plazos provienen "
+"de Wikidata y están bajo la %(CC0_link)s."
 
 #: templates/about.html:28
 #, python-format
@@ -255,35 +255,35 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
-"Los textos y otros contenidos originales de este sitio web están bajo una"
-" %(ccbysa_link)s."
+"Los textos y otros contenidos originales de este sitio web están bajo una "
+"%(ccbysa_link)s."
 
 #: templates/about.html:29
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and "
-"terms come from %(wm_commons_link)s and are under different free licenses"
-" or in the public domain. We recommend consulting the information of each"
-" content on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and terms "
+"come from %(wm_commons_link)s and are under different free licenses or in "
+"the public domain. We recommend consulting the information of each content "
+"on Wikimedia Commons."
 msgstr ""
-"Las imágenes y contenidos audiovisuales en las páginas de autores, obras,"
-" países y plazos provienen de %(wm_commons_link)s y están bajo distintas "
-"licencias libres o en dominio público. Recomendamos consultar la "
-"información de cada contenido en Wikimedia Commons."
+"Las imágenes y contenidos audiovisuales en las páginas de autores, obras, "
+"países y plazos provienen de %(wm_commons_link)s y están bajo distintas "
+"licencias libres o en dominio público. Recomendamos consultar la información "
+"de cada contenido en Wikimedia Commons."
 
 #: templates/about.html:30
 msgid ""
-"The works accessible through links to external sites are available to the"
-" public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. "
-"We recommend consulting the information of each work on the websites "
-"where they are hosted."
+"The works accessible through links to external sites are available to the "
+"public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. We "
+"recommend consulting the information of each work on the websites where they "
+"are hosted."
 msgstr ""
-"Las obras accesibles a través de enlaces a sitios externos están "
-"disponibles al público, en su mayoría por estar en dominio público, o "
-"bajo licencias libres, pero algunas de ellas pueden tener derechos de "
-"autor en vigencia en algunas jurisdicciones. Recomendamos consultar la "
-"información de cada obra en los sitios web donde están alojadas."
+"Las obras accesibles a través de enlaces a sitios externos están disponibles "
+"al público, en su mayoría por estar en dominio público, o bajo licencias "
+"libres, pero algunas de ellas pueden tener derechos de autor en vigencia en "
+"algunas jurisdicciones. Recomendamos consultar la información de cada obra "
+"en los sitios web donde están alojadas."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -292,106 +292,106 @@ msgstr "Software libre"
 #: templates/about.html:32
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit "
-"the %(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
+"%(repository_link)s."
 msgstr ""
 "Paulina es software libre. Se publica bajo la %(agpl_link)s. Visita el "
 "%(repository_link)s."
 
-#: templates/author.html:9
+#: templates/author.html:8
 msgid "Search works"
 msgstr "Buscar obras"
 
-#: templates/author.html:16 templates/work.html:10
+#: templates/author.html:15 templates/work.html:10
 msgid "Image"
 msgstr "Imagen"
 
-#: templates/author.html:20 templates/work.html:14
+#: templates/author.html:19 templates/work.html:14
 msgid "Description"
 msgstr "Descripción"
 
-#: templates/author.html:24
+#: templates/author.html:23
 msgid "Nationality"
 msgstr "Nacionalidad"
 
-#: templates/author.html:28
+#: templates/author.html:27
 msgid "Gender"
 msgstr "Género"
 
-#: templates/author.html:32
+#: templates/author.html:31
 msgid "Date of birth"
 msgstr "Fecha de nacimiento"
 
-#: templates/author.html:36
+#: templates/author.html:35
 msgid "Occupation"
 msgstr "Ocupación"
 
-#: templates/author.html:40
+#: templates/author.html:39
 msgid "Place of birth"
 msgstr "Lugar de nacimiento"
 
-#: templates/author.html:44
+#: templates/author.html:43
 msgid "Country of birth"
 msgstr "País de nacimiento"
 
-#: templates/author.html:48
+#: templates/author.html:47
 msgid "Date of death"
 msgstr "Fecha de muerte"
 
-#: templates/author.html:52
+#: templates/author.html:51
 msgid "Age"
 msgstr "Edad"
 
-#: templates/author.html:56 templates/work.html:42
+#: templates/author.html:55 templates/work.html:42
 msgid "Wikipedia link"
 msgstr "Enlace a Wikipedia"
 
-#: templates/author.html:60
+#: templates/author.html:59
 msgid "Commons link"
 msgstr "Enlace a Commons"
 
-#: templates/author.html:64
+#: templates/author.html:63
 msgid "Wikisource link"
 msgstr "Enlace a Wikisource"
 
-#: templates/author.html:68
+#: templates/author.html:67
 msgid "Wikiquote link"
 msgstr "Enlace a Wikiquote"
 
-#: templates/author.html:72
+#: templates/author.html:71
 msgid "In public domain?"
 msgstr "¿En dominio público?"
 
-#: templates/author.html:75
+#: templates/author.html:74
 msgid "Yes"
 msgstr "Sí"
 
-#: templates/author.html:77
+#: templates/author.html:76
 msgid "No"
 msgstr "No"
 
-#: templates/author.html:79 templates/author.html:82
+#: templates/author.html:78 templates/author.html:81
 msgid "Consult individual works."
 msgstr "Consultar obras individuales."
 
-#: templates/author.html:81
+#: templates/author.html:80
 msgid "Unknown due to lack of available dates of birth and death."
 msgstr ""
 "Desconocido debido a que no están disponibles las fechas de nacimiento y "
 "muerte."
 
-#: templates/author.html:87 templates/work.html:77
+#: templates/author.html:86 templates/work.html:77
 msgid "Missing/wrong data?"
 msgstr "¿Datos faltantes/errados?"
 
-#: templates/author.html:88 templates/work.html:78
+#: templates/author.html:87 templates/work.html:78
 msgid "Edit Wikidata item"
 msgstr "Editar ítem de Wikidata"
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain "
-"in each country."
+"This grid indicates the period after which works enter the public domain in "
+"each country."
 msgstr ""
 "Esta grilla indica el período luego del cual las obras entran en dominio "
 "público en cada país."
@@ -422,8 +422,8 @@ msgid "Applies to %(countries)s"
 msgstr "Aplica a %(countries)s"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:156 templates/layout.html:158
-#: templates/layout.html:160
+#: templates/layout.html:167 templates/layout.html:169
+#: templates/layout.html:171
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -433,8 +433,8 @@ msgstr "Descubre autores/as"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the "
-"world and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the world "
+"and learn about their works."
 msgstr ""
 "Paulina es una herramienta de búsqueda sencilla para descubrir autores y "
 "autoras de todo el mundo y conocer acerca de sus obras."
@@ -461,8 +461,8 @@ msgstr "Encuentra obras"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and"
-" knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and "
+"knowledge found on Wikidata."
 msgstr ""
 "Encuentra fácilmente los datos sobre obras culturales de todas las "
 "disciplinas del arte y el conocimiento que se encuentran en Wikidata."
@@ -492,8 +492,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Entérate qué obras están en dominio público en diferentes países y accede"
-" a las versiones disponibles en línea."
+"Entérate qué obras están en dominio público en diferentes países y accede a "
+"las versiones disponibles en línea."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -503,66 +503,69 @@ msgstr "Países con 50 años post mortem auctoris"
 msgid "Countries with 70 years post mortem auctoris"
 msgstr "Países con 70 años post mortem auctoris"
 
-#: templates/layout.html:14
+#: templates/layout.html:12
 msgid "Paulina"
 msgstr "Paulina"
 
-#: templates/layout.html:26 templates/layout.html:163
+#: templates/layout.html:24 templates/layout.html:174
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Datos para el dominio público"
 
-#: templates/layout.html:30
+#: templates/layout.html:28
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by Wikidata, that allows you to search "
-"for people and find out if they have freely accessible works in the "
-"public domain. It also facilitates the understanding of copyright terms "
-"and helps to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by Wikidata, that allows you to search for "
+"people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina invita a aprender sobre el patrimonio cultural de la humanidad. "
-"Es una herramienta multilingüe, basada en datos de Wikidata, que permite "
-"buscar personas y consultar si tienen obras libremente accesibles en "
-"dominio público. También facilita la comprensión de los plazos de derecho"
-" de autor y ayuda a saber cuándo una obra entra en dominio público en "
-"cada país."
+"Paulina invita a aprender sobre el patrimonio cultural de la humanidad. Es "
+"una herramienta multilingüe, basada en datos de Wikidata, que permite buscar "
+"personas y consultar si tienen obras libremente accesibles en dominio "
+"público. También facilita la comprensión de los plazos de derecho de autor y "
+"ayuda a saber cuándo una obra entra en dominio público en cada país."
 
-#: templates/layout.html:72
+#: templates/layout.html:73
 msgid "Select"
 msgstr "Elegir"
 
-#: templates/layout.html:87 templates/layout.html:90
+#: templates/layout.html:91 templates/layout.html:94
 msgid "Author"
 msgstr "Autor/a"
 
-#: templates/layout.html:88 templates/layout.html:91
+#: templates/layout.html:92 templates/layout.html:95
 msgid "Work"
 msgstr "Obra"
 
-#: templates/layout.html:95
+#: templates/layout.html:99
 msgid "Search with Paulina"
 msgstr "Buscar con Paulina"
 
-#: templates/layout.html:95 templates/layout.html:97
+#: templates/layout.html:99 templates/layout.html:101
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/layout.html:111
+#: templates/layout.html:117
 msgid "Paulina is supported by:"
 msgstr "Paulina está sostenida por:"
 
-#: templates/layout.html:134
+#: templates/layout.html:140
 msgid "Source code"
 msgstr "Código fuente"
 
-#: templates/layout.html:139
+#: templates/layout.html:143
+msgid "Help translate"
+msgstr "Ayuda a traducir"
+
+#: templates/layout.html:148
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/layout.html:142
+#: templates/layout.html:151
 msgid "Documentation"
 msgstr "Documentación"
 
-#: templates/layout.html:164
+#: templates/layout.html:175
 msgid "Powered by Wikidata."
 msgstr "Basado en datos de Wikidata."
 
@@ -623,4 +626,3 @@ msgstr "Agrégala a Wikidata"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
-
