@@ -34,7 +34,8 @@ TRANSLATED_LANGUAGES = {"en": "English",
                         "es": "Español",
                         "nb": "Norsk bokmål",
                         "pt": "Português",
-                        "fi": "Suomi"
+                        "fi": "Suomi",
+                        "bn": "বাংলা"
                         }
 
 
