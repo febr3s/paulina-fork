@@ -6,6 +6,3 @@ __pycache__/
 
 # Ignore main config file
 /config.py
-
-# Ignore Babel config file
-/babel.cfg
