@@ -5,7 +5,9 @@ import squeries
 import languages
 
 
-def search_author(user_search):
+def search_author(user_search: str) -> list:
+    """Takes a user search string and returns a list of search results using the Wikidata API.
+    Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
     search_url_suffix = "%20haswbstatement:P31=Q5|P31=Q21070568&prop=entityterms&wbetlanguage="
@@ -32,7 +34,9 @@ def search_author(user_search):
             pass
     return final_results
 
-def search_work(user_search):
+def search_work(user_search: str) -> list:
+    """Takes a user search string and returns a list of search results using the Wikidata API.
+    Results are filtered in order to get only works."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
     search_url_suffix = "&prop=entityterms&wbetlanguage="

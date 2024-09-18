@@ -8,11 +8,11 @@ import squeries
 import languages
 
 
-def build_field(wikidata_statement):
+def build_field(wikidata_statement: list[dict]) -> str | None:
     """Function to return a field from a Wikidata statement.
     If the statement does not exist, it returns None.
     If the statement exists and has a preferred value, it returns the preferred value.
-    If the statement exists and does not have a preferred value, it prints the first value."""
+    If the statement exists and does not have a preferred value, it returns the first value."""
     if wikidata_statement is None:  # If statement doesn't exist
         return None
     else:  # If statement exists, check if there is a preferred value
@@ -40,8 +40,8 @@ def build_field(wikidata_statement):
                 return retrieve_item(first_claim, data_type="labels").get(languages.get_locale())
 
 
-def build_date(wikidata_statement):
-    """Builds a datetime.date object from a Wikidata timestamp"""
+def build_date(wikidata_statement: list[dict]) -> dict | None:
+    """Builds a dictionary with a datetime.date object and a date string from a Wikidata timestamp"""
     if wikidata_statement is None:  # If statement doesn't exist
         return None
     else:  # If statement exists, check if there is a preferred value
@@ -88,7 +88,7 @@ def build_date(wikidata_statement):
                 return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
 
 
-def retrieve_item(wikidata_item_id, data_type="item"):
+def retrieve_item(wikidata_item_id: str, data_type: str ="item") -> dict:
     """Takes a Q identifier and returns the item full data or the item labels in case the optional argument
     'data-type' is set to 'labels'"""
     item_url_prefix = "https://www.wikidata.org/w/rest.php/wikibase/v0/entities/items/"

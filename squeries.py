@@ -3,8 +3,8 @@ import requests
 
 # old query_for_works = '''SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE {{ SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en, {lang}". }} {{ SELECT DISTINCT ?item WHERE {{ VALUES ?languages {{"en" "{lang}"}}. ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 ) wd:{qname} . ?item rdfs:label ?itemLabel . FILTER(lang(?itemLabel) = ?languages ) . MINUS {{ VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} ?item wdt:P31 ?typeOfItem . }} }} }} }} ORDER BY ASC (?itemLabel)'''
 
-def retrieve_query(query, **kwargs):
-    """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results"""
+def retrieve_query(query: str, **kwargs: str) -> list[dict]:
+    """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results."""
     query_url_prefix = 'https://query.wikidata.org/sparql?query='
     query = query.format(**kwargs)
     query = requests.utils.quote(query)  # URL encoded

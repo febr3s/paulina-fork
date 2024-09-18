@@ -14,14 +14,15 @@ app.config.from_pyfile('config.py')
 
 babel = Babel(app, locale_selector=languages.get_locale)
 
-def print_field(field):
+def print_field(field: str | dict | None) -> str:
+    """Takes a value of different possible types and converts it to a meaningful string to print on the screen"""
     if field is None:
         return ""
     elif field == "novalue":
         return _("No value")
     elif field == "somevalue":
         return _("Unknown value")
-    elif isinstance(field, dict) and field.get("date string"):  # For dates
+    elif isinstance(field, dict) and field.get("date string"):  # For dates from pdclasses.build_date
         return field["date string"]
     else:
         return field
@@ -225,5 +226,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run()
-    # app.run(debug=True)
+    # app.run()
+    app.run(debug=True)

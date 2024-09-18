@@ -40,7 +40,13 @@ TRANSLATED_LANGUAGES = {"en": "English",
                         }
 
 
-def get_locale():
+def get_locale() -> str:
+    """Identifies the locale. If the locale is requested in the language URL parameter, 
+    it's taken from there and stored in the session.
+    Otherwise, it takes the locale from the session or, if not present,
+    it takes the locale from the browser Accept-Language request HTTP header and stores it.
+    Finally, if everything else fails, it defaults to English.
+    """
     if "language" in request.args:
         session["language"] = request.args.get("language")
         return session.get("language")
