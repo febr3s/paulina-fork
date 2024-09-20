@@ -207,6 +207,12 @@ def countries_main():
                            )
 
 
+@app.route("/robots.txt")
+def show_robots_txt():
+    ROBOTS_TXT = "User-agent: *\nAllow: /\n"
+    return ROBOTS_TXT
+
+
 @app.context_processor
 def inject_now():
     return {'now': datetime.datetime.now(datetime.timezone.utc)}
