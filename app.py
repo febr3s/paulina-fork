@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, Response, url_for, abort
 from flask_babel import Babel, _
 import datetime
 
@@ -210,7 +210,7 @@ def countries_main():
 @app.route("/robots.txt")
 def show_robots_txt():
     ROBOTS_TXT = "User-agent: *\nAllow: /\n"
-    return ROBOTS_TXT
+    return Response(ROBOTS_TXT, mimetype="text/plain")
 
 
 @app.context_processor
