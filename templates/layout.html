@@ -10,6 +10,11 @@
         content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ title }} - {{ _('Paulina') }}</title>
+  <meta name="description" content="{{ _('Paulina invites you to learn about the cultural heritage of humanity. '
+                                         'It is a multilingual tool, powered by Wikidata, that allows you to search '
+                                         'for people and find out if they have freely accessible works in the public '
+                                         'domain. It also facilitates the understanding of copyright terms and helps '
+                                         'to know when a work enters the public domain in each country.') }}">
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -19,7 +24,10 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/paulina-icon-32x32.png', _external=True) }}" sizes="32x32">
+  <link rel="icon" href="{{ url_for('static', filename='images/paulina-icon-192x192.png', _external=True) }}" sizes="192x192">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/paulina-icon-180x180.png', _external=True) }}">
+  <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/paulina-icon-270x270.png', _external=True) }}">
   <!-- Open Graph meta tags -->
   <meta property="og:site_name" content="{{ _('Paulina - Data for the Public Domain') }}"/>
   <meta property="og:title" content="{{ title }}"/>
@@ -30,7 +38,7 @@
                                          'for people and find out if they have freely accessible works in the public '
                                          'domain. It also facilitates the understanding of copyright terms and helps '
                                          'to know when a work enters the public domain in each country.') }}"/>
-  <meta property="og:image" content="{{ url_for('static', filename='images/isotype-paulina.png') }}"/>
+  <meta property="og:image" content="{{ url_for('static', filename='images/paulina-icon-192x192.png', _external=True) }}"/>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -39,10 +47,10 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      {% set home_paulina = url_for('static',filename='images/home-paulina.png') %}
-      {% set isotype_paulina = url_for('static',filename='images/isotype-paulina.png') %}
-      <img src="{{ home_paulina }}"
-           onmouseover="this.src='{{isotype_paulina}}';" onmouseout="this.src='{{home_paulina}}';"
+      {% set paulina_icon_bw = url_for('static',filename='images/paulina-icon-bw-180x180.png') %}
+      {% set paulina_icon = url_for('static',filename='images/paulina-icon-180x180.png') %}
+      <img src="{{ paulina_icon_bw }}"
+           onmouseover="this.src='{{paulina_icon}}';" onmouseout="this.src='{{paulina_icon_bw}}';"
            width="30" height="30" class="d-inline-block align-top" alt="{{ _('Home') }}">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems"
