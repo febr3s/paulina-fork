@@ -1,4 +1,4 @@
-from flask_babel import _
+from flask_babel import _, format_date
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
 import requests
@@ -73,9 +73,9 @@ def build_date(wikidata_statement: list[dict]) -> dict | None:
             return {"date object": year, "date string": f"{year}"}  # For simplicity, dates BC have year precision
         else:
             if precision == 11:  # Day precision
-                return {"date object": datetime.date(year, month, day), "date string": f"{year}-{month}-{day}"}
+                return {"date object": datetime.date(year, month, day), "date string": format_date(datetime.date(year, month, day), "long")}
             elif precision == 10:  # Month precision
-                return {"date object": datetime.date(year, month, 1), "date string": f"{year}-{month}"}
+                return {"date object": datetime.date(year, month, 1), "date string": format_date(datetime.date(year, month, day), "MMMM yyyy")}
             elif precision == 9:  # Year precision
                 return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
             elif precision == 8:  # Decade precision
