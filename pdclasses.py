@@ -75,7 +75,7 @@ def build_date(wikidata_statement: list[dict]) -> dict | None:
             if precision == 11:  # Day precision
                 return {"date object": datetime.date(year, month, day), "date string": format_date(datetime.date(year, month, day), "long")}
             elif precision == 10:  # Month precision
-                return {"date object": datetime.date(year, month, 1), "date string": format_date(datetime.date(year, month, day), "MMMM yyyy")}
+                return {"date object": datetime.date(year, month, 1), "date string": format_date(datetime.date(year, month, 1), "MMMM yyyy")}
             elif precision == 9:  # Year precision
                 return {"date object": datetime.date(year, 1, 1), "date string": f"{year}"}
             elif precision == 8:  # Decade precision
