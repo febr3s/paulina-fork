@@ -93,21 +93,50 @@
   <!-- Search form -->
   {% block searchform %}
   <div class="container-fluid w-100 py-4" style="max-width:600px;">
-    <form class="d-flex" role="search" action="{{ url_for('results') }}" method="GET">
-      <select class="form-select search border-black border-end-0 shadow-none" name="type_of_search">
-        {% if not type_of_search or type_of_search == 'author' %}
-        <option value="author" selected>{{ _('Author') }}</option>
-        <option value="work">{{ _('Work') }}</option>
-        {% elif type_of_search == 'work' %}
-        <option value="author">{{ _('Author') }}</option>
-        <option value="work" selected>{{ _('Work') }}</option>
-        {% endif %}
-      </select>
-      <input class="form-control border-black border-end-0 shadow-none" type="search" name="query"
-             placeholder="{{ _('Search with Paulina') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
-      <button class="btn border-black border-start-0 p-2" style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;" type="submit">
-        <img src="{{ url_for('static', filename='images/search.svg') }}" width="20" height="20" alt="{{ _('Search') }}">
-      </button>
+    <form role="search" action="{{ url_for('results') }}" method="GET">
+      <div class="d-flex flex-row">      
+        <select class="form-select search border-black border-end-0 shadow-none" name="type_of_search" id="type_of_search" onchange="showFilters(this)">
+          {% if not type_of_search or type_of_search == 'author' %}
+          <option value="author" selected>{{ _('Author') }}</option>
+          <option value="work">{{ _('Work') }}</option>
+          {% elif type_of_search == 'work' %}
+          <option value="author">{{ _('Author') }}</option>
+          <option value="work" selected>{{ _('Work') }}</option>
+          {% endif %}
+        </select>
+        <input class="form-control border-black border-end-0 shadow-none" type="search" name="query"
+              placeholder="{{ _('Search with Paulina') }}" aria-label="{{ _('Search') }}" value="{{search_request}}">
+        <button class="btn border-black border-start-0 p-2" style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;" type="submit">
+          <img src="{{ url_for('static', filename='images/search.svg') }}" width="20" height="20" alt="{{ _('Search') }}">
+        </button>
+      </div>
+      <div class="d-flex flex-row py-2">
+        <details>
+          <summary>{{ _('Search filters') }}</summary>
+          <div class="py-2" id="filter-gender">
+            <label for="gender"><strong>{{ _('Gender') }}</strong></label>
+            <select class="form-select filter border-black shadow-none" name="gender" id="gender">
+              <option value="">{{ _('Any') }}</option>
+              <option value="Q6581072">{{ _('Female') }}</option>
+              <option value="Q6581097">{{ _('Male') }}</option>
+              <option value="Q2449503">{{ _('Trans man') }}</option>
+              <option value="Q1052281">{{ _('Trans woman') }}</option>
+              <option value="Q48270">{{ _('Non-binary') }}</option>
+            </select>
+          </div>
+          <div class="py-2" id="filter-type-of-work">
+            <label for="type-of-work"><strong>{{ _('Type of work') }}</strong></label>
+            <select class="form-select filter border-black shadow-none" name="type_of_work" id="type-of-work">
+              <option value="">{{ _('Any') }}</option>
+              <option value="Q11424">{{ _('Film') }}</option>
+              <option value="Q7725634">{{ _('Literary work') }}</option>
+              <option value="Q105543609">{{ _('Musical work') }}</option>              
+              <option value="Q3305213">{{ _('Painting') }}</option>
+              <option value="Q860861">{{ _('Sculpture') }}</option>              
+            </select>
+          </div>
+        </details>
+      </div>
     </form>
   </div>
   {% endblock %}
@@ -185,4 +214,15 @@
 </footer>
 
 </body>
+<script>
+  let initialTypeOfSearch = document.getElementById("type_of_search").value;
+  document.getElementById("filter-gender").style.display = initialTypeOfSearch === "author" ? 'block' : 'none';
+  document.getElementById("filter-type-of-work").style.display = initialTypeOfSearch === "work" ? 'block' : 'none';
+
+  function showFilters(typeOfSearch)
+  {
+    document.getElementById("filter-gender").style.display = typeOfSearch.value === "author" ? 'block' : 'none';
+    document.getElementById("filter-type-of-work").style.display = typeOfSearch.value === "work" ? 'block' : 'none';
+  }
+</script>
 </html>

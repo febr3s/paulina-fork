@@ -65,7 +65,8 @@ def results():
                                    type_of_search=type_of_search)
         elif len(search_request) > 1:
             if type_of_search == "author":
-                search_result = search.search_author(search_request)
+                gender = request.args.get("gender")
+                search_result = search.search_author(search_request, gender)
                 if len(search_result) > 0:
                     return render_template('results.html',
                                            title=_("Results"),
@@ -78,7 +79,8 @@ def results():
                                            search_request=search_request,
                                            type_of_search=type_of_search)
             elif type_of_search == "work":
-                search_result = search.search_work(search_request)
+                type_of_work = request.args.get("type_of_work")
+                search_result = search.search_work(search_request, type_of_work)
                 if len(search_result) > 0:
                     return render_template('results.html',
                                            title=_("Results"),

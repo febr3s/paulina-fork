@@ -5,15 +5,27 @@ import squeries
 import languages
 
 
-def search_author(user_search: str) -> list:
+def search_filters(gender=None, type_of_work=None) -> str:
+    filters_string = ""
+    if gender:
+        filters_string = filters_string + f"%20haswbstatement:P21={gender}"
+    if type_of_work:
+        filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
+    return filters_string
+
+
+
+def search_author(user_search: str, gender:str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
-    search_url_suffix = "%20haswbstatement:P31=Q5|P31=Q21070568&prop=entityterms&wbetlanguage="
+    human_being_filter = "%20haswbstatement:P31=Q5|P31=Q21070568"
+    user_filters = search_filters(gender=gender)
+    search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"
-    search_url = search_url_prefix + search + search_url_suffix + search_language + search_format
+    search_url = search_url_prefix + search + human_being_filter + user_filters + search_url_suffix + search_language + search_format
     headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
@@ -34,15 +46,16 @@ def search_author(user_search: str) -> list:
             pass
     return final_results
 
-def search_work(user_search: str) -> list:
+def search_work(user_search: str, type_of_work: str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only works."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
+    user_filters = search_filters(type_of_work=type_of_work)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"
-    search_url = search_url_prefix + search + search_url_suffix + search_language + search_format
+    search_url = search_url_prefix + search + user_filters + search_url_suffix + search_language + search_format
     headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4

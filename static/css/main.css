@@ -84,3 +84,11 @@ h3 {
 .form-select.search:hover {
   background-color: #71c3ec;
 }
+
+.form-select.filter {
+  background-color:#fcdb1a;
+}
+
+.form-select.filter:hover {
+  background-color: #ffe65b;
+}
