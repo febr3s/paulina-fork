@@ -33,6 +33,7 @@ Other languages are ordered by alphabetical order."""
 TRANSLATED_LANGUAGES = {"en": "English",
                         "es": "Español",
                         "eo": "Esperanto",
+                        "fr": "Français",
                         "nb": "Norsk bokmål",
                         "pt": "Português",
                         "fi": "Suomi",
