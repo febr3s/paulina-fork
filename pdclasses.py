@@ -91,7 +91,7 @@ def build_date(wikidata_statement: list[dict]) -> dict | None:
 def retrieve_item(wikidata_item_id: str, data_type: str ="item") -> dict:
     """Takes a Q identifier and returns the item full data or the item labels in case the optional argument
     'data-type' is set to 'labels'"""
-    item_url_prefix = "https://www.wikidata.org/w/rest.php/wikibase/v0/entities/items/"
+    item_url_prefix = "https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/"
     if data_type == "labels":
         item_url_suffix = "/labels"
     else:
