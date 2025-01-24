@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, Response, url_for, abort
-from flask_babel import Babel, _
+from flask_babel import Babel, _, get_locale
 import datetime
 
 # Local modules
@@ -7,6 +7,7 @@ import pdclasses
 import search
 import languages
 import squeries
+import filters
 
 app = Flask(__name__)
 
@@ -66,7 +67,8 @@ def results():
         elif len(search_request) > 1:
             if type_of_search == "author":
                 gender = request.args.get("gender")
-                search_result = search.search_author(search_request, gender)
+                nationality = request.args.get("nationality")
+                search_result = search.search_author(search_request, gender, nationality)
                 if len(search_result) > 0:
                     return render_template('results.html',
                                            title=_("Results"),
@@ -80,7 +82,8 @@ def results():
                                            type_of_search=type_of_search)
             elif type_of_search == "work":
                 type_of_work = request.args.get("type_of_work")
-                search_result = search.search_work(search_request, type_of_work)
+                country_of_origin = request.args.get("country_of_origin")
+                search_result = search.search_work(search_request, type_of_work, country_of_origin)
                 if len(search_result) > 0:
                     return render_template('results.html',
                                            title=_("Results"),
@@ -224,6 +227,15 @@ def inject_now():
 def inject_language():
     return {"CURRENT_LANGUAGE": languages.get_locale(),
             "TRANSLATED_LANGUAGES": languages.TRANSLATED_LANGUAGES}
+
+@app.context_processor
+def inject_filters():
+    countries = [{"qid": country["qid"], "country_name": get_locale().territories[country["country_iso"]]} for country in filters.COUNTRIES ]
+    return {        
+        "GENDERS": filters.GENDERS,
+        "TYPES_OF_WORK": filters.TYPES_OF_WORK,
+        "COUNTRIES": countries
+        }
 
 
 @app.errorhandler(404)

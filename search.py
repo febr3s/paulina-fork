@@ -5,23 +5,27 @@ import squeries
 import languages
 
 
-def search_filters(gender=None, type_of_work=None) -> str:
+def search_filters(gender=None, nationality=None, type_of_work=None, country_of_origin=None) -> str:
     filters_string = ""
     if gender:
         filters_string = filters_string + f"%20haswbstatement:P21={gender}"
+    if nationality:
+        filters_string = filters_string + f"%20haswbstatement:P27={nationality}"
     if type_of_work:
         filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
+    if country_of_origin:
+        filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}"
     return filters_string
 
 
 
-def search_author(user_search: str, gender:str) -> list:
+def search_author(user_search: str, gender:str, nationality:str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
     human_being_filter = "%20haswbstatement:P31=Q5|P31=Q21070568"
-    user_filters = search_filters(gender=gender)
+    user_filters = search_filters(gender=gender, nationality=nationality)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"
@@ -46,12 +50,12 @@ def search_author(user_search: str, gender:str) -> list:
             pass
     return final_results
 
-def search_work(user_search: str, type_of_work: str) -> list:
+def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only works."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
-    user_filters = search_filters(type_of_work=type_of_work)
+    user_filters = search_filters(type_of_work=type_of_work, country_of_origin=country_of_origin)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"

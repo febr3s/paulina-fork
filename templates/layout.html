@@ -117,22 +117,36 @@
             <label for="gender"><strong>{{ _('Gender') }}</strong></label>
             <select class="form-select filter border-black shadow-none" name="gender" id="gender">
               <option value="">{{ _('Any') }}</option>
-              <option value="Q6581072">{{ _('Female') }}</option>
-              <option value="Q6581097">{{ _('Male') }}</option>
-              <option value="Q2449503">{{ _('Trans man') }}</option>
-              <option value="Q1052281">{{ _('Trans woman') }}</option>
-              <option value="Q48270">{{ _('Non-binary') }}</option>
+              {% for gender in GENDERS %}
+              <option value="{{ gender['qid'] }}">{{ _(gender['gender_name']) }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="py-2" id="filter-nationality">
+            <label for="nationality"><strong>{{ _('Nationality') }}</strong></label>
+            <select class="form-select filter border-black shadow-none" name="nationality" id="nationality">
+              <option value="">{{ _('Any') }}</option>
+              {% for country in COUNTRIES %}
+              <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="py-2" id="filter-type-of-work">
             <label for="type-of-work"><strong>{{ _('Type of work') }}</strong></label>
             <select class="form-select filter border-black shadow-none" name="type_of_work" id="type-of-work">
               <option value="">{{ _('Any') }}</option>
-              <option value="Q11424">{{ _('Film') }}</option>
-              <option value="Q7725634">{{ _('Literary work') }}</option>
-              <option value="Q105543609">{{ _('Musical work') }}</option>              
-              <option value="Q3305213">{{ _('Painting') }}</option>
-              <option value="Q860861">{{ _('Sculpture') }}</option>              
+              {% for type_of_work in TYPES_OF_WORK %}
+              <option value="{{type_of_work['qid']}}">{{ _(type_of_work['type_name']) }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="py-2" id="filter-country-of-origin">
+            <label for="country-of-origin"><strong>{{ _('Country of origin') }}</strong></label>
+            <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin">
+              <option value="">{{ _('Any') }}</option>
+              {% for country in COUNTRIES %}
+              <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
+              {% endfor %}
             </select>
           </div>
         </details>
@@ -217,12 +231,16 @@
 <script>
   let initialTypeOfSearch = document.getElementById("type_of_search").value;
   document.getElementById("filter-gender").style.display = initialTypeOfSearch === "author" ? 'block' : 'none';
+  document.getElementById("filter-nationality").style.display = initialTypeOfSearch === "author" ? 'block' : 'none';
   document.getElementById("filter-type-of-work").style.display = initialTypeOfSearch === "work" ? 'block' : 'none';
+  document.getElementById("filter-country-of-origin").style.display = initialTypeOfSearch === "work" ? 'block' : 'none';
 
   function showFilters(typeOfSearch)
   {
     document.getElementById("filter-gender").style.display = typeOfSearch.value === "author" ? 'block' : 'none';
+    document.getElementById("filter-nationality").style.display = typeOfSearch.value === "author" ? 'block' : 'none';
     document.getElementById("filter-type-of-work").style.display = typeOfSearch.value === "work" ? 'block' : 'none';
+    document.getElementById("filter-country-of-origin").style.display = typeOfSearch.value === "work" ? 'block' : 'none';
   }
 </script>
 </html>

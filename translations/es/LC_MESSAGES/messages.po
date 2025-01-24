@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-17 22:02-0300\n"
+"POT-Creation-Date: 2025-01-24 19:42-0300\n"
 "PO-Revision-Date: 2024-09-04 20:31+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: es\n"
@@ -19,51 +19,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:22
+#: app.py:23
 msgid "No value"
 msgstr "Sin valor"
 
-#: app.py:24
+#: app.py:25
 msgid "Unknown value"
 msgstr "Valor desconocido"
 
-#: app.py:34 templates/layout.html:54
+#: app.py:35 templates/layout.html:54
 msgid "Home"
 msgstr "Inicio"
 
-#: app.py:41 templates/layout.html:63 templates/layout.html:174
+#: app.py:42 templates/layout.html:63 templates/layout.html:188
 msgid "About"
 msgstr "Acerca de"
 
-#: app.py:63 app.py:78 app.py:92
+#: app.py:64 app.py:80 app.py:95
 msgid "No results found"
 msgstr "No se encontraron resultados"
 
-#: app.py:72 app.py:86
+#: app.py:74 app.py:89
 msgid "Results"
 msgstr "Resultados"
 
-#: app.py:134
+#: app.py:137
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:190
+#: app.py:193
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:205
+#: app.py:208
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:207 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:191
+#: app.py:210 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:205
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:232
+#: app.py:244
 msgid "404 error"
 msgstr "Error 404"
+
+#: filters.py:6
+msgid "Female"
+msgstr "Femenino"
+
+#: filters.py:7
+msgid "Male"
+msgstr "Masculino"
+
+#: filters.py:8
+msgid "Trans man"
+msgstr "Hombre trans"
+
+#: filters.py:9
+msgid "Trans woman"
+msgstr "Mujer trans"
+
+#: filters.py:10
+msgid "Non-binary"
+msgstr "No binario"
+
+#: filters.py:17
+msgid "Film"
+msgstr "Película"
+
+#: filters.py:18
+msgid "Literary work"
+msgstr "Obra literaria"
+
+#: filters.py:19
+msgid "Musical work"
+msgstr "Obra musical"
+
+#: filters.py:20
+msgid "Painting"
+msgstr "Pintura"
+
+#: filters.py:21
+msgid "Sculpture"
+msgstr "Escultura"
 
 #: pdclasses.py:82
 msgid "(decade)"
@@ -129,7 +169,7 @@ msgstr "página de inicio"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Por favor, ir a la %(home_page)s e intentar nuevamente."
 
-#: templates/about.html:7 templates/layout.html:171
+#: templates/about.html:7 templates/layout.html:185
 msgid "About Paulina"
 msgstr "Acerca de Paulina"
 
@@ -137,19 +177,19 @@ msgstr "Acerca de Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:157
+#: templates/about.html:9 templates/layout.html:171
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centro Cultural Online"
 
-#: templates/about.html:10 templates/layout.html:160
+#: templates/about.html:10 templates/layout.html:174
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:163
+#: templates/about.html:11 templates/layout.html:177
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:166
+#: templates/about.html:12 templates/layout.html:180
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -311,7 +351,7 @@ msgstr "Imagen"
 msgid "Description"
 msgstr "Descripción"
 
-#: templates/author.html:23
+#: templates/author.html:23 templates/layout.html:126
 msgid "Nationality"
 msgstr "Nacionalidad"
 
@@ -423,8 +463,8 @@ msgid "Applies to %(countries)s"
 msgstr "Aplica a %(countries)s"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:204 templates/layout.html:206
-#: templates/layout.html:208
+#: templates/layout.html:218 templates/layout.html:220
+#: templates/layout.html:222
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -523,7 +563,7 @@ msgstr ""
 " de autor y ayuda a saber cuándo una obra entra en dominio público en "
 "cada país."
 
-#: templates/layout.html:32 templates/layout.html:211
+#: templates/layout.html:32 templates/layout.html:225
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Datos para el dominio público"
 
@@ -551,75 +591,40 @@ msgstr "Buscar"
 msgid "Search filters"
 msgstr "Filtros de búsqueda"
 
-#: templates/layout.html:119 templates/layout.html:130
+#: templates/layout.html:119 templates/layout.html:128
+#: templates/layout.html:137 templates/layout.html:146
 msgid "Any"
 msgstr "Cualquiera"
 
-#: templates/layout.html:120
-msgid "Female"
-msgstr "Femenino"
-
-#: templates/layout.html:121
-msgid "Male"
-msgstr "Masculino"
-
-#: templates/layout.html:122
-msgid "Trans man"
-msgstr "Hombre trans"
-
-#: templates/layout.html:123
-msgid "Trans woman"
-msgstr "Mujer trans"
-
-#: templates/layout.html:124
-msgid "Non-binary"
-msgstr "No binario"
-
-#: templates/layout.html:128
+#: templates/layout.html:135
 msgid "Type of work"
 msgstr "Tipo de obra"
 
-#: templates/layout.html:131
-msgid "Film"
-msgstr "Película"
+#: templates/layout.html:144 templates/work.html:38
+msgid "Country of origin"
+msgstr "País de origen"
 
-#: templates/layout.html:132
-msgid "Literary work"
-msgstr "Obra literaria"
-
-#: templates/layout.html:133
-msgid "Musical work"
-msgstr "Obra musical"
-
-#: templates/layout.html:134
-msgid "Painting"
-msgstr "Pintura"
-
-#: templates/layout.html:135
-msgid "Sculpture"
-msgstr "Escultura"
-
-#: templates/layout.html:154
+#: templates/layout.html:168
 msgid "Paulina is supported by:"
 msgstr "Paulina está sostenida por:"
 
-#: templates/layout.html:177
+#: templates/layout.html:191
 msgid "Source code"
 msgstr "Código fuente"
 
-#: templates/layout.html:180
+#: templates/layout.html:194
 msgid "Help translate"
 msgstr "Ayuda a traducir"
 
-#: templates/layout.html:185
+#: templates/layout.html:199
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/layout.html:188
+#: templates/layout.html:202
 msgid "Documentation"
 msgstr "Documentación"
 
-#: templates/layout.html:212
+#: templates/layout.html:226
 msgid "Powered by Wikidata."
 msgstr "Basado en datos de Wikidata."
 
@@ -646,10 +651,6 @@ msgstr "Fecha de publicación"
 #: templates/work.html:34
 msgid "Language"
 msgstr "Idioma"
-
-#: templates/work.html:38
-msgid "Country of origin"
-msgstr "País de origen"
 
 #: templates/work.html:47
 msgid "Access work"
