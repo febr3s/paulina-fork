@@ -23,7 +23,7 @@ def search_author(user_search: str, gender:str, nationality:str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
-    search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
+    search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=200&gsrsearch="
     human_being_filter = "%20haswbstatement:P31=Q5|P31=Q21070568"
     user_filters = search_filters(gender=gender, nationality=nationality)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
@@ -54,7 +54,7 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> 
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only works."""
     search = requests.utils.quote(user_search)  # URL encoded
-    search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=100&gsrsearch="
+    search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=200&gsrsearch="
     user_filters = search_filters(type_of_work=type_of_work, country_of_origin=country_of_origin)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
