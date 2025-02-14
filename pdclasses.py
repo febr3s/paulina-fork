@@ -1,4 +1,4 @@
-from flask_babel import _, format_date
+from flask_babel import _, format_date, get_locale
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
 import requests
@@ -269,7 +269,12 @@ class Work(Parent):
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
         self.language = build_field(self.wikidata_item.get('statements', {}).get('P407'))
         self.publication_date = build_date(self.wikidata_item.get('statements', {}).get('P577'))
-        self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
+
+        self.wikisource_links = {wikisource_version: {'title': value.get('title'),
+                                                      'url': value.get('url'),
+                                                      'language': get_locale().languages[wikisource_version.removesuffix('wikisource')]}
+                                 for wikisource_version, value in self.wikidata_item.get('sitelinks', {}).items()
+                                 if "wikisource" in wikisource_version }
 
         internet_archive_ID = self.wikidata_item.get('statements', {}).get('P724')
         if internet_archive_ID is None:

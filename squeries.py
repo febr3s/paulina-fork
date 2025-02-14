@@ -39,7 +39,7 @@ WHERE
   OPTIONAL {{ ?item wdt:P953 ?download . }}
   OPTIONAL {{
   ?wikisource schema:about ?item .
-  ?wikisource schema:isPartOf <https://{lang}.wikisource.org/> . }}  
+  ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }}  
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }} 
 GROUP BY ?item ?itemLabel ?itemDescription 
@@ -67,7 +67,7 @@ WHERE
   OPTIONAL {{ ?item wdt:P953 ?download . }} 
   OPTIONAL {{ 
   ?wikisource schema:about ?item . 
-  ?wikisource schema:isPartOf <https://{lang}.wikisource.org/> . }} 
+  ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }} 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }} 
 GROUP BY ?item ?itemLabel ?itemDescription 
