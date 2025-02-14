@@ -101,7 +101,7 @@ def results():
 @app.route("/author/<author_data>")
 def author_page(author_data):
     try:
-        author = pdclasses.Author(author_data)  # If user enters a URL with a Q of a non-human, this renders it anyway.
+        author = pdclasses.Author(author_data)
         return render_template("author.html",
             title=print_field(author.name),
             author_name=print_field(author.name),
@@ -125,7 +125,7 @@ def author_page(author_data):
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
             author_wikidata_link=print_field(author.wikidata_link)
         )
-    except:  # If the Q number doesn't match any item
+    except:  # If the Q number doesn't match any item or the item is not about a human
         abort(404)
 
 
@@ -139,7 +139,7 @@ def works_list(author_id):
             author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
         )
 
-    except:  # If the Q number doesn't match any item
+    except:  # If the Q number doesn't match any item or the item is not about a human
         abort(404)
 
 
