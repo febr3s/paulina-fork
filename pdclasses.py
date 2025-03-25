@@ -150,6 +150,7 @@ class Author(Parent):
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
         self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
+        self.date_enter_public_domain = self.date_of_death['date object'].year + 101 if self.date_of_death else None
 
         occupations = self.wikidata_item.get('statements', {}).get('P106')
         if occupations is None:
@@ -235,6 +236,7 @@ class Author(Parent):
                 return self.date_of_death["date object"].year - self.date_of_birth["date object"]  # If born BC and died AC, date types are mixed
             else:
                 return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
+            
 
     def getWorks(self, lang):
         works = squeries.retrieve_query(squeries.query_for_works_by_an_author, qname=self.wikidata_item_id, lang=lang)

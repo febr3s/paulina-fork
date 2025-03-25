@@ -73,7 +73,8 @@
           {% if author_is_in_public_domain == True %}
           <span class="badge text-bg-success">&check;</span> {{ _('Yes') }}
           {% elif author_is_in_public_domain == False %}
-          <span class="badge text-bg-danger">&cross;</span> {{ _('No') }}
+          <span class="badge text-bg-danger">&cross;</span> {{ _('No') }} | 
+          {{ _('Author will enter worldwide public domain on January 1, ') }} {{author_date_enter_public_domain}}
           {% elif author_is_in_public_domain == 'Consult individual works' %}
           <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
           {% elif author_is_in_public_domain == 'Unknown' %}

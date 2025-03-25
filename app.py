@@ -123,7 +123,8 @@ def author_page(author_data):
             author_wikisource_link=print_field(author.wikisource_link),
             author_wikiquote_link=print_field(author.wikiquote_link),
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
-            author_wikidata_link=print_field(author.wikidata_link)
+            author_wikidata_link=print_field(author.wikidata_link),
+            author_date_enter_public_domain=print_field(author.date_enter_public_domain)
         )
     except:  # If the Q number doesn't match any item or the item is not about a human
         abort(404)
@@ -247,4 +248,4 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     app.run()
-    # app.run(debug=True)
+    #app.run(debug=True)
