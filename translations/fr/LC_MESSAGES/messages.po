@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-24 19:42-0300\n"
+"POT-Creation-Date: 2025-03-25 15:25-0300\n"
 "PO-Revision-Date: 2024-11-18 22:55+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fr\n"
@@ -31,7 +31,7 @@ msgstr "Valeur inconnue"
 msgid "Home"
 msgstr "Accueil"
 
-#: app.py:42 templates/layout.html:63 templates/layout.html:188
+#: app.py:42 templates/layout.html:63 templates/layout.html:192
 msgid "About"
 msgstr "À propos"
 
@@ -43,25 +43,25 @@ msgstr "Aucun résultat trouvé"
 msgid "Results"
 msgstr "Résultats"
 
-#: app.py:137
+#: app.py:138
 msgid "List of works"
 msgstr "Liste des ouvrages"
 
-#: app.py:193
+#: app.py:194
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste de %(term_name)s"
 
-#: app.py:208
+#: app.py:209
 msgid "Unknown term"
 msgstr "Délai inconnu"
 
-#: app.py:210 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:205
+#: app.py:211 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:209
 msgid "Countries and terms"
 msgstr "Pays et délais"
 
-#: app.py:244
+#: app.py:245
 msgid "404 error"
 msgstr "Erreur 404"
 
@@ -105,19 +105,19 @@ msgstr "Peinture"
 msgid "Sculpture"
 msgstr "Sculpture"
 
-#: pdclasses.py:82
+#: pdclasses.py:97
 msgid "(decade)"
 msgstr "(décennie)"
 
-#: pdclasses.py:84
+#: pdclasses.py:99
 msgid "(century)"
 msgstr "(siècle)"
 
-#: pdclasses.py:86
+#: pdclasses.py:101
 msgid "(millennium)"
 msgstr "(millénaire)"
 
-#: pdclasses.py:164
+#: pdclasses.py:188
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
@@ -127,16 +127,16 @@ msgstr ""
 "qu'il n'y a pas d'image libre disponible pour cette personne, et que si "
 "vous en possédez une, vous pouvez cliquer sur le lien."
 
-#: pdclasses.py:170
+#: pdclasses.py:194
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Image de %(name)s."
 
-#: pdclasses.py:202 pdclasses.py:205
+#: pdclasses.py:226 pdclasses.py:229
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: pdclasses.py:245
+#: pdclasses.py:270
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
@@ -146,12 +146,12 @@ msgstr ""
 "d'image libre de l'ouvrage disponible, et que si vous en possédez une, "
 "vous pouvez cliquer sur le lien pour la télécharger."
 
-#: pdclasses.py:252
+#: pdclasses.py:277
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Image de %(title)s."
 
-#: pdclasses.py:323 templates/countries.html:20
+#: pdclasses.py:353 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Drapeau de %(country_name)s."
@@ -169,7 +169,7 @@ msgstr "page d'accueil"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Veuillez vous rendre sur %(home_page)s et réessayer."
 
-#: templates/about.html:7 templates/layout.html:185
+#: templates/about.html:7 templates/layout.html:189
 msgid "About Paulina"
 msgstr "À propos de Paulina"
 
@@ -177,19 +177,19 @@ msgstr "À propos de Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:171
+#: templates/about.html:9 templates/layout.html:175
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centre culturel en ligne"
 
-#: templates/about.html:10 templates/layout.html:174
+#: templates/about.html:10 templates/layout.html:178
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:177
+#: templates/about.html:11 templates/layout.html:181
 msgid "Data Uruguay"
 msgstr "Open Data de l'Uruguay"
 
-#: templates/about.html:12 templates/layout.html:180
+#: templates/about.html:12 templates/layout.html:184
 msgid "Wikimedistas de Uruguay"
 msgstr "Contributeurs Wikimédia d'Uruguay"
 
@@ -357,11 +357,11 @@ msgstr "Image"
 msgid "Description"
 msgstr "Description"
 
-#: templates/author.html:23 templates/layout.html:126
+#: templates/author.html:23 templates/layout.html:127
 msgid "Nationality"
 msgstr "Nationalité"
 
-#: templates/author.html:27 templates/layout.html:117
+#: templates/author.html:27 templates/layout.html:118
 msgid "Gender"
 msgstr "Genre"
 
@@ -417,21 +417,25 @@ msgstr "Oui"
 msgid "No"
 msgstr "Non"
 
-#: templates/author.html:78 templates/author.html:81
+#: templates/author.html:77
+msgid "Author will enter worldwide public domain on January 1, "
+msgstr ""
+
+#: templates/author.html:79 templates/author.html:82
 msgid "Consult individual works."
 msgstr "Consulter les ouvrages individuels."
 
-#: templates/author.html:80
+#: templates/author.html:81
 msgid "Unknown due to lack of available dates of birth and death."
 msgstr ""
 "Inconnu en raison de l'absence de dates de naissance et de décès "
 "disponibles."
 
-#: templates/author.html:86 templates/work.html:77
+#: templates/author.html:87 templates/work.html:79
 msgid "Missing/wrong data?"
 msgstr "Données incorrectes ou manquantes ?"
 
-#: templates/author.html:87 templates/work.html:78
+#: templates/author.html:88 templates/work.html:80
 msgid "Edit Wikidata item"
 msgstr "Modifier l'élément Wikidata"
 
@@ -471,8 +475,8 @@ msgid "Applies to %(countries)s"
 msgstr "S'applique à %(countries)s"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:218 templates/layout.html:220
-#: templates/layout.html:222
+#: templates/layout.html:222 templates/layout.html:224
+#: templates/layout.html:226
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -571,7 +575,7 @@ msgstr ""
 "compréhension du délai de droit d'auteur et permet de savoir quand une "
 "œuvre entre dans le domaine public dans chaque pays."
 
-#: templates/layout.html:32 templates/layout.html:225
+#: templates/layout.html:32 templates/layout.html:229
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Données du domaine public"
 
@@ -599,40 +603,40 @@ msgstr "Rechercher"
 msgid "Search filters"
 msgstr "Filtres de recherche"
 
-#: templates/layout.html:119 templates/layout.html:128
-#: templates/layout.html:137 templates/layout.html:146
+#: templates/layout.html:120 templates/layout.html:129
+#: templates/layout.html:140 templates/layout.html:149
 msgid "Any"
 msgstr "Tout"
 
-#: templates/layout.html:135
+#: templates/layout.html:138
 msgid "Type of work"
 msgstr "Type d'œuvre"
 
-#: templates/layout.html:144 templates/work.html:38
+#: templates/layout.html:147 templates/work.html:38
 msgid "Country of origin"
 msgstr "Pays d'origine"
 
-#: templates/layout.html:168
+#: templates/layout.html:172
 msgid "Paulina is supported by:"
 msgstr "Paulina est soutenu par :"
 
-#: templates/layout.html:191
+#: templates/layout.html:195
 msgid "Source code"
 msgstr "Code source"
 
-#: templates/layout.html:194
+#: templates/layout.html:198
 msgid "Help translate"
 msgstr "Aider à traduire"
 
-#: templates/layout.html:199
+#: templates/layout.html:203
 msgid "Help"
 msgstr "Aide"
 
-#: templates/layout.html:202
+#: templates/layout.html:206
 msgid "Documentation"
 msgstr "Documentation"
 
-#: templates/layout.html:226
+#: templates/layout.html:230
 msgid "Powered by Wikidata."
 msgstr "Alimenté par Wikidata."
 
@@ -664,11 +668,11 @@ msgstr "Langue"
 msgid "Access work"
 msgstr "Accéder à l'ouvrage"
 
-#: templates/work.html:62
+#: templates/work.html:64
 msgid "Copyright status"
 msgstr "Statut du droit d'auteur"
 
-#: templates/work.html:65
+#: templates/work.html:67
 msgid "in"
 msgstr "dans"
 

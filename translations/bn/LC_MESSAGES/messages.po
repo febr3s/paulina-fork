@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-24 19:42-0300\n"
+"POT-Creation-Date: 2025-03-25 15:25-0300\n"
 "PO-Revision-Date: 2024-09-04 19:48+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: bn\n"
@@ -31,7 +31,7 @@ msgstr "অজানা মান"
 msgid "Home"
 msgstr "প্রধান পাতা"
 
-#: app.py:42 templates/layout.html:63 templates/layout.html:188
+#: app.py:42 templates/layout.html:63 templates/layout.html:192
 msgid "About"
 msgstr "সম্পর্কে"
 
@@ -43,25 +43,25 @@ msgstr "কোন ফলাফল পাওয়া যায়নি"
 msgid "Results"
 msgstr "ফলাফল"
 
-#: app.py:137
+#: app.py:138
 msgid "List of works"
 msgstr "কর্মের তালিকা"
 
-#: app.py:193
+#: app.py:194
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s-এর তালিকা"
 
-#: app.py:208
+#: app.py:209
 msgid "Unknown term"
 msgstr "অজানা শর্ত"
 
-#: app.py:210 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:205
+#: app.py:211 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:209
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:244
+#: app.py:245
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
@@ -107,47 +107,47 @@ msgstr ""
 msgid "Sculpture"
 msgstr ""
 
-#: pdclasses.py:82
+#: pdclasses.py:97
 msgid "(decade)"
 msgstr "(দশক)"
 
-#: pdclasses.py:84
+#: pdclasses.py:99
 msgid "(century)"
 msgstr "(শতাব্দী)"
 
-#: pdclasses.py:86
+#: pdclasses.py:101
 msgid "(millennium)"
 msgstr "(সহস্রাব্দ)"
 
-#: pdclasses.py:164
+#: pdclasses.py:188
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
 "you can click on the placeholder link."
 msgstr ""
 
-#: pdclasses.py:170
+#: pdclasses.py:194
 #, python-format
 msgid "Image of %(name)s."
 msgstr "%(name)s-এর চিত্র"
 
-#: pdclasses.py:202 pdclasses.py:205
+#: pdclasses.py:226 pdclasses.py:229
 msgid "Unknown"
 msgstr "অজানা"
 
-#: pdclasses.py:245
+#: pdclasses.py:270
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
 "on the placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:252
+#: pdclasses.py:277
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)s-এর চিত্র"
 
-#: pdclasses.py:323 templates/countries.html:20
+#: pdclasses.py:353 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s-এর পতাকা"
@@ -165,7 +165,7 @@ msgstr "প্রধান পাতা"
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:185
+#: templates/about.html:7 templates/layout.html:189
 msgid "About Paulina"
 msgstr "পাউলিনা সম্পর্কে"
 
@@ -173,19 +173,19 @@ msgstr "পাউলিনা সম্পর্কে"
 msgid "Wikidata"
 msgstr "উইকিউপাত্ত"
 
-#: templates/about.html:9 templates/layout.html:171
+#: templates/about.html:9 templates/layout.html:175
 msgid "Ártica - Online Cultural Center"
 msgstr "আফ্রিকা - অনলাইন কালচারাল সেণ্টার"
 
-#: templates/about.html:10 templates/layout.html:174
+#: templates/about.html:10 templates/layout.html:178
 msgid "Creative Commons Uruguay"
 msgstr "ক্রিয়েটিভ কমন্স উরুগুয়ে"
 
-#: templates/about.html:11 templates/layout.html:177
+#: templates/about.html:11 templates/layout.html:181
 msgid "Data Uruguay"
 msgstr "ডাটা উরুগুয়ে"
 
-#: templates/about.html:12 templates/layout.html:180
+#: templates/about.html:12 templates/layout.html:184
 msgid "Wikimedistas de Uruguay"
 msgstr "উইকিমেদিস্তাস দে উরুগুয়ে"
 
@@ -315,11 +315,11 @@ msgstr "চিত্র"
 msgid "Description"
 msgstr "বর্ণনা"
 
-#: templates/author.html:23 templates/layout.html:126
+#: templates/author.html:23 templates/layout.html:127
 msgid "Nationality"
 msgstr "জাতীয়তা"
 
-#: templates/author.html:27 templates/layout.html:117
+#: templates/author.html:27 templates/layout.html:118
 msgid "Gender"
 msgstr "লিঙ্গ"
 
@@ -375,19 +375,23 @@ msgstr "হ্যাঁ"
 msgid "No"
 msgstr "না"
 
-#: templates/author.html:78 templates/author.html:81
+#: templates/author.html:77
+msgid "Author will enter worldwide public domain on January 1, "
+msgstr ""
+
+#: templates/author.html:79 templates/author.html:82
 msgid "Consult individual works."
 msgstr ""
 
-#: templates/author.html:80
+#: templates/author.html:81
 msgid "Unknown due to lack of available dates of birth and death."
 msgstr ""
 
-#: templates/author.html:86 templates/work.html:77
+#: templates/author.html:87 templates/work.html:79
 msgid "Missing/wrong data?"
 msgstr ""
 
-#: templates/author.html:87 templates/work.html:78
+#: templates/author.html:88 templates/work.html:80
 msgid "Edit Wikidata item"
 msgstr "উইকিউপাত্ত আইটেম সম্পাদনা করুন"
 
@@ -423,8 +427,8 @@ msgid "Applies to %(countries)s"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:218 templates/layout.html:220
-#: templates/layout.html:222
+#: templates/layout.html:222 templates/layout.html:224
+#: templates/layout.html:226
 msgid "Paulina logo"
 msgstr "পাউলিনা লোগো"
 
@@ -511,7 +515,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:32 templates/layout.html:225
+#: templates/layout.html:32 templates/layout.html:229
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -540,41 +544,41 @@ msgstr "অনুসন্ধান করুন"
 msgid "Search filters"
 msgstr "ফলাফল অনুসন্ধান করুন"
 
-#: templates/layout.html:119 templates/layout.html:128
-#: templates/layout.html:137 templates/layout.html:146
+#: templates/layout.html:120 templates/layout.html:129
+#: templates/layout.html:140 templates/layout.html:149
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:135
+#: templates/layout.html:138
 #, fuzzy
 msgid "Type of work"
 msgstr "কর্মের তালিকা"
 
-#: templates/layout.html:144 templates/work.html:38
+#: templates/layout.html:147 templates/work.html:38
 msgid "Country of origin"
 msgstr "উৎপত্তির দেশ"
 
-#: templates/layout.html:168
+#: templates/layout.html:172
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:191
+#: templates/layout.html:195
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:194
+#: templates/layout.html:198
 msgid "Help translate"
 msgstr ""
 
-#: templates/layout.html:199
+#: templates/layout.html:203
 msgid "Help"
 msgstr "সাহায্য"
 
-#: templates/layout.html:202
+#: templates/layout.html:206
 msgid "Documentation"
 msgstr "নথি"
 
-#: templates/layout.html:226
+#: templates/layout.html:230
 msgid "Powered by Wikidata."
 msgstr ""
 
@@ -606,11 +610,11 @@ msgstr "ভাষা"
 msgid "Access work"
 msgstr ""
 
-#: templates/work.html:62
+#: templates/work.html:64
 msgid "Copyright status"
 msgstr "কপিরাইট অবস্থা"
 
-#: templates/work.html:65
+#: templates/work.html:67
 msgid "in"
 msgstr ""
 
