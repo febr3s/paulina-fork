@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-25 15:25-0300\n"
-"PO-Revision-Date: 2025-03-25 15:32-0300\n"
+"POT-Creation-Date: 2025-03-26 00:25-0300\n"
+"PO-Revision-Date: 2025-03-26 00:33-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/es/>\n"
@@ -62,7 +62,7 @@ msgstr "Plazo desconocido"
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:245
+#: app.py:247
 msgid "404 error"
 msgstr "Error 404"
 
@@ -259,9 +259,9 @@ msgid ""
 "national, regional or thematic versions of the tool, according to the needs "
 "of each community."
 msgstr ""
-"Este sitio web es parte de un proyecto más amplio para facilitar la creación "
-"de versiones nacionales, regionales o temáticas de la herramienta, de "
-"acuerdo a las necesidades de cada comunidad."
+"Esta página web es parte de un proyecto más amplio para facilitar la "
+"creación de versiones nacionales, regionales o temáticas de la herramienta, "
+"de acuerdo a las necesidades de cada comunidad."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -273,8 +273,8 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
-"Paulina está sostenida por %(artica_link)s, %(cc_uruguay_link)s, "
-"%(data_uruguay_link)s y %(wm_uruguay_link)s."
+"Paulina cuenta con el apoyo de %(artica_link)s , %(cc_uruguay_link)s , "
+"%(data_uruguay_link)s y %(wm_uruguay_link)s ."
 
 #: templates/about.html:26
 msgid "Content licenses"
@@ -295,7 +295,7 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
-"Los textos y otros contenidos originales de este sitio web están bajo una "
+"Los textos y otros contenidos originales de esta página web están bajo una "
 "%(ccbysa_link)s."
 
 #: templates/about.html:29
@@ -412,7 +412,7 @@ msgstr "No"
 
 #: templates/author.html:77
 msgid "Author will enter worldwide public domain on January 1, "
-msgstr "Entrará en dominio público en todo el mundo el 1 de enero de "
+msgstr "Estará en dominio público en todo el mundo el 1 de enero de "
 
 #: templates/author.html:79 templates/author.html:82
 msgid "Consult individual works."
@@ -422,27 +422,27 @@ msgstr "Consultar obras individuales."
 msgid "Unknown due to lack of available dates of birth and death."
 msgstr ""
 "Desconocido debido a que no están disponibles las fechas de nacimiento y "
-"muerte."
+"defunción."
 
 #: templates/author.html:87 templates/work.html:79
 msgid "Missing/wrong data?"
-msgstr "¿Datos faltantes/errados?"
+msgstr "¿Datos faltantes/incorrectos?"
 
 #: templates/author.html:88 templates/work.html:80
 msgid "Edit Wikidata item"
-msgstr "Editar ítem de Wikidata"
+msgstr "Editar elemento de Wikidata"
 
 #: templates/countries.html:8
 msgid ""
 "This grid indicates the period after which works enter the public domain in "
 "each country."
 msgstr ""
-"Esta grilla indica el período luego del cual las obras entran en dominio "
-"público en cada país."
+"Esta tabla indica el período tras el cual finaliza la protección de los "
+"derechos de autor de las obras en cada país."
 
 #: templates/countries.html:9
 msgid "The period indicated is post mortem auctoris."
-msgstr "El plazo indicado es post mortem auctoris."
+msgstr "El período indicado es posterior a la muerte del autor."
 
 #: templates/countries.html:10
 msgid ""
@@ -453,7 +453,7 @@ msgstr "Haciendo clic en un país, se accede a más información acerca del paí
 #: templates/country.html:8
 #, python-format
 msgid "%(country_name)s's copyright term"
-msgstr "Plazo de derecho de autor de %(country_name)s"
+msgstr "Términos de derechos de autor de %(country_name)s"
 
 #: templates/country.html:15
 #, python-format
@@ -501,7 +501,7 @@ msgstr "Paulina Luisi"
 
 #: templates/home.html:44
 msgid "Find works"
-msgstr "Encuentra obras"
+msgstr "Encontrar obras"
 
 #: templates/home.html:45
 msgid ""
@@ -536,7 +536,7 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Entérate qué obras están en dominio público en diferentes países y accede a "
+"Entérate qué obras son de dominio público en diferentes países y accede a "
 "las versiones disponibles en línea."
 
 #: templates/home.html:65
@@ -608,7 +608,7 @@ msgstr "País de origen"
 
 #: templates/layout.html:172
 msgid "Paulina is supported by:"
-msgstr "Paulina está sostenida por:"
+msgstr "Paulina cuenta con el apoyo de:"
 
 #: templates/layout.html:195
 msgid "Source code"
@@ -632,7 +632,7 @@ msgstr "Basado en datos de Wikidata."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
-msgstr "No se encontraron resultados. Intenta de nuevo."
+msgstr "Sin resultados. Inténtalo de nuevo."
 
 #: templates/results.html:6
 msgid "Search results"
@@ -660,7 +660,7 @@ msgstr "Acceder a la obra"
 
 #: templates/work.html:64
 msgid "Copyright status"
-msgstr "Estatus de derecho de autor"
+msgstr "Estado de los derechos de autor"
 
 #: templates/work.html:67
 msgid "in"
@@ -669,7 +669,7 @@ msgstr "en"
 #: templates/works-list.html:8
 #, python-format
 msgid "No works by %(author_name)s were found"
-msgstr "No se encontraron obras de %(author_name)s"
+msgstr "Sin obras para %(author_name)s"
 
 #: templates/works-list.html:9
 msgid "Missing information?"

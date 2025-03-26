@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-25 15:25-0300\n"
-"PO-Revision-Date: 2024-09-14 22:09+0000\n"
-"Last-Translator: phlostically <phlostically@mailinator.com>\n"
+"POT-Creation-Date: 2025-03-26 00:25-0300\n"
+"PO-Revision-Date: 2025-02-13 05:02+0000\n"
+"Last-Translator: Juan Sebastian Quintero Santacruz "
+"<juancho2291@hotmail.com>\n"
 "Language: eo\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/paulina"
 "/paulina-app/eo/>\n"
@@ -61,51 +62,54 @@ msgstr "Nekonata termino"
 msgid "Countries and terms"
 msgstr "Landoj kaj terminoj"
 
-#: app.py:245
+#: app.py:247
 msgid "404 error"
 msgstr "Eraro 404"
 
 #: filters.py:6
+#, fuzzy
 msgid "Female"
-msgstr ""
+msgstr "Virina"
 
 #: filters.py:7
 #, fuzzy
 msgid "Male"
-msgstr "Bildo"
+msgstr "Vira"
 
 #: filters.py:8
 msgid "Trans man"
-msgstr ""
+msgstr "Transviro"
 
 #: filters.py:9
 msgid "Trans woman"
-msgstr ""
+msgstr "Transvirino"
 
 #: filters.py:10
+#, fuzzy
 msgid "Non-binary"
-msgstr ""
+msgstr "Neduuma"
 
 #: filters.py:17
 msgid "Film"
-msgstr ""
+msgstr "Filmo"
 
 #: filters.py:18
-#, fuzzy
 msgid "Literary work"
-msgstr "Serĉi verkoj"
+msgstr "Literatura verkaro"
 
 #: filters.py:19
 msgid "Musical work"
-msgstr ""
+msgstr "Musika verkaro"
 
 #: filters.py:20
+#, fuzzy
 msgid "Painting"
-msgstr ""
+msgstr "Pentraĵo"
 
 #: filters.py:21
+#, fuzzy
 msgid "Sculpture"
-msgstr ""
+msgstr "Skulptaĵo"
 
 #: pdclasses.py:97
 msgid "(decade)"
@@ -187,7 +191,7 @@ msgstr ""
 
 #: templates/about.html:12 templates/layout.html:184
 msgid "Wikimedistas de Uruguay"
-msgstr "Wikimedistas de Uruguay"
+msgstr "Vikimediistoj de Urugvajo"
 
 #: templates/about.html:13
 msgid "Creative Commons CC0 1.0 Universal Public Domain Dedication"
@@ -473,8 +477,9 @@ msgid "The Araucaniad"
 msgstr "La Araucana"
 
 #: templates/home.html:51
+#, fuzzy
 msgid "Orlando: A Biography"
-msgstr "Orlando: A Biography"
+msgstr "Orlando: Biografio"
 
 #: templates/home.html:53
 msgid "Metropolis"
@@ -542,7 +547,7 @@ msgstr "Serĉi"
 #: templates/layout.html:115
 #, fuzzy
 msgid "Search filters"
-msgstr "Serĉrezultoj"
+msgstr "Serĉiloj"
 
 #: templates/layout.html:120 templates/layout.html:129
 #: templates/layout.html:140 templates/layout.html:149
@@ -550,9 +555,8 @@ msgid "Any"
 msgstr ""
 
 #: templates/layout.html:138
-#, fuzzy
 msgid "Type of work"
-msgstr "Listo de verkoj"
+msgstr "Verkklaso"
 
 #: templates/layout.html:147 templates/work.html:38
 msgid "Country of origin"

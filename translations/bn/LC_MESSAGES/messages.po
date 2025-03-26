@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-25 15:25-0300\n"
-"PO-Revision-Date: 2024-09-04 19:48+0000\n"
-"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
+"POT-Creation-Date: 2025-03-26 00:25-0300\n"
+"PO-Revision-Date: 2025-02-23 16:11+0000\n"
+"Last-Translator: Bodhisattwa Mandal <bodhisattwa.rgkmc@gmail.com>\n"
 "Language: bn\n"
 "Language-Team: Bengali <https://hosted.weblate.org/projects/paulina"
 "/paulina-app/bn/>\n"
@@ -61,13 +61,13 @@ msgstr "অজানা শর্ত"
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:245
+#: app.py:247
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
 #: filters.py:6
 msgid "Female"
-msgstr ""
+msgstr "নারী"
 
 #: filters.py:7
 #, fuzzy
@@ -88,24 +88,23 @@ msgstr ""
 
 #: filters.py:17
 msgid "Film"
-msgstr ""
+msgstr "চলচ্চিত্র"
 
 #: filters.py:18
-#, fuzzy
 msgid "Literary work"
-msgstr "কর্ম অনুসন্ধান করুন"
+msgstr "সাহিত্য কর্ম"
 
 #: filters.py:19
 msgid "Musical work"
-msgstr ""
+msgstr "সঙ্গীত"
 
 #: filters.py:20
 msgid "Painting"
-msgstr ""
+msgstr "চিত্র কর্ম"
 
 #: filters.py:21
 msgid "Sculpture"
-msgstr ""
+msgstr "ভাস্কর্য"
 
 #: pdclasses.py:97
 msgid "(decade)"

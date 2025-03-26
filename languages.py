@@ -4,7 +4,7 @@
 from flask import request, session
 
 
-SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
+SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "ast", "av",
                        "ay", "az", "ba", "be", "bg", "bh", "bi", "bm", "bn",
                        "bo", "br", "bs", "ca", "ce", "ch", "co", "cr", "cs",
                        "cu", "cv", "cy", "da", "de", "dv", "dz", "ee", "el",
@@ -30,7 +30,8 @@ SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "av",
 Item key is language 2 letter code. Value is language name in its own language.
 English must be the first item of the dictionary. 
 Other languages are ordered by alphabetical order."""
-TRANSLATED_LANGUAGES = {"en": "English",
+TRANSLATED_LANGUAGES = {"ast": "Asturianu",
+                        "en": "English",
                         "es": "Español",
                         "eo": "Esperanto",
                         "fr": "Français",

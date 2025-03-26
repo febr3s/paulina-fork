@@ -231,7 +231,9 @@ def inject_language():
 
 @app.context_processor
 def inject_filters():
-    countries = [{"qid": country["qid"], "country_name": get_locale().territories[country["country_iso"]]} for country in filters.COUNTRIES ]
+    countries = [{"qid": country["qid"], 
+                  "country_name": get_locale().territories.get(country["country_iso"])} 
+                  for country in filters.COUNTRIES ]  # Check: North Macedonia doesn't have Asturian label in Babel
     return {        
         "GENDERS": filters.GENDERS,
         "TYPES_OF_WORK": filters.TYPES_OF_WORK,
@@ -248,4 +250,4 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     app.run()
-    #app.run(debug=True)
+    # app.run(debug=True)
