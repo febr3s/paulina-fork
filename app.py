@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, Response, url_for, abort
+from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
 import datetime
 
@@ -11,9 +12,38 @@ import filters
 
 app = Flask(__name__)
 
+
+# i18n configuration
+
+"""config.py contains the key for the session cookie.
+The session cookie is required to store the language choice 
+in the session and make it persistent."""
+
 app.config.from_pyfile('config.py')
 
-babel = Babel(app, locale_selector=languages.get_locale)
+babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
+
+
+# Cache configuration
+
+app.config.update(CACHE_TYPE="SimpleCache",
+                  CACHE_DEFAULT_TIMEOUT=300)
+
+cache = Cache(app)  # Initializes Flask-Caching
+
+@app.before_request  # Necessary to add language to request context
+def before_request():
+    setattr(request, "language", languages.get_locale())
+
+def make_cache_key(**kwargs) -> str:
+   """Creates a cache key combining the request path and the locale."""
+   request_language = request.language
+   request_path = request.path
+   request_args = {key:value for key, value in request.args.items() if key!= "language"}   
+   return f"{request_language}, {request_path}, {request_args}"
+
+# End of app and module configuration
+
 
 def print_field(field: str | dict | None) -> str:
     """Takes a value of different possible types and converts it to a meaningful string to print on the screen"""
@@ -44,6 +74,7 @@ def about():
 
 
 @app.route("/results")
+@cache.cached(make_cache_key=make_cache_key)
 def results():
     try:
         type_of_search = request.args.get("type_of_search")
@@ -99,6 +130,7 @@ def results():
         abort(404)
 
 @app.route("/author/<author_data>")
+@cache.cached(make_cache_key=make_cache_key)
 def author_page(author_data):
     try:
         author = pdclasses.Author(author_data)
@@ -131,6 +163,7 @@ def author_page(author_data):
 
 
 @app.route("/works-list/<author_id>")
+@cache.cached(make_cache_key=make_cache_key)
 def works_list(author_id):
     try:
         author = pdclasses.Author(author_id)
@@ -145,6 +178,7 @@ def works_list(author_id):
 
 
 @app.route("/work/<work_data>")
+@cache.cached(make_cache_key=make_cache_key)
 def work_page(work_data):
     try:
         work = pdclasses.Work(work_data)  # Make a work object
@@ -171,6 +205,7 @@ def work_page(work_data):
 
 
 @app.route("/country/<country_data>")
+@cache.cached(timeout=86400, make_cache_key=make_cache_key)
 def country_page(country_data):
     try:
         country = pdclasses.Country(country_data)
@@ -187,6 +222,7 @@ def country_page(country_data):
 
 
 @app.route("/term/<term_id>")
+@cache.cached(timeout=86400, make_cache_key=make_cache_key)
 def term_page(term_id):
     try:
         term = pdclasses.Term(term_id)
@@ -200,6 +236,7 @@ def term_page(term_id):
 
 
 @app.route("/countries/")
+@cache.cached(timeout=86400, make_cache_key=make_cache_key)
 def countries_main():
     countries_info = squeries.retrieve_query(squeries.query_for_all_countries_info, lang=languages.get_locale())
     for country in countries_info:
