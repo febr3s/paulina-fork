@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-26 00:25-0300\n"
+"POT-Creation-Date: 2025-04-02 11:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,49 +17,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:23
+#: app.py:53
 msgid "No value"
 msgstr ""
 
-#: app.py:25
+#: app.py:55
 msgid "Unknown value"
 msgstr ""
 
-#: app.py:35 templates/layout.html:54
+#: app.py:65 templates/layout.html:54
 msgid "Home"
 msgstr ""
 
-#: app.py:42 templates/layout.html:63 templates/layout.html:192
+#: app.py:72 templates/layout.html:63 templates/layout.html:192
 msgid "About"
 msgstr ""
 
-#: app.py:64 app.py:80 app.py:95
+#: app.py:95 app.py:111 app.py:126
 msgid "No results found"
 msgstr ""
 
-#: app.py:74 app.py:89
+#: app.py:105 app.py:120
 msgid "Results"
 msgstr ""
 
-#: app.py:138
+#: app.py:171
 msgid "List of works"
 msgstr ""
 
-#: app.py:194
+#: app.py:230
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:209
+#: app.py:246
 msgid "Unknown term"
 msgstr ""
 
-#: app.py:211 templates/countries.html:7 templates/layout.html:66
+#: app.py:248 templates/countries.html:7 templates/layout.html:66
 #: templates/layout.html:209
 msgid "Countries and terms"
 msgstr ""
 
-#: app.py:247
+#: app.py:284
 msgid "404 error"
 msgstr ""
 

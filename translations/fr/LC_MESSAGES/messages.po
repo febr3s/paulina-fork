@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-26 00:25-0300\n"
+"POT-Creation-Date: 2025-04-02 11:29-0300\n"
 "PO-Revision-Date: 2024-11-18 22:55+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fr\n"
@@ -19,49 +19,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:23
+#: app.py:53
 msgid "No value"
 msgstr "Aucune valeur"
 
-#: app.py:25
+#: app.py:55
 msgid "Unknown value"
 msgstr "Valeur inconnue"
 
-#: app.py:35 templates/layout.html:54
+#: app.py:65 templates/layout.html:54
 msgid "Home"
 msgstr "Accueil"
 
-#: app.py:42 templates/layout.html:63 templates/layout.html:192
+#: app.py:72 templates/layout.html:63 templates/layout.html:192
 msgid "About"
 msgstr "À propos"
 
-#: app.py:64 app.py:80 app.py:95
+#: app.py:95 app.py:111 app.py:126
 msgid "No results found"
 msgstr "Aucun résultat trouvé"
 
-#: app.py:74 app.py:89
+#: app.py:105 app.py:120
 msgid "Results"
 msgstr "Résultats"
 
-#: app.py:138
+#: app.py:171
 msgid "List of works"
 msgstr "Liste des ouvrages"
 
-#: app.py:194
+#: app.py:230
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste de %(term_name)s"
 
-#: app.py:209
+#: app.py:246
 msgid "Unknown term"
 msgstr "Délai inconnu"
 
-#: app.py:211 templates/countries.html:7 templates/layout.html:66
+#: app.py:248 templates/countries.html:7 templates/layout.html:66
 #: templates/layout.html:209
 msgid "Countries and terms"
 msgstr "Pays et délais"
 
-#: app.py:247
+#: app.py:284
 msgid "404 error"
 msgstr "Erreur 404"
 
