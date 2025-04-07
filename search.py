@@ -5,7 +5,7 @@ import squeries
 import languages
 
 
-def search_filters(gender=None, nationality=None, type_of_work=None, country_of_origin=None) -> str:
+def search_filters(gender=None, nationality=None, type_of_work=None, country_of_origin=None, in_public_domain=None) -> str:
     filters_string = ""
     if gender:
         filters_string = filters_string + f"%20haswbstatement:P21={gender}"
@@ -15,17 +15,17 @@ def search_filters(gender=None, nationality=None, type_of_work=None, country_of_
         filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
     if country_of_origin:
         filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}"
+    if in_public_domain:
+        filters_string = filters_string + f"%20haswbstatement:P7763=Q71887839|P7763=Q75700125"
     return filters_string
 
-
-
-def search_author(user_search: str, gender:str, nationality:str) -> list:
+def search_author(user_search: str, gender:str, nationality:str, in_public_domain:bool) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=200&gsrsearch="
     human_being_filter = "%20haswbstatement:P31=Q5|P31=Q21070568"
-    user_filters = search_filters(gender=gender, nationality=nationality)
+    user_filters = search_filters(gender=gender, nationality=nationality, in_public_domain=in_public_domain)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"
