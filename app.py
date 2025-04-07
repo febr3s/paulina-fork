@@ -99,7 +99,8 @@ def results():
             if type_of_search == "author":
                 gender = request.args.get("gender")
                 nationality = request.args.get("nationality")
-                search_result = search.search_author(search_request, gender, nationality)
+                in_public_domain = request.args.get("in-public-domain")
+                search_result = search.search_author(search_request, gender, nationality, in_public_domain)
                 if len(search_result) > 0:
                     return render_template('results.html',
                                            title=_("Results"),
