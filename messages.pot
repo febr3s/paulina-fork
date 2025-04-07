@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-02 11:29-0300\n"
+"POT-Creation-Date: 2025-04-07 09:11-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: app.py:72 templates/layout.html:63 templates/layout.html:192
+#: app.py:72 templates/layout.html:63 templates/layout.html:197
 msgid "About"
 msgstr ""
 
-#: app.py:95 app.py:111 app.py:126
+#: app.py:95 app.py:112 app.py:127
 msgid "No results found"
 msgstr ""
 
-#: app.py:105 app.py:120
+#: app.py:106 app.py:121
 msgid "Results"
 msgstr ""
 
-#: app.py:171
+#: app.py:172
 msgid "List of works"
 msgstr ""
 
-#: app.py:230
+#: app.py:231
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:246
+#: app.py:247
 msgid "Unknown term"
 msgstr ""
 
-#: app.py:248 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:209
+#: app.py:249 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:214
 msgid "Countries and terms"
 msgstr ""
 
-#: app.py:284
+#: app.py:285
 msgid "404 error"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:189
+#: templates/about.html:7 templates/layout.html:194
 msgid "About Paulina"
 msgstr ""
 
@@ -169,19 +169,19 @@ msgstr ""
 msgid "Wikidata"
 msgstr ""
 
-#: templates/about.html:9 templates/layout.html:175
+#: templates/about.html:9 templates/layout.html:180
 msgid "Ártica - Online Cultural Center"
 msgstr ""
 
-#: templates/about.html:10 templates/layout.html:178
+#: templates/about.html:10 templates/layout.html:183
 msgid "Creative Commons Uruguay"
 msgstr ""
 
-#: templates/about.html:11 templates/layout.html:181
+#: templates/about.html:11 templates/layout.html:186
 msgid "Data Uruguay"
 msgstr ""
 
-#: templates/about.html:12 templates/layout.html:184
+#: templates/about.html:12 templates/layout.html:189
 msgid "Wikimedistas de Uruguay"
 msgstr ""
 
@@ -423,8 +423,8 @@ msgid "Applies to %(countries)s"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:222 templates/layout.html:224
-#: templates/layout.html:226
+#: templates/layout.html:227 templates/layout.html:229
+#: templates/layout.html:231
 msgid "Paulina logo"
 msgstr ""
 
@@ -511,7 +511,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:32 templates/layout.html:229
+#: templates/layout.html:32 templates/layout.html:234
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -540,39 +540,47 @@ msgid "Search filters"
 msgstr ""
 
 #: templates/layout.html:120 templates/layout.html:129
-#: templates/layout.html:140 templates/layout.html:149
+#: templates/layout.html:145 templates/layout.html:154
 msgid "Any"
 msgstr ""
 
+#: templates/layout.html:136
+msgid "In public domain"
+msgstr ""
+
 #: templates/layout.html:138
+msgid "Authors whose works are in public domain in at least one jurisdiction"
+msgstr ""
+
+#: templates/layout.html:143
 msgid "Type of work"
 msgstr ""
 
-#: templates/layout.html:147 templates/work.html:38
+#: templates/layout.html:152 templates/work.html:38
 msgid "Country of origin"
 msgstr ""
 
-#: templates/layout.html:172
+#: templates/layout.html:177
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:195
+#: templates/layout.html:200
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:198
+#: templates/layout.html:203
 msgid "Help translate"
 msgstr ""
 
-#: templates/layout.html:203
+#: templates/layout.html:208
 msgid "Help"
 msgstr ""
 
-#: templates/layout.html:206
+#: templates/layout.html:211
 msgid "Documentation"
 msgstr ""
 
-#: templates/layout.html:230
+#: templates/layout.html:235
 msgid "Powered by Wikidata."
 msgstr ""
 
