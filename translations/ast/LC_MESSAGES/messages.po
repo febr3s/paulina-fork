@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-03-26 00:25-0300\n"
-"PO-Revision-Date: 2025-04-02 14:38+0000\n"
-"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
+"PO-Revision-Date: 2025-04-07 09:54+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Asturian <https://hosted.weblate.org/projects/paulina/"
 "paulina-app/ast/>\n"
 "Language: ast\n"
@@ -35,7 +35,7 @@ msgstr "Entamu"
 
 #: app.py:42 templates/layout.html:63 templates/layout.html:192
 msgid "About"
-msgstr "Sobre"
+msgstr "Tocante a"
 
 #: app.py:64 app.py:80 app.py:95
 msgid "No results found"
@@ -229,7 +229,7 @@ msgstr ""
 "Paulina invitate conocer el padremuñu cultural de la humanidá. Ye una "
 "ferramienta multillingüe, impulsada por %(wikidata_link)s, que te permite "
 "guetar persones y saber si tienen obres d'accesu llibre nel dominiu públicu. "
-"Tamién facilita la comprensión de los términos de copyright y aida saber "
+"Tamién facilita la comprensión de los plazos de copyright y aida saber "
 "cuándo una obra entra nel dominiu públicu en cada país."
 
 #: templates/about.html:20
@@ -289,7 +289,7 @@ msgid ""
 "All data in the pages about authors, works, countries and terms come from "
 "Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"Tolos datos nes páxines sobro autores, obres, países y términos vienen de "
+"Tolos datos nes páxines sobro autores, obres, países y plazos vienen de "
 "Wikidata y tán so los términos de %(CC0_link)s."
 
 #: templates/about.html:28
@@ -309,7 +309,7 @@ msgid ""
 "the public domain. We recommend consulting the information of each content "
 "on Wikimedia Commons."
 msgstr ""
-"Les imáxenes y medios nes páxines sobre autores, obres, países y términos "
+"Les imáxenes y medios nes páxines sobre autores, obres, países y plazos "
 "vienen de %(wm_commons_link)s y tán so distintes llicencies llibres o nel "
 "dominiu públicu. Recomendamos consultar la información de cada conteníu en "
 "Wikimedia Commons."
@@ -456,7 +456,7 @@ msgstr "Al facer clic en cada país, pue acceder a más información sobro'l pa�
 #: templates/country.html:8
 #, python-format
 msgid "%(country_name)s's copyright term"
-msgstr "Términos de drechos d'autor en %(country_name)s"
+msgstr "Plazos de drechos d'autor en %(country_name)s"
 
 #: templates/country.html:15
 #, python-format
@@ -488,11 +488,11 @@ msgstr ""
 
 #: templates/home.html:33
 msgid "Mary Shelley"
-msgstr ""
+msgstr "Mary Shelley"
 
 #: templates/home.html:35
 msgid "Carlos Gardel"
-msgstr ""
+msgstr "Carlos Gardel"
 
 #: templates/home.html:37
 msgid "Kiyohara Yukinobu"
@@ -500,7 +500,7 @@ msgstr ""
 
 #: templates/home.html:39
 msgid "Paulina Luisi"
-msgstr ""
+msgstr "Paulina Luisi"
 
 #: templates/home.html:44
 msgid "Find works"
@@ -514,11 +514,11 @@ msgstr ""
 
 #: templates/home.html:49
 msgid "The Araucaniad"
-msgstr ""
+msgstr "La Araucana"
 
 #: templates/home.html:51
 msgid "Orlando: A Biography"
-msgstr ""
+msgstr "Orlando"
 
 #: templates/home.html:53
 msgid "Metropolis"
@@ -561,11 +561,11 @@ msgstr ""
 
 #: templates/layout.html:32 templates/layout.html:229
 msgid "Paulina - Data for the Public Domain"
-msgstr ""
+msgstr "Paulina: datos nel dominiu públicu"
 
 #: templates/layout.html:81
 msgid "Select"
-msgstr ""
+msgstr "Esbillar"
 
 #: templates/layout.html:100 templates/layout.html:103
 msgid "Author"
@@ -573,19 +573,19 @@ msgstr ""
 
 #: templates/layout.html:101 templates/layout.html:104
 msgid "Work"
-msgstr ""
+msgstr "Obra"
 
 #: templates/layout.html:108
 msgid "Search with Paulina"
-msgstr ""
+msgstr "Guetar con Paulina"
 
 #: templates/layout.html:108 templates/layout.html:110
 msgid "Search"
-msgstr ""
+msgstr "Guetar"
 
 #: templates/layout.html:115
 msgid "Search filters"
-msgstr ""
+msgstr "Peñeres de gueta"
 
 #: templates/layout.html:120 templates/layout.html:129
 #: templates/layout.html:140 templates/layout.html:149
@@ -594,11 +594,11 @@ msgstr ""
 
 #: templates/layout.html:138
 msgid "Type of work"
-msgstr ""
+msgstr "Triba d'obra"
 
 #: templates/layout.html:147 templates/work.html:38
 msgid "Country of origin"
-msgstr ""
+msgstr "País d'orixe"
 
 #: templates/layout.html:172
 msgid "Paulina is supported by:"
@@ -606,7 +606,7 @@ msgstr ""
 
 #: templates/layout.html:195
 msgid "Source code"
-msgstr ""
+msgstr "Códigu fonte"
 
 #: templates/layout.html:198
 msgid "Help translate"
@@ -614,11 +614,11 @@ msgstr ""
 
 #: templates/layout.html:203
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: templates/layout.html:206
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: templates/layout.html:230
 msgid "Powered by Wikidata."
@@ -630,11 +630,11 @@ msgstr ""
 
 #: templates/results.html:6
 msgid "Search results"
-msgstr ""
+msgstr "Resultaos de la gueta"
 
 #: templates/results.html:26 templates/works-list.html:21
 msgid "Available for download"
-msgstr ""
+msgstr "Disponible pa baxar"
 
 #: templates/work.html:18
 msgid "Author/s"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: templates/work.html:34
 msgid "Language"
-msgstr ""
+msgstr "Llingua"
 
 #: templates/work.html:47
 msgid "Access work"
