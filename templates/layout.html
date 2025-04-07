@@ -134,8 +134,8 @@
             </div>
             <div class="py-2 px-2">
               <label for="in-public-domain"><strong>{{ _('In public domain') }}</strong></label>
-              </br><input type="checkbox" id="in-public-domain" name="in-public-domain">
-              </br><small>{{ _('Authors whose works are in public domain in at least one jusrisdiction') }}</small>
+              <input type="checkbox" id="in-public-domain" name="in-public-domain">
+              <br><small>{{ _('Authors whose works are in public domain in at least one jusrisdiction') }}</small>
             </div>
           </div>
           <div id="filters-for-work">
@@ -239,13 +239,13 @@
 </body>
 <script>
   let initialTypeOfSearch = document.getElementById("type_of_search").value;
-  document.getElementById("filters-for-author").style.display = initialTypeOfSearch === "author" ? 'flex' : 'none';
-  document.getElementById("filters-for-work").style.display = initialTypeOfSearch === "work" ? 'flex' : 'none';
+  document.getElementById("filters-for-author").style.cssText = initialTypeOfSearch === "author" ? 'display: flex; flex-wrap: wrap' : 'display: none';
+  document.getElementById("filters-for-work").style.cssText = initialTypeOfSearch === "work" ? 'display: flex; flex-wrap: wrap' : 'display: none';
 
   function showFilters(typeOfSearch)
   {
-    document.getElementById("filters-for-author").style.display = typeOfSearch.value === "author" ? 'flex' : 'none';
-    document.getElementById("filters-for-work").style.display = typeOfSearch.value === "work" ? 'flex' : 'none';
+    document.getElementById("filters-for-author").style.cssText = typeOfSearch.value === "author" ? 'display: flex; flex-wrap: wrap' : 'display: none';
+    document.getElementById("filters-for-work").style.cssText = typeOfSearch.value === "work" ? 'display: flex; flex-wrap: wrap' : 'display: none';
   }
 </script>
 </html>
