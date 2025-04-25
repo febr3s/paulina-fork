@@ -126,7 +126,14 @@ class Parent:
         self.wikidata_item_id = wikidata_item_id
         self.wikidata_item = retrieve_item(wikidata_item_id, data_type="item")
         self.wikidata_link = "https://www.wikidata.org/wiki/" + wikidata_item_id
-        self.name = self.wikidata_item.get('labels', {}).get(languages.get_locale())
+
+        if self.wikidata_item.get('labels', {}).get(languages.get_locale()) is not None:
+            self.name = self.wikidata_item.get('labels', {}).get(languages.get_locale())
+        elif self.wikidata_item.get('labels', {}).get("mul") is not None:
+            self.name = self.wikidata_item.get('labels', {}).get("mul")
+        else:
+            self.name = self.wikidata_item.get('labels', {}).get("en")
+
         self.description = self.wikidata_item.get('descriptions', {}).get(languages.get_locale())
         self.wikipedia_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wiki', {}).get('url')
 
@@ -256,13 +263,6 @@ class Work(Parent):
         super().__init__(wikidata_item_id)
         self.instance_of = build_field(self.wikidata_item.get('statements', {}).get('P31'))
 
-        if self.wikidata_item.get('labels', {}).get(languages.get_locale()) is not None:
-            self.title = self.wikidata_item.get('labels', {}).get(languages.get_locale())
-        elif self.wikidata_item.get('labels', {}).get("en") is not None:
-            self.title = self.wikidata_item.get('labels', {}).get("en")
-        else:
-            self.title = None
-
         image = self.wikidata_item.get('statements', {}).get('P18')
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/464px-Placeholder_book.svg.png"
@@ -274,7 +274,7 @@ class Work(Parent):
             image_file_name = requests.utils.quote(image_file_name)
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
-            self.image_alt_text = _('Image of %(title)s.', title=self.title)
+            self.image_alt_text = _('Image of %(title)s.', title=self.name)
 
         query_for_authors_response = squeries.retrieve_query(squeries.query_for_authors_of_a_work,
                                                    qname=wikidata_item_id,

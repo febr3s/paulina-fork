@@ -184,8 +184,8 @@ def work_page(work_data):
     try:
         work = pdclasses.Work(work_data)  # Make a work object
         return render_template("work.html",
-            title=print_field(work.title),
-            work_title=print_field(work.title),
+            title=print_field(work.name),  # This is for Open Graph meta tags
+            work_title=print_field(work.name),
             work_description=print_field(work.description),
             work_image=print_field(work.image),
             work_image_link=print_field(work.image_link),
