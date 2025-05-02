@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-07 09:11-0300\n"
+"POT-Creation-Date: 2025-05-02 18:26-0300\n"
 "PO-Revision-Date: 2024-09-04 20:31+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/nb_NO/>\n"
 "Language: nb_NO\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Norwegian Bokmål "
+"<https://hosted.weblate.org/projects/paulina/paulina-app/nb_NO/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -31,7 +31,7 @@ msgstr "Ukjent verdi"
 msgid "Home"
 msgstr "Hjem"
 
-#: app.py:72 templates/layout.html:63 templates/layout.html:197
+#: app.py:72 templates/layout.html:63 templates/layout.html:205
 msgid "About"
 msgstr "Om"
 
@@ -47,21 +47,21 @@ msgstr "Resultater"
 msgid "List of works"
 msgstr "Liste over verk"
 
-#: app.py:231
+#: app.py:232
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste over %(term_name)s"
 
-#: app.py:247
+#: app.py:248
 msgid "Unknown term"
 msgstr "Ukjent søkeord"
 
-#: app.py:249 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:214
+#: app.py:250 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:222
 msgid "Countries and terms"
 msgstr "Land og vilkår"
 
-#: app.py:285
+#: app.py:286
 msgid "404 error"
 msgstr "404-feil"
 
@@ -119,30 +119,30 @@ msgstr "(hundreår)"
 msgid "(millennium)"
 msgstr "(tusenår)"
 
-#: pdclasses.py:188
+#: pdclasses.py:195
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
 msgstr ""
-"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at det "
-"ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp et du "
-"eier ved å klikke på plassholderlenken."
+"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at "
+"det ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp"
+" et du eier ved å klikke på plassholderlenken."
 
-#: pdclasses.py:194
+#: pdclasses.py:201
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Bilde av %(name)s."
 
-#: pdclasses.py:226 pdclasses.py:229
+#: pdclasses.py:233 pdclasses.py:236
 msgid "Unknown"
 msgstr "Ukjent"
 
 #: pdclasses.py:270
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
 msgstr ""
 "Bilde av generisk verk. Teksten ovenfor indikerer at det ikke finnes noe "
 "fritt bilde av verket tilgjengelig, og at kan laste opp et du eier ved å "
@@ -171,7 +171,7 @@ msgstr "hjemmeside"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Gå til %(home_page)s og prøv igjen."
 
-#: templates/about.html:7 templates/layout.html:194
+#: templates/about.html:7 templates/layout.html:202
 msgid "About Paulina"
 msgstr "Om Paulina"
 
@@ -179,19 +179,19 @@ msgstr "Om Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:180
+#: templates/about.html:9 templates/layout.html:188
 msgid "Ártica - Online Cultural Center"
 msgstr "Artica — Nettbasert kultursenter"
 
-#: templates/about.html:10 templates/layout.html:183
+#: templates/about.html:10 templates/layout.html:191
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:186
+#: templates/about.html:11 templates/layout.html:194
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:189
+#: templates/about.html:12 templates/layout.html:197
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedia-redigerere fra Uruguay"
 
@@ -218,30 +218,31 @@ msgstr "prosjektet kildekodelager"
 #: templates/about.html:18
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
-"er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater deg å "
-"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
-"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg å "
-"finne ut når et verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
+"Det er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater "
+"deg å søke etter folk og finne ut om de har fritt tilgjengelige verk i "
+"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
+"å finne ut når et verk går inn i allemannseie i hvert land."
 
 #: templates/about.html:20
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
 msgstr ""
 "Paulina henter data fra WIkidata, den frie og gemenskapsdrevne databasen "
 "vedlikeholdt av Wikimedia-stiftelsen."
 
 #: templates/about.html:21
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
@@ -257,12 +258,12 @@ msgstr "Lokale verktøy"
 #: templates/about.html:23
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
 msgstr ""
 "Nettsiden er en del av et større prosjekt for å hjelpe opprettelse av "
-"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold "
-"til behovene hver gemenskap måtte ha."
+"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold"
+" til behovene hver gemenskap måtte ha."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -284,11 +285,11 @@ msgstr "Innholdslisenser"
 #: templates/about.html:27
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata og "
-"er underlagt vilkårene i %(CC0_link)s."
+"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata "
+"og er underlagt vilkårene i %(CC0_link)s."
 
 #: templates/about.html:28
 #, python-format
@@ -302,10 +303,10 @@ msgstr ""
 #: templates/about.html:29
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
 msgstr ""
 "Bildene og media på sidene om skapere, verk, land og vilkår kommer fra "
 "%(wm_commons_link)s og er underlagt forskjellige frie lisenser eller er "
@@ -314,16 +315,17 @@ msgstr ""
 
 #: templates/about.html:30
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
 msgstr ""
 "Verk tilgjengelig gjennom lenker til eksterne sider er tilgjengelig for "
 "offentlig, for det meste fordi de eer i allemannseie, eller under frie "
-"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen lovområder. "
-"Det anbefales å sjekke info om hvert verk på nettsiden de vertstjenes fra."
+"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen "
+"lovområder. Det anbefales å sjekke info om hvert verk på nettsiden de "
+"vertstjenes fra."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -332,10 +334,9 @@ msgstr "Fri programvare"
 #: templates/about.html:32
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
-msgstr ""
-"Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
+msgstr "Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
 
 #: templates/author.html:8
 msgid "Search works"
@@ -431,8 +432,8 @@ msgstr "Rediger Wikidata-element"
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr ""
 "Dette rutenettet indikerer tidsrommet etter at verkene går inn i "
 "allemannseie i hvert land."
@@ -462,9 +463,28 @@ msgstr "%(country_name)s er en del av"
 msgid "Applies to %(countries)s"
 msgstr "Gjelder for %(countries)s"
 
+#: templates/country.html:28
+#, fuzzy, python-format
+msgid "%(country_name)s's statistics"
+msgstr "%(country_name)s er en del av"
+
+#: templates/country.html:29
+msgid "Number of works identified as being in the public domain on Wikidata"
+msgstr ""
+
+#: templates/country.html:33 templates/layout.html:151
+#, fuzzy
+msgid "Type of work"
+msgstr "Liste over verk"
+
+#: templates/country.html:34
+#, fuzzy
+msgid "Number of works in public domain"
+msgstr "Allemannseie?"
+
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:227 templates/layout.html:229
-#: templates/layout.html:231
+#: templates/layout.html:235 templates/layout.html:237
+#: templates/layout.html:239
 msgid "Paulina logo"
 msgstr "Paulina-logo"
 
@@ -474,11 +494,11 @@ msgstr "Oppdag forfattere"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
 msgstr ""
-"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og lære "
-"om verkene deres."
+"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og "
+"lære om verkene deres."
 
 #: templates/home.html:33
 msgid "Mary Shelley"
@@ -502,11 +522,11 @@ msgstr "Finn verker"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
 msgstr ""
-"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å finne "
-"på Wikidata."
+"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å "
+"finne på Wikidata."
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -533,8 +553,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Finn ut hvilke verk som er i allemannseie i forskjellige land og få tilgang "
-"til versjoner på nett."
+"Finn ut hvilke verk som er i allemannseie i forskjellige land og få "
+"tilgang til versjoner på nett."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -550,19 +570,19 @@ msgstr "Paulina"
 
 #: templates/layout.html:13 templates/layout.html:36
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
-"er et flerspråklig verktøy, drevet av Wikidata som tillater deg å søke etter "
-"folk og finne ut om de har fritt tilgjengelige verk i allemannseie. Det "
-"hjelper også forståelsen av opphavsrett og hjelper deg å finne ut når et "
-"verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
+"Det er et flerspråklig verktøy, drevet av Wikidata som tillater deg å "
+"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
+"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
+"å finne ut når et verk går inn i allemannseie i hvert land."
 
-#: templates/layout.html:32 templates/layout.html:234
+#: templates/layout.html:32 templates/layout.html:242
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina — Data for allemanseie"
 
@@ -591,50 +611,49 @@ msgstr "Søk"
 msgid "Search filters"
 msgstr "Søkeresultater"
 
-#: templates/layout.html:120 templates/layout.html:129
-#: templates/layout.html:145 templates/layout.html:154
+#: templates/layout.html:120 templates/layout.html:135
+#: templates/layout.html:153 templates/layout.html:162
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:136
+#: templates/layout.html:131
+msgid "Type to filter..."
+msgstr ""
+
+#: templates/layout.html:144
 #, fuzzy
 msgid "In public domain"
 msgstr "Allemannseie?"
 
-#: templates/layout.html:138
+#: templates/layout.html:146
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:143
-#, fuzzy
-msgid "Type of work"
-msgstr "Liste over verk"
-
-#: templates/layout.html:152 templates/work.html:38
+#: templates/layout.html:160 templates/work.html:38
 msgid "Country of origin"
 msgstr "Opprinnelsesland"
 
-#: templates/layout.html:177
+#: templates/layout.html:185
 msgid "Paulina is supported by:"
 msgstr "Paulina støttes av:"
 
-#: templates/layout.html:200
+#: templates/layout.html:208
 msgid "Source code"
 msgstr "Kildekode"
 
-#: templates/layout.html:203
+#: templates/layout.html:211
 msgid "Help translate"
 msgstr "Hjelp til å oversette"
 
-#: templates/layout.html:208
+#: templates/layout.html:216
 msgid "Help"
 msgstr "Hjelp"
 
-#: templates/layout.html:211
+#: templates/layout.html:219
 msgid "Documentation"
 msgstr "Dokumentasjon"
 
-#: templates/layout.html:235
+#: templates/layout.html:243
 msgid "Powered by Wikidata."
 msgstr "Drevet av Wikidata."
 
@@ -691,3 +710,7 @@ msgstr "Legg til på WIkidata"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Liste over verker av %(author_name)s"
+
+#~ msgid "Type to filter or select..."
+#~ msgstr ""
+

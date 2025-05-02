@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-07 09:11-0300\n"
+"POT-Creation-Date: 2025-05-02 18:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: app.py:72 templates/layout.html:63 templates/layout.html:197
+#: app.py:72 templates/layout.html:63 templates/layout.html:205
 msgid "About"
 msgstr ""
 
@@ -45,21 +45,21 @@ msgstr ""
 msgid "List of works"
 msgstr ""
 
-#: app.py:231
+#: app.py:232
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:247
+#: app.py:248
 msgid "Unknown term"
 msgstr ""
 
-#: app.py:249 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:214
+#: app.py:250 templates/countries.html:7 templates/layout.html:66
+#: templates/layout.html:222
 msgid "Countries and terms"
 msgstr ""
 
-#: app.py:285
+#: app.py:286
 msgid "404 error"
 msgstr ""
 
@@ -115,19 +115,19 @@ msgstr ""
 msgid "(millennium)"
 msgstr ""
 
-#: pdclasses.py:188
+#: pdclasses.py:195
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
 "you can click on the placeholder link."
 msgstr ""
 
-#: pdclasses.py:194
+#: pdclasses.py:201
 #, python-format
 msgid "Image of %(name)s."
 msgstr ""
 
-#: pdclasses.py:226 pdclasses.py:229
+#: pdclasses.py:233 pdclasses.py:236
 msgid "Unknown"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:194
+#: templates/about.html:7 templates/layout.html:202
 msgid "About Paulina"
 msgstr ""
 
@@ -169,19 +169,19 @@ msgstr ""
 msgid "Wikidata"
 msgstr ""
 
-#: templates/about.html:9 templates/layout.html:180
+#: templates/about.html:9 templates/layout.html:188
 msgid "Ártica - Online Cultural Center"
 msgstr ""
 
-#: templates/about.html:10 templates/layout.html:183
+#: templates/about.html:10 templates/layout.html:191
 msgid "Creative Commons Uruguay"
 msgstr ""
 
-#: templates/about.html:11 templates/layout.html:186
+#: templates/about.html:11 templates/layout.html:194
 msgid "Data Uruguay"
 msgstr ""
 
-#: templates/about.html:12 templates/layout.html:189
+#: templates/about.html:12 templates/layout.html:197
 msgid "Wikimedistas de Uruguay"
 msgstr ""
 
@@ -422,9 +422,26 @@ msgstr ""
 msgid "Applies to %(countries)s"
 msgstr ""
 
+#: templates/country.html:28
+#, python-format
+msgid "%(country_name)s's statistics"
+msgstr ""
+
+#: templates/country.html:29
+msgid "Number of works identified as being in the public domain on Wikidata"
+msgstr ""
+
+#: templates/country.html:33 templates/layout.html:151
+msgid "Type of work"
+msgstr ""
+
+#: templates/country.html:34
+msgid "Number of works in public domain"
+msgstr ""
+
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:227 templates/layout.html:229
-#: templates/layout.html:231
+#: templates/layout.html:235 templates/layout.html:237
+#: templates/layout.html:239
 msgid "Paulina logo"
 msgstr ""
 
@@ -511,7 +528,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:32 templates/layout.html:234
+#: templates/layout.html:32 templates/layout.html:242
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -539,48 +556,48 @@ msgstr ""
 msgid "Search filters"
 msgstr ""
 
-#: templates/layout.html:120 templates/layout.html:129
-#: templates/layout.html:145 templates/layout.html:154
+#: templates/layout.html:120 templates/layout.html:135
+#: templates/layout.html:153 templates/layout.html:162
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:136
+#: templates/layout.html:131
+msgid "Type to filter..."
+msgstr ""
+
+#: templates/layout.html:144
 msgid "In public domain"
 msgstr ""
 
-#: templates/layout.html:138
+#: templates/layout.html:146
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:143
-msgid "Type of work"
-msgstr ""
-
-#: templates/layout.html:152 templates/work.html:38
+#: templates/layout.html:160 templates/work.html:38
 msgid "Country of origin"
 msgstr ""
 
-#: templates/layout.html:177
+#: templates/layout.html:185
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:200
+#: templates/layout.html:208
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:203
+#: templates/layout.html:211
 msgid "Help translate"
 msgstr ""
 
-#: templates/layout.html:208
+#: templates/layout.html:216
 msgid "Help"
 msgstr ""
 
-#: templates/layout.html:211
+#: templates/layout.html:219
 msgid "Documentation"
 msgstr ""
 
-#: templates/layout.html:235
+#: templates/layout.html:243
 msgid "Powered by Wikidata."
 msgstr ""
 
