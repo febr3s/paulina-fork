@@ -62,11 +62,31 @@ h3 {
   background-color: #f8f9fa;
 }
 
+#nationality-combobox {
+  background-color: #fcdb1a;
+}
+
+#nationality-combobox:hover {
+  background-color: #ffe65b;
+}
+
 .list-group {
   --bs-list-group-border-color: #717171;
   --bs-list-group-bg: #f8f9fa;
   --bs-list-group-action-hover-bg: #fcdb1a;
   --bs-list-group-action-active-bg: #f46527;
+  cursor: pointer;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item.active {
+  --bs-list-group-active-bg: transparent;
+  --bs-list-group-active-border-color: transparent;
+  --bs-list-group-active-color: inherit;
+  cursor: default;
 }
 
 .list-group-item:hover {
@@ -91,4 +111,43 @@ h3 {
 
 .form-select.filter:hover {
   background-color: #ffe65b;
+}
+
+/* Combobox styles */
+.combobox-container {
+  position: relative;
+}
+
+#nationality-dropdown {
+  position: absolute;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #fcdb1a;
+  border: 1px solid black;
+  display: none;
+  /* Hide scrollbar for Chrome */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+#nationality-dropdown::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+#nationality-dropdown.show {
+  display: block;
+}
+
+#nationality-dropdown .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: black;
+}
+
+#nationality-dropdown .dropdown-item:hover {
+  background-color: #ffe65b;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  --bs-dropdown-link-active-bg: #ffee8d;
+  background-color: var(--bs-dropdown-link-active-bg);
 }
