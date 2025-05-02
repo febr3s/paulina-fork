@@ -351,7 +351,13 @@ class Country(Parent):
             self.flag_image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + flag_image_file_name + '&width=200&height=30'
             self.flag_image_link = 'https://commons.wikimedia.org/wiki/File:' + flag_image_file_name
             self.flag_image_alt_text = _('Flag of %(country_name)s.', country_name=self.name)
-
+        
+        self.number_of_works_in_public_domain = squeries.retrieve_query(squeries.query_for_number_of_works_in_public_domain_from_a_country,
+                                                         qname=self.wikidata_item_id,
+                                                         lang=languages.get_locale()
+                                                         )
+        
+    
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):
         copyright_term = squeries.retrieve_query(squeries.query_for_country_copyright_term,

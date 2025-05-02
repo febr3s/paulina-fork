@@ -216,7 +216,8 @@ def country_page(country_data):
             country_copyright_terms=print_field(country.getCopyrightTerm()),
             country_flag_image=print_field(country.flag_image),
             country_flag_image_link=print_field(country.flag_image_link),
-            country_flag_image_alt_text=print_field(country.flag_image_alt_text)
+            country_flag_image_alt_text=print_field(country.flag_image_alt_text),
+            country_number_of_works_in_public_domain=print_field(country.number_of_works_in_public_domain)
         )
     except:  # If the Q number doesn't match any item
         abort(404)

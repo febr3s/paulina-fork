@@ -389,3 +389,41 @@ WHERE
 #     "lyrics_by": "P676",
 #     "programmer": "P943"
 # }
+
+
+query_for_number_of_works_in_public_domain_from_a_country = '''
+SELECT ?item ?itemLabel ( COUNT ( DISTINCT ?work_in_pd ) as ?works_in_pd ) 
+WHERE 
+{{ 
+  VALUES ?item {{ wd:Q11424 wd:Q7725634 wd:Q105543609 wd:Q3305213 wd:Q860861 }} . 
+  ?work_in_pd wdt:P31 ?item . 
+  ?work_in_pd wdt:P6216 wd:Q19652 . 
+  ?work_in_pd wdt:P495 wd:{qname} . 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang},mul,en". }} 
+}} 
+GROUP BY ?item ?itemLabel 
+ORDER BY ASC ( ?itemLabel )
+'''
+
+
+# Not used at this moment. Needs optimization for better performance
+query_for_number_of_authors_from_a_country = '''
+SELECT ?item ?itemLabel ( COUNT ( DISTINCT ?author ) as ?authors ) ( COUNT ( DISTINCT ?author_pd ) as ?authors_pd ) 
+WHERE 
+{{ 
+  VALUES ?item {{ wd:Q36180 wd:Q1028181 wd:Q2526255 wd:Q639669 }}. 
+  {{ 
+    ?author wdt:P106 ?item . 
+    ?author wdt:P27 wd:{qname} . 
+  }} 
+  UNION 
+  {{ 
+    ?author_pd wdt:P106 ?item . 
+    ?author_pd wdt:P27 wd:{qname} . 
+    ?author_pd wdt:P7763 wd:Q71887839 . 
+  }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }} 
+}} 
+GROUP BY ?item ?itemLabel
+ORDER BY ASC (?itemLabel)
+'''

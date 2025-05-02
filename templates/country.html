@@ -25,6 +25,24 @@
     {% endfor %}
     </tbody>
   </table>
+  <h2>{{ _("%(country_name)s's statistics", country_name=country_name) }}</h2>
+  <h3>{{ _("Number of works identified as being in the public domain on Wikidata") }}</h3>
+  <table class="table table-light p-1">
+    <tbody>
+    <tr>
+      <th>{{ _("Type of work") }}</th>
+      <th>{{ _("Number of works in public domain") }}</th>
+    </tr>
+    {% for type_of_work in country_number_of_works_in_public_domain %}
+    {% if "itemLabel" in type_of_work %}
+    <tr>
+      <td>{{ type_of_work['itemLabel']['value'] }}</th>
+      <td>{{ type_of_work['works_in_pd']['value'] }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
 
 </div>
 {% endblock %}
