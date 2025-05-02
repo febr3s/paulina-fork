@@ -124,13 +124,21 @@
               </select>
             </div>
             <div class="py-2 px-2">
-              <label for="nationality"><strong>{{ _('Nationality') }}</strong></label>
-              <select class="form-select filter border-black shadow-none" name="nationality" id="nationality">
-                <option value="">{{ _('Any') }}</option>
-                {% for country in COUNTRIES %}
-                <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
-                {% endfor %}
-              </select>
+              <label for="nationality-combobox"><strong>{{ _('Nationality') }}</strong></label>
+              <div class="combobox-container">
+                <input type="text" class="form-control filter border-black shadow-none"
+                      id="nationality-combobox"
+                      placeholder="{{ _('Type to filter or select...') }}"
+                      autocomplete="off">
+                <select class="form-select filter border-black shadow-none"
+                      name="nationality" id="nationality" style="display:none">
+                  <option value="">{{ _('Any') }}</option>
+                  {% for country in COUNTRIES %}
+                  <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
+                  {% endfor %}
+                </select>
+                <ul class="dropdown-menu w-100" id="nationality-dropdown"></ul>
+              </div>
             </div>
             <div class="py-2 px-2">
               <label for="in-public-domain"><strong>{{ _('In public domain') }}</strong></label>
@@ -247,5 +255,128 @@
     document.getElementById("filters-for-author").style.cssText = typeOfSearch.value === "author" ? 'display: flex; flex-wrap: wrap' : 'display: none';
     document.getElementById("filters-for-work").style.cssText = typeOfSearch.value === "work" ? 'display: flex; flex-wrap: wrap' : 'display: none';
   }
+</script>
+<script>
+  const combobox = document.getElementById('nationality-combobox');
+  const dropdown = document.getElementById('nationality-dropdown');
+  const select = document.getElementById('nationality');
+  
+  // Populate dropdown with options
+  function updateDropdown(filter = '') {
+    dropdown.innerHTML = '';
+    let options = Array.from(select.options);
+    // If showing all options but combobox has a value, exclude the selected option
+    if (!filter && combobox.value) {
+      options = options.filter(opt => opt.text !== combobox.value);
+    }
+    const filtered = filter ?
+      options.filter(opt => opt.text.toLowerCase().includes(filter.toLowerCase())) :
+      options;
+    
+    if (filtered.length === 0 && filter) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.classList.add('dropdown-item', 'text-muted');
+      a.href = '#';
+      a.textContent = 'No option';
+      li.appendChild(a);
+      dropdown.appendChild(li);
+    } else {
+      filtered.forEach(option => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.classList.add('dropdown-item');
+        a.href = '#';
+        a.textContent = option.text;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          combobox.value = option.text;
+          select.value = option.value;
+          dropdown.classList.remove('show');
+        });
+        li.appendChild(a);
+        dropdown.appendChild(li);
+      });
+    }
+  }
+  
+  // Initialize dropdown
+  updateDropdown();
+  
+  combobox.addEventListener('input', (e) => {
+    updateDropdown(e.target.value);
+    dropdown.classList.add('show');
+  });
+
+  combobox.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
+      const activeItem = dropdown.querySelector('.dropdown-item.active');
+      if (items.length === 1) {
+        e.preventDefault();
+        items[0].click();
+      } else if (activeItem) {
+        e.preventDefault();
+        activeItem.click();
+      }
+    } else if (['ArrowDown', 'ArrowUp'].includes(e.key) && dropdown.classList.contains('show')) {
+      e.preventDefault();
+      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
+      if (items.length === 0) return;
+      
+      let currentIndex = -1;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].classList.contains('active')) {
+          currentIndex = i;
+          break;
+        }
+      }
+
+      if (e.key === 'ArrowDown') {
+        currentIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % items.length;
+      } else { // ArrowUp
+        currentIndex = currentIndex === -1 ? items.length - 1 : (currentIndex - 1 + items.length) % items.length;
+      }
+
+      items.forEach(item => item.classList.remove('active'));
+      items[currentIndex].classList.add('active');
+      items[currentIndex].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Escape' && dropdown.classList.contains('show')) {
+      e.preventDefault();
+      dropdown.classList.remove('show');
+    }
+  });
+  
+  combobox.addEventListener('focus', () => {
+    // Show all options if combobox has a value (country selected)
+    updateDropdown(combobox.value ? '' : combobox.value);
+    dropdown.classList.add('show');
+  });
+
+  combobox.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // Only open if not already shown
+    if (!dropdown.classList.contains('show')) {
+      updateDropdown(combobox.value ? '' : combobox.value);
+      dropdown.classList.add('show');
+    }
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target) && e.target !== combobox) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Prevent form submission if no valid option is selected
+  document.querySelector('form[role="search"]').addEventListener('submit', (e) => {
+    const noOptionItem = dropdown.querySelector('.text-muted');
+    if ((combobox.value && !select.value) || noOptionItem) {
+      e.preventDefault();
+      combobox.focus();
+      alert('Please select a valid option from the dropdown or clear the nationality field');
+    }
+  });
 </script>
 </html>
