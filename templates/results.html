@@ -5,6 +5,11 @@
 <div class="container-fluid col-12 col-xl-9 p-2">
   <h2 class="mb-4 p-1">{{ _('Search results') }}</h2>
   <div class="list-group p-1">
+    {% if not complete %}
+    <div class="alert alert-warning" role="alert">
+      <p class="p-1">{{ _('Your search returned too many results. Please refine your search.') }}</p>
+    </div>
+    {% endif %}
     {% if list_of_authors %}
     {% for author in list_of_authors %}
     <a href="{{ url_for('author_page', author_data=author['title']) }}" class="list-group-item list-group-item-action">

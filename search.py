@@ -35,10 +35,11 @@ def search_author(user_search: str, gender:str, nationality:str, in_public_domai
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
     search_results = search_response.json()
+    complete = not ("continue" in search_results)
     try:
         search_results = search_results["query"]["pages"]
     except KeyError:  # If there are no pages, return an empty list
-        return []
+        return [], complete
     search_results_list = list(search_results.values())
     ordered_results = sorted(search_results_list, key=lambda x: x["index"])
     final_results = []
@@ -48,7 +49,7 @@ def search_author(user_search: str, gender:str, nationality:str, in_public_domai
                 final_results.append(item)
         except KeyError:  # If there is no label, exclude
             pass
-    return final_results
+    return final_results, complete
 
 def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
@@ -65,10 +66,12 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> 
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
     search_results = search_response.json()
+    complete = not ("continue" in search_results)
+
     try:
         search_results = search_results["query"]["pages"]
     except KeyError:  # If there are no pages, return an empty list
-        return []
+        return [], complete
     search_results_list = list(search_results.values())
     results_q_and_index = {item["title"]: item["index"] for item in search_results_list}
     filtered_results = squeries.retrieve_query(squeries.query_for_works_from_search_results,
@@ -84,4 +87,4 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> 
             work['downloads'] = True
         else:
             work['downloads'] = False
-    return ordered_filtered_results
+    return ordered_filtered_results, complete
