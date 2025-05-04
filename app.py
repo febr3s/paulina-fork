@@ -74,7 +74,6 @@ def about():
 
 
 @app.route("/results")
-@cache.cached(make_cache_key=make_cache_key)
 def results():
     try:
         type_of_search = request.args.get("type_of_search")
@@ -90,6 +89,8 @@ def results():
                     return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
                 else:
                     return redirect(url_for('home'))
+            else:
+                return redirect(url_for('home'))
 
         if type_of_search == "author":
             gender = request.args.get("gender")
