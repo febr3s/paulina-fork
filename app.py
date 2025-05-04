@@ -80,6 +80,8 @@ def results():
         type_of_search = request.args.get("type_of_search")
         search_request = request.args.get("query")
         language = request.args.get("language")
+
+        #show results when there is no query (for example in case of changing the language)
         if search_request is None:
             referer = request.headers.get('Referer')
             if referer is not None:
@@ -88,45 +90,47 @@ def results():
                     return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
                 else:
                     return redirect(url_for('home'))
+
+        if type_of_search == "author":
+            gender = request.args.get("gender")
+            nationality = request.args.get("nationality")
+            in_public_domain = request.args.get("in-public-domain")
+            search_result, complete = search.search_author(search_request, gender, nationality, in_public_domain)
+            if len(search_result) > 0:
+                return render_template('results.html',
+                                        title=_("Results"),
+                                        list_of_authors=search_result,
+                                        search_request=search_request,
+                                        type_of_search=type_of_search,
+                                        complete=complete)
             else:
-                return redirect(url_for('home'))
-        elif search_request == "" or len(search_request) == 1:
-            return render_template("no-results.html",
-                                   title=_("No results found"),
-                                   search_request=search_request,
-                                   type_of_search=type_of_search)
-        elif len(search_request) > 1:
-            if type_of_search == "author":
-                gender = request.args.get("gender")
-                nationality = request.args.get("nationality")
-                in_public_domain = request.args.get("in-public-domain")
-                search_result = search.search_author(search_request, gender, nationality, in_public_domain)
-                if len(search_result) > 0:
-                    return render_template('results.html',
-                                           title=_("Results"),
-                                           list_of_authors=search_result,
-                                           search_request=search_request,
-                                           type_of_search=type_of_search)
-                else:
-                    return render_template("no-results.html",
-                                           title=_("No results found"),
-                                           search_request=search_request,
-                                           type_of_search=type_of_search)
-            elif type_of_search == "work":
-                type_of_work = request.args.get("type_of_work")
-                country_of_origin = request.args.get("country_of_origin")
-                search_result = search.search_work(search_request, type_of_work, country_of_origin)
-                if len(search_result) > 0:
-                    return render_template('results.html',
-                                           title=_("Results"),
-                                           list_of_works=search_result,
-                                           search_request=search_request,
-                                           type_of_search=type_of_search)
-                else:
-                    return render_template("no-results.html",
-                                           title=_("No results found"),
-                                           search_request=search_request,
-                                           type_of_search=type_of_search)
+                return render_template("no-results.html",
+                                        title=_("No results found"),
+                                        search_request=search_request,
+                                        type_of_search=type_of_search)
+        elif type_of_search == "work":
+            #if no search parameters have been input for Works search, show message
+            type_of_work = request.args.get("type_of_work")
+            country_of_origin = request.args.get("country_of_origin")
+            if (search_request == type_of_work == country_of_origin == "" ):
+                return render_template("refine-search.html",
+                    title=_("Please refine your search criteria."),
+                    search_request=search_request,
+                    type_of_search=type_of_search)
+
+            search_result, complete = search.search_work(search_request, type_of_work, country_of_origin)
+            if len(search_result) > 0:
+                return render_template('results.html',
+                                        title=_("Results"),
+                                        list_of_works=search_result,
+                                        search_request=search_request,
+                                        type_of_search=type_of_search,
+                                        complete=complete)
+            else:
+                return render_template("no-results.html",
+                                        title=_("No results found"),
+                                        search_request=search_request,
+                                        type_of_search=type_of_search)
     except:
         abort(404)
 
@@ -289,4 +293,4 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     app.run()
-    # app.run(debug=True)
+    #app.run(debug=True)
