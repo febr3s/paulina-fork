@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-02 18:26-0300\n"
+"POT-Creation-Date: 2025-05-03 21:41-0300\n"
 "PO-Revision-Date: 2025-04-08 13:07+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: ast\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: app.py:53
 msgid "No value"
@@ -36,33 +36,37 @@ msgstr "Entamu"
 msgid "About"
 msgstr "Tocante a"
 
-#: app.py:95 app.py:112 app.py:127
-msgid "No results found"
-msgstr "Nengún resultáu alcontráu"
-
-#: app.py:106 app.py:121
+#: app.py:102 app.py:125
 msgid "Results"
 msgstr "Resultaos"
 
-#: app.py:172
+#: app.py:109 app.py:132
+msgid "No results found"
+msgstr "Nengún resultáu alcontráu"
+
+#: app.py:118
+msgid "Please refine your search criteria."
+msgstr ""
+
+#: app.py:177
 msgid "List of works"
 msgstr "Llista trabayos"
 
-#: app.py:232
+#: app.py:237
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Llista de %(term_name)s"
 
-#: app.py:248
+#: app.py:253
 msgid "Unknown term"
 msgstr "Términu desconocíu"
 
-#: app.py:250 templates/countries.html:7 templates/layout.html:66
+#: app.py:255 templates/countries.html:7 templates/layout.html:66
 #: templates/layout.html:222
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:286
+#: app.py:291
 msgid "404 error"
 msgstr "Error 404"
 
@@ -585,11 +589,13 @@ msgid "Select"
 msgstr "Esbillar"
 
 #: templates/layout.html:100 templates/layout.html:103
-msgid "Author"
-msgstr ""
+#, fuzzy
+msgid "Authors"
+msgstr "Descubrir autores"
 
 #: templates/layout.html:101 templates/layout.html:104
-msgid "Work"
+#, fuzzy
+msgid "Works"
 msgstr "Obra"
 
 #: templates/layout.html:108
@@ -601,8 +607,8 @@ msgid "Search"
 msgstr "Guetar"
 
 #: templates/layout.html:115
-msgid "Search filters"
-msgstr "Peñeres de gueta"
+msgid "Advanced search"
+msgstr ""
 
 #: templates/layout.html:120 templates/layout.html:135
 #: templates/layout.html:153 templates/layout.html:162
@@ -653,11 +659,19 @@ msgstr ""
 msgid "No results found. Try again."
 msgstr ""
 
+#: templates/refine-search.html:6
+msgid "Please refine your search."
+msgstr ""
+
 #: templates/results.html:6
 msgid "Search results"
 msgstr "Resultaos de la gueta"
 
-#: templates/results.html:26 templates/works-list.html:21
+#: templates/results.html:10
+msgid "Your search returned too many results. Please refine your search."
+msgstr ""
+
+#: templates/results.html:31 templates/works-list.html:21
 msgid "Available for download"
 msgstr "Disponible pa baxar"
 
@@ -705,4 +719,10 @@ msgstr ""
 
 #~ msgid "Type to filter or select..."
 #~ msgstr ""
+
+#~ msgid "Author"
+#~ msgstr ""
+
+#~ msgid "Search filters"
+#~ msgstr "Peñeres de gueta"
 

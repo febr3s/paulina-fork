@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-02 18:26-0300\n"
-"PO-Revision-Date: 2025-05-02 18:27-0300\n"
+"POT-Creation-Date: 2025-05-03 21:41-0300\n"
+"PO-Revision-Date: 2025-05-03 21:49-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/pt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 "X-Generator: Poedit 3.4.2\n"
 
 #: app.py:53
@@ -36,33 +36,37 @@ msgstr "Início"
 msgid "About"
 msgstr "Sobre"
 
-#: app.py:95 app.py:112 app.py:127
-msgid "No results found"
-msgstr "Nenhum resultado encontrado"
-
-#: app.py:106 app.py:121
+#: app.py:102 app.py:125
 msgid "Results"
 msgstr "Resultados"
 
-#: app.py:172
+#: app.py:109 app.py:132
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
+#: app.py:118
+msgid "Please refine your search criteria."
+msgstr "Por favor, refine seus critérios de pesquisa."
+
+#: app.py:177
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:232
+#: app.py:237
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:248
+#: app.py:253
 msgid "Unknown term"
 msgstr "Termo desconhecido"
 
-#: app.py:250 templates/countries.html:7 templates/layout.html:66
+#: app.py:255 templates/countries.html:7 templates/layout.html:66
 #: templates/layout.html:222
 msgid "Countries and terms"
 msgstr "Países e termos"
 
-#: app.py:286
+#: app.py:291
 msgid "404 error"
 msgstr "Erro 404"
 
@@ -585,12 +589,12 @@ msgid "Select"
 msgstr "Escolher"
 
 #: templates/layout.html:100 templates/layout.html:103
-msgid "Author"
-msgstr "Autor"
+msgid "Authors"
+msgstr "Autores/as"
 
 #: templates/layout.html:101 templates/layout.html:104
-msgid "Work"
-msgstr "Obra"
+msgid "Works"
+msgstr "Obras"
 
 #: templates/layout.html:108
 msgid "Search with Paulina"
@@ -601,8 +605,8 @@ msgid "Search"
 msgstr "Pesquisar"
 
 #: templates/layout.html:115
-msgid "Search filters"
-msgstr "Filtros de pesquisa"
+msgid "Advanced search"
+msgstr "Pesquisa avançada"
 
 #: templates/layout.html:120 templates/layout.html:135 templates/layout.html:153
 #: templates/layout.html:162
@@ -653,11 +657,19 @@ msgstr "Com base nos dados do Wikidata."
 msgid "No results found. Try again."
 msgstr "Nenhum resultado encontrado. Tente novamente."
 
+#: templates/refine-search.html:6
+msgid "Please refine your search."
+msgstr "Por favor, refine sua pesquisa."
+
 #: templates/results.html:6
 msgid "Search results"
 msgstr "Resultados da pesquisa"
 
-#: templates/results.html:26 templates/works-list.html:21
+#: templates/results.html:10
+msgid "Your search returned too many results. Please refine your search."
+msgstr "Sua pesquisa retornou muitos resultados. Por favor, refine sua pesquisa."
+
+#: templates/results.html:31 templates/works-list.html:21
 msgid "Available for download"
 msgstr "Disponível para download"
 
@@ -702,3 +714,9 @@ msgstr "Adicionar ao Wikidata"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "Search filters"
+#~ msgstr "Filtros de pesquisa"
