@@ -31,6 +31,7 @@ Item key is language 2 letter code. Value is language name in its own language.
 English must be the first item of the dictionary. 
 Other languages are ordered by alphabetical order."""
 TRANSLATED_LANGUAGES = {"ast": "Asturianu",
+                        "az": "Azərbaycanca",
                         "ca": "Català",
                         "en": "English",
                         "es": "Español",
@@ -39,6 +40,7 @@ TRANSLATED_LANGUAGES = {"ast": "Asturianu",
                         "nb": "Norsk bokmål",
                         "pt": "Português",
                         "fi": "Suomi",
+                        "uk": "Українська",
                         "bn": "বাংলা"
                         }
 
