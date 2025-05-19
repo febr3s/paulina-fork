@@ -221,7 +221,7 @@ class Author(Parent):
                 return True
             elif (datetime.date.today().year - 100) <= year_of_death < (datetime.date.today().year - 50):
                 return "Consult individual works"  # author works are in public domain in some countries
-            elif ("film director" in self.occupation
+            elif self.occupation and ("film director" in self.occupation
                   or "photographer" in self.occupation) and self.date_of_birth["date object"].year < (datetime.date.today().year - 80):
                 return "Consult individual works"   # This is to address works whose copyright
                 # term is measured in years after being made available.
