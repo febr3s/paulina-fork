@@ -80,12 +80,15 @@ def results():
         search_request = request.args.get("query")
         language = request.args.get("language")
 
-        #show results when there is no query (for example in case of changing the language)
+        # Show results when there is no query (for example in case of changing the language)
         if search_request is None:
             referer = request.headers.get('Referer')
             if referer is not None:
                 if referer.startswith(url_for('home', _external=True)):
-                    path_string = "&".join(referer.split("?")[-1].split("&")[0:2])
+                    query_parameters = referer.split("?")[-1].split("&")
+                    query_parameters_without_language = [parameter for parameter in query_parameters
+                                                          if not parameter.startswith("language=")]
+                    path_string = "&".join(query_parameters_without_language)
                     return redirect(url_for('results') + "?" + path_string + "&" + "language=" + language )
                 else:
                     return redirect(url_for('home'))
@@ -113,12 +116,6 @@ def results():
             #if no search parameters have been input for Works search, show message
             type_of_work = request.args.get("type_of_work")
             country_of_origin = request.args.get("country_of_origin")
-            if (search_request == type_of_work == country_of_origin == "" ):
-                return render_template("refine-search.html",
-                    title=_("Please refine your search criteria."),
-                    search_request=search_request,
-                    type_of_search=type_of_search)
-
             search_result, complete = search.search_work(search_request, type_of_work, country_of_origin)
             if len(search_result) > 0:
                 return render_template('results.html',
@@ -132,6 +129,10 @@ def results():
                                         title=_("No results found"),
                                         search_request=search_request,
                                         type_of_search=type_of_search)
+        else:
+            return render_template("no-results.html",
+                                        title=_("No results found"),
+                                        search_request=search_request)
     except:
         abort(404)
 
@@ -294,4 +295,4 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     app.run()
-    #app.run(debug=True)
+    # app.run(debug=True)

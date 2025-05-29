@@ -46,23 +46,12 @@ GROUP BY ?item ?itemLabel ?itemDescription
 ORDER BY ASC ( ?itemLabel )
 '''
 
-query_for_works_from_search_results = '''
+query_for_downloads_from_search_results = '''
 SELECT DISTINCT ?item ?itemLabel ?itemDescription ( COUNT ( DISTINCT ?wikisource ) as ?wikisourceFullWork ) ( COUNT ( DISTINCT ?iaID ) as ?iaDownloads ) ( COUNT ( DISTINCT ?download ) as ?otherDownloads ) 
 WHERE 
 {{ 
-  {{ SELECT DISTINCT ?item 
-   WHERE 
-     {{ 
-       VALUES ?item {{ {qnames} }} 
-       VALUES ?languages {{ "{lang}" "mul" "en" }}. 
-       ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 | wd:P175 | wd:P9191 | wd:P10837 ) ?author . 
-       ?item rdfs:label ?itemLabel . 
-       FILTER ( LANG( ?itemLabel ) = ?languages ) . 
-       MINUS {{ 
-         VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} 
-         ?item wdt:P31 ?typeOfItem . }} 
-     }} 
-  }} 
+  VALUES ?item {{ {qnames} }} 
+  ?item wdt:P31 ?any . 
   OPTIONAL {{ ?item wdt:P724 ?iaID . }} 
   OPTIONAL {{ ?item wdt:P953 ?download . }} 
   OPTIONAL {{ 
@@ -70,8 +59,7 @@ WHERE
   ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }} 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }} 
-GROUP BY ?item ?itemLabel ?itemDescription 
-ORDER BY ASC ( ?itemLabel )
+GROUP BY ?item ?itemLabel ?itemDescription
 '''
 
 
