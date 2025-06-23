@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-05-08 15:03-0300\n"
-"PO-Revision-Date: 2025-05-03 21:45-0300\n"
-"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
-"app/es/>\n"
+"PO-Revision-Date: 2025-06-02 18:05+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12-dev\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -45,7 +46,7 @@ msgstr "No se encontraron resultados"
 
 #: app.py:118
 msgid "Please refine your search criteria."
-msgstr "Por favor refina tus criterios de búsqueda."
+msgstr "Refine sus criterios de búsqueda."
 
 #: app.py:177
 msgid "List of works"
@@ -620,7 +621,7 @@ msgstr "Cualquiera"
 
 #: templates/layout.html:131
 msgid "Type to filter..."
-msgstr "Escribe para filtrar..."
+msgstr "Escriba para filtrar..."
 
 #: templates/layout.html:144
 msgid "In public domain"
@@ -645,7 +646,7 @@ msgstr "Código fuente"
 
 #: templates/layout.html:211
 msgid "Help translate"
-msgstr "Ayuda a traducir"
+msgstr "Ayudar a traducir"
 
 #: templates/layout.html:216
 msgid "Help"
@@ -665,7 +666,7 @@ msgstr "Sin resultados. Inténtalo de nuevo."
 
 #: templates/refine-search.html:6
 msgid "Please refine your search."
-msgstr "Por favor refina tu búsqueda."
+msgstr "Refine su búsqueda."
 
 #: templates/results.html:6
 msgid "Search results"

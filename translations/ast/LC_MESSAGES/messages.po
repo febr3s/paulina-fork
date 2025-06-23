@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-05-08 15:03-0300\n"
-"PO-Revision-Date: 2025-04-08 13:07+0000\n"
-"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
-"Language-Team: Asturian <https://hosted.weblate.org/projects/paulina/paulina-"
-"app/ast/>\n"
+"PO-Revision-Date: 2025-06-04 14:02+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Asturian <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/ast/>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12-dev\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -518,7 +519,7 @@ msgstr "Carlos Gardel"
 
 #: templates/home.html:37
 msgid "Kiyohara Yukinobu"
-msgstr ""
+msgstr "Kiyohara Yukinobu"
 
 #: templates/home.html:39
 msgid "Paulina Luisi"
@@ -552,7 +553,7 @@ msgstr ""
 
 #: templates/home.html:60
 msgid "Learn about the public domain"
-msgstr ""
+msgstr "Más información sobro'l dominiu públicu"
 
 #: templates/home.html:61
 msgid ""
@@ -618,7 +619,7 @@ msgstr ""
 
 #: templates/layout.html:131
 msgid "Type to filter..."
-msgstr ""
+msgstr "Escribi pa peñerar..."
 
 #: templates/layout.html:144
 msgid "In public domain"
