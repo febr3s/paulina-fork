@@ -39,6 +39,16 @@ h3 {
   font-weight: 700;
 }
 
+/* Navbar Paulina brand icon */
+.navbar-brand {
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Pills */
 .pill-custom {
   box-shadow: 5px 5px;
   --bs-btn-color: black;
@@ -130,6 +140,7 @@ h3 {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
 }
+
 #nationality-dropdown::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
