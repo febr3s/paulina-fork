@@ -67,6 +67,12 @@
         <th scope="row">{{ _('Wikiquote link') }}</th>
         <td><a href="{{author_wikiquote_link}}" target="_blank">{{author_wikiquote_link}}</a></td>
       </tr>
+      {% if author_official_website %}
+      <tr>
+        <th scope="row">{{ _('Official website') }}</th>
+        <td><a href="{{author_official_website}}" target="_blank">{{author_official_website}}</a></td>
+      </tr>
+      {% endif %}
       <tr>
         <th scope="row">{{ _('In public domain?') }}</th>
         <td>

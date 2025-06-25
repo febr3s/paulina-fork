@@ -161,6 +161,7 @@ def author_page(author_data):
             author_commons_link=print_field(author.commons_link),
             author_wikisource_link=print_field(author.wikisource_link),
             author_wikiquote_link=print_field(author.wikiquote_link),
+            author_official_website=print_field(author.official_website),
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
             author_wikidata_link=print_field(author.wikidata_link),
             author_date_enter_public_domain=print_field(author.date_enter_public_domain)

@@ -8,14 +8,14 @@ import squeries
 import languages
 
 
-def build_field(wikidata_statement: list[dict], field_type: str ="label") -> str | None:
+def build_field(wikidata_statement: list[dict], field_type: str ="item_label") -> str | None:
     """Function to return a field from a Wikidata statement.
     If the statement does not exist, it returns None.
     If the statement exists and has a preferred value, it returns the preferred value.
     If the statement exists and does not have a preferred value, it returns the first value.
-    The default behavior of the function is to return the label of the value,
-    but if the optional argument 'field_type' is set to 'qid',
-    the function returns the Wikidata item ID of the value."""
+    The default behavior of the function is to return the item label of the value,
+    but if the optional argument 'field_type' is set to 'plain_value',
+    the function returns the Wikidata item ID or text string of the value."""
     if wikidata_statement is None:  # If statement doesn't exist
         return None
     else:  # If statement exists, check if there is a preferred value
@@ -32,7 +32,7 @@ def build_field(wikidata_statement: list[dict], field_type: str ="label") -> str
                 break
 
         if "preferred" in dictionary_of_claims.values():  # If there is a preferred value, pick it            
-            if field_type == "qid":
+            if field_type == "plain_value":
                 return [key for key, value in dictionary_of_claims.items()
                         if value == "preferred" and key not in ["novalue", "somevalue"]][0]
             else:
@@ -43,13 +43,13 @@ def build_field(wikidata_statement: list[dict], field_type: str ="label") -> str
         else:  # If there is not a preferred value, pick the first value
             first_claim = next(iter(dictionary_of_claims))
             if first_claim in ["novalue", "somevalue"]:  # If the value is not a Wikidata item ID
-                if field_type == "qid":
+                if field_type == "plain_value":
                     return None
                 else:
                     return first_claim
                 
             else:  # If the value is a Wikidata item ID
-                if field_type == "qid":
+                if field_type == "plain_value":
                     return first_claim
                 else:
                     return retrieve_item(first_claim, data_type="labels").get(languages.get_locale())
@@ -153,6 +153,7 @@ class Author(Parent):
         self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
         self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
         self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikiquote', {}).get('url')
+        self.official_website = build_field(self.wikidata_item.get('statements', {}).get('P856'), field_type="plain_value")
         self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
@@ -176,7 +177,7 @@ class Author(Parent):
 
         # Country of birth is built taking the place of birth and looking in what country it is.
         if place_of_birth:
-            place_of_birth_Q = build_field(place_of_birth, field_type="qid")
+            place_of_birth_Q = build_field(place_of_birth, field_type="plain_value")
             if place_of_birth_Q:
                 country_of_birth = squeries.retrieve_query(squeries.query_for_country_of_birth,
                                                   qname=place_of_birth_Q,
