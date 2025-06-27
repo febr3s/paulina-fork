@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-08 15:03-0300\n"
+"POT-Creation-Date: 2025-06-27 16:04-0300\n"
 "PO-Revision-Date: 2025-05-11 22:03+0000\n"
 "Last-Translator: Nemoralis <50991261+nemoralis@users.noreply.github.com>\n"
-"Language-Team: Azerbaijani <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/az/>\n"
 "Language: az\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Azerbaijani <https://hosted.weblate.org/projects/paulina"
+"/paulina-app/az/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -28,45 +27,41 @@ msgstr "Dəyər yoxdur"
 msgid "Unknown value"
 msgstr "Naməlum dəyər"
 
-#: app.py:65 templates/layout.html:54
+#: app.py:65 templates/layout.html:56 templates/layout.html:65
 msgid "Home"
 msgstr "Ana səhifə"
 
-#: app.py:72 templates/layout.html:63 templates/layout.html:205
+#: app.py:72 templates/layout.html:68 templates/layout.html:210
 msgid "About"
 msgstr "Haqqında"
 
-#: app.py:102 app.py:125
+#: app.py:105 app.py:122
 msgid "Results"
 msgstr "Nəticələr"
 
-#: app.py:109 app.py:132
+#: app.py:112 app.py:129 app.py:134
 msgid "No results found"
 msgstr "Nəticə tapılmadı"
 
-#: app.py:118
-msgid "Please refine your search criteria."
-msgstr "Zəhmət olmasa axtarış kriteriyalarınızı dəqiqləşdirin."
-
-#: app.py:177
+#: app.py:179
 msgid "List of works"
 msgstr "Əsərlərinin siyahısı"
 
-#: app.py:237
+#: app.py:239
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s siyahısı"
 
-#: app.py:253
+#: app.py:255
 msgid "Unknown term"
 msgstr "Naməlum ifadə"
 
-#: app.py:255 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:222
+#: app.py:257 templates/countries.html:7 templates/layout.html:71
+#: templates/layout.html:227
 msgid "Countries and terms"
 msgstr "Ölkələr və şərtlər"
 
-#: app.py:291
+#: app.py:293
 msgid "404 error"
 msgstr "404 xətası"
 
@@ -122,39 +117,39 @@ msgstr "(əsr)"
 msgid "(millennium)"
 msgstr "(minillik)"
 
-#: pdclasses.py:195
+#: pdclasses.py:196
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
 msgstr ""
-"Ümumi insan siluetinin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad şəkli "
-"yoxdur və əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
+"Ümumi insan siluetinin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad "
+"şəkli yoxdur və əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
 
-#: pdclasses.py:201
+#: pdclasses.py:202
 #, python-format
 msgid "Image of %(name)s."
 msgstr "%(name)s şəkli."
 
-#: pdclasses.py:233 pdclasses.py:236
+#: pdclasses.py:234 pdclasses.py:237
 msgid "Unknown"
 msgstr "Naməlum"
 
-#: pdclasses.py:270
+#: pdclasses.py:271
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
 msgstr ""
-"Ümumi əsərin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad şəkli yoxdur və "
-"əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
+"Ümumi əsərin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad şəkli yoxdur"
+" və əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
 
-#: pdclasses.py:277
+#: pdclasses.py:278
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)s şəkli."
 
-#: pdclasses.py:353 templates/countries.html:20
+#: pdclasses.py:354 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s bayrağı."
@@ -172,27 +167,27 @@ msgstr "ana səhifə"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Zəhmət olmasa, %(home_page)s gedin və yenidən cəhd edin."
 
-#: templates/about.html:7 templates/layout.html:202
+#: templates/about.html:7 templates/layout.html:207
 msgid "About Paulina"
 msgstr "Paulina haqqında"
 
-#: templates/about.html:8 templates/about.html:19
+#: templates/about.html:8 templates/about.html:19 templates/author.html:56
 msgid "Wikidata"
 msgstr "Vikidata"
 
-#: templates/about.html:9 templates/layout.html:188
+#: templates/about.html:9 templates/layout.html:193
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Onlayn mədəniyyət mərkəzi"
 
-#: templates/about.html:10 templates/layout.html:191
+#: templates/about.html:10 templates/layout.html:196
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruqvay"
 
-#: templates/about.html:11 templates/layout.html:194
+#: templates/about.html:11 templates/layout.html:199
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:197
+#: templates/about.html:12 templates/layout.html:202
 #, fuzzy
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
@@ -205,7 +200,7 @@ msgstr "Creative Commons CC0 1.0 Universal Public Domain Dedication"
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr "Creative Commons Attribution-ShareAlike 4.0 International License"
 
-#: templates/about.html:15
+#: templates/about.html:15 templates/author.html:62
 msgid "Wikimedia Commons"
 msgstr "Vikianbar"
 
@@ -220,37 +215,39 @@ msgstr "layihənin kod repozitoriyası"
 #: templates/about.html:18
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
 msgstr ""
 "Paulina sizi bəşəriyyətin mədəni irsi haqqında öyrənməyə dəvət edir. Bu, "
-"%(wikidata_link)s tərəfindən dəstəklənən çoxdilli alətdir və sizə insanları "
-"axtarmağa və onların ictimai mülkiyyətdə olan sərbəst şəkildə əldə edilə "
-"bilən əsərlərinin olub-olmadığını öyrənməyə imkan verir. O, həmçinin müəllif "
-"hüququ şərtlərinin başa düşülməsini asanlaşdırır və əsərin hər bir ölkədə "
-"ictimai mülkiyyətə nə vaxt daxil olduğunu bilməyə kömək edir."
+"%(wikidata_link)s tərəfindən dəstəklənən çoxdilli alətdir və sizə "
+"insanları axtarmağa və onların ictimai mülkiyyətdə olan sərbəst şəkildə "
+"əldə edilə bilən əsərlərinin olub-olmadığını öyrənməyə imkan verir. O, "
+"həmçinin müəllif hüququ şərtlərinin başa düşülməsini asanlaşdırır və "
+"əsərin hər bir ölkədə ictimai mülkiyyətə nə vaxt daxil olduğunu bilməyə "
+"kömək edir."
 
 #: templates/about.html:20
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
 msgstr ""
-"Paulina Vikimedia Fondu tərəfindən saxlanılan açıq və birgə məlumat bazası "
-"olan Vikidatadan gələn məlumatlarla işləyir."
+"Paulina Vikimedia Fondu tərəfindən saxlanılan açıq və birgə məlumat "
+"bazası olan Vikidatadan gələn məlumatlarla işləyir."
 
 #: templates/about.html:21
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
-"Bəzən verilən məlumatda səhvlər və ya natamam ola bilər. Paulina mədəni irs "
-"haqqında məlumatdakı boşluqları və qeyri-dəqiqlikləri aşkarlamağa kömək edir "
-"və sizi Vikidata və onun vasitəsilə İnternetdəki məlumatları "
+"Bəzən verilən məlumatda səhvlər və ya natamam ola bilər. Paulina mədəni "
+"irs haqqında məlumatdakı boşluqları və qeyri-dəqiqlikləri aşkarlamağa "
+"kömək edir və sizi Vikidata və onun vasitəsilə İnternetdəki məlumatları "
 "təkmilləşdirməyə dəvət edir."
 
 #: templates/about.html:22
@@ -260,12 +257,12 @@ msgstr "Lokal alətlər"
 #: templates/about.html:23
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
 msgstr ""
 "Bu veb-sayt hər bir cəmiyyətin ehtiyaclarına uyğun olaraq alətin milli, "
-"regional və ya tematik versiyalarının yaradılmasını asanlaşdırmaq üçün daha "
-"böyük layihənin bir hissəsidir."
+"regional və ya tematik versiyalarının yaradılmasını asanlaşdırmaq üçün "
+"daha böyük layihənin bir hissəsidir."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -287,8 +284,8 @@ msgstr "Məzmun lisenziyaları"
 #: templates/about.html:27
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
 "Müəlliflər, əsərlər, ölkələr və şərtlər haqqında səhifələrdəki bütün "
 "məlumatlar Vikidatadan gəlir və %(CC0_link)s şərtləri altındadır."
@@ -299,34 +296,35 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
-"Bu veb-saytın mətnləri və digər orijinal məzmunu %(ccbysa_link)s altındadır."
+"Bu veb-saytın mətnləri və digər orijinal məzmunu %(ccbysa_link)s "
+"altındadır."
 
 #: templates/about.html:29
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
 msgstr ""
-"Müəlliflər, əsərlər, ölkələr və şərtlər haqqında səhifələrdəki şəkillər və "
-"media %(wm_commons_link)s-dən gəlir və müxtəlif azad lisenziyalar altında və "
-"ya ictimai mülkiyyətdədir. Biz hər bir məzmunun məlumatı ilə Vikimedia "
-"Commons-da məsləhətləşməyi tövsiyə edirik."
+"Müəlliflər, əsərlər, ölkələr və şərtlər haqqında səhifələrdəki şəkillər "
+"və media %(wm_commons_link)s-dən gəlir və müxtəlif azad lisenziyalar "
+"altında və ya ictimai mülkiyyətdədir. Biz hər bir məzmunun məlumatı ilə "
+"Vikimedia Commons-da məsləhətləşməyi tövsiyə edirik."
 
 #: templates/about.html:30
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
 msgstr ""
-"Xarici saytlara keçidlər vasitəsilə əldə edilə bilən əsərlər, əsasən ictimai "
-"mülkiyyətdə və ya azad lisenziyalar altında olduqları üçün ictimaiyyət üçün "
-"əlçatandır, lakin bəzi yurisdiksiyalarda müəllif hüququ altında ola bilər. "
-"Hər bir əsər üçün onların yerləşdirildiyi veb-saytlarla məsləhətləşməyi "
-"tövsiyə edirik."
+"Xarici saytlara keçidlər vasitəsilə əldə edilə bilən əsərlər, əsasən "
+"ictimai mülkiyyətdə və ya azad lisenziyalar altında olduqları üçün "
+"ictimaiyyət üçün əlçatandır, lakin bəzi yurisdiksiyalarda müəllif hüququ "
+"altında ola bilər. Hər bir əsər üçün onların yerləşdirildiyi veb-"
+"saytlarla məsləhətləşməyi tövsiyə edirik."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -335,109 +333,114 @@ msgstr "Azad proqram təminatı"
 #: templates/about.html:32
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
 msgstr ""
 "Paulina azad proqramdır. %(agpl_link)s lisenziyası altında dərc olunur. "
 "%(repository_link)s səhifəsinə daxil olun."
 
-#: templates/author.html:8
-msgid "Search works"
-msgstr "Əsərləri axtar"
-
-#: templates/author.html:15 templates/work.html:10
-msgid "Image"
-msgstr "Şəkil"
-
-#: templates/author.html:19 templates/work.html:14
-msgid "Description"
-msgstr "Təsvir"
-
-#: templates/author.html:23 templates/layout.html:127
-msgid "Nationality"
-msgstr "Milliyəti"
-
-#: templates/author.html:27 templates/layout.html:118
-msgid "Gender"
-msgstr "Cinsi"
-
-#: templates/author.html:31
-msgid "Date of birth"
-msgstr "Doğum tarixi"
-
-#: templates/author.html:35
-msgid "Occupation"
-msgstr "Peşəsi"
-
-#: templates/author.html:39
-msgid "Place of birth"
-msgstr "Doğum yeri"
-
-#: templates/author.html:43
-msgid "Country of birth"
-msgstr "Doğulduğu ölkə"
-
-#: templates/author.html:47
-msgid "Date of death"
-msgstr "Ölüm tarixi"
-
-#: templates/author.html:51
-msgid "Age"
-msgstr "Yaşı"
-
-#: templates/author.html:55 templates/work.html:42
-msgid "Wikipedia link"
-msgstr "Vikipediya keçidi"
-
-#: templates/author.html:59
-msgid "Commons link"
-msgstr "Vikianbar keçidi"
-
-#: templates/author.html:63
-msgid "Wikisource link"
-msgstr "Vikimənbə keçidi"
-
-#: templates/author.html:67
-msgid "Wikiquote link"
-msgstr "Vikisitat keçidi"
-
-#: templates/author.html:71
-msgid "In public domain?"
-msgstr "İctimai mülkiyyətdədir?"
-
-#: templates/author.html:74
-msgid "Yes"
-msgstr "Bəli"
-
-#: templates/author.html:76
-msgid "No"
-msgstr "Xeyr"
-
-#: templates/author.html:77
-msgid "Author will enter worldwide public domain on January 1, "
-msgstr ""
-"Müəllif yanvarın 1-də dünya miqyasında ictimai mülkiyyətə daxil olacaq, "
-
-#: templates/author.html:79 templates/author.html:82
-msgid "Consult individual works."
-msgstr "Əsərlərə ayrıca bax."
-
-#: templates/author.html:81
-msgid "Unknown due to lack of available dates of birth and death."
-msgstr "Mövcud doğum və ölüm tarixləri olmadığı üçün məlum deyil."
-
-#: templates/author.html:87 templates/work.html:79
+#: templates/author.html:7 templates/work.html:79
 msgid "Missing/wrong data?"
 msgstr "Çatışmayan/yanlış data?"
 
-#: templates/author.html:88 templates/work.html:80
+#: templates/author.html:7 templates/work.html:80
 msgid "Edit Wikidata item"
 msgstr "Vikidata elementini redaktə et"
 
+#: templates/author.html:29
+msgid "Search works"
+msgstr "Əsərləri axtar"
+
+#: templates/author.html:34
+#, fuzzy
+msgid "Works are in the public domain"
+msgstr "İctimai mülkiyyət haqqında ətraflı öyrən"
+
+#: templates/author.html:38
+#, fuzzy
+msgid "Works are not in the worldwide public domain"
+msgstr "İctimai mülkiyyət haqqında ətraflı öyrən"
+
+#: templates/author.html:40
+msgid "until January 1, "
+msgstr ""
+
+#: templates/author.html:46
+#, fuzzy
+msgid "Consult individual works for public domain status"
+msgstr "Əsərlərə ayrıca bax."
+
+#: templates/author.html:50
+#, fuzzy
+msgid ""
+"Public domain status unknown due to lack of available dates of birth and "
+"death."
+msgstr "Mövcud doğum və ölüm tarixləri olmadığı üçün məlum deyil."
+
+#: templates/author.html:51
+msgid "Consult individual works."
+msgstr "Əsərlərə ayrıca bax."
+
+#: templates/author.html:59
+#, fuzzy
+msgid "Wikipedia"
+msgstr "Vikipediya keçidi"
+
+#: templates/author.html:65
+#, fuzzy
+msgid "Wikisource"
+msgstr "Vikimənbə keçidi"
+
+#: templates/author.html:68
+#, fuzzy
+msgid "Wikiquote"
+msgstr "Vikisitat keçidi"
+
+#: templates/author.html:71
+msgid "Official website"
+msgstr ""
+
+#: templates/author.html:80
+#, fuzzy
+msgid "Biography"
+msgstr "Orlando: A Biography"
+
+#: templates/author.html:85 templates/layout.html:132
+msgid "Nationality"
+msgstr "Milliyəti"
+
+#: templates/author.html:89 templates/layout.html:123
+msgid "Gender"
+msgstr "Cinsi"
+
+#: templates/author.html:93
+msgid "Date of birth"
+msgstr "Doğum tarixi"
+
+#: templates/author.html:97
+msgid "Occupation"
+msgstr "Peşəsi"
+
+#: templates/author.html:101
+msgid "Place of birth"
+msgstr "Doğum yeri"
+
+#: templates/author.html:105
+msgid "Country of birth"
+msgstr "Doğulduğu ölkə"
+
+#: templates/author.html:109
+msgid "Date of death"
+msgstr "Ölüm tarixi"
+
+#: templates/author.html:113
+msgid "Age"
+msgstr "Yaşı"
+
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr ""
 "Bu şəbəkə əsərlərin hər bir ölkədə ictimai mülkiyyətə daxil olduğu dövrü "
 "göstərir."
@@ -451,8 +454,8 @@ msgid ""
 "By clicking on each country, you can access more information about the "
 "country."
 msgstr ""
-"Hər bir ölkənin üzərinə klikləməklə, ölkə haqqında daha çox məlumat əldə edə "
-"bilərsiniz."
+"Hər bir ölkənin üzərinə klikləməklə, ölkə haqqında daha çox məlumat əldə "
+"edə bilərsiniz."
 
 #: templates/country.html:8
 #, python-format
@@ -478,7 +481,7 @@ msgstr "%(country_name)s statistikaları"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "Vikidatada ictimai mülkiyyətdə olduğu müəyyən edilən əsərlərin sayı"
 
-#: templates/country.html:33 templates/layout.html:151
+#: templates/country.html:33 templates/layout.html:156
 msgid "Type of work"
 msgstr "Əsərin tipi"
 
@@ -487,8 +490,8 @@ msgid "Number of works in public domain"
 msgstr "İctimai mülkiyyətdə olan əsərlərinin siyahısı"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:235 templates/layout.html:237
-#: templates/layout.html:239
+#: templates/layout.html:240 templates/layout.html:242
+#: templates/layout.html:244
 msgid "Paulina logo"
 msgstr "Paulina loqosu"
 
@@ -498,8 +501,8 @@ msgstr "Müəllifləri kəşf et"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
 msgstr ""
 "Paulina dünyanın hər yerindən müəllifləri tapmaq və onların əsərləri "
 "haqqında öyrənmək üçün sadə axtarış vasitəsidir."
@@ -526,8 +529,8 @@ msgstr "Əsərləri tap"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
 msgstr ""
 "Vikidatada tapılan bütün sənət və bilik sahələrindən mədəniyyət əsərləri "
 "haqqında məlumatı asanlıqla tapın."
@@ -557,8 +560,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Müxtəlif ölkələrdə hansı əsərlərin ictimai mülkiyyətdə olduğunu öyrənin və "
-"onlayn mövcud versiyalara daxil olun."
+"Müxtəlif ölkələrdə hansı əsərlərin ictimai mülkiyyətdə olduğunu öyrənin "
+"və onlayn mövcud versiyalara daxil olun."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -572,101 +575,97 @@ msgstr "Müəllifin ölümündən sonra 70 il olan ölkələr"
 msgid "Paulina"
 msgstr "Paulina"
 
-#: templates/layout.html:13 templates/layout.html:36
+#: templates/layout.html:13 templates/layout.html:38
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
 msgstr ""
 "Paulina sizi bəşəriyyətin mədəni irsi haqqında öyrənməyə dəvət edir. Bu, "
-"Vikidata tərəfindən dəstəklənən çoxdilli alətdir və sizə insanları axtarmağa "
-"və onların ictimai sahədə sərbəst şəkildə əldə edilə bilən əsərlərinin olub "
-"olmadığını öyrənməyə imkan verir. O, həmçinin müəllif hüququ şərtlərinin "
-"başa düşülməsini asanlaşdırır və əsərin hər bir ölkədə ictimai mülkiyyətə nə "
-"vaxt daxil olduğunu bilməyə kömək edir."
+"Vikidata tərəfindən dəstəklənən çoxdilli alətdir və sizə insanları "
+"axtarmağa və onların ictimai sahədə sərbəst şəkildə əldə edilə bilən "
+"əsərlərinin olub olmadığını öyrənməyə imkan verir. O, həmçinin müəllif "
+"hüququ şərtlərinin başa düşülməsini asanlaşdırır və əsərin hər bir ölkədə"
+" ictimai mülkiyyətə nə vaxt daxil olduğunu bilməyə kömək edir."
 
-#: templates/layout.html:32 templates/layout.html:242
+#: templates/layout.html:34 templates/layout.html:247
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - İctimai mülkiyyət datası"
 
-#: templates/layout.html:81
+#: templates/layout.html:86
 msgid "Select"
 msgstr "Seç"
 
-#: templates/layout.html:100 templates/layout.html:103
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Authors"
 msgstr "Müəlliflər"
 
-#: templates/layout.html:101 templates/layout.html:104
+#: templates/layout.html:106 templates/layout.html:109
 msgid "Works"
 msgstr "Əsərlər"
 
-#: templates/layout.html:108
+#: templates/layout.html:113
 msgid "Search with Paulina"
 msgstr "Paulina ilə axtar"
 
-#: templates/layout.html:108 templates/layout.html:110
+#: templates/layout.html:113 templates/layout.html:115
 msgid "Search"
 msgstr "Axtar"
 
-#: templates/layout.html:115
+#: templates/layout.html:120
 msgid "Advanced search"
 msgstr "Ətraflı axtarış"
 
-#: templates/layout.html:120 templates/layout.html:135
-#: templates/layout.html:153 templates/layout.html:162
+#: templates/layout.html:125 templates/layout.html:140
+#: templates/layout.html:158 templates/layout.html:167
 msgid "Any"
 msgstr "Hər hansı"
 
-#: templates/layout.html:131
+#: templates/layout.html:136
 msgid "Type to filter..."
 msgstr "Filtr üçün yaz..."
 
-#: templates/layout.html:144
+#: templates/layout.html:149
 msgid "In public domain"
 msgstr "İctimai mülkiyyətdə olsun"
 
-#: templates/layout.html:146
+#: templates/layout.html:151
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "Əsərləri ən azı bir yurisdiksiyada ictimai mülkiyyətdə olan müəlliflər"
 
-#: templates/layout.html:160 templates/work.html:38
+#: templates/layout.html:165 templates/work.html:38
 msgid "Country of origin"
 msgstr "Mənşə ölkəsi"
 
-#: templates/layout.html:185
+#: templates/layout.html:190
 msgid "Paulina is supported by:"
 msgstr "Paulinanı dəstəkləyənlər:"
 
-#: templates/layout.html:208
+#: templates/layout.html:213
 msgid "Source code"
 msgstr "Mənbə kodu"
 
-#: templates/layout.html:211
+#: templates/layout.html:216
 msgid "Help translate"
 msgstr "Tərcüməyə kömək edin"
 
-#: templates/layout.html:216
+#: templates/layout.html:221
 msgid "Help"
 msgstr "Kömək"
 
-#: templates/layout.html:219
+#: templates/layout.html:224
 msgid "Documentation"
 msgstr "Sənədləşdirmə"
 
-#: templates/layout.html:243
+#: templates/layout.html:248
 msgid "Powered by Wikidata."
 msgstr "Vikidata sayəsində işləyir."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "Heç bir nəticə tapılmadı. Yenidən cəhd edin."
-
-#: templates/refine-search.html:6
-msgid "Please refine your search."
-msgstr "Zəhmət olmasa, axtarışınızı dəqiqləşdirin."
 
 #: templates/results.html:6
 msgid "Search results"
@@ -682,6 +681,14 @@ msgstr ""
 msgid "Available for download"
 msgstr "Yükləmək üçün mövcuddur"
 
+#: templates/work.html:10
+msgid "Image"
+msgstr "Şəkil"
+
+#: templates/work.html:14
+msgid "Description"
+msgstr "Təsvir"
+
 #: templates/work.html:18
 msgid "Author/s"
 msgstr "Müəllif(lər)"
@@ -693,6 +700,10 @@ msgstr "Nəşr tarixi"
 #: templates/work.html:34
 msgid "Language"
 msgstr "Dil"
+
+#: templates/work.html:42
+msgid "Wikipedia link"
+msgstr "Vikipediya keçidi"
 
 #: templates/work.html:47
 msgid "Access work"
@@ -723,3 +734,27 @@ msgstr "Vikidataya əlavə et"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "%(author_name)s əsərlərinin siyahısı"
+
+#~ msgid "Please refine your search criteria."
+#~ msgstr "Zəhmət olmasa axtarış kriteriyalarınızı dəqiqləşdirin."
+
+#~ msgid "Commons link"
+#~ msgstr "Vikianbar keçidi"
+
+#~ msgid "In public domain?"
+#~ msgstr "İctimai mülkiyyətdədir?"
+
+#~ msgid "Yes"
+#~ msgstr "Bəli"
+
+#~ msgid "No"
+#~ msgstr "Xeyr"
+
+#~ msgid "Author will enter worldwide public domain on January 1, "
+#~ msgstr ""
+#~ "Müəllif yanvarın 1-də dünya miqyasında "
+#~ "ictimai mülkiyyətə daxil olacaq, "
+
+#~ msgid "Please refine your search."
+#~ msgstr "Zəhmət olmasa, axtarışınızı dəqiqləşdirin."
+

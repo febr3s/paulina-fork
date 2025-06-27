@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-08 15:03-0300\n"
+"POT-Creation-Date: 2025-06-27 16:04-0300\n"
 "PO-Revision-Date: 2025-05-08 17:40+0000\n"
 "Last-Translator: AtaZh <ipomoea@hilarious.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/uk/>\n"
 "Language: uk\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/paulina"
+"/paulina-app/uk/>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -28,45 +28,41 @@ msgstr "Порожньо"
 msgid "Unknown value"
 msgstr "Невідоме значення"
 
-#: app.py:65 templates/layout.html:54
+#: app.py:65 templates/layout.html:56 templates/layout.html:65
 msgid "Home"
 msgstr "Головна"
 
-#: app.py:72 templates/layout.html:63 templates/layout.html:205
+#: app.py:72 templates/layout.html:68 templates/layout.html:210
 msgid "About"
 msgstr "Про нас"
 
-#: app.py:102 app.py:125
+#: app.py:105 app.py:122
 msgid "Results"
 msgstr "Результати"
 
-#: app.py:109 app.py:132
+#: app.py:112 app.py:129 app.py:134
 msgid "No results found"
 msgstr "Результатів не знайдено"
 
-#: app.py:118
-msgid "Please refine your search criteria."
-msgstr "Будь ласка, уточніть критерії пошуку."
-
-#: app.py:177
+#: app.py:179
 msgid "List of works"
 msgstr "Список робіт"
 
-#: app.py:237
+#: app.py:239
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Список %(term_name)s"
 
-#: app.py:253
+#: app.py:255
 msgid "Unknown term"
 msgstr "Невідомий термін"
 
-#: app.py:255 templates/countries.html:7 templates/layout.html:66
-#: templates/layout.html:222
+#: app.py:257 templates/countries.html:7 templates/layout.html:71
+#: templates/layout.html:227
 msgid "Countries and terms"
 msgstr "Країни та терміни"
 
-#: app.py:291
+#: app.py:293
 msgid "404 error"
 msgstr "Помилка 404"
 
@@ -122,41 +118,41 @@ msgstr "(століття)"
 msgid "(millennium)"
 msgstr "(тисячоліття)"
 
-#: pdclasses.py:195
+#: pdclasses.py:196
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
 msgstr ""
-"Ілюстративне зображення силуету людини. Текст над ним зазначає, що вільне "
-"зображення людини наразі недоступне і що якщо ви таке знайдете, то можете "
-"натиснути на посилання плейсголдера."
+"Ілюстративне зображення силуету людини. Текст над ним зазначає, що вільне"
+" зображення людини наразі недоступне і що якщо ви таке знайдете, то "
+"можете натиснути на посилання плейсголдера."
 
-#: pdclasses.py:201
+#: pdclasses.py:202
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Зображення %(name)s."
 
-#: pdclasses.py:233 pdclasses.py:236
+#: pdclasses.py:234 pdclasses.py:237
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: pdclasses.py:270
+#: pdclasses.py:271
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
 msgstr ""
-"Ілюстративне зображення твору. Текст угорі зазначає, що вільне зображення "
-"твору наразі недоступне і що якщо ви таке маєте, то можете натиснути на "
+"Ілюстративне зображення твору. Текст угорі зазначає, що вільне зображення"
+" твору наразі недоступне і що якщо ви таке маєте, то можете натиснути на "
 "посилання плейсголдера, щоб завантажити його."
 
-#: pdclasses.py:277
+#: pdclasses.py:278
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Зображення %(title)s."
 
-#: pdclasses.py:353 templates/countries.html:20
+#: pdclasses.py:354 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Прапор %(country_name)s."
@@ -174,27 +170,27 @@ msgstr "домашня сторінка"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Будь ласка, поверніться на %(home_page)s і спробуйте ще раз."
 
-#: templates/about.html:7 templates/layout.html:202
+#: templates/about.html:7 templates/layout.html:207
 msgid "About Paulina"
 msgstr "Про Пауліну"
 
-#: templates/about.html:8 templates/about.html:19
+#: templates/about.html:8 templates/about.html:19 templates/author.html:56
 msgid "Wikidata"
 msgstr "Вікідані"
 
-#: templates/about.html:9 templates/layout.html:188
+#: templates/about.html:9 templates/layout.html:193
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Online Cultural Center"
 
-#: templates/about.html:10 templates/layout.html:191
+#: templates/about.html:10 templates/layout.html:196
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:194
+#: templates/about.html:11 templates/layout.html:199
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:197
+#: templates/about.html:12 templates/layout.html:202
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -208,7 +204,7 @@ msgstr ""
 "Ліцензія Creative Commons із зазначенням авторства — поширення на тих же "
 "умовах 4.0 міжнародна"
 
-#: templates/about.html:15
+#: templates/about.html:15 templates/author.html:62
 msgid "Wikimedia Commons"
 msgstr "Вікісховище"
 
@@ -223,37 +219,39 @@ msgstr "репозиторій коду проєкту"
 #: templates/about.html:18
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
 msgstr ""
 "«Пауліна» запрошує вас дізнатися про культурну спадщину людства. Це "
 "багатомовний інструмент, в основі якого лежать %(wikidata_link)s, який "
 "дозволяє вам шукати людей і дізнаватися про те, чи їхні твори є "
-"вільнодоступними роботами у суспільному надбанні. Він також допомагає краще "
-"зрозуміти терміни захисту авторських прав і коли твори переходять у "
-"суспільне надбання у кожній країні."
+"вільнодоступними роботами у суспільному надбанні. Він також допомагає "
+"краще зрозуміти терміни захисту авторських прав і коли твори переходять у"
+" суспільне надбання у кожній країні."
 
 #: templates/about.html:20
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
 msgstr ""
-"«Пауліна» працює на основі даних з Вікіданих, вільної спільної бази даних, "
-"яку підтримує Фонд Вікімедіа."
+"«Пауліна» працює на основі даних з Вікіданих, вільної спільної бази "
+"даних, яку підтримує Фонд Вікімедіа."
 
 #: templates/about.html:21
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
-"Інколи інформація може містити помилки чи бути неповною. «Пауліна» допомагає "
-"виявляти прогалини і неточності інформації про культурну спадщину і запрошує "
-"вас покращувати дані у Вікіданих і завдяки цьому — весь інтернет."
+"Інколи інформація може містити помилки чи бути неповною. «Пауліна» "
+"допомагає виявляти прогалини і неточності інформації про культурну "
+"спадщину і запрошує вас покращувати дані у Вікіданих і завдяки цьому — "
+"весь інтернет."
 
 #: templates/about.html:22
 msgid "Local tools"
@@ -262,12 +260,12 @@ msgstr "Локальні інструменти"
 #: templates/about.html:23
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
 msgstr ""
-"Цей вебсайт є частиною ширшого проєкту з фасилітації створення національних, "
-"регіональних чи тематичних версій інструменту, залежно від потреб кожної "
-"спільноти."
+"Цей вебсайт є частиною ширшого проєкту з фасилітації створення "
+"національних, регіональних чи тематичних версій інструменту, залежно від "
+"потреб кожної спільноти."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -289,11 +287,11 @@ msgstr "Ліцензії на вміст"
 #: templates/about.html:27
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"Усі дані на сторінках про авторів, твори, країни і терміни взято з Вікіданих "
-"на правах ліцензії %(CC0_link)s."
+"Усі дані на сторінках про авторів, твори, країни і терміни взято з "
+"Вікіданих на правах ліцензії %(CC0_link)s."
 
 #: templates/about.html:28
 #, python-format
@@ -301,35 +299,35 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
-"Тексти та інший оригінальний вміст цього сайту опубліковані під ліцензією "
-"%(ccbysa_link)s."
+"Тексти та інший оригінальний вміст цього сайту опубліковані під ліцензією"
+" %(ccbysa_link)s."
 
 #: templates/about.html:29
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
 msgstr ""
-"Зображення і медіафайли на сторінках про авторів, твори, країни та терміни "
-"взято з сайту %(wm_commons_link)s і вони опубліковані під різними вільними "
-"ліцензіями або у суспільному надбанні. Ми рекомендуємо переходити у "
-"Вікісховище і дивитися інформацію про кожен медіафайл там."
+"Зображення і медіафайли на сторінках про авторів, твори, країни та "
+"терміни взято з сайту %(wm_commons_link)s і вони опубліковані під різними"
+" вільними ліцензіями або у суспільному надбанні. Ми рекомендуємо "
+"переходити у Вікісховище і дивитися інформацію про кожен медіафайл там."
 
 #: templates/about.html:30
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
 msgstr ""
-"Твори, доступні за посиланнями на сторонні сайти, доступні громадськості, "
-"здебільшого тому що вони вже в суспільному надбанні або опубліковані під "
-"вільними ліцензіями, але деякі з них можуть бути захищені авторськими "
-"правами у певних юрисдикціях. Ми рекомендуємо ознайомлюватися з інформацією "
-"про кожен твір на сайтах, де вони розміщені."
+"Твори, доступні за посиланнями на сторонні сайти, доступні громадськості,"
+" здебільшого тому що вони вже в суспільному надбанні або опубліковані під"
+" вільними ліцензіями, але деякі з них можуть бути захищені авторськими "
+"правами у певних юрисдикціях. Ми рекомендуємо ознайомлюватися з "
+"інформацією про кожен твір на сайтах, де вони розміщені."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -338,111 +336,117 @@ msgstr "Вільне програмне забезпечення"
 #: templates/about.html:32
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
 msgstr ""
 "«Пауліна» є вільним програмним забезпеченням. Вона опублікована під "
 "%(agpl_link)s. Перегляньте %(repository_link)s."
 
-#: templates/author.html:8
-msgid "Search works"
-msgstr "Шукати твори"
-
-#: templates/author.html:15 templates/work.html:10
-msgid "Image"
-msgstr "Зображення"
-
-#: templates/author.html:19 templates/work.html:14
-msgid "Description"
-msgstr "Опис"
-
-#: templates/author.html:23 templates/layout.html:127
-msgid "Nationality"
-msgstr "Національність"
-
-#: templates/author.html:27 templates/layout.html:118
-msgid "Gender"
-msgstr "Гендер"
-
-#: templates/author.html:31
-msgid "Date of birth"
-msgstr "Дата народження"
-
-#: templates/author.html:35
-msgid "Occupation"
-msgstr "Професія"
-
-#: templates/author.html:39
-msgid "Place of birth"
-msgstr "Місце народження"
-
-#: templates/author.html:43
-msgid "Country of birth"
-msgstr "Країна народження"
-
-#: templates/author.html:47
-msgid "Date of death"
-msgstr "Дата смерті"
-
-#: templates/author.html:51
-msgid "Age"
-msgstr "Вік"
-
-#: templates/author.html:55 templates/work.html:42
-msgid "Wikipedia link"
-msgstr "Посилання на Вікіпедію"
-
-#: templates/author.html:59
-msgid "Commons link"
-msgstr "Посилання на Вікісховище"
-
-#: templates/author.html:63
-msgid "Wikisource link"
-msgstr "Посилання на Вікіджерела"
-
-#: templates/author.html:67
-msgid "Wikiquote link"
-msgstr "Посилання на Вікіцитати"
-
-#: templates/author.html:71
-msgid "In public domain?"
-msgstr "У суспільному надбанні?"
-
-#: templates/author.html:74
-msgid "Yes"
-msgstr "Так"
-
-#: templates/author.html:76
-msgid "No"
-msgstr "Ні"
-
-#: templates/author.html:77
-msgid "Author will enter worldwide public domain on January 1, "
-msgstr "Автор перейде у суспільне надбання у всьому світі 1 січня "
-
-#: templates/author.html:79 templates/author.html:82
-msgid "Consult individual works."
-msgstr "Дивіться окремі твори."
-
-#: templates/author.html:81
-msgid "Unknown due to lack of available dates of birth and death."
-msgstr "Невідомо через відсутність доступних дат народження і смерті."
-
-#: templates/author.html:87 templates/work.html:79
+#: templates/author.html:7 templates/work.html:79
 msgid "Missing/wrong data?"
 msgstr "Відсутні/хибні дані?"
 
-#: templates/author.html:88 templates/work.html:80
+#: templates/author.html:7 templates/work.html:80
 msgid "Edit Wikidata item"
 msgstr "Редагувати елемент Вікіданих"
 
+#: templates/author.html:29
+msgid "Search works"
+msgstr "Шукати твори"
+
+#: templates/author.html:34
+#, fuzzy
+msgid "Works are in the public domain"
+msgstr "Дізнайтеся про суспільне надбання"
+
+#: templates/author.html:38
+#, fuzzy
+msgid "Works are not in the worldwide public domain"
+msgstr "Дізнайтеся про суспільне надбання"
+
+#: templates/author.html:40
+msgid "until January 1, "
+msgstr ""
+
+#: templates/author.html:46
+#, fuzzy
+msgid "Consult individual works for public domain status"
+msgstr "Дивіться окремі твори."
+
+#: templates/author.html:50
+#, fuzzy
+msgid ""
+"Public domain status unknown due to lack of available dates of birth and "
+"death."
+msgstr "Невідомо через відсутність доступних дат народження і смерті."
+
+#: templates/author.html:51
+msgid "Consult individual works."
+msgstr "Дивіться окремі твори."
+
+#: templates/author.html:59
+#, fuzzy
+msgid "Wikipedia"
+msgstr "Посилання на Вікіпедію"
+
+#: templates/author.html:65
+#, fuzzy
+msgid "Wikisource"
+msgstr "Посилання на Вікіджерела"
+
+#: templates/author.html:68
+#, fuzzy
+msgid "Wikiquote"
+msgstr "Посилання на Вікіцитати"
+
+#: templates/author.html:71
+msgid "Official website"
+msgstr ""
+
+#: templates/author.html:80
+#, fuzzy
+msgid "Biography"
+msgstr "Орландо: Біографія"
+
+#: templates/author.html:85 templates/layout.html:132
+msgid "Nationality"
+msgstr "Національність"
+
+#: templates/author.html:89 templates/layout.html:123
+msgid "Gender"
+msgstr "Гендер"
+
+#: templates/author.html:93
+msgid "Date of birth"
+msgstr "Дата народження"
+
+#: templates/author.html:97
+msgid "Occupation"
+msgstr "Професія"
+
+#: templates/author.html:101
+msgid "Place of birth"
+msgstr "Місце народження"
+
+#: templates/author.html:105
+msgid "Country of birth"
+msgstr "Країна народження"
+
+#: templates/author.html:109
+msgid "Date of death"
+msgstr "Дата смерті"
+
+#: templates/author.html:113
+msgid "Age"
+msgstr "Вік"
+
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr ""
-"У таблиці показано період, після якого твори переходять у суспільне надбання "
-"у кожній країні."
+"У таблиці показано період, після якого твори переходять у суспільне "
+"надбання у кожній країні."
 
 #: templates/countries.html:9
 msgid "The period indicated is post mortem auctoris."
@@ -480,7 +484,7 @@ msgstr ""
 "Кількість творів, визначених у Вікіданих як такі, що перебувають у "
 "суспільному надбанні"
 
-#: templates/country.html:33 templates/layout.html:151
+#: templates/country.html:33 templates/layout.html:156
 msgid "Type of work"
 msgstr "Тип твору"
 
@@ -489,8 +493,8 @@ msgid "Number of works in public domain"
 msgstr "Кількість творів у суспільному надбанні"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:235 templates/layout.html:237
-#: templates/layout.html:239
+#: templates/layout.html:240 templates/layout.html:242
+#: templates/layout.html:244
 msgid "Paulina logo"
 msgstr "Логотип «Пауліни»"
 
@@ -500,8 +504,8 @@ msgstr "Відкрийте для себе авторів"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
 msgstr ""
 "«Пауліна» — це простий інструмент пошуку авторів з усього світу, щоб "
 "дізнатися про їхні твори."
@@ -528,11 +532,11 @@ msgstr "Знаходьте твори"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
 msgstr ""
-"Легко знаходьте інформацію про культурні праці в усіх дисциплінах мистецтва "
-"і знань, яка є у Вікіданих."
+"Легко знаходьте інформацію про культурні праці в усіх дисциплінах "
+"мистецтва і знань, яка є у Вікіданих."
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -559,8 +563,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Визначте, які твори перебувають у суспільному надбанні у різних країнах, і "
-"отримайте доступ до їхніх версій онлайн."
+"Визначте, які твори перебувають у суспільному надбанні у різних країнах, "
+"і отримайте доступ до їхніх версій онлайн."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -574,102 +578,99 @@ msgstr "Країни з 70 post mortem auctoris"
 msgid "Paulina"
 msgstr "«Пауліна»"
 
-#: templates/layout.html:13 templates/layout.html:36
+#: templates/layout.html:13 templates/layout.html:38
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
 msgstr ""
 "«Пауліна» запрошує вас дізнатися про культурну спадщину людства. Це "
-"багатомовний інструмент на основі Вікіданих, який дозволяє вам шукати людей "
-"і дізнаватися про те, чи їхні твори є вільнодоступними роботами у "
-"суспільному надбанні. Вона також допомагає краще зрозуміти терміни захисту "
-"авторських прав і коли твори переходять у суспільне надбання у кожній країні."
+"багатомовний інструмент на основі Вікіданих, який дозволяє вам шукати "
+"людей і дізнаватися про те, чи їхні твори є вільнодоступними роботами у "
+"суспільному надбанні. Вона також допомагає краще зрозуміти терміни "
+"захисту авторських прав і коли твори переходять у суспільне надбання у "
+"кожній країні."
 
-#: templates/layout.html:32 templates/layout.html:242
+#: templates/layout.html:34 templates/layout.html:247
 msgid "Paulina - Data for the Public Domain"
 msgstr "«Пауліна» — дані для суспільного надбання"
 
-#: templates/layout.html:81
+#: templates/layout.html:86
 msgid "Select"
 msgstr "Вибрати"
 
-#: templates/layout.html:100 templates/layout.html:103
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Authors"
 msgstr "Автори"
 
-#: templates/layout.html:101 templates/layout.html:104
+#: templates/layout.html:106 templates/layout.html:109
 msgid "Works"
 msgstr "Твори"
 
-#: templates/layout.html:108
+#: templates/layout.html:113
 msgid "Search with Paulina"
 msgstr "Шукати у «Пауліні»"
 
-#: templates/layout.html:108 templates/layout.html:110
+#: templates/layout.html:113 templates/layout.html:115
 msgid "Search"
 msgstr "Шукати"
 
-#: templates/layout.html:115
+#: templates/layout.html:120
 msgid "Advanced search"
 msgstr "Розширений пошук"
 
-#: templates/layout.html:120 templates/layout.html:135
-#: templates/layout.html:153 templates/layout.html:162
+#: templates/layout.html:125 templates/layout.html:140
+#: templates/layout.html:158 templates/layout.html:167
 msgid "Any"
 msgstr "Будь-який"
 
-#: templates/layout.html:131
+#: templates/layout.html:136
 msgid "Type to filter..."
 msgstr "Почніть вводити…"
 
-#: templates/layout.html:144
+#: templates/layout.html:149
 msgid "In public domain"
 msgstr "У суспільному надбанні"
 
-#: templates/layout.html:146
+#: templates/layout.html:151
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 "Автори, чиї твори перебувають у суспільному надбанні принаймні в одній "
 "юрисдикції"
 
-#: templates/layout.html:160 templates/work.html:38
+#: templates/layout.html:165 templates/work.html:38
 msgid "Country of origin"
 msgstr "Країна походження"
 
-#: templates/layout.html:185
+#: templates/layout.html:190
 msgid "Paulina is supported by:"
 msgstr "«Пауліну» підтримують:"
 
-#: templates/layout.html:208
+#: templates/layout.html:213
 msgid "Source code"
 msgstr "Вихідний код"
 
-#: templates/layout.html:211
+#: templates/layout.html:216
 msgid "Help translate"
 msgstr "Допомогти перекласти"
 
-#: templates/layout.html:216
+#: templates/layout.html:221
 msgid "Help"
 msgstr "Довідка"
 
-#: templates/layout.html:219
+#: templates/layout.html:224
 msgid "Documentation"
 msgstr "Документація"
 
-#: templates/layout.html:243
+#: templates/layout.html:248
 msgid "Powered by Wikidata."
 msgstr "На основі Вікіданих."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "Результатів не знайдено. Спробуйте ще раз."
-
-#: templates/refine-search.html:6
-msgid "Please refine your search."
-msgstr "Будь ласка, уточніть свій пошук."
 
 #: templates/results.html:6
 msgid "Search results"
@@ -683,6 +684,14 @@ msgstr "Ваш запит видав забагато результатів. Б
 msgid "Available for download"
 msgstr "Доступно для завантаження"
 
+#: templates/work.html:10
+msgid "Image"
+msgstr "Зображення"
+
+#: templates/work.html:14
+msgid "Description"
+msgstr "Опис"
+
 #: templates/work.html:18
 msgid "Author/s"
 msgstr "Автор(и)"
@@ -694,6 +703,10 @@ msgstr "Дата публікації"
 #: templates/work.html:34
 msgid "Language"
 msgstr "Мова"
+
+#: templates/work.html:42
+msgid "Wikipedia link"
+msgstr "Посилання на Вікіпедію"
 
 #: templates/work.html:47
 msgid "Access work"
@@ -724,3 +737,25 @@ msgstr "Додати її у Вікіданих"
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Список творів автора %(author_name)s"
+
+#~ msgid "Please refine your search criteria."
+#~ msgstr "Будь ласка, уточніть критерії пошуку."
+
+#~ msgid "Commons link"
+#~ msgstr "Посилання на Вікісховище"
+
+#~ msgid "In public domain?"
+#~ msgstr "У суспільному надбанні?"
+
+#~ msgid "Yes"
+#~ msgstr "Так"
+
+#~ msgid "No"
+#~ msgstr "Ні"
+
+#~ msgid "Author will enter worldwide public domain on January 1, "
+#~ msgstr "Автор перейде у суспільне надбання у всьому світі 1 січня "
+
+#~ msgid "Please refine your search."
+#~ msgstr "Будь ласка, уточніть свій пошук."
+
