@@ -197,7 +197,7 @@ class Author(Parent):
         else:
             image_file_name = image[0]["value"]["content"]
             image_file_name = requests.utils.quote(image_file_name)
-            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
+            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=200'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(name)s.', name=self.name)
 
@@ -273,7 +273,7 @@ class Work(Parent):
         else:
             image_file_name = image[0]["value"]["content"]
             image_file_name = requests.utils.quote(image_file_name)
-            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=100'
+            self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=200'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(title)s.', title=self.name)
 

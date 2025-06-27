@@ -72,14 +72,7 @@ h3 {
   background-color: #f8f9fa;
 }
 
-#nationality-combobox {
-  background-color: #fcdb1a;
-}
-
-#nationality-combobox:hover {
-  background-color: #ffe65b;
-}
-
+/* Lists */
 .list-group {
   --bs-list-group-border-color: #717171;
   --bs-list-group-bg: #f8f9fa;
@@ -104,6 +97,135 @@ h3 {
   outline-offset: -1px;
 }
 
+/* Page sections */
+.section-icon {
+  font-size: 1.5rem;
+  color: #f46527;
+  margin-right: 0.75rem;
+}
+
+/* Author card */
+.author-card {
+  border: 1px solid #717171;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Author image */
+.author-image-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.author-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+
+.author-image-link:hover .author-image {
+  transform: scale(1.05);
+}
+
+.author-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  color: white;
+  font-size: 2rem;
+}
+
+.author-image-link:hover .author-image-overlay {
+  opacity: 1;
+}
+
+/* Author public domain status */
+.public-domain-badge {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.pd-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.pd-yes {
+  background-color: rgba(25, 135, 84, 0.1);
+  border: 1px solid rgba(25, 135, 84, 0.2);
+  color: #198754;
+}
+
+.pd-yes .pd-icon {
+  background-color: #198754;
+  color: white;
+}
+
+.pd-no {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.pd-no .pd-icon {
+  background-color: #dc3545;
+  color: white;
+}
+
+.pd-consult, .pd-unknown {
+  background-color: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  color: #664d03;
+}
+
+.pd-consult .pd-icon, .pd-unknown .pd-icon {
+  background-color: #ffc107;
+  color: #664d03;
+}
+
+.pd-consult a, .pd-unknown a {
+  color: #664d03;
+}
+
+.pd-consult a:hover, .pd-unknown a:hover {
+  color: #523e03;
+}
+
+/* Biography styling */
+.bio-row {
+  transition: background-color 0.15s ease;
+}
+
+.bio-row:hover {
+  background-color: #f8f9fa;
+}
+
+.bio-row:last-child {
+  border-bottom: none !important;
+}
+
+/* Forms */
 .form-select.search {
   color: black;
   width: fit-content;
@@ -124,6 +246,14 @@ h3 {
 }
 
 /* Combobox styles */
+#nationality-combobox {
+  background-color: #fcdb1a;
+}
+
+#nationality-combobox:hover {
+  background-color: #ffe65b;
+}
+
 .combobox-container {
   position: relative;
 }

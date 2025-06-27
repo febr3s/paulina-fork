@@ -1,99 +1,119 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">{{author_name}}
-    <a href="{{ url_for('works_list', author_id=author_id) }}" role="button"
-       class="btn border-black rounded-pill pill-custom lightblue">
-      {{ _('Search works') }}
-    </a>
-  </h2>
-
-  <table class="table table-light p-1">
-    <tbody>
-      <tr>
-        <th scope="row">{{ _('Image') }}</th>
-        <td><a href="{{author_image_link}}" target="_blank"><img src="{{author_image}}" alt="{{author_image_alt_text}}" height="100"></a></td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Description') }}</th>
-        <td>{{author_description}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Nationality') }}</th>
-        <td>{{author_nationality}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Gender') }}</th>
-        <td>{{author_gender}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Date of birth') }}</th>
-        <td>{{author_date_of_birth}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Occupation') }}</th>
-        <td>{{author_occupation}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Place of birth') }}</th>
-        <td>{{author_place_of_birth}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Country of birth') }}</th>
-        <td>{{author_country_of_birth}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Date of death') }}</th>
-        <td>{{author_date_of_death}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Age') }}</th>
-        <td>{{author_age}}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Wikipedia link') }}</th>
-        <td><a href="{{author_wikipedia_link}}" target="_blank">{{author_wikipedia_link}}</a></td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Commons link') }}</th>
-        <td><a href="{{author_commons_link}}" target="_blank">{{author_commons_link}}</a></td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Wikisource link') }}</th>
-        <td><a href="{{author_wikisource_link}}" target="_blank">{{author_wikisource_link}}</a></td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Wikiquote link') }}</th>
-        <td><a href="{{author_wikiquote_link}}" target="_blank">{{author_wikiquote_link}}</a></td>
-      </tr>
-      {% if author_official_website %}
-      <tr>
-        <th scope="row">{{ _('Official website') }}</th>
-        <td><a href="{{author_official_website}}" target="_blank">{{author_official_website}}</a></td>
-      </tr>
-      {% endif %}
-      <tr>
-        <th scope="row">{{ _('In public domain?') }}</th>
-        <td>
-          {% if author_is_in_public_domain == True %}
-          <span class="badge text-bg-success">&check;</span> {{ _('Yes') }}
-          {% elif author_is_in_public_domain == False %}
-          <span class="badge text-bg-danger">&cross;</span> {{ _('No') }} | 
-          {{ _('Author will enter worldwide public domain on January 1, ') }} {{author_date_enter_public_domain}}
-          {% elif author_is_in_public_domain == 'Consult individual works' %}
-          <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
-          {% elif author_is_in_public_domain == 'Unknown' %}
-          <span class="badge text-bg-warning">&#9888;</span> {{ _('Unknown due to lack of available dates of birth and death.') }}
-          <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
+<div class="container-fluid p-2">
+  <!-- Edit Wikidata link -->
+  <div class="text-end mb-2">
+    <small class="text-body-secondary">{{ _('Missing/wrong data?') }} <a href="{{author_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></small>
+  </div>
+  <!-- Author card -->
+  <div class="card author-card mb-4 p-4">
+    <!-- Author card upper section -->
+    <div class="row mb-4">
+      <!-- Author image -->
+      <div class="col-md-2 col-sm-3 mb-3 mb-md-0">
+        <a href="{{author_image_link}}" target="_blank" class="author-image-link">
+          <img src="{{author_image}}" alt="{{author_image_alt_text}}" class="author-image">
+          <div class="author-image-overlay">
+            <i class="bi bi-arrows-fullscreen"></i>
+          </div>
+        </a>
+      </div>
+      <!-- Author basic info -->
+      <div class="col-md-10 col-sm-9">
+        <h2>{{author_name}}</h2>
+        <p>{{author_description}}</p>
+        <div class="my-4">
+          <a href="{{ url_for('works_list', author_id=author_id) }}" role="button"
+          class="btn border-black rounded-pill pill-custom orange">
+          {{ _('Search works') }}
+          </a>
+        </div>
+        {% if author_is_in_public_domain == True %}
+        <div class="public-domain-badge pd-yes mb-2">
+          <span class="pd-icon">&check;</span> {{ _('Works are in the public domain') }}
+        </div>
+        {% elif author_is_in_public_domain == False %}
+        <div class="public-domain-badge pd-no mb-2">
+          <span class="pd-icon">&cross;</span> {{ _('Works are not in the worldwide public domain') }}
+          {% if author_date_enter_public_domain %}
+          {{ _('until January 1, ') }} {{author_date_enter_public_domain}}
           {% endif %}
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">{{ _('Missing/wrong data?') }}</th>
-        <td><a href="{{author_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+        {% elif author_is_in_public_domain == 'Consult individual works' %}
+        <div class="public-domain-badge pd-consult mb-2">
+          <span class="pd-icon">!</span> <a href="{{ url_for('works_list', author_id=author_id) }}">
+            {{ _('Consult individual works for public domain status') }}</a>
+        </div>
+        {% elif author_is_in_public_domain == 'Unknown' %}
+        <div class="public-domain-badge pd-unknown mb-2">
+          <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth and death.') }}
+        <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
+        </div>
+        {% endif %}
+        <div class="mb-2">
+          {% if author_wikidata_link %}
+          <a href="{{author_wikidata_link}}" target="_blank">{{ _('Wikidata') }}</a>
+          {% endif %}
+          {% if author_wikipedia_link %}
+          | <a href="{{author_wikipedia_link}}" target="_blank">{{ _('Wikipedia') }}</a>
+          {% endif %}
+          {% if author_commons_link %}
+          | <a href="{{author_commons_link}}" target="_blank">{{ _('Wikimedia Commons') }}</a>
+          {% endif %}
+          {% if author_wikisource_link %}
+          | <a href="{{author_wikisource_link}}" target="_blank">{{ _('Wikisource') }}</a>
+          {% endif %}
+          {% if author_wikiquote_link %}
+          | <a href="{{author_wikiquote_link}}" target="_blank">{{ _('Wikiquote') }}</a>
+          {% endif %}
+          {% if author_official_website %}
+          | <a href="{{author_official_website}}" target="_blank">{{ _('Official website') }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- Author card biography section -->
+    <div class="d-flex align-items-center mb-2">
+      <i class="bi bi-person-lines-fill me-2 section-icon"></i>
+      <h2 class="section-title mb-0">{{ _('Biography') }}</h2>
+    </div>
+    <!-- Biography details -->
+    <div class="mt-2">
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Nationality') }}</div>
+        <div class="col-md-9">{{author_nationality}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Gender') }}</div>
+        <div class="col-md-9">{{author_gender}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
+        <div class="col-md-9">{{author_date_of_birth}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Occupation') }}</div>
+        <div class="col-md-9">{{author_occupation}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Place of birth') }}</div>
+        <div class="col-md-9">{{author_place_of_birth}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Country of birth') }}</div>
+        <div class="col-md-9">{{author_country_of_birth}}</div>
+      </div>
+      <div class="row bio-row py-2 border-bottom">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
+        <div class="col-md-9">{{author_date_of_death}}</div>
+      </div>
+      <div class="row bio-row py-2">
+        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Age') }}</div>
+        <div class="col-md-9">{{author_age}}</div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
