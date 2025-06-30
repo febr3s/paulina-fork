@@ -1,86 +1,153 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">{{work_title}}</h2>
-
-  <table class="table table-light p-1">
-    <tbody>
-    <tr>
-      <th scope="row">{{ _('Image') }}</th>
-      <td><a href="{{work_image_link}}" target="_blank"><img src="{{work_image}}" alt="{{work_image_alt_text}}" height="100"></a></td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Description') }}</th>
-      <td>{{work_description}}</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Author/s') }}</th>
-      <td>
+<div class="container-fluid p-2">
+  <!-- Edit Wikidata link -->
+  <div class="text-end mb-2">
+    <small class="text-body-secondary">{{ _('Missing/wrong data?') }} <a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></small>
+  </div>
+  <!-- Work card -->
+  <div class="card main-card mb-4 p-4">
+    <!-- Work card upper section -->
+    <div class="row">
+      <!-- Work image -->
+      <div class="col-md-2 col-sm-3 mb-3 mb-md-0">
+        <div class="work-image-container">
+          <a href="{{work_image_link}}" target="_blank" class="main-card-image-link">
+            <img src="{{work_image}}" alt="{{work_image_alt_text}}" class="main-card-image work-image">
+            <div class="main-card-image-overlay">
+              <i class="bi bi-arrows-fullscreen"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Work basic info -->
+      <div class="col-md-10 col-sm-9 text-center text-md-start">
+        <h2>{{work_title}}</h2>
+        <p>{{work_description}}</p>
+        <!-- Work author/s -->
+        <h3 class="work-section-title">{{ _('Author/s') }}</h3>
         {% for type_of_author, authors in work_authors.items() %}
-        <p class="mb-1"> {{ type_of_author }}:
+        <p class="mb-1"><span class="fw-semibold text-light-emphasis">{{ type_of_author }}:</span>
           {% for author in authors %}
-          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>&nbsp;
+          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>{% if not loop.last %}, {% endif %}
           {% endfor %}
         </p>
         {% endfor %}
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Publication date') }}</th>
-      <td>{{work_publication_date}}</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Language') }}</th>
-      <td>{{work_language}}</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Country of origin') }}</th>
-      <td>{{work_country}}</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Wikipedia link') }}</th>
-      <td><a href="{{work_wikipedia_link}}" target="_blank">{{work_wikipedia_link}}</a></td>
-    </tr>
+        <!-- Wikipedia link -->
+        {% if work_wikipedia_link %}
+        <p class="mt-3">
+          <a href="{{work_wikipedia_link}}" target="_blank">
+            <i class="bi bi-wikipedia me-1"></i> {{ _('Wikipedia') }}
+          </a>
+        </p>
+        {% endif %}
+      </div>    
+    </div>
+    <hr class="my-4">
+    <!-- Work details section -->
+    <div class="row">      
+      <div class="col-md-6">
+        <!-- General details card -->
+        <div class="detail-card">
+          <h3 class="detail-card-title">
+            <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
+          </h3>
+          <div class="detail-item">
+            <span class="detail-label">{{ _('Publication date') }}:</span>
+            {{work_publication_date if work_publication_date else _('Unknown')}}
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ _('Language') }}:</span>
+            {{work_language if work_language else _('Unknown')}}
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">{{ _('Country of origin') }}:</span>
+            {{work_country if work_country else _('Unknown')}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Copyright status card -->
+        <div class="detail-card">
+          <h3 class="detail-card-title">
+            <i class="bi bi-shield-check section-icon"></i>{{ _('Copyright status') }}
+          </h3>
+          {% if work_copyright_status %}
+          {% for claim in work_copyright_status %}
+          <div class="copyright-status-item">
+            {{ claim['status'] }} {{ _('in') }}
+            {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
+            <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
+              {{ claim['applies_to_jurisdiction_label'] }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+              {{ claim['applies_to_jurisdiction_label'] }}
+            </a>
+            {% endif %}
+          </div>
+          {% endfor %}
+          {% else %}
+          {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
+          <div class="copyright-status-unknown">
+            <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
+            <p>{{ _('To learn more about copyright terms in different countries, visit the %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
+          </div>
+          {% endif %}
+        </div>        
+      </div>
+    </div>
     {% if work_wikisource_links or work_internet_archive_link or work_full_work_link %}
-    <tr>
-      <th scope="row">{{ _('Access work') }}</th>
-      <td>
-        {% if work_wikisource_links %}
-        {% for wikisource_version, wikisource_link in work_wikisource_links.items() %}
-        <p><a href="{{wikisource_link['url']}}" target="_blank">{{wikisource_link['title']}}</a> (Wikisource {{wikisource_link['language']}})</p>
-        {% endfor %}
-        {% endif %}
-        {% if work_internet_archive_link %}
-        <p><a href="{{work_internet_archive_link}}" target="_blank">{{work_internet_archive_link}}</a></p>
-        {% endif %}
-        {% if work_full_work_link %}
-        <p><a href="{{work_full_work_link}}" target="_blank">{{work_full_work_link}}</a></p>
-        {% endif %}
-      </td>
-    </tr>
+    <hr class="my-4">
+    <!-- Access work section -->
+    <div class="d-flex align-items-center mb-2">
+      <i class="bi bi-book-half me-2 section-icon"></i>
+      <h3 class="mb-0">{{ _('Access work') }}</h3>
+    </div>
+    <div class="row list-group border-0 flex-row">
+      {% if work_wikisource_links %}
+      {% for wikisource_version, wikisource_link in work_wikisource_links.items() %}
+      <div class="col-md-6 mb-3">
+        <a href="{{wikisource_link['url']}}" target="_blank" class="list-group-item list-group-item-action">
+          <div>
+            <i class="bi bi-journal-text"></i> {{ _('Wikisource') }} {{wikisource_link['language']}}
+          </div>
+          <div class="fw-semibold text-light-emphasis">
+            {{wikisource_link['title']}}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% if work_internet_archive_link %}
+      <div class="col-md-6 mb-3">
+        <a href="{{work_internet_archive_link}}" target="_blank" class="list-group-item list-group-item-action">
+          <div>
+            <i class="bi bi-archive"></i> {{ _('Internet Archive') }}
+          </div>
+          <div class="fw-semibold text-light-emphasis">
+            {{ _('Access on Internet Archive') }}
+          </div>
+        </a>
+      </div>
+      {% endif %}
+      {% if work_full_work_link %}
+      <div class="col-md-6 mb-3">
+        <a href="{{work_full_work_link}}" target="_blank" class="list-group-item list-group-item-action">
+          <div>
+            <i class="bi bi-link-45deg"></i> {{ _('External link') }}
+          </div>
+          <div class="fw-semibold text-light-emphasis">
+            {{ _('Access online') }}
+          </div>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
+    <!-- No access work section if there are no links -->
     {% endif %}
-    <tr>
-      <th scope="row">{{ _('Copyright status') }}</th>
-      <td>
-        {% for claim in work_copyright_status %}
-        <p class="mb-1"> {{ claim['status'] }} {{ _('in') }}
-          {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
-          <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
-            {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
-        {% else %}
-        <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
-          {{ claim['applies_to_jurisdiction_label'] }}</a>.</p>
-        {% endif %}
-        {% endfor %}
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">{{ _('Missing/wrong data?') }}</th>
-      <td><a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></td>
-    </tr>
-    </tbody>
-  </table>
-
+  </div>
 </div>
 {% endblock %}

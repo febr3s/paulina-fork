@@ -7,14 +7,14 @@
     <small class="text-body-secondary">{{ _('Missing/wrong data?') }} <a href="{{author_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></small>
   </div>
   <!-- Author card -->
-  <div class="card author-card mb-4 p-4">
+  <div class="card main-card mb-4 p-4">
     <!-- Author card upper section -->
     <div class="row mb-4">
       <!-- Author image -->
       <div class="col-md-2 col-sm-3 mb-3 mb-md-0">
-        <a href="{{author_image_link}}" target="_blank" class="author-image-link">
-          <img src="{{author_image}}" alt="{{author_image_alt_text}}" class="author-image">
-          <div class="author-image-overlay">
+        <a href="{{author_image_link}}" target="_blank" class="main-card-image-link author-image-link">
+          <img src="{{author_image}}" alt="{{author_image_alt_text}}" class=" main-card-image author-image">
+          <div class="main-card-image-overlay">
             <i class="bi bi-arrows-fullscreen"></i>
           </div>
         </a>
@@ -77,7 +77,7 @@
     <!-- Author card biography section -->
     <div class="d-flex align-items-center mb-2">
       <i class="bi bi-person-lines-fill me-2 section-icon"></i>
-      <h2 class="section-title mb-0">{{ _('Biography') }}</h2>
+      <h3 class="mb-0">{{ _('Biography') }}</h3>
     </div>
     <!-- Biography details -->
     <div class="mt-2">
