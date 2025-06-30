@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-27 16:04-0300\n"
+"POT-Creation-Date: 2025-06-30 20:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,7 +127,8 @@ msgstr ""
 msgid "Image of %(name)s."
 msgstr ""
 
-#: pdclasses.py:234 pdclasses.py:237
+#: pdclasses.py:234 pdclasses.py:237 templates/work.html:58
+#: templates/work.html:62 templates/work.html:66
 msgid "Unknown"
 msgstr ""
 
@@ -299,11 +300,11 @@ msgid ""
 "the %(repository_link)s."
 msgstr ""
 
-#: templates/author.html:7 templates/work.html:79
+#: templates/author.html:7 templates/work.html:7
 msgid "Missing/wrong data?"
 msgstr ""
 
-#: templates/author.html:7 templates/work.html:80
+#: templates/author.html:7 templates/work.html:7
 msgid "Edit Wikidata item"
 msgstr ""
 
@@ -337,11 +338,11 @@ msgstr ""
 msgid "Consult individual works."
 msgstr ""
 
-#: templates/author.html:59
+#: templates/author.html:59 templates/work.html:41
 msgid "Wikipedia"
 msgstr ""
 
-#: templates/author.html:65
+#: templates/author.html:65 templates/work.html:114
 msgid "Wikisource"
 msgstr ""
 
@@ -571,7 +572,7 @@ msgstr ""
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:165 templates/work.html:38
+#: templates/layout.html:165 templates/work.html:65
 msgid "Country of origin"
 msgstr ""
 
@@ -615,40 +616,66 @@ msgstr ""
 msgid "Available for download"
 msgstr ""
 
-#: templates/work.html:10
-msgid "Image"
-msgstr ""
-
-#: templates/work.html:14
-msgid "Description"
-msgstr ""
-
-#: templates/work.html:18
+#: templates/work.html:29
 msgid "Author/s"
 msgstr ""
 
-#: templates/work.html:30
+#: templates/work.html:54
+msgid "Work details"
+msgstr ""
+
+#: templates/work.html:57
 msgid "Publication date"
 msgstr ""
 
-#: templates/work.html:34
+#: templates/work.html:61
 msgid "Language"
 msgstr ""
 
-#: templates/work.html:42
-msgid "Wikipedia link"
-msgstr ""
-
-#: templates/work.html:47
-msgid "Access work"
-msgstr ""
-
-#: templates/work.html:64
+#: templates/work.html:74
 msgid "Copyright status"
 msgstr ""
 
-#: templates/work.html:67
+#: templates/work.html:79
 msgid "in"
+msgstr ""
+
+#: templates/work.html:92
+msgid "countries and terms page"
+msgstr ""
+
+#: templates/work.html:94
+msgid ""
+"Copyright status information is not available for this work. The "
+"copyright status depends on the jurisdiction, the author's date of death "
+"and the date the work was created or published."
+msgstr ""
+
+#: templates/work.html:95
+#, python-format
+msgid ""
+"To learn more about copyright terms in different countries, visit the "
+"%(countries_and_terms_page_link)s."
+msgstr ""
+
+#: templates/work.html:106
+msgid "Access work"
+msgstr ""
+
+#: templates/work.html:127
+msgid "Internet Archive"
+msgstr ""
+
+#: templates/work.html:130
+msgid "Access on Internet Archive"
+msgstr ""
+
+#: templates/work.html:139
+msgid "External link"
+msgstr ""
+
+#: templates/work.html:142
+msgid "Access online"
 msgstr ""
 
 #: templates/works-list.html:8
