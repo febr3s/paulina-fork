@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-06-30 20:18-0300\n"
-"PO-Revision-Date: 2025-06-04 14:02+0000\n"
+"PO-Revision-Date: 2025-07-02 06:03+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/paulina/paulina-"
-"app/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -143,6 +144,9 @@ msgid ""
 "image of the work available, and that if you own one, you can click on the "
 "placeholder link to upload it."
 msgstr ""
+"Imatge d’una obra genèrica. El text a sobre indica que no hi ha cap imatge "
+"de l’obra disponible i que, si en teniu una, la podeu pujar fent clic a l’"
+"enllaç de l’espai reservat."
 
 #: pdclasses.py:278
 #, python-format
@@ -346,28 +350,24 @@ msgid "Consult individual works."
 msgstr ""
 
 #: templates/author.html:59 templates/work.html:41
-#, fuzzy
 msgid "Wikipedia"
-msgstr "Enllaç a la Viquipèdia"
+msgstr "Viquipèdia"
 
 #: templates/author.html:65 templates/work.html:114
-#, fuzzy
 msgid "Wikisource"
-msgstr "Enllaç al Viquitexts"
+msgstr "Viquitexts"
 
 #: templates/author.html:68
-#, fuzzy
 msgid "Wikiquote"
-msgstr "Enllaç al Viquidites"
+msgstr "Viquidites"
 
 #: templates/author.html:71
 msgid "Official website"
-msgstr ""
+msgstr "Lloc web oficial"
 
 #: templates/author.html:80
-#, fuzzy
 msgid "Biography"
-msgstr "Orlando"
+msgstr "Biografia"
 
 #: templates/author.html:85 templates/layout.html:132
 msgid "Nationality"
@@ -685,7 +685,7 @@ msgstr ""
 
 #: templates/work.html:139
 msgid "External link"
-msgstr ""
+msgstr "Enllaç extern"
 
 #: templates/work.html:142
 msgid "Access online"
