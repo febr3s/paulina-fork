@@ -158,7 +158,11 @@ class Author(Parent):
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
         self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
-        self.date_enter_public_domain = self.date_of_death['date object'].year + 101 if self.date_of_death else None
+
+        if self.date_of_death and isinstance(self.date_of_birth["date object"], datetime.date):
+            self.date_enter_public_domain = self.date_of_death['date object'].year + 101
+        else:
+            self.date_enter_public_domain = None
 
         occupations = self.wikidata_item.get('statements', {}).get('P106')
         if occupations is None:
@@ -183,7 +187,10 @@ class Author(Parent):
                                                   qname=place_of_birth_Q,
                                                   lang=languages.get_locale()
                                                   )
-                self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+                try:
+                    self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+                except:
+                    self.country_of_birth = None
             else:
                 self.country_of_birth = None
         else:
@@ -231,10 +238,10 @@ class Author(Parent):
 
     def ageOfAuthor(self):
         if self.date_of_birth is None:
-            return _('Unknown')  # Authors with date of birth unavailable
+            return None  # Authors with date of birth unavailable
         if self.date_of_death is None:
             if not isinstance(self.date_of_birth["date object"], datetime.date) or self.date_of_birth["date object"].year < (datetime.date.today().year - 110):
-                return _('Unknown')  # Dead authors without date of death
+                return None  # Dead authors without date of death
             else:
                 return rd.relativedelta(datetime.date.today(), self.date_of_birth["date object"]).years  # Age of living authors
         else:

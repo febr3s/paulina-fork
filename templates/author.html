@@ -91,7 +91,9 @@
       </div>
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
-        <div class="col-md-9">{{author_date_of_birth}}</div>
+        <div class="col-md-9">{{author_date_of_birth}}
+          {% if author_age and not author_date_of_death %}
+          {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
       </div>
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Occupation') }}</div>
@@ -107,12 +109,10 @@
       </div>
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
-        <div class="col-md-9">{{author_date_of_death}}</div>
-      </div>
-      <div class="row bio-row py-2">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Age') }}</div>
-        <div class="col-md-9">{{author_age}}</div>
-      </div>
+        <div class="col-md-9">{{author_date_of_death}}
+          {% if author_age and author_date_of_death %}
+          {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
+      </div>      
     </div>
   </div>
 </div>
