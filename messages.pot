@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-30 20:18-0300\n"
+"POT-Creation-Date: 2025-07-17 16:19-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,36 +115,31 @@ msgstr ""
 msgid "(millennium)"
 msgstr ""
 
-#: pdclasses.py:196
+#: pdclasses.py:203
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
 "you can click on the placeholder link."
 msgstr ""
 
-#: pdclasses.py:202
+#: pdclasses.py:209
 #, python-format
 msgid "Image of %(name)s."
 msgstr ""
 
-#: pdclasses.py:234 pdclasses.py:237 templates/work.html:58
-#: templates/work.html:62 templates/work.html:66
-msgid "Unknown"
-msgstr ""
-
-#: pdclasses.py:271
+#: pdclasses.py:278
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
 "on the placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:278
+#: pdclasses.py:285
 #, python-format
 msgid "Image of %(title)s."
 msgstr ""
 
-#: pdclasses.py:354 templates/countries.html:20
+#: pdclasses.py:361 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr ""
@@ -370,24 +365,25 @@ msgstr ""
 msgid "Date of birth"
 msgstr ""
 
-#: templates/author.html:97
+#: templates/author.html:96 templates/author.html:114
+#, python-format
+msgid "(%(author_age)s years)"
+msgstr ""
+
+#: templates/author.html:99
 msgid "Occupation"
 msgstr ""
 
-#: templates/author.html:101
+#: templates/author.html:103
 msgid "Place of birth"
 msgstr ""
 
-#: templates/author.html:105
+#: templates/author.html:107
 msgid "Country of birth"
 msgstr ""
 
-#: templates/author.html:109
+#: templates/author.html:111
 msgid "Date of death"
-msgstr ""
-
-#: templates/author.html:113
-msgid "Age"
 msgstr ""
 
 #: templates/countries.html:8
@@ -626,6 +622,10 @@ msgstr ""
 
 #: templates/work.html:57
 msgid "Publication date"
+msgstr ""
+
+#: templates/work.html:58 templates/work.html:62 templates/work.html:66
+msgid "Unknown"
 msgstr ""
 
 #: templates/work.html:61
