@@ -159,7 +159,7 @@ class Author(Parent):
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
         self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
 
-        if self.date_of_death and isinstance(self.date_of_birth["date object"], datetime.date):
+        if self.date_of_death and isinstance(self.date_of_death["date object"], datetime.date):
             self.date_enter_public_domain = self.date_of_death['date object'].year + 101
         else:
             self.date_enter_public_domain = None
