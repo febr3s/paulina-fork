@@ -146,9 +146,12 @@ class Author(Parent):
         """ Prevent loading an author page if the Wikidata item does not exist or it is not about a human:            
             - Raise a "TypeError: 'NoneType' object is not iterable" if the item does not exist.
             - Raise an "Exception: Not a human" if the item is not about a human."""
+        is_human = False
         for statement in self.wikidata_item.get('statements', {}).get('P31'):
-            if statement.get('value', {}).get('content') not in ["Q5", "Q21070568"]:
-                raise Exception("Not a human")
+            if statement.get('value', {}).get('content') in ["Q5", "Q21070568"]:
+                is_human = True
+        if is_human is False:
+            raise Exception("Not a human")
             
         self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
         self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
