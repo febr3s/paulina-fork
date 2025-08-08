@@ -336,7 +336,8 @@ class Work(Parent):
             for claim in copyright_status_response:
                 try:
                     status_dict = {
-                        'status': claim.get('cstatusLabel', {}).get('value'),
+                        'status_label': claim.get('cstatusLabel', {}).get('value'),
+                        'status_id':claim.get('cstatus', {}).get('value').split("/")[-1],
                         'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
                         'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1],
                         'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1]

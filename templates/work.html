@@ -75,8 +75,8 @@
           </h3>
           {% if work_copyright_status %}
           {% for claim in work_copyright_status %}
-          <div class="copyright-status-item">
-            {{ claim['status'] }} {{ _('in') }}
+          {% if claim['status_id'] == 'Q50423863' %}<div class="copyright-status-item copyright-status-private-domain">{% else %}<div class="copyright-status-item">{% endif %}
+            {{ claim['status_label'] }} {{ _('in') }}
             {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
             <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
               {{ claim['applies_to_jurisdiction_label'] }}
