@@ -30,16 +30,18 @@ SUPPORTED_LANGUAGES = ["aa", "ab", "af", "ak", "am", "an", "ar", "as", "ast", "a
 Item key is language 2 letter code. Value is language name in its own language.
 English must be the first item of the dictionary. 
 Other languages are ordered by alphabetical order."""
-TRANSLATED_LANGUAGES = {"ast": "Asturianu",
+TRANSLATED_LANGUAGES = {"en": "English",
+                        "ast": "Asturianu",
                         "az": "Azərbaycanca",
                         "ca": "Català",
-                        "en": "English",
                         "es": "Español",
                         "eo": "Esperanto",
                         "fr": "Français",
+                        "ja": "日本語",
                         "nb": "Norsk bokmål",
                         "pt": "Português",
                         "fi": "Suomi",
+                        "tr": "Türkçe",
                         "uk": "Українська",
                         "bn": "বাংলা"
                         }
