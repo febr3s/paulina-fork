@@ -337,10 +337,10 @@ class Work(Parent):
                 try:
                     status_dict = {
                         'status_label': claim.get('cstatusLabel', {}).get('value'),
-                        'status_id':claim.get('cstatus', {}).get('value').split("/")[-1],
+                        'status_id': claim.get('cstatus', {}).get('value').split("/")[-1],
                         'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
-                        'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1],
-                        'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1]
+                        'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1] if claim.get('jurisdiction', {}).get('value') else None,
+                        'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1] if claim.get('jurisdictionIsInstanceOf', {}).get('value') else None
                         }
                     copyright_status.append(status_dict)
                 except:

@@ -22,11 +22,11 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
 query_for_works_by_an_author = '''
 SELECT DISTINCT ?item ?itemLabel ?itemDescription ( COUNT ( DISTINCT ?wikisource ) as ?wikisourceFullWork ) ( COUNT ( DISTINCT ?iaID ) as ?iaDownloads ) ( COUNT ( DISTINCT ?download ) as ?otherDownloads ) 
 WHERE 
-{{  
+{{ 
   {{ SELECT DISTINCT ?item 
    WHERE
      {{ 
-       VALUES ?languages {{ "{lang}" "mul" "en" }}.                                                                                                           
+       VALUES ?languages {{ "{lang}" "mul" "en" }}. 
        ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 | wd:P175 | wd:P9191 | wd:P10837 ) wd:{qname} . 
        ?item rdfs:label ?itemLabel .
        FILTER ( LANG( ?itemLabel ) = ?languages ) . 
@@ -34,12 +34,12 @@ WHERE
          VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} 
          ?item wdt:P31 ?typeOfItem . }} 
      }} 
-  }}   
+  }} 
   OPTIONAL {{ ?item wdt:P724 ?iaID . }}
   OPTIONAL {{ ?item wdt:P953 ?download . }}
   OPTIONAL {{
   ?wikisource schema:about ?item .
-  ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }}  
+  ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }} 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }} 
 GROUP BY ?item ?itemLabel ?itemDescription 
@@ -337,7 +337,7 @@ WHERE {{
 query_for_labels_of_list_of_items = '''
 SELECT DISTINCT ?item ?itemLabel 
 WHERE {{ 
-  VALUES ?item {{ {qnames} }} .  
+  VALUES ?item {{ {qnames} }} . 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }} 
 }}
 '''
@@ -345,11 +345,12 @@ WHERE {{
 query_for_copyright_status_of_work = '''
 SELECT DISTINCT ?cstatus ?cstatusLabel ?jurisdiction ?jurisdictionLabel ?jurisdictionIsInstanceOf ?jurisdictionIsInstanceOfLabel 
 WHERE {{ 
-  VALUES ?jurisdictionIsInstanceOf {{ wd:Q63705939 wd:Q6256 }} . 
   wd:{qname} p:P6216 ?cstatusStatement . 
   ?cstatusStatement ps:P6216 ?cstatus . 
-  OPTIONAL {{ ?cstatusStatement pq:P1001 ?jurisdiction . }} 
-  ?jurisdiction wdt:P31 ?jurisdictionIsInstanceOf . 
+  OPTIONAL {{ 
+  VALUES ?jurisdictionIsInstanceOf {{ wd:Q63705939 wd:Q6256 }} . 
+  ?cstatusStatement pq:P1001 ?jurisdiction . 
+  ?jurisdiction wdt:P31 ?jurisdictionIsInstanceOf . }} 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }}
 '''

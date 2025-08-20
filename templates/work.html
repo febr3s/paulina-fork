@@ -74,20 +74,21 @@
             <i class="bi bi-shield-check section-icon"></i>{{ _('Copyright status') }}
           </h3>
           {% if work_copyright_status %}
-          {% for claim in work_copyright_status %}
-          {% if claim['status_id'] == 'Q50423863' %}<div class="copyright-status-item copyright-status-private-domain">{% else %}<div class="copyright-status-item">{% endif %}
-            {{ claim['status_label'] }} {{ _('in') }}
-            {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
-            <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
-              {{ claim['applies_to_jurisdiction_label'] }}
-            </a>
-            {% else %}
-            <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
-              {{ claim['applies_to_jurisdiction_label'] }}
-            </a>
-            {% endif %}
-          </div>
-          {% endfor %}
+            {% for claim in work_copyright_status %}
+            {% if claim['status_id'] == 'Q50423863' %}<div class="copyright-status-item copyright-status-private-domain">{% else %}<div class="copyright-status-item">{% endif %}
+              {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %} {{ _('in') }}
+              {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
+              <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
+                {{ claim['applies_to_jurisdiction_label'] }}
+              </a>
+              {% else %}
+              <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+                {{ claim['applies_to_jurisdiction_label'] }}
+              </a>
+              {% endif %}
+              {% endif %}
+            </div>
+            {% endfor %}
           {% else %}
           {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
           <div class="copyright-status-unknown">
