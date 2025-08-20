@@ -14,6 +14,11 @@ You must copy the `config-sample.py` file to `config.py`. In this file you must 
 
 The secret key is for the session cookie. The session cookie is necessary so that the language choice is persistent throughout the session.
 
+## Complete documentation
+If you'd like to learn more about the software:
+- [User documentation](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina)
+- [Complete technical documentation](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina/Software_Documentation)
+
 ## Website
 The public beta version is available at <https://paulina.toolforge.org/>.
 
@@ -25,11 +30,12 @@ The public beta version is available at <https://paulina.toolforge.org/>.
 ## Credits
 Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.articaonline.com), 
 [Creative Commons Uruguay](https://www.creativecommons.uy), [Data Uruguay](https://data.org.uy) and 
-[Wikimedistas de Uruguay](https://wikimedistas.uy). In June 2024 the project [received support](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/Rapid_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_con_Wikidata_(ID:_22592697)) 
-from the Wikimedia Community Fund.
+[Wikimedistas de Uruguay](https://wikimedistas.uy). The project received support from the Wikimedia Community Fund [in 2024](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/Rapid_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_con_Wikidata_(ID:_22592697)) and [2025](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/General_Support_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_latinoamericano_con_Wikidata).
+
+Maintainer: Jorge Gemetto. Contributors: David Coronel, Mariana Fossatti, Sudhanshu Gautam, Nat Hernández, Carla Toro.
+
+## Awards and Recognitions
+Paulina received the [Coolest Tool Award 2025](https://meta.wikimedia.org/wiki/Coolest_Tool_Award/2025) in the category Most Innovative.
 
 ## License
 This software is under a [GNU Affero General Public License Version 3](https://www.gnu.org/licenses/agpl-3.0.html).
-
----
-*Documentation under construction. Read more at [Paulina's page on Wikidata](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina).*
