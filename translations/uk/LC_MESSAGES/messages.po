@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
 "PO-Revision-Date: 2025-05-08 17:40+0000\n"
 "Last-Translator: AtaZh <ipomoea@hilarious.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/paulina/"
@@ -118,7 +118,7 @@ msgstr "(століття)"
 msgid "(millennium)"
 msgstr "(тисячоліття)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -128,12 +128,12 @@ msgstr ""
 "зображення людини наразі недоступне і що якщо ви таке знайдете, то можете "
 "натиснути на посилання плейсголдера."
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Зображення %(name)s."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
@@ -143,12 +143,12 @@ msgstr ""
 "твору наразі недоступне і що якщо ви таке маєте, то можете натиснути на "
 "посилання плейсголдера, щоб завантажити його."
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Зображення %(title)s."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Прапор %(country_name)s."

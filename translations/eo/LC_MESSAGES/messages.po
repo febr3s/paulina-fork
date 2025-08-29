@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
 "PO-Revision-Date: 2025-02-13 05:02+0000\n"
 "Last-Translator: Juan Sebastian Quintero Santacruz <juancho2291@hotmail."
 "com>\n"
@@ -123,31 +123,31 @@ msgstr "(jarcento)"
 msgid "(millennium)"
 msgstr "(jarmilo)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
 "click on the placeholder link."
 msgstr ""
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Bildo de %(name)s."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
 "placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Bildo de %(title)s."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Flago de %(country_name)s."

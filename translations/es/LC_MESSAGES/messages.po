@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
+"app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,7 +118,7 @@ msgstr "(siglo)"
 msgid "(millennium)"
 msgstr "(milenio)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -128,12 +128,12 @@ msgstr ""
 "disponible una imagen libre de la persona, y que si posees una, puedes hacer "
 "clic en el enlace del cartel."
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Imagen de %(name)s."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
@@ -143,12 +143,12 @@ msgstr ""
 "disponible una imagen libre de la obra, y que si posees una, puedes hacer "
 "clic en el enlace del cartel para subirla."
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Imagen de %(title)s."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Bandera de %(country_name)s."

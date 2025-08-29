@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
 "PO-Revision-Date: 2025-04-22 16:08+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/paulina/paulina-"
@@ -119,7 +119,7 @@ msgstr "(vuosisata)"
 msgid "(millennium)"
 msgstr "(vuosituhat)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -129,12 +129,12 @@ msgstr ""
 "saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit ladata sen "
 "klikkaamalla mallikuvan linkkiä."
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Kuva %(name)s."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
@@ -144,12 +144,12 @@ msgstr ""
 "avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
 "klikkaamalla mallikuvan linkkiä."
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Kuva %(title)s."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s lippu."

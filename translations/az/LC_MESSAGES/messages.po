@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
 "PO-Revision-Date: 2025-05-11 22:03+0000\n"
 "Last-Translator: Nemoralis <50991261+nemoralis@users.noreply.github.com>\n"
 "Language-Team: Azerbaijani <https://hosted.weblate.org/projects/paulina/"
@@ -117,7 +117,7 @@ msgstr "(əsr)"
 msgid "(millennium)"
 msgstr "(minillik)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -126,12 +126,12 @@ msgstr ""
 "Ümumi insan siluetinin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad şəkli "
 "yoxdur və əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "%(name)s şəkli."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
@@ -140,12 +140,12 @@ msgstr ""
 "Ümumi əsərin şəkli. Yuxarıdakı mətn göstərir ki, şəxsin azad şəkli yoxdur və "
 "əgər sizdə varsa, bu keçidə klikləyə bilərsiniz."
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)s şəkli."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s bayrağı."

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-17 16:19-0300\n"
-"PO-Revision-Date: 2024-09-04 20:31+0000\n"
-"Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
+"POT-Creation-Date: 2025-08-15 12:33-0300\n"
+"PO-Revision-Date: 2025-08-24 17:01+0000\n"
+"Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/paulina/"
 "paulina-app/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:53
@@ -37,11 +38,11 @@ msgstr "Om"
 
 #: app.py:105 app.py:122
 msgid "Results"
-msgstr "Resultater"
+msgstr "Treff"
 
 #: app.py:112 app.py:129 app.py:134
 msgid "No results found"
-msgstr "Resultatløst"
+msgstr "Ingen treff"
 
 #: app.py:179
 msgid "List of works"
@@ -67,45 +68,43 @@ msgstr "404-feil"
 
 #: filters.py:6
 msgid "Female"
-msgstr ""
+msgstr "Kvinne"
 
 #: filters.py:7
-#, fuzzy
 msgid "Male"
-msgstr "Bilde"
+msgstr "Mann"
 
 #: filters.py:8
 msgid "Trans man"
-msgstr ""
+msgstr "Transmann"
 
 #: filters.py:9
 msgid "Trans woman"
-msgstr ""
+msgstr "Transkvinne"
 
 #: filters.py:10
 msgid "Non-binary"
-msgstr ""
+msgstr "Ikke-binær"
 
 #: filters.py:17
 msgid "Film"
-msgstr ""
+msgstr "Film"
 
 #: filters.py:18
-#, fuzzy
 msgid "Literary work"
-msgstr "Søk i verker"
+msgstr "Litterært verk"
 
 #: filters.py:19
 msgid "Musical work"
-msgstr ""
+msgstr "Musikkverk"
 
 #: filters.py:20
 msgid "Painting"
-msgstr ""
+msgstr "Maleri"
 
 #: filters.py:21
 msgid "Sculpture"
-msgstr ""
+msgstr "Skulptur"
 
 #: pdclasses.py:97
 msgid "(decade)"
@@ -113,13 +112,13 @@ msgstr "(tiår)"
 
 #: pdclasses.py:99
 msgid "(century)"
-msgstr "(hundreår)"
+msgstr "(århundre)"
 
 #: pdclasses.py:101
 msgid "(millennium)"
-msgstr "(tusenår)"
+msgstr "(årtusen)"
 
-#: pdclasses.py:203
+#: pdclasses.py:206
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -129,12 +128,12 @@ msgstr ""
 "ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp et du "
 "eier ved å klikke på plassholderlenken."
 
-#: pdclasses.py:209
+#: pdclasses.py:212
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Bilde av %(name)s."
 
-#: pdclasses.py:278
+#: pdclasses.py:281
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free "
 "image of the work available, and that if you own one, you can click on the "
@@ -144,12 +143,12 @@ msgstr ""
 "fritt bilde av verket tilgjengelig, og at kan laste opp et du eier ved å "
 "klikke på plassholderlenken."
 
-#: pdclasses.py:285
+#: pdclasses.py:288
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Bilde av %(title)s."
 
-#: pdclasses.py:361 templates/countries.html:20
+#: pdclasses.py:365 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Flagg tilhørende %(country_name)s."
@@ -189,7 +188,7 @@ msgstr "Data Uruguay"
 
 #: templates/about.html:12 templates/layout.html:202
 msgid "Wikimedistas de Uruguay"
-msgstr "Wikimedia-redigerere fra Uruguay"
+msgstr "Wikimedia-bidragsytere fra Uruguay"
 
 #: templates/about.html:13
 msgid "Creative Commons CC0 1.0 Universal Public Domain Dedication"
@@ -346,58 +345,52 @@ msgid "Search works"
 msgstr "Søk i verker"
 
 #: templates/author.html:34
-#, fuzzy
 msgid "Works are in the public domain"
-msgstr "Lær mer om allemannseie"
+msgstr "Lær mer om offentlig eiendom"
 
 #: templates/author.html:38
-#, fuzzy
 msgid "Works are not in the worldwide public domain"
-msgstr "Lær mer om allemannseie"
+msgstr "Verk er ikke i verdensomfattende offentlig eiendom"
 
 #: templates/author.html:40
 msgid "until January 1, "
-msgstr ""
+msgstr "til og med 1. januar, "
 
 #: templates/author.html:46
-#, fuzzy
 msgid "Consult individual works for public domain status"
-msgstr "Sjekk individuelle verk."
+msgstr "Sjekk individuelle verk for offentlig eiendomsstatus"
 
 #: templates/author.html:50
-#, fuzzy
 msgid ""
 "Public domain status unknown due to lack of available dates of birth and "
 "death."
-msgstr "Ukjent som følge av manglende tilgjengelige datoer for fødsel og død."
+msgstr ""
+"Ukjent på om det er falt i det fri på grunn av mangel på tilgjengelige "
+"fødsels- og dødsdatoer."
 
 #: templates/author.html:51
 msgid "Consult individual works."
 msgstr "Sjekk individuelle verk."
 
 #: templates/author.html:59 templates/work.html:41
-#, fuzzy
 msgid "Wikipedia"
-msgstr "Wikipedia-lenke"
+msgstr "Wikipedia"
 
 #: templates/author.html:65 templates/work.html:114
-#, fuzzy
 msgid "Wikisource"
-msgstr "Wikisource-lenke"
+msgstr "Wikikilden"
 
 #: templates/author.html:68
-#, fuzzy
 msgid "Wikiquote"
-msgstr "Wikiquote-lenke"
+msgstr "Wikiquote"
 
 #: templates/author.html:71
 msgid "Official website"
-msgstr ""
+msgstr "Offisielt nettsted"
 
 #: templates/author.html:80
-#, fuzzy
 msgid "Biography"
-msgstr "Orlando: En biografi"
+msgstr "Biografi"
 
 #: templates/author.html:85 templates/layout.html:132
 msgid "Nationality"
@@ -414,7 +407,7 @@ msgstr "Fødselsdato"
 #: templates/author.html:96 templates/author.html:114
 #, python-format
 msgid "(%(author_age)s years)"
-msgstr ""
+msgstr "(%(author_age)s år)"
 
 #: templates/author.html:99
 msgid "Occupation"
@@ -466,23 +459,21 @@ msgid "Applies to %(countries)s"
 msgstr "Gjelder for %(countries)s"
 
 #: templates/country.html:28
-#, fuzzy, python-format
+#, python-format
 msgid "%(country_name)s's statistics"
-msgstr "%(country_name)s er en del av"
+msgstr "Statistikk for %(country_name)s"
 
 #: templates/country.html:29
 msgid "Number of works identified as being in the public domain on Wikidata"
-msgstr ""
+msgstr "Antall verk identifisert som falt i det fri på Wikidata"
 
 #: templates/country.html:33 templates/layout.html:156
-#, fuzzy
 msgid "Type of work"
-msgstr "Liste over verk"
+msgstr "Type verk"
 
 #: templates/country.html:34
-#, fuzzy
 msgid "Number of works in public domain"
-msgstr "Allemannseie?"
+msgstr "Antall verk som er offentlig eiendom"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
 #: templates/layout.html:240 templates/layout.html:242
@@ -593,12 +584,10 @@ msgid "Select"
 msgstr "Velg"
 
 #: templates/layout.html:105 templates/layout.html:108
-#, fuzzy
 msgid "Authors"
-msgstr "Forfatter/e"
+msgstr "Skapere"
 
 #: templates/layout.html:106 templates/layout.html:109
-#, fuzzy
 msgid "Works"
 msgstr "Verk"
 
@@ -612,25 +601,24 @@ msgstr "Søk"
 
 #: templates/layout.html:120
 msgid "Advanced search"
-msgstr ""
+msgstr "Avansert søk"
 
 #: templates/layout.html:125 templates/layout.html:140
 #: templates/layout.html:158 templates/layout.html:167
 msgid "Any"
-msgstr ""
+msgstr "Alle"
 
 #: templates/layout.html:136
 msgid "Type to filter..."
-msgstr ""
+msgstr "Skriv for å filtrere ..."
 
 #: templates/layout.html:149
-#, fuzzy
 msgid "In public domain"
-msgstr "Allemannseie?"
+msgstr "Falt i det fri"
 
 #: templates/layout.html:151
 msgid "Authors whose works are in public domain in at least one jurisdiction"
-msgstr ""
+msgstr "Skapere hvis verker er falt i det fri i minst én jurisdiksjon"
 
 #: templates/layout.html:165 templates/work.html:65
 msgid "Country of origin"
@@ -662,7 +650,7 @@ msgstr "Drevet av Wikidata."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
-msgstr "Resultatløst. Prøv igjen."
+msgstr "Ingen treff. Prøv igjen."
 
 #: templates/results.html:6
 msgid "Search results"
@@ -670,7 +658,7 @@ msgstr "Søkeresultater"
 
 #: templates/results.html:10
 msgid "Your search returned too many results. Please refine your search."
-msgstr ""
+msgstr "Søket resulterte i for mange treff. Snevre inn søket ditt."
 
 #: templates/results.html:31 templates/works-list.html:21
 msgid "Available for download"
@@ -678,11 +666,11 @@ msgstr "Tilgjengelig for nedlastning"
 
 #: templates/work.html:29
 msgid "Author/s"
-msgstr "Forfatter/e"
+msgstr "Skaper(e)"
 
 #: templates/work.html:54
 msgid "Work details"
-msgstr ""
+msgstr "Verksdetaljer"
 
 #: templates/work.html:57
 msgid "Publication date"
@@ -705,9 +693,8 @@ msgid "in"
 msgstr "i"
 
 #: templates/work.html:92
-#, fuzzy
 msgid "countries and terms page"
-msgstr "Land og vilkår"
+msgstr "siden for land og vilkår"
 
 #: templates/work.html:94
 msgid ""
@@ -715,6 +702,9 @@ msgid ""
 "status depends on the jurisdiction, the author's date of death and the date "
 "the work was created or published."
 msgstr ""
+"Informasjon om opphavsrettsstatus er ikke tilgjengelig for dette verket. "
+"Opphavsrettsstatusen kommer an på jurisdiksjon, skaperens dødsdato og datoen "
+"verket ble skapt eller utgitt."
 
 #: templates/work.html:95
 #, python-format
@@ -722,6 +712,8 @@ msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
 msgstr ""
+"For å lære mer om opphavsrettsbegreper i forskjellige land, sjekk "
+"%(countries_and_terms_page_link)s."
 
 #: templates/work.html:106
 msgid "Access work"
@@ -729,20 +721,19 @@ msgstr "Få tilgang til arbeidet"
 
 #: templates/work.html:127
 msgid "Internet Archive"
-msgstr ""
+msgstr "Internet Archive"
 
 #: templates/work.html:130
 msgid "Access on Internet Archive"
-msgstr ""
+msgstr "Se i Internet Archive"
 
 #: templates/work.html:139
 msgid "External link"
-msgstr ""
+msgstr "Ekstern lenke"
 
 #: templates/work.html:142
-#, fuzzy
 msgid "Access online"
-msgstr "Få tilgang til arbeidet"
+msgstr "Få tilgang på nett"
 
 #: templates/works-list.html:8
 #, python-format
