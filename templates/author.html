@@ -29,7 +29,34 @@
           {{ _('Search works') }}
           </a>
         </div>
-        {% if author_is_in_public_domain == True %}
+        {% if author_is_in_public_domain is iterable and (
+          author_is_in_public_domain is not string and 
+          author_is_in_public_domain is not mapping
+          ) %}
+          {% for claim in author_is_in_public_domain %}
+            {% if claim['status_id'] == 'Q73555012' %}
+            <div class="public-domain-badge pd-no mb-2"><span class="pd-icon">&cross;</span>{% else %}
+            <div class="public-domain-badge pd-yes mb-2"><span class="pd-icon">&check;</span>{% endif %}
+            {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %}
+            {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
+            {{ _('in') }} <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
+              {{ claim['applies_to_jurisdiction_label'] }}
+            </a>
+            {% elif claim['jurisdiction_is_instance_of'] == "Q6256" %}
+            {{ _('in') }} <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+              {{ claim['applies_to_jurisdiction_label'] }}
+            </a>
+            {% elif claim['applies_to_jurisdiction_id'] == "Q13780930" %}
+            <a href="{{ url_for('term_page', term_id='Q60332278') }}">
+              {{ _('everywhere in the world') }}
+            </a>
+            {% else %}
+            {% trans jurisdiction_label=claim['applies_to_jurisdiction_label'] %}in {{jurisdiction_label}}{% endtrans %}
+            {% endif %}
+            {% endif %}
+          </div>
+          {% endfor %}
+        {% elif author_is_in_public_domain == True %}
         <div class="public-domain-badge pd-yes mb-2">
           <span class="pd-icon">&check;</span> {{ _('Works are in the public domain') }}
         </div>

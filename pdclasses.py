@@ -212,32 +212,52 @@ class Author(Parent):
             self.image_alt_text = _('Image of %(name)s.', name=self.name)
 
     def isInPublicDomain(self):
-        if self.date_of_death is None:
-            if self.date_of_birth is None:
-                return "Unknown"
-            elif not isinstance(self.date_of_birth["date object"], datetime.date):  # born BC
-                return True
-            elif self.date_of_birth["date object"].year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
-                return True
-            elif (datetime.date.today().year - 180) <= self.date_of_birth["date object"].year < (datetime.date.today().year - 90):
-                return "Consult individual works"  # author born in a date that makes it impossible to determine copyright status worldwide.
-            else:
-                return False  # authors that are alive or whose works are probably in private domain worldwide
+        copyright_status_response = squeries.retrieve_query(squeries.query_for_copyright_status_of_author,
+                                                   qname=self.wikidata_item_id,
+                                                   lang=languages.get_locale()
+                                                   )
+        if not copyright_status_response:
+            if self.date_of_death is None:
+                if self.date_of_birth is None:
+                    return "Unknown"
+                elif not isinstance(self.date_of_birth["date object"], datetime.date):  # born BC
+                    return True
+                elif self.date_of_birth["date object"].year < (datetime.date.today().year - 180):  # author was born in a date that assures is in public domain
+                    return True
+                elif (datetime.date.today().year - 180) <= self.date_of_birth["date object"].year < (datetime.date.today().year - 90):
+                    return "Consult individual works"  # author born in a date that makes it impossible to determine copyright status worldwide.
+                else:
+                    return False  # authors that are alive or whose works are probably in private domain worldwide
 
-        elif not isinstance(self.date_of_death["date object"], datetime.date):  # died BC
-            return True
-        else:
-            year_of_death = self.date_of_death["date object"].year
-            if year_of_death < (datetime.date.today().year - 100):  # author works are in public domain worldwide
+            elif not isinstance(self.date_of_death["date object"], datetime.date):  # died BC
                 return True
-            elif (datetime.date.today().year - 100) <= year_of_death < (datetime.date.today().year - 50):
-                return "Consult individual works"  # author works are in public domain in some countries
-            elif self.occupation and ("film director" in self.occupation
-                  or "photographer" in self.occupation) and self.date_of_birth["date object"].year < (datetime.date.today().year - 80):
-                return "Consult individual works"   # This is to address works whose copyright
-                # term is measured in years after being made available.
             else:
-                return False
+                year_of_death = self.date_of_death["date object"].year
+                if year_of_death < (datetime.date.today().year - 100):  # author works are in public domain worldwide
+                    return True
+                elif (datetime.date.today().year - 100) <= year_of_death < (datetime.date.today().year - 50):
+                    return "Consult individual works"  # author works are in public domain in some countries
+                elif self.occupation and ("film director" in self.occupation
+                    or "photographer" in self.occupation) and self.date_of_birth["date object"].year < (datetime.date.today().year - 80):
+                    return "Consult individual works"   # This is to address works whose copyright
+                    # term is measured in years after being made available.
+                else:
+                    return False
+        else:
+            copyright_status = []
+            for claim in copyright_status_response:
+                try:
+                    status_dict = {
+                        'status_label': claim.get('cstatusLabel', {}).get('value'),
+                        'status_id': claim.get('cstatus', {}).get('value').split("/")[-1],
+                        'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
+                        'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1] if claim.get('jurisdiction', {}).get('value') else None,
+                        'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1] if claim.get('jurisdictionIsInstanceOf', {}).get('value') else None
+                        }
+                    copyright_status.append(status_dict)
+                except:
+                    pass
+            return copyright_status
 
     def ageOfAuthor(self):
         if self.date_of_birth is None:

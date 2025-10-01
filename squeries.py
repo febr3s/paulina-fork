@@ -355,6 +355,19 @@ WHERE {{
 }}
 '''
 
+query_for_copyright_status_of_author = '''
+SELECT DISTINCT ?cstatus ?cstatusLabel ?jurisdiction ?jurisdictionLabel ?jurisdictionIsInstanceOf ?jurisdictionIsInstanceOfLabel 
+WHERE {{ 
+  wd:{qname} p:P7763 ?cstatusStatement . 
+  ?cstatusStatement ps:P7763 ?cstatus . 
+  OPTIONAL {{ 
+  VALUES ?jurisdictionIsInstanceOf {{ wd:Q63705939 wd:Q6256 wd:Q82794 wd:Q1140229 }} . 
+  ?cstatusStatement pq:P1001 ?jurisdiction . 
+  ?jurisdiction wdt:P31 ?jurisdictionIsInstanceOf . }} 
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
+}}
+'''
+
 query_for_authors_of_a_work = '''
 SELECT DISTINCT ?typeOfAuthor ?typeOfAuthorLabel ?author ?authorLabel 
 WHERE 
