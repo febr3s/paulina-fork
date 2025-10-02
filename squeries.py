@@ -62,16 +62,14 @@ WHERE
 GROUP BY ?item ?itemLabel ?itemDescription
 '''
 
-
 query_for_countries_by_copyright_term = '''
-SELECT ?item ?itemLabel 
+SELECT DISTINCT ?item ?itemLabel 
 WHERE 
 {{ 
-  VALUES ?term {{ wd:{qname} }} . 
-  ?term ( wdt:P1001|wdt:P150 ) ?item . 
+  wd:{qname} wdt:P527?/wdt:P1001 ?item . 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
 }} 
-ORDER BY ASC(?itemLabel)
+ORDER BY ?itemLabel
 '''
 
 query_for_country_copyright_term = '''
