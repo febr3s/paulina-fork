@@ -199,14 +199,13 @@ class Author(Parent):
         else:
             self.country_of_birth = None
 
-        image = self.wikidata_item.get('statements', {}).get('P18')
+        image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Image_is_needed_female.svg/240px-Image_is_needed_female.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
             self.image_alt_text = _('Image of a generic human silhouette. The text above it indicates that there is no free image of the person available, and that if you own one, you can click on the placeholder link.')
         else:
-            image_file_name = image[0]["value"]["content"]
-            image_file_name = requests.utils.quote(image_file_name)
+            image_file_name = requests.utils.quote(image)
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=200'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(name)s.', name=self.name)
@@ -294,15 +293,13 @@ class Work(Parent):
         super().__init__(wikidata_item_id)
         self.instance_of = build_field(self.wikidata_item.get('statements', {}).get('P31'))
 
-        image = self.wikidata_item.get('statements', {}).get('P18')
+        image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:
             self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/464px-Placeholder_book.svg.png"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
             self.image_alt_text = _('Image of a generic work. The text above it indicates that there is no free image of the work available, and that if you own one, you can click on the placeholder link to upload it.')
-
         else:
-            image_file_name = image[0]["value"]["content"]
-            image_file_name = requests.utils.quote(image_file_name)
+            image_file_name = requests.utils.quote(image)
             self.image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + image_file_name + '&width=400&height=200'
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(title)s.', title=self.name)
@@ -373,13 +370,12 @@ class Country(Parent):
     """A class for countries."""
     def __init__(self, wikidata_item_id):
         super().__init__(wikidata_item_id)
-        flag_image = self.wikidata_item.get('statements', {}).get('P41')
+        flag_image = build_field(self.wikidata_item.get('statements', {}).get('P41'), field_type="plain_value")
         if flag_image is None:
             self.flag_image = None
             self.flag_image_link = None
         else:
-            flag_image_file_name = flag_image[0]["value"]["content"]
-            flag_image_file_name = requests.utils.quote(flag_image_file_name)
+            flag_image_file_name = requests.utils.quote(flag_image)
             self.flag_image = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/' + flag_image_file_name + '&width=200&height=30'
             self.flag_image_link = 'https://commons.wikimedia.org/wiki/File:' + flag_image_file_name
             self.flag_image_alt_text = _('Flag of %(country_name)s.', country_name=self.name)
@@ -388,7 +384,6 @@ class Country(Parent):
                                                          qname=self.wikidata_item_id,
                                                          lang=languages.get_locale()
                                                          )
-        
     
     # Method to determine the copyright term of the country
     def getCopyrightTerm(self):
