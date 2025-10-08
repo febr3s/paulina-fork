@@ -148,6 +148,7 @@ def author_page(author_data):
             author_description=print_field(author.description),
             author_nationality=print_field(author.nationality),
             author_gender=print_field(author.gender),
+            author_ethnicity=print_field(author.ethnicity),
             author_date_of_birth=print_field(author.date_of_birth),
             author_occupation=", ".join(print_field(author.occupation)),
             author_place_of_birth=print_field(author.place_of_birth),
