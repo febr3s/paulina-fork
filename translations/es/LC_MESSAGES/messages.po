@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-01 20:15-0300\n"
-"PO-Revision-Date: 2025-10-01 20:23-0300\n"
+"POT-Creation-Date: 2025-10-08 13:46-0300\n"
+"PO-Revision-Date: 2025-10-08 13:50-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.16.0\n"
@@ -44,25 +44,25 @@ msgstr "Resultados"
 msgid "No results found"
 msgstr "No se encontraron resultados"
 
-#: app.py:179
+#: app.py:180
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:239
+#: app.py:240
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:255
+#: app.py:256
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:257 templates/countries.html:7 templates/layout.html:71
+#: app.py:258 templates/countries.html:7 templates/layout.html:71
 #: templates/layout.html:227
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:293
+#: app.py:294
 msgid "404 error"
 msgstr "Error 404"
 
@@ -118,7 +118,7 @@ msgstr "(siglo)"
 msgid "(millennium)"
 msgstr "(milenio)"
 
-#: pdclasses.py:206
+#: pdclasses.py:207
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there "
 "is no free image of the person available, and that if you own one, you can "
@@ -139,16 +139,16 @@ msgid ""
 "image of the work available, and that if you own one, you can click on the "
 "placeholder link to upload it."
 msgstr ""
-"Imagen de una obra genérica. El texto sobre ella indica que no hay "
-"disponible una imagen libre de la obra, y que si posees una, puedes hacer "
-"clic en el enlace del cartel para subirla."
+"Imagen de una obra genérica. El texto sobre ella indica que no hay disponible "
+"una imagen libre de la obra, y que si posees una, puedes hacer clic en el "
+"enlace del cartel para subirla."
 
-#: pdclasses.py:308
+#: pdclasses.py:306
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Imagen de %(title)s."
 
-#: pdclasses.py:385 templates/countries.html:20
+#: pdclasses.py:382 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Bandera de %(country_name)s."
@@ -213,11 +213,11 @@ msgstr "repositorio de código del proyecto"
 #: templates/about.html:18
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
+"Paulina invites you to learn about the cultural heritage of humanity. It is a "
+"multilingual tool, powered by %(wikidata_link)s, that allows you to search "
 "for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"domain. It also facilitates the understanding of copyright terms and helps to "
+"know when a work enters the public domain in each country."
 msgstr ""
 "Paulina invita a aprender sobre el patrimonio cultural de la humanidad. Es "
 "una herramienta multilingüe, basada en datos de %(wikidata_link)s, que "
@@ -236,9 +236,9 @@ msgstr ""
 #: templates/about.html:21
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
-"cultural heritage and invites you to improve the data in Wikidata and, "
-"through it, on the Internet."
+"Paulina helps to identify gaps and inaccuracies in information about cultural "
+"heritage and invites you to improve the data in Wikidata and, through it, on "
+"the Internet."
 msgstr ""
 "En ocasiones, la información consultada puede contener errores o estar "
 "incompleta. Paulina ayuda a identificar brechas e inexactitudes en la "
@@ -255,9 +255,9 @@ msgid ""
 "national, regional or thematic versions of the tool, according to the needs "
 "of each community."
 msgstr ""
-"Esta página web es parte de un proyecto más amplio para facilitar la "
-"creación de versiones nacionales, regionales o temáticas de la herramienta, "
-"de acuerdo a las necesidades de cada comunidad."
+"Esta página web es parte de un proyecto más amplio para facilitar la creación "
+"de versiones nacionales, regionales o temáticas de la herramienta, de acuerdo "
+"a las necesidades de cada comunidad."
 
 #: templates/about.html:24
 msgid "Who makes Paulina"
@@ -298,9 +298,9 @@ msgstr ""
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"come from %(wm_commons_link)s and are under different free licenses or in the "
+"public domain. We recommend consulting the information of each content on "
+"Wikimedia Commons."
 msgstr ""
 "Las imágenes y contenidos audiovisuales en las páginas de autores, obras, "
 "países y plazos provienen de %(wm_commons_link)s y están bajo distintas "
@@ -310,16 +310,15 @@ msgstr ""
 #: templates/about.html:30
 msgid ""
 "The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"public, mostly because they are in the public domain, or under free licenses, "
+"but some of them may be under copyright in some jurisdictions. We recommend "
+"consulting the information of each work on the websites where they are hosted."
 msgstr ""
 "Las obras accesibles a través de enlaces a sitios externos están disponibles "
 "al público, en su mayoría por estar en dominio público, o bajo licencias "
 "libres, pero algunas de ellas pueden tener derechos de autor en vigencia en "
-"algunas jurisdicciones. Recomendamos consultar la información de cada obra "
-"en los sitios web donde están alojadas."
+"algunas jurisdicciones. Recomendamos consultar la información de cada obra en "
+"los sitios web donde están alojadas."
 
 #: templates/about.html:31
 msgid "Free software"
@@ -373,8 +372,7 @@ msgstr "hasta el 1 de enero de "
 
 #: templates/author.html:73
 msgid "Consult individual works for public domain status"
-msgstr ""
-"Consultar obras individuales para conocer el estatus de dominio público"
+msgstr "Consultar obras individuales para conocer el estatus de dominio público"
 
 #: templates/author.html:77
 msgid ""
@@ -412,32 +410,36 @@ msgstr "Biografía"
 msgid "Nationality"
 msgstr "Nacionalidad"
 
-#: templates/author.html:116 templates/layout.html:123
+#: templates/author.html:117
+msgid "Ethnicity"
+msgstr "Grupo étnico"
+
+#: templates/author.html:122 templates/layout.html:123
 msgid "Gender"
 msgstr "Género"
 
-#: templates/author.html:120
+#: templates/author.html:126
 msgid "Date of birth"
 msgstr "Fecha de nacimiento"
 
-#: templates/author.html:123 templates/author.html:141
+#: templates/author.html:129 templates/author.html:147
 #, python-format
 msgid "(%(author_age)s years)"
 msgstr "(%(author_age)s años)"
 
-#: templates/author.html:126
+#: templates/author.html:132
 msgid "Occupation"
 msgstr "Ocupación"
 
-#: templates/author.html:130
+#: templates/author.html:136
 msgid "Place of birth"
 msgstr "Lugar de nacimiento"
 
-#: templates/author.html:134
+#: templates/author.html:140
 msgid "Country of birth"
 msgstr "País de nacimiento"
 
-#: templates/author.html:138
+#: templates/author.html:144
 msgid "Date of death"
 msgstr "Fecha de muerte"
 
@@ -492,8 +494,7 @@ msgid "Number of works in public domain"
 msgstr "Cantidad de obras en dominio público"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:240 templates/layout.html:242
-#: templates/layout.html:244
+#: templates/layout.html:240 templates/layout.html:242 templates/layout.html:244
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -579,11 +580,11 @@ msgstr "Paulina"
 
 #: templates/layout.html:13 templates/layout.html:38
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is a "
+"multilingual tool, powered by Wikidata, that allows you to search for people "
+"and find out if they have freely accessible works in the public domain. It "
+"also facilitates the understanding of copyright terms and helps to know when "
+"a work enters the public domain in each country."
 msgstr ""
 "Paulina invita a aprender sobre el patrimonio cultural de la humanidad. Es "
 "una herramienta multilingüe, basada en datos de Wikidata, que permite buscar "
@@ -619,8 +620,8 @@ msgstr "Buscar"
 msgid "Advanced search"
 msgstr "Búsqueda avanzada"
 
-#: templates/layout.html:125 templates/layout.html:140
-#: templates/layout.html:158 templates/layout.html:167
+#: templates/layout.html:125 templates/layout.html:140 templates/layout.html:158
+#: templates/layout.html:167
 msgid "Any"
 msgstr "Cualquiera"
 

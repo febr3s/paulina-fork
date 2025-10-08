@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-01 20:15-0300\n"
+"POT-Creation-Date: 2025-10-08 13:46-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,25 +41,25 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: app.py:179
+#: app.py:180
 msgid "List of works"
 msgstr ""
 
-#: app.py:239
+#: app.py:240
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:255
+#: app.py:256
 msgid "Unknown term"
 msgstr ""
 
-#: app.py:257 templates/countries.html:7 templates/layout.html:71
+#: app.py:258 templates/countries.html:7 templates/layout.html:71
 #: templates/layout.html:227
 msgid "Countries and terms"
 msgstr ""
 
-#: app.py:293
+#: app.py:294
 msgid "404 error"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "(millennium)"
 msgstr ""
 
-#: pdclasses.py:206
+#: pdclasses.py:207
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
@@ -134,12 +134,12 @@ msgid ""
 "on the placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:308
+#: pdclasses.py:306
 #, python-format
 msgid "Image of %(title)s."
 msgstr ""
 
-#: pdclasses.py:385 templates/countries.html:20
+#: pdclasses.py:382 templates/countries.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr ""
@@ -370,32 +370,36 @@ msgstr ""
 msgid "Nationality"
 msgstr ""
 
-#: templates/author.html:116 templates/layout.html:123
+#: templates/author.html:117
+msgid "Ethnicity"
+msgstr ""
+
+#: templates/author.html:122 templates/layout.html:123
 msgid "Gender"
 msgstr ""
 
-#: templates/author.html:120
+#: templates/author.html:126
 msgid "Date of birth"
 msgstr ""
 
-#: templates/author.html:123 templates/author.html:141
+#: templates/author.html:129 templates/author.html:147
 #, python-format
 msgid "(%(author_age)s years)"
 msgstr ""
 
-#: templates/author.html:126
+#: templates/author.html:132
 msgid "Occupation"
 msgstr ""
 
-#: templates/author.html:130
+#: templates/author.html:136
 msgid "Place of birth"
 msgstr ""
 
-#: templates/author.html:134
+#: templates/author.html:140
 msgid "Country of birth"
 msgstr ""
 
-#: templates/author.html:138
+#: templates/author.html:144
 msgid "Date of death"
 msgstr ""
 
