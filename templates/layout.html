@@ -71,8 +71,8 @@
           <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
         </li>
       </ul>
-      <form class="d-flex" method="GET">
-        <select class="form-select me-1 border-black shadow-none" name="language">
+      <form class="d-flex" method="GET" id="language-form">
+        <select class="form-select me-1 border-black shadow-none" name="language" id="language-select">
           {% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
           <option value="{{ CURRENT_LANGUAGE }}" selected>{{ TRANSLATED_LANGUAGES[CURRENT_LANGUAGE] }}</option>
           {% endif %}
@@ -82,7 +82,8 @@
           {% endif %}
           {% endfor %}
         </select>
-        <button class="btn border-black" style="--bs-btn-color: black; --bs-btn-hover-bg: #71c3ec; --bs-btn-bg: #29a4e2;"
+        <button class="btn border-black" id="language-select-btn"
+                style="--bs-btn-color: black; --bs-btn-hover-bg: #71c3ec; --bs-btn-bg: #29a4e2;"
                 type="submit">{{ _('Select') }}
         </button>
       </form>
@@ -260,6 +261,22 @@
     document.getElementById("filters-for-author").style.cssText = typeOfSearch.value === "author" ? 'display: flex; flex-wrap: wrap' : 'display: none';
     document.getElementById("filters-for-work").style.cssText = typeOfSearch.value === "work" ? 'display: flex; flex-wrap: wrap' : 'display: none';
   }
+</script>
+<script>
+   // Auto-Navigate on Language Selection with Javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    var langSelect = document.getElementById('language-select');
+    var langForm = document.getElementById('language-form');
+    var langBtn = document.getElementById('language-select-btn');
+    if (langSelect && langForm && langBtn) {
+      // Hide the button if JS is enabled
+      langBtn.style.display = 'none';
+      // Submit form on change
+      langSelect.addEventListener('change', function() {
+        langForm.submit();
+      });
+    }
+  });
 </script>
 <script>
   const combobox = document.getElementById('nationality-combobox');
