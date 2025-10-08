@@ -161,6 +161,7 @@ class Author(Parent):
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
         self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
+        self.ethnicity = build_field(self.wikidata_item.get('statements', {}).get('P172'))
 
         if self.date_of_death and isinstance(self.date_of_death["date object"], datetime.date):
             self.date_enter_public_domain = self.date_of_death['date object'].year + 101
