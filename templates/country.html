@@ -2,11 +2,12 @@
 
 {% block content %}
 <div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">
+  <h1 class="mb-4 p-1">
     <a href="{{country_flag_image_link}}" target="_blank">
       <img src="{{country_flag_image}}" alt="{{country_flag_image_alt_text}}" height="30"></a>
-    {{ _("%(country_name)s's copyright term", country_name=country_name) }}</h2>
+    {{ country_name }}</h1>
 
+  <h2>{{ _("Copyright term") }}</h2>
   <table class="table table-light p-1">
     <tbody>
     {% for term in country_copyright_terms %}
@@ -25,8 +26,8 @@
     {% endfor %}
     </tbody>
   </table>
-  <h2>{{ _("%(country_name)s's statistics", country_name=country_name) }}</h2>
-  <h3>{{ _("Number of works identified as being in the public domain on Wikidata") }}</h3>
+  <h2>{{ _("Public domain statistics") }}</h2>
+  <p>{{ _("Number of works identified as being in the public domain on Wikidata") }}</p>
   <table class="table table-light p-1">
     <tbody>
     <tr>
