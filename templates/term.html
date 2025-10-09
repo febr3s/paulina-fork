@@ -4,17 +4,27 @@
 
 <div class="container-fluid col-12 col-xl-9 p-2">
   <h2 class="mb-4 p-1">{{ title }}</h2>
-  <div class="list-group p-1">
-    {% for country in term_countries %}
-    {% if "itemLabel" in country %}
-    <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
-       class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ country['itemLabel']['value'] }}</h5>
-      </div>
-    </a>
-    {% endif %}
-    {% endfor %}
+  <div class="container p-1">
+    <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+      {% for country in term_countries %}
+      {% if "itemLabel" in country %}
+      <div class="col">
+          <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
+            class="list-group-item list-group-item-action">
+            <div class="text-center border border-black country-card p-3 h-100">
+              <p>
+                <img src="{{ country.get('flag', {}).get('value') }}"
+                    alt="{{ _('Flag of %(country_name)s.', country_name=country.get('itemLabel', {}).get('value')) }}" height="20">
+              </p>
+              <p>
+                <strong>{{ country['itemLabel']['value'] }}</strong>
+              </p>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>
 
