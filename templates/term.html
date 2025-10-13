@@ -4,7 +4,9 @@
 
 <div class="container-fluid col-12 col-xl-9 p-2">
   <h2 class="mb-4 p-1">{{ title }}</h2>
-<<<<<<< HEAD
+  {% if term_description %}
+    <p class="text-muted px-1 mb-4">{{ term_description }}</p>
+  {% endif %}
   <div class="container p-1">
     <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
       {% for country in term_countries %}
@@ -26,22 +28,6 @@
       {% endif %}
       {% endfor %}
     </div>
-=======
-  {% if term_description %}
-  <p class="text-muted px-1 mb-4">{{ term_description }}</p>
-  {% endif %}
-  <div class="list-group p-1">
-    {% for country in term_countries %}
-    {% if "itemLabel" in country %}
-    <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
-       class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ country['itemLabel']['value'] }}</h5>
-      </div>
-    </a>
-    {% endif %}
-    {% endfor %}
->>>>>>> cfd046a (add copyright description)
   </div>
 </div>
 
