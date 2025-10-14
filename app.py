@@ -236,10 +236,14 @@ def country_page(country_data):
 def term_page(term_id):
     try:
         term = pdclasses.Term(term_id)
+        description = print_field(term.description)
+        if isinstance(description, str) and description:
+            description = description.capitalize() + "."
         return render_template("term.html",
             title=_('List of %(term_name)s', term_name=print_field(term.name)),
             term_name=print_field(term.name),
-            term_countries=print_field(term.getCountries())
+            term_countries=print_field(term.getCountries()),
+            term_description=description,
         )
     except:  # If the Q number doesn't match any item
         abort(404)

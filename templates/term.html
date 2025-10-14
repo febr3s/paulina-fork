@@ -4,6 +4,9 @@
 
 <div class="container-fluid col-12 col-xl-9 p-2">
   <h2 class="mb-4 p-1">{{ title }}</h2>
+  {% if term_description %}
+    <p class="text-muted px-1 mb-4">{{ term_description }}</p>
+  {% endif %}
   <div class="container p-1">
     <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
       {% for country in term_countries %}
