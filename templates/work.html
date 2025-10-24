@@ -58,6 +58,12 @@
             <span class="detail-label">{{ _('Publication date') }}:</span>
             {{ work_publication_date }}
           </div>
+          {% endif %}          
+          {% if work_inception_date %}
+          <div class="detail-item">
+            <span class="detail-label">{{ _('Inception') }}:</span>
+            {{ work_inception_date }}
+          </div>
           {% endif %}
           {% if work_language %}
           <div class="detail-item">
