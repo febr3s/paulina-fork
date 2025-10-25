@@ -14,6 +14,12 @@ You must copy the `config-sample.py` file to `config.py`. In this file you must 
 
 The secret key is for the session cookie. The session cookie is necessary so that the language choice is persistent throughout the session.
 
+If you'd like to run application in DEBUG mode, uncomment the second line and set it to `True`, i.e.:
+
+`DEBUG = True`
+
+By default, `DEBUG` is set to `False`.
+
 ## Complete documentation
 If you'd like to learn more about the software:
 - [User documentation](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina)
