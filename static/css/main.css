@@ -48,6 +48,9 @@ h3 {
   transform: scale(1.05);
 }
 
+.footer {
+  margin-top: auto !important;
+}
 /* Pills */
 .pill-custom {
   box-shadow: 5px 5px;
