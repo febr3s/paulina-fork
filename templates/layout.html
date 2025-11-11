@@ -94,6 +94,7 @@
 {% block presentation %}
 {% endblock %}
 
+<!-- Main content -->
 <div class="container p-3">
 
   <!-- Search form -->
@@ -183,72 +184,75 @@
 
 </div>
 
-<!-- Pre-footer widgets -->
-<div class="text-bg-light mt-4">
-  <div class="container text-center p-3">
-    <div class="row">
-      <div class="col-md p-2 m-2">
-        <p><strong>{{ _('Paulina is supported by:') }}</strong></p>
-        <ul class="list-unstyled">
-          <li>
-            <a href="https://www.articaonline.com" target="_blank" class="link-dark">{{ _('Ártica - Online Cultural Center') }}</a>
-          </li>
-          <li>
-            <a href="https://www.creativecommons.uy" target="_blank" class="link-dark">{{ _('Creative Commons Uruguay') }}</a>
-          </li>
-          <li>
-            <a href="https://data.org.uy" target="_blank" class="link-dark">{{ _('Data Uruguay') }}</a>
-          </li>
-          <li>
-            <a href="https://wikimedistas.uy" target="_blank" class="link-dark">{{ _('Wikimedistas de Uruguay') }}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md p-2 m-2">
-        <p><strong>{{ _('About Paulina') }}</strong></p>
-        <ul class="list-unstyled">
-          <li>
-            <a href="{{ url_for('about') }}" class="link-dark">{{ _('About') }}</a>
-          </li>
-          <li>
-            <a href="https://gitlab.wikimedia.org/toolforge-repos/paulina" target="_blank" class="link-dark">{{ _("Source code") }}</a>
-          </li>
-          <li>
-            <a href="https://hosted.weblate.org/engage/paulina/" target="_blank" class="link-dark">{{ _("Help translate") }}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md p-2 m-2">
-        <p><strong>{{ _('Help') }}</strong></p>
-        <ul class="list-unstyled">
-          <li>
-            <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Paulina" target="_blank" class="link-dark">{{ _('Documentation') }}</a>
-          </li>
-          <li>
-            <a href="{{ url_for('countries_main') }}" class="link-dark">{{ _('Countries and terms') }}</a>
-          </li>
-        </ul>
+<!-- Footer -->
+<div class="footer">
+  <!-- Footer widgets -->
+  <div class="text-bg-light mt-4">
+    <div class="container text-center p-3">
+      <div class="row">
+        <div class="col-md p-2 m-2">
+          <p><strong>{{ _('Paulina is supported by:') }}</strong></p>
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://www.articaonline.com" target="_blank" class="link-dark">{{ _('Ártica - Online Cultural Center') }}</a>
+            </li>
+            <li>
+              <a href="https://www.creativecommons.uy" target="_blank" class="link-dark">{{ _('Creative Commons Uruguay') }}</a>
+            </li>
+            <li>
+              <a href="https://data.org.uy" target="_blank" class="link-dark">{{ _('Data Uruguay') }}</a>
+            </li>
+            <li>
+              <a href="https://wikimedistas.uy" target="_blank" class="link-dark">{{ _('Wikimedistas de Uruguay') }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md p-2 m-2">
+          <p><strong>{{ _('About Paulina') }}</strong></p>
+          <ul class="list-unstyled">
+            <li>
+              <a href="{{ url_for('about') }}" class="link-dark">{{ _('About') }}</a>
+            </li>
+            <li>
+              <a href="https://gitlab.wikimedia.org/toolforge-repos/paulina" target="_blank" class="link-dark">{{ _("Source code") }}</a>
+            </li>
+            <li>
+              <a href="https://hosted.weblate.org/engage/paulina/" target="_blank" class="link-dark">{{ _("Help translate") }}</a>
+            </li>
+          </ul>
+        </div> 
+        <div class="col-md p-2 m-2">
+          <p><strong>{{ _('Help') }}</strong></p>
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Paulina" target="_blank" class="link-dark">{{ _('Documentation') }}</a>
+            </li>
+            <li>
+              <a href="{{ url_for('countries_main') }}" class="link-dark">{{ _('Countries and terms') }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Footer -->
-<footer>
-  <div class="text-center p-2" style="background-color: #f46527;">
-    <a href="/">
-    {% if CURRENT_LANGUAGE == 'en' %}
-    <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
-    {% elif CURRENT_LANGUAGE == 'es' %}
-    <img src="{{ url_for('static', filename='images/logo-paulina-mono-es.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
-    {% else %}
-    <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
-    {% endif %}
-    </a>
-    <p>{{ now.year }} - {{ _('Paulina - Data for the Public Domain') }}.
-      <a href="https://www.wikidata.org" target="_blank" class="link-dark">{{ _('Powered by Wikidata.') }}</a></p>
-  </div>
-</footer>
+  <!-- Footer rights notice -->
+  <footer>
+    <div class="text-center p-2" style="background-color: #f46527;">
+      <a href="/">
+      {% if CURRENT_LANGUAGE == 'en' %}
+      <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+      {% elif CURRENT_LANGUAGE == 'es' %}
+      <img src="{{ url_for('static', filename='images/logo-paulina-mono-es.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+      {% else %}
+      <img src="{{ url_for('static', filename='images/logo-paulina-mono-en.svg') }}" alt="{{ _('Paulina logo') }}" style="width:100px;">
+      {% endif %}
+      </a>
+      <p>{{ now.year }} - {{ _('Paulina - Data for the Public Domain') }}.
+        <a href="https://www.wikidata.org" target="_blank" class="link-dark">{{ _('Powered by Wikidata.') }}</a></p>
+    </div>
+  </footer>
+</div>
 
 </body>
 <script>
