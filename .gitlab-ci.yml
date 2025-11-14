@@ -1,0 +1,114 @@
+stages:
+  - deploy
+
+Deploy to staging:
+  stage: deploy
+  image: alpine:latest
+  only:
+    - branches
+  except:
+    - main
+  when: manual
+  variables:
+    CI_DEBUG_TRACE: "true"    
+    SSH_USER: "davidcoronel"
+    SSH_HOST: "login.toolforge.org"
+    TARGET_DIR: "www/python/src/"
+    GITHUB_REPO: "https://gitlab.wikimedia.org/toolforge-repos/paulina.git"    
+  before_script:
+    - apk add --no-cache openssh
+    - eval "$(ssh-agent -s)"
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+  script:
+    - echo "🚀 Deploying to $SSH_USER@$SSH_HOST in $TARGET_DIR"
+    - |
+      ssh "$SSH_USER@$SSH_HOST" <<EOF
+      export TARGET_DIR="$TARGET_DIR"
+      export GITHUB_REPO="$GITHUB_REPO"
+        set -e
+        echo "✅ Connected to remote host."
+
+        become paulina-staging bash -se
+          export TARGET_DIR="${TARGET_DIR}"
+          export GITHUB_REPO="${GITHUB_REPO}"
+
+          echo "🧭 Switched to paulina-staging"
+          mkdir -p "$TARGET_DIR"
+          cd "$TARGET_DIR"
+
+          echo "Checking out branch"
+          git checkout $CI_COMMIT_BRANCH
+          echo "Checked out branch"
+
+          if [ -d .git ]; then
+            echo "🔄 Pulling latest changes..."
+            git pull
+          else
+            echo "⬇️ Cloning fresh copy..."
+            git clone --depth 1 "$GITHUB_REPO" .
+          fi
+
+          webservice --cpu=1000m --mem=2Gi python3.11 restart &&
+          echo "Paulina correctly updated. Congratulations!"
+
+
+      EOF
+
+
+Deploy to production:
+  stage: deploy
+  image: alpine:latest
+  only:
+    - main
+  when: manual
+  variables:
+    CI_DEBUG_TRACE: "true"    
+    SSH_USER: "davidcoronel"
+    SSH_HOST: "login.toolforge.org"
+    TARGET_DIR: "www/python/src/"
+    GITHUB_REPO: "https://gitlab.wikimedia.org/toolforge-repos/paulina.git"    
+  before_script:
+    - apk add --no-cache openssh
+    - eval "$(ssh-agent -s)"
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+  script:
+    - echo "🚀 Deploying to $SSH_USER@$SSH_HOST in $TARGET_DIR"
+    - |
+      ssh "$SSH_USER@$SSH_HOST" <<EOF
+      export TARGET_DIR="$TARGET_DIR"
+      export GITHUB_REPO="$GITHUB_REPO"
+        set -e
+        echo "✅ Connected to remote host."
+
+        become paulina-staging bash -se
+          export TARGET_DIR="${TARGET_DIR}"
+          export GITHUB_REPO="${GITHUB_REPO}"
+
+          echo "🧭 Switched to paulina-staging"
+          mkdir -p "$TARGET_DIR"
+          cd "$TARGET_DIR"
+
+          echo "Checking out main"
+          git checkout main
+          echo "Checked out main"
+
+          if [ -d .git ]; then
+            echo "🔄 Pulling latest changes..."
+            git pull
+          else
+            echo "⬇️ Cloning fresh copy..."
+            git clone --depth 1 "$GITHUB_REPO" .
+          fi
+
+          webservice --cpu=1000m --mem=2Gi python3.11 restart &&
+          echo "Paulina correctly updated. Congratulations!"
+
+
+      EOF
+  
