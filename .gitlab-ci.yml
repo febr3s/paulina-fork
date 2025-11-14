@@ -86,11 +86,11 @@ Deploy to production:
         set -e
         echo "✅ Connected to remote host."
 
-        become paulina-staging bash -se
+        become paulina bash -se
           export TARGET_DIR="${TARGET_DIR}"
           export GITHUB_REPO="${GITHUB_REPO}"
 
-          echo "🧭 Switched to paulina-staging"
+          echo "🧭 Switched to paulina"
           mkdir -p "$TARGET_DIR"
           cd "$TARGET_DIR"
 
