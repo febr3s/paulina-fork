@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-25 17:06-0300\n"
+"POT-Creation-Date: 2025-12-02 15:16-0300\n"
 "PO-Revision-Date: 2025-08-21 01:01+0000\n"
 "Last-Translator: S H <higa432@gmail.com>\n"
 "Language: ja\n"
@@ -19,49 +19,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:53
+#: app.py:54
 msgid "No value"
 msgstr "値なし"
 
-#: app.py:55
+#: app.py:56
 msgid "Unknown value"
 msgstr "不明な値"
 
-#: app.py:65 templates/layout.html:56 templates/layout.html:65
+#: app.py:66 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "ホーム"
 
-#: app.py:72 templates/layout.html:68 templates/layout.html:211
+#: app.py:73 templates/layout.html:65 templates/layout.html:211
 msgid "About"
 msgstr "このサイトについて"
 
-#: app.py:105 app.py:122
+#: app.py:106 app.py:123
 msgid "Results"
 msgstr "結果"
 
-#: app.py:112 app.py:129 app.py:134
+#: app.py:113 app.py:130 app.py:135
 msgid "No results found"
 msgstr "結果はありません"
 
-#: app.py:180
+#: app.py:183
 msgid "List of works"
 msgstr "作品のリスト"
 
-#: app.py:243
+#: app.py:247
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)sのリスト"
 
-#: app.py:260
+#: app.py:264
 msgid "Unknown term"
 msgstr "不明な条項"
 
-#: app.py:262 templates/countries.html:7 templates/layout.html:71
+#: app.py:266 templates/countries.html:7 templates/layout.html:68
 #: templates/layout.html:228
 msgid "Countries and terms"
 msgstr "各国の著作権条項"
 
-#: app.py:298
+#: app.py:302
 msgid "404 error"
 msgstr "404 エラー"
 
@@ -373,7 +373,7 @@ msgstr "公式ウェブサイト"
 msgid "Biography"
 msgstr "略歴"
 
-#: templates/author.html:112 templates/layout.html:133
+#: templates/author.html:112 templates/layout.html:131
 msgid "Nationality"
 msgstr "国籍"
 
@@ -381,7 +381,7 @@ msgstr "国籍"
 msgid "Ethnicity"
 msgstr ""
 
-#: templates/author.html:122 templates/layout.html:124
+#: templates/author.html:122 templates/layout.html:122
 msgid "Gender"
 msgstr "性別"
 
@@ -450,7 +450,7 @@ msgstr "パブリックドメイン"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "ウィキデータ上でパブリックドメインであると特定された作品の数"
 
-#: templates/country.html:34 templates/layout.html:157
+#: templates/country.html:34 templates/layout.html:155
 msgid "Type of work"
 msgstr "作品の種別"
 
@@ -538,7 +538,7 @@ msgstr "著作権保護期間が死後70年の国"
 msgid "Paulina"
 msgstr "Paulina（ポーリナ）"
 
-#: templates/layout.html:13 templates/layout.html:38
+#: templates/layout.html:13 templates/layout.html:35
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
 "is a multilingual tool, powered by Wikidata, that allows you to search "
@@ -547,52 +547,52 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr "Paulina（ポーリナ）は、人類の文化遺産の学習に招待します。これはウィキデータを利用した多言語ツールで、人物を検索し、パブリックドメインで自由にアクセスできる作品があるかどうかを調べることができます。また、著作権条項の理解を容易にし、各国で作品がいつパブリックドメインになったかを知るのにも役立ちます。"
 
-#: templates/layout.html:34 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:248
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina（ポーリナ） - パブリックドメインのためのデータ"
 
-#: templates/layout.html:87
+#: templates/layout.html:84
 msgid "Select"
 msgstr "選択"
 
-#: templates/layout.html:106 templates/layout.html:109
+#: templates/layout.html:104 templates/layout.html:107
 msgid "Authors"
 msgstr "作家"
 
-#: templates/layout.html:107 templates/layout.html:110
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Works"
 msgstr "作品"
 
-#: templates/layout.html:114
+#: templates/layout.html:112
 msgid "Search with Paulina"
 msgstr "Paulina（ポーリナ）で探す"
 
-#: templates/layout.html:114 templates/layout.html:116
+#: templates/layout.html:112 templates/layout.html:114
 msgid "Search"
 msgstr "検索"
 
-#: templates/layout.html:121
+#: templates/layout.html:119
 msgid "Advanced search"
 msgstr "高度な検索"
 
-#: templates/layout.html:126 templates/layout.html:141
-#: templates/layout.html:159 templates/layout.html:168
+#: templates/layout.html:124 templates/layout.html:139
+#: templates/layout.html:157 templates/layout.html:166
 msgid "Any"
 msgstr "任意"
 
-#: templates/layout.html:137
+#: templates/layout.html:135
 msgid "Type to filter..."
 msgstr "入力してフィルター..."
 
-#: templates/layout.html:150
+#: templates/layout.html:148
 msgid "In public domain"
 msgstr "パブリックドメイン"
 
-#: templates/layout.html:152
+#: templates/layout.html:150
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "作品が少なくとも1つの法域でパブリックドメインにある作家"
 
-#: templates/layout.html:166 templates/work.html:65
+#: templates/layout.html:164 templates/work.html:65
 msgid "Country of origin"
 msgstr "本国"
 
@@ -632,7 +632,7 @@ msgstr "検索結果"
 msgid "Your search returned too many results. Please refine your search."
 msgstr "検索結果が多すぎます。条件を見直してください。"
 
-#: templates/results.html:31 templates/works-list.html:21
+#: templates/results.html:31 templates/works-list.html:28
 msgid "Available for download"
 msgstr "ダウンロード可能"
 
@@ -698,23 +698,27 @@ msgstr "外部リンク"
 msgid "Access online"
 msgstr "オンラインでアクセス"
 
-#: templates/works-list.html:8
+#: templates/works-list.html:9
 #, python-format
 msgid "No works by %(author_name)s were found"
 msgstr "%(author_name)s による作品は見つかりません"
 
-#: templates/works-list.html:9
+#: templates/works-list.html:10
 msgid "Missing information?"
 msgstr "情報が不足していますか？"
 
-#: templates/works-list.html:10
+#: templates/works-list.html:11
 msgid "Add it to Wikidata"
 msgstr "ウィキデータに追加"
 
-#: templates/works-list.html:13
+#: templates/works-list.html:14
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "%(author_name)sによる作品のリスト"
+
+#: templates/works-list.html:18
+msgid "View this query on the Wikidata Query Service"
+msgstr ""
 
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)sの著作権条項"

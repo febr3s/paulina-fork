@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-25 17:06-0300\n"
-"PO-Revision-Date: 2025-10-25 17:08-0300\n"
+"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"PO-Revision-Date: 2025-12-02 15:19-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/es/>\n"
@@ -20,49 +20,49 @@ msgstr ""
 "Generated-By: Babel 2.16.0\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: app.py:53
+#: app.py:54
 msgid "No value"
 msgstr "Sin valor"
 
-#: app.py:55
+#: app.py:56
 msgid "Unknown value"
 msgstr "Valor desconocido"
 
-#: app.py:65 templates/layout.html:56 templates/layout.html:65
+#: app.py:66 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "Inicio"
 
-#: app.py:72 templates/layout.html:68 templates/layout.html:211
+#: app.py:73 templates/layout.html:65 templates/layout.html:211
 msgid "About"
 msgstr "Acerca de"
 
-#: app.py:105 app.py:122
+#: app.py:106 app.py:123
 msgid "Results"
 msgstr "Resultados"
 
-#: app.py:112 app.py:129 app.py:134
+#: app.py:113 app.py:130 app.py:135
 msgid "No results found"
 msgstr "No se encontraron resultados"
 
-#: app.py:180
+#: app.py:183
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:243
+#: app.py:247
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:260
+#: app.py:264
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:262 templates/countries.html:7 templates/layout.html:71
+#: app.py:266 templates/countries.html:7 templates/layout.html:68
 #: templates/layout.html:228
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:298
+#: app.py:302
 msgid "404 error"
 msgstr "Error 404"
 
@@ -406,7 +406,7 @@ msgstr "Sitio web oficial"
 msgid "Biography"
 msgstr "Biografía"
 
-#: templates/author.html:112 templates/layout.html:133
+#: templates/author.html:112 templates/layout.html:131
 msgid "Nationality"
 msgstr "Nacionalidad"
 
@@ -414,7 +414,7 @@ msgstr "Nacionalidad"
 msgid "Ethnicity"
 msgstr "Grupo étnico"
 
-#: templates/author.html:122 templates/layout.html:124
+#: templates/author.html:122 templates/layout.html:122
 msgid "Gender"
 msgstr "Género"
 
@@ -483,7 +483,7 @@ msgstr "Estadísticas sobre el dominio público"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "Cantidad de obras identificadas como en dominio público en Wikidata"
 
-#: templates/country.html:34 templates/layout.html:157
+#: templates/country.html:34 templates/layout.html:155
 msgid "Type of work"
 msgstr "Tipo de obra"
 
@@ -576,7 +576,7 @@ msgstr "Países con 70 años post mortem auctoris"
 msgid "Paulina"
 msgstr "Paulina"
 
-#: templates/layout.html:13 templates/layout.html:38
+#: templates/layout.html:13 templates/layout.html:35
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It is a "
 "multilingual tool, powered by Wikidata, that allows you to search for people "
@@ -590,53 +590,53 @@ msgstr ""
 "público. También facilita la comprensión de los plazos de derecho de autor y "
 "ayuda a saber cuándo una obra entra en dominio público en cada país."
 
-#: templates/layout.html:34 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:248
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Datos para el dominio público"
 
-#: templates/layout.html:87
+#: templates/layout.html:84
 msgid "Select"
 msgstr "Elegir"
 
-#: templates/layout.html:106 templates/layout.html:109
+#: templates/layout.html:104 templates/layout.html:107
 msgid "Authors"
 msgstr "Autores/as"
 
-#: templates/layout.html:107 templates/layout.html:110
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Works"
 msgstr "Obras"
 
-#: templates/layout.html:114
+#: templates/layout.html:112
 msgid "Search with Paulina"
 msgstr "Buscar con Paulina"
 
-#: templates/layout.html:114 templates/layout.html:116
+#: templates/layout.html:112 templates/layout.html:114
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/layout.html:121
+#: templates/layout.html:119
 msgid "Advanced search"
 msgstr "Búsqueda avanzada"
 
-#: templates/layout.html:126 templates/layout.html:141 templates/layout.html:159
-#: templates/layout.html:168
+#: templates/layout.html:124 templates/layout.html:139 templates/layout.html:157
+#: templates/layout.html:166
 msgid "Any"
 msgstr "Cualquiera"
 
-#: templates/layout.html:137
+#: templates/layout.html:135
 msgid "Type to filter..."
 msgstr "Escriba para filtrar..."
 
-#: templates/layout.html:150
+#: templates/layout.html:148
 msgid "In public domain"
 msgstr "En dominio público"
 
-#: templates/layout.html:152
+#: templates/layout.html:150
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 "Autores/as cuyas obras están en dominio público en al menos una jurisdicción"
 
-#: templates/layout.html:166 templates/work.html:65
+#: templates/layout.html:164 templates/work.html:65
 msgid "Country of origin"
 msgstr "País de origen"
 
@@ -677,7 +677,7 @@ msgid "Your search returned too many results. Please refine your search."
 msgstr ""
 "Tu búsqueda ha devuelto demasiados resultados. Por favor, refina tu búsqueda."
 
-#: templates/results.html:31 templates/works-list.html:21
+#: templates/results.html:31 templates/works-list.html:28
 msgid "Available for download"
 msgstr "Disponible para descargar"
 
@@ -749,23 +749,27 @@ msgstr "Enlace externo"
 msgid "Access online"
 msgstr "Accede en línea"
 
-#: templates/works-list.html:8
+#: templates/works-list.html:9
 #, python-format
 msgid "No works by %(author_name)s were found"
 msgstr "Sin obras para %(author_name)s"
 
-#: templates/works-list.html:9
+#: templates/works-list.html:10
 msgid "Missing information?"
 msgstr "¿Falta información?"
 
-#: templates/works-list.html:10
+#: templates/works-list.html:11
 msgid "Add it to Wikidata"
 msgstr "Agrégala a Wikidata"
 
-#: templates/works-list.html:13
+#: templates/works-list.html:14
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
+
+#: templates/works-list.html:18
+msgid "View this query on the Wikidata Query Service"
+msgstr "Ver esta consulta en el Servicio de Consultas de Wikidata"
 
 #~ msgid "Age"
 #~ msgstr "Edad"

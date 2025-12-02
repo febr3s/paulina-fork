@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-25 17:06-0300\n"
+"POT-Creation-Date: 2025-12-02 15:16-0300\n"
 "PO-Revision-Date: 2025-10-14 22:05+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language: nb_NO\n"
@@ -19,49 +19,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:53
+#: app.py:54
 msgid "No value"
 msgstr "Ingen verdi"
 
-#: app.py:55
+#: app.py:56
 msgid "Unknown value"
 msgstr "Ukjent verdi"
 
-#: app.py:65 templates/layout.html:56 templates/layout.html:65
+#: app.py:66 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "Hjem"
 
-#: app.py:72 templates/layout.html:68 templates/layout.html:211
+#: app.py:73 templates/layout.html:65 templates/layout.html:211
 msgid "About"
 msgstr "Om"
 
-#: app.py:105 app.py:122
+#: app.py:106 app.py:123
 msgid "Results"
 msgstr "Treff"
 
-#: app.py:112 app.py:129 app.py:134
+#: app.py:113 app.py:130 app.py:135
 msgid "No results found"
 msgstr "Ingen treff"
 
-#: app.py:180
+#: app.py:183
 msgid "List of works"
 msgstr "Liste over verk"
 
-#: app.py:243
+#: app.py:247
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste over %(term_name)s"
 
-#: app.py:260
+#: app.py:264
 msgid "Unknown term"
 msgstr "Ukjent søkeord"
 
-#: app.py:262 templates/countries.html:7 templates/layout.html:71
+#: app.py:266 templates/countries.html:7 templates/layout.html:68
 #: templates/layout.html:228
 msgid "Countries and terms"
 msgstr "Land og vilkår"
 
-#: app.py:298
+#: app.py:302
 msgid "404 error"
 msgstr "404-feil"
 
@@ -405,7 +405,7 @@ msgstr "Offisielt nettsted"
 msgid "Biography"
 msgstr "Biografi"
 
-#: templates/author.html:112 templates/layout.html:133
+#: templates/author.html:112 templates/layout.html:131
 msgid "Nationality"
 msgstr "Nasjonalitet"
 
@@ -413,7 +413,7 @@ msgstr "Nasjonalitet"
 msgid "Ethnicity"
 msgstr "Etnisitet"
 
-#: templates/author.html:122 templates/layout.html:124
+#: templates/author.html:122 templates/layout.html:122
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -484,7 +484,7 @@ msgstr "Falt i det fri"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "Antall verk identifisert som falt i det fri på Wikidata"
 
-#: templates/country.html:34 templates/layout.html:157
+#: templates/country.html:34 templates/layout.html:155
 msgid "Type of work"
 msgstr "Type verk"
 
@@ -578,7 +578,7 @@ msgstr "Land med 70 års vernetid"
 msgid "Paulina"
 msgstr "Paulina"
 
-#: templates/layout.html:13 templates/layout.html:38
+#: templates/layout.html:13 templates/layout.html:35
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
 "is a multilingual tool, powered by Wikidata, that allows you to search "
@@ -592,52 +592,52 @@ msgstr ""
 "allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
 "å finne ut når et verk går inn i allemannseie i hvert land."
 
-#: templates/layout.html:34 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:248
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina — Data for allemanseie"
 
-#: templates/layout.html:87
+#: templates/layout.html:84
 msgid "Select"
 msgstr "Velg"
 
-#: templates/layout.html:106 templates/layout.html:109
+#: templates/layout.html:104 templates/layout.html:107
 msgid "Authors"
 msgstr "Skapere"
 
-#: templates/layout.html:107 templates/layout.html:110
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Works"
 msgstr "Verk"
 
-#: templates/layout.html:114
+#: templates/layout.html:112
 msgid "Search with Paulina"
 msgstr "Søk med Paulina"
 
-#: templates/layout.html:114 templates/layout.html:116
+#: templates/layout.html:112 templates/layout.html:114
 msgid "Search"
 msgstr "Søk"
 
-#: templates/layout.html:121
+#: templates/layout.html:119
 msgid "Advanced search"
 msgstr "Avansert søk"
 
-#: templates/layout.html:126 templates/layout.html:141
-#: templates/layout.html:159 templates/layout.html:168
+#: templates/layout.html:124 templates/layout.html:139
+#: templates/layout.html:157 templates/layout.html:166
 msgid "Any"
 msgstr "Alle"
 
-#: templates/layout.html:137
+#: templates/layout.html:135
 msgid "Type to filter..."
 msgstr "Skriv for å filtrere ..."
 
-#: templates/layout.html:150
+#: templates/layout.html:148
 msgid "In public domain"
 msgstr "Falt i det fri"
 
-#: templates/layout.html:152
+#: templates/layout.html:150
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "Skapere hvis verker er falt i det fri i minst én jurisdiksjon"
 
-#: templates/layout.html:166 templates/work.html:65
+#: templates/layout.html:164 templates/work.html:65
 msgid "Country of origin"
 msgstr "Opprinnelsesland"
 
@@ -677,7 +677,7 @@ msgstr "Søkeresultater"
 msgid "Your search returned too many results. Please refine your search."
 msgstr "Søket resulterte i for mange treff. Snevre inn søket ditt."
 
-#: templates/results.html:31 templates/works-list.html:21
+#: templates/results.html:31 templates/works-list.html:28
 msgid "Available for download"
 msgstr "Tilgjengelig for nedlastning"
 
@@ -748,23 +748,27 @@ msgstr "Ekstern lenke"
 msgid "Access online"
 msgstr "Få tilgang på nett"
 
-#: templates/works-list.html:8
+#: templates/works-list.html:9
 #, python-format
 msgid "No works by %(author_name)s were found"
 msgstr "Ingen verk av %(author_name)s funnet"
 
-#: templates/works-list.html:9
+#: templates/works-list.html:10
 msgid "Missing information?"
 msgstr "Manglende info?"
 
-#: templates/works-list.html:10
+#: templates/works-list.html:11
 msgid "Add it to Wikidata"
 msgstr "Legg til på WIkidata"
 
-#: templates/works-list.html:13
+#: templates/works-list.html:14
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Liste over verker av %(author_name)s"
+
+#: templates/works-list.html:18
+msgid "View this query on the Wikidata Query Service"
+msgstr ""
 
 #~ msgid "Age"
 #~ msgstr "Alder"

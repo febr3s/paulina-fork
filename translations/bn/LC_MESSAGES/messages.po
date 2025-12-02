@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-25 17:06-0300\n"
+"POT-Creation-Date: 2025-12-02 15:16-0300\n"
 "PO-Revision-Date: 2025-10-03 20:02+0000\n"
 "Last-Translator: Bodhisattwa Mandal <bodhisattwa.rgkmc@gmail.com>\n"
 "Language: bn\n"
@@ -19,49 +19,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:53
+#: app.py:54
 msgid "No value"
 msgstr "মান নেই"
 
-#: app.py:55
+#: app.py:56
 msgid "Unknown value"
 msgstr "অজানা মান"
 
-#: app.py:65 templates/layout.html:56 templates/layout.html:65
+#: app.py:66 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "প্রধান পাতা"
 
-#: app.py:72 templates/layout.html:68 templates/layout.html:211
+#: app.py:73 templates/layout.html:65 templates/layout.html:211
 msgid "About"
 msgstr "সম্পর্কে"
 
-#: app.py:105 app.py:122
+#: app.py:106 app.py:123
 msgid "Results"
 msgstr "ফলাফল"
 
-#: app.py:112 app.py:129 app.py:134
+#: app.py:113 app.py:130 app.py:135
 msgid "No results found"
 msgstr "কোন ফলাফল পাওয়া যায়নি"
 
-#: app.py:180
+#: app.py:183
 msgid "List of works"
 msgstr "কর্মের তালিকা"
 
-#: app.py:243
+#: app.py:247
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s-এর তালিকা"
 
-#: app.py:260
+#: app.py:264
 msgid "Unknown term"
 msgstr "অজানা শর্ত"
 
-#: app.py:262 templates/countries.html:7 templates/layout.html:71
+#: app.py:266 templates/countries.html:7 templates/layout.html:68
 #: templates/layout.html:228
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:298
+#: app.py:302
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
@@ -368,7 +368,7 @@ msgstr ""
 msgid "Biography"
 msgstr "জীবনী"
 
-#: templates/author.html:112 templates/layout.html:133
+#: templates/author.html:112 templates/layout.html:131
 msgid "Nationality"
 msgstr "জাতীয়তা"
 
@@ -376,7 +376,7 @@ msgstr "জাতীয়তা"
 msgid "Ethnicity"
 msgstr ""
 
-#: templates/author.html:122 templates/layout.html:124
+#: templates/author.html:122 templates/layout.html:122
 msgid "Gender"
 msgstr "লিঙ্গ"
 
@@ -445,7 +445,7 @@ msgstr "পাবলিক ডোমেইনে রয়েছে"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr ""
 
-#: templates/country.html:34 templates/layout.html:157
+#: templates/country.html:34 templates/layout.html:155
 msgid "Type of work"
 msgstr "কর্মের ধরণ"
 
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Paulina"
 msgstr "পাউলিনা"
 
-#: templates/layout.html:13 templates/layout.html:38
+#: templates/layout.html:13 templates/layout.html:35
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
 "is a multilingual tool, powered by Wikidata, that allows you to search "
@@ -543,54 +543,54 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:34 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:248
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
-#: templates/layout.html:87
+#: templates/layout.html:84
 msgid "Select"
 msgstr ""
 
-#: templates/layout.html:106 templates/layout.html:109
+#: templates/layout.html:104 templates/layout.html:107
 #, fuzzy
 msgid "Authors"
 msgstr "লেখক"
 
-#: templates/layout.html:107 templates/layout.html:110
+#: templates/layout.html:105 templates/layout.html:108
 #, fuzzy
 msgid "Works"
 msgstr "কর্ম"
 
-#: templates/layout.html:114
+#: templates/layout.html:112
 msgid "Search with Paulina"
 msgstr ""
 
-#: templates/layout.html:114 templates/layout.html:116
+#: templates/layout.html:112 templates/layout.html:114
 msgid "Search"
 msgstr "অনুসন্ধান করুন"
 
-#: templates/layout.html:121
+#: templates/layout.html:119
 msgid "Advanced search"
 msgstr "উন্নত অনুসন্ধান"
 
-#: templates/layout.html:126 templates/layout.html:141
-#: templates/layout.html:159 templates/layout.html:168
+#: templates/layout.html:124 templates/layout.html:139
+#: templates/layout.html:157 templates/layout.html:166
 msgid "Any"
 msgstr "যে কোন"
 
-#: templates/layout.html:137
+#: templates/layout.html:135
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:150
+#: templates/layout.html:148
 msgid "In public domain"
 msgstr "পাবলিক ডোমেইনে রয়েছে"
 
-#: templates/layout.html:152
+#: templates/layout.html:150
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:166 templates/work.html:65
+#: templates/layout.html:164 templates/work.html:65
 msgid "Country of origin"
 msgstr "উৎপত্তির দেশ"
 
@@ -630,7 +630,7 @@ msgstr "ফলাফল অনুসন্ধান করুন"
 msgid "Your search returned too many results. Please refine your search."
 msgstr ""
 
-#: templates/results.html:31 templates/works-list.html:21
+#: templates/results.html:31 templates/works-list.html:28
 msgid "Available for download"
 msgstr "ডাউনলোডের জন্য উপলব্ধ"
 
@@ -697,22 +697,26 @@ msgstr ""
 msgid "Access online"
 msgstr ""
 
-#: templates/works-list.html:8
+#: templates/works-list.html:9
 #, python-format
 msgid "No works by %(author_name)s were found"
 msgstr ""
 
-#: templates/works-list.html:9
+#: templates/works-list.html:10
 msgid "Missing information?"
 msgstr ""
 
-#: templates/works-list.html:10
+#: templates/works-list.html:11
 msgid "Add it to Wikidata"
 msgstr "উইকিউপাত্তে যোগ করুন"
 
-#: templates/works-list.html:13
+#: templates/works-list.html:14
 #, python-format
 msgid "List of works by %(author_name)s"
+msgstr ""
+
+#: templates/works-list.html:18
+msgid "View this query on the Wikidata Query Service"
 msgstr ""
 
 #~ msgid "Age"
