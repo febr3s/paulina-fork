@@ -100,6 +100,14 @@ h3 {
   outline-offset: -1px;
 }
 
+.list-group-item .bi {
+  color: #f46527;
+}
+
+.list-group-item:hover .bi {
+  color: black;
+}
+
 /* Author and work page features */
 
 .main-card {
