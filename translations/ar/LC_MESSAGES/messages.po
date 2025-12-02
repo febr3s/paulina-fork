@@ -1,0 +1,727 @@
+# Translations template for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-10-25 17:06-0300\n"
+"PO-Revision-Date: 2025-11-01 22:51+0000\n"
+"Last-Translator: حبيشان Hubaishan <s.hubaishan@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/ar/>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.14.1-dev\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: app.py:53
+msgid "No value"
+msgstr "لا قيمة"
+
+#: app.py:55
+msgid "Unknown value"
+msgstr "مجهول"
+
+#: app.py:65 templates/layout.html:56 templates/layout.html:65
+msgid "Home"
+msgstr "البداية"
+
+#: app.py:72 templates/layout.html:68 templates/layout.html:211
+msgid "About"
+msgstr "عن"
+
+#: app.py:105 app.py:122
+msgid "Results"
+msgstr "النتائج"
+
+#: app.py:112 app.py:129 app.py:134
+msgid "No results found"
+msgstr "لا توجد نتائج"
+
+#: app.py:180
+msgid "List of works"
+msgstr "قائمة الأعمال"
+
+#: app.py:243
+#, python-format
+msgid "List of %(term_name)s"
+msgstr "قائمة %(term_name)s"
+
+#: app.py:260
+msgid "Unknown term"
+msgstr "شروط غير معروفة"
+
+#: app.py:262 templates/countries.html:7 templates/layout.html:71
+#: templates/layout.html:228
+msgid "Countries and terms"
+msgstr "الدول والشروط"
+
+#: app.py:298
+msgid "404 error"
+msgstr "خطأ 404"
+
+#: filters.py:6
+msgid "Female"
+msgstr "أنثى"
+
+#: filters.py:7
+msgid "Male"
+msgstr "ذكر"
+
+#: filters.py:8
+msgid "Trans man"
+msgstr ""
+
+#: filters.py:9
+msgid "Trans woman"
+msgstr ""
+
+#: filters.py:10
+msgid "Non-binary"
+msgstr "غير رقمي"
+
+#: filters.py:17
+msgid "Film"
+msgstr "فلم"
+
+#: filters.py:18
+msgid "Literary work"
+msgstr "عمل أدبي"
+
+#: filters.py:19
+msgid "Musical work"
+msgstr "عمل موسيقي"
+
+#: filters.py:20
+msgid "Painting"
+msgstr "لوحة فنية"
+
+#: filters.py:21
+msgid "Sculpture"
+msgstr "نحت"
+
+#: pdclasses.py:97
+msgid "(decade)"
+msgstr "(عقد)"
+
+#: pdclasses.py:99
+msgid "(century)"
+msgstr "(قرن)"
+
+#: pdclasses.py:101
+msgid "(millennium)"
+msgstr "(ألفية)"
+
+#: pdclasses.py:207
+msgid ""
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
+msgstr ""
+"صورة لظل إنسان عام. يشير النص الموجود أعلاها إلى عدم توفر صورة مجانية للشخص، "
+"وأنه إذا كنت تمتلك صورة، فيمكنك النقر على رابط العنصر النائب."
+
+#: pdclasses.py:212
+#, python-format
+msgid "Image of %(name)s."
+msgstr "صورة %(name)s."
+
+#: pdclasses.py:301
+msgid ""
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
+msgstr ""
+"صورة لعمل عام. يشير النص الموجود أعلاها إلى أنه لا توجد صورة مجانية متاحة "
+"للعمل، وأنه إذا كنت تمتلك صورة، فيمكنك النقر على رابط العنصر النائب لتحميلها."
+
+#: pdclasses.py:306
+#, python-format
+msgid "Image of %(title)s."
+msgstr "صورة %(title)s."
+
+#: pdclasses.py:382 templates/countries.html:20 templates/term.html:20
+#, python-format
+msgid "Flag of %(country_name)s."
+msgstr "علم %(country_name)s."
+
+#: templates/404.html:7
+msgid "Page not found"
+msgstr "لم يعثر على الصفحة"
+
+#: templates/404.html:8
+msgid "home page"
+msgstr "صفحة البداية"
+
+#: templates/404.html:9
+#, python-format
+msgid "Please go to the %(home_page)s and try again."
+msgstr "رجاء توجه إلى %(home_page)s وحاول مجددًّا."
+
+#: templates/about.html:7 templates/layout.html:208
+msgid "About Paulina"
+msgstr "عن باولينا"
+
+#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+msgid "Wikidata"
+msgstr "ويكي بيانات"
+
+#: templates/about.html:9 templates/layout.html:194
+msgid "Ártica - Online Cultural Center"
+msgstr "Ártica - المركز الثقافي عبر الإنترنت"
+
+#: templates/about.html:10 templates/layout.html:197
+msgid "Creative Commons Uruguay"
+msgstr "المشاع الإبداعي أوروغواي"
+
+#: templates/about.html:11 templates/layout.html:200
+msgid "Data Uruguay"
+msgstr "بيانات أورغواي"
+
+#: templates/about.html:12 templates/layout.html:203
+msgid "Wikimedistas de Uruguay"
+msgstr ""
+
+#: templates/about.html:13
+msgid "Creative Commons CC0 1.0 Universal Public Domain Dedication"
+msgstr "Creative Commons CC0 1.0 التكريس العالمي للملكية العامة"
+
+#: templates/about.html:14
+msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
+msgstr "رخصة المشاع الإبداعي - النسبة-المشاركة بالمثل 4.0 الدولية"
+
+#: templates/about.html:15 templates/author.html:89
+msgid "Wikimedia Commons"
+msgstr "ويكيميديا كومنز"
+
+#: templates/about.html:16
+msgid "GNU Affero General Public License Version 3"
+msgstr "رخصة GNU Affero العامة الإصدار 3"
+
+#: templates/about.html:17
+msgid "project's code repository"
+msgstr "مستودع كود المشروع"
+
+#: templates/about.html:18
+#, python-format
+msgid ""
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
+msgstr ""
+
+#: templates/about.html:20
+msgid ""
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
+msgstr ""
+
+#: templates/about.html:21
+msgid ""
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
+"cultural heritage and invites you to improve the data in Wikidata and, "
+"through it, on the Internet."
+msgstr ""
+
+#: templates/about.html:22
+msgid "Local tools"
+msgstr "أدوات محلية"
+
+#: templates/about.html:23
+msgid ""
+"This website is part of a larger project to facilitate the creation of "
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
+msgstr ""
+
+#: templates/about.html:24
+msgid "Who makes Paulina"
+msgstr ""
+
+#: templates/about.html:25
+#, python-format
+msgid ""
+"Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
+"%(data_uruguay_link)s and %(wm_uruguay_link)s."
+msgstr ""
+
+#: templates/about.html:26
+msgid "Content licenses"
+msgstr ""
+
+#: templates/about.html:27
+#, python-format
+msgid ""
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
+msgstr ""
+
+#: templates/about.html:28
+#, python-format
+msgid ""
+"The texts and other original content of this website are under a "
+"%(ccbysa_link)s."
+msgstr ""
+
+#: templates/about.html:29
+#, python-format
+msgid ""
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
+msgstr ""
+
+#: templates/about.html:30
+msgid ""
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
+msgstr ""
+
+#: templates/about.html:31
+msgid "Free software"
+msgstr ""
+
+#: templates/about.html:32
+#, python-format
+msgid ""
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
+msgstr ""
+
+#: templates/author.html:7 templates/work.html:7
+msgid "Missing/wrong data?"
+msgstr ""
+
+#: templates/author.html:7 templates/work.html:7
+msgid "Edit Wikidata item"
+msgstr "تحرير عنصر ويكي بيانات"
+
+#: templates/author.html:29
+msgid "Search works"
+msgstr "بحث عن الأعمال"
+
+#: templates/author.html:42 templates/author.html:46 templates/work.html:79
+msgid "in"
+msgstr "في"
+
+#: templates/author.html:51
+msgid "everywhere in the world"
+msgstr "كل شيء في العالم"
+
+#: templates/author.html:54
+#, python-format
+msgid "in %(jurisdiction_label)s"
+msgstr "في %(jurisdiction_label)s"
+
+#: templates/author.html:61
+msgid "Works are in the public domain"
+msgstr "الأعمال في النطاق العام"
+
+#: templates/author.html:65
+msgid "Works are not in the worldwide public domain"
+msgstr "الأعمال التي ليس في النطاق العام"
+
+#: templates/author.html:67
+msgid "until January 1, "
+msgstr "إلى 1 يناير "
+
+#: templates/author.html:73
+msgid "Consult individual works for public domain status"
+msgstr "راجع الأعمال الفردية لمعرفة حالة الملكية العامة"
+
+#: templates/author.html:77
+msgid ""
+"Public domain status unknown due to lack of available dates of birth and "
+"death."
+msgstr "حالة الملكية العامة غير معروفة بسبب عدم توفر تواريخ الميلاد والوفاة."
+
+#: templates/author.html:78
+msgid "Consult individual works."
+msgstr "راجع الأعمال الفردية."
+
+#: templates/author.html:86 templates/work.html:41
+msgid "Wikipedia"
+msgstr "ويكيبيديا"
+
+#: templates/author.html:92 templates/work.html:115
+msgid "Wikisource"
+msgstr "ويكي مصدر"
+
+#: templates/author.html:95
+msgid "Wikiquote"
+msgstr "ويكي الاقتباس"
+
+#: templates/author.html:98
+msgid "Official website"
+msgstr "الموقع الرسمي"
+
+#: templates/author.html:107
+msgid "Biography"
+msgstr "السيرة"
+
+#: templates/author.html:112 templates/layout.html:133
+msgid "Nationality"
+msgstr "الجنسية"
+
+#: templates/author.html:117
+msgid "Ethnicity"
+msgstr "العرق"
+
+#: templates/author.html:122 templates/layout.html:124
+msgid "Gender"
+msgstr "الجنس"
+
+#: templates/author.html:126
+msgid "Date of birth"
+msgstr "تاريخ الميلاد"
+
+#: templates/author.html:129 templates/author.html:147
+#, python-format
+msgid "(%(author_age)s years)"
+msgstr "(%(author_age)s سنة)"
+
+#: templates/author.html:132
+msgid "Occupation"
+msgstr "الوظيفة"
+
+#: templates/author.html:136
+msgid "Place of birth"
+msgstr "محل الميلاد"
+
+#: templates/author.html:140
+msgid "Country of birth"
+msgstr "دولة الميلاد"
+
+#: templates/author.html:144
+msgid "Date of death"
+msgstr "تاريخ الوفاة"
+
+#: templates/countries.html:8
+msgid ""
+"This grid indicates the period after which works enter the public domain "
+"in each country."
+msgstr ""
+"تشير هذه الشبكة إلى الفترة التي تصبح بعدها الأعمال ملكية عامة في كل بلد."
+
+#: templates/countries.html:9
+msgid "The period indicated is post mortem auctoris."
+msgstr "الفترة المشار إليها هي فترة ما بعد وفاة المؤلف."
+
+#: templates/countries.html:10
+msgid ""
+"By clicking on each country, you can access more information about the "
+"country."
+msgstr "بالنقر على كل بلد، يمكنك الوصول إلى مزيد من المعلومات حول هذا البلد."
+
+#: templates/country.html:10
+msgid "Copyright term"
+msgstr "شرط حفظ الحقوق"
+
+#: templates/country.html:16
+#, python-format
+msgid "%(country_name)s is part of"
+msgstr "%(country_name)s هي جزء من"
+
+#: templates/country.html:21
+#, python-format
+msgid "Applies to %(countries)s"
+msgstr "ينطبق على %(countries)s"
+
+#: templates/country.html:29
+msgid "Public domain statistics"
+msgstr "إحصائيات النطاق العام"
+
+#: templates/country.html:30
+msgid "Number of works identified as being in the public domain on Wikidata"
+msgstr "عدد الأعمال التي تم تحديدها على أنها ملكية عامة في ويكي بيانات"
+
+#: templates/country.html:34 templates/layout.html:157
+msgid "Type of work"
+msgstr "نوع العمل"
+
+#: templates/country.html:35
+msgid "Number of works in public domain"
+msgstr "عدد الأعمال في النطاق العام"
+
+#: templates/home.html:8 templates/home.html:12 templates/home.html:16
+#: templates/layout.html:241 templates/layout.html:243
+#: templates/layout.html:245
+msgid "Paulina logo"
+msgstr "علامة باولينا"
+
+#: templates/home.html:28
+msgid "Discover authors"
+msgstr "استكشف المؤلفين"
+
+#: templates/home.html:29
+msgid ""
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
+msgstr ""
+"باولينا هي أداة بحث بسيطة لاكتشاف مؤلفين من جميع أنحاء العالم والتعرف على "
+"أعمالهم."
+
+#: templates/home.html:33
+msgid "Mary Shelley"
+msgstr ""
+
+#: templates/home.html:35
+msgid "Carlos Gardel"
+msgstr ""
+
+#: templates/home.html:37
+msgid "Kiyohara Yukinobu"
+msgstr ""
+
+#: templates/home.html:39
+msgid "Paulina Luisi"
+msgstr ""
+
+#: templates/home.html:44
+msgid "Find works"
+msgstr "أوجد الأعمال"
+
+#: templates/home.html:45
+msgid ""
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
+msgstr ""
+"يمكنك العثور بسهولة على معلومات حول الأعمال الثقافية من جميع تخصصات الفن "
+"والمعرفة الموجودة على ويكي بيانات."
+
+#: templates/home.html:49
+msgid "The Araucaniad"
+msgstr ""
+
+#: templates/home.html:51
+msgid "Orlando: A Biography"
+msgstr ""
+
+#: templates/home.html:53
+msgid "Metropolis"
+msgstr ""
+
+#: templates/home.html:55
+msgid "Pampa"
+msgstr ""
+
+#: templates/home.html:60
+msgid "Learn about the public domain"
+msgstr "تعرف على النطاق العام"
+
+#: templates/home.html:61
+msgid ""
+"Find out which works are in the public domain in different countries and "
+"access the versions available online."
+msgstr ""
+"اكتشف الأعمال التي تندرج ضمن النطاق العام في مختلف البلدان واطلع على النسخ "
+"المتاحة عبر الإنترنت."
+
+#: templates/home.html:65
+msgid "Countries with 50 years post mortem auctoris"
+msgstr "البلدان التي تطبق مدة 50 عامًا بعد الوفاة"
+
+#: templates/home.html:67
+msgid "Countries with 70 years post mortem auctoris"
+msgstr "البلدان التي تطبق مدة 70 عامًا بعد وفاة المؤلف"
+
+#: templates/layout.html:12
+msgid "Paulina"
+msgstr "باولينا"
+
+#: templates/layout.html:13 templates/layout.html:38
+msgid ""
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
+msgstr ""
+
+#: templates/layout.html:34 templates/layout.html:248
+msgid "Paulina - Data for the Public Domain"
+msgstr "باولينا - بيانات للنطاق العام"
+
+#: templates/layout.html:87
+msgid "Select"
+msgstr "اختيار"
+
+#: templates/layout.html:106 templates/layout.html:109
+msgid "Authors"
+msgstr "المؤلفون"
+
+#: templates/layout.html:107 templates/layout.html:110
+msgid "Works"
+msgstr "الأعمال"
+
+#: templates/layout.html:114
+msgid "Search with Paulina"
+msgstr "ابحث مع باولينا"
+
+#: templates/layout.html:114 templates/layout.html:116
+msgid "Search"
+msgstr "بحث"
+
+#: templates/layout.html:121
+msgid "Advanced search"
+msgstr "بحث متقدم"
+
+#: templates/layout.html:126 templates/layout.html:141
+#: templates/layout.html:159 templates/layout.html:168
+msgid "Any"
+msgstr "أي"
+
+#: templates/layout.html:137
+msgid "Type to filter..."
+msgstr "اكتب للتصفية..."
+
+#: templates/layout.html:150
+msgid "In public domain"
+msgstr "في النطاق العام"
+
+#: templates/layout.html:152
+msgid "Authors whose works are in public domain in at least one jurisdiction"
+msgstr "المؤلفون الذين تعتبر أعمالهم ملكية عامة في ولاية قضائية واحدة على الأقل"
+
+#: templates/layout.html:166 templates/work.html:65
+msgid "Country of origin"
+msgstr "بلد المنشأ"
+
+#: templates/layout.html:191
+msgid "Paulina is supported by:"
+msgstr "باولينا مدعوم من:"
+
+#: templates/layout.html:214
+msgid "Source code"
+msgstr "الكود المصدري"
+
+#: templates/layout.html:217
+msgid "Help translate"
+msgstr "ساعد في الترجمة"
+
+#: templates/layout.html:222
+msgid "Help"
+msgstr "مساعدة"
+
+#: templates/layout.html:225
+msgid "Documentation"
+msgstr "توثيق"
+
+#: templates/layout.html:249
+msgid "Powered by Wikidata."
+msgstr "مدعوم من ويكي بيانات."
+
+#: templates/no-results.html:6
+msgid "No results found. Try again."
+msgstr "لم يتم العثور على نتائج. حاول مرة أخرى."
+
+#: templates/results.html:6
+msgid "Search results"
+msgstr "نتائج البحث"
+
+#: templates/results.html:10
+msgid "Your search returned too many results. Please refine your search."
+msgstr "أعطى بحثك نتائج كثيرة جدًا. يرجى تحسين بحثك."
+
+#: templates/results.html:31 templates/works-list.html:21
+msgid "Available for download"
+msgstr "متاح للتحميل"
+
+#: templates/work.html:29
+msgid "Author/s"
+msgstr "المؤلف(ون)"
+
+#: templates/work.html:54
+msgid "Work details"
+msgstr "بيانات العمل"
+
+#: templates/work.html:57
+msgid "Publication date"
+msgstr "تاريخ النشر"
+
+#: templates/work.html:58 templates/work.html:62 templates/work.html:66
+msgid "Unknown"
+msgstr "مجهول"
+
+#: templates/work.html:61
+msgid "Language"
+msgstr "اللغة"
+
+#: templates/work.html:74
+msgid "Copyright status"
+msgstr "حالة حقوق الطبع"
+
+#: templates/work.html:93
+msgid "countries and terms page"
+msgstr "صفحة الدول والشروط"
+
+#: templates/work.html:95
+msgid ""
+"Copyright status information is not available for this work. The "
+"copyright status depends on the jurisdiction, the author's date of death "
+"and the date the work was created or published."
+msgstr ""
+"معلومات حالة حقوق النشر غير متوفرة لهذا العمل. تعتمد حالة حقوق النشر على "
+"الولاية القضائية وتاريخ وفاة المؤلف وتاريخ إنشاء العمل أو نشره."
+
+#: templates/work.html:96
+#, python-format
+msgid ""
+"To learn more about copyright terms in different countries, visit the "
+"%(countries_and_terms_page_link)s."
+msgstr ""
+"لمعرفة المزيد عن شروط حقوق النشر في بلدان مختلفة، تفضل بزيارة الموقع %"
+"(countries_and_terms_page_link)s."
+
+#: templates/work.html:107
+msgid "Access work"
+msgstr "الوصول إلى العمل"
+
+#: templates/work.html:128
+msgid "Internet Archive"
+msgstr "أنترنت أرشيف"
+
+#: templates/work.html:131
+msgid "Access on Internet Archive"
+msgstr "الوصول إلى إنترنت أرشيف"
+
+#: templates/work.html:140
+msgid "External link"
+msgstr "وصلة خارجية"
+
+#: templates/work.html:143
+msgid "Access online"
+msgstr "الوصول عبر الإنترنت"
+
+#: templates/works-list.html:8
+#, python-format
+msgid "No works by %(author_name)s were found"
+msgstr "لم يعثر على أي أعمال لـ %(author_name)s"
+
+#: templates/works-list.html:9
+msgid "Missing information?"
+msgstr "معلومات مفقودة؟"
+
+#: templates/works-list.html:10
+msgid "Add it to Wikidata"
+msgstr "أضف إلى ويكي بيانات"
+
+#: templates/works-list.html:13
+#, python-format
+msgid "List of works by %(author_name)s"
+msgstr "قائمة أعمال %(author_name)s"
