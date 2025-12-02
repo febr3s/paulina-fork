@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, Response, url_for, 
 from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
 import datetime
+from urllib.parse import quote
 
 # Local modules
 import pdclasses
@@ -175,11 +176,15 @@ def author_page(author_data):
 @cache.cached(make_cache_key=make_cache_key)
 def works_list(author_id):
     try:
+        user_lang = str(get_locale())
+        query = squeries.query_for_works_by_an_author.format(qname=author_id, lang=user_lang)
+        wqs_link = "https://query.wikidata.org/#" + quote(query)
         author = pdclasses.Author(author_id)
         return render_template("works-list.html",
             title=_('List of works') + " - " + print_field(author.name),
             author_name=print_field(author.name),
-            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
+            wqs_link=wqs_link,
+            author_works=print_field(author.getWorks(user_lang))  # Get list of works
         )
 
     except:  # If the Q number doesn't match any item or the item is not about a human
