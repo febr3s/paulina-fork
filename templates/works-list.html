@@ -11,6 +11,11 @@
 
     {% else %}
     <h2 class="mb-4 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
+    <!-- View query on the Wikidata Query Service -->
+    <div class="text-end mb-2 px-1">
+        <small class="text-body-secondary"><a href="{{ wqs_link }}" target="_blank">
+                {{ _('View this query on the Wikidata Query Service') }}</a></small>
+    </div>
         <div class="list-group p-1">
         {% for work in author_works %}
         <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}"
@@ -25,14 +30,7 @@
         </a>
         {% endfor %}
         </div>
-    {% endif %}
-     <div class="text-right mb-2 mt-3">
-        <span class="text-body-secondary">
-            <a href="{{ wqs_link }}" target="_blank">
-                {{ _('View this query at the Wikidata Query Service') }}
-            </a>
-        </span>
-    </div>
+    {% endif %}    
 </div>
 
 
