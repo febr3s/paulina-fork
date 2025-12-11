@@ -20,6 +20,63 @@ If you'd like to run application in DEBUG mode, uncomment the second line and se
 
 By default, `DEBUG` is set to `False`.
 
+
+## Setting Up OAuth for Local Development
+
+To test Wikidata editing features locally, you need to create your own OAuth consumer credentials.
+
+### Step 1: Register Your OAuth Consumer
+
+1. **Go to the OAuth Consumer Registration page:**
+   
+   https://meta.wikimedia.org/wiki/Special:OAuthConsumerRegistration/propose
+
+2. **Fill out the registration form:**
+
+   - **Application name:**  
+     `Paulina Local Dev - YourWikimediaUsername`  
+     (Replace `YourWikimediaUsername` with your actual username)
+
+   - **Application version:**  
+     `1.0`
+
+   - **Application description:**  
+     `Local development instance of Paulina for testing Wikidata editing features`
+
+   - **This consumer is for use only by [username]:**  
+     **Leave this UNCHECKED** (This callback URL field only appears after leaving it unchecked)
+
+   - **OAuth protocol version:**  
+     Select **`OAuth 1.0a`**
+
+   - **OAuth "callback" URL:**  
+     `http://localhost:5000/oauth-callback`  
+
+   - **Applicable grants:**  
+     Check these boxes:
+     - Basic rights
+     - Edit existing pages
+     - Create, edit, and move pages
+
+3. **Click "Propose consumer"**
+
+### Step 2: Copy Your Credentials
+
+After registration, you'll see a confirmation page with your credentials:
+
+**Important:** Copy both tokens immediately. The secret is only shown once. Test consumers expire after 30 days. Create a new one when needed.
+
+### Step 3: Configure Your Local Environment
+
+1. **Copy the sample configuration:**
+ 
+Update the config.py file with the copied tokens:
+
+CONSUMER_KEY = "paste-your-consumer-token-here"
+CONSUMER_SECRET = "paste-your-secret-token-here"
+
+### Step 4: Test Your OAuth Setup
+
 ## Complete documentation
 If you'd like to learn more about the software:
 - [User documentation](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina)

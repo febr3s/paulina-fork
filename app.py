@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect, Response, url_for, abort
+from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session
 from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from mwoauth import ConsumerToken, Handshaker, RequestToken
 import datetime
 import requests
 
@@ -42,6 +45,24 @@ def make_cache_key(**kwargs) -> str:
    request_path = request.path
    request_args = {key:value for key, value in request.args.items() if key!= "language"}   
    return f"{request_language}, {request_path}, {request_args}"
+
+# Initialize Rate Limiter
+def get_user_identifier():
+    """Get user identifier for rate limiting (Wikimedia user ID or IP)"""
+    if 'wikimedia_userid' in session:
+        return f"user:{session['wikimedia_userid']}"
+    return get_remote_address()
+
+limiter = Limiter(
+    app=app,
+    key_func=get_user_identifier,
+    default_limits=[
+        f"{app.config.get('RATE_LIMIT_PER_DAY', 200)} per day",
+        f"{app.config.get('RATE_LIMIT_PER_HOUR', 50)} per hour"
+    ],
+    storage_uri=app.config.get('RATELIMIT_STORAGE_URL', 'memory://'),
+    headers_enabled=app.config.get('RATELIMIT_HEADERS_ENABLED', True)
+)
 
 # End of app and module configuration
 
@@ -295,6 +316,89 @@ def inject_filters():
         "COUNTRIES": countries
         }
 
+
+# OAuth Routes
+
+@app.route('/auth/login')
+@limiter.limit("5 per minute")  # Prevent login spam
+def login():
+    """Initiate OAuth login with Wikimedia"""
+    try:
+        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
+        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
+        
+        redirect_url, request_token = handshaker.initiate()
+        
+        # Store request token in session for callback
+        session['request_token'] = dict(
+            key=request_token.key,
+            secret=request_token.secret
+        )
+        
+        return redirect(redirect_url)
+    
+    except Exception as e:
+        flash(f'Login failed: {str(e)}', 'danger')
+        return redirect(url_for('home'))
+
+
+@app.route('/oauth-callback')
+@limiter.exempt 
+def oauth_callback():
+    """Handle OAuth callback from Wikimedia"""
+    try:
+        # Get the request token from session
+        if 'request_token' not in session:
+            flash('Login session expired. Please try again.', 'warning')
+            return redirect(url_for('home'))
+        
+        request_token_dict = session.pop('request_token')
+        
+        # Recreate RequestToken object from dict
+        request_token = RequestToken(
+            request_token_dict['key'],
+            request_token_dict['secret']
+        )
+        
+        # Recreate the consumer token and handshaker
+        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
+        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
+        
+        # Complete the OAuth handshake with RequestToken object
+        access_token = handshaker.complete(
+            request_token,  
+            request.query_string.decode('utf-8')
+        )
+        
+        # Get user identity
+        identity = handshaker.identify(access_token)
+        
+        # Store user info in session
+        session['access_token'] = dict(
+            key=access_token.key,
+            secret=access_token.secret
+        )
+        session['wikimedia_username'] = identity['username']
+        session['wikimedia_userid'] = identity['sub'] 
+        return redirect(url_for('home'))
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        flash(f'Authentication failed: {str(e)}', 'danger')
+        return redirect(url_for('home'))
+
+
+@app.route('/auth/logout')
+@limiter.exempt 
+def logout():
+    # Clear OAuth-related session data
+    session.pop('access_token', None)
+    session.pop('wikimedia_username', None)
+    session.pop('wikimedia_userid', None)
+
+    flash(f'You have been logged out.', 'info')
+    return redirect(url_for('home'))
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -401,3 +401,43 @@ h3 {
   --bs-dropdown-link-active-bg: #ffee8d;
   background-color: var(--bs-dropdown-link-active-bg);
 }
+
+/* OAuth/User Menu Styles */
+.btn-auth {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  font-weight: 400;
+  transition: background-color .15s ease-in-out;
+}
+
+.btn-auth:hover {
+  background-color: #29a4e2;
+  color: black;
+}
+
+.user-dropdown .dropdown-menu {
+  background-color: #29a4e2;
+  border: 1px solid black;
+  min-width: auto;
+  width: max-content;
+}
+
+.user-dropdown .dropdown-item {
+  color: black;
+  transition: background-color .15s ease-in-out;
+   white-space: nowrap;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background-color: #71c3ec;
+  color: black;
+}
+
+.user-dropdown .dropdown-divider {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.user-dropdown .dropdown-item i {
+  margin-right: 0.5rem;
+}
