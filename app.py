@@ -229,7 +229,8 @@ def country_page(country_data):
             country_flag_image=print_field(country.flag_image),
             country_flag_image_link=print_field(country.flag_image_link),
             country_flag_image_alt_text=print_field(country.flag_image_alt_text),
-            country_number_of_works_in_public_domain=print_field(country.number_of_works_in_public_domain)
+            country_number_of_works_in_public_domain=print_field(country.number_of_works_in_public_domain),
+            prefill_country_qid=country.wikidata_item_id
         )
     except:  # If the Q number doesn't match any item
         abort(404)
