@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"POT-Creation-Date: 2025-12-12 11:06-0300\n"
 "PO-Revision-Date: 2025-08-21 01:01+0000\n"
 "Last-Translator: S H <higa432@gmail.com>\n"
 "Language: ja\n"
@@ -163,7 +163,7 @@ msgstr "%(home_page)sでもう一度試してください。"
 msgid "About Paulina"
 msgstr "Paulina（ポーリナ）について"
 
-#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+#: templates/about.html:8 templates/about.html:20 templates/author.html:83
 msgid "Wikidata"
 msgstr "ウィキデータ"
 
@@ -206,6 +206,10 @@ msgid "project's code repository"
 msgstr "プロジェクトのコードリポジトリ"
 
 #: templates/about.html:18
+msgid "list of people who contribute to the project"
+msgstr ""
+
+#: templates/about.html:19
 #, python-format
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
@@ -216,13 +220,13 @@ msgid ""
 "country."
 msgstr "Paulina（ポーリナ）は、人類の文化遺産の学習にあなたを招待します。これは%(wikidata_link)sを利用した多言語ツールで、人物を検索してパブリックドメインで自由にアクセスできる作品を持っているかどうかを調べることができます。また、著作権条項の理解を容易にし、各国で作品がいつパブリックドメインになったかを知るのにも役立ちます。"
 
-#: templates/about.html:20
+#: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database"
 " maintained by the Wikimedia Foundation."
 msgstr "Paulina（ポーリナ）は、ウィキメディア財団が管理するフリーな協働データベースであるウィキデータのデータを利用しています。"
 
-#: templates/about.html:21
+#: templates/about.html:22
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete."
 " Paulina helps to identify gaps and inaccuracies in information about "
@@ -230,22 +234,22 @@ msgid ""
 "through it, on the Internet."
 msgstr "場合により、参照情報にエラーが含まれていたり、不完全であったりすることがあります。Paulina（ポーリナ）は、文化遺産に関する情報のギャップや不正確さを特定するのに役立ち、ウィキデータのデータ、そしてそれを通じてインターネット上のデータ改善に招待します。"
 
-#: templates/about.html:22
+#: templates/about.html:23
 msgid "Local tools"
 msgstr "ローカル・ツール"
 
-#: templates/about.html:23
+#: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
 "national, regional or thematic versions of the tool, according to the "
 "needs of each community."
 msgstr "このウェブサイトは、各コミュニティのニーズに応じて、ツールの国別、地域別、テーマ別バージョンの作成を促進するための大規模なプロジェクトの一部です。"
 
-#: templates/about.html:24
+#: templates/about.html:25
 msgid "Who makes Paulina"
 msgstr "Paulina（ポーリナ）開発者"
 
-#: templates/about.html:25
+#: templates/about.html:26
 #, python-format
 msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
@@ -254,25 +258,30 @@ msgstr ""
 "Paulina（ポーリナ）は%(artica_link)s, %(cc_uruguay_link)s, %(data_uruguay_link)s"
 " そして %(wm_uruguay_link)sのサポートを受けています。"
 
-#: templates/about.html:26
+#: templates/about.html:27
+#, python-format
+msgid "See the %(credits_link)s."
+msgstr ""
+
+#: templates/about.html:28
 msgid "Content licenses"
 msgstr "コンテンツのライセンス"
 
-#: templates/about.html:27
+#: templates/about.html:29
 #, python-format
 msgid ""
 "All data in the pages about authors, works, countries and terms come from"
 " Wikidata and are under the terms of the %(CC0_link)s."
 msgstr "作家、作品、各国の著作権条項に関するページのすべてのデータはウィキデータからのものであり、%(CC0_link)sの条件の下にあります。"
 
-#: templates/about.html:28
+#: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr "このウェブサイトのテキストやその他のオリジナルコンテンツは%(ccbysa_link)sの下にあります。"
 
-#: templates/about.html:29
+#: templates/about.html:31
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and "
@@ -281,7 +290,7 @@ msgid ""
 " content on Wikimedia Commons."
 msgstr "作家、作品、各国の著作権条項に関するページの画像とメディアは%(wm_commons_link)sからのものであり、異なるフリーライセンスの下にあるか、パブリックドメインにあります。ウィキメディア・コモンズの各コンテンツの情報を参照することをお勧めします。"
 
-#: templates/about.html:30
+#: templates/about.html:32
 msgid ""
 "The works accessible through links to external sites are available to the"
 " public, mostly because they are in the public domain, or under free "
@@ -290,11 +299,11 @@ msgid ""
 "where they are hosted."
 msgstr "外部サイトへのリンクを通じてアクセス可能な作品は、主にパブリックドメインにあるか、フリーライセンスの下にあるため、一般に公開されていますが、一部の作品は一部の法域で著作権の下にある場合があります。各作品がホストされているウェブサイトでその情報を参照することをお勧めします。"
 
-#: templates/about.html:31
+#: templates/about.html:33
 msgid "Free software"
 msgstr "フリーソフトウェア"
 
-#: templates/about.html:32
+#: templates/about.html:34
 #, python-format
 msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
@@ -632,7 +641,7 @@ msgstr "検索結果"
 msgid "Your search returned too many results. Please refine your search."
 msgstr "検索結果が多すぎます。条件を見直してください。"
 
-#: templates/results.html:31 templates/works-list.html:28
+#: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
 msgstr "ダウンロード可能"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"POT-Creation-Date: 2025-12-12 11:06-0300\n"
 "PO-Revision-Date: 2025-10-14 22:05+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language: nb_NO\n"
@@ -169,7 +169,7 @@ msgstr "Gå til %(home_page)s og prøv igjen."
 msgid "About Paulina"
 msgstr "Om Paulina"
 
-#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+#: templates/about.html:8 templates/about.html:20 templates/author.html:83
 msgid "Wikidata"
 msgstr "Wikidata"
 
@@ -210,6 +210,10 @@ msgid "project's code repository"
 msgstr "prosjektet kildekodelager"
 
 #: templates/about.html:18
+msgid "list of people who contribute to the project"
+msgstr ""
+
+#: templates/about.html:19
 #, python-format
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
@@ -225,7 +229,7 @@ msgstr ""
 "allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
 "å finne ut når et verk går inn i allemannseie i hvert land."
 
-#: templates/about.html:20
+#: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database"
 " maintained by the Wikimedia Foundation."
@@ -233,7 +237,7 @@ msgstr ""
 "Paulina henter data fra WIkidata, den frie og gemenskapsdrevne databasen "
 "vedlikeholdt av Wikimedia-stiftelsen."
 
-#: templates/about.html:21
+#: templates/about.html:22
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete."
 " Paulina helps to identify gaps and inaccuracies in information about "
@@ -245,11 +249,11 @@ msgstr ""
 "inviterer deg til å bidra til data i Wikidata, som brukes flittig på "
 "Internett."
 
-#: templates/about.html:22
+#: templates/about.html:23
 msgid "Local tools"
 msgstr "Lokale verktøy"
 
-#: templates/about.html:23
+#: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
 "national, regional or thematic versions of the tool, according to the "
@@ -259,11 +263,11 @@ msgstr ""
 "nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold"
 " til behovene hver gemenskap måtte ha."
 
-#: templates/about.html:24
+#: templates/about.html:25
 msgid "Who makes Paulina"
 msgstr "Hvem skaper Paulina"
 
-#: templates/about.html:25
+#: templates/about.html:26
 #, python-format
 msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
@@ -272,11 +276,16 @@ msgstr ""
 "Paulina støttes av %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s, og %(wm_uruguay_link)s."
 
-#: templates/about.html:26
+#: templates/about.html:27
+#, python-format
+msgid "See the %(credits_link)s."
+msgstr ""
+
+#: templates/about.html:28
 msgid "Content licenses"
 msgstr "Innholdslisenser"
 
-#: templates/about.html:27
+#: templates/about.html:29
 #, python-format
 msgid ""
 "All data in the pages about authors, works, countries and terms come from"
@@ -285,7 +294,7 @@ msgstr ""
 "All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata "
 "og er underlagt vilkårene i %(CC0_link)s."
 
-#: templates/about.html:28
+#: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
@@ -294,7 +303,7 @@ msgstr ""
 "Tekstene og annet originalinnhold på denne nettsiden er under "
 "%(ccbysa_link)s."
 
-#: templates/about.html:29
+#: templates/about.html:31
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and "
@@ -307,7 +316,7 @@ msgstr ""
 "allemannseie. Det anbefales å ta en titt på info om hver innholdsdel på "
 "Wikimedia Commons."
 
-#: templates/about.html:30
+#: templates/about.html:32
 msgid ""
 "The works accessible through links to external sites are available to the"
 " public, mostly because they are in the public domain, or under free "
@@ -321,11 +330,11 @@ msgstr ""
 "lovområder. Det anbefales å sjekke info om hvert verk på nettsiden de "
 "vertstjenes fra."
 
-#: templates/about.html:31
+#: templates/about.html:33
 msgid "Free software"
 msgstr "Fri programvare"
 
-#: templates/about.html:32
+#: templates/about.html:34
 #, python-format
 msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
@@ -677,7 +686,7 @@ msgstr "Søkeresultater"
 msgid "Your search returned too many results. Please refine your search."
 msgstr "Søket resulterte i for mange treff. Snevre inn søket ditt."
 
-#: templates/results.html:31 templates/works-list.html:28
+#: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
 msgstr "Tilgjengelig for nedlastning"
 

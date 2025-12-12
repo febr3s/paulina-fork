@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"POT-Creation-Date: 2025-12-12 11:06-0300\n"
 "PO-Revision-Date: 2025-05-08 17:40+0000\n"
 "Last-Translator: AtaZh <ipomoea@hilarious.com>\n"
 "Language: uk\n"
@@ -170,7 +170,7 @@ msgstr "Будь ласка, поверніться на %(home_page)s і спр
 msgid "About Paulina"
 msgstr "Про Пауліну"
 
-#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+#: templates/about.html:8 templates/about.html:20 templates/author.html:83
 msgid "Wikidata"
 msgstr "Вікідані"
 
@@ -213,6 +213,10 @@ msgid "project's code repository"
 msgstr "репозиторій коду проєкту"
 
 #: templates/about.html:18
+msgid "list of people who contribute to the project"
+msgstr ""
+
+#: templates/about.html:19
 #, python-format
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
@@ -229,7 +233,7 @@ msgstr ""
 "краще зрозуміти терміни захисту авторських прав і коли твори переходять у"
 " суспільне надбання у кожній країні."
 
-#: templates/about.html:20
+#: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database"
 " maintained by the Wikimedia Foundation."
@@ -237,7 +241,7 @@ msgstr ""
 "«Пауліна» працює на основі даних з Вікіданих, вільної спільної бази "
 "даних, яку підтримує Фонд Вікімедіа."
 
-#: templates/about.html:21
+#: templates/about.html:22
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete."
 " Paulina helps to identify gaps and inaccuracies in information about "
@@ -249,11 +253,11 @@ msgstr ""
 "спадщину і запрошує вас покращувати дані у Вікіданих і завдяки цьому — "
 "весь інтернет."
 
-#: templates/about.html:22
+#: templates/about.html:23
 msgid "Local tools"
 msgstr "Локальні інструменти"
 
-#: templates/about.html:23
+#: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
 "national, regional or thematic versions of the tool, according to the "
@@ -263,11 +267,11 @@ msgstr ""
 "національних, регіональних чи тематичних версій інструменту, залежно від "
 "потреб кожної спільноти."
 
-#: templates/about.html:24
+#: templates/about.html:25
 msgid "Who makes Paulina"
 msgstr "Хто створює «Пауліну»"
 
-#: templates/about.html:25
+#: templates/about.html:26
 #, python-format
 msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
@@ -276,11 +280,16 @@ msgstr ""
 "Над «Пауліною» працюють %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s і %(wm_uruguay_link)s."
 
-#: templates/about.html:26
+#: templates/about.html:27
+#, python-format
+msgid "See the %(credits_link)s."
+msgstr ""
+
+#: templates/about.html:28
 msgid "Content licenses"
 msgstr "Ліцензії на вміст"
 
-#: templates/about.html:27
+#: templates/about.html:29
 #, python-format
 msgid ""
 "All data in the pages about authors, works, countries and terms come from"
@@ -289,7 +298,7 @@ msgstr ""
 "Усі дані на сторінках про авторів, твори, країни і терміни взято з "
 "Вікіданих на правах ліцензії %(CC0_link)s."
 
-#: templates/about.html:28
+#: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
@@ -298,7 +307,7 @@ msgstr ""
 "Тексти та інший оригінальний вміст цього сайту опубліковані під ліцензією"
 " %(ccbysa_link)s."
 
-#: templates/about.html:29
+#: templates/about.html:31
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and "
@@ -311,7 +320,7 @@ msgstr ""
 " вільними ліцензіями або у суспільному надбанні. Ми рекомендуємо "
 "переходити у Вікісховище і дивитися інформацію про кожен медіафайл там."
 
-#: templates/about.html:30
+#: templates/about.html:32
 msgid ""
 "The works accessible through links to external sites are available to the"
 " public, mostly because they are in the public domain, or under free "
@@ -325,11 +334,11 @@ msgstr ""
 "правами у певних юрисдикціях. Ми рекомендуємо ознайомлюватися з "
 "інформацією про кожен твір на сайтах, де вони розміщені."
 
-#: templates/about.html:31
+#: templates/about.html:33
 msgid "Free software"
 msgstr "Вільне програмне забезпечення"
 
-#: templates/about.html:32
+#: templates/about.html:34
 #, python-format
 msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
@@ -694,7 +703,7 @@ msgstr "Результати пошуку"
 msgid "Your search returned too many results. Please refine your search."
 msgstr "Ваш запит видав забагато результатів. Будь ласка, уточніть свій пошук."
 
-#: templates/results.html:31 templates/works-list.html:28
+#: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
 msgstr "Доступно для завантаження"
 

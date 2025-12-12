@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"POT-Creation-Date: 2025-12-12 11:06-0300\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: ast\n"
@@ -171,7 +171,7 @@ msgstr "Por favor, dir a la %(home_page)s y preba otra vegada."
 msgid "About Paulina"
 msgstr "Sobro Paulina"
 
-#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+#: templates/about.html:8 templates/about.html:20 templates/author.html:83
 msgid "Wikidata"
 msgstr "Wikidata"
 
@@ -213,6 +213,10 @@ msgid "project's code repository"
 msgstr "repositoriu del códigu del proyeutu"
 
 #: templates/about.html:18
+msgid "list of people who contribute to the project"
+msgstr ""
+
+#: templates/about.html:19
 #, python-format
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
@@ -228,7 +232,7 @@ msgstr ""
 "públicu. Tamién facilita la comprensión de los plazos de copyright y aida"
 " saber cuándo una obra entra nel dominiu públicu en cada país."
 
-#: templates/about.html:20
+#: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database"
 " maintained by the Wikimedia Foundation."
@@ -236,7 +240,7 @@ msgstr ""
 "Paulina aliméntase de datos dende Wikidata, la base de datos llibre y "
 "collaborativa mantenida pola Fundación Wikimedia."
 
-#: templates/about.html:21
+#: templates/about.html:22
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete."
 " Paulina helps to identify gaps and inaccuracies in information about "
@@ -248,11 +252,11 @@ msgstr ""
 " padremuñu cultural ya invita a ameyorar los datos en Wikidata y, al "
 "traviés d'ella, na Internet."
 
-#: templates/about.html:22
+#: templates/about.html:23
 msgid "Local tools"
 msgstr "Ferramientes llocales"
 
-#: templates/about.html:23
+#: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
 "national, regional or thematic versions of the tool, according to the "
@@ -262,11 +266,11 @@ msgstr ""
 "creación de versiones nacionales, rexonales o temátiques de la "
 "ferramienta, según les necesidaes de cada comunidá."
 
-#: templates/about.html:24
+#: templates/about.html:25
 msgid "Who makes Paulina"
 msgstr "Quiénes creamos Paulina"
 
-#: templates/about.html:25
+#: templates/about.html:26
 #, python-format
 msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
@@ -275,11 +279,16 @@ msgstr ""
 "Paulina cuenta col sofitu de %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s y %(wm_uruguay_link)s."
 
-#: templates/about.html:26
+#: templates/about.html:27
+#, python-format
+msgid "See the %(credits_link)s."
+msgstr ""
+
+#: templates/about.html:28
 msgid "Content licenses"
 msgstr "Llicencias de los conteníos"
 
-#: templates/about.html:27
+#: templates/about.html:29
 #, python-format
 msgid ""
 "All data in the pages about authors, works, countries and terms come from"
@@ -288,7 +297,7 @@ msgstr ""
 "Tolos datos nes páxines sobro autores, obres, países y plazos vienen de "
 "Wikidata y tán so los términos de %(CC0_link)s."
 
-#: templates/about.html:28
+#: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
@@ -297,7 +306,7 @@ msgstr ""
 "Los testos y demás conteníu orixinal d'esta páxina web tán so una "
 "%(ccbysa_link)s."
 
-#: templates/about.html:29
+#: templates/about.html:31
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and "
@@ -310,7 +319,7 @@ msgstr ""
 " dominiu públicu. Recomendamos consultar la información de cada conteníu "
 "en Wikimedia Commons."
 
-#: templates/about.html:30
+#: templates/about.html:32
 msgid ""
 "The works accessible through links to external sites are available to the"
 " public, mostly because they are in the public domain, or under free "
@@ -324,11 +333,11 @@ msgstr ""
 "dalgunes xurisdiciones. Recomendamos consultar la información de caúna "
 "les obres nos sitios webs onde tán albergáes."
 
-#: templates/about.html:31
+#: templates/about.html:33
 msgid "Free software"
 msgstr "Software llibre"
 
-#: templates/about.html:32
+#: templates/about.html:34
 #, python-format
 msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
@@ -681,7 +690,7 @@ msgstr "Resultaos de la gueta"
 msgid "Your search returned too many results. Please refine your search."
 msgstr ""
 
-#: templates/results.html:31 templates/works-list.html:28
+#: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
 msgstr "Disponible pa baxar"
 
