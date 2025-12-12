@@ -338,7 +338,7 @@ def login():
         return redirect(redirect_url)
     
     except Exception as e:
-        flash(f'Login failed: {str(e)}', 'danger')
+        flash(_('Login failed: {error}').format(error=str(e)), 'danger')
         return redirect(url_for('home'))
 
 
@@ -385,7 +385,7 @@ def oauth_callback():
     except Exception as e:
         import traceback
         traceback.print_exc()
-        flash(f'Authentication failed: {str(e)}', 'danger')
+        flash(_('Authentication failed: {error}').format(error=str(e)), 'danger')
         return redirect(url_for('home'))
 
 
@@ -397,8 +397,9 @@ def logout():
     session.pop('wikimedia_username', None)
     session.pop('wikimedia_userid', None)
 
-    flash(f'You have been logged out.', 'info')
-    return redirect(url_for('home'))
+    flash(_('You have been logged out.'), 'info')
+    return redirect(request.referrer or url_for('home'))
+
 
 @app.errorhandler(404)
 def page_not_found(e):

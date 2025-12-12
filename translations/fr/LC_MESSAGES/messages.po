@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-02 15:16-0300\n"
+"POT-Creation-Date: 2025-12-12 09:32+0100\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fr\n"
@@ -17,51 +17,65 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
-#: app.py:54
+#: app.py:75
 msgid "No value"
 msgstr "Aucune valeur"
 
-#: app.py:56
+#: app.py:77
 msgid "Unknown value"
 msgstr "Valeur inconnue"
 
-#: app.py:66 templates/layout.html:53 templates/layout.html:62
+#: app.py:87 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "Accueil"
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:211
+#: app.py:94 templates/layout.html:65 templates/layout.html:256
 msgid "About"
 msgstr "À propos"
 
-#: app.py:106 app.py:123
+#: app.py:127 app.py:144
 msgid "Results"
 msgstr "Résultats"
 
-#: app.py:113 app.py:130 app.py:135
+#: app.py:134 app.py:151 app.py:156
 msgid "No results found"
 msgstr "Aucun résultat trouvé"
 
-#: app.py:183
+#: app.py:204
 msgid "List of works"
 msgstr "Liste des ouvrages"
 
-#: app.py:247
+#: app.py:268
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste de %(term_name)s"
 
-#: app.py:264
+#: app.py:285
 msgid "Unknown term"
 msgstr "Délai inconnu"
 
-#: app.py:266 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:228
+#: app.py:287 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:273
 msgid "Countries and terms"
 msgstr "Pays et délais"
 
-#: app.py:302
+#: app.py:341
+#, python-brace-format
+msgid "Login failed: {error}"
+msgstr ""
+
+#: app.py:388
+#, python-brace-format
+msgid "Authentication failed: {error}"
+msgstr ""
+
+#: app.py:400
+msgid "You have been logged out."
+msgstr ""
+
+#: app.py:407
 msgid "404 error"
 msgstr "Erreur 404"
 
@@ -165,7 +179,7 @@ msgstr "page d'accueil"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Veuillez vous rendre sur %(home_page)s et réessayer."
 
-#: templates/about.html:7 templates/layout.html:208
+#: templates/about.html:7 templates/layout.html:253
 msgid "About Paulina"
 msgstr "À propos de Paulina"
 
@@ -173,19 +187,19 @@ msgstr "À propos de Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:194
+#: templates/about.html:9 templates/layout.html:239
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centre culturel en ligne"
 
-#: templates/about.html:10 templates/layout.html:197
+#: templates/about.html:10 templates/layout.html:242
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:200
+#: templates/about.html:11 templates/layout.html:245
 msgid "Data Uruguay"
 msgstr "Open Data de l'Uruguay"
 
-#: templates/about.html:12 templates/layout.html:203
+#: templates/about.html:12 templates/layout.html:248
 msgid "Wikimedistas de Uruguay"
 msgstr "Contributeurs Wikimédia d'Uruguay"
 
@@ -422,7 +436,7 @@ msgstr ""
 msgid "Biography"
 msgstr "Orlando"
 
-#: templates/author.html:112 templates/layout.html:131
+#: templates/author.html:112 templates/layout.html:176
 msgid "Nationality"
 msgstr "Nationalité"
 
@@ -430,7 +444,7 @@ msgstr "Nationalité"
 msgid "Ethnicity"
 msgstr ""
 
-#: templates/author.html:122 templates/layout.html:122
+#: templates/author.html:122 templates/layout.html:167
 msgid "Gender"
 msgstr "Genre"
 
@@ -503,7 +517,7 @@ msgstr "Dans le domaine public"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr ""
 
-#: templates/country.html:34 templates/layout.html:155
+#: templates/country.html:34 templates/layout.html:200
 msgid "Type of work"
 msgstr "Type d'œuvre"
 
@@ -513,8 +527,8 @@ msgid "Number of works in public domain"
 msgstr "Dans le domaine public"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:241 templates/layout.html:243
-#: templates/layout.html:245
+#: templates/layout.html:286 templates/layout.html:288
+#: templates/layout.html:290
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -613,84 +627,112 @@ msgstr ""
 "compréhension du délai de droit d'auteur et permet de savoir quand une "
 "œuvre entre dans le domaine public dans chaque pays."
 
-#: templates/layout.html:31 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:293
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Données du domaine public"
 
-#: templates/layout.html:84
+#: templates/layout.html:82
+msgid "Logout"
+msgstr ""
+
+#: templates/layout.html:92
+msgid "Login with your Wikimedia account to add/edit items"
+msgstr ""
+
+#: templates/layout.html:94
+msgid "Login"
+msgstr ""
+
+#: templates/layout.html:114
 msgid "Select"
 msgstr "Sélectionner"
 
-#: templates/layout.html:104 templates/layout.html:107
+#: templates/layout.html:149 templates/layout.html:152
 #, fuzzy
 msgid "Authors"
 msgstr "Auteur(s)"
 
-#: templates/layout.html:105 templates/layout.html:108
+#: templates/layout.html:150 templates/layout.html:153
 #, fuzzy
 msgid "Works"
 msgstr "Ouvrage"
 
-#: templates/layout.html:112
+#: templates/layout.html:157
 msgid "Search with Paulina"
 msgstr "Rechercher avec Paulina"
 
-#: templates/layout.html:112 templates/layout.html:114
+#: templates/layout.html:157 templates/layout.html:159
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/layout.html:119
+#: templates/layout.html:164
 msgid "Advanced search"
 msgstr ""
 
-#: templates/layout.html:124 templates/layout.html:139
-#: templates/layout.html:157 templates/layout.html:166
+#: templates/layout.html:169 templates/layout.html:184
+#: templates/layout.html:202 templates/layout.html:211
 msgid "Any"
 msgstr "Tout"
 
-#: templates/layout.html:135
+#: templates/layout.html:180
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:148
+#: templates/layout.html:193
 msgid "In public domain"
 msgstr "Dans le domaine public"
 
-#: templates/layout.html:150
+#: templates/layout.html:195
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:164 templates/work.html:65
+#: templates/layout.html:209 templates/work.html:65
 msgid "Country of origin"
 msgstr "Pays d'origine"
 
-#: templates/layout.html:191
+#: templates/layout.html:236
 msgid "Paulina is supported by:"
 msgstr "Paulina est soutenu par :"
 
-#: templates/layout.html:214
+#: templates/layout.html:259
 msgid "Source code"
 msgstr "Code source"
 
-#: templates/layout.html:217
+#: templates/layout.html:262
 msgid "Help translate"
 msgstr "Aider à traduire"
 
-#: templates/layout.html:222
+#: templates/layout.html:267
 msgid "Help"
 msgstr "Aide"
 
-#: templates/layout.html:225
+#: templates/layout.html:270
 msgid "Documentation"
 msgstr "Documentation"
 
-#: templates/layout.html:249
+#: templates/layout.html:294
 msgid "Powered by Wikidata."
 msgstr "Alimenté par Wikidata."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "Aucun résultat trouvé. Réessayez."
+
+#: templates/oauth-callback.html:2
+msgid "Authenticating..."
+msgstr ""
+
+#: templates/oauth-callback.html:10
+msgid "Loading..."
+msgstr ""
+
+#: templates/oauth-callback.html:12
+msgid "Authenticating with Wikimedia..."
+msgstr ""
+
+#: templates/oauth-callback.html:13
+msgid "Please wait while we complete your login."
+msgstr ""
 
 #: templates/results.html:6
 msgid "Search results"
@@ -700,7 +742,7 @@ msgstr "Résultats de recherche"
 msgid "Your search returned too many results. Please refine your search."
 msgstr ""
 
-#: templates/results.html:31 templates/works-list.html:28
+#: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
 msgstr "Disponible au téléchargement"
 
