@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-12 09:32+0100\n"
+"POT-Creation-Date: 2025-12-12 11:06-0300\n"
 "PO-Revision-Date: 2025-11-01 22:51+0000\n"
 "Last-Translator: حبيشان Hubaishan <s.hubaishan@gmail.com>\n"
 "Language: ar\n"
@@ -18,65 +18,51 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.16.0\n"
 
-#: app.py:75
+#: app.py:54
 msgid "No value"
 msgstr "لا قيمة"
 
-#: app.py:77
+#: app.py:56
 msgid "Unknown value"
 msgstr "مجهول"
 
-#: app.py:87 templates/layout.html:53 templates/layout.html:62
+#: app.py:66 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "البداية"
 
-#: app.py:94 templates/layout.html:65 templates/layout.html:256
+#: app.py:73 templates/layout.html:65 templates/layout.html:211
 msgid "About"
 msgstr "عن"
 
-#: app.py:127 app.py:144
+#: app.py:106 app.py:123
 msgid "Results"
 msgstr "النتائج"
 
-#: app.py:134 app.py:151 app.py:156
+#: app.py:113 app.py:130 app.py:135
 msgid "No results found"
 msgstr "لا توجد نتائج"
 
-#: app.py:204
+#: app.py:183
 msgid "List of works"
 msgstr "قائمة الأعمال"
 
-#: app.py:268
+#: app.py:247
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "قائمة %(term_name)s"
 
-#: app.py:285
+#: app.py:264
 msgid "Unknown term"
 msgstr "شروط غير معروفة"
 
-#: app.py:287 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:273
+#: app.py:266 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:228
 msgid "Countries and terms"
 msgstr "الدول والشروط"
 
-#: app.py:341
-#, python-brace-format
-msgid "Login failed: {error}"
-msgstr ""
-
-#: app.py:388
-#, python-brace-format
-msgid "Authentication failed: {error}"
-msgstr ""
-
-#: app.py:400
-msgid "You have been logged out."
-msgstr ""
-
-#: app.py:407
+#: app.py:302
 msgid "404 error"
 msgstr "خطأ 404"
 
@@ -179,27 +165,27 @@ msgstr "صفحة البداية"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "رجاء توجه إلى %(home_page)s وحاول مجددًّا."
 
-#: templates/about.html:7 templates/layout.html:253
+#: templates/about.html:7 templates/layout.html:208
 msgid "About Paulina"
 msgstr "عن باولينا"
 
-#: templates/about.html:8 templates/about.html:19 templates/author.html:83
+#: templates/about.html:8 templates/about.html:20 templates/author.html:83
 msgid "Wikidata"
 msgstr "ويكي بيانات"
 
-#: templates/about.html:9 templates/layout.html:239
+#: templates/about.html:9 templates/layout.html:194
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - المركز الثقافي عبر الإنترنت"
 
-#: templates/about.html:10 templates/layout.html:242
+#: templates/about.html:10 templates/layout.html:197
 msgid "Creative Commons Uruguay"
 msgstr "المشاع الإبداعي أوروغواي"
 
-#: templates/about.html:11 templates/layout.html:245
+#: templates/about.html:11 templates/layout.html:200
 msgid "Data Uruguay"
 msgstr "بيانات أورغواي"
 
-#: templates/about.html:12 templates/layout.html:248
+#: templates/about.html:12 templates/layout.html:203
 msgid "Wikimedistas de Uruguay"
 msgstr ""
 
@@ -224,6 +210,10 @@ msgid "project's code repository"
 msgstr "مستودع كود المشروع"
 
 #: templates/about.html:18
+msgid "list of people who contribute to the project"
+msgstr ""
+
+#: templates/about.html:19
 #, python-format
 msgid ""
 "Paulina invites you to learn about the cultural heritage of humanity. It "
@@ -234,13 +224,13 @@ msgid ""
 "country."
 msgstr ""
 
-#: templates/about.html:20
+#: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database"
 " maintained by the Wikimedia Foundation."
 msgstr ""
 
-#: templates/about.html:21
+#: templates/about.html:22
 msgid ""
 "Sometimes, the information consulted may contain errors or be incomplete."
 " Paulina helps to identify gaps and inaccuracies in information about "
@@ -248,47 +238,52 @@ msgid ""
 "through it, on the Internet."
 msgstr ""
 
-#: templates/about.html:22
+#: templates/about.html:23
 msgid "Local tools"
 msgstr "أدوات محلية"
 
-#: templates/about.html:23
+#: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
 "national, regional or thematic versions of the tool, according to the "
 "needs of each community."
 msgstr ""
 
-#: templates/about.html:24
+#: templates/about.html:25
 msgid "Who makes Paulina"
 msgstr ""
 
-#: templates/about.html:25
+#: templates/about.html:26
 #, python-format
 msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
 
-#: templates/about.html:26
+#: templates/about.html:27
+#, python-format
+msgid "See the %(credits_link)s."
+msgstr ""
+
+#: templates/about.html:28
 msgid "Content licenses"
 msgstr ""
 
-#: templates/about.html:27
+#: templates/about.html:29
 #, python-format
 msgid ""
 "All data in the pages about authors, works, countries and terms come from"
 " Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
 
-#: templates/about.html:28
+#: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
 
-#: templates/about.html:29
+#: templates/about.html:31
 #, python-format
 msgid ""
 "The images and media in the pages about authors, works, countries and "
@@ -297,7 +292,7 @@ msgid ""
 " content on Wikimedia Commons."
 msgstr ""
 
-#: templates/about.html:30
+#: templates/about.html:32
 msgid ""
 "The works accessible through links to external sites are available to the"
 " public, mostly because they are in the public domain, or under free "
@@ -306,11 +301,11 @@ msgid ""
 "where they are hosted."
 msgstr ""
 
-#: templates/about.html:31
+#: templates/about.html:33
 msgid "Free software"
 msgstr ""
 
-#: templates/about.html:32
+#: templates/about.html:34
 #, python-format
 msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit "
@@ -388,7 +383,7 @@ msgstr "الموقع الرسمي"
 msgid "Biography"
 msgstr "السيرة"
 
-#: templates/author.html:112 templates/layout.html:176
+#: templates/author.html:112 templates/layout.html:131
 msgid "Nationality"
 msgstr "الجنسية"
 
@@ -396,7 +391,7 @@ msgstr "الجنسية"
 msgid "Ethnicity"
 msgstr "العرق"
 
-#: templates/author.html:122 templates/layout.html:167
+#: templates/author.html:122 templates/layout.html:122
 msgid "Gender"
 msgstr "الجنس"
 
@@ -463,7 +458,7 @@ msgstr "إحصائيات النطاق العام"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "عدد الأعمال التي تم تحديدها على أنها ملكية عامة في ويكي بيانات"
 
-#: templates/country.html:34 templates/layout.html:200
+#: templates/country.html:34 templates/layout.html:155
 msgid "Type of work"
 msgstr "نوع العمل"
 
@@ -472,8 +467,8 @@ msgid "Number of works in public domain"
 msgstr "عدد الأعمال في النطاق العام"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:286 templates/layout.html:288
-#: templates/layout.html:290
+#: templates/layout.html:241 templates/layout.html:243
+#: templates/layout.html:245
 msgid "Paulina logo"
 msgstr "علامة باولينا"
 
@@ -566,110 +561,82 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:293
+#: templates/layout.html:31 templates/layout.html:248
 msgid "Paulina - Data for the Public Domain"
 msgstr "باولينا - بيانات للنطاق العام"
 
-#: templates/layout.html:82
-msgid "Logout"
-msgstr ""
-
-#: templates/layout.html:92
-msgid "Login with your Wikimedia account to add/edit items"
-msgstr ""
-
-#: templates/layout.html:94
-msgid "Login"
-msgstr ""
-
-#: templates/layout.html:114
+#: templates/layout.html:84
 msgid "Select"
 msgstr "اختيار"
 
-#: templates/layout.html:149 templates/layout.html:152
+#: templates/layout.html:104 templates/layout.html:107
 msgid "Authors"
 msgstr "المؤلفون"
 
-#: templates/layout.html:150 templates/layout.html:153
+#: templates/layout.html:105 templates/layout.html:108
 msgid "Works"
 msgstr "الأعمال"
 
-#: templates/layout.html:157
+#: templates/layout.html:112
 msgid "Search with Paulina"
 msgstr "ابحث مع باولينا"
 
-#: templates/layout.html:157 templates/layout.html:159
+#: templates/layout.html:112 templates/layout.html:114
 msgid "Search"
 msgstr "بحث"
 
-#: templates/layout.html:164
+#: templates/layout.html:119
 msgid "Advanced search"
 msgstr "بحث متقدم"
 
-#: templates/layout.html:169 templates/layout.html:184
-#: templates/layout.html:202 templates/layout.html:211
+#: templates/layout.html:124 templates/layout.html:139
+#: templates/layout.html:157 templates/layout.html:166
 msgid "Any"
 msgstr "أي"
 
-#: templates/layout.html:180
+#: templates/layout.html:135
 msgid "Type to filter..."
 msgstr "اكتب للتصفية..."
 
-#: templates/layout.html:193
+#: templates/layout.html:148
 msgid "In public domain"
 msgstr "في النطاق العام"
 
-#: templates/layout.html:195
+#: templates/layout.html:150
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "المؤلفون الذين تعتبر أعمالهم ملكية عامة في ولاية قضائية واحدة على الأقل"
 
-#: templates/layout.html:209 templates/work.html:65
+#: templates/layout.html:164 templates/work.html:65
 msgid "Country of origin"
 msgstr "بلد المنشأ"
 
-#: templates/layout.html:236
+#: templates/layout.html:191
 msgid "Paulina is supported by:"
 msgstr "باولينا مدعوم من:"
 
-#: templates/layout.html:259
+#: templates/layout.html:214
 msgid "Source code"
 msgstr "الكود المصدري"
 
-#: templates/layout.html:262
+#: templates/layout.html:217
 msgid "Help translate"
 msgstr "ساعد في الترجمة"
 
-#: templates/layout.html:267
+#: templates/layout.html:222
 msgid "Help"
 msgstr "مساعدة"
 
-#: templates/layout.html:270
+#: templates/layout.html:225
 msgid "Documentation"
 msgstr "توثيق"
 
-#: templates/layout.html:294
+#: templates/layout.html:249
 msgid "Powered by Wikidata."
 msgstr "مدعوم من ويكي بيانات."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "لم يتم العثور على نتائج. حاول مرة أخرى."
-
-#: templates/oauth-callback.html:2
-msgid "Authenticating..."
-msgstr ""
-
-#: templates/oauth-callback.html:10
-msgid "Loading..."
-msgstr ""
-
-#: templates/oauth-callback.html:12
-msgid "Authenticating with Wikimedia..."
-msgstr ""
-
-#: templates/oauth-callback.html:13
-msgid "Please wait while we complete your login."
-msgstr ""
 
 #: templates/results.html:6
 msgid "Search results"

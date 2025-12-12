@@ -95,7 +95,17 @@ Paulina Project is supported by [Ártica - Centro Cultural Online](https://www.a
 [Creative Commons Uruguay](https://www.creativecommons.uy), [Data Uruguay](https://data.org.uy) and 
 [Wikimedistas de Uruguay](https://wikimedistas.uy). The project received support from the Wikimedia Community Fund [in 2024](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/Rapid_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_con_Wikidata_(ID:_22592697)) and [2025](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/General_Support_Fund/Fortaleciendo_el_dominio_p%C3%BAblico_latinoamericano_con_Wikidata).
 
-Maintainer: Jorge Gemetto. Contributors: David Coronel, Mariana Fossatti, Sudhanshu Gautam, Nat Hernández, Carla Toro.
+Project Lead: Jorge Gemetto
+
+Maintainers: David Coronel, Jorge Gemetto, Nat Hernández Clavijo.
+
+Contributors: David Coronel, Dipanshu Vishwakarma, Jorge Gemetto, Kimbrene Kakande, Mariana Fossatti, Nat Hernández Clavijo, Nurah Wakili, Shreya Bhagat, Sudhanshu Gautam, Tunde-Ajayi Olamiposi.
+
+Translators: Adolfo Jayme Barrientos, Allan Nordhøy, AtaZh, Bodhisattwa Mandal, ButterflyOfFire, EdoAug, Hubaishan, Jorge Gemetto, Juan Sebastian Quintero Santacruz, Nathan, Nemoralis, Phlostically, S. H., Steven Sun, Supaplex, Susanna Ånäs, Yunus Emre Bayraktar.
+
+Community advisors: Alex Stinson, Carla Toro, Diego de la Hera.
+
+Paulina logo designer: Gonzalo Saavedra.
 
 ## Awards and Recognitions
 Paulina received the [Coolest Tool Award 2025](https://meta.wikimedia.org/wiki/Coolest_Tool_Award/2025) in the category Most Innovative.
