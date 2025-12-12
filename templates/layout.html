@@ -117,7 +117,7 @@
         </button>
       </div>
       <div class="d-flex flex-row py-2">
-        <details>
+        <details {% if prefill_country_qid %}open{% endif %}>
           <summary>{{ _('Advanced search') }}</summary>
           <div id="filters-for-author">
             <div class="py-2 px-2">
@@ -135,12 +135,17 @@
                 <input type="text" class="form-control filter border-black shadow-none"
                       id="nationality-combobox"
                       placeholder="{{ _('Type to filter...') }}"
-                      autocomplete="off">
+                      autocomplete="off"
+                        {% if prefill_country_qid %}
+                        value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                        {% endif %}>
                 <select class="form-select filter border-black shadow-none"
                       name="nationality" id="nationality" style="display:none">
                   <option value="">{{ _('Any') }}</option>
                   {% for country in COUNTRIES %}
-                  <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
+                   <option value="{{ country['qid'] }}"
+                    {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected{% endif %}>
+                    {{ country['country_name'] }}</option>
                   {% endfor %}
                 </select>
                 <ul class="dropdown-menu w-100" id="nationality-dropdown"></ul>
@@ -167,7 +172,9 @@
               <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin">
                 <option value="">{{ _('Any') }}</option>
                 {% for country in COUNTRIES %}
-                <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
+                <option value="{{ country['qid'] }}"
+                {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected{% endif %} >
+                  {{ country['country_name'] }}</option>
                 {% endfor %}
               </select>
             </div>
