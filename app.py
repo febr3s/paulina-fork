@@ -57,7 +57,7 @@ limiter = Limiter(
     app=app,
     key_func=get_user_identifier,
     default_limits=[
-        f"{app.config.get('RATE_LIMIT_PER_DAY', 200)} per day",
+        f"{app.config.get('RATE_LIMIT_PER_DAY', 300)} per day",
         f"{app.config.get('RATE_LIMIT_PER_HOUR', 50)} per hour"
     ],
     storage_uri=app.config.get('RATELIMIT_STORAGE_URL', 'memory://'),
@@ -291,6 +291,7 @@ def countries_main():
 
 
 @app.route("/robots.txt")
+@limiter.exempt 
 def show_robots_txt():
     ROBOTS_TXT = "User-agent: *\nAllow: /\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
