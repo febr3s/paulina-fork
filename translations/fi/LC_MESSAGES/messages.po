@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-12 11:06-0300\n"
+"POT-Creation-Date: 2025-12-12 20:15+0100\n"
 "PO-Revision-Date: 2025-04-22 16:08+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fi\n"
@@ -17,51 +17,65 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
-#: app.py:54
+#: app.py:75
 msgid "No value"
 msgstr "Ei arvoa"
 
-#: app.py:56
+#: app.py:77
 msgid "Unknown value"
 msgstr "Tuntematon arvo"
 
-#: app.py:66 templates/layout.html:53 templates/layout.html:62
+#: app.py:87 templates/layout.html:53 templates/layout.html:62
 msgid "Home"
 msgstr "Alku"
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:211
+#: app.py:94 templates/layout.html:65 templates/layout.html:263
 msgid "About"
 msgstr "Tietoa projektista"
 
-#: app.py:106 app.py:123
+#: app.py:127 app.py:144
 msgid "Results"
 msgstr "Tulokset"
 
-#: app.py:113 app.py:130 app.py:135
+#: app.py:134 app.py:151 app.py:156
 msgid "No results found"
 msgstr "Ei tuloksia"
 
-#: app.py:183
+#: app.py:204
 msgid "List of works"
 msgstr "Teosluettelo"
 
-#: app.py:247
+#: app.py:269
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Luettelo %(term_name)s"
 
-#: app.py:264
+#: app.py:286
 msgid "Unknown term"
 msgstr "Tuntematon tekijänoikeuden kesto"
 
-#: app.py:266 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:228
+#: app.py:288 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:280
 msgid "Countries and terms"
 msgstr "Maat ja tekijänoikeuden kestot"
 
-#: app.py:302
+#: app.py:342
+#, python-brace-format
+msgid "Login failed: {error}"
+msgstr ""
+
+#: app.py:389
+#, python-brace-format
+msgid "Authentication failed: {error}"
+msgstr ""
+
+#: app.py:401
+msgid "You have been logged out."
+msgstr ""
+
+#: app.py:408
 msgid "404 error"
 msgstr "404-virhe"
 
@@ -167,7 +181,7 @@ msgstr "aloitussivu"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Mene %(home_page)s ja yritä uudelleen."
 
-#: templates/about.html:7 templates/layout.html:208
+#: templates/about.html:7 templates/layout.html:260
 msgid "About Paulina"
 msgstr "Tietoa Paulinasta"
 
@@ -175,19 +189,19 @@ msgstr "Tietoa Paulinasta"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:194
+#: templates/about.html:9 templates/layout.html:246
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - online-kulttuurikeskus"
 
-#: templates/about.html:10 templates/layout.html:197
+#: templates/about.html:10 templates/layout.html:249
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:200
+#: templates/about.html:11 templates/layout.html:252
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:203
+#: templates/about.html:12 templates/layout.html:255
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -426,7 +440,7 @@ msgstr ""
 msgid "Biography"
 msgstr "Orlando"
 
-#: templates/author.html:112 templates/layout.html:131
+#: templates/author.html:112 templates/layout.html:176
 msgid "Nationality"
 msgstr "Kansallisuus"
 
@@ -434,7 +448,7 @@ msgstr "Kansallisuus"
 msgid "Ethnicity"
 msgstr ""
 
-#: templates/author.html:122 templates/layout.html:122
+#: templates/author.html:122 templates/layout.html:167
 msgid "Gender"
 msgstr "Sukupuoli"
 
@@ -505,7 +519,7 @@ msgstr "Onko tekijänoikeuksista vapaa"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr ""
 
-#: templates/country.html:34 templates/layout.html:155
+#: templates/country.html:34 templates/layout.html:205
 #, fuzzy
 msgid "Type of work"
 msgstr "Teosluettelo"
@@ -516,8 +530,8 @@ msgid "Number of works in public domain"
 msgstr "Onko tekijänoikeuksista vapaa"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:241 templates/layout.html:243
-#: templates/layout.html:245
+#: templates/layout.html:293 templates/layout.html:295
+#: templates/layout.html:297
 msgid "Paulina logo"
 msgstr "Paulina-logo"
 
@@ -615,84 +629,112 @@ msgstr ""
 "helpottaa myös tekijänoikeusehtojen ymmärtämistä ja auttaa tietämään, "
 "milloin teos tulee public domainiin kussakin maassa."
 
-#: templates/layout.html:31 templates/layout.html:248
+#: templates/layout.html:31 templates/layout.html:300
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Tietoa public domainia varten"
 
-#: templates/layout.html:84
+#: templates/layout.html:82
+msgid "Logout"
+msgstr ""
+
+#: templates/layout.html:92
+msgid "Login with your Wikimedia account to add/edit items"
+msgstr ""
+
+#: templates/layout.html:94
+msgid "Login"
+msgstr ""
+
+#: templates/layout.html:114
 msgid "Select"
 msgstr "Valitse"
 
-#: templates/layout.html:104 templates/layout.html:107
+#: templates/layout.html:149 templates/layout.html:152
 #, fuzzy
 msgid "Authors"
 msgstr "Kirjoittaja(t)"
 
-#: templates/layout.html:105 templates/layout.html:108
+#: templates/layout.html:150 templates/layout.html:153
 #, fuzzy
 msgid "Works"
 msgstr "Teos"
 
-#: templates/layout.html:112
+#: templates/layout.html:157
 msgid "Search with Paulina"
 msgstr "Etsi Paulinan avulla"
 
-#: templates/layout.html:112 templates/layout.html:114
+#: templates/layout.html:157 templates/layout.html:159
 msgid "Search"
 msgstr "Etsi"
 
-#: templates/layout.html:119
+#: templates/layout.html:164
 msgid "Advanced search"
 msgstr ""
 
-#: templates/layout.html:124 templates/layout.html:139
-#: templates/layout.html:157 templates/layout.html:166
+#: templates/layout.html:169 templates/layout.html:187
+#: templates/layout.html:207 templates/layout.html:216
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:135
+#: templates/layout.html:180
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:148
+#: templates/layout.html:198
 msgid "In public domain"
 msgstr "Onko tekijänoikeuksista vapaa"
 
-#: templates/layout.html:150
+#: templates/layout.html:200
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:164 templates/work.html:65
+#: templates/layout.html:214 templates/work.html:65
 msgid "Country of origin"
 msgstr "Alkuperämaa"
 
-#: templates/layout.html:191
+#: templates/layout.html:243
 msgid "Paulina is supported by:"
 msgstr "Paulinaa tukevat:"
 
-#: templates/layout.html:214
+#: templates/layout.html:266
 msgid "Source code"
 msgstr "Lähdekoodi"
 
-#: templates/layout.html:217
+#: templates/layout.html:269
 msgid "Help translate"
 msgstr "Auta kääntämään"
 
-#: templates/layout.html:222
+#: templates/layout.html:274
 msgid "Help"
 msgstr "Apu"
 
-#: templates/layout.html:225
+#: templates/layout.html:277
 msgid "Documentation"
 msgstr "Dokumentaatio"
 
-#: templates/layout.html:249
+#: templates/layout.html:301
 msgid "Powered by Wikidata."
 msgstr "Toimii Wikidatan avulla."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "Tuloksia ei löytynyt. Yritä uudelleen."
+
+#: templates/oauth-callback.html:2
+msgid "Authenticating..."
+msgstr ""
+
+#: templates/oauth-callback.html:10
+msgid "Loading..."
+msgstr ""
+
+#: templates/oauth-callback.html:12
+msgid "Authenticating with Wikimedia..."
+msgstr ""
+
+#: templates/oauth-callback.html:13
+msgid "Please wait while we complete your login."
+msgstr ""
 
 #: templates/results.html:6
 msgid "Search results"
