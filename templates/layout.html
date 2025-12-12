@@ -115,7 +115,7 @@
         </button>
       </div>
       <div class="d-flex flex-row py-2">
-        <details {% if prefill_country_qid %}open{% endif %}>
+        <details {% if request.path == '/results' or prefill_country_qid %}open{% endif %}>
           <summary>{{ _('Advanced search') }}</summary>
           <div id="filters-for-author">
             <div class="py-2 px-2">
@@ -123,7 +123,9 @@
               <select class="form-select filter border-black shadow-none" name="gender" id="gender">
                 <option value="">{{ _('Any') }}</option>
                 {% for gender in GENDERS %}
-                <option value="{{ gender['qid'] }}">{{ _(gender['gender_name']) }}</option>
+                <option value="{{ gender['qid'] }}"
+                {% if request.args.get('gender') == gender['qid'] %}selected{% endif %}>
+                {{ _(gender['gender_name']) }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -136,13 +138,17 @@
                       autocomplete="off"
                         {% if prefill_country_qid %}
                         value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                        {% elif request.args.get('nationality') %}
+                        value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('nationality') %}{{country['country_name']}}{% endif %}{% endfor %}"
                         {% endif %}>
                 <select class="form-select filter border-black shadow-none"
                       name="nationality" id="nationality" style="display:none">
                   <option value="">{{ _('Any') }}</option>
                   {% for country in COUNTRIES %}
                    <option value="{{ country['qid'] }}"
-                    {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected{% endif %}>
+                    {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected
+                    {% elif request.args.get('nationality') and country['qid'] == request.args.get('nationality') %}selected
+                    {% endif %}>
                     {{ country['country_name'] }}</option>
                   {% endfor %}
                 </select>
@@ -151,7 +157,8 @@
             </div>
             <div class="py-2 px-2">
               <label for="in-public-domain"><strong>{{ _('In public domain') }}</strong></label>
-              <input type="checkbox" id="in-public-domain" name="in-public-domain">
+              <input type="checkbox" id="in-public-domain" name="in-public-domain" value="yes"
+              {% if request.args.get('in-public-domain') == 'yes' %}checked{% endif %}>
               <br><small>{{ _('Authors whose works are in public domain in at least one jurisdiction') }}</small>
             </div>
           </div>
@@ -161,7 +168,9 @@
               <select class="form-select filter border-black shadow-none" name="type_of_work" id="type-of-work">
                 <option value="">{{ _('Any') }}</option>
                 {% for type_of_work in TYPES_OF_WORK %}
-                <option value="{{type_of_work['qid']}}">{{ _(type_of_work['type_name']) }}</option>
+                <option value="{{type_of_work['qid']}}"
+                {% if request.args.get('type_of_work') == type_of_work['qid'] %}selected{% endif %}>
+                {{ _(type_of_work['type_name']) }}</option>
                 {% endfor %}
               </select>
             </div>
@@ -171,7 +180,9 @@
                 <option value="">{{ _('Any') }}</option>
                 {% for country in COUNTRIES %}
                 <option value="{{ country['qid'] }}"
-                {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected{% endif %} >
+                {% if prefill_country_qid and country['qid'] == prefill_country_qid %}selected
+                {% elif request.args.get('country_of_origin') and country['qid'] == request.args.get('country_of_origin') %}selected
+                {% endif %}>
                   {{ country['country_name'] }}</option>
                 {% endfor %}
               </select>
