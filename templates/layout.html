@@ -68,6 +68,36 @@
           <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
         </li>
       </ul>
+      <div class="d-flex align-items-center me-3">
+       {% if session.get('wikimedia_username') %}
+          <!-- Logged in state -->
+          <div class="dropdown user-dropdown">
+            <button class="btn btn-md btn-auth dropdown-toggle" type="button" id="userDropdown" 
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> {{ session.get('wikimedia_username') }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li>
+                <a class="dropdown-item" href="{{ url_for('logout') }}">
+                  <i class="bi bi-box-arrow-right"></i>{{ _('Logout') }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <!-- Logged out state -->
+           <div class="bg-light y-2">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-center gap-2">
+      <span class="fw-light small">{{ _('Login with your Wikimedia account to add/edit items') }}</span>
+          <a href="{{ url_for('login') }}" class="btn btn-md btn-auth">
+            <i class="bi bi-box-arrow-in-right"></i> {{ _('Login') }}
+          </a>
+           </div>
+  </div>
+</div>
+     {% endif %}
+      </div>
       <form class="d-flex" method="GET" id="language-form">
         <select class="form-select me-1 border-black shadow-none" name="language" id="language-select">
           {% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
@@ -87,6 +117,21 @@
     </div>
   </div>
 </nav>
+
+
+<!-- FLASH MESSAGES -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
 {% block presentation %}
 {% endblock %}

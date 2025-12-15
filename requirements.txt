@@ -3,3 +3,5 @@ python-dateutil
 flask
 Flask-Babel
 Flask-Caching
+mwoauth
+Flask-Limiter
