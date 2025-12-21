@@ -56,10 +56,6 @@ def get_user_identifier():
 limiter = Limiter(
     app=app,
     key_func=get_user_identifier,
-    default_limits=[
-        f"{app.config.get('RATE_LIMIT_PER_DAY', 300)} per day",
-        f"{app.config.get('RATE_LIMIT_PER_HOUR', 50)} per hour"
-    ],
     storage_uri=app.config.get('RATELIMIT_STORAGE_URL', 'memory://'),
     headers_enabled=app.config.get('RATELIMIT_HEADERS_ENABLED', True)
 )
@@ -291,7 +287,6 @@ def countries_main():
 
 
 @app.route("/robots.txt")
-@limiter.exempt 
 def show_robots_txt():
     ROBOTS_TXT = "User-agent: *\nAllow: /\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
@@ -340,12 +335,11 @@ def login():
         return redirect(redirect_url)
     
     except Exception as e:
-        flash(_('Login failed: {error}').format(error=str(e)), 'danger')
+        flash(_('Login failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
 
 
 @app.route('/oauth-callback')
-@limiter.exempt 
 def oauth_callback():
     """Handle OAuth callback from Wikimedia"""
     try:
@@ -387,12 +381,11 @@ def oauth_callback():
     except Exception as e:
         import traceback
         traceback.print_exc()
-        flash(_('Authentication failed: {error}').format(error=str(e)), 'danger')
+        flash(_('Authentication failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
 
 
 @app.route('/auth/logout')
-@limiter.exempt 
 def logout():
     # Clear OAuth-related session data
     session.pop('access_token', None)

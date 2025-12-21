@@ -412,8 +412,20 @@ h3 {
 }
 
 .btn-auth:hover {
-  background-color: #29a4e2;
+  background-color: #71c3ec;
   color: black;
+   border: 1px solid black;
+}
+
+/* Mobile login button */
+@media (max-width: 991.98px) {
+  .btn-auth {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-auth:hover {
+    border-color: black
+  }
 }
 
 .user-dropdown .dropdown-menu {
