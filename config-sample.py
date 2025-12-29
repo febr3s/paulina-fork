@@ -9,6 +9,9 @@ CONSUMER_KEY = ""
 CONSUMER_SECRET = ""
 OAUTH_MWURI = "https://meta.wikimedia.org/w/index.php"
 
+# User-Agent for API requests 
+USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'
+
 # Wikidata API URLs
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
 WIKIDATA_REST_API_URL = "https://www.wikidata.org/w/rest.php/wikibase/v1"

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session
+from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session, jsonify
 from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from mwoauth import ConsumerToken, Handshaker, RequestToken
+from wikidata_api import WikidataAPI
 import datetime
 import requests
 
@@ -313,6 +314,56 @@ def inject_filters():
         "COUNTRIES": countries
         }
 
+@app.route('/api/search-wikidata-items')
+@cache.cached(timeout=60, make_cache_key=make_cache_key)
+def search_wikidata_items():
+    query = request.args.get('q', '')
+    entity_type = request.args.get('type', 'author')
+    
+    # Get language from request, fall back to user's locale, then 'en'
+    lang = request.args.get('lang', '')
+    if not lang:
+        try:
+            lang = languages.get_locale()
+        except:
+            lang = 'en'
+            
+    url = app.config.get('WIKIDATA_API_URL', 'https://www.wikidata.org/w/api.php')
+
+    if not query or len(query) < 2:
+        return jsonify([])
+    
+    try:
+        params = {
+            'action': 'wbsearchentities',
+            'search': query,
+            'language': lang,      # Labels in user's language
+            'uselang': lang,       # UI/descriptions in user's language
+            'type': 'item',
+            'limit': 10,
+            'format': 'json'
+        }
+        
+        headers = {
+            'User-Agent': 'Paulina/1.0 (https://paulina.toolforge.org/) Python/requests'
+        }
+        
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        data = response.json()
+        
+        results = []
+        for item in data.get('search', []):
+            results.append({
+                'id': item.get('id'),
+                'label': item.get('label', ''),
+                'description': item.get('description', '')
+            })
+        
+        return jsonify(results)
+        
+    except Exception as e:
+        print(f"Wikidata search error: {e}")
+        return jsonify([])
 
 # OAuth Routes
 
@@ -375,7 +426,7 @@ def oauth_callback():
             secret=access_token.secret
         )
         session['wikimedia_username'] = identity['username']
-        session['wikimedia_userid'] = identity['sub'] 
+        session['wikimedia_userid'] = identity['sub']      
         return redirect(url_for('home'))
     
     except Exception as e:
@@ -395,6 +446,232 @@ def logout():
     flash(_('You have been logged out.'), 'info')
     return redirect(request.referrer or url_for('home'))
 
+
+# Wikidata Editing Routes
+
+@app.route('/add-author', methods=['GET', 'POST'])
+@limiter.limit("20 per hour", methods=['POST'])
+def add_author():
+    """Handle the Add Author form"""
+    
+    # Check if user is logged in
+    if 'wikimedia_username' not in session:
+        flash(_('Please login to add an author.'), 'warning')
+        return redirect(url_for('home'))
+    
+    if request.method == 'POST':
+        return process_add_author_form()
+    
+    return render_template('add-author.html', title=_('Add Author'))
+
+def process_add_author_form():
+    """Process the Add Author form submission"""
+    
+    try:
+        wikidata = WikidataAPI(app.config)
+        
+        # Get form data
+        name = request.form.get('name', '').strip()
+        description = request.form.get('description', '').strip()
+        gender = request.form.get('gender', '').strip()
+        nationality = request.form.get('nationality', '').strip()
+        place_of_birth_qid = request.form.get('placeOfBirthQid', '').strip()
+        place_of_birth_text = request.form.get('placeOfBirth', '').strip()
+        date_of_birth = request.form.get('dateOfBirth', '').strip()
+        date_of_death = request.form.get('dateOfDeath', '').strip()
+        occupation_qids = request.form.get('occupationQids', '').strip()
+        occupation_texts = request.form.get('occupationTexts', '').strip()
+        ethnicity_qid = request.form.get('ethnicityQid', '').strip()
+        ethnicity_text = request.form.get('ethnicity', '').strip()
+        image_url = request.form.get('imageUrl', '').strip()
+        official_website = request.form.get('officialWebsite', '').strip()
+                
+        # Validate required fields
+        errors = []
+        if not name:
+            errors.append(_('Name is required'))
+        if not description:
+            errors.append(_('Description is required'))
+        if not gender:
+            errors.append(_('Gender is required'))
+        if not nationality:
+            errors.append(_('Nationality is required'))
+        if not place_of_birth_qid and not place_of_birth_text:
+            errors.append(_('Place of birth is required'))
+        if not occupation_qids and not occupation_texts:
+            errors.append(_('Occupation is required'))
+        
+        if errors:
+            for error in errors:
+                flash(error, 'error')
+            return render_template('add-author.html', 
+                                 title=_('Add Author'),
+                                 form_data=request.form)
+        
+        # Get current language for labels/descriptions
+        lang = languages.get_locale()
+        
+        # Build labels and descriptions
+        labels = {lang: name}
+        descriptions = {lang: description} if description else {}
+        
+        # Build statements
+        statements = []
+        
+        # Instance of: Human (Q5) - Required
+        statements.append(
+            wikidata.build_statement('P31', 'Q5', 'wikibase-item')
+        )
+        
+        # Gender
+        if gender:
+            refs = collect_references('author-gender')
+            statements.append(
+                wikidata.build_statement('P21', gender, 'wikibase-item', refs)
+            )
+        
+        # Nationality (Country of citizenship)
+        if nationality:
+            refs = collect_references('author-nationality')
+            statements.append(
+                wikidata.build_statement('P27', nationality, 'wikibase-item', refs)
+            )
+        
+        # Place of birth
+        if place_of_birth_qid:
+            refs = collect_references('author-place-of-birth')
+            statements.append(
+                wikidata.build_statement('P19', place_of_birth_qid, 'wikibase-item', refs)
+            )
+        
+        # Date of birth
+        if date_of_birth:
+            refs = collect_references('author-date-of-birth')
+            statements.append(
+                wikidata.build_statement('P569', date_of_birth, 'time', refs)
+            )
+        
+        # Date of death
+        if date_of_death:
+            refs = collect_references('author-date-of-death')
+            statements.append(
+                wikidata.build_statement('P570', date_of_death, 'time', refs)
+            )
+        
+        # Occupations (can be multiple)
+        if occupation_qids:
+            refs = collect_references('author-occupation')
+            for qid in occupation_qids.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        wikidata.build_statement('P106', qid, 'wikibase-item', refs)
+                    )
+        
+        # Ethnicity
+        if ethnicity_qid:
+            refs = collect_references('author-ethnicity')
+            statements.append(
+                wikidata.build_statement('P172', ethnicity_qid, 'wikibase-item', refs)
+            )
+        
+        # Image (Commons)
+        if image_url:
+            filename = wikidata.extract_commons_filename(image_url)
+            if filename:
+                statements.append(
+                    wikidata.build_statement('P18', filename, 'commonsMedia')
+                )
+        
+        # Official website
+        if official_website:
+            statements.append(
+                wikidata.build_statement('P856', official_website, 'url')
+            )
+        
+        # Log the payload being sent to Wikidata
+        payload = {
+            'labels': labels,
+            'descriptions': descriptions,
+            'statements': statements
+        }
+        
+        print("\n" + "="*60)
+        print("WIKIDATA API PAYLOAD:")
+        print("="*60)
+        import json
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        print("="*60 + "\n")
+
+        for field in ['gender', 'nationality', 'placeOfBirth', 'dateOfBirth', 'dateOfDeath', 'occupation', 'ethnicity']:
+            refs = collect_references(field)
+            print(f"{field} references: {refs}")
+
+        print("="*60 + "\n")
+        
+        # Create the item on Wikidata
+        result = wikidata.create_item(labels, descriptions, statements)
+        
+        # Log the result
+        print("\n" + "="*60)
+        print("WIKIDATA API RESPONSE:")
+        print("="*60)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        print("="*60 + "\n")
+        
+        if result['success']:
+            item_id = result['item_id']
+            flash(_('Author created successfully! Wikidata ID: %(item_id)s', item_id=item_id), 'success')
+            # Keep form filled by passing form data back
+            return render_template('add-author.html', 
+                                 title=_('Add Author'),
+                                 form_data=request.form,
+                                 success_item_id=item_id)
+        else:
+            flash(_('Error creating author: %(error)s', error=result['error']), 'error')
+            # Keep form filled on error
+            return render_template('add-author.html', 
+                                 title=_('Add Author'),
+                                 form_data=request.form)
+    
+    except Exception as e:
+        import traceback
+        print("\n" + "="*60)
+        print("EXCEPTION OCCURRED:")
+        print("="*60)
+        traceback.print_exc()
+        print("="*60 + "\n")
+        
+        flash(_('An error occurred while creating the author. Please try again.'), 'error')
+        # Keep form filled on exception
+        return render_template('add-author.html', 
+                             title=_('Add Author'),
+                             form_data=request.form)
+        
+def collect_references(field_id):
+    """
+    Collect references for a specific field from form data
+    
+    Args:
+        field_id: The field identifier (e.g., 'gender', 'nationality')
+    
+    Returns:
+        List of reference dicts or None if no references
+    """
+    wikidata = WikidataAPI(app.config)
+    references = []
+    
+    # Check for up to 3 references per field
+    for i in range(3):
+        url = request.form.get(f'{field_id}_ref_url_{i}', '').strip()
+        title = request.form.get(f'{field_id}_ref_title_{i}', '').strip()
+        retrieved = request.form.get(f'{field_id}_ref_retrieved_{i}', '').strip()
+        
+        if url:
+            ref = wikidata.build_reference(url, title, retrieved)
+            references.append(ref)
+    
+    return references if references else None
 
 @app.errorhandler(404)
 def page_not_found(e):

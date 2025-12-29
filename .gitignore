@@ -6,3 +6,6 @@ __pycache__/
 
 # Ignore main config file
 /config.py
+/config_test.py
+
+/run_tests.py
