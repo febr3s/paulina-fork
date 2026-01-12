@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session
+from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session, jsonify
 from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from mwoauth import ConsumerToken, Handshaker, RequestToken
+from requests_oauthlib import OAuth2Session
 import datetime
 import requests
+import os
+import sys
+import time
 
 # Local modules
 import pdclasses
@@ -13,9 +16,17 @@ import search
 import languages
 import squeries
 import filters
+import oauth
+import wikidata_api
 
 app = Flask(__name__)
 
+# Load config file
+app.config.from_pyfile('config.py')
+
+# Disable OAuth 2.0 HTTPS requirement for local development only
+if app.config.get('DEBUG', False):
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # i18n configuration
 
@@ -23,7 +34,6 @@ app = Flask(__name__)
 The session cookie is required to store the language choice 
 in the session and make it persistent."""
 
-app.config.from_pyfile('config.py')
 
 babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
 
@@ -56,10 +66,6 @@ def get_user_identifier():
 limiter = Limiter(
     app=app,
     key_func=get_user_identifier,
-    default_limits=[
-        f"{app.config.get('RATE_LIMIT_PER_DAY', 300)} per day",
-        f"{app.config.get('RATE_LIMIT_PER_HOUR', 50)} per hour"
-    ],
     storage_uri=app.config.get('RATELIMIT_STORAGE_URL', 'memory://'),
     headers_enabled=app.config.get('RATELIMIT_HEADERS_ENABLED', True)
 )
@@ -291,7 +297,6 @@ def countries_main():
 
 
 @app.route("/robots.txt")
-@limiter.exempt 
 def show_robots_txt():
     ROBOTS_TXT = "User-agent: *\nAllow: /\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
@@ -318,90 +323,274 @@ def inject_filters():
         "COUNTRIES": countries
         }
 
+@app.route('/api/search-wikidata-items')
+@cache.cached(timeout=60, make_cache_key=make_cache_key)
+def search_wikidata_items():
+    query = request.args.get('q', '')
+    
+    # Get language from request, fall back to user's locale, then 'en' as default
+    lang = request.args.get('lang', '')
+    if not lang:
+        try:
+            lang = languages.get_locale()
+        except:
+            lang = 'en'
+            
+    url = app.config.get('WIKIDATA_API_URL', 'https://www.wikidata.org/w/api.php')
+
+    if not query or len(query) < 2:
+        return jsonify([])
+    
+    try:
+        params = {
+            'action': 'wbsearchentities',
+            'search': query,
+            'language': lang,      # Labels in user's language
+            'uselang': lang,       # UI/descriptions in user's language
+            'type': 'item',
+            'limit': 10,
+            'format': 'json'
+        }
+        
+        headers = {
+           'User-Agent': app.config.get('USER_AGENT')
+        }
+        
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        data = response.json()
+        
+        results = []
+        for item in data.get('search', []):
+            results.append({
+                'id': item.get('id'),
+                'label': item.get('label', ''),
+                'description': item.get('description', '')
+            })
+        
+        return jsonify(results)
+        
+    except Exception as e:
+        print(f"Wikidata search error: {e}")
+        return jsonify([])
 
 # OAuth Routes
 
 @app.route('/auth/login')
-@limiter.limit("5 per minute")  # Prevent login spam
+@limiter.limit("5 per minute")
 def login():
-    """Initiate OAuth login with Wikimedia"""
+    """Initiate OAuth 2.0 login with Wikimedia"""
     try:
-        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
-        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
-        
-        redirect_url, request_token = handshaker.initiate()
-        
-        # Store request token in session for callback
-        session['request_token'] = dict(
-            key=request_token.key,
-            secret=request_token.secret
+        oauth = OAuth2Session(
+            app.config['CLIENT_ID'],
+            redirect_uri=app.config['REDIRECT_URL'],
+            scope=app.config['OAUTH_SCOPES']
         )
         
-        return redirect(redirect_url)
+        authorization_url, state = oauth.authorization_url(
+            app.config['AUTHORIZATION_BASE_URL']
+        )
+        
+        # Store state in session for CSRF protection
+        session['oauth_state'] = state
+        
+        return redirect(authorization_url)
     
     except Exception as e:
-        flash(_('Login failed: {error}').format(error=str(e)), 'danger')
+        import traceback
+        traceback.print_exc()
+        flash(_('Login failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
-
+    
 
 @app.route('/oauth-callback')
-@limiter.exempt 
 def oauth_callback():
-    """Handle OAuth callback from Wikimedia"""
+    """Handle OAuth 2.0 callback from Wikimedia"""
     try:
-        # Get the request token from session
-        if 'request_token' not in session:
-            flash('Login session expired. Please try again.', 'warning')
+        # Check for errors in callback
+        if 'error' in request.args:
+            flash(_('Authentication failed. Please try again.'), 'danger')
             return redirect(url_for('home'))
         
-        request_token_dict = session.pop('request_token')
+        # Get state from session
+        if 'oauth_state' not in session:
+            flash(_('Login session expired. Please try again.'), 'warning')
+            return redirect(url_for('home'))
         
-        # Recreate RequestToken object from dict
-        request_token = RequestToken(
-            request_token_dict['key'],
-            request_token_dict['secret']
+        state = session.pop('oauth_state')
+        
+        # Verify state matches (CSRF protection)
+        if state != request.args.get('state'):
+            flash(_('Invalid state parameter. Please try again.'), 'danger')
+            return redirect(url_for('home'))
+        
+        # Exchange authorization code for access token
+    
+        token_params = {
+            'grant_type': 'authorization_code',
+            'code': request.args.get('code'),
+            'redirect_uri': app.config['REDIRECT_URL'],
+            'client_id': app.config['CLIENT_ID'],
+            'client_secret': app.config['CLIENT_SECRET']
+        }
+        
+        token_response = requests.post(
+            app.config['TOKEN_URL'],
+            data=token_params,
+            headers={'User-Agent': app.config.get('USER_AGENT')}
         )
         
-        # Recreate the consumer token and handshaker
-        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
-        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
+        if token_response.status_code != 200:
+            flash(_('Failed to obtain access token. Please try again.'), 'danger')
+            return redirect(url_for('home'))
         
-        # Complete the OAuth handshake with RequestToken object
-        access_token = handshaker.complete(
-            request_token,  
-            request.query_string.decode('utf-8')
+        token_data = token_response.json()
+        
+        # Build token dict with expiration timestamp
+        token = {
+            'access_token': token_data['access_token'],
+            'refresh_token': token_data.get('refresh_token'),
+            'token_type': token_data.get('token_type', 'Bearer'),
+            'expires_in': token_data.get('expires_in', 14400),
+            'expires_at': time.time() + token_data.get('expires_in', 14400)
+        }
+        
+        # Store token in session
+        session['oauth_token'] = token
+        
+        # Get user identity using the access token
+        profile_response = requests.get(
+            app.config['PROFILE_URL'],
+            headers={
+                'Authorization': f"Bearer {token['access_token']}",
+                'User-Agent': app.config.get('USER_AGENT')
+            }
         )
         
-        # Get user identity
-        identity = handshaker.identify(access_token)
+        if profile_response.status_code != 200:
+            flash(_('Failed to get user profile. Please try again.'), 'danger')
+            return redirect(url_for('home'))
         
-        # Store user info in session
-        session['access_token'] = dict(
-            key=access_token.key,
-            secret=access_token.secret
-        )
-        session['wikimedia_username'] = identity['username']
-        session['wikimedia_userid'] = identity['sub'] 
+        user_info = profile_response.json()
+        
+        session['wikimedia_username'] = user_info.get('username')
+        session['wikimedia_userid'] = user_info.get('sub')
         return redirect(url_for('home'))
     
     except Exception as e:
         import traceback
         traceback.print_exc()
-        flash(_('Authentication failed: {error}').format(error=str(e)), 'danger')
+        flash(_('Authentication failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
-
+    
 
 @app.route('/auth/logout')
-@limiter.exempt 
 def logout():
-    # Clear OAuth-related session data
-    session.pop('access_token', None)
+    """Clear OAuth session"""
+    session.pop('oauth_token', None)
     session.pop('wikimedia_username', None)
     session.pop('wikimedia_userid', None)
-
+    session.pop('form_data', None)
+    
     flash(_('You have been logged out.'), 'info')
     return redirect(request.referrer or url_for('home'))
 
+# Wikidata Editing Routes
+
+@app.route('/add-author', methods=['GET', 'POST'])
+@limiter.limit("20 per hour", methods=['POST'])
+def add_author():
+    """Handle the Add Author form"""
+    
+    # Check if user is logged in
+    if 'wikimedia_username' not in session:
+        flash(_('Please login to add an author.'), 'warning')
+        return redirect(url_for('home'))
+    
+    # Refresh token if needed
+    if not oauth.token_refresh():
+        flash(_('Your session has expired. Please login again.'), 'warning')
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        try:
+            # Get OAuth session
+            oauth_session = oauth.get_oauth_session()
+            if not oauth_session:
+                flash(_('Session expired. Please login again.'), 'warning')
+                return redirect(url_for('login'))
+
+            wikidata = wikidata_api.WikidataAPI(app.config, oauth_session=oauth_session)
+
+            # Process the author form (validation + creation)
+            result = wikidata.process_author_form(request.form, current_lang=languages.get_locale())
+            
+            if result['success']:
+                item_id = result['item_id']
+               
+                # Build URLs for the new item
+                wikidata_url = f"https://www.wikidata.org/wiki/{item_id}"
+                if wikidata_api.WIKIDATA_TEST_MODE:
+                    wikidata_url = f"https://test.wikidata.org/wiki/{item_id}"
+                
+                paulina_url = url_for('author_page', author_data=item_id, _external=False)
+                
+                # Clear the form after successful creation
+                session.pop('form_data', None)
+        
+                return render_template('add-author.html', 
+                                    title=_('Add Author'),
+                                    form_data=None,
+                                    success_item_id=item_id,
+                                    wikidata_url=wikidata_url,
+                                    paulina_url=paulina_url)
+            else:
+                if 'errors' in result:
+                    for error in result['errors']:
+                        flash(_(error), 'error')
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    if isinstance(error_msg, dict):
+                        error_text = error_msg.get('info', str(error_msg))
+                    else:
+                        error_text = str(error_msg)
+                    flash(_('Error creating author: %(error)s', error=error_text), 'danger')
+                
+                # Store form data in session for restoration
+                session['form_data'] = dict(request.form)
+                
+                return render_template('add-author.html', 
+                                     title=_('Add Author'),
+                                     form_data=session['form_data'])
+        
+        except Exception as e:
+            app.logger.error(f"Author creation failed: {str(e)}", exc_info=True)
+            flash(_('An error occurred while creating the author. Please try again.'), 'danger')
+            
+            # Store form data for restoration
+            session['form_data'] = dict(request.form)
+            
+            return render_template('add-author.html', 
+                                 title=_('Add Author'),
+                                 form_data=session['form_data'])
+    
+    # GET request handling
+    if request.args.get('cleared') == '1':
+        session.pop('form_data', None)
+        form_data = None
+    else:
+        form_data = session.get('form_data', None)
+    
+    return render_template('add-author.html', 
+                          title=_('Add Author'),
+                          form_data=form_data)
+
+
+@app.route('/clear_form_data', methods=['POST'])
+def clear_form_data():
+    """Clear stored form data from session"""
+    if 'form_data' in session:
+        session.pop('form_data')
+    return jsonify({'success': True})
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -411,4 +600,17 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run()
+    
+    # Set environment variable BEFORE any config loading
+    if 'test' in sys.argv:
+        os.environ['WIKIDATA_TEST_MODE'] = 'true'
+        print("* Paulina running in TEST mode")
+        print("* https://test.wikidata.org")
+    else:
+        os.environ['WIKIDATA_TEST_MODE'] = 'false'
+        print("* Paulina running in PRODUCTION mode")
+        print("* https://www.wikidata.org")
+    
+    app.run(debug=True)
+
+

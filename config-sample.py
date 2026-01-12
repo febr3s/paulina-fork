@@ -1,23 +1,41 @@
 import os
 
-# Flask Configuration
-SECRET_KEY = ""  
-DEBUG = False
+# Determine mode from environment variable
+WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
 
-# OAuth Configuration (See README.md for detailed setup instructions)
-CONSUMER_KEY = ""
-CONSUMER_SECRET = ""
-OAUTH_MWURI = "https://meta.wikimedia.org/w/index.php"
+# Session secret key
+SECRET_KEY = ""
 
-# Wikidata API URLs
-WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
-WIKIDATA_REST_API_URL = "https://www.wikidata.org/w/rest.php/wikibase/v1"
+# Debug settings
+# DEBUG = False
 
-# Rate Limiting
-RATELIMIT_STORAGE_URL = "memory://" 
+# OAuth 2.0 Tokens
+CLIENT_ID = ""
+CLIENT_SECRET = ""
+
+# User Agent
+USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'
+
+# OAuth Configuration - based on mode
+if WIKIDATA_TEST_MODE:
+    # Test Wikidata
+    REDIRECT_URL = 'http://localhost:5000/oauth-callback'
+    WIKIDATA_API_URL = 'https://test.wikidata.org/w/api.php'
+    WIKIDATA_REST_API_URL = 'https://test.wikidata.org/w/rest.php/wikibase/v1'
+else:
+    # Production Wikidata
+    REDIRECT_URL = 'https://paulina.toolforge.org/oauth-callback'
+    WIKIDATA_API_URL = 'https://www.wikidata.org/w/api.php'
+    WIKIDATA_REST_API_URL = 'https://www.wikidata.org/w/rest.php/wikibase/v1'
+
+# OAuth URLs (same for both test and production)
+AUTHORIZATION_BASE_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/authorize'
+TOKEN_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/access_token'
+PROFILE_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/resource/profile'
+
+# OAuth Scopes
+OAUTH_SCOPES = ['basic', 'editpage', 'createeditmovepage']
+
+# Rate limiting
+RATELIMIT_STORAGE_URL = 'memory://'
 RATELIMIT_HEADERS_ENABLED = True
-
-# Rate limit values
-RATE_LIMIT_PER_DAY = int(os.getenv('RATE_LIMIT_PER_DAY', '200'))
-RATE_LIMIT_PER_HOUR = int(os.getenv('RATE_LIMIT_PER_HOUR', '50'))
-RATE_LIMIT_SUBMISSIONS_PER_HOUR = int(os.getenv('RATE_LIMIT_SUBMISSIONS_PER_HOUR', '20'))
