@@ -536,13 +536,15 @@ def add_author():
                 
                 # Clear the form after successful creation
                 session.pop('form_data', None)
-        
-                return render_template('add-author.html', 
-                                    title=_('Add Author'),
-                                    form_data=None,
-                                    success_item_id=item_id,
-                                    wikidata_url=wikidata_url,
-                                    paulina_url=paulina_url)
+                
+                session['success_data'] = {
+                    'item_id': item_id,
+                    'wikidata_url': wikidata_url,
+                    'paulina_url': paulina_url
+                }
+                    
+                return redirect(url_for('add_author', success=1))
+            
             else:
                 if 'errors' in result:
                     for error in result['errors']:
@@ -576,13 +578,35 @@ def add_author():
     # GET request handling
     if request.args.get('cleared') == '1':
         session.pop('form_data', None)
+        session.pop('success_data', None) 
         form_data = None
+        success_item_id = None
+        wikidata_url = None
+        paulina_url = None
+    elif request.args.get('success') == '1':
+        # Show success message from session
+        success_data = session.pop('success_data', None) 
+        form_data = None
+        if success_data:
+            success_item_id = success_data.get('item_id')
+            wikidata_url = success_data.get('wikidata_url')
+            paulina_url = success_data.get('paulina_url')
+        else:
+            success_item_id = None
+            wikidata_url = None
+            paulina_url = None
     else:
         form_data = session.get('form_data', None)
-    
+        success_item_id = None
+        wikidata_url = None
+        paulina_url = None
+
     return render_template('add-author.html', 
-                          title=_('Add Author'),
-                          form_data=form_data)
+                        title=_('Add Author'),
+                        form_data=form_data,
+                        success_item_id=success_item_id,
+                        wikidata_url=wikidata_url,
+                        paulina_url=paulina_url)
 
 
 @app.route('/clear_form_data', methods=['POST'])

@@ -64,6 +64,25 @@ class WikidataItemSearch {
         this.search(query);
       }, 500);
     });
+
+    this.input.addEventListener('blur', (e) => {
+      setTimeout(() => {
+        this.hideResults();
+        // For multi-select, switch to display mode when focus leaves
+        if (this.multiSelect && this.selectedItems.length > 0) {
+          this.input.style.display = 'none';
+          this.updateSelectedItemsDisplay();
+        }
+      }, 200);
+    });
+
+    this.input.addEventListener('focus', (e) => {
+      // For multi-select, switch to editing mode when focused
+      if (this.multiSelect) {
+        this.input.style.display = 'block';
+        this.updateSelectedItemsDisplay();
+      }
+    });
     
     document.addEventListener('click', (e) => {
       if (!this.resultsContainer.contains(e.target) && e.target !== this.input) {
@@ -155,13 +174,13 @@ class WikidataItemSearch {
         return;
       }
       
-    this.selectedItems.push(item);
-    this.input.value = ''; // Clear input
-    this.input.style.display = 'none'; // Hide input after selection
-    this.updateSelectedItemsDisplay(); // Re-render in display mode
-    this.updateHiddenInput();
-    this.updateVisibleInput();
-    this.hideResults();
+      this.selectedItems.push(item);
+      this.updateSelectedItemsDisplay();
+      this.updateHiddenInput();
+      this.updateVisibleInput();
+      this.input.value = ''; // Clear input
+      this.hideResults(); // Hide results
+      this.input.focus(); // Keep focus on input for next selection
       
     } else {
       // Single select: replace any existing selection
@@ -178,143 +197,95 @@ class WikidataItemSearch {
   }
   
   updateSingleSelectDisplay() {
-  if (!this.selectedContainer) return;
-  
-  this.selectedContainer.innerHTML = '';
-  
-  const item = this.selectedItems[0];
-  if (!item) {
-    this.selectedContainer.classList.add('d-none');
-    // Show input when no selection
-    this.input.style.display = 'block';
-    return;
+    if (!this.selectedContainer) return;
+    
+    this.selectedContainer.innerHTML = '';
+    
+    const item = this.selectedItems[0];
+    if (!item) {
+      this.selectedContainer.classList.add('d-none');
+      this.input.style.display = 'block';
+      return;
+    }
+    
+    this.selectedContainer.classList.remove('d-none');
+    this.input.style.display = 'none';
+    
+    // Style container to look like the input
+    this.selectedContainer.style.cssText = `
+      border: 1px solid #000;
+      background-color: #ffe65b;
+      padding: 0.375rem 0.75rem;
+      min-height: 38px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    `;
+    
+    const badge = this.createPillElement(item, 0);
+    this.selectedContainer.appendChild(badge);
   }
-  
-  this.selectedContainer.classList.remove('d-none');
-  
-  // Hide the text input when we have a selection
-  this.input.style.display = 'none';
-  
-  // Style container to look like the input
-  this.selectedContainer.style.cssText = `
-    border: 1px solid #000;
-    background-color: #ffe65b;
-    border-radius: 0.375rem;
-    padding: 0.375rem 0.75rem;
-    min-height: 38px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    align-items: center;
-    cursor: pointer;
-  `;
-  
-  // Make container clickable to change selection
-  this.selectedContainer.onclick = () => {
-    this.input.style.display = 'block';
-    this.input.focus();
-    this.selectedContainer.style.display = 'none';
-  };
-  
-  const badge = this.createPillElement(item, 0);
-  this.selectedContainer.appendChild(badge);
-  
-  // Add a change button
-  const changeBtn = document.createElement('button');
-  changeBtn.type = 'button';
-  changeBtn.className = 'btn btn-sm btn-outline-secondary';
-  changeBtn.innerHTML = '<i class="bi bi-pencil"></i>';
-  changeBtn.style.cssText = 'padding: 0.25rem 0.5rem; margin-left: auto;';
-  changeBtn.onclick = (e) => {
-    e.stopPropagation();
-    this.input.style.display = 'block';
-    this.input.focus();
-    this.selectedContainer.style.display = 'none';
-  };
-  this.selectedContainer.appendChild(changeBtn);
-}
   
   updateSelectedItemsDisplay() {
-  const container = this.multiSelect 
-    ? document.getElementById(this.selectedItemsId)
-    : this.selectedContainer;
+    const container = this.multiSelect 
+      ? document.getElementById(this.selectedItemsId)
+      : this.selectedContainer;
+      
+    if (!container) return;
     
-  if (!container) return;
-  
-  container.innerHTML = '';
-  
-  if (this.selectedItems.length === 0) {
-    container.classList.add('d-none');
-    // Show input when no selections
-    if (this.multiSelect) {
-      this.input.style.display = 'block';
-    }
-    return;
-  }
-  
-  container.classList.remove('d-none');
-  
-  // Check if input is currently visible (editing mode)
-  const isEditing = this.input.style.display !== 'none';
-  
-  if (this.multiSelect) {
-    if (isEditing) {
-      // Editing mode: show badges above input in a simple flex container
-      container.style.cssText = `
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin-bottom: 0.5rem;
-      `;
-    } else {
-      // Display mode: hide input and style container to look like input
-      this.input.style.display = 'none';
-      
-      container.style.cssText = `
-        border: 1px solid #000;
-        background-color: #ffe65b;
-        border-radius: 0.375rem;
-        padding: 0.375rem 0.75rem;
-        min-height: 38px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        align-items: center;
-        cursor: pointer;
-      `;
-      
-      // Make container clickable to add more items
-      container.onclick = () => {
-        this.input.value = ''; // Clear input before showing
+    container.innerHTML = '';
+    
+    if (this.selectedItems.length === 0) {
+      container.classList.add('d-none');
+      if (this.multiSelect) {
         this.input.style.display = 'block';
-        this.input.focus();
-        this.updateSelectedItemsDisplay(); // Re-render in editing mode
-      };
+      }
+      return;
     }
+    
+    container.classList.remove('d-none');
+    
+    // Check if input is currently visible (editing mode)
+    const isInputVisible = this.input.style.display !== 'none';
+    
+    if (this.multiSelect) {
+      if (isInputVisible) {
+        // Editing mode: show badges above input in a simple flex container
+        container.style.cssText = `
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          margin-bottom: 0.5rem;
+        `;
+      } else {
+        // Display mode: hide input and style container to look like input
+        container.style.cssText = `
+          border: 1px solid #000;
+          background-color: #ffe65b;
+          padding: 0.375rem 0.75rem;
+          min-height: 38px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          align-items: center;
+          cursor: pointer;
+        `;
+        
+        // Make container clickable to add more items
+        container.onclick = () => {
+          this.input.style.display = 'block';
+          this.input.focus();
+          this.updateSelectedItemsDisplay(); // Re-render in editing mode
+        };
+      }
+    }
+    
+    this.selectedItems.forEach((item, index) => {
+      const badge = this.createPillElement(item, index);
+      container.appendChild(badge);
+    });
   }
-  
-  this.selectedItems.forEach((item, index) => {
-    const badge = this.createPillElement(item, index);
-    container.appendChild(badge);
-  });
-  
-  // Add a "+" button only in display mode (not editing)
-  if (this.multiSelect && !isEditing) {
-    const addMoreBtn = document.createElement('button');
-    addMoreBtn.type = 'button';
-    addMoreBtn.className = 'btn btn-sm btn-outline-primary';
-    addMoreBtn.innerHTML = '<i class="bi bi-plus"></i>';
-    addMoreBtn.style.cssText = 'padding: 0.25rem 0.5rem; margin-left: auto;';
-    addMoreBtn.onclick = (e) => {
-      e.stopPropagation();
-      this.input.value = ''; // Clear input before showing
-      this.input.style.display = 'block';
-      this.input.focus();
-      this.updateSelectedItemsDisplay(); // Re-render in editing mode
-    };
-    container.appendChild(addMoreBtn);
-  }
-}
 
   createPillElement(item, index) {
     const badge = document.createElement('span');
@@ -340,6 +311,11 @@ class WikidataItemSearch {
       this.updateSelectedItemsDisplay();
       this.updateHiddenInput();
       this.updateVisibleInput();
+      
+      // If no items left, show the input
+      if (this.selectedItems.length === 0) {
+        this.input.style.display = 'block';
+      }
     } else {
       this.hiddenInput.value = '';
       this.input.value = '';
@@ -357,11 +333,11 @@ class WikidataItemSearch {
   }
 
   updateVisibleInput() {
-  if (this.multiSelect) {
-    const labels = this.selectedItems.map(i => i.label).join(',');
-    this.input.value = labels;
+    if (this.multiSelect) {
+      const labels = this.selectedItems.map(i => i.label).join(',');
+      this.input.value = labels;
+    }
   }
-}
   
   showResults() {
     this.resultsContainer.style.display = 'block';

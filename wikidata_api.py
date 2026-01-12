@@ -8,6 +8,7 @@ import json
 import requests
 import os
 import urllib.parse as urlparse
+from flask_babel import gettext
 
 
 # WIKIDATA CONSTANTS - Test/Production Mode Configuration
@@ -58,7 +59,7 @@ else:
 
 # UTILITY FUNCTIONS
 
-def generate_author_description(nationality_label, date_of_birth=None, date_of_death=None):
+def generate_author_description(nationality_label, date_of_birth=None, date_of_death=None, lang='en'):
     """
     Generate a simple standard description for an author.
     Format: "creator from {nationality} (birthDate–deathDate)" or "creator from {nationality}"
@@ -67,22 +68,24 @@ def generate_author_description(nationality_label, date_of_birth=None, date_of_d
         nationality_label: Human-readable nationality label
         date_of_birth: Birth date string (YYYY-MM-DD format)
         date_of_death: Death date string (YYYY-MM-DD format)
+        lang: Language code for the description
     
     Returns:
         Generated description string (starts with lowercase per Wikidata rules)
     """
     # Base description (always lowercase)
     if nationality_label:
-        description = f"creator from {nationality_label.lower()}"
+        # Use gettext for translation with placeholder
+        description = gettext("creator from %(nationality)s", nationality=nationality_label)
     else:
-        description = "creator"
-    
+        description = gettext("creator")
+
     # Add dates if both birth and death are present
     if date_of_birth and date_of_death:
         try:
             birth_year = date_of_birth.split('-')[0]
             death_year = date_of_death.split('-')[0]
-            description += f" ({birth_year}–{death_year})"  # Using en dash (–)
+            description += f" ({birth_year}–{death_year})" 
         except:
             pass  # Skip dates if parsing fails
     
@@ -370,7 +373,8 @@ class WikidataAPI:
             description = generate_author_description(
                 nationality_label,
                 date_of_birth,
-                date_of_death
+                date_of_death,
+                current_lang
             )
         
         # Build labels and descriptions

@@ -13,8 +13,8 @@
 {% endif %}
 
 
-{% if not success_item_id %}
-<div class="success-message position-relative" role="alert">
+{% if success_item_id %}
+<div class="success-message position-relative alert alert-dismissible fade show" role="alert">
   <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
   <h3>{{ _('Author Created Successfully!') }}</h3>
   <p>
@@ -28,7 +28,7 @@
     <a href="{{ paulina_url }}" class="btn" style="background-color: #29a4e2; color: #fff;">
       {{ _('View on Paulina') }}
     </a>
-</div>
+  </div>
 </div>
 {% endif %}
 
@@ -377,12 +377,6 @@
             <div class="p-3 border border-black rounded">
               <div class="row d-flex justify-content-between align-items-start">
                 <div class="col-md-8">
-                  <div class="alert alert-warning">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <strong>{{ _('Copyright Notice:') }}</strong>
-                    {{ _('Only use public domain or CC-licensed images.') }}
-                    <a href="/about#copyright-policy">{{ _('Learn more') }}</a>
-                  </div>
                   <p class="mb-3">{{ _("Search Wikimedia Commons for author's image, or enter the Commons image URL directly:") }}</p>
                   
                   <!-- Search Button -->
