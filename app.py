@@ -204,7 +204,7 @@ def work_page(work_data):
             work_image_alt_text=print_field(work.image_alt_text),
             work_authors=print_field(work.authors),
             work_publication_date=print_field(work.publication_date),
-            work_inception_date=print_field(work.inception_date),
+            work_creation_date=print_field(work.creation_date),
             work_language=print_field(work.language),
             work_country=print_field(work.country_of_origin),
             work_wikipedia_link=print_field(work.wikipedia_link),
