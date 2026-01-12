@@ -108,44 +108,58 @@
     </div>
     <!-- Biography details -->
     <div class="mt-2">
+      {% if author_nationality %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Nationality') }}</div>
         <div class="col-md-9">{{author_nationality}}</div>
       </div>
+      {% endif %}
       {% if author_ethnicity %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Ethnicity') }}</div>
         <div class="col-md-9">{{author_ethnicity}}</div>
       </div>
       {% endif %}
+      {% if author_gender %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Gender') }}</div>
         <div class="col-md-9">{{author_gender}}</div>
       </div>
+      {% endif %}
+      {% if author_date_of_birth %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
         <div class="col-md-9">{{author_date_of_birth}}
           {% if author_age and not author_date_of_death %}
           {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
       </div>
+      {% endif %}
+      {% if author_occupation %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Occupation') }}</div>
         <div class="col-md-9">{{author_occupation}}</div>
       </div>
+      {% endif %}
+      {% if author_place_of_birth %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Place of birth') }}</div>
         <div class="col-md-9">{{author_place_of_birth}}</div>
       </div>
+      {% endif %}
+      {% if author_country_of_birth %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Country of birth') }}</div>
         <div class="col-md-9">{{author_country_of_birth}}</div>
       </div>
+      {% endif %}
+      {% if author_date_of_death %}
       <div class="row bio-row py-2 border-bottom">
         <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
         <div class="col-md-9">{{author_date_of_death}}
           {% if author_age and author_date_of_death %}
           {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
-      </div>      
+      </div>
+      {% endif %}      
     </div>
   </div>
 </div>
