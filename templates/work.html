@@ -53,18 +53,24 @@
           <h3 class="detail-card-title">
             <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
           </h3>
+          {% if work_publication_date %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Publication date') }}:</span>
-            {{work_publication_date if work_publication_date else _('Unknown')}}
+            {{ work_publication_date }}
           </div>
+          {% endif %}
+          {% if work_language %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Language') }}:</span>
-            {{work_language if work_language else _('Unknown')}}
+            {{ work_language }}
           </div>
+          {% endif %}
+          {% if work_country %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Country of origin') }}:</span>
-            {{work_country if work_country else _('Unknown')}}
+            {{work_country if work_country else _('Unknown') }}
           </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-md-6">
