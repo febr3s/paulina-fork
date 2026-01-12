@@ -9,23 +9,18 @@ class WikidataItemSearch {
     this.resultsId = config.resultsId;
     this.multiSelect = config.multiSelect || false;
     this.selectedItemsId = config.selectedItemsId || null;
-    this.allowFreeText = config.allowFreeText !== false;
     this.apiEndpoint = config.apiEndpoint || '/api/search-wikidata-items';
     this.selectedItems = [];
     this.lastQuery = '';
     
-    // All translatable messages with defaults
+    // All translatable messages with English fallbacks
     this.messages = {
       searching: config.messages?.searching || 'Searching Wikidata...',
       noResults: config.messages?.noResults || 'No Wikidata results found',
       noDescription: config.messages?.noDescription || 'No description',
       error: config.messages?.error || 'Error searching Wikidata',
-      addAsText: config.messages?.addAsText || 'Add as text',
-      useAsText: config.messages?.useAsText || 'Use as entered',
-      freeTextHint: config.messages?.freeTextHint || 'Not linked to Wikidata',
       alreadyAdded: config.messages?.alreadyAdded || 'This item is already added',
       alreadySelected: config.messages?.alreadySelected || 'This item is already selected',
-      textLabel: config.messages?.textLabel || 'text',
       remove: config.messages?.remove || 'Remove'
     };
     
@@ -37,8 +32,8 @@ class WikidataItemSearch {
       console.error(`WikidataItemSearch: Elements not found for ${this.inputId}`);
       return;
     }
-    
-    // For single-select, get or create container for the selected pill
+
+    // For single-select, create container for the selected pill
     if (!this.multiSelect) {
       this.selectedContainer = document.getElementById(`${this.inputId}-selected`);
     } else {
@@ -70,21 +65,6 @@ class WikidataItemSearch {
       }, 500);
     });
     
-    // Handle Enter key for free text
-    this.input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const text = this.input.value.trim();
-        if (text && this.allowFreeText) {
-          if (this.multiSelect) {
-            this.addFreeTextItem(text);
-          } else {
-            this.selectFreeText(text);
-          }
-        }
-      }
-    });
-    
     document.addEventListener('click', (e) => {
       if (!this.resultsContainer.contains(e.target) && e.target !== this.input) {
         this.hideResults();
@@ -107,11 +87,11 @@ class WikidataItemSearch {
       const data = await response.json();
       
       if (!data || data.length === 0) {
-        this.displayNoResults(query);
+        this.displayNoResults();
         return;
       }
       
-      this.displayResults(data, query);
+      this.displayResults(data);
       
     } catch (error) {
       console.error('Wikidata search error:', error);
@@ -124,7 +104,7 @@ class WikidataItemSearch {
     }
   }
   
-  displayResults(results, query) {
+  displayResults(results) {
     this.resultsContainer.innerHTML = '';
     
     results.forEach(item => {
@@ -144,7 +124,7 @@ class WikidataItemSearch {
       
       resultItem.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        this.selectItem({ ...item, isText: false });
+        this.selectItem(item);
       });
       
       resultItem.addEventListener('mouseenter', () => {
@@ -157,120 +137,37 @@ class WikidataItemSearch {
       
       this.resultsContainer.appendChild(resultItem);
     });
-    
-    if (this.allowFreeText && query) {
-      this.addFreeTextOption(query);
-    }
   }
   
-  displayNoResults(query) {
+  displayNoResults() {
     this.resultsContainer.innerHTML = `
       <div class="p-2 text-muted">
         <i class="bi bi-info-circle me-1"></i>
         ${this.messages.noResults}
       </div>
     `;
-    
-    if (this.allowFreeText && query) {
-      this.addFreeTextOption(query, true);
-    }
-  }
-  
-  addFreeTextOption(query, prominent = false) {
-    const freeTextItem = document.createElement('div');
-    freeTextItem.className = `free-text-option p-2 ${prominent ? 'bg-light' : 'border-top'}`;
-    freeTextItem.style.cursor = 'pointer';
-    
-    const actionText = this.multiSelect ? this.messages.addAsText : this.messages.useAsText;
-    
-    freeTextItem.innerHTML = `
-      <div class="d-flex align-items-center ${prominent ? 'text-primary' : 'text-secondary'}">
-        <i class="bi bi-plus-circle me-2"></i>
-        <div class="flex-grow-1">
-          <span>${actionText}:</span>
-          <strong class="ms-1">"${this.escapeHtml(query)}"</strong>
-        </div>
-        <span class="badge bg-secondary ms-2">${this.messages.textLabel}</span>
-      </div>
-      <div class="small text-muted ms-4 mt-1">
-        <i class="bi bi-lightbulb me-1"></i>
-        ${this.messages.freeTextHint}
-      </div>
-    `;
-    
-    freeTextItem.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      if (this.multiSelect) {
-        this.addFreeTextItem(query);
-      } else {
-        this.selectFreeText(query);
-      }
-    });
-    
-    freeTextItem.addEventListener('mouseenter', () => {
-      freeTextItem.style.backgroundColor = '#fff3cd';
-    });
-    
-    freeTextItem.addEventListener('mouseleave', () => {
-      freeTextItem.style.backgroundColor = prominent ? '#f8f9fa' : '';
-    });
-    
-    this.resultsContainer.appendChild(freeTextItem);
-  }
-  
-  selectFreeText(text) {
-    if (this.multiSelect) {
-      this.addFreeTextItem(text);
-    } else {
-      // Single select: replace any existing selection
-      this.selectedItems = [{ id: null, label: text, isText: true }];
-      this.hiddenInput.value = '';
-      this.input.value = '';
-      this.updateSingleSelectDisplay();
-      this.hideResults();
-      
-      this.input.dispatchEvent(new CustomEvent('wikidata:freetext', {
-        detail: { label: text, isText: true }
-      }));
-    }
-  }
-  
-  addFreeTextItem(text) {
-    if (this.selectedItems.some(i => i.label.toLowerCase() === text.toLowerCase())) {
-      alert(this.messages.alreadyAdded);
-      return;
-    }
-    
-    this.selectedItems.push({
-      id: null,
-      label: text,
-      isText: true
-    });
-    
-    this.updateSelectedItemsDisplay();
-    this.updateHiddenInput();
-    this.input.value = '';
-    this.hideResults();
   }
   
   selectItem(item) {
     if (this.multiSelect) {
-      if (this.selectedItems.some(i => i.id === item.id && i.id !== null)) {
+      if (this.selectedItems.some(i => i.id === item.id)) {
         alert(this.messages.alreadySelected);
         return;
       }
       
-      this.selectedItems.push(item);
-      this.updateSelectedItemsDisplay();
-      this.updateHiddenInput();
-      this.input.value = '';
-      this.hideResults();
+    this.selectedItems.push(item);
+    this.input.value = ''; // Clear input
+    this.input.style.display = 'none'; // Hide input after selection
+    this.updateSelectedItemsDisplay(); // Re-render in display mode
+    this.updateHiddenInput();
+    this.updateVisibleInput();
+    this.hideResults();
       
     } else {
       // Single select: replace any existing selection
       this.selectedItems = [item];
-      this.hiddenInput.value = item.id || '';
-      this.input.value = '';
+      this.hiddenInput.value = item.id;
+      this.input.value = item.label;  
       this.updateSingleSelectDisplay();
       this.hideResults();
     }
@@ -281,58 +178,149 @@ class WikidataItemSearch {
   }
   
   updateSingleSelectDisplay() {
-    if (!this.selectedContainer) return;
-    
-    this.selectedContainer.innerHTML = '';
-    
-    const item = this.selectedItems[0];
-    if (!item) {
-      this.selectedContainer.classList.add('d-none');
-      return;
-    }
-    
-    this.selectedContainer.classList.remove('d-none');
-    
-    const badge = this.createPillElement(item, 0);
-    this.selectedContainer.appendChild(badge);
+  if (!this.selectedContainer) return;
+  
+  this.selectedContainer.innerHTML = '';
+  
+  const item = this.selectedItems[0];
+  if (!item) {
+    this.selectedContainer.classList.add('d-none');
+    // Show input when no selection
+    this.input.style.display = 'block';
+    return;
   }
+  
+  this.selectedContainer.classList.remove('d-none');
+  
+  // Hide the text input when we have a selection
+  this.input.style.display = 'none';
+  
+  // Style container to look like the input
+  this.selectedContainer.style.cssText = `
+    border: 1px solid #000;
+    background-color: #ffe65b;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    min-height: 38px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    cursor: pointer;
+  `;
+  
+  // Make container clickable to change selection
+  this.selectedContainer.onclick = () => {
+    this.input.style.display = 'block';
+    this.input.focus();
+    this.selectedContainer.style.display = 'none';
+  };
+  
+  const badge = this.createPillElement(item, 0);
+  this.selectedContainer.appendChild(badge);
+  
+  // Add a change button
+  const changeBtn = document.createElement('button');
+  changeBtn.type = 'button';
+  changeBtn.className = 'btn btn-sm btn-outline-secondary';
+  changeBtn.innerHTML = '<i class="bi bi-pencil"></i>';
+  changeBtn.style.cssText = 'padding: 0.25rem 0.5rem; margin-left: auto;';
+  changeBtn.onclick = (e) => {
+    e.stopPropagation();
+    this.input.style.display = 'block';
+    this.input.focus();
+    this.selectedContainer.style.display = 'none';
+  };
+  this.selectedContainer.appendChild(changeBtn);
+}
   
   updateSelectedItemsDisplay() {
-    const container = this.multiSelect 
-      ? document.getElementById(this.selectedItemsId)
-      : this.selectedContainer;
-      
-    if (!container) return;
+  const container = this.multiSelect 
+    ? document.getElementById(this.selectedItemsId)
+    : this.selectedContainer;
     
-    container.innerHTML = '';
-    
-    if (this.selectedItems.length === 0) {
-      container.classList.add('d-none');
-      return;
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  if (this.selectedItems.length === 0) {
+    container.classList.add('d-none');
+    // Show input when no selections
+    if (this.multiSelect) {
+      this.input.style.display = 'block';
     }
-    
-    container.classList.remove('d-none');
-    
-    this.selectedItems.forEach((item, index) => {
-      const badge = this.createPillElement(item, index);
-      container.appendChild(badge);
-    });
+    return;
   }
   
+  container.classList.remove('d-none');
+  
+  // Check if input is currently visible (editing mode)
+  const isEditing = this.input.style.display !== 'none';
+  
+  if (this.multiSelect) {
+    if (isEditing) {
+      // Editing mode: show badges above input in a simple flex container
+      container.style.cssText = `
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 0.5rem;
+      `;
+    } else {
+      // Display mode: hide input and style container to look like input
+      this.input.style.display = 'none';
+      
+      container.style.cssText = `
+        border: 1px solid #000;
+        background-color: #ffe65b;
+        border-radius: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        min-height: 38px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        align-items: center;
+        cursor: pointer;
+      `;
+      
+      // Make container clickable to add more items
+      container.onclick = () => {
+        this.input.value = ''; // Clear input before showing
+        this.input.style.display = 'block';
+        this.input.focus();
+        this.updateSelectedItemsDisplay(); // Re-render in editing mode
+      };
+    }
+  }
+  
+  this.selectedItems.forEach((item, index) => {
+    const badge = this.createPillElement(item, index);
+    container.appendChild(badge);
+  });
+  
+  // Add a "+" button only in display mode (not editing)
+  if (this.multiSelect && !isEditing) {
+    const addMoreBtn = document.createElement('button');
+    addMoreBtn.type = 'button';
+    addMoreBtn.className = 'btn btn-sm btn-outline-primary';
+    addMoreBtn.innerHTML = '<i class="bi bi-plus"></i>';
+    addMoreBtn.style.cssText = 'padding: 0.25rem 0.5rem; margin-left: auto;';
+    addMoreBtn.onclick = (e) => {
+      e.stopPropagation();
+      this.input.value = ''; // Clear input before showing
+      this.input.style.display = 'block';
+      this.input.focus();
+      this.updateSelectedItemsDisplay(); // Re-render in editing mode
+    };
+    container.appendChild(addMoreBtn);
+  }
+}
+
   createPillElement(item, index) {
     const badge = document.createElement('span');
     badge.className = 'badge d-inline-flex align-items-center me-1 mb-1 py-2 px-3';
-    
-    // Blue for Wikidata items, gray for plain text
-    const isWikidata = !item.isText && item.id;
-    badge.style.backgroundColor = isWikidata ? '#0d6efd' : '#6c757d';
-    
-    const icon = isWikidata 
-      ? '<i class="bi bi-link-45deg me-1"></i>' 
-      : '<i class="bi bi-fonts me-1"></i>';
-    
+    badge.style.backgroundColor = '#29a4e2';
     badge.innerHTML = `
-      ${icon}
       <span>${this.escapeHtml(item.label)}</span>
       <button type="button" class="btn-close btn-close-white ms-2" style="font-size: 0.55em;" aria-label="${this.messages.remove}"></button>
     `;
@@ -351,8 +339,10 @@ class WikidataItemSearch {
     if (this.multiSelect) {
       this.updateSelectedItemsDisplay();
       this.updateHiddenInput();
+      this.updateVisibleInput();
     } else {
       this.hiddenInput.value = '';
+      this.input.value = '';
       this.updateSingleSelectDisplay();
     }
     
@@ -361,17 +351,17 @@ class WikidataItemSearch {
   
   updateHiddenInput() {
     if (this.multiSelect) {
-      const qids = this.selectedItems.filter(i => !i.isText).map(i => i.id).join(',');
-      const texts = this.selectedItems.filter(i => i.isText).map(i => i.label).join('|');
-      
+      const qids = this.selectedItems.map(i => i.id).join(',');
       this.hiddenInput.value = qids;
-      
-      const textInput = document.getElementById(this.hiddenInputId.replace('-qids', '-texts'));
-      if (textInput) {
-        textInput.value = texts;
-      }
     }
   }
+
+  updateVisibleInput() {
+  if (this.multiSelect) {
+    const labels = this.selectedItems.map(i => i.label).join(',');
+    this.input.value = labels;
+  }
+}
   
   showResults() {
     this.resultsContainer.style.display = 'block';
@@ -400,9 +390,6 @@ class WikidataItemSearch {
       }
     }
     
-    const textInput = document.getElementById(this.hiddenInputId.replace('-qids', '-texts'));
-    if (textInput) textInput.value = '';
-    
     this.hideResults();
   }
   
@@ -413,12 +400,11 @@ class WikidataItemSearch {
   getValue() {
     if (this.multiSelect) {
       return {
-        qids: this.selectedItems.filter(i => !i.isText).map(i => i.id),
-        texts: this.selectedItems.filter(i => i.isText).map(i => i.label)
+        qids: this.selectedItems.map(i => i.id)
       };
     } else {
       const item = this.selectedItems[0];
-      return item ? { id: item.id, label: item.label, isText: item.isText } : null;
+      return item ? { id: item.id, label: item.label } : null;
     }
   }
   

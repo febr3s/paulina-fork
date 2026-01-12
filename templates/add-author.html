@@ -2,20 +2,35 @@
 
 {% block content %}
 
-<!-- Flash messages -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div class="container-fluid p-2">
-      {% for category, message in messages %}
-        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
-          <i class="bi bi-{{ 'exclamation-triangle-fill' if category == 'error' else 'check-circle-fill' }} me-2"></i>
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
-        </div>
-      {% endfor %}
+
+{% if form_data and not success_item_id %}
+<div class="container-fluid p-2">
+    <div class="form-retained-notice text-danger">
+        <i class="bi bi-info-circle me-2"></i>
+        {{ _('Please fix the errors and resubmit.') }}
     </div>
-  {% endif %}
-{% endwith %}
+</div>
+{% endif %}
+
+
+{% if not success_item_id %}
+<div class="success-message position-relative" role="alert">
+  <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
+  <h3>{{ _('Author Created Successfully!') }}</h3>
+  <p>
+    {{ _('The author has been added to Wikidata with ID:') }} 
+    <strong>{{ success_item_id }}</strong>
+  </p>
+  <div class="success-links">
+    <a href="{{ wikidata_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary" style="background-color: transparent; color: #222; border-width: 2px;">
+      {{ _('View on Wikidata') }} ↗
+    </a>
+    <a href="{{ paulina_url }}" class="btn" style="background-color: #29a4e2; color: #fff;">
+      {{ _('View on Paulina') }}
+    </a>
+</div>
+</div>
+{% endif %}
 
 <div class="container-fluid p-2">
   <div class="card main-card mb-4 p-4">
@@ -32,7 +47,7 @@
       <!-- Basic Information with Duplicate Detection Sidebar -->
       <div class="row mb-4">
         <div class="col-md-8">
-          <!-- Name Field with Real-time Search -->
+          <!-- Author Name -->
           <div class="mb-3">
             <label for="author-name" class="form-label">
               <strong>{{ _('Name') }} <span class="text-danger">*</span></strong>
@@ -41,6 +56,7 @@
                    class="form-control border-black shadow-none" 
                    id="author-name" 
                    name="name" 
+                   value="{{ form_data.get('name', '') if form_data else '' }}"
                    placeholder="{{ _('e.g., Paulina Luisi') }}"
                    required
                    autocomplete="off">
@@ -48,7 +64,7 @@
               {{ _('Please enter the author name') }}
             </div>
             <div class="form-text">
-              {{ _("We'll search for existing authors as you type") }}
+              {{ _('Matching authors will appear as you type') }}
             </div>
           </div>
 
@@ -61,8 +77,7 @@
                       id="author-description" 
                       name="description" 
                       rows="3" 
-                      placeholder="{{ _('e.g., Uruguayan politician and medical doctor') }}"
-                      required></textarea>
+                      placeholder="{{ _('e.g., Uruguayan politician and medical doctor') }}">{{ form_data.get('description', '') if form_data else '' }}</textarea>
             <div class="invalid-feedback">
               {{ _('Please enter a brief description') }}
             </div>
@@ -98,269 +113,251 @@
       <div class="mb-4">
         <h2 class="h5 text-body-secondary mb-3">{{ _('Biographical Information') }}</h2>
         
+        <!-- Row 1: Nationality and Gender -->
         <div class="row">
-           <!-- Nationality -->
-          <div class="col-md-6 mb-3">
-            <label for="author-nationality-combobox">
-              <strong>{{ _('Nationality') }} <span class="text-danger">*</span></strong>
-            </label>
-            <div class="combobox-container">
-              <input type="text" class="form-control filter border-black shadow-none"
-                     id="author-nationality-combobox"
-                     placeholder="{{ _('Type to filter...') }}"
+          <!-- Nationality -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-nationality" class="form-label">
+                {{ _('Nationality') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="author-nationality" 
+                     name="nationality"
+                     placeholder="{{ _('Search for a country...') }}"
                      autocomplete="off">
-              <select class="form-select filter border-black shadow-none"
-                      name="nationality" id="author-nationality" style="display:none">
-                <option value="">{{ _('Any') }}</option>
-                {% for country in COUNTRIES %}
-                <option value="{{ country['qid'] }}">{{ country['country_name'] }}</option>
-                {% endfor %}
-              </select>
-              <ul class="dropdown-menu w-100" id="author-nationality-dropdown" style="max-height: 200px; overflow-y: auto;"></ul>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-nationality')">
-              <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-            </button>
+              
+               <div id="author-nationality-selected" class="mt-2 d-none"></div>
+              
+              <input type="hidden" 
+                     id="author-nationality-qid" 
+                     name="nationalityQid">
+              
+              <div id="author-nationality-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
 
-            <div id="author-nationality-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for nationality') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-nationality', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-nationality', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-nationality', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-nationality-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-nationality')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-nationality')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-nationality-references" class="mt-3 d-none">
+                <div id="author-nationality-reference-container"></div>
               </div>
             </div>
           </div>
-        
-          <!-- Gender -->
-          <div class="col-md-6 mb-3">
-            <label for="author-gender">
-              <strong>{{ _('Gender') }} <span class="text-danger">*</span></strong>
-            </label>
-            <select class="form-select filter border-black shadow-none" name="gender" id="author-gender" required>
-              <option value="">{{ _('Select gender...') }}</option>
-              {% for gender in GENDERS %}
-              <option value="{{ gender['qid'] }}">{{ _(gender['gender_name']) }}</option>
-              {% endfor %}
-            </select>
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-gender')">
-              <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-            </button>
 
-            <div id="author-gender-references" class="reference-section mt-2 mb-3 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for gender') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-gender', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-gender', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-gender', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-gender-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-gender')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+          <!-- Gender -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-gender" class="form-label">
+                {{ _('Gender') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="author-gender" 
+                     name="gender"
+                     placeholder="{{ _('Search for gender identity...') }}"
+                     autocomplete="off">
+              
+              <input type="hidden" 
+                     id="author-gender-qid" 
+                     name="genderQid">
+              
+              <div id="author-gender-selected" class="mt-2 d-none"></div>
+              
+              <div id="author-gender-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-gender')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-gender-references" class="mt-3 d-none">
+                <div id="author-gender-reference-container"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Row 2: Place of Birth and Occupation -->
         <div class="row">
           <!-- Place of Birth -->
-           <div class="col-md-6 mb-3">
-  <label for="author-place-of-birth" class="form-label">
-    <strong>{{ _('Place of birth') }} <span class="text-danger">*</span></strong>
-  </label>
-  <div class="position-relative">
-    <div class="form-control border-black shadow-none d-flex flex-wrap align-items-center gap-1 p-2" 
-         id="author-place-of-birth-container" 
-         style="min-height: 38px; cursor: text;">
-      <div id="author-place-of-birth-selected" class="d-flex flex-wrap gap-1"></div>
-      <input type="text" 
-             class="border-0 flex-grow-1" 
-             id="author-place-of-birth" 
-             name="placeOfBirth"
-             placeholder="{{ _('e.g., Buenos Aires, Tokyo, Lagos') }}"
-             autocomplete="off"
-             style="outline: none; min-width: 150px; padding: 0;">
-    </div>
-    <input type="hidden" id="author-place-of-birth-qid" name="placeOfBirthQid">
-    <div class="wikidata-search-results" id="author-place-of-birth-results"></div>
-  </div>
-  
-  <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-place-of-birth')">
-    <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-  </button>
-
-            <div id="author-place-of-birth-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for place of birth') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-place-of-birth', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-place-of-birth', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-place-of-birth', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-place-of-birth-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-place-of-birth')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-place-of-birth" class="form-label">
+                {{ _('Place of birth') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="author-place-of-birth" 
+                     name="placeOfBirth"
+                     placeholder="{{ _('e.g., Buenos Aires, Tokyo, Lagos') }}"
+                     autocomplete="off">
+              
+              <input type="hidden" 
+                     id="author-place-of-birth-qid" 
+                     name="placeOfBirthQid">
+              
+              <div id="author-place-of-birth-selected" class="mt-2 d-none"></div>
+              
+              <div id="author-place-of-birth-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-place-of-birth')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-place-of-birth-references" class="mt-3 d-none">
+                <div id="author-place-of-birth-reference-container"></div>
               </div>
             </div>
           </div>
 
           <!-- Occupation -->
-          <div class="col-md-6 mb-3">
-            <label for="author-occupation" class="form-label">
-              <strong>{{ _('Occupation') }} <span class="text-danger">*</span></strong>
-            </label>
-            <div class="position-relative">
-              <div class="form-control border-black shadow-none d-flex flex-wrap align-items-center gap-1 p-2" 
-                   id="author-occupation-container" 
-                   style="min-height: 38px; cursor: text;">
-                <div id="author-selected-occupations" class="d-flex flex-wrap gap-1"></div>
-                <input type="text" 
-                       class="border-0 flex-grow-1" 
-                       id="author-occupation" 
-                       name="occupation"
-                       placeholder="{{ _('e.g., Writer, Poet, Novelist') }}"
-                       autocomplete="off"
-                       style="outline: none; min-width: 150px; padding: 0;">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-occupation" class="form-label">
+                {{ _('Occupation') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="author-occupation" 
+                     name="occupation"
+                     placeholder="{{ _('e.g., Writer, Poet, Novelist') }}"
+                     autocomplete="off">
+              
+               <div id="author-selected-occupations" class="mt-2 d-none"></div>
+              
+              <input type="hidden" 
+                     id="author-occupation-qids" 
+                     name="occupationQids">
+              
+              <div id="author-occupation-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
               </div>
               
-              <input type="hidden" id="author-occupation-qids" name="occupationQids">
-              <input type="hidden" id="author-occupation-texts" name="occupationTexts">
-              <div class="wikidata-search-results" id="author-occupation-results"></div>
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-occupation')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
               
-              <div class="invalid-feedback">
-                {{ _('Please add at least one occupation') }}
-              </div>
-            </div>
-            
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-occupation')">
-              <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-            </button>
-            
-            <div id="author-occupation-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for occupation') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-occupation', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-occupation', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-occupation', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-occupation-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-occupation')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+              <div id="author-occupation-references" class="mt-3 d-none">
+                <div id="author-occupation-reference-container"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Row 3: Ethnicity -->
         <div class="row">
-          <!-- Ethnicity -->
-          <div class="col-md-6 mb-3">
-  <label for="author-ethnicity" class="form-label">
-    <strong>{{ _('Ethnicity') }}</strong>
-  </label>
-  <div class="position-relative">
-    <div class="form-control border-black shadow-none d-flex flex-wrap align-items-center gap-1 p-2" 
-         id="author-ethnicity-container" 
-         style="min-height: 38px; cursor: text;">
-      <div id="author-ethnicity-selected" class="d-flex flex-wrap gap-1"></div>
-      <input type="text" 
-             class="border-0 flex-grow-1" 
-             id="author-ethnicity" 
-             name="ethnicity"
-             placeholder="{{ _('e.g., Polish') }}"
-             autocomplete="off"
-             style="outline: none; min-width: 150px; padding: 0;">
-    </div>
-    <input type="hidden" id="author-ethnicity-qid" name="ethnicityQid">
-    <div class="wikidata-search-results" id="author-ethnicity-results"></div>
-  </div>
-  <div class="form-text">
-    <small class="text-muted">{{ _('Type to search Wikidata, or just enter text') }}</small>
-  </div>
-  
-  <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-ethnicity')">
-    <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-  </button>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-ethnicity" class="form-label">
+                {{ _('Ethnicity') }}
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="author-ethnicity" 
+                     name="ethnicity"
+                     placeholder="{{ _('e.g., Polish') }}"
+                     autocomplete="off">
+              
+              <input type="hidden" 
+                     id="author-ethnicity-qid" 
+                     name="ethnicityQid">
+              
+              <div id="author-ethnicity-selected" class="mt-2 d-none"></div>
+              
+              <div id="author-ethnicity-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+              <div class="form-text">
+                <small class="text-muted">{{ _('Type to search Wikidata') }}</small>
+              </div>
 
-            <div id="author-ethnicity-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for ethnicity') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-ethnicity', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-ethnicity', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-ethnicity', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-ethnicity-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-ethnicity')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-ethnicity')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-ethnicity-references" class="mt-3 d-none">
+                <div id="author-ethnicity-reference-container"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Row 4: Dates -->
         <div class="row">
           <!-- Date of Birth -->
-          <div class="col-md-6 mb-3">
-            <label for="author-date-of-birth" class="form-label">
-              <strong>{{ _('Date of birth') }}</strong>
-            </label>
-            <input type="date" class="form-control border-black shadow-none" id="author-date-of-birth" name="dateOfBirth">
-            
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-date-of-birth')">
-              <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-            </button>
-            
-            <div id="author-date-of-birth-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for date of birth') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-birth', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-birth', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-birth', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-date-of-birth-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-date-of-birth')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-date-of-birth" class="form-label">
+                <strong>{{ _('Date of birth') }}</strong>
+              </label>
+              <input type="date" 
+                     class="form-control border-black shadow-none" 
+                     id="author-date-of-birth" 
+                     name="dateOfBirth" 
+                     value="{{ form_data.get('dateOfBirth', '') if form_data else '' }}">
+              
+              
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-date-of-birth')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-date-of-birth-references" class="mt-3 d-none">
+                <div id="author-date-of-birth-reference-container"></div>
               </div>
             </div>
           </div>
 
           <!-- Date of Death -->
-          <div class="col-md-6 mb-3">
-            <label for="author-date-of-death" class="form-label">
-              <strong>{{ _('Date of death') }}</strong>
-              <span class="text-muted small">({{ _('if applicable') }})</span>
-            </label>
-            <input type="date" class="form-control border-black shadow-none" id="author-date-of-death" name="dateOfDeath">
-            
-            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleReference('author-date-of-death')">
-              <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-            </button>
-            
-            <div id="author-date-of-death-references" class="reference-section mt-2 d-none">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h6 class="card-subtitle mb-2 text-muted">{{ _('Reference for date of death') }}</h6>
-                  <div class="btn-group btn-group-sm mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-death', 'wikipedia')">{{ _('Wikipedia') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-death', 'library')">{{ _('Library catalog') }}</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="fillReferenceTemplate('author-date-of-death', 'website')">{{ _('Website') }}</button>
-                  </div>
-                  <div id="author-date-of-death-reference-container"></div>
-                  <button type="button" class="btn btn-sm btn-success" onclick="addReference('author-date-of-death')"><i class="bi bi-plus-circle"></i> {{ _('Add another reference') }}</button>
-                </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="author-date-of-death" class="form-label">
+                <strong>{{ _('Date of death') }}</strong>
+                <span class="text-muted small">({{ _('if applicable') }})</span>
+              </label>
+              <input type="date" 
+                     class="form-control border-black shadow-none" 
+                     id="author-date-of-death" 
+                     name="dateOfDeath" 
+                     value="{{ form_data.get('dateOfDeath', '') if form_data else '' }}">
+              
+               <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('author-date-of-death')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="author-date-of-death-references" class="mt-3 d-none">
+                <div id="author-date-of-death-reference-container"></div>
               </div>
             </div>
           </div>
@@ -394,7 +391,7 @@
                             class="btn border-black" 
                             id="author-search-commons-btn"
                             style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
-                      <i class="bi bi-search me-2"></i>{{ _('Search Commons for') }} "<span id="author-name-display">{{ _('author name') }}</span>"
+                      <i class="bi bi-search me-2"></i>{{ _('Search Commons for') }} "<span id="author-name-display">{{ form_data.get('name', '') if form_data else 'author name' }}</span>"
                     </button>
                     <div class="form-text mt-2">
                       {{ _('Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below.') }}
@@ -409,21 +406,12 @@
                              class="form-control border-black shadow-none" 
                              id="author-image-url" 
                              name="imageUrl"
-                             placeholder="https://upload.wikimedia.org/...">
+                             value="{{ form_data.get('imageUrl', '') if form_data else '' }}"
+                             placeholder="https://commons.wikimedia.org/wiki/File:Example.jpg">
                       <button type="button" class="btn btn-outline-secondary d-none" id="author-clear-image-url">
                         <i class="bi bi-x-lg"></i>
                       </button>
                     </div>
-                  </div>
-
-                  <!-- Image Description Field -->
-                  <div class="mb-0">
-                    <label for="author-image-alt-text" class="form-label">{{ _('Image Description') }}</label>
-                    <input type="text" 
-                           class="form-control border-black shadow-none" 
-                           id="author-image-alt-text" 
-                           name="imageAltText"
-                           placeholder="{{ _('e.g., Portrait of the author') }}">
                   </div>
                 </div>
 
@@ -466,12 +454,21 @@
                    class="form-control border-black shadow-none" 
                    id="author-official-website" 
                    name="officialWebsite"
+                   value="{{ form_data.get('officialWebsite', '') if form_data else '' }}"
                    placeholder="https://">
             <div class="form-text">
               {{ _('Enter the full URL including https://') }}
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Hidden div to store retained form data for JS -->
+      <div id="form-data-store" 
+        {% if form_data %}
+            data-all-form-data='{{ form_data|tojson }}'
+        {% endif %}
+        style="display: none;">
       </div>
 
       <!-- Submit and Reset Buttons -->
@@ -491,7 +488,6 @@
 </div>
 
 <!-- Load reusable JS modules -->
-<script src="{{ url_for('static', filename='js/combobox.js') }}"></script>
 <script src="{{ url_for('static', filename='js/wikidata-search.js') }}"></script>
 <script src="{{ url_for('static', filename='js/image-preview.js') }}"></script>
 <script src="{{ url_for('static', filename='js/references.js') }}"></script>
@@ -501,21 +497,15 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   
-  // ============================================
   // TRANSLATABLE MESSAGES
-  // ============================================
   
   const wikidataMessages = {
     searching: '{{ _("Searching Wikidata...") }}',
     noResults: '{{ _("No Wikidata results found") }}',
     noDescription: '{{ _("No description") }}',
-    addAsText: '{{ _("Add as text") }}',
-    useAsText: '{{ _("Use as entered") }}',
-    freeTextHint: '{{ _("Not linked to Wikidata") }}',
     error: '{{ _("Error searching Wikidata") }}',
     alreadyAdded: '{{ _("This item is already added") }}',
     alreadySelected: '{{ _("This item is already selected") }}',
-    textLabel: '{{ _("text") }}',
     remove: '{{ _("Remove") }}'
   };
   
@@ -553,10 +543,6 @@ document.addEventListener('DOMContentLoaded', function() {
     authorName: '{{ _("author name") }}',
     imagePreview: '{{ _("Image preview") }}'
   };
-  
-  const comboboxMessages = {
-    noOption: '{{ _("No option") }}'
-  };
 
   // INITIALIZE COMPONENTS
   
@@ -587,33 +573,47 @@ document.addEventListener('DOMContentLoaded', function() {
     messages: imageMessages
   });
   
-  // Nationality Combobox
-  window.nationalityCombobox = new Combobox({
-    inputId: 'author-nationality-combobox',
-    selectId: 'author-nationality',
-    dropdownId: 'author-nationality-dropdown',
-    noOptionText: comboboxMessages.noOption
+  // Nationality Search
+  window.nationalitySearch = new WikidataItemSearch({
+    inputId: 'author-nationality',
+    hiddenInputId: 'author-nationality-qid',
+    resultsId: 'author-nationality-results',
+    selectedItemsId: 'author-nationality-selected',
+    multiSelect: false,
+    messages: wikidataMessages
+  });
+
+  // Gender Search
+  window.genderSearch = new WikidataItemSearch({
+    inputId: 'author-gender',
+    hiddenInputId: 'author-gender-qid',
+    resultsId: 'author-gender-results',
+    selectedItemsId: 'author-gender-selected',
+    multiSelect: false,
+    messages: wikidataMessages
   });
   
-  // Wikidata Search: Place of Birth
+  // Place of Birth
   window.placeOfBirthSearch = new WikidataItemSearch({
     inputId: 'author-place-of-birth',
     hiddenInputId: 'author-place-of-birth-qid',
     resultsId: 'author-place-of-birth-results',
+    selectedItemsId: 'author-place-of-birth-selected',
     multiSelect: false,
     messages: wikidataMessages
   });
   
-  // Wikidata Search: Ethnicity
+  // Ethnicity
   window.ethnicitySearch = new WikidataItemSearch({
     inputId: 'author-ethnicity',
     hiddenInputId: 'author-ethnicity-qid',
     resultsId: 'author-ethnicity-results',
+    selectedItemsId: 'author-ethnicity-selected',
     multiSelect: false,
     messages: wikidataMessages
   });
   
-  // Wikidata Search: Occupation (multi-select)
+  // Occupation (multi-select)
   window.occupationSearch = new WikidataItemSearch({
     inputId: 'author-occupation',
     hiddenInputId: 'author-occupation-qids',
@@ -624,17 +624,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // EVENT HANDLERS
-  
-  // Occupation container click - focus input when clicking container
-  const occupationContainer = document.getElementById('author-occupation-container');
-  const occupationInput = document.getElementById('author-occupation');
-  if (occupationContainer && occupationInput) {
-    occupationContainer.addEventListener('click', function(e) {
-      if (!e.target.closest('.badge')) {
-        occupationInput.focus();
-      }
-    });
-  }
   
   // Commons search button
   const searchCommonsBtn = document.getElementById('author-search-commons-btn');
@@ -663,94 +652,237 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Image alt text sync
-  const imageAltText = document.getElementById('author-image-alt-text');
-  const imagePreviewEl = document.getElementById('author-image-preview');
-  if (imageAltText && imagePreviewEl) {
-    imageAltText.addEventListener('input', function() {
-      imagePreviewEl.alt = this.value || formMessages.imagePreview;
-    });
-  }
-  
   // Reset form button
   const resetBtn = document.getElementById('author-reset-btn');
   if (resetBtn) {
     resetBtn.addEventListener('click', function() {
-      if (confirm(formMessages.confirmReset)) {
         resetAuthorForm();
-      }
     });
   }
 
   // FORM SUBMISSION
  
-const authorForm = document.getElementById('addAuthorForm');
-if (authorForm) {
-  authorForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    let isValid = true;
-    const errors = [];
-    
-    // Validate required fields
-    const nameResult = FormUtils.validateRequired('author-name', formMessages.nameRequired);
-    if (!nameResult.valid) { isValid = false; errors.push(nameResult.message); }
-    
-    const genderResult = FormUtils.validateRequired('author-gender', formMessages.genderRequired);
-    if (!genderResult.valid) { isValid = false; errors.push(genderResult.message); }
-    
-    const nationalityResult = FormUtils.validateRequired('author-nationality', formMessages.nationalityRequired);
-    if (!nationalityResult.valid) { isValid = false; errors.push(nationalityResult.message); }
-    
-    if (!window.placeOfBirthSearch.hasValue()) {
-      isValid = false;
-      errors.push(formMessages.placeOfBirthRequired);
-    }
-    
-    if (!window.occupationSearch.hasValue()) { 
-      isValid = false; 
-      errors.push(formMessages.occupationRequired); 
-    }
-    
-    if (window.imagePreview && !window.imagePreview.isValid()) {
-      isValid = false;
-      errors.push(formMessages.imageCommonsRequired);
-    }
-    
-    if (!isValid) {
-      alert(formMessages.fillRequired + '\n- ' + errors.join('\n- '));
-      FormUtils.scrollToFirstError(authorForm);
-      return false;
-    }
-    
-    // All validations passed - submit the form
-    this.submit();
-  });
-}
+  const authorForm = document.getElementById('addAuthorForm');
+  if (authorForm) {
+    authorForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      let isValid = true;
+      const errors = [];
+      
+      // Validate required fields
+      const nameResult = FormUtils.validateRequired('author-name', formMessages.nameRequired);
+      if (!nameResult.valid) { isValid = false; errors.push(nameResult.message); }
+      
+      const genderQid = document.getElementById('author-gender-qid').value;
+      if (!genderQid) {
+        isValid = false;
+        errors.push(formMessages.genderRequired);
+      }
 
-  // RESET FUNCTION
-  
+      const nationalityQid = document.getElementById('author-nationality-qid').value;
+      if (!nationalityQid) {
+        isValid = false;
+        errors.push(formMessages.nationalityRequired);
+      }
+          
+      if (!window.placeOfBirthSearch.hasValue()) {
+        isValid = false;
+        errors.push(formMessages.placeOfBirthRequired);
+      }
+      
+      if (!window.occupationSearch.hasValue()) { 
+        isValid = false; 
+        errors.push(formMessages.occupationRequired); 
+      }
+      
+      if (window.imagePreview && !window.imagePreview.isValid()) {
+        isValid = false;
+        errors.push(formMessages.imageCommonsRequired);
+      }
+      
+      if (!isValid) {
+        alert(formMessages.fillRequired + '\n- ' + errors.join('\n- '));
+        FormUtils.scrollToFirstError(authorForm);
+        return false;
+      }
+      
+      this.submit();
+    });
+  }
+
+  // RESET FORM FUNCTION
+
   window.resetAuthorForm = function() {
-    const authorForm = document.getElementById('addAuthorForm');
-    authorForm.reset();
-    FormUtils.clearValidation(authorForm);
-    
-    // Reset all components
-    if (window.imagePreview) window.imagePreview.reset();
-    if (window.duplicateDetector) window.duplicateDetector.reset();
-    if (window.nationalityCombobox) window.nationalityCombobox.reset();
-    if (window.placeOfBirthSearch) window.placeOfBirthSearch.reset();
-    if (window.ethnicitySearch) window.ethnicitySearch.reset();
-    if (window.occupationSearch) window.occupationSearch.reset();
-    if (window.refManager) window.refManager.reset();
-    
-    // Reset Commons search button
-    if (searchCommonsBtn && authorNameDisplay) {
-      authorNameDisplay.textContent = formMessages.authorName;
-      searchCommonsBtn.style.setProperty('--bs-btn-bg', 'white');
-      searchCommonsBtn.style.setProperty('--bs-btn-color', 'black');
+    if (!confirm(formMessages.confirmReset)) {
+      return; // User cancelled
     }
+    
+    // Clear all form fields
+    authorForm.reset();
+
+    // Send request to clear server-side form data, then redirect to fresh page
+    fetch('/clear_form_data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Redirect to the same page with cleared=1 parameter for a clean state
+        window.location.href = '/add-author?cleared=1';
+      }
+    })
+    .catch(error => {
+      console.error('Error clearing form data:', error);
+      alert('Could not connect to server. Please refresh the page manually to clear all data.');
+    });
   };
+
+  // RESTORE FORM DATA ON ERROR
+
+  function restoreFormData() {
+    const dataStore = document.getElementById('form-data-store');
+    if (!dataStore) return;
+    
+    // Get all form data from JSON
+    let formData = {};
+    try {
+      const jsonData = dataStore.dataset.allFormData;
+      if (jsonData) {
+        formData = JSON.parse(jsonData);
+      } else {
+        return;
+      }
+    } catch (e) {
+      return;
+    }
+    
+    // Restore Nationality
+    if (formData.nationalityQid && formData.nationality) {
+      if (window.nationalitySearch) {
+        window.nationalitySearch.selectItem({
+          id: formData.nationalityQid,
+          label: formData.nationality,
+          description: ''
+        });
+      }
+    }
+
+    // Restore Gender
+    if (formData.genderQid && formData.gender) {
+      if (window.genderSearch) {
+        window.genderSearch.selectItem({
+          id: formData.genderQid,
+          label: formData.gender,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Place of Birth
+    if (formData.placeOfBirthQid && formData.placeOfBirth) {
+      if (window.placeOfBirthSearch) {
+        window.placeOfBirthSearch.selectItem({
+          id: formData.placeOfBirthQid,
+          label: formData.placeOfBirth,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Occupation (multi-select)
+    if (formData.occupationQids && formData.occupation) {
+      if (window.occupationSearch) {
+      const occupationQids = formData.occupationQids.split(',').filter(q => q.trim());
+       const occupationLabels = formData.occupation.split(',').filter(l => l.trim());
+        occupationQids.forEach((qid, index) => {
+          if (qid && occupationLabels[index]) {
+            window.occupationSearch.selectItem({
+              id: qid,
+              label: occupationLabels[index],
+              description: ''
+            });
+          }
+        });
+      }
+    }
+    
+    // Restore Ethnicity
+    if (formData.ethnicityQid && formData.ethnicity) {
+      if (window.ethnicitySearch) {
+        window.ethnicitySearch.selectItem({
+          id: formData.ethnicityQid,
+          label: formData.ethnicity,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Image Preview
+    if (formData.imageUrl) {
+      if (window.imagePreview) {
+        const imageUrlInput = document.getElementById('author-image-url');
+        if (imageUrlInput) {
+          imageUrlInput.value = formData.imageUrl;
+          imageUrlInput.dispatchEvent(new Event('input'));
+        }
+      }
+    }
+    
+    // Restore References for all fields
+    const fieldIds = [
+      'author-nationality',
+      'author-gender', 
+      'author-place-of-birth',
+      'author-occupation',
+      'author-ethnicity',
+      'author-date-of-birth',
+      'author-date-of-death'
+    ];
+    
+    fieldIds.forEach(fieldId => {
+      for (let i = 0; i < 3; i++) {
+        const refUrl = formData[`${fieldId}_ref_url_${i}`];
+        const refTitle = formData[`${fieldId}_ref_title_${i}`];
+        const refRetrieved = formData[`${fieldId}_ref_retrieved_${i}`];
+        
+        if (refUrl) {
+          const refSection = document.getElementById(`${fieldId}-references`);
+          if (refSection && refSection.classList.contains('d-none')) {
+            window.refManager.toggleReference(fieldId);
+          }
+          
+          if (window.refManager) {
+            const container = document.getElementById(`${fieldId}-reference-container`);
+            if (container) {
+              const existingRefs = container.querySelectorAll('.reference-item').length;
+              
+              if (existingRefs <= i) {
+                window.refManager.addReference(fieldId);
+              }
+              
+              const urlInput = document.querySelector(`input[name="${fieldId}_ref_url_${i}"]`);
+              const titleInput = document.querySelector(`input[name="${fieldId}_ref_title_${i}"]`);
+              const retrievedInput = document.querySelector(`input[name="${fieldId}_ref_retrieved_${i}"]`);
+              
+              if (urlInput) urlInput.value = refUrl;
+              if (titleInput && refTitle) titleInput.value = refTitle;
+              if (retrievedInput && refRetrieved) retrievedInput.value = refRetrieved;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Call restore function if data exists 
+  if (document.getElementById('form-data-store')) {
+    setTimeout(restoreFormData, 500); // Delay to ensure all components are initialized
+  }
+
 });
 
 // GLOBAL FUNCTIONS FOR REFERENCE BUTTONS

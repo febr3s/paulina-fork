@@ -2,6 +2,7 @@ requests
 python-dateutil
 flask
 Flask-Babel
+requests-oauthlib
+oauthlib
 Flask-Caching
-mwoauth
 Flask-Limiter

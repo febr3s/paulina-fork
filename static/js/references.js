@@ -61,7 +61,7 @@ class ReferenceManager {
       </div>
       <div class="mb-2">
         <label class="form-label small">${this.msg.url}</label>
-        <input type="url" class="form-control form-control-sm" name="${fieldId}_ref_url_${refIndex}" placeholder="https://...">
+        <input type="url" class="form-control form-control-sm" name="${fieldId}_ref_url_${refIndex}" placeholder="Enter the full URL including https://">
       </div>
       <div class="mb-2">
         <label class="form-label small">${this.msg.title}</label>

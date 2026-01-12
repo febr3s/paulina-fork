@@ -1,228 +1,234 @@
 """
 Wikidata API Helper Module
 Handles creating and editing Wikidata items via the Wikibase REST API
-
+Includes Wikidata property/item ID constants and utility functions
 """
 
+import json
 import requests
-from flask import session
-import hashlib
-import hmac
-import time
-import urllib.parse
-import secrets
-import base64
+import os
+import urllib.parse as urlparse
 
+
+# WIKIDATA CONSTANTS - Test/Production Mode Configuration
+
+# Check for test mode
+WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
+
+# Property IDs (PIDs)
+if WIKIDATA_TEST_MODE:
+    # Test Wikidata properties (from test.wikidata.org)
+    PID_INSTANCE_OF = 'P82'           # instance of
+    PID_SEX_OR_GENDER = 'P192'         # sex or gender
+    PID_COUNTRY_OF_CITIZENSHIP = 'P196' # country of citizenship
+    PID_DATE_OF_BIRTH = 'P18'         # date of birth
+    PID_DATE_OF_DEATH = 'P25'        # date of death
+    PID_PLACE_OF_BIRTH = 'P342'       # place of birth
+    PID_OCCUPATION = 'P204'           # occupation
+    PID_ETHNIC_GROUP = 'P84982'         # ethnic group
+    PID_IMAGE = 'P185'                # image
+    PID_OFFICIAL_WEBSITE = 'P206'     # official website
+    PID_REFERENCE_URL = 'P93'        # reference URL
+    PID_TITLE = 'P77107'                # title
+    PID_RETRIEVED = 'P388'            # retrieved
+else:
+    # Production Wikidata properties
+    PID_INSTANCE_OF = 'P31'
+    PID_SEX_OR_GENDER = 'P21'
+    PID_COUNTRY_OF_CITIZENSHIP = 'P27'
+    PID_DATE_OF_BIRTH = 'P569'
+    PID_DATE_OF_DEATH = 'P570'
+    PID_PLACE_OF_BIRTH = 'P19'
+    PID_OCCUPATION = 'P106'
+    PID_ETHNIC_GROUP = 'P172'
+    PID_IMAGE = 'P18'
+    PID_OFFICIAL_WEBSITE = 'P856'
+    PID_REFERENCE_URL = 'P854'
+    PID_TITLE = 'P1476'
+    PID_RETRIEVED = 'P813'
+
+# Item IDs (QIDs)
+if WIKIDATA_TEST_MODE:
+    # Test Wikidata items
+    QID_HUMAN = 'Q224056'
+else:
+    # Production Wikidata items
+    QID_HUMAN = 'Q5'
+
+
+# UTILITY FUNCTIONS
+
+def generate_author_description(nationality_label, date_of_birth=None, date_of_death=None):
+    """
+    Generate a simple standard description for an author.
+    Format: "creator from {nationality} (birthDate–deathDate)" or "creator from {nationality}"
+    
+    Args:
+        nationality_label: Human-readable nationality label
+        date_of_birth: Birth date string (YYYY-MM-DD format)
+        date_of_death: Death date string (YYYY-MM-DD format)
+    
+    Returns:
+        Generated description string (starts with lowercase per Wikidata rules)
+    """
+    # Base description (always lowercase)
+    if nationality_label:
+        description = f"creator from {nationality_label.lower()}"
+    else:
+        description = "creator"
+    
+    # Add dates if both birth and death are present
+    if date_of_birth and date_of_death:
+        try:
+            birth_year = date_of_birth.split('-')[0]
+            death_year = date_of_death.split('-')[0]
+            description += f" ({birth_year}–{death_year})"  # Using en dash (–)
+        except:
+            pass  # Skip dates if parsing fails
+    
+    return description
+
+
+def normalize_description(description):
+    """
+    Normalize description to follow Wikidata conventions.
+    Always starts with lowercase per Wikidata rules.
+    
+    Args:
+        description: Description string
+    
+    Returns:
+        Normalized description string
+    """
+    if not description:
+        return description
+    
+    # Always enforce lowercase first letter (Wikidata rule)
+    if description[0].isupper():
+        description = description[0].lower() + description[1:]
+    
+    return description
+
+
+# WIKIDATA API CLASS
 
 class WikidataAPI:
-    """Helper class for Wikidata REST API operations"""
+    """Handles creating and editing Wikidata items via the Wikibase REST API"""
     
-    BASE_URL = "https://www.wikidata.org/w/rest.php/wikibase/v1"
+    def __init__(self, config, oauth_session=None):
+        self.config = config
+        self.oauth_session = oauth_session
+        self.api_url = config['WIKIDATA_API_URL']  
+        self.rest_api_url = config['WIKIDATA_REST_API_URL']  
+        self.user_agent = config['USER_AGENT']
+        
+    # AUTHENTICATION
+  
+    def get_csrf_token(self):
+        """Get CSRF token for authenticated actions."""
+        if not self.oauth_session:
+            raise Exception("No OAuth session available")
+      
+        token_url = f"{self.api_url}?action=query&meta=tokens&type=csrf&format=json"
+        
+        try:
+            headers = {'User-Agent': self.user_agent}
+            
+            response = self.oauth_session.get(token_url, headers=headers)
+            data = response.json()
+            
+            # MediaWiki API returns token in query.tokens.csrftoken
+            if 'query' in data and 'tokens' in data['query']:
+                csrf_token = data['query']['tokens'].get('csrftoken')
+                if csrf_token:
+                    print(f"✅ CSRF token obtained: {csrf_token[:20]}...")
+                    return csrf_token
+            
+            raise Exception(f"Unexpected token response: {data}")
+            
+        except Exception as e:
+            print(f"Error getting CSRF token: {e}")
+            raise
     
-    # Property IDs for author data
-    PROPERTIES = {
-        'instance_of': 'P31',
-        'sex_or_gender': 'P21',
-        'country_of_citizenship': 'P27',
-        'place_of_birth': 'P19',
-        'date_of_birth': 'P569',
-        'date_of_death': 'P570',
-        'occupation': 'P106',
-        'ethnic_group': 'P172',
-        'image': 'P18',
-        'official_website': 'P856',
-    }
-    
-    # Reference properties
-    REF_PROPERTIES = {
-        'reference_url': 'P854',
-        'title': 'P1476',
-        'retrieved': 'P813',
-    }
-    
-    def __init__(self, app_config):
-        self.config = app_config 
-        self.consumer_key = app_config['CONSUMER_KEY']
-        self.consumer_secret = app_config['CONSUMER_SECRET']
-        self.user_agent = app_config.get('USER_AGENT', 'Paulina/1.0')
-        self.base_url = app_config.get('WIKIDATA_REST_API_URL', 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities')
-        print("Wikidata REST API URL:", self.base_url)
-    
-    
-    def _get_access_token(self):
-        """Get OAuth access token from session"""
-        if 'access_token' not in session:
-            raise Exception("User not authenticated")
-        
-        return (
-            session['access_token']['key'],
-            session['access_token']['secret']
-        )
-    
-    def _generate_oauth_signature(self, method, url, params, token_secret):
-        """Generate OAuth 1.0a signature"""
-        # Sort and encode parameters
-        sorted_params = sorted(params.items())
-        param_string = urllib.parse.urlencode(sorted_params, quote_via=urllib.parse.quote)
-        
-        # Create signature base string
-        base_string = '&'.join([
-            method.upper(),
-            urllib.parse.quote(url, safe=''),
-            urllib.parse.quote(param_string, safe='')
-        ])
-        
-        # Create signing key
-        signing_key = '&'.join([
-            urllib.parse.quote(self.consumer_secret, safe=''),
-            urllib.parse.quote(token_secret, safe='')
-        ])
-        
-        # Generate HMAC-SHA1 signature
-        signature = hmac.new(
-            signing_key.encode('utf-8'),
-            base_string.encode('utf-8'),
-            hashlib.sha1
-        ).digest()
-        
-        return base64.b64encode(signature).decode('utf-8')
-    
-    def _build_oauth_header(self, method, url, token_key, token_secret):
-        """Build OAuth 1.0a Authorization header"""
-        oauth_params = {
-            'oauth_consumer_key': self.consumer_key,
-            'oauth_token': token_key,
-            'oauth_signature_method': 'HMAC-SHA1',
-            'oauth_timestamp': str(int(time.time())),
-            'oauth_nonce': secrets.token_hex(16),
-            'oauth_version': '1.0'
-        }
-        
-        # Generate signature
-        signature = self._generate_oauth_signature(method, url, oauth_params, token_secret)
-        oauth_params['oauth_signature'] = signature
-        
-        # Build header string
-        header_parts = [f'{k}="{urllib.parse.quote(str(v), safe="")}"' 
-                       for k, v in sorted(oauth_params.items())]
-        
-        return 'OAuth ' + ', '.join(header_parts)
-    
-    def _make_authenticated_request(self, method, endpoint, json_data=None):
-        """Make an authenticated request using the mwoauth access token"""
-        token_key, token_secret = self._get_access_token()
-        
-        url = f"{self.base_url}{endpoint}"
-        
-        # Build OAuth header
-        auth_header = self._build_oauth_header(method, url, token_key, token_secret)
-        
-        headers = {
-            'Authorization': auth_header,
-            'User-Agent': self.user_agent,
-            'Content-Type': 'application/json'
-        }
-        
-        if method == 'POST':
-            response = requests.post(url, headers=headers, json=json_data, timeout=30)
-        elif method == 'PUT':
-            response = requests.put(url, headers=headers, json=json_data, timeout=30)
-        elif method == 'PATCH':
-            response = requests.patch(url, headers=headers, json=json_data, timeout=30)
-        elif method == 'GET':
-            response = requests.get(url, headers=headers, timeout=30)
-        else:
-            raise ValueError(f"Unsupported HTTP method: {method}")
-        
-        return response
+    # ITEM CREATION
     
     def create_item(self, labels, descriptions, statements):
-        """
-        Create a new Wikidata item using REST API
-        """
+        """Create a new Wikidata item using REST API."""
+        if not self.oauth_session:
+            raise Exception("No OAuth session available")
+        
         try:
-            url = f"{self.base_url}/items"
-
-            # Build the item payload
+            # Group statements by property ID 
+            grouped_statements = {}
+            for statement in statements:
+                prop_id = statement['property']['id']
+                if prop_id not in grouped_statements:
+                    grouped_statements[prop_id] = []
+                grouped_statements[prop_id].append(statement)
+            
+            # Build item data structure with correct REST API format
             item_data = {
-                "labels": labels,
-                "descriptions": descriptions
+                "item": {
+                    "labels": labels,
+                    "descriptions": descriptions,
+                    "statements": grouped_statements
+                }
             }
-
-            # Add statements if provided
-            if statements:
-                # Group statements by property
-                statements_dict = {}
-                for statement in statements:
-                    prop = statement['property']['id']
-                    if prop not in statements_dict:
-                        statements_dict[prop] = []
-                    statements_dict[prop].append(statement)
-                item_data["statements"] = statements_dict
-
-            # Wrap in "item" key as required by API
-            payload = {
-                "item": item_data
-            }
-
-            # Log the payload
-            print("\n" + "="*60)
-            print("CREATE ITEM PAYLOAD:")
-            print("="*60)
-            import json
-            print(json.dumps(payload, indent=2, ensure_ascii=False))
-            print("="*60 + "\n")
-
-            # Get OAuth headers
-            token_key, token_secret = self._get_access_token()
+            
+            create_url = f"{self.rest_api_url}/entities/items"
+            
             headers = {
-                'Authorization': self._build_oauth_header('POST', url, token_key, token_secret),
-                'User-Agent': self.user_agent,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'User-Agent': self.user_agent
             }
+            
+            # Add Bearer token only for production Wikidata
+            if not WIKIDATA_TEST_MODE:
+                token = self.oauth_session.token
+                headers['Authorization'] = f"Bearer {token['access_token']}"
+            else:
+                print(f"Test mode - no authentication required")
+            
+            print(f"*Creating item at: {create_url}")
+            print(f"*Item data: {json.dumps(item_data, indent=2, ensure_ascii=False)}")
 
-            # Make the request
-            response = requests.post(url, json=payload, headers=headers, timeout=30)
-
-            # Log the response
-            print("\n" + "="*60)
-            print("RAW API RESPONSE:")
-            print("="*60)
-            print(f"Status Code: {response.status_code}")
-            print(f"Headers: {dict(response.headers)}")
-            print(f"Content-Type: {response.headers.get('content-type', 'unknown')}")
-            print(f"Raw Content (first 1000 chars): {response.text[:1000]}")
-            print("="*60 + "\n")
-
-            if response.status_code == 201:  # Created
-                data = response.json()
-                item_id = data.get('id')
+            # Use regular requests for test mode, oauth_session for production
+            if WIKIDATA_TEST_MODE:
+                response = requests.post(create_url, json=item_data, headers=headers)
+            else:
+                response = self.oauth_session.post(create_url, json=item_data, headers=headers)
+            
+            print(f"📥 Response status: {response.status_code}")
+            print(f"📄 Response body: {response.text}")
+            
+            if response.status_code in [200, 201]:
+                result = response.json()
+                item_id = result.get('id')
+                print(f"* Item created successfully: {item_id}")
                 return {
                     'success': True,
                     'item_id': item_id,
-                    'error': None
+                    'data': result
                 }
             else:
-                try:
-                    error_data = response.json()
-                    error_message = error_data.get('message', 'Unknown error')
-                except:
-                    error_message = response.text
-
+                error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
+                print(f"Failed to create item: {error_data}")
                 return {
                     'success': False,
-                    'item_id': None,
-                    'error': error_message
+                    'error': error_data
                 }
-
+                
         except Exception as e:
+            print(f"Exception creating item: {e}")
             import traceback
             traceback.print_exc()
             return {
                 'success': False,
-                'item_id': None,
                 'error': str(e)
             }
+    
+    
+    # STATEMENT & VALUE BUILDERS
     
     def build_statement(self, property_id, value, value_type='wikibase-item', references=None):
         """
@@ -284,6 +290,252 @@ class WikidataAPI:
                 'content': value
             }
     
+    def build_reference(self, url, title=None, retrieved_date=None):
+        """
+        Build a reference structure.
+        
+        Args:
+            url: Reference URL
+            title: Title of the source (optional)
+            retrieved_date: Date accessed in YYYY-MM-DD format (optional)
+        
+        Returns:
+            Reference dict ready for API
+        """
+        parts = []
+        
+        if url:
+            parts.append({
+                'property': {'id': PID_REFERENCE_URL},
+                'value': {'type': 'value', 'content': url}
+            })
+        
+        if title:
+            parts.append({
+                'property': {'id': PID_TITLE},
+                'value': {
+                    'type': 'value',
+                    'content': {
+                        'text': title,
+                        'language': 'en'
+                    }
+                }
+            })
+        
+        if retrieved_date:
+            parts.append({
+                'property': {'id': PID_RETRIEVED},
+                'value': {
+                    'type': 'value',
+                    'content': {
+                        'time': self._format_date(retrieved_date),
+                        'precision': 11,
+                        'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
+                    }
+                }
+            })
+        
+        return {'parts': parts}
+    
+    
+    # AUTHOR FORM PROCESSING
+    
+    def process_author_form(self, form_data, current_lang='en'):
+        """
+        Processing of author form - validation, building labels/descriptions/statements.
+        
+        Args:
+            form_data: Flask request.form object
+            current_lang: Current language code for labels/descriptions
+        
+        Returns:
+            dict with 'success', 'item_id' or 'errors'
+        """
+        # Validate
+        is_valid, errors = self.validate_author_form_data(form_data)
+        if not is_valid:
+            return {'success': False, 'errors': errors}
+        
+        # Extract form data
+        name = form_data.get('name', '').strip()
+        description = form_data.get('description', '').strip()
+        nationality_label = form_data.get('nationality', '').strip()
+        date_of_birth = form_data.get('dateOfBirth', '').strip()
+        date_of_death = form_data.get('dateOfDeath', '').strip()
+        
+        # Handle description
+        if description:
+            description = normalize_description(description)
+        else:
+            description = generate_author_description(
+                nationality_label,
+                date_of_birth,
+                date_of_death
+            )
+        
+        # Build labels and descriptions
+        labels = {current_lang: name}
+        descriptions = {current_lang: description} if description else {}
+        
+        # Build statements
+        statements = self.build_author_statements_from_form(form_data)
+        
+        # Create the item
+        result = self.create_item(labels, descriptions, statements)
+        
+        return result
+    
+    def validate_author_form_data(self, form_data):
+        """
+        Validate required fields for author creation.
+        
+        Args:
+            form_data: Flask request.form object
+        
+        Returns:
+            Tuple of (is_valid, errors_list)
+        """
+        errors = []
+        
+        if not form_data.get('name', '').strip():
+            errors.append('Name is required')
+        if not form_data.get('genderQid', '').strip():
+            errors.append('Gender is required')
+        if not form_data.get('nationalityQid', '').strip():
+            errors.append('Nationality is required')
+        if not form_data.get('placeOfBirthQid', '').strip():
+            errors.append('Place of birth is required')
+        if not form_data.get('occupationQids', '').strip():
+            errors.append('Occupation is required')
+        
+        return len(errors) == 0, errors
+
+    def collect_references_from_form(self, field_id, form_data):
+        """
+        Collect references for a specific field from form data.
+        
+        Args:
+            field_id: The field identifier (e.g., 'author-gender', 'author-nationality')
+            form_data: Flask request.form object
+        
+        Returns:
+            List of reference dicts or None if no references
+        """
+        references = []
+        
+        # Check for up to 3 references per field
+        for i in range(3):
+            url = form_data.get(f'{field_id}_ref_url_{i}', '').strip()
+            title = form_data.get(f'{field_id}_ref_title_{i}', '').strip()
+            retrieved = form_data.get(f'{field_id}_ref_retrieved_{i}', '').strip()
+            
+            if url:
+                # Auto-prepend https:// if protocol is missing
+                if not url.startswith(('http://', 'https://')):
+                    url = 'https://' + url
+                
+                ref = self.build_reference(url, title, retrieved)
+                references.append(ref)
+        
+        return references if references else None
+
+    def build_author_statements_from_form(self, form_data):
+        """
+        Build all Wikidata statements for an author from form data.
+        Uses constants that adapt to test/production mode.
+        
+        Args:
+            form_data: Flask request.form object
+        
+        Returns:
+            List of statement dictionaries
+        """
+        statements = []
+        
+        # Instance of: Human (Q5) - Required
+        statements.append(
+            self.build_statement(PID_INSTANCE_OF, QID_HUMAN, 'wikibase-item')
+        )
+        
+        # Gender
+        gender = form_data.get('genderQid', '').strip()
+        if gender:
+            refs = self.collect_references_from_form('author-gender', form_data)
+            statements.append(
+                self.build_statement(PID_SEX_OR_GENDER, gender, 'wikibase-item', refs)
+            )
+        
+        # Nationality
+        nationality = form_data.get('nationalityQid', '').strip()
+        if nationality:
+            refs = self.collect_references_from_form('author-nationality', form_data)
+            statements.append(
+                self.build_statement(PID_COUNTRY_OF_CITIZENSHIP, nationality, 'wikibase-item', refs)
+            )
+        
+        # Place of birth
+        place_of_birth = form_data.get('placeOfBirthQid', '').strip()
+        if place_of_birth:
+            refs = self.collect_references_from_form('author-place-of-birth', form_data)
+            statements.append(
+                self.build_statement(PID_PLACE_OF_BIRTH, place_of_birth, 'wikibase-item', refs)
+            )
+        
+        # Date of birth
+        date_of_birth = form_data.get('dateOfBirth', '').strip()
+        if date_of_birth:
+            refs = self.collect_references_from_form('author-date-of-birth', form_data)
+            statements.append(
+                self.build_statement(PID_DATE_OF_BIRTH, date_of_birth, 'time', refs)
+            )
+        
+        # Date of death
+        date_of_death = form_data.get('dateOfDeath', '').strip()
+        if date_of_death:
+            refs = self.collect_references_from_form('author-date-of-death', form_data)
+            statements.append(
+                self.build_statement(PID_DATE_OF_DEATH, date_of_death, 'time', refs)
+            )
+        
+        # Occupations - can be multiple
+        occupation = form_data.get('occupationQids', '').strip()
+        if occupation:
+            refs = self.collect_references_from_form('author-occupation', form_data)
+            for qid in occupation.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_OCCUPATION, qid, 'wikibase-item', refs)
+                    )
+        
+        # Ethnicity
+        ethnicity = form_data.get('ethnicityQid', '').strip()
+        if ethnicity:
+            refs = self.collect_references_from_form('author-ethnicity', form_data)
+            statements.append(
+                self.build_statement(PID_ETHNIC_GROUP, ethnicity, 'wikibase-item', refs)
+            )
+        
+        # Image
+        image_url = form_data.get('imageUrl', '').strip()
+        if image_url:
+            filename = self.extract_commons_filename(image_url)
+            if filename:
+                statements.append(
+                    self.build_statement(PID_IMAGE, filename, 'commonsMedia')
+                )
+        
+        # Official website
+        official_website = form_data.get('officialWebsite', '').strip()
+        if official_website:
+            statements.append(
+                self.build_statement(PID_OFFICIAL_WEBSITE, official_website, 'url')
+            )
+        
+        return statements
+    
+    # HELPER METHODS
+    
     def _format_date(self, date_string):
         """Convert date string (YYYY-MM-DD) to Wikidata format"""
         if not date_string:
@@ -309,59 +561,10 @@ class WikidataAPI:
         else:
             return 9
     
-    def build_reference(self, url, title=None, retrieved_date=None):
-        """
-        Build a reference structure
-        
-        Args:
-            url: Reference URL
-            title: Title of the source (optional)
-            retrieved_date: Date accessed in YYYY-MM-DD format (optional)
-        
-        Returns:
-            Reference dict ready for API
-        """
-        parts = []
-        
-        if url:
-            parts.append({
-                'property': {'id': self.REF_PROPERTIES['reference_url']},
-                'value': {'type': 'value', 'content': url}
-            })
-        
-        if title:
-            parts.append({
-                'property': {'id': self.REF_PROPERTIES['title']},
-                'value': {
-                    'type': 'value',
-                    'content': {
-                        'text': title,
-                        'language': 'en'
-                    }
-                }
-            })
-        
-        if retrieved_date:
-            parts.append({
-                'property': {'id': self.REF_PROPERTIES['retrieved']},
-                'value': {
-                    'type': 'value',
-                    'content': {
-                        'time': self._format_date(retrieved_date),
-                        'precision': 11,
-                        'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
-                    }
-                }
-            })
-        
-        return {'parts': parts}
-    
     def extract_commons_filename(self, url):
         """Extract filename from Commons URL"""
         if not url:
             return None
-        
-        import urllib.parse as urlparse
         
         if 'upload.wikimedia.org' in url:
             # Format: https://upload.wikimedia.org/wikipedia/commons/a/ab/Filename.jpg

@@ -3,10 +3,12 @@ from flask_caching import Cache
 from flask_babel import Babel, _, get_locale
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from mwoauth import ConsumerToken, Handshaker, RequestToken
-from wikidata_api import WikidataAPI
+from requests_oauthlib import OAuth2Session
 import datetime
 import requests
+import os
+import sys
+import time
 
 # Local modules
 import pdclasses
@@ -14,9 +16,17 @@ import search
 import languages
 import squeries
 import filters
+import oauth
+import wikidata_api
 
 app = Flask(__name__)
 
+# Load config file
+app.config.from_pyfile('config.py')
+
+# Disable OAuth 2.0 HTTPS requirement for local development only
+if app.config.get('DEBUG', False):
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # i18n configuration
 
@@ -24,7 +34,6 @@ app = Flask(__name__)
 The session cookie is required to store the language choice 
 in the session and make it persistent."""
 
-app.config.from_pyfile('config.py')
 
 babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
 
@@ -318,9 +327,8 @@ def inject_filters():
 @cache.cached(timeout=60, make_cache_key=make_cache_key)
 def search_wikidata_items():
     query = request.args.get('q', '')
-    entity_type = request.args.get('type', 'author')
     
-    # Get language from request, fall back to user's locale, then 'en'
+    # Get language from request, fall back to user's locale, then 'en' as default
     lang = request.args.get('lang', '')
     if not lang:
         try:
@@ -345,7 +353,7 @@ def search_wikidata_items():
         }
         
         headers = {
-            'User-Agent': 'Paulina/1.0 (https://paulina.toolforge.org/) Python/requests'
+           'User-Agent': app.config.get('USER_AGENT')
         }
         
         response = requests.get(url, params=params, headers=headers, timeout=10)
@@ -368,65 +376,104 @@ def search_wikidata_items():
 # OAuth Routes
 
 @app.route('/auth/login')
-@limiter.limit("5 per minute")  # Prevent login spam
+@limiter.limit("5 per minute")
 def login():
-    """Initiate OAuth login with Wikimedia"""
+    """Initiate OAuth 2.0 login with Wikimedia"""
     try:
-        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
-        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
-        
-        redirect_url, request_token = handshaker.initiate()
-        
-        # Store request token in session for callback
-        session['request_token'] = dict(
-            key=request_token.key,
-            secret=request_token.secret
+        oauth = OAuth2Session(
+            app.config['CLIENT_ID'],
+            redirect_uri=app.config['REDIRECT_URL'],
+            scope=app.config['OAUTH_SCOPES']
         )
         
-        return redirect(redirect_url)
+        authorization_url, state = oauth.authorization_url(
+            app.config['AUTHORIZATION_BASE_URL']
+        )
+        
+        # Store state in session for CSRF protection
+        session['oauth_state'] = state
+        
+        return redirect(authorization_url)
     
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         flash(_('Login failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
-
+    
 
 @app.route('/oauth-callback')
 def oauth_callback():
-    """Handle OAuth callback from Wikimedia"""
+    """Handle OAuth 2.0 callback from Wikimedia"""
     try:
-        # Get the request token from session
-        if 'request_token' not in session:
-            flash('Login session expired. Please try again.', 'warning')
+        # Check for errors in callback
+        if 'error' in request.args:
+            flash(_('Authentication failed. Please try again.'), 'danger')
             return redirect(url_for('home'))
         
-        request_token_dict = session.pop('request_token')
+        # Get state from session
+        if 'oauth_state' not in session:
+            flash(_('Login session expired. Please try again.'), 'warning')
+            return redirect(url_for('home'))
         
-        # Recreate RequestToken object from dict
-        request_token = RequestToken(
-            request_token_dict['key'],
-            request_token_dict['secret']
+        state = session.pop('oauth_state')
+        
+        # Verify state matches (CSRF protection)
+        if state != request.args.get('state'):
+            flash(_('Invalid state parameter. Please try again.'), 'danger')
+            return redirect(url_for('home'))
+        
+        # Exchange authorization code for access token
+    
+        token_params = {
+            'grant_type': 'authorization_code',
+            'code': request.args.get('code'),
+            'redirect_uri': app.config['REDIRECT_URL'],
+            'client_id': app.config['CLIENT_ID'],
+            'client_secret': app.config['CLIENT_SECRET']
+        }
+        
+        token_response = requests.post(
+            app.config['TOKEN_URL'],
+            data=token_params,
+            headers={'User-Agent': app.config.get('USER_AGENT')}
         )
         
-        # Recreate the consumer token and handshaker
-        consumer_token = ConsumerToken(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
-        handshaker = Handshaker(app.config['OAUTH_MWURI'], consumer_token)
+        if token_response.status_code != 200:
+            flash(_('Failed to obtain access token. Please try again.'), 'danger')
+            return redirect(url_for('home'))
         
-        # Complete the OAuth handshake with RequestToken object
-        access_token = handshaker.complete(
-            request_token,  
-            request.query_string.decode('utf-8')
+        token_data = token_response.json()
+        
+        # Build token dict with expiration timestamp
+        token = {
+            'access_token': token_data['access_token'],
+            'refresh_token': token_data.get('refresh_token'),
+            'token_type': token_data.get('token_type', 'Bearer'),
+            'expires_in': token_data.get('expires_in', 14400),
+            'expires_at': time.time() + token_data.get('expires_in', 14400)
+        }
+        
+        # Store token in session
+        session['oauth_token'] = token
+        
+        # Get user identity using the access token
+        profile_response = requests.get(
+            app.config['PROFILE_URL'],
+            headers={
+                'Authorization': f"Bearer {token['access_token']}",
+                'User-Agent': app.config.get('USER_AGENT')
+            }
         )
         
-        # Get user identity
-        identity = handshaker.identify(access_token)
+        if profile_response.status_code != 200:
+            flash(_('Failed to get user profile. Please try again.'), 'danger')
+            return redirect(url_for('home'))
         
-        # Store user info in session
-        session['access_token'] = dict(
-            key=access_token.key,
-            secret=access_token.secret
-        )
-        session['wikimedia_username'] = identity['username']
-        session['wikimedia_userid'] = identity['sub']      
+        user_info = profile_response.json()
+        
+        session['wikimedia_username'] = user_info.get('username')
+        session['wikimedia_userid'] = user_info.get('sub')
         return redirect(url_for('home'))
     
     except Exception as e:
@@ -434,18 +481,18 @@ def oauth_callback():
         traceback.print_exc()
         flash(_('Authentication failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
-
+    
 
 @app.route('/auth/logout')
 def logout():
-    # Clear OAuth-related session data
-    session.pop('access_token', None)
+    """Clear OAuth session"""
+    session.pop('oauth_token', None)
     session.pop('wikimedia_username', None)
     session.pop('wikimedia_userid', None)
-
+    session.pop('form_data', None)
+    
     flash(_('You have been logged out.'), 'info')
     return redirect(request.referrer or url_for('home'))
-
 
 # Wikidata Editing Routes
 
@@ -459,219 +506,91 @@ def add_author():
         flash(_('Please login to add an author.'), 'warning')
         return redirect(url_for('home'))
     
+    # Refresh token if needed
+    if not oauth.token_refresh():
+        flash(_('Your session has expired. Please login again.'), 'warning')
+        return redirect(url_for('login'))
+    
     if request.method == 'POST':
-        return process_add_author_form()
-    
-    return render_template('add-author.html', title=_('Add Author'))
+        try:
+            # Get OAuth session
+            oauth_session = oauth.get_oauth_session()
+            if not oauth_session:
+                flash(_('Session expired. Please login again.'), 'warning')
+                return redirect(url_for('login'))
 
-def process_add_author_form():
-    """Process the Add Author form submission"""
-    
-    try:
-        wikidata = WikidataAPI(app.config)
-        
-        # Get form data
-        name = request.form.get('name', '').strip()
-        description = request.form.get('description', '').strip()
-        gender = request.form.get('gender', '').strip()
-        nationality = request.form.get('nationality', '').strip()
-        place_of_birth_qid = request.form.get('placeOfBirthQid', '').strip()
-        place_of_birth_text = request.form.get('placeOfBirth', '').strip()
-        date_of_birth = request.form.get('dateOfBirth', '').strip()
-        date_of_death = request.form.get('dateOfDeath', '').strip()
-        occupation_qids = request.form.get('occupationQids', '').strip()
-        occupation_texts = request.form.get('occupationTexts', '').strip()
-        ethnicity_qid = request.form.get('ethnicityQid', '').strip()
-        ethnicity_text = request.form.get('ethnicity', '').strip()
-        image_url = request.form.get('imageUrl', '').strip()
-        official_website = request.form.get('officialWebsite', '').strip()
+            wikidata = wikidata_api.WikidataAPI(app.config, oauth_session=oauth_session)
+
+            # Process the author form (validation + creation)
+            result = wikidata.process_author_form(request.form, current_lang=languages.get_locale())
+            
+            if result['success']:
+                item_id = result['item_id']
+               
+                # Build URLs for the new item
+                wikidata_url = f"https://www.wikidata.org/wiki/{item_id}"
+                if wikidata_api.WIKIDATA_TEST_MODE:
+                    wikidata_url = f"https://test.wikidata.org/wiki/{item_id}"
                 
-        # Validate required fields
-        errors = []
-        if not name:
-            errors.append(_('Name is required'))
-        if not description:
-            errors.append(_('Description is required'))
-        if not gender:
-            errors.append(_('Gender is required'))
-        if not nationality:
-            errors.append(_('Nationality is required'))
-        if not place_of_birth_qid and not place_of_birth_text:
-            errors.append(_('Place of birth is required'))
-        if not occupation_qids and not occupation_texts:
-            errors.append(_('Occupation is required'))
+                paulina_url = url_for('author_page', author_data=item_id, _external=False)
+                
+                # Clear the form after successful creation
+                session.pop('form_data', None)
         
-        if errors:
-            for error in errors:
-                flash(error, 'error')
+                return render_template('add-author.html', 
+                                    title=_('Add Author'),
+                                    form_data=None,
+                                    success_item_id=item_id,
+                                    wikidata_url=wikidata_url,
+                                    paulina_url=paulina_url)
+            else:
+                if 'errors' in result:
+                    for error in result['errors']:
+                        flash(_(error), 'error')
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    if isinstance(error_msg, dict):
+                        error_text = error_msg.get('info', str(error_msg))
+                    else:
+                        error_text = str(error_msg)
+                    flash(_('Error creating author: %(error)s', error=error_text), 'danger')
+                
+                # Store form data in session for restoration
+                session['form_data'] = dict(request.form)
+                
+                return render_template('add-author.html', 
+                                     title=_('Add Author'),
+                                     form_data=session['form_data'])
+        
+        except Exception as e:
+            app.logger.error(f"Author creation failed: {str(e)}", exc_info=True)
+            flash(_('An error occurred while creating the author. Please try again.'), 'danger')
+            
+            # Store form data for restoration
+            session['form_data'] = dict(request.form)
+            
             return render_template('add-author.html', 
                                  title=_('Add Author'),
-                                 form_data=request.form)
-        
-        # Get current language for labels/descriptions
-        lang = languages.get_locale()
-        
-        # Build labels and descriptions
-        labels = {lang: name}
-        descriptions = {lang: description} if description else {}
-        
-        # Build statements
-        statements = []
-        
-        # Instance of: Human (Q5) - Required
-        statements.append(
-            wikidata.build_statement('P31', 'Q5', 'wikibase-item')
-        )
-        
-        # Gender
-        if gender:
-            refs = collect_references('author-gender')
-            statements.append(
-                wikidata.build_statement('P21', gender, 'wikibase-item', refs)
-            )
-        
-        # Nationality (Country of citizenship)
-        if nationality:
-            refs = collect_references('author-nationality')
-            statements.append(
-                wikidata.build_statement('P27', nationality, 'wikibase-item', refs)
-            )
-        
-        # Place of birth
-        if place_of_birth_qid:
-            refs = collect_references('author-place-of-birth')
-            statements.append(
-                wikidata.build_statement('P19', place_of_birth_qid, 'wikibase-item', refs)
-            )
-        
-        # Date of birth
-        if date_of_birth:
-            refs = collect_references('author-date-of-birth')
-            statements.append(
-                wikidata.build_statement('P569', date_of_birth, 'time', refs)
-            )
-        
-        # Date of death
-        if date_of_death:
-            refs = collect_references('author-date-of-death')
-            statements.append(
-                wikidata.build_statement('P570', date_of_death, 'time', refs)
-            )
-        
-        # Occupations (can be multiple)
-        if occupation_qids:
-            refs = collect_references('author-occupation')
-            for qid in occupation_qids.split(','):
-                qid = qid.strip()
-                if qid:
-                    statements.append(
-                        wikidata.build_statement('P106', qid, 'wikibase-item', refs)
-                    )
-        
-        # Ethnicity
-        if ethnicity_qid:
-            refs = collect_references('author-ethnicity')
-            statements.append(
-                wikidata.build_statement('P172', ethnicity_qid, 'wikibase-item', refs)
-            )
-        
-        # Image (Commons)
-        if image_url:
-            filename = wikidata.extract_commons_filename(image_url)
-            if filename:
-                statements.append(
-                    wikidata.build_statement('P18', filename, 'commonsMedia')
-                )
-        
-        # Official website
-        if official_website:
-            statements.append(
-                wikidata.build_statement('P856', official_website, 'url')
-            )
-        
-        # Log the payload being sent to Wikidata
-        payload = {
-            'labels': labels,
-            'descriptions': descriptions,
-            'statements': statements
-        }
-        
-        print("\n" + "="*60)
-        print("WIKIDATA API PAYLOAD:")
-        print("="*60)
-        import json
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
-        print("="*60 + "\n")
+                                 form_data=session['form_data'])
+    
+    # GET request handling
+    if request.args.get('cleared') == '1':
+        session.pop('form_data', None)
+        form_data = None
+    else:
+        form_data = session.get('form_data', None)
+    
+    return render_template('add-author.html', 
+                          title=_('Add Author'),
+                          form_data=form_data)
 
-        for field in ['gender', 'nationality', 'placeOfBirth', 'dateOfBirth', 'dateOfDeath', 'occupation', 'ethnicity']:
-            refs = collect_references(field)
-            print(f"{field} references: {refs}")
 
-        print("="*60 + "\n")
-        
-        # Create the item on Wikidata
-        result = wikidata.create_item(labels, descriptions, statements)
-        
-        # Log the result
-        print("\n" + "="*60)
-        print("WIKIDATA API RESPONSE:")
-        print("="*60)
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-        print("="*60 + "\n")
-        
-        if result['success']:
-            item_id = result['item_id']
-            flash(_('Author created successfully! Wikidata ID: %(item_id)s', item_id=item_id), 'success')
-            # Keep form filled by passing form data back
-            return render_template('add-author.html', 
-                                 title=_('Add Author'),
-                                 form_data=request.form,
-                                 success_item_id=item_id)
-        else:
-            flash(_('Error creating author: %(error)s', error=result['error']), 'error')
-            # Keep form filled on error
-            return render_template('add-author.html', 
-                                 title=_('Add Author'),
-                                 form_data=request.form)
-    
-    except Exception as e:
-        import traceback
-        print("\n" + "="*60)
-        print("EXCEPTION OCCURRED:")
-        print("="*60)
-        traceback.print_exc()
-        print("="*60 + "\n")
-        
-        flash(_('An error occurred while creating the author. Please try again.'), 'error')
-        # Keep form filled on exception
-        return render_template('add-author.html', 
-                             title=_('Add Author'),
-                             form_data=request.form)
-        
-def collect_references(field_id):
-    """
-    Collect references for a specific field from form data
-    
-    Args:
-        field_id: The field identifier (e.g., 'gender', 'nationality')
-    
-    Returns:
-        List of reference dicts or None if no references
-    """
-    wikidata = WikidataAPI(app.config)
-    references = []
-    
-    # Check for up to 3 references per field
-    for i in range(3):
-        url = request.form.get(f'{field_id}_ref_url_{i}', '').strip()
-        title = request.form.get(f'{field_id}_ref_title_{i}', '').strip()
-        retrieved = request.form.get(f'{field_id}_ref_retrieved_{i}', '').strip()
-        
-        if url:
-            ref = wikidata.build_reference(url, title, retrieved)
-            references.append(ref)
-    
-    return references if references else None
+@app.route('/clear_form_data', methods=['POST'])
+def clear_form_data():
+    """Clear stored form data from session"""
+    if 'form_data' in session:
+        session.pop('form_data')
+    return jsonify({'success': True})
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -681,4 +600,17 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run()
+    
+    # Set environment variable BEFORE any config loading
+    if 'test' in sys.argv:
+        os.environ['WIKIDATA_TEST_MODE'] = 'true'
+        print("* Paulina running in TEST mode")
+        print("* https://test.wikidata.org")
+    else:
+        os.environ['WIKIDATA_TEST_MODE'] = 'false'
+        print("* Paulina running in PRODUCTION mode")
+        print("* https://www.wikidata.org")
+    
+    app.run(debug=True)
+
+

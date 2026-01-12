@@ -443,7 +443,7 @@ h3 {
 }
 
 .user-dropdown .dropdown-menu {
-  background-color: #29a4e2;
+  background-color: #71c3ec;
   border: 1px solid black;
   min-width: auto;
   width: max-content;
@@ -456,7 +456,7 @@ h3 {
 }
 
 .user-dropdown .dropdown-item:hover {
-  background-color: #71c3ec;
+  background-color: #29a4e2;
   color: black;
 }
 
@@ -492,4 +492,160 @@ h3 {
 
 .wikidata-search-results .free-text-option:hover {
   background-color: #fff3cd;
+}
+
+.success-message {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #155724;
+}
+
+.success-message h3 {
+    margin-top: 0;
+    color: #155724;
+}
+
+.success-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.success-links .btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.success-links .btn-primary {
+    background-color: #28a745;
+    color: white;
+}
+
+.success-links .btn-primary:hover {
+    background-color: #218838;
+}
+
+.success-links .btn-secondary {
+    background-color: #007bff;
+    color: white;
+}
+
+.success-links .btn-secondary:hover {
+    background-color: #0056b3;
+}
+
+.success-links .btn-outline {
+    background-color: white;
+    color: #155724;
+    border: 2px solid #155724;
+}
+
+.success-links .btn-outline:hover {
+    background-color: #155724;
+    color: white;
+}
+
+
+/* Wikidata Search Inputs */
+#author-nationality,
+#author-gender,
+#author-place-of-birth,
+#author-occupation,
+#author-ethnicity {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#author-nationality:focus,
+#author-gender:focus,
+#author-place-of-birth:focus,
+#author-occupation:focus,
+#author-ethnicity:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+#author-place-of-birth::placeholder,
+#author-nationality::placeholder,
+#author-gender::placeholder,
+#author-occupation::placeholder,
+#author-ethnicity::placeholder {
+  color: #000;
+  opacity: 0.7; 
+}
+
+#author-place-of-birth-selected .badge,
+#author-nationality-selected .badge,
+#author-gender-selected .badge,
+#author-selected-occupations .badge,
+#author-ethnicity-selected .badge {
+  background-color: #29a4e2;
+  color: white;
+  padding: 0.35em 0.65em;
+  font-size: 0.875em;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#author-place-of-birth-selected .badge .btn-close,
+#author-nationality-selected .badge .btn-close,
+#author-gender-selected .badge .btn-close,
+#author-selected-occupations .badge .btn-close,
+#author-ethnicity-selected .badge .btn-close {
+  font-size: 0.75em;
+  opacity: 0.7;
+  filter: invert(1);
+}
+
+#author-place-of-birth-selected .badge .btn-close:hover,
+#author-nationality-selected .badge .btn-close:hover,
+#author-gender-selected .badge .btn-close:hover,
+#author-selected-occupations .badge .btn-close:hover,
+#author-ethnicity-selected .badge .btn-close:hover {
+  opacity: 1;
+}
+
+.wikidata-search-results {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #000;
+  border-top: none;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  margin-top: -1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wikidata-search-results .search-result-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.wikidata-search-results .search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.wikidata-search-results .search-result-item:last-child {
+  border-bottom: none;
+}
+
+.wikidata-search-results .text-center {
+  padding: 1rem;
+  color: #6c757d;
 }
