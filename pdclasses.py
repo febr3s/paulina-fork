@@ -323,6 +323,7 @@ class Work(Parent):
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
         self.language = build_field(self.wikidata_item.get('statements', {}).get('P407'))
         self.publication_date = build_date(self.wikidata_item.get('statements', {}).get('P577'))
+        self.inception_date = build_date(self.wikidata_item.get('statements', {}).get('P571'))
 
         self.wikisource_links = {wikisource_version: {'title': value.get('title'),
                                                       'url': value.get('url'),
