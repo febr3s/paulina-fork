@@ -600,13 +600,16 @@ def add_author():
         success_item_id = None
         wikidata_url = None
         paulina_url = None
+    
+    genders_for_form = wikidata_api.GENDERS
 
     return render_template('add-author.html', 
                         title=_('Add Author'),
                         form_data=form_data,
                         success_item_id=success_item_id,
                         wikidata_url=wikidata_url,
-                        paulina_url=paulina_url)
+                        paulina_url=paulina_url,
+                        genders=genders_for_form)
 
 
 @app.route('/clear_form_data', methods=['POST'])

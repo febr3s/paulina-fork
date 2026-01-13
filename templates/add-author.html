@@ -152,43 +152,41 @@
             </div>
           </div>
 
-          <!-- Gender -->
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="author-gender" class="form-label">
-                {{ _('Gender') }} <span class="text-danger">*</span>
-              </label>
-              
-              <input type="text" 
-                     class="form-control border-black shadow-none" 
-                     id="author-gender" 
-                     name="gender"
-                     placeholder="{{ _('Search for gender identity...') }}"
-                     autocomplete="off">
-              
-              <input type="hidden" 
-                     id="author-gender-qid" 
-                     name="genderQid">
-              
-              <div id="author-gender-selected" class="mt-2 d-none"></div>
-              
-              <div id="author-gender-results" 
-                   class="wikidata-results-dropdown border rounded mt-1" 
-                   style="display: none;">
-              </div>
-              
-               <!-- References -->
-              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
-                      onclick="window.refManager.toggleReference('author-gender')">
-                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-              </button>
-              
-              <div id="author-gender-references" class="mt-3 d-none">
-                <div id="author-gender-reference-container"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+       <!-- Gender -->
+<div class="col-md-6">
+  <div class="mb-3">
+    <label for="author-gender" class="form-label">
+      {{ _('Gender') }} <span class="text-danger">*</span>
+    </label>
+    
+    <select class="form-select border-black shadow-none" 
+            id="author-gender" 
+            name="genderQid" 
+            required>
+      <option value="">{{ _('Any') }}</option>
+      {% for gender in genders %}
+        <option value="{{ gender.qid }}" 
+                {% if form_data and form_data.get('genderQid') == gender.qid %}selected{% endif %}>
+          {{ gender.gender_name }}
+        </option>
+      {% endfor %}
+    </select>
+    
+    <div class="invalid-feedback">
+      {{ _('Please select a gender') }}
+    </div>
+    
+    <!-- References -->
+    <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+            onclick="window.refManager.toggleReference('author-gender')">
+      <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+    </button>
+    
+    <div id="author-gender-references" class="mt-3 d-none">
+      <div id="author-gender-reference-container"></div>
+    </div>
+  </div>
+</div>
 
         <!-- Row 2: Place of Birth and Occupation -->
         <div class="row">
@@ -576,16 +574,6 @@ document.addEventListener('DOMContentLoaded', function() {
     multiSelect: false,
     messages: wikidataMessages
   });
-
-  // Gender Search
-  window.genderSearch = new WikidataItemSearch({
-    inputId: 'author-gender',
-    hiddenInputId: 'author-gender-qid',
-    resultsId: 'author-gender-results',
-    selectedItemsId: 'author-gender-selected',
-    multiSelect: false,
-    messages: wikidataMessages
-  });
   
   // Place of Birth
   window.placeOfBirthSearch = new WikidataItemSearch({
@@ -668,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const nameResult = FormUtils.validateRequired('author-name', formMessages.nameRequired);
       if (!nameResult.valid) { isValid = false; errors.push(nameResult.message); }
       
-      const genderQid = document.getElementById('author-gender-qid').value;
+      const genderQid = document.getElementById('author-gender').value;
       if (!genderQid) {
         isValid = false;
         errors.push(formMessages.genderRequired);

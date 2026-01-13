@@ -8,7 +8,8 @@ import json
 import requests
 import os
 import urllib.parse as urlparse
-from flask_babel import gettext
+from flask_babel import _
+
 
 
 # WIKIDATA CONSTANTS - Test/Production Mode Configuration
@@ -55,6 +56,27 @@ if WIKIDATA_TEST_MODE:
 else:
     # Production Wikidata items
     QID_HUMAN = 'Q5'
+    
+    
+# Gender QIDs
+if WIKIDATA_TEST_MODE:
+    # Test Wikidata QIDs for genders
+    GENDERS = [
+        {"qid": "Q216154", "gender_name": _("Female")},
+        {"qid": "Q216156", "gender_name": _("Male")},
+        {"qid": "Q243752", "gender_name": _("Trans man")},
+        {"qid": "Q243753", "gender_name": _("Trans woman")},
+        {"qid": "Q243754", "gender_name": _("Non-binary")}
+    ]
+else:
+    # Production Wikidata QIDs for genders
+    GENDERS = [
+        {"qid": "Q6581072", "gender_name": _("Female")},
+        {"qid": "Q6581097", "gender_name": _("Male")},
+        {"qid": "Q2449503", "gender_name": _("Trans man")},
+        {"qid": "Q1052281", "gender_name": _("Trans woman")},
+        {"qid": "Q48270", "gender_name": _("Non-binary")}
+    ]
 
 
 # UTILITY FUNCTIONS
@@ -76,9 +98,9 @@ def generate_author_description(nationality_label, date_of_birth=None, date_of_d
     # Base description (always lowercase)
     if nationality_label:
         # Use gettext for translation with placeholder
-        description = gettext("creator from %(nationality)s", nationality=nationality_label)
+        description = _("creator from %(nationality)s", nationality=nationality_label)
     else:
-        description = gettext("creator")
+        description = _("creator")
 
     # Add dates if both birth and death are present
     if date_of_birth and date_of_death:
@@ -175,7 +197,8 @@ class WikidataAPI:
                     "labels": labels,
                     "descriptions": descriptions,
                     "statements": grouped_statements
-                }
+                },
+                "comment": "Paulina-tool",
             }
             
             create_url = f"{self.rest_api_url}/entities/items"

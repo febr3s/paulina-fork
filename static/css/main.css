@@ -416,6 +416,22 @@ h3 {
   background-color: var(--bs-dropdown-link-active-bg);
 }
 
+
+/* Gender Select */
+#author-gender {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#author-gender:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+
 /* OAuth/User Menu Styles */
 .btn-auth {
   background-color: transparent;
@@ -555,7 +571,6 @@ h3 {
 
 /* Wikidata Search Inputs */
 #author-nationality,
-#author-gender,
 #author-place-of-birth,
 #author-occupation,
 #author-ethnicity {
@@ -565,7 +580,6 @@ h3 {
 }
 
 #author-nationality:focus,
-#author-gender:focus,
 #author-place-of-birth:focus,
 #author-occupation:focus,
 #author-ethnicity:focus {
@@ -577,7 +591,6 @@ h3 {
 
 #author-place-of-birth::placeholder,
 #author-nationality::placeholder,
-#author-gender::placeholder,
 #author-occupation::placeholder,
 #author-ethnicity::placeholder {
   color: #000;
@@ -586,7 +599,6 @@ h3 {
 
 #author-place-of-birth-selected .badge,
 #author-nationality-selected .badge,
-#author-gender-selected .badge,
 #author-selected-occupations .badge,
 #author-ethnicity-selected .badge {
   background-color: #29a4e2;
@@ -601,7 +613,6 @@ h3 {
 
 #author-place-of-birth-selected .badge .btn-close,
 #author-nationality-selected .badge .btn-close,
-#author-gender-selected .badge .btn-close,
 #author-selected-occupations .badge .btn-close,
 #author-ethnicity-selected .badge .btn-close {
   font-size: 0.75em;
@@ -611,7 +622,6 @@ h3 {
 
 #author-place-of-birth-selected .badge .btn-close:hover,
 #author-nationality-selected .badge .btn-close:hover,
-#author-gender-selected .badge .btn-close:hover,
 #author-selected-occupations .badge .btn-close:hover,
 #author-ethnicity-selected .badge .btn-close:hover {
   opacity: 1;
