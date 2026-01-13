@@ -8,7 +8,7 @@ import json
 import requests
 import os
 import urllib.parse as urlparse
-from flask_babel import _
+from flask_babel import lazy_gettext as _
 
 
 
