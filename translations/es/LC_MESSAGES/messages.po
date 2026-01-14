@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-12 17:46-0300\n"
-"PO-Revision-Date: 2026-01-12 17:46-0300\n"
+"POT-Creation-Date: 2026-01-14 12:44-0300\n"
+"PO-Revision-Date: 2026-01-14 12:46-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/es/>\n"
@@ -32,7 +32,7 @@ msgstr "Valor desconocido"
 msgid "Home"
 msgstr "Inicio"
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:229
+#: app.py:73 templates/layout.html:65 templates/layout.html:241
 msgid "About"
 msgstr "Acerca de"
 
@@ -48,21 +48,21 @@ msgstr "No se encontraron resultados"
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:249
+#: app.py:251
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:266
+#: app.py:268
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:268 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:246
+#: app.py:270 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:258
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:304
+#: app.py:306
 msgid "404 error"
 msgstr "Error 404"
 
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Image of %(title)s."
 msgstr "Imagen de %(title)s."
 
-#: pdclasses.py:383 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:382 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Bandera de %(country_name)s."
@@ -166,27 +166,28 @@ msgstr "página de inicio"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Por favor, ir a la %(home_page)s e intentar nuevamente."
 
-#: templates/about.html:7 templates/layout.html:226
+#: templates/about.html:7 templates/layout.html:238
 msgid "About Paulina"
 msgstr "Acerca de Paulina"
 
 #: templates/about.html:8 templates/about.html:20 templates/author.html:83
+#: templates/work.html:40
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:212
+#: templates/about.html:9 templates/layout.html:224
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centro Cultural Online"
 
-#: templates/about.html:10 templates/layout.html:215
+#: templates/about.html:10 templates/layout.html:227
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:218
+#: templates/about.html:11 templates/layout.html:230
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:221
+#: templates/about.html:12 templates/layout.html:233
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -198,7 +199,7 @@ msgstr "Dedicación al Dominio Público de Creative Commons CC0 1.0 Universal"
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr "Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional"
 
-#: templates/about.html:15 templates/author.html:89
+#: templates/about.html:15 templates/author.html:89 templates/work.html:46
 msgid "Wikimedia Commons"
 msgstr "Wikimedia Commons"
 
@@ -354,7 +355,7 @@ msgstr "Editar elemento de Wikidata"
 msgid "Search works"
 msgstr "Buscar obras"
 
-#: templates/author.html:42 templates/author.html:46 templates/work.html:91
+#: templates/author.html:42 templates/author.html:46 templates/work.html:98
 msgid "in"
 msgstr "en"
 
@@ -395,15 +396,15 @@ msgstr ""
 msgid "Consult individual works."
 msgstr "Consultar obras individuales."
 
-#: templates/author.html:86 templates/work.html:41
+#: templates/author.html:86 templates/work.html:43
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#: templates/author.html:92 templates/work.html:127
+#: templates/author.html:92 templates/work.html:134
 msgid "Wikisource"
 msgstr "Wikisource"
 
-#: templates/author.html:95
+#: templates/author.html:95 templates/work.html:49
 msgid "Wikiquote"
 msgstr "Wikiquote"
 
@@ -501,7 +502,7 @@ msgid "Number of works in public domain"
 msgstr "Cantidad de obras en dominio público"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:259 templates/layout.html:261 templates/layout.html:263
+#: templates/layout.html:271 templates/layout.html:273 templates/layout.html:275
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -599,7 +600,7 @@ msgstr ""
 "público. También facilita la comprensión de los plazos de derecho de autor y "
 "ayuda a saber cuándo una obra entra en dominio público en cada país."
 
-#: templates/layout.html:31 templates/layout.html:266
+#: templates/layout.html:31 templates/layout.html:278
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Datos para el dominio público"
 
@@ -628,11 +629,11 @@ msgid "Advanced search"
 msgstr "Búsqueda avanzada"
 
 #: templates/layout.html:124 templates/layout.html:146 templates/layout.html:169
-#: templates/layout.html:180
+#: templates/layout.html:190
 msgid "Any"
 msgstr "Cualquiera"
 
-#: templates/layout.html:137
+#: templates/layout.html:137 templates/layout.html:182
 msgid "Type to filter..."
 msgstr "Escriba para filtrar..."
 
@@ -645,33 +646,41 @@ msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 "Autores/as cuyas obras están en dominio público en al menos una jurisdicción"
 
-#: templates/layout.html:178 templates/work.html:76
+#: templates/layout.html:178 templates/work.html:83
 msgid "Country of origin"
 msgstr "País de origen"
 
-#: templates/layout.html:209
+#: templates/layout.html:221
 msgid "Paulina is supported by:"
 msgstr "Paulina cuenta con el apoyo de:"
 
-#: templates/layout.html:232
+#: templates/layout.html:244
 msgid "Source code"
 msgstr "Código fuente"
 
-#: templates/layout.html:235
+#: templates/layout.html:247
 msgid "Help translate"
 msgstr "Ayudar a traducir"
 
-#: templates/layout.html:240
+#: templates/layout.html:252
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/layout.html:243
+#: templates/layout.html:255
 msgid "Documentation"
 msgstr "Documentación"
 
-#: templates/layout.html:267
+#: templates/layout.html:279
 msgid "Powered by Wikidata."
 msgstr "Basado en datos de Wikidata."
+
+#: templates/layout.html:335
+msgid "No matching option"
+msgstr "Ninguna opción coincide"
+
+#: templates/layout.html:431
+msgid "Please select a valid option from the country dropdown."
+msgstr "Por favor, selecciona una opción válida del menú desplegable de país."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -694,31 +703,31 @@ msgstr "Disponible para descargar"
 msgid "Author/s"
 msgstr "Autoría"
 
-#: templates/work.html:54
+#: templates/work.html:61
 msgid "Work details"
 msgstr "Detalles de la obra"
 
-#: templates/work.html:58
+#: templates/work.html:65
 msgid "Publication date"
 msgstr "Fecha de publicación"
 
-#: templates/work.html:64
+#: templates/work.html:71
 msgid "Creation date"
 msgstr "Fecha de creación"
 
-#: templates/work.html:70
+#: templates/work.html:77
 msgid "Language"
 msgstr "Idioma"
 
-#: templates/work.html:86
+#: templates/work.html:93
 msgid "Copyright status"
 msgstr "Estado de los derechos de autor"
 
-#: templates/work.html:105
+#: templates/work.html:112
 msgid "countries and terms page"
 msgstr "página de países y plazos"
 
-#: templates/work.html:107
+#: templates/work.html:114
 msgid ""
 "Copyright status information is not available for this work. The copyright "
 "status depends on the jurisdiction, the author's date of death and the date "
@@ -729,7 +738,7 @@ msgstr ""
 "fecha de muerte del autor o autora y la fecha en que se creó o publicó la "
 "obra."
 
-#: templates/work.html:108
+#: templates/work.html:115
 #, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
@@ -738,23 +747,23 @@ msgstr ""
 "Para obtener más información sobre los plazos de derecho de autor en "
 "diferentes países, visita la %(countries_and_terms_page_link)s."
 
-#: templates/work.html:119
+#: templates/work.html:126
 msgid "Access work"
 msgstr "Acceder a la obra"
 
-#: templates/work.html:140
+#: templates/work.html:147
 msgid "Internet Archive"
 msgstr "Internet Archive"
 
-#: templates/work.html:143
+#: templates/work.html:150
 msgid "Access on Internet Archive"
 msgstr "Accede en Internet Archive"
 
-#: templates/work.html:152
+#: templates/work.html:159
 msgid "External link"
 msgstr "Enlace externo"
 
-#: templates/work.html:155
+#: templates/work.html:162
 msgid "Access online"
 msgstr "Accede en línea"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-12 17:46-0300\n"
+"POT-Creation-Date: 2026-01-14 12:44-0300\n"
 "PO-Revision-Date: 2025-04-22 16:08+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fi\n"
@@ -31,7 +31,7 @@ msgstr "Tuntematon arvo"
 msgid "Home"
 msgstr "Alku"
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:229
+#: app.py:73 templates/layout.html:65 templates/layout.html:241
 msgid "About"
 msgstr "Tietoa projektista"
 
@@ -47,21 +47,21 @@ msgstr "Ei tuloksia"
 msgid "List of works"
 msgstr "Teosluettelo"
 
-#: app.py:249
+#: app.py:251
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Luettelo %(term_name)s"
 
-#: app.py:266
+#: app.py:268
 msgid "Unknown term"
 msgstr "Tuntematon tekijänoikeuden kesto"
 
-#: app.py:268 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:246
+#: app.py:270 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:258
 msgid "Countries and terms"
 msgstr "Maat ja tekijänoikeuden kestot"
 
-#: app.py:304
+#: app.py:306
 msgid "404 error"
 msgstr "404-virhe"
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Image of %(title)s."
 msgstr "Kuva %(title)s."
 
-#: pdclasses.py:383 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:382 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s lippu."
@@ -167,27 +167,28 @@ msgstr "aloitussivu"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Mene %(home_page)s ja yritä uudelleen."
 
-#: templates/about.html:7 templates/layout.html:226
+#: templates/about.html:7 templates/layout.html:238
 msgid "About Paulina"
 msgstr "Tietoa Paulinasta"
 
 #: templates/about.html:8 templates/about.html:20 templates/author.html:83
+#: templates/work.html:40
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:212
+#: templates/about.html:9 templates/layout.html:224
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - online-kulttuurikeskus"
 
-#: templates/about.html:10 templates/layout.html:215
+#: templates/about.html:10 templates/layout.html:227
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:218
+#: templates/about.html:11 templates/layout.html:230
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:221
+#: templates/about.html:12 templates/layout.html:233
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -199,7 +200,7 @@ msgstr "Creative Commons CC0 1.0 Yleismaailmallinen"
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr "Nimeä-JaaSamoin 4.0 Kansainvälinen"
 
-#: templates/about.html:15 templates/author.html:89
+#: templates/about.html:15 templates/author.html:89 templates/work.html:46
 msgid "Wikimedia Commons"
 msgstr "Wikimedia Commons"
 
@@ -359,7 +360,7 @@ msgstr "Muokkaa Wikidata-kohdetta"
 msgid "Search works"
 msgstr "Etsi teoksia"
 
-#: templates/author.html:42 templates/author.html:46 templates/work.html:91
+#: templates/author.html:42 templates/author.html:46 templates/work.html:98
 msgid "in"
 msgstr " "
 
@@ -402,17 +403,17 @@ msgstr "Tuntematon, koska syntymä- ja kuolinpäivät puuttuvat."
 msgid "Consult individual works."
 msgstr "Tutustu yksittäisiin teoksiin."
 
-#: templates/author.html:86 templates/work.html:41
+#: templates/author.html:86 templates/work.html:43
 #, fuzzy
 msgid "Wikipedia"
 msgstr "Wikipedia-linkki"
 
-#: templates/author.html:92 templates/work.html:127
+#: templates/author.html:92 templates/work.html:134
 #, fuzzy
 msgid "Wikisource"
 msgstr "Wikiaineisto-linkki"
 
-#: templates/author.html:95
+#: templates/author.html:95 templates/work.html:49
 #, fuzzy
 msgid "Wikiquote"
 msgstr "Wikisitaatit-linkki"
@@ -516,8 +517,8 @@ msgid "Number of works in public domain"
 msgstr "Onko tekijänoikeuksista vapaa"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:259 templates/layout.html:261
-#: templates/layout.html:263
+#: templates/layout.html:271 templates/layout.html:273
+#: templates/layout.html:275
 msgid "Paulina logo"
 msgstr "Paulina-logo"
 
@@ -615,7 +616,7 @@ msgstr ""
 "helpottaa myös tekijänoikeusehtojen ymmärtämistä ja auttaa tietämään, "
 "milloin teos tulee public domainiin kussakin maassa."
 
-#: templates/layout.html:31 templates/layout.html:266
+#: templates/layout.html:31 templates/layout.html:278
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Tietoa public domainia varten"
 
@@ -646,11 +647,11 @@ msgid "Advanced search"
 msgstr ""
 
 #: templates/layout.html:124 templates/layout.html:146
-#: templates/layout.html:169 templates/layout.html:180
+#: templates/layout.html:169 templates/layout.html:190
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:137
+#: templates/layout.html:137 templates/layout.html:182
 msgid "Type to filter..."
 msgstr ""
 
@@ -662,33 +663,41 @@ msgstr "Onko tekijänoikeuksista vapaa"
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:178 templates/work.html:76
+#: templates/layout.html:178 templates/work.html:83
 msgid "Country of origin"
 msgstr "Alkuperämaa"
 
-#: templates/layout.html:209
+#: templates/layout.html:221
 msgid "Paulina is supported by:"
 msgstr "Paulinaa tukevat:"
 
-#: templates/layout.html:232
+#: templates/layout.html:244
 msgid "Source code"
 msgstr "Lähdekoodi"
 
-#: templates/layout.html:235
+#: templates/layout.html:247
 msgid "Help translate"
 msgstr "Auta kääntämään"
 
-#: templates/layout.html:240
+#: templates/layout.html:252
 msgid "Help"
 msgstr "Apu"
 
-#: templates/layout.html:243
+#: templates/layout.html:255
 msgid "Documentation"
 msgstr "Dokumentaatio"
 
-#: templates/layout.html:267
+#: templates/layout.html:279
 msgid "Powered by Wikidata."
 msgstr "Toimii Wikidatan avulla."
+
+#: templates/layout.html:335
+msgid "No matching option"
+msgstr ""
+
+#: templates/layout.html:431
+msgid "Please select a valid option from the country dropdown."
+msgstr ""
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -710,63 +719,63 @@ msgstr "Ladattavissa"
 msgid "Author/s"
 msgstr "Kirjoittaja(t)"
 
-#: templates/work.html:54
+#: templates/work.html:61
 msgid "Work details"
 msgstr ""
 
-#: templates/work.html:58
+#: templates/work.html:65
 msgid "Publication date"
 msgstr "Julkaisupäivä"
 
-#: templates/work.html:64
+#: templates/work.html:71
 #, fuzzy
 msgid "Creation date"
 msgstr "Julkaisupäivä"
 
-#: templates/work.html:70
+#: templates/work.html:77
 msgid "Language"
 msgstr "Kieli"
 
-#: templates/work.html:86
+#: templates/work.html:93
 msgid "Copyright status"
 msgstr "Tekijänoikeuden asema"
 
-#: templates/work.html:105
+#: templates/work.html:112
 #, fuzzy
 msgid "countries and terms page"
 msgstr "Maat ja tekijänoikeuden kestot"
 
-#: templates/work.html:107
+#: templates/work.html:114
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
 "and the date the work was created or published."
 msgstr ""
 
-#: templates/work.html:108
+#: templates/work.html:115
 #, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
 msgstr ""
 
-#: templates/work.html:119
+#: templates/work.html:126
 msgid "Access work"
 msgstr "Pääsy teokseen"
 
-#: templates/work.html:140
+#: templates/work.html:147
 msgid "Internet Archive"
 msgstr ""
 
-#: templates/work.html:143
+#: templates/work.html:150
 msgid "Access on Internet Archive"
 msgstr ""
 
-#: templates/work.html:152
+#: templates/work.html:159
 msgid "External link"
 msgstr ""
 
-#: templates/work.html:155
+#: templates/work.html:162
 #, fuzzy
 msgid "Access online"
 msgstr "Pääsy teokseen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-12 17:46-0300\n"
+"POT-Creation-Date: 2026-01-14 12:44-0300\n"
 "PO-Revision-Date: 2025-02-13 05:02+0000\n"
 "Last-Translator: Juan Sebastian Quintero Santacruz "
 "<juancho2291@hotmail.com>\n"
@@ -32,7 +32,7 @@ msgstr "Nekonata valoro"
 msgid "Home"
 msgstr "Hejmo"
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:229
+#: app.py:73 templates/layout.html:65 templates/layout.html:241
 msgid "About"
 msgstr "Pri"
 
@@ -48,21 +48,21 @@ msgstr "Neniu rezulto troviĝis"
 msgid "List of works"
 msgstr "Listo de verkoj"
 
-#: app.py:249
+#: app.py:251
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Listo de %(term_name)s"
 
-#: app.py:266
+#: app.py:268
 msgid "Unknown term"
 msgstr "Nekonata termino"
 
-#: app.py:268 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:246
+#: app.py:270 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:258
 msgid "Countries and terms"
 msgstr "Landoj kaj terminoj"
 
-#: app.py:304
+#: app.py:306
 msgid "404 error"
 msgstr "Eraro 404"
 
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Image of %(title)s."
 msgstr "Bildo de %(title)s."
 
-#: pdclasses.py:383 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:382 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Flago de %(country_name)s."
@@ -165,27 +165,28 @@ msgstr "ĉefpaĝo"
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:226
+#: templates/about.html:7 templates/layout.html:238
 msgid "About Paulina"
 msgstr "Pri Paulina"
 
 #: templates/about.html:8 templates/about.html:20 templates/author.html:83
+#: templates/work.html:40
 msgid "Wikidata"
 msgstr "Vikidatumoj"
 
-#: templates/about.html:9 templates/layout.html:212
+#: templates/about.html:9 templates/layout.html:224
 msgid "Ártica - Online Cultural Center"
 msgstr ""
 
-#: templates/about.html:10 templates/layout.html:215
+#: templates/about.html:10 templates/layout.html:227
 msgid "Creative Commons Uruguay"
 msgstr ""
 
-#: templates/about.html:11 templates/layout.html:218
+#: templates/about.html:11 templates/layout.html:230
 msgid "Data Uruguay"
 msgstr ""
 
-#: templates/about.html:12 templates/layout.html:221
+#: templates/about.html:12 templates/layout.html:233
 msgid "Wikimedistas de Uruguay"
 msgstr "Vikimediistoj de Urugvajo"
 
@@ -197,7 +198,7 @@ msgstr ""
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr ""
 
-#: templates/about.html:15 templates/author.html:89
+#: templates/about.html:15 templates/author.html:89 templates/work.html:46
 msgid "Wikimedia Commons"
 msgstr "Vikimedia Komunejo"
 
@@ -324,7 +325,7 @@ msgstr "Modifi Vikidatuman eron"
 msgid "Search works"
 msgstr "Serĉi verkoj"
 
-#: templates/author.html:42 templates/author.html:46 templates/work.html:91
+#: templates/author.html:42 templates/author.html:46 templates/work.html:98
 msgid "in"
 msgstr "en"
 
@@ -363,17 +364,17 @@ msgstr ""
 msgid "Consult individual works."
 msgstr ""
 
-#: templates/author.html:86 templates/work.html:41
+#: templates/author.html:86 templates/work.html:43
 #, fuzzy
 msgid "Wikipedia"
 msgstr "Vikipedia hiperligo"
 
-#: templates/author.html:92 templates/work.html:127
+#: templates/author.html:92 templates/work.html:134
 #, fuzzy
 msgid "Wikisource"
 msgstr "Vikifontara hiperligo"
 
-#: templates/author.html:95
+#: templates/author.html:95 templates/work.html:49
 #, fuzzy
 msgid "Wikiquote"
 msgstr "Vikicitara hiperligo"
@@ -472,8 +473,8 @@ msgid "Number of works in public domain"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:259 templates/layout.html:261
-#: templates/layout.html:263
+#: templates/layout.html:271 templates/layout.html:273
+#: templates/layout.html:275
 msgid "Paulina logo"
 msgstr "Emblemo de Paulina"
 
@@ -561,7 +562,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:266
+#: templates/layout.html:31 templates/layout.html:278
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -592,11 +593,11 @@ msgid "Advanced search"
 msgstr ""
 
 #: templates/layout.html:124 templates/layout.html:146
-#: templates/layout.html:169 templates/layout.html:180
+#: templates/layout.html:169 templates/layout.html:190
 msgid "Any"
 msgstr ""
 
-#: templates/layout.html:137
+#: templates/layout.html:137 templates/layout.html:182
 msgid "Type to filter..."
 msgstr ""
 
@@ -608,33 +609,41 @@ msgstr ""
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:178 templates/work.html:76
+#: templates/layout.html:178 templates/work.html:83
 msgid "Country of origin"
 msgstr "Devenlando"
 
-#: templates/layout.html:209
+#: templates/layout.html:221
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:232
+#: templates/layout.html:244
 msgid "Source code"
 msgstr "Fontkodo"
 
-#: templates/layout.html:235
+#: templates/layout.html:247
 msgid "Help translate"
 msgstr "Helpi traduki"
 
-#: templates/layout.html:240
+#: templates/layout.html:252
 msgid "Help"
 msgstr "Helpo"
 
-#: templates/layout.html:243
+#: templates/layout.html:255
 msgid "Documentation"
 msgstr "Dokumentaro"
 
-#: templates/layout.html:267
+#: templates/layout.html:279
 msgid "Powered by Wikidata."
 msgstr "Funkciante per Vikidatumoj."
+
+#: templates/layout.html:335
+msgid "No matching option"
+msgstr ""
+
+#: templates/layout.html:431
+msgid "Please select a valid option from the country dropdown."
+msgstr ""
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -656,63 +665,63 @@ msgstr ""
 msgid "Author/s"
 msgstr "Aŭtoro(j)"
 
-#: templates/work.html:54
+#: templates/work.html:61
 msgid "Work details"
 msgstr ""
 
-#: templates/work.html:58
+#: templates/work.html:65
 msgid "Publication date"
 msgstr "Dato de eldono"
 
-#: templates/work.html:64
+#: templates/work.html:71
 #, fuzzy
 msgid "Creation date"
 msgstr "Dato de eldono"
 
-#: templates/work.html:70
+#: templates/work.html:77
 msgid "Language"
 msgstr "Lingvo"
 
-#: templates/work.html:86
+#: templates/work.html:93
 msgid "Copyright status"
 msgstr "Kopirajta stato"
 
-#: templates/work.html:105
+#: templates/work.html:112
 #, fuzzy
 msgid "countries and terms page"
 msgstr "Landoj kaj terminoj"
 
-#: templates/work.html:107
+#: templates/work.html:114
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
 "and the date the work was created or published."
 msgstr ""
 
-#: templates/work.html:108
+#: templates/work.html:115
 #, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
 msgstr ""
 
-#: templates/work.html:119
+#: templates/work.html:126
 msgid "Access work"
 msgstr ""
 
-#: templates/work.html:140
+#: templates/work.html:147
 msgid "Internet Archive"
 msgstr ""
 
-#: templates/work.html:143
+#: templates/work.html:150
 msgid "Access on Internet Archive"
 msgstr ""
 
-#: templates/work.html:152
+#: templates/work.html:159
 msgid "External link"
 msgstr ""
 
-#: templates/work.html:155
+#: templates/work.html:162
 msgid "Access online"
 msgstr ""
 
