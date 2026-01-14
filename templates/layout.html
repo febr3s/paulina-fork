@@ -332,7 +332,7 @@ function DropdownSelector(inputId, selectId, dropdownId) {
       const a = document.createElement('a');
       a.classList.add('dropdown-item', 'text-muted');
       a.href = '#';
-      a.textContent = 'No option';
+      a.textContent = "{{ _('No matching option') }}";
       li.appendChild(a);
       dropdown.appendChild(li);
     } else {
@@ -428,7 +428,7 @@ function DropdownSelector(inputId, selectId, dropdownId) {
     if ((combobox.value && !select.value) || noOptionItem) {
       e.preventDefault();
       combobox.focus();
-      alert('Please select a valid option from the dropdown.');
+      alert("{{ _('Please select a valid option from the country dropdown.') }}");
     }
   });
 }
