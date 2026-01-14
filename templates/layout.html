@@ -425,7 +425,7 @@ function DropdownSelector(inputId, selectId, dropdownId) {
   // Prevent form submission if no valid option is selected
   document.querySelector('form[role="search"]').addEventListener('submit', (e) => {
     const noOptionItem = dropdown.querySelector('.text-muted');
-    if ((combobox.value && !select.value) || noOptionItem) {
+    if ((combobox.value && combobox.value != select.selectedOptions[0].text) || noOptionItem) {
       e.preventDefault();
       combobox.focus();
       alert("{{ _('Please select a valid option from the country dropdown.') }}");
