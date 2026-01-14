@@ -176,7 +176,12 @@
             </div>
             <div class="py-2 px-2">
               <label for="country-of-origin"><strong>{{ _('Country of origin') }}</strong></label>
-              <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin">
+               <div class="combobox-container">
+                <input type="text" class="form-control filter border-black shadow-none"
+                      id="country-of-origin-combobox"
+                      placeholder="{{ _('Type to filter...') }}"
+                      autocomplete="off">
+                <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin" style="display:none">
                 <option value="">{{ _('Any') }}</option>
                 {% for country in COUNTRIES %}
                 <option value="{{ country['qid'] }}"
@@ -186,6 +191,8 @@
                   {{ country['country_name'] }}</option>
                 {% endfor %}
               </select>
+                <ul class="dropdown-menu w-100" id="country-of-origin-dropdown"></ul>
+              </div>
             </div>
           </div>
         </details>
@@ -298,9 +305,10 @@
   });
 </script>
 <script>
-  const combobox = document.getElementById('nationality-combobox');
-  const dropdown = document.getElementById('nationality-dropdown');
-  const select = document.getElementById('nationality');
+function DropdownSelector(inputId, selectId, dropdownId) {
+  const combobox = document.getElementById(inputId);
+  const select = document.getElementById(selectId);
+  const dropdown = document.getElementById(dropdownId);
   
   // Populate dropdown with options
   function updateDropdown(filter = '') {
@@ -340,19 +348,19 @@
       });
     }
   }
-  
-  // Initialize dropdown
+
+   // Initialize dropdown
   updateDropdown();
-  
+
   combobox.addEventListener('input', (e) => {
     updateDropdown(e.target.value);
     dropdown.classList.add('show');
   });
 
   combobox.addEventListener('keydown', (e) => {
+    const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
+    const activeItem = dropdown.querySelector('.dropdown-item.active');
     if (e.key === 'Enter') {
-      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
-      const activeItem = dropdown.querySelector('.dropdown-item.active');
       if (items.length === 1) {
         e.preventDefault();
         items[0].click();
@@ -362,7 +370,6 @@
       }
     } else if (['ArrowDown', 'ArrowUp'].includes(e.key) && dropdown.classList.contains('show')) {
       e.preventDefault();
-      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
       if (items.length === 0) return;
       
       let currentIndex = -1;
@@ -416,8 +423,11 @@
     if ((combobox.value && !select.value) || noOptionItem) {
       e.preventDefault();
       combobox.focus();
-      alert('Please select a valid option from the dropdown or clear the nationality field');
+      alert('Please select a valid option from the dropdown.');
     }
   });
+}
+DropdownSelector('nationality-combobox', 'nationality', 'nationality-dropdown');
+DropdownSelector('country-of-origin-combobox', 'country-of-origin', 'country-of-origin-dropdown');
 </script>
 </html>

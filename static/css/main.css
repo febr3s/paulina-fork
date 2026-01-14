@@ -355,11 +355,11 @@ h3 {
 }
 
 /* Combobox styles */
-#nationality-combobox {
+#nationality-combobox, #country-of-origin-combobox {
   background-color: #fcdb1a;
 }
 
-#nationality-combobox:hover {
+#nationality-combobox:hover, #country-of-origin-combobox:hover {
   background-color: #ffe65b;
 }
 
@@ -367,7 +367,7 @@ h3 {
   position: relative;
 }
 
-#nationality-dropdown {
+#nationality-dropdown, #country-of-origin-dropdown {
   position: absolute;
   z-index: 1000;
   max-height: 300px;
@@ -380,20 +380,20 @@ h3 {
   -ms-overflow-style: none; /* IE/Edge */
 }
 
-#nationality-dropdown::-webkit-scrollbar {
+#nationality-dropdown::-webkit-scrollbar, #country-of-origin-dropdown::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
 
-#nationality-dropdown.show {
+#nationality-dropdown.show, #country-of-origin-dropdown.show {
   display: block;
 }
 
-#nationality-dropdown .dropdown-item {
+#nationality-dropdown .dropdown-item, #country-of-origin-dropdown .dropdown-item {
   padding: 0.5rem 1rem;
   color: black;
 }
 
-#nationality-dropdown .dropdown-item:hover {
+#nationality-dropdown .dropdown-item:hover, #country-of-origin-dropdown .dropdown-item:hover {
   background-color: #ffe65b;
 }
 
