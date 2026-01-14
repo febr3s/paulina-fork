@@ -35,25 +35,17 @@
         </p>
         {% endfor %}
         <!-- Links -->
-        <div class="mb-2">
+        <p class="mt-3 mb-0">
           {% if work_wikidata_link %}
-  <a href="{{work_wikidata_link}}" target="_blank">
-    {{ _('Wikidata') }}
-  </a>
-{% endif %}
-{% if work_wikipedia_link %}
-{% if work_wikidata_link %} | {% endif %}
-  <a href="{{work_wikipedia_link}}" target="_blank">
-    {{ _('Wikipedia') }}
-  </a>
-{% endif %}
-{% if work_wikimedia_commons_link %}
-  {% if work_wikidata_link or work_wikipedia_link %} | {% endif %}
-  <a href="{{work_wikimedia_commons_link}}" target="_blank">
-    {{ _('Wikimedia Commons') }}
-  </a>
-{% endif %}
-        </div>
+          <a href="{{work_wikidata_link}}" target="_blank">{{ _('Wikidata') }}</a>
+          {% endif %}
+          {% if work_wikipedia_link %}
+          | <a href="{{work_wikipedia_link}}" target="_blank">{{ _('Wikipedia') }}</a>
+          {% endif %}
+          {% if work_commons_link %}
+          | <a href="{{work_commons_link}}" target="_blank">{{ _('Wikimedia Commons') }}</a>
+          {% endif %}
+        </p>
       </div>    
     </div>
     <hr class="my-4">
