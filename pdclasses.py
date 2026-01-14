@@ -329,7 +329,7 @@ class Work(Parent):
                                                       'language': get_locale().languages[wikisource_version.removesuffix('wikisource')]}
                                  for wikisource_version, value in self.wikidata_item.get('sitelinks', {}).items()
                                  if "wikisource" in wikisource_version }
-
+        self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
         internet_archive_ID = self.wikidata_item.get('statements', {}).get('P724')
         if internet_archive_ID is None:
             self.internet_archive_link = None
