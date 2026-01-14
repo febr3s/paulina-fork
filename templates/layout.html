@@ -136,11 +136,11 @@
                       id="nationality-combobox"
                       placeholder="{{ _('Type to filter...') }}"
                       autocomplete="off"
-                        {% if prefill_country_qid %}
-                        value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
-                        {% elif request.args.get('nationality') %}
-                        value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('nationality') %}{{country['country_name']}}{% endif %}{% endfor %}"
-                        {% endif %}>
+                      {% if prefill_country_qid %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% elif request.args.get('nationality') %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('nationality') %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% endif %}>
                 <select class="form-select filter border-black shadow-none"
                       name="nationality" id="nationality" style="display:none">
                   <option value="">{{ _('Any') }}</option>
@@ -180,7 +180,12 @@
                 <input type="text" class="form-control filter border-black shadow-none"
                       id="country-of-origin-combobox"
                       placeholder="{{ _('Type to filter...') }}"
-                      autocomplete="off">
+                      autocomplete="off"
+                      {% if prefill_country_qid %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% elif request.args.get('country_of_origin') %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('country_of_origin') %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% endif %}>
                 <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin" style="display:none">
                 <option value="">{{ _('Any') }}</option>
                 {% for country in COUNTRIES %}
