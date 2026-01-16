@@ -333,11 +333,16 @@ class WikidataItemSearch {
   }
 
   updateVisibleInput() {
-    if (this.multiSelect) {
-      const labels = this.selectedItems.map(i => i.label).join(',');
-      this.input.value = labels;
+  
+  this.hiddenInput.value = this.selectedItems.map(item => item.id).join(',');
+
+  if (this.multiSelect) {
+    const labelsInput = document.getElementById(this.inputId + '-labels');
+    if (labelsInput) {
+      labelsInput.value = this.selectedItems.map(item => item.label).join(',');
     }
   }
+}
   
   showResults() {
     this.resultsContainer.style.display = 'block';

@@ -562,7 +562,8 @@ def add_author():
                 
                 return render_template('add-author.html', 
                                      title=_('Add Author'),
-                                     form_data=session['form_data'])
+                                     form_data=session['form_data'],
+                                    form_genders=wikidata_api.FORM_GENDERS)
         
         except Exception as e:
             app.logger.error(f"Author creation failed: {str(e)}", exc_info=True)
@@ -573,7 +574,8 @@ def add_author():
             
             return render_template('add-author.html', 
                                  title=_('Add Author'),
-                                 form_data=session['form_data'])
+                                 form_data=session['form_data'],
+                                 form_genders=wikidata_api.FORM_GENDERS)
     
     # GET request handling
     if request.args.get('cleared') == '1':
@@ -601,15 +603,13 @@ def add_author():
         wikidata_url = None
         paulina_url = None
     
-    genders_for_form = wikidata_api.GENDERS
-
     return render_template('add-author.html', 
                         title=_('Add Author'),
                         form_data=form_data,
                         success_item_id=success_item_id,
                         wikidata_url=wikidata_url,
                         paulina_url=paulina_url,
-                        genders=genders_for_form)
+                        form_genders=wikidata_api.FORM_GENDERS)
 
 
 @app.route('/clear_form_data', methods=['POST'])

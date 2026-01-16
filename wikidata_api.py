@@ -8,7 +8,7 @@ import json
 import requests
 import os
 import urllib.parse as urlparse
-from flask_babel import lazy_gettext as _
+from flask_babel import lazy_gettext as _l, gettext as _ 
 
 
 
@@ -61,21 +61,21 @@ else:
 # Gender QIDs
 if WIKIDATA_TEST_MODE:
     # Test Wikidata QIDs for genders
-    GENDERS = [
-        {"qid": "Q216154", "gender_name": _("Female")},
-        {"qid": "Q216156", "gender_name": _("Male")},
-        {"qid": "Q243752", "gender_name": _("Trans man")},
-        {"qid": "Q243753", "gender_name": _("Trans woman")},
-        {"qid": "Q243754", "gender_name": _("Non-binary")}
+    FORM_GENDERS = [
+        {"qid": "Q216154", "gender_name": _l("Female")},
+        {"qid": "Q216156", "gender_name": _l("Male")},
+        {"qid": "Q243752", "gender_name": _l("Trans man")},
+        {"qid": "Q243753", "gender_name": _l("Trans woman")},
+        {"qid": "Q243754", "gender_name": _l("Non-binary")}
     ]
 else:
     # Production Wikidata QIDs for genders
-    GENDERS = [
-        {"qid": "Q6581072", "gender_name": _("Female")},
-        {"qid": "Q6581097", "gender_name": _("Male")},
-        {"qid": "Q2449503", "gender_name": _("Trans man")},
-        {"qid": "Q1052281", "gender_name": _("Trans woman")},
-        {"qid": "Q48270", "gender_name": _("Non-binary")}
+    FORM_GENDERS = [
+        {"qid": "Q6581072", "gender_name": _l("Female")},
+        {"qid": "Q6581097", "gender_name": _l("Male")},
+        {"qid": "Q2449503", "gender_name": _l("Trans man")},
+        {"qid": "Q1052281", "gender_name": _l("Trans woman")},
+        {"qid": "Q48270", "gender_name": _l("Non-binary")}
     ]
 
 
@@ -198,7 +198,7 @@ class WikidataAPI:
                     "descriptions": descriptions,
                     "statements": grouped_statements
                 },
-                "comment": "Paulina-tool",
+                "comment": "using [[toolforge:paulina|Paulina]]: data for the public domain",
             }
             
             create_url = f"{self.rest_api_url}/entities/items"
@@ -216,7 +216,7 @@ class WikidataAPI:
                 print(f"Test mode - no authentication required")
             
             print(f"*Creating item at: {create_url}")
-            print(f"*Item data: {json.dumps(item_data, indent=2, ensure_ascii=False)}")
+            print(f"*Item data: {json.dumps(item_data, indent=2, ensure_ascii=False, default=str)}")
 
             # Use regular requests for test mode, oauth_session for production
             if WIKIDATA_TEST_MODE:
@@ -555,6 +555,8 @@ class WikidataAPI:
         # Official website
         official_website = form_data.get('officialWebsite', '').strip()
         if official_website:
+            if not official_website.startswith(('http://', 'https://')):
+                official_website = 'https://' + official_website
             statements.append(
                 self.build_statement(PID_OFFICIAL_WEBSITE, official_website, 'url')
             )

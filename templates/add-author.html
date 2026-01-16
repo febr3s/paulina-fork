@@ -164,7 +164,7 @@
             name="genderQid" 
             required>
       <option value="">{{ _('Any') }}</option>
-      {% for gender in genders %}
+      {% for gender in form_genders %}
         <option value="{{ gender.qid }}" 
                 {% if form_data and form_data.get('genderQid') == gender.qid %}selected{% endif %}>
           {{ gender.gender_name }}
@@ -237,7 +237,6 @@
               <input type="text" 
                      class="form-control border-black shadow-none" 
                      id="author-occupation" 
-                     name="occupation"
                      placeholder="{{ _('e.g., Writer, Poet, Novelist') }}"
                      autocomplete="off">
               
@@ -246,7 +245,11 @@
               <input type="hidden" 
                      id="author-occupation-qids" 
                      name="occupationQids">
-              
+
+              <input type="hidden" 
+                    id="author-occupation-labels" 
+                    name="occupation">
+                            
               <div id="author-occupation-results" 
                    class="wikidata-results-dropdown border rounded mt-1" 
                    style="display: none;">
@@ -688,7 +691,7 @@ document.addEventListener('DOMContentLoaded', function() {
         FormUtils.scrollToFirstError(authorForm);
         return false;
       }
-      
+
       this.submit();
     });
   }
@@ -754,13 +757,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Restore Gender
-    if (formData.genderQid && formData.gender) {
-      if (window.genderSearch) {
-        window.genderSearch.selectItem({
-          id: formData.genderQid,
-          label: formData.gender,
-          description: ''
-        });
+   if (formData.genderQid) {
+      const genderSelect = document.getElementById('author-gender');
+      if (genderSelect) {
+        genderSelect.value = formData.genderQid;
       }
     }
     
@@ -778,8 +778,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Restore Occupation (multi-select)
     if (formData.occupationQids && formData.occupation) {
       if (window.occupationSearch) {
-      const occupationQids = formData.occupationQids.split(',').filter(q => q.trim());
-       const occupationLabels = formData.occupation.split(',').filter(l => l.trim());
+        const occupationQids = formData.occupationQids.split(',').filter(q => q.trim());
+        const occupationLabels = formData.occupation.split(',').filter(l => l.trim());
         occupationQids.forEach((qid, index) => {
           if (qid && occupationLabels[index]) {
             window.occupationSearch.selectItem({
@@ -789,9 +789,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
           }
         });
+
+        window.occupationSearch.input.style.display = 'none';
+        window.occupationSearch.updateSelectedItemsDisplay();
       }
     }
-    
+
     // Restore Ethnicity
     if (formData.ethnicityQid && formData.ethnicity) {
       if (window.ethnicitySearch) {

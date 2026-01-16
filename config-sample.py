@@ -19,11 +19,11 @@ USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.co
 # OAuth Configuration - based on mode
 if WIKIDATA_TEST_MODE:
     # Test Wikidata
-    REDIRECT_URL = 'http://localhost:5000/oauth-callback'
+    REDIRECT_URL = ''
     WIKIDATA_API_URL = 'https://test.wikidata.org/w/api.php'
     WIKIDATA_REST_API_URL = 'https://test.wikidata.org/w/rest.php/wikibase/v1'
 else:
-    # Production Wikidata
+    # Production Wikidata 
     REDIRECT_URL = 'https://paulina.toolforge.org/oauth-callback'
     WIKIDATA_API_URL = 'https://www.wikidata.org/w/api.php'
     WIKIDATA_REST_API_URL = 'https://www.wikidata.org/w/rest.php/wikibase/v1'
