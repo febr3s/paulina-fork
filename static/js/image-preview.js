@@ -10,6 +10,10 @@ class ImagePreview {
     this.clearBtn = document.getElementById(config.clearBtnId);
     this.requireCommons = config.requireCommons !== false;
     
+    // Preview dimensions 
+    this.previewWidth = config.previewWidth || 400;
+    this.previewHeight = config.previewHeight || 400;
+    
     this.defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
     this.isValidImage = true;
     this.hasImage = false;
@@ -17,7 +21,8 @@ class ImagePreview {
     // Translatable messages with English fallbacks
     this.msg = Object.assign({
       invalidCommons: 'Please use an image from Wikimedia Commons.',
-      loadError: 'Could not load image. Please check the URL.'
+      loadError: 'Could not load image. Please check the URL.',
+      tiffNotSupported: 'TIFF images cannot be previewed in the browser, but will work on Wikidata.'
     }, config.messages || {});
     
     this.init();
@@ -54,6 +59,19 @@ class ImagePreview {
       return;
     }
     
+    // Check for TIFF files (can't preview but valid for Wikidata)
+    if (this.isTiffFile(url)) {
+      this.showWarning(this.msg.tiffNotSupported);
+      this.isValidImage = true;
+      this.hasImage = true;
+      this.preview.src = this.defaultImage;
+      
+      if (this.clearBtn) {
+        this.clearBtn.classList.remove('d-none');
+      }
+      return;
+    }
+    
     this.loadImage(url);
   }
   
@@ -62,13 +80,55 @@ class ImagePreview {
            url.includes('commons.wikimedia.org');
   }
   
+  isTiffFile(url) {
+    return url.toLowerCase().match(/\.(tiff?|tif)(\?|$)/);
+  }
+  
+  /**
+   * Extract filename from various Commons URL formats and return optimized image URL
+   */
+  getOptimizedCommonsUrl(url) {
+    let filename = null;
+    
+    // Format 1: Direct upload URL
+    // https://upload.wikimedia.org/wikipedia/commons/a/ab/Filename.jpg
+    if (url.includes('upload.wikimedia.org')) {
+      const parts = url.split('/');
+      filename = decodeURIComponent(parts[parts.length - 1].split('?')[0]);
+    }
+    
+    // Format 2: Commons file page
+    // https://commons.wikimedia.org/wiki/File:Filename.jpg
+    else if (url.includes('commons.wikimedia.org/wiki/File:')) {
+      filename = url.split('File:')[1].split('?')[0].split('#')[0];
+      filename = decodeURIComponent(filename);
+    }
+    
+    // Format 3: Using Special:Redirect
+    else if (url.includes('Special:Redirect/file/')) {
+      return url; 
+    }
+    
+    if (!filename) {
+      return url; // Fallback to original URL if parsing fails
+    }
+    
+    // Return optimized Commons URL with specified dimensions
+    const encodedFilename = encodeURIComponent(filename);
+    return `https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/${encodedFilename}&width=${this.previewWidth}&height=${this.previewHeight}`;
+  }
+  
   loadImage(url) {
     this.hideError();
+    
+    // Convert to optimized Commons URL if it's a Commons image
+    const optimizedUrl = this.isCommonsUrl(url) ? 
+      this.getOptimizedCommonsUrl(url) : url;
     
     const img = new Image();
     
     img.onload = () => {
-      this.preview.src = url;
+      this.preview.src = optimizedUrl;
       this.isValidImage = true;
       this.hasImage = true;
       
@@ -83,20 +143,33 @@ class ImagePreview {
       this.preview.src = this.defaultImage;
     };
     
-    img.src = url;
+    img.src = optimizedUrl;
   }
   
   showError(message) {
     if (this.errorEl) {
       this.errorEl.textContent = message;
       this.errorEl.classList.remove('d-none');
+      this.errorEl.classList.remove('alert-warning');
+      this.errorEl.classList.add('alert-danger');
     }
     this.input.classList.add('is-invalid');
+  }
+  
+  showWarning(message) {
+    if (this.errorEl) {
+      this.errorEl.textContent = message;
+      this.errorEl.classList.remove('d-none');
+      this.errorEl.classList.remove('alert-danger');
+      this.errorEl.classList.add('alert-warning');
+    }
+    this.input.classList.remove('is-invalid');
   }
   
   hideError() {
     if (this.errorEl) {
       this.errorEl.classList.add('d-none');
+      this.errorEl.classList.remove('alert-danger', 'alert-warning');
     }
     this.input.classList.remove('is-invalid');
   }
@@ -122,6 +195,7 @@ class ImagePreview {
   }
   
   getImageUrl() {
+    // Return original URL entered by user
     return this.hasImage ? this.input.value.trim() : null;
   }
 }
