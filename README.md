@@ -69,7 +69,7 @@ Update the config.py file with the copied tokens:
 CLIENT_KEY = "paste-your-consumer-token-here"
 cLIENT_SECRET = "paste-your-secret-token-here"
 
-Update the test Wikidata redirect URL:
+Update the redirect URL:
 REDIRECT_URL = "http://localhost:5000/oauth-callback"
 
 #### Step 4 Update User Agent

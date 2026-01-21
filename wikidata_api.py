@@ -95,9 +95,8 @@ def generate_author_description(nationality_label, date_of_birth=None, date_of_d
     Returns:
         Generated description string (starts with lowercase per Wikidata rules)
     """
-    # Base description (always lowercase)
+    # Base description 
     if nationality_label:
-        # Use gettext for translation with placeholder
         description = _("creator from %(nationality)s", nationality=nationality_label)
     else:
         description = _("creator")
@@ -112,28 +111,6 @@ def generate_author_description(nationality_label, date_of_birth=None, date_of_d
             pass  # Skip dates if parsing fails
     
     return description
-
-
-def normalize_description(description):
-    """
-    Normalize description to follow Wikidata conventions.
-    Always starts with lowercase per Wikidata rules.
-    
-    Args:
-        description: Description string
-    
-    Returns:
-        Normalized description string
-    """
-    if not description:
-        return description
-    
-    # Always enforce lowercase first letter (Wikidata rule)
-    if description[0].isupper():
-        description = description[0].lower() + description[1:]
-    
-    return description
-
 
 # WIKIDATA API CLASS
 
@@ -152,7 +129,7 @@ class WikidataAPI:
     def get_csrf_token(self):
         """Get CSRF token for authenticated actions."""
         if not self.oauth_session:
-            raise Exception("No OAuth session available")
+            raise Exception(_("No OAuth session available"))
       
         token_url = f"{self.api_url}?action=query&meta=tokens&type=csrf&format=json"
         
@@ -166,13 +143,13 @@ class WikidataAPI:
             if 'query' in data and 'tokens' in data['query']:
                 csrf_token = data['query']['tokens'].get('csrftoken')
                 if csrf_token:
-                    print(f"✅ CSRF token obtained: {csrf_token[:20]}...")
+                    print(_("CSRF token obtained: %(token)s...", token=csrf_token[:20]))
                     return csrf_token
             
-            raise Exception(f"Unexpected token response: {data}")
+            raise Exception(_("Unexpected token response: %(data)s", data=str(data)))
             
         except Exception as e:
-            print(f"Error getting CSRF token: {e}")
+            print(_("Error getting CSRF token: %(error)s", error=str(e)))
             raise
     
     # ITEM CREATION
@@ -180,7 +157,7 @@ class WikidataAPI:
     def create_item(self, labels, descriptions, statements):
         """Create a new Wikidata item using REST API."""
         if not self.oauth_session:
-            raise Exception("No OAuth session available")
+            raise Exception(_("No OAuth session available"))
         
         try:
             # Group statements by property ID 
@@ -213,10 +190,10 @@ class WikidataAPI:
                 token = self.oauth_session.token
                 headers['Authorization'] = f"Bearer {token['access_token']}"
             else:
-                print(f"Test mode - no authentication required")
+                print(_("Test mode - no authentication required"))
             
-            print(f"*Creating item at: {create_url}")
-            print(f"*Item data: {json.dumps(item_data, indent=2, ensure_ascii=False, default=str)}")
+            print(_("Creating item at: %(url)s", url=create_url))
+            print(_("Item data: %(data)s", data=json.dumps(item_data, indent=2, ensure_ascii=False, default=str)))
 
             # Use regular requests for test mode, oauth_session for production
             if WIKIDATA_TEST_MODE:
@@ -224,13 +201,13 @@ class WikidataAPI:
             else:
                 response = self.oauth_session.post(create_url, json=item_data, headers=headers)
             
-            print(f"📥 Response status: {response.status_code}")
-            print(f"📄 Response body: {response.text}")
+            print(_("Response status: %(status)s", status=response.status_code))
+            print(_("Response body: %(body)s", body=response.text))
             
             if response.status_code in [200, 201]:
                 result = response.json()
                 item_id = result.get('id')
-                print(f"* Item created successfully: {item_id}")
+                print(_("Item created successfully: %(item_id)s", item_id=item_id))
                 return {
                     'success': True,
                     'item_id': item_id,
@@ -238,14 +215,14 @@ class WikidataAPI:
                 }
             else:
                 error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
-                print(f"Failed to create item: {error_data}")
+                print(_("Failed to create item: %(error)s", error=str(error_data)))
                 return {
                     'success': False,
                     'error': error_data
                 }
                 
         except Exception as e:
-            print(f"Exception creating item: {e}")
+            print(_("Exception creating item: %(error)s", error=str(e)))
             import traceback
             traceback.print_exc()
             return {
@@ -391,7 +368,7 @@ class WikidataAPI:
         
         # Handle description
         if description:
-            description = normalize_description(description)
+            description = description
         else:
             description = generate_author_description(
                 nationality_label,
@@ -424,17 +401,31 @@ class WikidataAPI:
         """
         errors = []
         
+        #Required fields
         if not form_data.get('name', '').strip():
-            errors.append('Name is required')
+            errors.append(_('Name is required'))
         if not form_data.get('genderQid', '').strip():
-            errors.append('Gender is required')
+            errors.append(_('Gender is required'))
         if not form_data.get('nationalityQid', '').strip():
-            errors.append('Nationality is required')
+            errors.append(_('Nationality is required'))
         if not form_data.get('placeOfBirthQid', '').strip():
-            errors.append('Place of birth is required')
+            errors.append(_('Place of birth is required'))
         if not form_data.get('occupationQids', '').strip():
-            errors.append('Occupation is required')
+            errors.append(_('Occupation is required'))
+            
+        # Validate date formats
+        date_of_birth = form_data.get('dateOfBirth', '').strip()
+        if date_of_birth:
+            is_valid, error_msg = self.validate_date_format(date_of_birth)
+            if not is_valid:
+                errors.append(_('Date of birth: %(error)s', error=error_msg))
         
+        date_of_death = form_data.get('dateOfDeath', '').strip()
+        if date_of_death:
+            is_valid, error_msg = self.validate_date_format(date_of_death)
+            if not is_valid:
+                errors.append(_('Date of death: %(error)s', error=error_msg))
+            
         return len(errors) == 0, errors
 
     def collect_references_from_form(self, field_id, form_data):
@@ -566,14 +557,22 @@ class WikidataAPI:
     # HELPER METHODS
     
     def _format_date(self, date_string):
-        """Convert date string (YYYY-MM-DD) to Wikidata format"""
+        """
+        Convert date string (YYYY-MM-DD) to Wikidata format.
+        Handles less precise dates (YYYY-00-00, YYYY-MM-00, etc.)
+        """
         if not date_string:
             return None
         
         parts = date_string.split('-')
         year = parts[0] if len(parts) > 0 else '0000'
-        month = parts[1] if len(parts) > 1 else '00'
-        day = parts[2] if len(parts) > 2 else '00'
+        month = parts[1] if len(parts) > 1 and parts[1] else '00'
+        day = parts[2] if len(parts) > 2 and parts[2] else '00'
+        
+        # Ensure zero-padding
+        year = year.zfill(4)
+        month = month.zfill(2)
+        day = day.zfill(2)
         
         return f"+{year}-{month}-{day}T00:00:00Z"
     
@@ -589,6 +588,51 @@ class WikidataAPI:
             return 10
         else:
             return 9
+    
+    def validate_date_format(self, date_string):
+        """
+        Validate date format and check for invalid placeholders.
+
+        Args:
+            date_string: Date in YYYY-MM-DD format
+
+        Returns:
+            Tuple of (is_valid, error_message)
+        """
+        if not date_string:
+            return True, None
+
+        # Check for invalid placeholders
+        invalid_patterns = ['yyyy', 'mm', 'dd', 'YYYY', 'MM', 'DD']
+        for pattern in invalid_patterns:
+            if pattern in date_string.lower():
+                return False, _("Invalid date: contains '%(pattern)s'", pattern=pattern)
+
+        parts = date_string.split('-')
+
+        # Must have at least year
+        if len(parts) < 1:
+            return False, _("Invalid date format")
+
+        year = parts[0] if len(parts) > 0 else ''
+        month = parts[1] if len(parts) > 1 else '00'
+        day = parts[2] if len(parts) > 2 else '00'
+
+        # Year is required and must be valid
+        if not year or year == '0000' or not year.isdigit() or len(year) != 4:
+            return False, _("Year is required and must be a valid 4-digit number")
+
+        # If month is provided, it must be valid 
+        if month and month != '00':
+            if not month.isdigit() or int(month) < 1 or int(month) > 12:
+                return False, _("Invalid month: %(month)s. Must be 01-12 or 00 for unknown", month=month)
+
+        # If day is provided, it must be valid 
+        if day and day != '00':
+            if not day.isdigit() or int(day) < 1 or int(day) > 31:
+                return False, _("Invalid day: %(day)s. Must be 01-31 or 00 for unknown", day=day)
+
+        return True, None
     
     def extract_commons_filename(self, url):
         """Extract filename from Commons URL"""

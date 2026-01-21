@@ -319,14 +319,43 @@
               <label for="author-date-of-birth" class="form-label">
                 <strong>{{ _('Date of birth') }}</strong>
               </label>
-              <input type="date" 
-                     class="form-control border-black shadow-none" 
-                     id="author-date-of-birth" 
-                     name="dateOfBirth" 
-                     value="{{ form_data.get('dateOfBirth', '') if form_data else '' }}">
               
+              <div class="date-input-group">
+                <input type="number" 
+                      id="author-date-of-birth-day" 
+                      name="dateOfBirthDay"
+                      placeholder="DD" 
+                      min="0" 
+                      max="31"
+                      step="1"
+                      class="form-control date-part-input day-input"
+                      aria-label="{{ _('Day') }}">
+                <span class="date-separator">-</span>
+                 <input type="number" 
+                      id="author-date-of-birth-month" 
+                      name="dateOfBirthMonth"
+                      placeholder="MM" 
+                      min="0" 
+                      max="12"
+                      step="1"
+                      class="form-control date-part-input month-input"
+                      aria-label="{{ _('Month') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="author-date-of-birth-year" 
+                      name="dateOfBirthYear"
+                      placeholder="YYYY" 
+                      min="1" 
+                      max="9999"
+                      step="1"
+                      class="form-control date-part-input year-input"
+                      aria-label="{{ _('Year') }}">
+              </div>
               
-               <!-- References -->
+              <!-- Hidden field to store combined date -->
+              <input type="hidden" id="dateOfBirth" name="dateOfBirth" value="{{ form_data.get('dateOfBirth', '') if form_data else '' }}">
+              
+              <!-- References -->
               <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
                       onclick="window.refManager.toggleReference('author-date-of-birth')">
                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
@@ -345,13 +374,43 @@
                 <strong>{{ _('Date of death') }}</strong>
                 <span class="text-muted small">({{ _('if applicable') }})</span>
               </label>
-              <input type="date" 
-                     class="form-control border-black shadow-none" 
-                     id="author-date-of-death" 
-                     name="dateOfDeath" 
-                     value="{{ form_data.get('dateOfDeath', '') if form_data else '' }}">
               
-               <!-- References -->
+              <div class="date-input-group">
+                <input type="number" 
+                      id="author-date-of-death-day" 
+                      name="dateOfDeathDay"
+                      placeholder="DD" 
+                      min="0" 
+                      max="31"
+                      step="1"
+                      class="form-control date-part-input day-input"
+                      aria-label="{{ _('Day') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="author-date-of-death-month" 
+                      name="dateOfDeathMonth"
+                      placeholder="MM" 
+                      min="0" 
+                      max="12"
+                      step="1"
+                      class="form-control date-part-input month-input"
+                      aria-label="{{ _('Month') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="author-date-of-death-year" 
+                      name="dateOfDeathYear"
+                      placeholder="YYYY" 
+                      min="1" 
+                      max="9999"
+                      step="1"
+                      class="form-control date-part-input year-input"
+                      aria-label="{{ _('Year') }}">
+              </div>
+              
+              <!-- Hidden field to store combined date -->
+              <input type="hidden" id="dateOfDeath" name="dateOfDeath" value="{{ form_data.get('dateOfDeath', '') if form_data else '' }}">
+              
+              <!-- References -->
               <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
                       onclick="window.refManager.toggleReference('author-date-of-death')">
                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
@@ -362,9 +421,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
+         </div>
       <!-- Author Image Section - Collapsible -->
       <div class="mt-3 mb-2">
         <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#author-image-section" aria-expanded="false" aria-controls="author-image-section">
@@ -536,8 +593,13 @@ document.addEventListener('DOMContentLoaded', function() {
     confirmReset: '{{ _("Are you sure you want to reset the form? All entered data will be lost.") }}',
     enterNameFirst: '{{ _("Please enter the author name first to search for images") }}',
     authorName: '{{ _("author name") }}',
-    imagePreview: '{{ _("Image preview") }}'
-  };
+    imagePreview: '{{ _("Image preview") }}',
+    dateYearRequired: '{{ _("Year is required") }}',
+    dateYearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+    dateMonthInvalid: '{{ _("Month must be between 0-12 (use 0 for unknown)") }}',
+    dateDayInvalid: '{{ _("Day must be between 0-31 (use 0 for unknown)") }}',
+    dateMonthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}'
+    };
 
   // INITIALIZE COMPONENTS
   
@@ -685,15 +747,69 @@ document.addEventListener('DOMContentLoaded', function() {
         isValid = false;
         errors.push(formMessages.imageCommonsRequired);
       }
-      
-      if (!isValid) {
-        alert(formMessages.fillRequired + '\n- ' + errors.join('\n- '));
-        FormUtils.scrollToFirstError(authorForm);
-        return false;
-      }
 
-      this.submit();
+      // Validate and Combine date of birth
+      const dobYear = document.getElementById('author-date-of-birth-year').value;
+      const dobMonth = document.getElementById('author-date-of-birth-month').value;
+      const dobDay = document.getElementById('author-date-of-birth-day').value;
+      
+      const dobValidation = FormUtils.validateDateInput(dobYear, dobMonth, dobDay, {
+      yearRequired: '{{ _("Date of birth: Year is required") }}',
+      yearInvalid: '{{ _("Date of birth: Year must be a valid 4-digit number") }}',
+      monthInvalid: '{{ _("Date of birth: Month must be between 0-12 (use 0 for unknown)") }}',
+      dayInvalid: '{{ _("Date of birth: Day must be between 0-31 (use 0 for unknown)") }}',
+      monthRequiredForDay: '{{ _("Date of birth: Month cannot be 0 if day is specified") }}',
+      monthRequiredForYear: '{{ _("Date of birth: Month is required if you enter day") }}'
     });
+    
+    if (!dobValidation.valid) {
+      isValid = false;
+      errors.push(dobValidation.message);
+      document.getElementById('author-date-of-birth-year').classList.add('is-invalid');
+    } else {
+      document.getElementById('author-date-of-birth-year').classList.remove('is-invalid');
+      // Combine date parts if valid
+      const combinedDob = FormUtils.combineDateParts(dobYear, dobMonth, dobDay);
+      if (combinedDob) {
+        document.getElementById('dateOfBirth').value = combinedDob;
+      }
+    }
+
+    // Validate and Combine date of death
+    const dodYear = document.getElementById('author-date-of-death-year').value;
+    const dodMonth = document.getElementById('author-date-of-death-month').value;
+    const dodDay = document.getElementById('author-date-of-death-day').value;
+
+    const dodValidation = FormUtils.validateDateInput(dodYear, dodMonth, dodDay, {
+    yearRequired: '{{ _("Date of death: Year is required if you enter month or day") }}',
+    yearInvalid: '{{ _("Date of death: Year must be a valid 4-digit number") }}',
+    monthInvalid: '{{ _("Date of death: Month must be between 0-12 (use 0 for unknown)") }}',
+    dayInvalid: '{{ _("Date of death: Day must be between 0-31 (use 0 for unknown)") }}',
+    monthRequiredForDay: '{{ _("Date of death: Month cannot be 0 if day is specified") }}',
+    monthRequiredForYear: '{{ _("Date of death: Month is required if you enter day and year") }}'
+  });
+  
+  if (!dodValidation.valid) {
+    isValid = false;
+    errors.push(dodValidation.message);
+    document.getElementById('author-date-of-death-year').classList.add('is-invalid');
+  } else {
+    document.getElementById('author-date-of-death-year').classList.remove('is-invalid');
+    // Combine date parts if valid
+    const combinedDod = FormUtils.combineDateParts(dodYear, dodMonth, dodDay);
+    if (combinedDod) {
+      document.getElementById('dateOfDeath').value = combinedDod;
+    }
+  }
+
+  if (!isValid) {
+    alert(formMessages.fillRequired + '\n- ' + errors.join('\n- '));
+    FormUtils.scrollToFirstError(authorForm);
+    return false;
+  }
+
+  this.submit();
+});
   }
 
   // RESET FORM FUNCTION
@@ -816,7 +932,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     }
-    
+
+
+     // Restore date of birth parts
+  if (formData.dateOfBirth) {
+    const dobParts = formData.dateOfBirth.split('-');
+    if (dobParts.length >= 1 && dobParts[0]) {
+      document.getElementById('author-date-of-birth-year').value = dobParts[0];
+    }
+    if (dobParts.length >= 2 && dobParts[1] && dobParts[1] !== '00') {
+      document.getElementById('author-date-of-birth-month').value = parseInt(dobParts[1], 10);
+    }
+    if (dobParts.length >= 3 && dobParts[2] && dobParts[2] !== '00') {
+      document.getElementById('author-date-of-birth-day').value = parseInt(dobParts[2], 10);
+    }
+  }
+  
+  // Restore date of death parts
+  if (formData.dateOfDeath) {
+    const dodParts = formData.dateOfDeath.split('-');
+    if (dodParts.length >= 1 && dodParts[0]) {
+      document.getElementById('author-date-of-death-year').value = dodParts[0];
+    }
+    if (dodParts.length >= 2 && dodParts[1] && dodParts[1] !== '00') {
+      document.getElementById('author-date-of-death-month').value = parseInt(dodParts[1], 10);
+    }
+    if (dodParts.length >= 3 && dodParts[2] && dodParts[2] !== '00') {
+      document.getElementById('author-date-of-death-day').value = parseInt(dodParts[2], 10);
+    }
+  }
+  
     // Restore References for all fields
     const fieldIds = [
       'author-nationality',

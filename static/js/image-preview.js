@@ -89,30 +89,35 @@ class ImagePreview {
    */
   getOptimizedCommonsUrl(url) {
     let filename = null;
-    
+
     // Format 1: Direct upload URL
-    // https://upload.wikimedia.org/wikipedia/commons/a/ab/Filename.jpg
-    if (url.includes('upload.wikimedia.org')) {
+    if (url.includes('upload.wikimedia.org') && !url.includes('/thumb/')) {
       const parts = url.split('/');
       filename = decodeURIComponent(parts[parts.length - 1].split('?')[0]);
     }
-    
+
     // Format 2: Commons file page
-    // https://commons.wikimedia.org/wiki/File:Filename.jpg
     else if (url.includes('commons.wikimedia.org/wiki/File:')) {
       filename = url.split('File:')[1].split('?')[0].split('#')[0];
       filename = decodeURIComponent(filename);
     }
-    
+
     // Format 3: Using Special:Redirect
     else if (url.includes('Special:Redirect/file/')) {
-      return url; 
+      return url;
     }
     
+    // Format 4: Thumb URL
+    else if (url.includes('/thumb/')) {
+      const parts = url.split('/');
+      const lastPart = parts[parts.length - 1];
+      filename = decodeURIComponent(lastPart.replace(/^\d+px-/, ''));
+    }
+
     if (!filename) {
       return url; // Fallback to original URL if parsing fails
     }
-    
+
     // Return optimized Commons URL with specified dimensions
     const encodedFilename = encodeURIComponent(filename);
     return `https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/${encodedFilename}&width=${this.previewWidth}&height=${this.previewHeight}`;

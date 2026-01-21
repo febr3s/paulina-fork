@@ -17,12 +17,58 @@ import languages
 import squeries
 import filters
 import oauth
+
+# Determine Wikidata mode from  environment
+if 'test' in sys.argv:
+    os.environ['WIKIDATA_TEST_MODE'] = 'true'
+    print("* Paulina running in TEST mode")
+    print("* https://test.wikidata.org")
+else:
+    os.environ['WIKIDATA_TEST_MODE'] = 'false'
+    print("* Paulina running in PRODUCTION mode")
+    print("* https://www.wikidata.org")
+        
+WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
+
 import wikidata_api
+
+# Configure Wikidata API URLs based on mode
+if WIKIDATA_TEST_MODE:
+    WIKIDATA_API_URL = 'https://test.wikidata.org/w/api.php'
+    WIKIDATA_REST_API_URL = 'https://test.wikidata.org/w/rest.php/wikibase/v1'
+else:
+    WIKIDATA_API_URL = 'https://www.wikidata.org/w/api.php'
+    WIKIDATA_REST_API_URL = 'https://www.wikidata.org/w/rest.php/wikibase/v1'
+
+# OAuth URLs (same for both test and production)
+AUTHORIZATION_BASE_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/authorize'
+TOKEN_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/access_token'
+PROFILE_URL = 'https://meta.wikimedia.org/w/rest.php/oauth2/resource/profile'
+
+# OAuth Scopes
+OAUTH_SCOPES = ['basic', 'editpage', 'createeditmovepage']
+
+# Rate limiting
+RATELIMIT_STORAGE_URL = 'memory://'
+RATELIMIT_HEADERS_ENABLED = True
+
 
 app = Flask(__name__)
 
-# Load config file
+# Load user config
 app.config.from_pyfile('config.py')
+
+# Add config settings to app.config
+app.config['WIKIDATA_TEST_MODE'] = WIKIDATA_TEST_MODE
+app.config['WIKIDATA_API_URL'] = WIKIDATA_API_URL
+app.config['WIKIDATA_REST_API_URL'] = WIKIDATA_REST_API_URL
+app.config['AUTHORIZATION_BASE_URL'] = AUTHORIZATION_BASE_URL
+app.config['TOKEN_URL'] = TOKEN_URL
+app.config['PROFILE_URL'] = PROFILE_URL
+app.config['OAUTH_SCOPES'] = OAUTH_SCOPES
+app.config['RATELIMIT_STORAGE_URL'] = RATELIMIT_STORAGE_URL
+app.config['RATELIMIT_HEADERS_ENABLED'] = RATELIMIT_HEADERS_ENABLED
+
 
 # Disable OAuth 2.0 HTTPS requirement for local development only
 if app.config.get('DEBUG', False):
@@ -39,7 +85,6 @@ babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
 
 
 # Cache configuration
-
 app.config.update(CACHE_TYPE="SimpleCache",
                   CACHE_DEFAULT_TIMEOUT=300)
 
@@ -69,6 +114,7 @@ limiter = Limiter(
     storage_uri=app.config.get('RATELIMIT_STORAGE_URL', 'memory://'),
     headers_enabled=app.config.get('RATELIMIT_HEADERS_ENABLED', True)
 )
+
 
 # End of app and module configuration
 
@@ -627,16 +673,6 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    
-    # Set environment variable BEFORE any config loading
-    if 'test' in sys.argv:
-        os.environ['WIKIDATA_TEST_MODE'] = 'true'
-        print("* Paulina running in TEST mode")
-        print("* https://test.wikidata.org")
-    else:
-        os.environ['WIKIDATA_TEST_MODE'] = 'false'
-        print("* Paulina running in PRODUCTION mode")
-        print("* https://www.wikidata.org")
     
     app.run(debug=True)
 

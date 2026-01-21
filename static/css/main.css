@@ -659,3 +659,27 @@ h3 {
   padding: 1rem;
   color: #6c757d;
 }
+
+
+/* date of birth and date input fields */
+.date-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-part-input.year-input {
+  width: 90px;
+}
+
+.date-part-input.month-input,
+.date-part-input.day-input {
+  width: 70px;
+}
+
+.date-separator {
+  color: #666;
+  font-weight: bold;
+  user-select: none;
+}
