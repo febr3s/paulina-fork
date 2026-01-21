@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-12-12 20:15+0100\n"
+"POT-Creation-Date: 2026-01-21 16:50+0100\n"
 "PO-Revision-Date: 2025-05-08 17:40+0000\n"
 "Last-Translator: AtaZh <ipomoea@hilarious.com>\n"
 "Language: uk\n"
@@ -20,63 +20,104 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app.py:75
+#: app.py:127
 msgid "No value"
 msgstr "Порожньо"
 
-#: app.py:77
+#: app.py:129
 msgid "Unknown value"
 msgstr "Невідоме значення"
 
-#: app.py:87 templates/layout.html:53 templates/layout.html:62
+#: app.py:139 templates/layout.html:53 templates/layout.html:95
 msgid "Home"
 msgstr "Головна"
 
-#: app.py:94 templates/layout.html:65 templates/layout.html:263
+#: app.py:146 templates/layout.html:98 templates/layout.html:308
 msgid "About"
 msgstr "Про нас"
 
-#: app.py:127 app.py:144
+#: app.py:179 app.py:196
 msgid "Results"
 msgstr "Результати"
 
-#: app.py:134 app.py:151 app.py:156
+#: app.py:186 app.py:203 app.py:208
 msgid "No results found"
 msgstr "Результатів не знайдено"
 
-#: app.py:204
+#: app.py:256
 msgid "List of works"
 msgstr "Список робіт"
 
-#: app.py:269
+#: app.py:321
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Список %(term_name)s"
 
-#: app.py:286
+#: app.py:338
 msgid "Unknown term"
 msgstr "Невідомий термін"
 
-#: app.py:288 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:280
+#: app.py:340 templates/countries.html:7 templates/layout.html:101
+#: templates/layout.html:325
 msgid "Countries and terms"
 msgstr "Країни та терміни"
 
-#: app.py:342
-#, python-brace-format
-msgid "Login failed: {error}"
+#: app.py:447
+msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:389
-#, python-brace-format
-msgid "Authentication failed: {error}"
+#: app.py:457 app.py:528
+msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:401
+#: app.py:462
+msgid "Login session expired. Please try again."
+msgstr ""
+
+#: app.py:469
+msgid "Invalid state parameter. Please try again."
+msgstr ""
+
+#: app.py:489
+msgid "Failed to obtain access token. Please try again."
+msgstr ""
+
+#: app.py:516
+msgid "Failed to get user profile. Please try again."
+msgstr ""
+
+#: app.py:540
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:408
+#: app.py:552
+msgid "Please login to add an author."
+msgstr ""
+
+#: app.py:557
+msgid "Your session has expired. Please login again."
+msgstr ""
+
+#: app.py:565
+msgid "Session expired. Please login again."
+msgstr ""
+
+#: app.py:604
+#, python-format
+msgid "Error creating author: %(error)s"
+msgstr ""
+
+#: app.py:610 app.py:622 app.py:653 templates/add-author.html:39
+#: templates/layout.html:67 templates/layout.html:116
+#, fuzzy
+msgid "Add Author"
+msgstr "Автори"
+
+#: app.py:616
+msgid "An error occurred while creating the author. Please try again."
+msgstr ""
+
+#: app.py:671
 msgid "404 error"
 msgstr "Помилка 404"
 
@@ -167,6 +208,129 @@ msgstr "Зображення %(title)s."
 msgid "Flag of %(country_name)s."
 msgstr "Прапор %(country_name)s."
 
+#: wikidata_api.py:100
+#, python-format
+msgid "creator from %(nationality)s"
+msgstr ""
+
+#: wikidata_api.py:102
+msgid "creator"
+msgstr ""
+
+#: wikidata_api.py:132 wikidata_api.py:160
+msgid "No OAuth session available"
+msgstr ""
+
+#: wikidata_api.py:146
+#, python-format
+msgid "CSRF token obtained: %(token)s..."
+msgstr ""
+
+#: wikidata_api.py:149
+#, python-format
+msgid "Unexpected token response: %(data)s"
+msgstr ""
+
+#: wikidata_api.py:152
+#, python-format
+msgid "Error getting CSRF token: %(error)s"
+msgstr ""
+
+#: wikidata_api.py:193
+msgid "Test mode - no authentication required"
+msgstr ""
+
+#: wikidata_api.py:195
+#, python-format
+msgid "Creating item at: %(url)s"
+msgstr ""
+
+#: wikidata_api.py:196
+#, python-format
+msgid "Item data: %(data)s"
+msgstr ""
+
+#: wikidata_api.py:204
+#, python-format
+msgid "Response status: %(status)s"
+msgstr ""
+
+#: wikidata_api.py:205
+#, python-format
+msgid "Response body: %(body)s"
+msgstr ""
+
+#: wikidata_api.py:210
+#, python-format
+msgid "Item created successfully: %(item_id)s"
+msgstr ""
+
+#: wikidata_api.py:218
+#, python-format
+msgid "Failed to create item: %(error)s"
+msgstr ""
+
+#: wikidata_api.py:225
+#, python-format
+msgid "Exception creating item: %(error)s"
+msgstr ""
+
+#: templates/add-author.html:586 wikidata_api.py:406
+msgid "Name is required"
+msgstr ""
+
+#: templates/add-author.html:587 wikidata_api.py:408
+msgid "Gender is required"
+msgstr ""
+
+#: templates/add-author.html:588 wikidata_api.py:410
+#, fuzzy
+msgid "Nationality is required"
+msgstr "Національність"
+
+#: templates/add-author.html:589 wikidata_api.py:412
+#, fuzzy
+msgid "Place of birth is required"
+msgstr "Місце народження"
+
+#: templates/add-author.html:590 wikidata_api.py:414
+#, fuzzy
+msgid "Occupation is required"
+msgstr "Професія"
+
+#: wikidata_api.py:421
+#, fuzzy, python-format
+msgid "Date of birth: %(error)s"
+msgstr "Дата народження"
+
+#: wikidata_api.py:427
+#, fuzzy, python-format
+msgid "Date of death: %(error)s"
+msgstr "Дата смерті"
+
+#: wikidata_api.py:609
+#, python-format
+msgid "Invalid date: contains '%(pattern)s'"
+msgstr ""
+
+#: wikidata_api.py:615
+msgid "Invalid date format"
+msgstr ""
+
+#: wikidata_api.py:623
+msgid "Year is required and must be a valid 4-digit number"
+msgstr ""
+
+#: wikidata_api.py:628
+#, python-format
+msgid "Invalid month: %(month)s. Must be 01-12 or 00 for unknown"
+msgstr ""
+
+#: wikidata_api.py:633
+#, python-format
+msgid "Invalid day: %(day)s. Must be 01-31 or 00 for unknown"
+msgstr ""
+
 #: templates/404.html:7
 msgid "Page not found"
 msgstr "Сторінку не знайдено"
@@ -180,7 +344,7 @@ msgstr "домашня сторінка"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Будь ласка, поверніться на %(home_page)s і спробуйте ще раз."
 
-#: templates/about.html:7 templates/layout.html:260
+#: templates/about.html:7 templates/layout.html:305
 msgid "About Paulina"
 msgstr "Про Пауліну"
 
@@ -188,19 +352,19 @@ msgstr "Про Пауліну"
 msgid "Wikidata"
 msgstr "Вікідані"
 
-#: templates/about.html:9 templates/layout.html:246
+#: templates/about.html:9 templates/layout.html:291
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Online Cultural Center"
 
-#: templates/about.html:10 templates/layout.html:249
+#: templates/about.html:10 templates/layout.html:294
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:252
+#: templates/about.html:11 templates/layout.html:297
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:255
+#: templates/about.html:12 templates/layout.html:300
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
 
@@ -361,6 +525,376 @@ msgstr ""
 "«Пауліна» є вільним програмним забезпеченням. Вона опублікована під "
 "%(agpl_link)s. Перегляньте %(repository_link)s."
 
+#: templates/add-author.html:10
+msgid "Please fix the errors and resubmit."
+msgstr ""
+
+#: templates/add-author.html:18
+msgid "Close"
+msgstr ""
+
+#: templates/add-author.html:19
+msgid "Author Created Successfully!"
+msgstr ""
+
+#: templates/add-author.html:21
+msgid "The author has been added to Wikidata with ID:"
+msgstr ""
+
+#: templates/add-author.html:26
+#, fuzzy
+msgid "View on Wikidata"
+msgstr "Вікідані"
+
+#: templates/add-author.html:29
+#, fuzzy
+msgid "View on Paulina"
+msgstr "Про Пауліну"
+
+#: templates/add-author.html:53
+msgid "Name"
+msgstr ""
+
+#: templates/add-author.html:60
+#, fuzzy
+msgid "e.g., Paulina Luisi"
+msgstr "Пауліна Луїсі"
+
+#: templates/add-author.html:64
+msgid "Please enter the author name"
+msgstr ""
+
+#: templates/add-author.html:67
+msgid "Matching authors will appear as you type"
+msgstr ""
+
+#: templates/add-author.html:74
+msgid "Description"
+msgstr ""
+
+#: templates/add-author.html:80
+msgid "e.g., Uruguayan politician and medical doctor"
+msgstr ""
+
+#: templates/add-author.html:82
+msgid "Please enter a brief description"
+msgstr ""
+
+#: templates/add-author.html:91
+msgid "Possible matches on Wikidata:"
+msgstr ""
+
+#: templates/add-author.html:98
+msgid "None of these match - Continue"
+msgstr ""
+
+#: templates/add-author.html:103 templates/add-author.html:566
+msgid "No exact match found."
+msgstr ""
+
+#: templates/add-author.html:111 templates/author.html:107
+#, fuzzy
+msgid "Biography"
+msgstr "Орландо: Біографія"
+
+#: templates/add-author.html:114
+#, fuzzy
+msgid "Biographical Information"
+msgstr "Бракує інформації?"
+
+#: templates/add-author.html:122 templates/author.html:112
+#: templates/layout.html:212
+msgid "Nationality"
+msgstr "Національність"
+
+#: templates/add-author.html:129
+msgid "Search for a country..."
+msgstr ""
+
+#: templates/add-author.html:146 templates/add-author.html:182
+#: templates/add-author.html:221 templates/add-author.html:261
+#: templates/add-author.html:304 templates/add-author.html:361
+#: templates/add-author.html:416
+msgid "Add reference"
+msgstr ""
+
+#: templates/add-author.html:159 templates/author.html:122
+#: templates/layout.html:201
+msgid "Gender"
+msgstr "Гендер"
+
+#: templates/add-author.html:166 templates/layout.html:203
+#: templates/layout.html:225 templates/layout.html:248
+#: templates/layout.html:259
+msgid "Any"
+msgstr "Будь-який"
+
+#: templates/add-author.html:176
+msgid "Please select a gender"
+msgstr ""
+
+#: templates/add-author.html:197 templates/author.html:136
+msgid "Place of birth"
+msgstr "Місце народження"
+
+#: templates/add-author.html:204
+msgid "e.g., Buenos Aires, Tokyo, Lagos"
+msgstr ""
+
+#: templates/add-author.html:234 templates/author.html:132
+msgid "Occupation"
+msgstr "Професія"
+
+#: templates/add-author.html:240
+msgid "e.g., Writer, Poet, Novelist"
+msgstr ""
+
+#: templates/add-author.html:276 templates/author.html:117
+msgid "Ethnicity"
+msgstr ""
+
+#: templates/add-author.html:283
+msgid "e.g., Polish"
+msgstr ""
+
+#: templates/add-author.html:298
+#, fuzzy
+msgid "Type to search Wikidata"
+msgstr "Додати її у Вікіданих"
+
+#: templates/add-author.html:320 templates/author.html:126
+msgid "Date of birth"
+msgstr "Дата народження"
+
+#: templates/add-author.html:332 templates/add-author.html:387
+#, fuzzy
+msgid "Day"
+msgstr "Будь-який"
+
+#: templates/add-author.html:342 templates/add-author.html:397
+msgid "Month"
+msgstr ""
+
+#: templates/add-author.html:352 templates/add-author.html:407
+#, fuzzy
+msgid "Year"
+msgstr "Шукати"
+
+#: templates/add-author.html:374 templates/author.html:144
+msgid "Date of death"
+msgstr "Дата смерті"
+
+#: templates/add-author.html:375
+msgid "if applicable"
+msgstr ""
+
+#: templates/add-author.html:428
+msgid "Add author image (optional)"
+msgstr ""
+
+#: templates/add-author.html:438
+msgid ""
+"Search Wikimedia Commons for author's image, or enter the Commons image "
+"URL directly:"
+msgstr ""
+
+#: templates/add-author.html:446
+#, fuzzy
+msgid "Search Commons for"
+msgstr "Шукати твори"
+
+#: templates/add-author.html:449
+msgid ""
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
+"below."
+msgstr ""
+
+#: templates/add-author.html:455
+msgid "Image URL"
+msgstr ""
+
+#: templates/add-author.html:473 templates/add-author.html:476
+#: templates/add-author.html:596
+msgid "Image preview"
+msgstr ""
+
+#: templates/add-author.html:484
+msgid "Could not load image"
+msgstr ""
+
+#: templates/add-author.html:497
+msgid "Add external links (optional)"
+msgstr ""
+
+#: templates/add-author.html:504
+msgid "Official Website"
+msgstr ""
+
+#: templates/add-author.html:512
+msgid "Enter the full URL including https://, e.g. https://example.com"
+msgstr ""
+
+#: templates/add-author.html:532
+#, fuzzy
+msgid "Reset"
+msgstr "Результати"
+
+#: templates/add-author.html:535
+msgid "Submit"
+msgstr ""
+
+#: templates/add-author.html:555
+msgid "Searching Wikidata..."
+msgstr ""
+
+#: templates/add-author.html:556
+#, fuzzy
+msgid "No Wikidata results found"
+msgstr "Результатів не знайдено"
+
+#: templates/add-author.html:557 templates/add-author.html:568
+msgid "No description"
+msgstr ""
+
+#: templates/add-author.html:558 templates/add-author.html:567
+msgid "Error searching Wikidata"
+msgstr ""
+
+#: templates/add-author.html:559
+msgid "This item is already added"
+msgstr ""
+
+#: templates/add-author.html:560
+msgid "This item is already selected"
+msgstr ""
+
+#: templates/add-author.html:561 templates/add-author.html:577
+msgid "Remove"
+msgstr ""
+
+#: templates/add-author.html:565
+#, fuzzy
+msgid "Searching..."
+msgstr "Шукати"
+
+#: templates/add-author.html:572
+msgid "Reference"
+msgstr ""
+
+#: templates/add-author.html:573
+msgid "Reference URL"
+msgstr ""
+
+#: templates/add-author.html:574
+msgid "Title"
+msgstr ""
+
+#: templates/add-author.html:575
+msgid "Date accessed"
+msgstr ""
+
+#: templates/add-author.html:576
+msgid "Maximum 3 references per field"
+msgstr ""
+
+#: templates/add-author.html:581
+msgid "Please use an image from Wikimedia Commons."
+msgstr ""
+
+#: templates/add-author.html:582
+msgid "Could not load image. Please check the URL."
+msgstr ""
+
+#: templates/add-author.html:591
+#, fuzzy
+msgid "Image must be from Wikimedia Commons"
+msgstr "Вікісховище"
+
+#: templates/add-author.html:592
+msgid "Please fill in all required fields:"
+msgstr ""
+
+#: templates/add-author.html:593
+msgid "Are you sure you want to reset the form? All entered data will be lost."
+msgstr ""
+
+#: templates/add-author.html:594
+msgid "Please enter the author name first to search for images"
+msgstr ""
+
+#: templates/add-author.html:595
+#, fuzzy
+msgid "author name"
+msgstr "Автори"
+
+#: templates/add-author.html:597
+msgid "Year is required"
+msgstr ""
+
+#: templates/add-author.html:598
+msgid "Year must be a valid 4-digit number"
+msgstr ""
+
+#: templates/add-author.html:599
+msgid "Month must be between 0-12 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:600
+msgid "Day must be between 0-31 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:601
+msgid "Month cannot be 0 if day is specified"
+msgstr ""
+
+#: templates/add-author.html:757
+msgid "Date of birth: Year is required"
+msgstr ""
+
+#: templates/add-author.html:758
+msgid "Date of birth: Year must be a valid 4-digit number"
+msgstr ""
+
+#: templates/add-author.html:759
+msgid "Date of birth: Month must be between 0-12 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:760
+msgid "Date of birth: Day must be between 0-31 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:761
+msgid "Date of birth: Month cannot be 0 if day is specified"
+msgstr ""
+
+#: templates/add-author.html:762
+msgid "Date of birth: Month is required if you enter day"
+msgstr ""
+
+#: templates/add-author.html:784
+msgid "Date of death: Year is required if you enter month or day"
+msgstr ""
+
+#: templates/add-author.html:785
+msgid "Date of death: Year must be a valid 4-digit number"
+msgstr ""
+
+#: templates/add-author.html:786
+msgid "Date of death: Month must be between 0-12 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:787
+msgid "Date of death: Day must be between 0-31 (use 0 for unknown)"
+msgstr ""
+
+#: templates/add-author.html:788
+msgid "Date of death: Month cannot be 0 if day is specified"
+msgstr ""
+
+#: templates/add-author.html:789
+msgid "Date of death: Month is required if you enter day and year"
+msgstr ""
+
 #: templates/author.html:7 templates/work.html:7
 msgid "Missing/wrong data?"
 msgstr "Відсутні/хибні дані?"
@@ -435,47 +969,14 @@ msgstr "Посилання на Вікіцитати"
 msgid "Official website"
 msgstr ""
 
-#: templates/author.html:107
-#, fuzzy
-msgid "Biography"
-msgstr "Орландо: Біографія"
-
-#: templates/author.html:112 templates/layout.html:176
-msgid "Nationality"
-msgstr "Національність"
-
-#: templates/author.html:117
-msgid "Ethnicity"
-msgstr ""
-
-#: templates/author.html:122 templates/layout.html:167
-msgid "Gender"
-msgstr "Гендер"
-
-#: templates/author.html:126
-msgid "Date of birth"
-msgstr "Дата народження"
-
 #: templates/author.html:129 templates/author.html:147
 #, python-format
 msgid "(%(author_age)s years)"
 msgstr ""
 
-#: templates/author.html:132
-msgid "Occupation"
-msgstr "Професія"
-
-#: templates/author.html:136
-msgid "Place of birth"
-msgstr "Місце народження"
-
 #: templates/author.html:140
 msgid "Country of birth"
 msgstr "Країна народження"
-
-#: templates/author.html:144
-msgid "Date of death"
-msgstr "Дата смерті"
 
 #: templates/countries.html:8
 msgid ""
@@ -521,7 +1022,7 @@ msgstr ""
 "Кількість творів, визначених у Вікіданих як такі, що перебувають у "
 "суспільному надбанні"
 
-#: templates/country.html:34 templates/layout.html:205
+#: templates/country.html:34 templates/layout.html:246
 msgid "Type of work"
 msgstr "Тип твору"
 
@@ -530,8 +1031,8 @@ msgid "Number of works in public domain"
 msgstr "Кількість творів у суспільному надбанні"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:293 templates/layout.html:295
-#: templates/layout.html:297
+#: templates/layout.html:338 templates/layout.html:340
+#: templates/layout.html:342
 msgid "Paulina logo"
 msgstr "Логотип «Пауліни»"
 
@@ -630,90 +1131,89 @@ msgstr ""
 "захисту авторських прав і коли твори переходять у суспільне надбання у "
 "кожній країні."
 
-#: templates/layout.html:31 templates/layout.html:300
+#: templates/layout.html:31 templates/layout.html:345
 msgid "Paulina - Data for the Public Domain"
 msgstr "«Пауліна» — дані для суспільного надбання"
 
-#: templates/layout.html:82
+#: templates/layout.html:74 templates/layout.html:122
 msgid "Logout"
 msgstr ""
 
-#: templates/layout.html:92
-msgid "Login with your Wikimedia account to add/edit items"
+#: templates/layout.html:81
+msgid "Login with Wikimedia"
 msgstr ""
 
-#: templates/layout.html:94
+#: templates/layout.html:128
+msgid "Login with your Wikimedia account to add/edit data"
+msgstr ""
+
+#: templates/layout.html:130
 msgid "Login"
 msgstr ""
 
-#: templates/layout.html:114
+#: templates/layout.html:148
 msgid "Select"
 msgstr "Вибрати"
 
-#: templates/layout.html:149 templates/layout.html:152
+#: templates/layout.html:183 templates/layout.html:186
 msgid "Authors"
 msgstr "Автори"
 
-#: templates/layout.html:150 templates/layout.html:153
+#: templates/layout.html:184 templates/layout.html:187
 msgid "Works"
 msgstr "Твори"
 
-#: templates/layout.html:157
+#: templates/layout.html:191
 msgid "Search with Paulina"
 msgstr "Шукати у «Пауліні»"
 
-#: templates/layout.html:157 templates/layout.html:159
+#: templates/layout.html:191 templates/layout.html:193
 msgid "Search"
 msgstr "Шукати"
 
-#: templates/layout.html:164
+#: templates/layout.html:198
 msgid "Advanced search"
 msgstr "Розширений пошук"
 
-#: templates/layout.html:169 templates/layout.html:187
-#: templates/layout.html:207 templates/layout.html:216
-msgid "Any"
-msgstr "Будь-який"
-
-#: templates/layout.html:180
+#: templates/layout.html:216
 msgid "Type to filter..."
 msgstr "Почніть вводити…"
 
-#: templates/layout.html:198
+#: templates/layout.html:238
 msgid "In public domain"
 msgstr "У суспільному надбанні"
 
-#: templates/layout.html:200
+#: templates/layout.html:241
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 "Автори, чиї твори перебувають у суспільному надбанні принаймні в одній "
 "юрисдикції"
 
-#: templates/layout.html:214 templates/work.html:65
+#: templates/layout.html:257 templates/work.html:65
 msgid "Country of origin"
 msgstr "Країна походження"
 
-#: templates/layout.html:243
+#: templates/layout.html:288
 msgid "Paulina is supported by:"
 msgstr "«Пауліну» підтримують:"
 
-#: templates/layout.html:266
+#: templates/layout.html:311
 msgid "Source code"
 msgstr "Вихідний код"
 
-#: templates/layout.html:269
+#: templates/layout.html:314
 msgid "Help translate"
 msgstr "Допомогти перекласти"
 
-#: templates/layout.html:274
+#: templates/layout.html:319
 msgid "Help"
 msgstr "Довідка"
 
-#: templates/layout.html:277
+#: templates/layout.html:322
 msgid "Documentation"
 msgstr "Документація"
 
-#: templates/layout.html:301
+#: templates/layout.html:346
 msgid "Powered by Wikidata."
 msgstr "На основі Вікіданих."
 
@@ -882,4 +1382,13 @@ msgstr ""
 
 #~ msgid "%(country_name)s's statistics"
 #~ msgstr "Статистика для країни %(country_name)s"
+
+#~ msgid "Login failed: {error}"
+#~ msgstr ""
+
+#~ msgid "Authentication failed: {error}"
+#~ msgstr ""
+
+#~ msgid "Login with your Wikimedia account to add/edit items"
+#~ msgstr ""
 
