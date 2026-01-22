@@ -639,16 +639,26 @@ class WikidataAPI:
         if not url:
             return None
         
-        if 'upload.wikimedia.org' in url:
+        if 'upload.wikimedia.org' in url and '/thumb/' not in url:
             # Format: https://upload.wikimedia.org/wikipedia/commons/a/ab/Filename.jpg
             parts = url.split('/')
             if len(parts) > 0:
                 return urlparse.unquote(parts[-1])
         
-        elif 'commons.wikimedia.org' in url:
+        elif 'upload.wikimedia.org' in url and '/thumb/' in url:
+            # Format: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Filename.jpg/500px-Filename.jpg
+            parts = url.split('/')
+            if len(parts) > 0:
+                return urlparse.unquote(parts[-2])
+        
+        elif 'commons.wikimedia.org/wiki/File:' in url:
             # Format: https://commons.wikimedia.org/wiki/File:Filename.jpg
-            if 'File:' in url:
-                filename = url.split('File:')[-1]
-                return urlparse.unquote(filename.split('?')[0])
+            filename = url.split('File:')[-1]
+            return urlparse.unquote(filename.split('?')[0])
+        
+        elif 'Special:Redirect/file/' in url:
+            # Format: https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Filename.jpg&width=400&height=200
+            filename = url.split('/')[-1]
+            return urlparse.unquote(filename.split('&')[0])
         
         return None
