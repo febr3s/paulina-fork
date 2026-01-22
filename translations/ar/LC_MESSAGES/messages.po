@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-21 16:50+0100\n"
+"POT-Creation-Date: 2026-01-14 12:44-0300\n"
 "PO-Revision-Date: 2025-11-01 22:51+0000\n"
 "Last-Translator: حبيشان Hubaishan <s.hubaishan@gmail.com>\n"
 "Language: ar\n"
@@ -32,7 +32,7 @@ msgstr "مجهول"
 msgid "Home"
 msgstr "البداية"
 
-#: app.py:146 templates/layout.html:98 templates/layout.html:308
+#: app.py:73 templates/layout.html:65 templates/layout.html:241
 msgid "About"
 msgstr "عن"
 
@@ -48,76 +48,21 @@ msgstr "لا توجد نتائج"
 msgid "List of works"
 msgstr "قائمة الأعمال"
 
-#: app.py:321
+#: app.py:251
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "قائمة %(term_name)s"
 
-#: app.py:338
+#: app.py:268
 msgid "Unknown term"
 msgstr "شروط غير معروفة"
 
-#: app.py:340 templates/countries.html:7 templates/layout.html:101
-#: templates/layout.html:325
+#: app.py:270 templates/countries.html:7 templates/layout.html:68
+#: templates/layout.html:258
 msgid "Countries and terms"
 msgstr "الدول والشروط"
 
-#: app.py:447
-msgid "Login failed. Please try again."
-msgstr ""
-
-#: app.py:457 app.py:528
-msgid "Authentication failed. Please try again."
-msgstr ""
-
-#: app.py:462
-msgid "Login session expired. Please try again."
-msgstr ""
-
-#: app.py:469
-msgid "Invalid state parameter. Please try again."
-msgstr ""
-
-#: app.py:489
-msgid "Failed to obtain access token. Please try again."
-msgstr ""
-
-#: app.py:516
-msgid "Failed to get user profile. Please try again."
-msgstr ""
-
-#: app.py:540
-msgid "You have been logged out."
-msgstr ""
-
-#: app.py:552
-msgid "Please login to add an author."
-msgstr ""
-
-#: app.py:557
-msgid "Your session has expired. Please login again."
-msgstr ""
-
-#: app.py:565
-msgid "Session expired. Please login again."
-msgstr ""
-
-#: app.py:604
-#, python-format
-msgid "Error creating author: %(error)s"
-msgstr ""
-
-#: app.py:610 app.py:622 app.py:653 templates/add-author.html:39
-#: templates/layout.html:67 templates/layout.html:116
-#, fuzzy
-msgid "Add Author"
-msgstr "المؤلفون"
-
-#: app.py:616
-msgid "An error occurred while creating the author. Please try again."
-msgstr ""
-
-#: app.py:671
+#: app.py:306
 msgid "404 error"
 msgstr "خطأ 404"
 
@@ -343,27 +288,28 @@ msgstr "صفحة البداية"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "رجاء توجه إلى %(home_page)s وحاول مجددًّا."
 
-#: templates/about.html:7 templates/layout.html:305
+#: templates/about.html:7 templates/layout.html:238
 msgid "About Paulina"
 msgstr "عن باولينا"
 
 #: templates/about.html:8 templates/about.html:20 templates/author.html:83
+#: templates/work.html:40
 msgid "Wikidata"
 msgstr "ويكي بيانات"
 
-#: templates/about.html:9 templates/layout.html:291
+#: templates/about.html:9 templates/layout.html:224
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - المركز الثقافي عبر الإنترنت"
 
-#: templates/about.html:10 templates/layout.html:294
+#: templates/about.html:10 templates/layout.html:227
 msgid "Creative Commons Uruguay"
 msgstr "المشاع الإبداعي أوروغواي"
 
-#: templates/about.html:11 templates/layout.html:297
+#: templates/about.html:11 templates/layout.html:230
 msgid "Data Uruguay"
 msgstr "بيانات أورغواي"
 
-#: templates/about.html:12 templates/layout.html:300
+#: templates/about.html:12 templates/layout.html:233
 msgid "Wikimedistas de Uruguay"
 msgstr ""
 
@@ -375,7 +321,7 @@ msgstr "Creative Commons CC0 1.0 التكريس العالمي للملكية ا
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr "رخصة المشاع الإبداعي - النسبة-المشاركة بالمثل 4.0 الدولية"
 
-#: templates/about.html:15 templates/author.html:89
+#: templates/about.html:15 templates/author.html:89 templates/work.html:46
 msgid "Wikimedia Commons"
 msgstr "ويكيميديا كومنز"
 
@@ -872,7 +818,7 @@ msgstr "تحرير عنصر ويكي بيانات"
 msgid "Search works"
 msgstr "بحث عن الأعمال"
 
-#: templates/author.html:42 templates/author.html:46 templates/work.html:79
+#: templates/author.html:42 templates/author.html:46 templates/work.html:98
 msgid "in"
 msgstr "في"
 
@@ -911,15 +857,15 @@ msgstr "حالة الملكية العامة غير معروفة بسبب عدم
 msgid "Consult individual works."
 msgstr "راجع الأعمال الفردية."
 
-#: templates/author.html:86 templates/work.html:41
+#: templates/author.html:86 templates/work.html:43
 msgid "Wikipedia"
 msgstr "ويكيبيديا"
 
-#: templates/author.html:92 templates/work.html:115
+#: templates/author.html:92 templates/work.html:134
 msgid "Wikisource"
 msgstr "ويكي مصدر"
 
-#: templates/author.html:95
+#: templates/author.html:95 templates/work.html:49
 msgid "Wikiquote"
 msgstr "ويكي الاقتباس"
 
@@ -927,14 +873,46 @@ msgstr "ويكي الاقتباس"
 msgid "Official website"
 msgstr "الموقع الرسمي"
 
-#: templates/author.html:129 templates/author.html:147
+#: templates/author.html:107
+msgid "Biography"
+msgstr "السيرة"
+
+#: templates/author.html:113 templates/layout.html:133
+msgid "Nationality"
+msgstr "الجنسية"
+
+#: templates/author.html:119
+msgid "Ethnicity"
+msgstr "العرق"
+
+#: templates/author.html:125 templates/layout.html:122
+msgid "Gender"
+msgstr "الجنس"
+
+#: templates/author.html:131
+msgid "Date of birth"
+msgstr "تاريخ الميلاد"
+
+#: templates/author.html:134 templates/author.html:160
 #, python-format
 msgid "(%(author_age)s years)"
 msgstr "(%(author_age)s سنة)"
 
-#: templates/author.html:140
+#: templates/author.html:139
+msgid "Occupation"
+msgstr "الوظيفة"
+
+#: templates/author.html:145
+msgid "Place of birth"
+msgstr "محل الميلاد"
+
+#: templates/author.html:151
 msgid "Country of birth"
 msgstr "دولة الميلاد"
+
+#: templates/author.html:157
+msgid "Date of death"
+msgstr "تاريخ الوفاة"
 
 #: templates/countries.html:8
 msgid ""
@@ -974,7 +952,7 @@ msgstr "إحصائيات النطاق العام"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "عدد الأعمال التي تم تحديدها على أنها ملكية عامة في ويكي بيانات"
 
-#: templates/country.html:34 templates/layout.html:246
+#: templates/country.html:34 templates/layout.html:167
 msgid "Type of work"
 msgstr "نوع العمل"
 
@@ -983,8 +961,8 @@ msgid "Number of works in public domain"
 msgstr "عدد الأعمال في النطاق العام"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:338 templates/layout.html:340
-#: templates/layout.html:342
+#: templates/layout.html:271 templates/layout.html:273
+#: templates/layout.html:275
 msgid "Paulina logo"
 msgstr "علامة باولينا"
 
@@ -1077,7 +1055,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:345
+#: templates/layout.html:31 templates/layout.html:278
 msgid "Paulina - Data for the Public Domain"
 msgstr "باولينا - بيانات للنطاق العام"
 
@@ -1121,45 +1099,58 @@ msgstr "بحث"
 msgid "Advanced search"
 msgstr "بحث متقدم"
 
-#: templates/layout.html:216
+#: templates/layout.html:124 templates/layout.html:146
+#: templates/layout.html:169 templates/layout.html:190
+msgid "Any"
+msgstr "أي"
+
+#: templates/layout.html:137 templates/layout.html:182
 msgid "Type to filter..."
 msgstr "اكتب للتصفية..."
 
-#: templates/layout.html:238
+#: templates/layout.html:159
 msgid "In public domain"
 msgstr "في النطاق العام"
 
-#: templates/layout.html:241
+#: templates/layout.html:162
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "المؤلفون الذين تعتبر أعمالهم ملكية عامة في ولاية قضائية واحدة على الأقل"
 
-#: templates/layout.html:257 templates/work.html:65
+#: templates/layout.html:178 templates/work.html:83
 msgid "Country of origin"
 msgstr "بلد المنشأ"
 
-#: templates/layout.html:288
+#: templates/layout.html:221
 msgid "Paulina is supported by:"
 msgstr "باولينا مدعوم من:"
 
-#: templates/layout.html:311
+#: templates/layout.html:244
 msgid "Source code"
 msgstr "الكود المصدري"
 
-#: templates/layout.html:314
+#: templates/layout.html:247
 msgid "Help translate"
 msgstr "ساعد في الترجمة"
 
-#: templates/layout.html:319
+#: templates/layout.html:252
 msgid "Help"
 msgstr "مساعدة"
 
-#: templates/layout.html:322
+#: templates/layout.html:255
 msgid "Documentation"
 msgstr "توثيق"
 
-#: templates/layout.html:346
+#: templates/layout.html:279
 msgid "Powered by Wikidata."
 msgstr "مدعوم من ويكي بيانات."
+
+#: templates/layout.html:335
+msgid "No matching option"
+msgstr ""
+
+#: templates/layout.html:431
+msgid "Please select a valid option from the country dropdown."
+msgstr ""
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -1197,31 +1188,32 @@ msgstr "متاح للتحميل"
 msgid "Author/s"
 msgstr "المؤلف(ون)"
 
-#: templates/work.html:54
+#: templates/work.html:61
 msgid "Work details"
 msgstr "بيانات العمل"
 
-#: templates/work.html:57
+#: templates/work.html:65
 msgid "Publication date"
 msgstr "تاريخ النشر"
 
-#: templates/work.html:58 templates/work.html:62 templates/work.html:66
-msgid "Unknown"
-msgstr "مجهول"
+#: templates/work.html:71
+#, fuzzy
+msgid "Creation date"
+msgstr "تاريخ النشر"
 
-#: templates/work.html:61
+#: templates/work.html:77
 msgid "Language"
 msgstr "اللغة"
 
-#: templates/work.html:74
+#: templates/work.html:93
 msgid "Copyright status"
 msgstr "حالة حقوق الطبع"
 
-#: templates/work.html:93
+#: templates/work.html:112
 msgid "countries and terms page"
 msgstr "صفحة الدول والشروط"
 
-#: templates/work.html:95
+#: templates/work.html:114
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1230,7 +1222,7 @@ msgstr ""
 "معلومات حالة حقوق النشر غير متوفرة لهذا العمل. تعتمد حالة حقوق النشر على "
 "الولاية القضائية وتاريخ وفاة المؤلف وتاريخ إنشاء العمل أو نشره."
 
-#: templates/work.html:96
+#: templates/work.html:115
 #, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
@@ -1239,23 +1231,23 @@ msgstr ""
 "لمعرفة المزيد عن شروط حقوق النشر في بلدان مختلفة، تفضل بزيارة الموقع "
 "%(countries_and_terms_page_link)s."
 
-#: templates/work.html:107
+#: templates/work.html:126
 msgid "Access work"
 msgstr "الوصول إلى العمل"
 
-#: templates/work.html:128
+#: templates/work.html:147
 msgid "Internet Archive"
 msgstr "أنترنت أرشيف"
 
-#: templates/work.html:131
+#: templates/work.html:150
 msgid "Access on Internet Archive"
 msgstr "الوصول إلى إنترنت أرشيف"
 
-#: templates/work.html:140
+#: templates/work.html:159
 msgid "External link"
 msgstr "وصلة خارجية"
 
-#: templates/work.html:143
+#: templates/work.html:162
 msgid "Access online"
 msgstr "الوصول عبر الإنترنت"
 
@@ -1281,12 +1273,6 @@ msgstr "قائمة أعمال %(author_name)s"
 msgid "View this query on the Wikidata Query Service"
 msgstr ""
 
-#~ msgid "Login failed: {error}"
-#~ msgstr ""
-
-#~ msgid "Authentication failed: {error}"
-#~ msgstr ""
-
-#~ msgid "Login with your Wikimedia account to add/edit items"
-#~ msgstr ""
+#~ msgid "Unknown"
+#~ msgstr "مجهول"
 

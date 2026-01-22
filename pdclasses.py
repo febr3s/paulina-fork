@@ -136,6 +136,8 @@ class Parent:
 
         self.description = self.wikidata_item.get('descriptions', {}).get(languages.get_locale())
         self.wikipedia_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wiki', {}).get('url')
+        self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
+        self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikiquote', {}).get('url')
 
 
 class Author(Parent):
@@ -152,10 +154,8 @@ class Author(Parent):
                 is_human = True
         if is_human is False:
             raise Exception("Not a human")
-            
-        self.commons_link = self.wikidata_item.get('sitelinks', {}).get('commonswiki', {}).get('url')
+
         self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
-        self.wikiquote_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikiquote', {}).get('url')
         self.official_website = build_field(self.wikidata_item.get('statements', {}).get('P856'), field_type="plain_value")
         self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
@@ -323,13 +323,13 @@ class Work(Parent):
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
         self.language = build_field(self.wikidata_item.get('statements', {}).get('P407'))
         self.publication_date = build_date(self.wikidata_item.get('statements', {}).get('P577'))
+        self.creation_date = build_date(self.wikidata_item.get('statements', {}).get('P571'))
 
         self.wikisource_links = {wikisource_version: {'title': value.get('title'),
                                                       'url': value.get('url'),
                                                       'language': get_locale().languages[wikisource_version.removesuffix('wikisource')]}
                                  for wikisource_version, value in self.wikidata_item.get('sitelinks', {}).items()
                                  if "wikisource" in wikisource_version }
-
         internet_archive_ID = self.wikidata_item.get('statements', {}).get('P724')
         if internet_archive_ID is None:
             self.internet_archive_link = None

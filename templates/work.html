@@ -34,14 +34,21 @@
           {% endfor %}
         </p>
         {% endfor %}
-        <!-- Wikipedia link -->
-        {% if work_wikipedia_link %}
-        <p class="mt-3">
-          <a href="{{work_wikipedia_link}}" target="_blank">
-            <i class="bi bi-wikipedia me-1"></i> {{ _('Wikipedia') }}
-          </a>
+        <!-- Links -->
+        <p class="mt-3 mb-0">
+          {% if work_wikidata_link %}
+          <a href="{{work_wikidata_link}}" target="_blank">{{ _('Wikidata') }}</a>
+          {% endif %}
+          {% if work_wikipedia_link %}
+          | <a href="{{work_wikipedia_link}}" target="_blank">{{ _('Wikipedia') }}</a>
+          {% endif %}
+          {% if work_commons_link %}
+          | <a href="{{work_commons_link}}" target="_blank">{{ _('Wikimedia Commons') }}</a>
+          {% endif %}
+          {% if work_wikiquote_link %}
+          | <a href="{{work_wikiquote_link}}" target="_blank">{{ _('Wikiquote') }}</a>
+          {% endif %}
         </p>
-        {% endif %}
       </div>    
     </div>
     <hr class="my-4">
@@ -53,18 +60,30 @@
           <h3 class="detail-card-title">
             <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
           </h3>
+          {% if work_publication_date %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Publication date') }}:</span>
-            {{work_publication_date if work_publication_date else _('Unknown')}}
+            {{ work_publication_date }}
           </div>
+          {% endif %}          
+          {% if work_creation_date %}
+          <div class="detail-item">
+            <span class="detail-label">{{ _('Creation date') }}:</span>
+            {{ work_creation_date }}
+          </div>
+          {% endif %}
+          {% if work_language %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Language') }}:</span>
-            {{work_language if work_language else _('Unknown')}}
+            {{ work_language }}
           </div>
+          {% endif %}
+          {% if work_country %}
           <div class="detail-item">
             <span class="detail-label">{{ _('Country of origin') }}:</span>
-            {{work_country if work_country else _('Unknown')}}
+            {{ work_country }}
           </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-md-6">

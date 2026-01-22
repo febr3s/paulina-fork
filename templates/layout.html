@@ -215,11 +215,11 @@
                       id="nationality-combobox"
                       placeholder="{{ _('Type to filter...') }}"
                       autocomplete="off"
-                        {% if prefill_country_qid %}
-                        value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
-                        {% elif request.args.get('nationality') %}
-                        value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('nationality') %}{{country['country_name']}}{% endif %}{% endfor %}"
-                        {% endif %}>
+                      {% if prefill_country_qid %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% elif request.args.get('nationality') %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('nationality') %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% endif %}>
                 <select class="form-select filter border-black shadow-none"
                       name="nationality" id="nationality" style="display:none">
                   <option value="">{{ _('Any') }}</option>
@@ -255,7 +255,17 @@
             </div>
             <div class="py-2 px-2">
               <label for="country-of-origin"><strong>{{ _('Country of origin') }}</strong></label>
-              <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin">
+               <div class="combobox-container">
+                <input type="text" class="form-control filter border-black shadow-none"
+                      id="country-of-origin-combobox"
+                      placeholder="{{ _('Type to filter...') }}"
+                      autocomplete="off"
+                      {% if prefill_country_qid %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==prefill_country_qid %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% elif request.args.get('country_of_origin') %}
+                      value="{% for country in COUNTRIES %}{% if country['qid']==request.args.get('country_of_origin') %}{{country['country_name']}}{% endif %}{% endfor %}"
+                      {% endif %}>
+                <select class="form-select filter border-black shadow-none" name="country_of_origin" id="country-of-origin" style="display:none">
                 <option value="">{{ _('Any') }}</option>
                 {% for country in COUNTRIES %}
                 <option value="{{ country['qid'] }}"
@@ -265,6 +275,8 @@
                   {{ country['country_name'] }}</option>
                 {% endfor %}
               </select>
+                <ul class="dropdown-menu w-100" id="country-of-origin-dropdown"></ul>
+              </div>
             </div>
           </div>
         </details>
@@ -377,9 +389,10 @@
   });
 </script>
 <script>
-  const combobox = document.getElementById('nationality-combobox');
-  const dropdown = document.getElementById('nationality-dropdown');
-  const select = document.getElementById('nationality');
+function DropdownSelector(inputId, selectId, dropdownId) {
+  const combobox = document.getElementById(inputId);
+  const select = document.getElementById(selectId);
+  const dropdown = document.getElementById(dropdownId);
   
   // Populate dropdown with options
   function updateDropdown(filter = '') {
@@ -398,7 +411,7 @@
       const a = document.createElement('a');
       a.classList.add('dropdown-item', 'text-muted');
       a.href = '#';
-      a.textContent = 'No option';
+      a.textContent = "{{ _('No matching option') }}";
       li.appendChild(a);
       dropdown.appendChild(li);
     } else {
@@ -419,19 +432,19 @@
       });
     }
   }
-  
-  // Initialize dropdown
+
+   // Initialize dropdown
   updateDropdown();
-  
+
   combobox.addEventListener('input', (e) => {
     updateDropdown(e.target.value);
     dropdown.classList.add('show');
   });
 
   combobox.addEventListener('keydown', (e) => {
+    const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
+    const activeItem = dropdown.querySelector('.dropdown-item.active');
     if (e.key === 'Enter') {
-      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
-      const activeItem = dropdown.querySelector('.dropdown-item.active');
       if (items.length === 1) {
         e.preventDefault();
         items[0].click();
@@ -441,7 +454,6 @@
       }
     } else if (['ArrowDown', 'ArrowUp'].includes(e.key) && dropdown.classList.contains('show')) {
       e.preventDefault();
-      const items = dropdown.querySelectorAll('.dropdown-item:not(.text-muted)');
       if (items.length === 0) return;
       
       let currentIndex = -1;
@@ -492,11 +504,14 @@
   // Prevent form submission if no valid option is selected
   document.querySelector('form[role="search"]').addEventListener('submit', (e) => {
     const noOptionItem = dropdown.querySelector('.text-muted');
-    if ((combobox.value && !select.value) || noOptionItem) {
+    if ((combobox.value && combobox.value != select.selectedOptions[0].text) || noOptionItem) {
       e.preventDefault();
       combobox.focus();
-      alert('Please select a valid option from the dropdown or clear the nationality field');
+      alert("{{ _('Please select a valid option from the country dropdown.') }}");
     }
   });
+}
+DropdownSelector('nationality-combobox', 'nationality', 'nationality-dropdown');
+DropdownSelector('country-of-origin-combobox', 'country-of-origin', 'country-of-origin-dropdown');
 </script>
 </html>

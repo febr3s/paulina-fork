@@ -356,12 +356,14 @@ h3 {
 
 /* Combobox styles */
 #nationality-combobox,
+#country-of-origin-combobox,
 #author-nationality-combobox,
 #author-country-of-birth-combobox  {
   background-color: #fcdb1a;
 }
 
 #nationality-combobox:hover,
+#country-of-origin-combobox:hover,
 #author-nationality-combobox:hover,
 #author-country-of-birth-combobox:hover {
   background-color: #ffe65b;
@@ -372,6 +374,7 @@ h3 {
 }
 
 #nationality-dropdown,
+#country-of-origin-dropdown,
 #author-nationality-dropdown,
 #author-country-of-birth-dropdown {
   position: absolute;
@@ -387,18 +390,21 @@ h3 {
 }
 
 #nationality-dropdown::-webkit-scrollbar,
+#country-of-origin-dropdown::-webkit-scrollbar,
 #author-nationality-dropdown::-webkit-scrollbar,
 #author-country-of-birth-dropdown::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
 
 #nationality-dropdown.show,
+#country-of-origin-dropdown.show,
 #author-nationality-dropdown.show,
 #author-country-of-birth-dropdown.show {
   display: block;
 }
 
 #nationality-dropdown .dropdown-item,
+#country-of-origin-dropdown .dropdown-item,
 #author-nationality-dropdown .dropdown-item,
 #author-country-of-birth-dropdown .dropdown-item {
   padding: 0.5rem 1rem;
@@ -406,7 +412,8 @@ h3 {
 }
 
 #nationality-dropdown .dropdown-item:hover,
-#author-nationality-dropdown .dropdown-item:hover, 
+#country-of-origin-dropdown .dropdown-item:hover,
+#author-nationality-dropdown .dropdown-item:hover,
 #author-country-of-birth-dropdown .dropdown-item:hover {
   background-color: #ffe65b;
 }
