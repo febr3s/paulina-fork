@@ -355,11 +355,17 @@ h3 {
 }
 
 /* Combobox styles */
-#nationality-combobox, #country-of-origin-combobox {
+#nationality-combobox,
+#country-of-origin-combobox,
+#author-nationality-combobox,
+#author-country-of-birth-combobox  {
   background-color: #fcdb1a;
 }
 
-#nationality-combobox:hover, #country-of-origin-combobox:hover {
+#nationality-combobox:hover,
+#country-of-origin-combobox:hover,
+#author-nationality-combobox:hover,
+#author-country-of-birth-combobox:hover {
   background-color: #ffe65b;
 }
 
@@ -367,7 +373,10 @@ h3 {
   position: relative;
 }
 
-#nationality-dropdown, #country-of-origin-dropdown {
+#nationality-dropdown,
+#country-of-origin-dropdown,
+#author-nationality-dropdown,
+#author-country-of-birth-dropdown {
   position: absolute;
   z-index: 1000;
   max-height: 300px;
@@ -380,24 +389,304 @@ h3 {
   -ms-overflow-style: none; /* IE/Edge */
 }
 
-#nationality-dropdown::-webkit-scrollbar, #country-of-origin-dropdown::-webkit-scrollbar {
+#nationality-dropdown::-webkit-scrollbar,
+#country-of-origin-dropdown::-webkit-scrollbar,
+#author-nationality-dropdown::-webkit-scrollbar,
+#author-country-of-birth-dropdown::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
 
-#nationality-dropdown.show, #country-of-origin-dropdown.show {
+#nationality-dropdown.show,
+#country-of-origin-dropdown.show,
+#author-nationality-dropdown.show,
+#author-country-of-birth-dropdown.show {
   display: block;
 }
 
-#nationality-dropdown .dropdown-item, #country-of-origin-dropdown .dropdown-item {
+#nationality-dropdown .dropdown-item,
+#country-of-origin-dropdown .dropdown-item,
+#author-nationality-dropdown .dropdown-item,
+#author-country-of-birth-dropdown .dropdown-item {
   padding: 0.5rem 1rem;
   color: black;
 }
 
-#nationality-dropdown .dropdown-item:hover, #country-of-origin-dropdown .dropdown-item:hover {
+#nationality-dropdown .dropdown-item:hover,
+#country-of-origin-dropdown .dropdown-item:hover,
+#author-nationality-dropdown .dropdown-item:hover,
+#author-country-of-birth-dropdown .dropdown-item:hover {
   background-color: #ffe65b;
 }
 
 .dropdown-item.active, .dropdown-item:active {
   --bs-dropdown-link-active-bg: #ffee8d;
   background-color: var(--bs-dropdown-link-active-bg);
+}
+
+
+/* Gender Select */
+#author-gender {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#author-gender:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+
+/* OAuth/User Menu Styles */
+.btn-auth {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  font-weight: 400;
+  transition: background-color .15s ease-in-out;
+}
+
+.btn-auth:hover {
+  background-color: #71c3ec;
+  color: black;
+   border: 1px solid black;
+}
+
+/* Mobile login button */
+@media (max-width: 991.98px) {
+  .btn-auth {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-auth:hover {
+    border-color: black
+  }
+}
+
+.user-dropdown .dropdown-menu {
+  background-color: #71c3ec;
+  border: 1px solid black;
+  min-width: auto;
+  width: max-content;
+}
+
+.user-dropdown .dropdown-item {
+  color: black;
+  transition: background-color .15s ease-in-out;
+   white-space: nowrap;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background-color: #29a4e2;
+  color: black;
+}
+
+.user-dropdown .dropdown-divider {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.user-dropdown .dropdown-item i {
+  margin-right: 0.5rem;
+}
+
+
+/* Add author form styles */
+.wikidata-search-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.wikidata-search-results .wikidata-result-item:hover {
+  background-color: #e7f1ff;
+}
+
+.wikidata-search-results .free-text-option:hover {
+  background-color: #fff3cd;
+}
+
+.success-message {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #155724;
+}
+
+.success-message h3 {
+    margin-top: 0;
+    color: #155724;
+}
+
+.success-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.success-links .btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.success-links .btn-primary {
+    background-color: #28a745;
+    color: white;
+}
+
+.success-links .btn-primary:hover {
+    background-color: #218838;
+}
+
+.success-links .btn-secondary {
+    background-color: #007bff;
+    color: white;
+}
+
+.success-links .btn-secondary:hover {
+    background-color: #0056b3;
+}
+
+.success-links .btn-outline {
+    background-color: white;
+    color: #155724;
+    border: 2px solid #155724;
+}
+
+.success-links .btn-outline:hover {
+    background-color: #155724;
+    color: white;
+}
+
+
+/* Wikidata Search Inputs */
+#author-nationality,
+#author-place-of-birth,
+#author-occupation,
+#author-ethnicity {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#author-nationality:focus,
+#author-place-of-birth:focus,
+#author-occupation:focus,
+#author-ethnicity:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+#author-place-of-birth::placeholder,
+#author-nationality::placeholder,
+#author-occupation::placeholder,
+#author-ethnicity::placeholder {
+  color: #000;
+  opacity: 0.7; 
+}
+
+#author-place-of-birth-selected .badge,
+#author-nationality-selected .badge,
+#author-selected-occupations .badge,
+#author-ethnicity-selected .badge {
+  background-color: #29a4e2;
+  color: white;
+  padding: 0.35em 0.65em;
+  font-size: 0.875em;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#author-place-of-birth-selected .badge .btn-close,
+#author-nationality-selected .badge .btn-close,
+#author-selected-occupations .badge .btn-close,
+#author-ethnicity-selected .badge .btn-close {
+  font-size: 0.75em;
+  opacity: 0.7;
+  filter: invert(1);
+}
+
+#author-place-of-birth-selected .badge .btn-close:hover,
+#author-nationality-selected .badge .btn-close:hover,
+#author-selected-occupations .badge .btn-close:hover,
+#author-ethnicity-selected .badge .btn-close:hover {
+  opacity: 1;
+}
+
+.wikidata-search-results {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #000;
+  border-top: none;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  margin-top: -1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wikidata-search-results .search-result-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.wikidata-search-results .search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.wikidata-search-results .search-result-item:last-child {
+  border-bottom: none;
+}
+
+.wikidata-search-results .text-center {
+  padding: 1rem;
+  color: #6c757d;
+}
+
+
+/* date of birth and date input fields */
+.date-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-part-input.year-input {
+  width: 90px;
+}
+
+.date-part-input.month-input,
+.date-part-input.day-input {
+  width: 75px;
+}
+
+.date-separator {
+  color: #666;
+  font-weight: bold;
+  user-select: none;
 }

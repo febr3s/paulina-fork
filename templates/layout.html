@@ -52,11 +52,44 @@
            onmouseover="this.src='{{paulina_icon}}';" onmouseout="this.src='{{paulina_icon_bw}}';"
            width="30" height="30" class="d-inline-block align-top" alt="{{ _('Home') }}">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems"
-            aria-controls="menuItems" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="menuItems">
+    
+    <!-- Mobile Login -->
+    <div class="d-flex d-lg-none align-items-center order-2">
+      {% if session.get('wikimedia_username') %}
+        <div class="dropdown user-dropdown me-2">
+          <button class="btn btn-md btn-auth dropdown-toggle" type="button" id="userDropdownMobile" 
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> {{ session.get('wikimedia_username') }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMobile">
+               <li>
+              <a class="dropdown-item" href="{{ url_for('add_author') }}">
+                <i class="bi bi-person-plus"></i> {{ _('Add Author') }}
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+            <li>
+              <a class="dropdown-item" href="{{ url_for('logout') }}">
+                <i class="bi bi-box-arrow-right"></i> {{ _('Logout') }}
+              </a>
+            </li>
+          </ul>
+        </div>
+           {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-sm btn-auth me-2">
+        {{ _('Login with Wikimedia') }}
+        </a>
+      {% endif %}
+      
+      <!-- Mobile Menu Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuItems"
+              aria-controls="menuItems" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    
+    <div class="collapse navbar-collapse order-4" id="menuItems">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="/">{{ _('Home') }}</a>
@@ -68,6 +101,37 @@
           <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
         </li>
       </ul>
+      
+      <!-- Desktop Login -->
+      <div class="d-none d-lg-flex align-items-center gap-3 me-3">
+        {% if session.get('wikimedia_username') %}
+          <div class="dropdown user-dropdown">
+            <button class="btn btn-md btn-auth dropdown-toggle" type="button" id="userDropdownDesktop" 
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> {{ session.get('wikimedia_username') }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownDesktop">
+               <li>
+                <a class="dropdown-item" href="{{ url_for('add_author') }}">
+                  <i class="bi bi-person-plus"></i> {{ _('Add Author') }}
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="{{ url_for('logout') }}">
+                  <i class="bi bi-box-arrow-right"></i> {{ _('Logout') }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <span class="fw-light small">{{ _('Login with your Wikimedia account to add/edit data') }}</span>
+          <a href="{{ url_for('login') }}" class="btn btn-md btn-auth">
+            <i class="bi bi-box-arrow-in-right"></i> {{ _('Login') }}
+          </a>
+        {% endif %}
+      </div>
+      
       <form class="d-flex" method="GET" id="language-form">
         <select class="form-select me-1 border-black shadow-none" name="language" id="language-select">
           {% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
@@ -87,6 +151,21 @@
     </div>
   </div>
 </nav>
+
+
+<!-- FLASH MESSAGES -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
 {% block presentation %}
 {% endblock %}

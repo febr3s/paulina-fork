@@ -20,6 +20,77 @@ If you'd like to run application in DEBUG mode, uncomment the second line and se
 
 By default, `DEBUG` is set to `False`.
 
+### Setting Up OAuth for Local Development
+
+Paulina uses OAuth 2.0 to authenticate users and make edits to Wikidata. To test Wikidata editing features locally, you need to create your own OAuth consumer credentials.
+
+#### Step 1: Register Your OAuth Consumer
+
+1. **Go to the OAuth Consumer Registration page:**
+   
+  https://meta.wikimedia.org/wiki/Special:OAuthConsumerRegistration/propose/oauth2
+
+2. **Fill out the registration form:**
+
+   - **Application name:**  
+     `Paulina Local Dev - YourWikimediaUsername`  
+     (Replace `YourWikimediaUsername` with your actual username)
+
+   - **Application version:**  
+     `1.0`
+
+   - **Application description:**  
+     `Local development instance of Paulina for testing Wikidata editing features`
+
+   - **This consumer is for use only by [username]:**  
+     **Leave this UNCHECKED** (This callback URL field only appears after leaving it unchecked)
+
+   - **OAuth "callback" URL:**  
+     `http://localhost:5000/oauth-callback`  
+
+   - **Applicable grants:**  
+     Check these boxes:
+     - Basic rights
+     - Edit existing pages
+     - Create, edit, and move pages
+
+3. **Click "Propose consumer"**
+
+#### Step 2: Copy Your Credentials
+
+After registration, you'll see a confirmation page with your credentials:
+
+**Important:** Copy both tokens immediately. The secret is only shown once. Test consumers expire after 30 days. Create a new one when needed.
+
+#### Step 3: Update Config.py
+
+Update the config.py file with the copied tokens:
+
+CLIENT_KEY = "paste-your-consumer-token-here"
+cLIENT_SECRET = "paste-your-secret-token-here"
+
+Update the redirect URL:
+REDIRECT_URL = "http://localhost:5000/oauth-callback"
+
+#### Step 4 Update User Agent
+Replace the placeholder email with your actual contact email:
+
+USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'
+
+
+## Running Paulina: Test vs Production
+Paulina can run in test mode or production mode using a single configuration file.
+
+- Test mode (recommended for local development): uses test.wikidata.org
+ to safely test edits without affecting real data. For test mode run: 
+
+ python app.py test
+
+- Production mode: uses wikidata.org for live data. For production mode run:
+
+python app.py
+
+
 ## Complete documentation
 If you'd like to learn more about the software:
 - [User documentation](https://www.wikidata.org/wiki/Wikidata:Tools/Paulina)
