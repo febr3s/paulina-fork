@@ -4,7 +4,7 @@ and works in the public domain using Wikidata and Python.
 
 ## Requirements
 * Python 3.11 or later.
-* Python modules: flask, Flask-Babel, Flask-Caching, python-dateutil, requests.
+* Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, python-dateutil, requests, requests-oauthlib.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
 ## Config file
@@ -37,7 +37,7 @@ Paulina uses OAuth 2.0 to authenticate users and make edits to Wikidata. To test
      (Replace `YourWikimediaUsername` with your actual username)
 
    - **Application version:**  
-     `1.0`
+     `2.0`
 
    - **Application description:**  
      `Local development instance of Paulina for testing Wikidata editing features`
@@ -62,20 +62,22 @@ After registration, you'll see a confirmation page with your credentials:
 
 **Important:** Copy both tokens immediately. The secret is only shown once. Test consumers expire after 30 days. Create a new one when needed.
 
-#### Step 3: Update Config.py
+#### Step 3: Update config.py
 
 Update the config.py file with the copied tokens:
 
-CLIENT_KEY = "paste-your-consumer-token-here"
-cLIENT_SECRET = "paste-your-secret-token-here"
+`CLIENT_ID = "paste-your-client-application-key-here"`
+
+`CLIENT_SECRET = "paste-your-client-application-secret-here"`
 
 Update the redirect URL:
-REDIRECT_URL = "http://localhost:5000/oauth-callback"
+
+`REDIRECT_URL = "http://localhost:5000/oauth-callback"`
 
 #### Step 4 Update User Agent
 Replace the placeholder email with your actual contact email:
 
-USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'
+`USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'`
 
 
 ## Running Paulina: Test vs Production
@@ -84,11 +86,11 @@ Paulina can run in test mode or production mode using a single configuration fil
 - Test mode (recommended for local development): uses test.wikidata.org
  to safely test edits without affecting real data. For test mode run: 
 
- python app.py test
+  `python app.py test`
 
 - Production mode: uses wikidata.org for live data. For production mode run:
 
-python app.py
+  `python app.py`
 
 
 ## Complete documentation
