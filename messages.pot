@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-14 12:44-0300\n"
+"POT-Creation-Date: 2026-01-22 15:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: app.py:73 templates/layout.html:65 templates/layout.html:241
+#: app.py:146 templates/layout.html:98 templates/layout.html:320
 msgid "About"
 msgstr ""
 
@@ -45,21 +45,75 @@ msgstr ""
 msgid "List of works"
 msgstr ""
 
-#: app.py:251
+#: app.py:324
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:268
+#: app.py:341
 msgid "Unknown term"
 msgstr ""
 
-#: app.py:270 templates/countries.html:7 templates/layout.html:68
-#: templates/layout.html:258
+#: app.py:343 templates/countries.html:7 templates/layout.html:101
+#: templates/layout.html:337
 msgid "Countries and terms"
 msgstr ""
 
-#: app.py:306
+#: app.py:450
+msgid "Login failed. Please try again."
+msgstr ""
+
+#: app.py:460 app.py:531
+msgid "Authentication failed. Please try again."
+msgstr ""
+
+#: app.py:465
+msgid "Login session expired. Please try again."
+msgstr ""
+
+#: app.py:472
+msgid "Invalid state parameter. Please try again."
+msgstr ""
+
+#: app.py:492
+msgid "Failed to obtain access token. Please try again."
+msgstr ""
+
+#: app.py:519
+msgid "Failed to get user profile. Please try again."
+msgstr ""
+
+#: app.py:543
+msgid "You have been logged out."
+msgstr ""
+
+#: app.py:555
+msgid "Please login to add an author."
+msgstr ""
+
+#: app.py:560
+msgid "Your session has expired. Please login again."
+msgstr ""
+
+#: app.py:568
+msgid "Session expired. Please login again."
+msgstr ""
+
+#: app.py:607
+#, python-format
+msgid "Error creating author: %(error)s"
+msgstr ""
+
+#: app.py:613 app.py:625 app.py:656 templates/add-author.html:39
+#: templates/layout.html:67 templates/layout.html:116
+msgid "Add Author"
+msgstr ""
+
+#: app.py:619
+msgid "An error occurred while creating the author. Please try again."
+msgstr ""
+
+#: app.py:674
 msgid "404 error"
 msgstr ""
 
@@ -277,7 +331,7 @@ msgstr ""
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:238
+#: templates/about.html:7 templates/layout.html:317
 msgid "About Paulina"
 msgstr ""
 
@@ -286,19 +340,19 @@ msgstr ""
 msgid "Wikidata"
 msgstr ""
 
-#: templates/about.html:9 templates/layout.html:224
+#: templates/about.html:9 templates/layout.html:303
 msgid "Ártica - Online Cultural Center"
 msgstr ""
 
-#: templates/about.html:10 templates/layout.html:227
+#: templates/about.html:10 templates/layout.html:306
 msgid "Creative Commons Uruguay"
 msgstr ""
 
-#: templates/about.html:11 templates/layout.html:230
+#: templates/about.html:11 templates/layout.html:309
 msgid "Data Uruguay"
 msgstr ""
 
-#: templates/about.html:12 templates/layout.html:233
+#: templates/about.html:12 templates/layout.html:312
 msgid "Wikimedistas de Uruguay"
 msgstr ""
 
@@ -470,7 +524,7 @@ msgid "Description"
 msgstr ""
 
 #: templates/add-author.html:80
-msgid "e.g., Uruguayan politician and medical doctor"
+msgid "e.g., Uruguayan writer and politician"
 msgstr ""
 
 #: templates/add-author.html:82
@@ -497,7 +551,7 @@ msgstr ""
 msgid "Biographical Information"
 msgstr ""
 
-#: templates/add-author.html:122 templates/author.html:112
+#: templates/add-author.html:122 templates/author.html:113
 #: templates/layout.html:212
 msgid "Nationality"
 msgstr ""
@@ -513,14 +567,14 @@ msgstr ""
 msgid "Add reference"
 msgstr ""
 
-#: templates/add-author.html:159 templates/author.html:122
+#: templates/add-author.html:159 templates/author.html:125
 #: templates/layout.html:201
 msgid "Gender"
 msgstr ""
 
 #: templates/add-author.html:166 templates/layout.html:203
 #: templates/layout.html:225 templates/layout.html:248
-#: templates/layout.html:259
+#: templates/layout.html:269
 msgid "Any"
 msgstr ""
 
@@ -528,7 +582,7 @@ msgstr ""
 msgid "Please select a gender"
 msgstr ""
 
-#: templates/add-author.html:197 templates/author.html:136
+#: templates/add-author.html:197 templates/author.html:145
 msgid "Place of birth"
 msgstr ""
 
@@ -536,27 +590,27 @@ msgstr ""
 msgid "e.g., Buenos Aires, Tokyo, Lagos"
 msgstr ""
 
-#: templates/add-author.html:234 templates/author.html:132
+#: templates/add-author.html:234 templates/author.html:139
 msgid "Occupation"
 msgstr ""
 
 #: templates/add-author.html:240
-msgid "e.g., Writer, Poet, Novelist"
+msgid "e.g., writer, painter, sculptor"
 msgstr ""
 
-#: templates/add-author.html:276 templates/author.html:117
+#: templates/add-author.html:276 templates/author.html:119
 msgid "Ethnicity"
 msgstr ""
 
 #: templates/add-author.html:283
-msgid "e.g., Polish"
+msgid "e.g., Aymara, Inuit, Zulu"
 msgstr ""
 
 #: templates/add-author.html:298
 msgid "Type to search Wikidata"
 msgstr ""
 
-#: templates/add-author.html:320 templates/author.html:126
+#: templates/add-author.html:320 templates/author.html:131
 msgid "Date of birth"
 msgstr ""
 
@@ -572,7 +626,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: templates/add-author.html:374 templates/author.html:144
+#: templates/add-author.html:374 templates/author.html:157
 msgid "Date of death"
 msgstr ""
 
@@ -848,45 +902,13 @@ msgstr ""
 msgid "Official website"
 msgstr ""
 
-#: templates/author.html:107
-msgid "Biography"
-msgstr ""
-
-#: templates/author.html:113 templates/layout.html:133
-msgid "Nationality"
-msgstr ""
-
-#: templates/author.html:119
-msgid "Ethnicity"
-msgstr ""
-
-#: templates/author.html:125 templates/layout.html:122
-msgid "Gender"
-msgstr ""
-
-#: templates/author.html:131
-msgid "Date of birth"
-msgstr ""
-
 #: templates/author.html:134 templates/author.html:160
 #, python-format
 msgid "(%(author_age)s years)"
 msgstr ""
 
-#: templates/author.html:139
-msgid "Occupation"
-msgstr ""
-
-#: templates/author.html:145
-msgid "Place of birth"
-msgstr ""
-
 #: templates/author.html:151
 msgid "Country of birth"
-msgstr ""
-
-#: templates/author.html:157
-msgid "Date of death"
 msgstr ""
 
 #: templates/countries.html:8
@@ -927,7 +949,7 @@ msgstr ""
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr ""
 
-#: templates/country.html:34 templates/layout.html:167
+#: templates/country.html:34 templates/layout.html:246
 msgid "Type of work"
 msgstr ""
 
@@ -936,8 +958,8 @@ msgid "Number of works in public domain"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:271 templates/layout.html:273
-#: templates/layout.html:275
+#: templates/layout.html:350 templates/layout.html:352
+#: templates/layout.html:354
 msgid "Paulina logo"
 msgstr ""
 
@@ -1024,7 +1046,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:278
+#: templates/layout.html:31 templates/layout.html:357
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -1040,68 +1062,79 @@ msgstr ""
 msgid "Login with your Wikimedia account to add/edit data"
 msgstr ""
 
-#: templates/layout.html:112
+#: templates/layout.html:130
+msgid "Login"
+msgstr ""
+
+#: templates/layout.html:148
+msgid "Select"
+msgstr ""
+
+#: templates/layout.html:183 templates/layout.html:186
+msgid "Authors"
+msgstr ""
+
+#: templates/layout.html:184 templates/layout.html:187
+msgid "Works"
+msgstr ""
+
+#: templates/layout.html:191
 msgid "Search with Paulina"
 msgstr ""
 
-#: templates/layout.html:112 templates/layout.html:114
+#: templates/layout.html:191 templates/layout.html:193
 msgid "Search"
 msgstr ""
 
-#: templates/layout.html:119
+#: templates/layout.html:198
 msgid "Advanced search"
 msgstr ""
 
-#: templates/layout.html:124 templates/layout.html:146
-#: templates/layout.html:169 templates/layout.html:190
-msgid "Any"
-msgstr ""
-
-#: templates/layout.html:137 templates/layout.html:182
+#: templates/layout.html:216 templates/layout.html:261
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:159
+#: templates/layout.html:238
 msgid "In public domain"
 msgstr ""
 
-#: templates/layout.html:162
+#: templates/layout.html:241
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:178 templates/work.html:83
+#: templates/layout.html:257 templates/work.html:83
 msgid "Country of origin"
 msgstr ""
 
-#: templates/layout.html:221
+#: templates/layout.html:300
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:244
+#: templates/layout.html:323
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:247
+#: templates/layout.html:326
 msgid "Help translate"
 msgstr ""
 
-#: templates/layout.html:252
+#: templates/layout.html:331
 msgid "Help"
 msgstr ""
 
-#: templates/layout.html:255
+#: templates/layout.html:334
 msgid "Documentation"
 msgstr ""
 
-#: templates/layout.html:279
+#: templates/layout.html:358
 msgid "Powered by Wikidata."
 msgstr ""
 
-#: templates/layout.html:335
+#: templates/layout.html:414
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:431
+#: templates/layout.html:510
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
