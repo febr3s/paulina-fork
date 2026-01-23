@@ -7,6 +7,7 @@ Includes Wikidata property/item ID constants and utility functions
 import json
 import requests
 import os
+import traceback
 import urllib.parse as urlparse
 from flask_babel import lazy_gettext as _l, gettext as _ 
 
@@ -223,7 +224,6 @@ class WikidataAPI:
                 
         except Exception as e:
             print(f"Exception creating item: {e}")
-            import traceback
             traceback.print_exc()
             return {
                 'success': False,

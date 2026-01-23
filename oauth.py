@@ -1,5 +1,6 @@
 from flask import session, current_app as app
 from flask_babel import _
+import requests
 from requests_oauthlib import OAuth2Session
 import time
 
@@ -53,8 +54,6 @@ def token_refresh():
             return False
         
         try:
-            import requests
-            
             refresh_data = {
                 'grant_type': 'refresh_token',
                 'refresh_token': token['refresh_token'],
