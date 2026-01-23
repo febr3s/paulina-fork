@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-22 15:37-0300\n"
+"POT-Creation-Date: 2026-01-23 14:12-0300\n"
 "PO-Revision-Date: 2025-02-13 05:02+0000\n"
 "Last-Translator: Juan Sebastian Quintero Santacruz "
 "<juancho2291@hotmail.com>\n"
@@ -62,62 +62,62 @@ msgstr "Nekonata termino"
 msgid "Countries and terms"
 msgstr "Landoj kaj terminoj"
 
-#: app.py:450
+#: app.py:449
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:460 app.py:531
+#: app.py:459 app.py:529
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:465
+#: app.py:464
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:472
+#: app.py:471
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:492
+#: app.py:491
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:519
+#: app.py:518
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:543
+#: app.py:541
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:555
+#: app.py:553
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:560
+#: app.py:558
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:568
+#: app.py:566
 msgid "Session expired. Please login again."
 msgstr ""
 
-#: app.py:607
+#: app.py:605
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Mortdato"
 
-#: app.py:613 app.py:625 app.py:656 templates/add-author.html:39
+#: app.py:611 app.py:623 app.py:654 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:116
 #, fuzzy
 msgid "Add Author"
 msgstr "Aŭtoro(j)"
 
-#: app.py:619
+#: app.py:617
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:674
+#: app.py:672
 msgid "404 error"
 msgstr "Eraro 404"
 
@@ -207,71 +207,22 @@ msgstr "Bildo de %(title)s."
 msgid "Flag of %(country_name)s."
 msgstr "Flago de %(country_name)s."
 
-#: wikidata_api.py:100
+#: wikidata_api.py:101
 #, python-format
 msgid "creator from %(nationality)s"
 msgstr ""
 
-#: wikidata_api.py:102
+#: wikidata_api.py:103
 msgid "creator"
 msgstr ""
 
-#: wikidata_api.py:132 wikidata_api.py:160
+#: wikidata_api.py:133 wikidata_api.py:161
 msgid "No OAuth session available"
 msgstr ""
 
-#: wikidata_api.py:146
-#, python-format
-msgid "CSRF token obtained: %(token)s..."
-msgstr ""
-
-#: wikidata_api.py:149
+#: wikidata_api.py:150
 #, python-format
 msgid "Unexpected token response: %(data)s"
-msgstr ""
-
-#: wikidata_api.py:152
-#, python-format
-msgid "Error getting CSRF token: %(error)s"
-msgstr ""
-
-#: wikidata_api.py:193
-msgid "Test mode - no authentication required"
-msgstr ""
-
-#: wikidata_api.py:195
-#, python-format
-msgid "Creating item at: %(url)s"
-msgstr ""
-
-#: wikidata_api.py:196
-#, python-format
-msgid "Item data: %(data)s"
-msgstr ""
-
-#: wikidata_api.py:204
-#, python-format
-msgid "Response status: %(status)s"
-msgstr ""
-
-#: wikidata_api.py:205
-#, python-format
-msgid "Response body: %(body)s"
-msgstr ""
-
-#: wikidata_api.py:210
-#, python-format
-msgid "Item created successfully: %(item_id)s"
-msgstr ""
-
-#: wikidata_api.py:218
-#, python-format
-msgid "Failed to create item: %(error)s"
-msgstr ""
-
-#: wikidata_api.py:225
-#, python-format
-msgid "Exception creating item: %(error)s"
 msgstr ""
 
 #: templates/add-author.html:586 wikidata_api.py:406
@@ -539,7 +490,7 @@ msgid "Description"
 msgstr ""
 
 #: templates/add-author.html:80
-msgid "e.g., Uruguayan writer and politician"
+msgid "e.g., Uruguayan doctor, writer, and politician"
 msgstr ""
 
 #: templates/add-author.html:82
@@ -1294,9 +1245,6 @@ msgstr ""
 #~ msgid "Image"
 #~ msgstr "Bildo"
 
-#~ msgid "Description"
-#~ msgstr "Priskribo"
-
 #~ msgid "Wikipedia link"
 #~ msgstr "Vikipedia hiperligo"
 
@@ -1329,16 +1277,4 @@ msgstr ""
 
 #~ msgid "Unknown"
 #~ msgstr "Nekonata"
-
-#~ msgid "e.g., Uruguayan politician and medical doctor"
-#~ msgstr ""
-
-#~ msgid "e.g., Writer, Poet, Novelist"
-#~ msgstr ""
-
-#~ msgid "e.g., Polish"
-#~ msgstr ""
-
-#~ msgid "e.g., Aymara, Poles"
-#~ msgstr ""
 
