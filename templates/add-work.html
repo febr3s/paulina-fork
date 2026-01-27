@@ -1,0 +1,1005 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+{% if form_data and not success_item_id %}
+<div class="container-fluid p-2">
+    <div class="form-retained-notice text-danger">
+        <i class="bi bi-info-circle me-2"></i>
+        {{ _('Please fix the errors and resubmit.') }}
+    </div>
+</div>
+{% endif %}
+
+
+{% if success_item_id %}
+<div class="success-message position-relative alert alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="{{ _('Close') }}"></button>
+  <h3>{{ _('Work Created Successfully!') }}</h3>
+  <p>
+    {{ _('The work has been added to Wikidata with ID:') }} 
+    <strong>{{ success_item_id }}</strong>
+  </p>
+  <div class="success-links">
+    <a href="{{ wikidata_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary" style="background-color: transparent; color: #222; border-width: 2px;">
+      {{ _('View on Wikidata') }} ↗
+    </a>
+    <a href="{{ paulina_url }}" class="btn" style="background-color: #29a4e2; color: #fff;">
+      {{ _('View on Paulina') }}
+    </a>
+  </div>
+</div>
+{% endif %}
+
+<div class="container-fluid p-2">
+  <div class="card main-card mb-4 p-4">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-book-fill me-2 section-icon"></i>
+      <h1 class="mb-0">{{ _('Add Work') }}</h1>
+    </div>
+
+    <form id="addWorkForm" class="needs-validation" novalidate method="POST" action="{{ url_for('add_work') }}">
+      
+      <!-- Basic Information with Duplicate Detection Sidebar -->
+      <div class="row mb-4">
+        <div class="col-md-8">
+          <!-- Work Title -->
+          <div class="mb-3">
+            <label for="work-title" class="form-label">
+              <strong>{{ _('Title') }} <span class="text-danger">*</span></strong>
+            </label>
+            <input type="text" 
+                   class="form-control border-black shadow-none" 
+                   id="work-title" 
+                   name="title" 
+                   value="{{ form_data.get('title', '') if form_data else '' }}"
+                   placeholder="{{ _('e.g., The Araucaniad') }}"
+                   required
+                   autocomplete="off">
+            <div class="invalid-feedback">
+              {{ _('Please enter the work title') }}
+            </div>
+            <div class="form-text">
+              {{ _('Matching works will appear as you type') }}
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="work-description" class="form-label">
+              <strong>{{ _('Description') }}</strong>
+            </label>
+            <textarea class="form-control border-black shadow-none" 
+                      id="work-description" 
+                      name="description" 
+                      rows="3" 
+                      placeholder="{{ _('e.g., novel by Miguel de Cervantes') }}">{{ form_data.get('description', '') if form_data else '' }}</textarea>
+            <div class="invalid-feedback">
+              {{ _('Please enter a brief description') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Potential Duplicates Sidebar -->
+        <div class="col-md-4 mt-4">
+          <div id="work-duplicates-sidebar" class="border border-secondary rounded p-3 bg-light d-none">
+            <h6 class="text-secondary mb-2">
+              <i class="bi bi-search me-1"></i>{{ _('Possible matches on Wikidata:') }}
+            </h6>
+            <div id="work-duplicates-container" style="max-height: 400px; overflow-y: auto;">
+              <!-- Populated by JavaScript -->
+            </div>
+            <hr>
+            <button type="button" class="btn btn-sm btn-outline-secondary w-100" id="work-none-match-btn">
+              {{ _('None of these match - Continue') }}
+            </button>
+          </div>
+          <div id="work-no-matches-message" class="alert alert-success d-none" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            {{ _('No exact match found.') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Information -->
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-info-circle me-2 section-icon"></i>
+        <h3 class="mb-0">{{ _('Work Information') }}</h3>
+      </div>
+      <div class="mb-4">
+        <h2 class="h5 text-body-secondary mb-3">{{ _('Basic Work Details') }}</h2>
+        
+        <!-- Row 1: Instance Of and Author -->
+        <div class="row">
+          <!-- Instance Of (Type of Work) -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-instance-of" class="form-label">
+                {{ _('Type of work') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="work-instance-of" 
+                     name="instanceOf"
+                     placeholder="{{ _('e.g., novel, poem, play') }}"
+                     autocomplete="off">
+              
+              <div id="work-instance-of-selected" class="mt-2 d-none"></div>
+              
+              <input type="hidden" 
+                     id="work-instance-of-qid" 
+                     name="instanceOfQid">
+              
+              <div id="work-instance-of-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-instance-of')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-instance-of-references" class="mt-3 d-none">
+                <div id="work-instance-of-reference-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Author -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-author" class="form-label">
+                {{ _('Author') }} <span class="text-danger">*</span>
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="work-author" 
+                     placeholder="{{ _('e.g., Gabriel García Márquez, Virginia Woolf') }}"
+                     autocomplete="off">
+              
+              <div id="work-selected-authors" class="mt-2 d-none"></div>
+              
+              <input type="hidden" 
+                     id="work-author-qids" 
+                     name="authorQids">
+
+              <input type="hidden" 
+                    id="work-author-labels" 
+                    name="author">
+                            
+              <div id="work-author-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-author')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-author-references" class="mt-3 d-none">
+                <div id="work-author-reference-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Language and Country of Origin -->
+        <div class="row">
+          <!-- Language -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-language" class="form-label">
+                {{ _('Language') }}
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="work-language" 
+                     name="language"
+                     placeholder="{{ _('e.g., Spanish, English, French') }}"
+                     autocomplete="off">
+              
+              <input type="hidden" 
+                     id="work-language-qid" 
+                     name="languageQid">
+              
+              <div id="work-language-selected" class="mt-2 d-none"></div>
+              
+              <div id="work-language-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-language')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-language-references" class="mt-3 d-none">
+                <div id="work-language-reference-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Country of Origin -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-country" class="form-label">
+                {{ _('Country of origin') }}
+              </label>
+              
+              <input type="text" 
+                     class="form-control border-black shadow-none" 
+                     id="work-country" 
+                     name="country"
+                     placeholder="{{ _('Search for a country...') }}"
+                     autocomplete="off">
+              
+              <input type="hidden" 
+                     id="work-country-qid" 
+                     name="countryQid">
+              
+              <div id="work-country-selected" class="mt-2 d-none"></div>
+              
+              <div id="work-country-results" 
+                   class="wikidata-results-dropdown border rounded mt-1" 
+                   style="display: none;">
+              </div>
+              
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-country')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-country-references" class="mt-3 d-none">
+                <div id="work-country-reference-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Dates -->
+        <div class="row">
+          <!-- Publication Date -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-publication-date" class="form-label">
+                <strong>{{ _('Publication date') }}</strong>
+              </label>
+              
+              <div class="date-input-group">
+                <input type="number" 
+                      id="work-publication-date-day" 
+                      name="publicationDateDay"
+                      placeholder="DD" 
+                      min="0" 
+                      max="31"
+                      step="1"
+                      class="form-control date-part-input day-input"
+                      aria-label="{{ _('Day') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="work-publication-date-month" 
+                      name="publicationDateMonth"
+                      placeholder="MM" 
+                      min="0" 
+                      max="12"
+                      step="1"
+                      class="form-control date-part-input month-input"
+                      aria-label="{{ _('Month') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="work-publication-date-year" 
+                      name="publicationDateYear"
+                      placeholder="YYYY" 
+                      min="1" 
+                      max="9999"
+                      step="1"
+                      class="form-control date-part-input year-input"
+                      aria-label="{{ _('Year') }}">
+              </div>
+              
+              <!-- Hidden field to store combined date -->
+              <input type="hidden" id="publicationDate" name="publicationDate" value="{{ form_data.get('publicationDate', '') if form_data else '' }}">
+              
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-publication-date')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-publication-date-references" class="mt-3 d-none">
+                <div id="work-publication-date-reference-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Creation Date -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="work-creation-date" class="form-label">
+                <strong>{{ _('Creation date') }}</strong>
+              </label>
+              
+              <div class="date-input-group">
+                <input type="number" 
+                      id="work-creation-date-day" 
+                      name="creationDateDay"
+                      placeholder="DD" 
+                      min="0" 
+                      max="31"
+                      step="1"
+                      class="form-control date-part-input day-input"
+                      aria-label="{{ _('Day') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="work-creation-date-month" 
+                      name="creationDateMonth"
+                      placeholder="MM" 
+                      min="0" 
+                      max="12"
+                      step="1"
+                      class="form-control date-part-input month-input"
+                      aria-label="{{ _('Month') }}">
+                <span class="date-separator">-</span>
+                <input type="number" 
+                      id="work-creation-date-year" 
+                      name="creationDateYear"
+                      placeholder="YYYY" 
+                      min="1" 
+                      max="9999"
+                      step="1"
+                      class="form-control date-part-input year-input"
+                      aria-label="{{ _('Year') }}">
+              </div>
+              
+              <!-- Hidden field to store combined date -->
+              <input type="hidden" id="creationDate" name="creationDate" value="{{ form_data.get('creationDate', '') if form_data else '' }}">
+              
+              <!-- References -->
+              <button type="button" class="btn btn-sm btn-outline-secondary mt-2" 
+                      onclick="window.refManager.toggleReference('work-creation-date')">
+                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+              </button>
+              
+              <div id="work-creation-date-references" class="mt-3 d-none">
+                <div id="work-creation-date-reference-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Image Section - Collapsible -->
+      <div class="mt-3 mb-2">
+        <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#work-image-section" aria-expanded="false" aria-controls="work-image-section">
+          <i class="bi bi-plus-circle me-1"></i>{{ _('Add work image (optional)') }}
+        </button>
+      </div>
+
+      <div class="collapse" id="work-image-section">
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="p-3 border border-black rounded">
+              <div class="row d-flex justify-content-between align-items-start">
+                <div class="col-md-8">
+                  <p class="mb-3">{{ _("Search Wikimedia Commons for work's image, or enter the Commons image URL directly:") }}</p>
+                  
+                  <!-- Search Button -->
+                  <div class="mb-3">
+                    <button type="button" 
+                            class="btn border-black" 
+                            id="work-search-commons-btn"
+                            style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
+                      <i class="bi bi-search me-2"></i>{{ _('Search Commons for') }} "<span id="work-title-display">{{ form_data.get('title', '') if form_data else 'work title' }}</span>"
+                    </button>
+                    <div class="form-text mt-2">
+                      {{ _('Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below.') }}
+                    </div>
+                  </div>
+
+                  <!-- URL Input -->
+                  <div class="mb-3">
+                    <label for="work-image-url" class="form-label">{{ _('Image URL') }}</label>
+                    <div class="input-group">
+                      <input type="url" 
+                             class="form-control border-black shadow-none" 
+                             id="work-image-url" 
+                             name="imageUrl"
+                             value="{{ form_data.get('imageUrl', '') if form_data else '' }}"
+                             placeholder="https://commons.wikimedia.org/wiki/File:Example.jpg">
+                      <button type="button" class="btn btn-outline-secondary d-none" id="work-clear-image-url">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Work Image Preview -->
+                <div class="col-md-4">
+                  <div class="mb-3 d-flex flex-column align-items-center text-center">
+                    <h5 class="h5 text-body-secondary mb-1 fs-6">{{ _('Image preview') }}</h5>
+                    <div class="main-card-image-link work-image-link d-flex justify-content-center mx-auto" style="max-width: 200px; transition: none !important;">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" 
+                           alt="{{ _('Image preview') }}" 
+                           id="work-image-preview" 
+                           class="img-fluid rounded"
+                           style="max-height: 200px; object-fit: cover;">
+                    </div>
+                    <!-- Error Message -->
+                    <div id="work-image-error-message" class="alert alert-danger mt-2 d-none" role="alert">
+                      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                      {{ _('Could not load image') }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- External Links Section - Collapsible -->
+      <div class="mt-3 mb-4">
+        <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#work-external-links-section" aria-expanded="false" aria-controls="work-external-links-section">
+          <i class="bi bi-plus-circle me-1"></i>{{ _('Add external links (optional)') }}
+        </button>
+      </div>
+
+      <div class="collapse" id="work-external-links-section">
+        <div class="mb-4">
+          <div class="mb-3">
+            <label for="work-full-work-url" class="form-label">{{ _('Full work available at (URL)') }}</label>
+            <input type="url" 
+                   class="form-control border-black shadow-none" 
+                   id="work-full-work-url" 
+                   name="fullWorkUrl"
+                   value="{{ form_data.get('fullWorkUrl', '') if form_data else '' }}"
+                   placeholder="https://">
+            <div class="form-text">
+              {{ _('Enter the full URL where the work can be accessed online') }}
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="work-internet-archive-id" class="form-label">{{ _('Internet Archive ID') }}</label>
+            <input type="text" 
+                   class="form-control border-black shadow-none" 
+                   id="work-internet-archive-id" 
+                   name="internetArchiveId"
+                   value="{{ form_data.get('internetArchiveId', '') if form_data else '' }}"
+                   placeholder="e.g., donquixotedelam00cerv">
+            <div class="form-text">
+              {{ _('The identifier for this work on archive.org') }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden div to store retained form data for JS -->
+      <div id="form-data-store" 
+        {% if form_data %}
+            data-all-form-data='{{ form_data|tojson }}'
+        {% endif %}
+        style="display: none;">
+      </div>
+
+      <!-- Submit and Reset Buttons -->
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" 
+                class="btn border-black rounded-pill pill-custom btn-lg" 
+                id="work-reset-btn"
+                style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f0f0f0;">
+          <i class="bi bi-arrow-counterclockwise me-2"></i>{{ _('Reset') }}
+        </button>
+        <button type="submit" class="btn border-black rounded-pill pill-custom orange btn-lg" id="work-submit-btn">
+          <i class="bi bi-check-circle me-2"></i>{{ _('Submit') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Load reusable JS modules -->
+<script src="{{ url_for('static', filename='js/wikidata-search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/image-preview.js') }}"></script>
+<script src="{{ url_for('static', filename='js/references.js') }}"></script>
+<script src="{{ url_for('static', filename='js/duplicate-detection.js') }}"></script>
+<script src="{{ url_for('static', filename='js/form-utils.js') }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // TRANSLATABLE MESSAGES
+  
+  const wikidataMessages = {
+    searching: '{{ _("Searching Wikidata...") }}',
+    noResults: '{{ _("No Wikidata results found") }}',
+    noDescription: '{{ _("No description") }}',
+    error: '{{ _("Error searching Wikidata") }}',
+    alreadyAdded: '{{ _("This item is already added") }}',
+    alreadySelected: '{{ _("This item is already selected") }}',
+    remove: '{{ _("Remove") }}'
+  };
+  
+  const duplicateMessages = {
+    searching: '{{ _("Searching...") }}',
+    noMatch: '{{ _("No exact match found.") }}',
+    error: '{{ _("Error searching Wikidata") }}',
+    noDescription: '{{ _("No description") }}'
+  };
+  
+  const referenceMessages = {
+    reference: '{{ _("Reference") }}',
+    url: '{{ _("Reference URL") }}',
+    title: '{{ _("Title") }}',
+    retrieved: '{{ _("Date accessed") }}',
+    maxReached: '{{ _("Maximum 3 references per field") }}',
+    remove: '{{ _("Remove") }}'
+  };
+  
+  const imageMessages = {
+    invalidCommons: '{{ _("Please use an image from Wikimedia Commons.") }}',
+    loadError: '{{ _("Could not load image. Please check the URL.") }}'
+  };
+  
+  const formMessages = {
+    titleRequired: '{{ _("Title is required") }}',
+    instanceOfRequired: '{{ _("Type of work is required") }}',
+    authorRequired: '{{ _("Author is required") }}',
+    imageCommonsRequired: '{{ _("Image must be from Wikimedia Commons") }}',
+    fillRequired: '{{ _("Please fill in all required fields:") }}',
+    confirmReset: '{{ _("Are you sure you want to reset the form? All entered data will be lost.") }}',
+    enterTitleFirst: '{{ _("Please enter the work title first to search for images") }}',
+    workTitle: '{{ _("work title") }}',
+    imagePreview: '{{ _("Image preview") }}',
+    dateYearRequired: '{{ _("Year is required") }}',
+    dateYearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+    dateMonthInvalid: '{{ _("Month must be between 0-12 (use 0 for unknown)") }}',
+    dateDayInvalid: '{{ _("Day must be between 0-31 (use 0 for unknown)") }}',
+    dateMonthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}'
+  };
+
+  // INITIALIZE COMPONENTS
+  
+  // Reference Manager
+  window.refManager = new ReferenceManager({
+    maxReferences: 3,
+    messages: referenceMessages
+  });
+  
+  // Duplicate Detection
+  window.duplicateDetector = new DuplicateDetector({
+    inputId: 'work-title',
+    sidebarId: 'work-duplicates-sidebar',
+    containerId: 'work-duplicates-container',
+    noMatchId: 'work-no-matches-message',
+    noneMatchBtnId: 'work-none-match-btn',
+    entityType: 'work',
+    messages: duplicateMessages
+  });
+  
+  // Image Preview
+  window.imagePreview = new ImagePreview({
+    inputId: 'work-image-url',
+    previewId: 'work-image-preview',
+    errorId: 'work-image-error-message',
+    clearBtnId: 'work-clear-image-url',
+    requireCommons: true,
+    messages: imageMessages
+  });
+  
+  // Instance Of (Type of Work) Search
+  window.instanceOfSearch = new WikidataItemSearch({
+    inputId: 'work-instance-of',
+    hiddenInputId: 'work-instance-of-qid',
+    resultsId: 'work-instance-of-results',
+    selectedItemsId: 'work-instance-of-selected',
+    multiSelect: false,
+    messages: wikidataMessages
+  });
+  
+  // Author Search (multi-select)
+  window.authorSearch = new WikidataItemSearch({
+    inputId: 'work-author',
+    hiddenInputId: 'work-author-qids',
+    resultsId: 'work-author-results',
+    multiSelect: true,
+    selectedItemsId: 'work-selected-authors',
+    messages: wikidataMessages
+  });
+  
+  // Language Search
+  window.languageSearch = new WikidataItemSearch({
+    inputId: 'work-language',
+    hiddenInputId: 'work-language-qid',
+    resultsId: 'work-language-results',
+    selectedItemsId: 'work-language-selected',
+    multiSelect: false,
+    messages: wikidataMessages
+  });
+  
+  // Country Search
+  window.countrySearch = new WikidataItemSearch({
+    inputId: 'work-country',
+    hiddenInputId: 'work-country-qid',
+    resultsId: 'work-country-results',
+    selectedItemsId: 'work-country-selected',
+    multiSelect: false,
+    messages: wikidataMessages
+  });
+
+  // EVENT HANDLERS
+  
+  // Commons search button
+  const searchCommonsBtn = document.getElementById('work-search-commons-btn');
+  const titleInput = document.getElementById('work-title');
+  const workTitleDisplay = document.getElementById('work-title-display');
+  
+  if (searchCommonsBtn && titleInput) {
+    titleInput.addEventListener('input', function() {
+      const workTitle = this.value.trim();
+      if (workTitleDisplay) {
+        workTitleDisplay.textContent = workTitle || formMessages.workTitle;
+      }
+      searchCommonsBtn.style.setProperty('--bs-btn-bg', workTitle ? '#29a4e2' : 'white');
+      searchCommonsBtn.style.setProperty('--bs-btn-color', workTitle ? 'white' : 'black');
+    });
+    
+    searchCommonsBtn.addEventListener('click', function() {
+      const workTitle = titleInput.value.trim();
+      if (workTitle) {
+        const searchUrl = `https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(workTitle)}&title=Special:MediaSearch&go=Go&type=image`;
+        window.open(searchUrl, '_blank');
+      } else {
+        alert(formMessages.enterTitleFirst);
+        titleInput.focus();
+      }
+    });
+  }
+  
+  // Reset form button
+  const resetBtn = document.getElementById('work-reset-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+        resetWorkForm();
+    });
+  }
+
+  // FORM SUBMISSION
+ 
+  const workForm = document.getElementById('addWorkForm');
+  if (workForm) {
+    workForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      let isValid = true;
+      const errors = [];
+      
+      // Validate required fields
+      const titleResult = FormUtils.validateRequired('work-title', formMessages.titleRequired);
+      if (!titleResult.valid) { isValid = false; errors.push(titleResult.message); }
+      
+      if (!window.instanceOfSearch.hasValue()) {
+        isValid = false;
+        errors.push(formMessages.instanceOfRequired);
+      }
+      
+      if (!window.authorSearch.hasValue()) { 
+        isValid = false; 
+        errors.push(formMessages.authorRequired); 
+      }
+      
+      if (window.imagePreview && !window.imagePreview.isValid()) {
+        isValid = false;
+        errors.push(formMessages.imageCommonsRequired);
+      }
+
+      // Validate and Combine publication date
+      const pubYear = document.getElementById('work-publication-date-year').value;
+      const pubMonth = document.getElementById('work-publication-date-month').value;
+      const pubDay = document.getElementById('work-publication-date-day').value;
+      
+      const pubValidation = FormUtils.validateDateInput(pubYear, pubMonth, pubDay, {
+        yearRequired: '{{ _("Publication date: Year is required if you enter month or day") }}',
+        yearInvalid: '{{ _("Publication date: Year must be a valid 4-digit number") }}',
+        monthInvalid: '{{ _("Publication date: Month must be between 0-12 (use 0 for unknown)") }}',
+        dayInvalid: '{{ _("Publication date: Day must be between 0-31 (use 0 for unknown)") }}',
+        monthRequiredForDay: '{{ _("Publication date: Month cannot be 0 if day is specified") }}',
+        monthRequiredForYear: '{{ _("Publication date: Month is required if you enter day") }}'
+      });
+      
+      if (!pubValidation.valid) {
+        isValid = false;
+        errors.push(pubValidation.message);
+        document.getElementById('work-publication-date-year').classList.add('is-invalid');
+      } else {
+        document.getElementById('work-publication-date-year').classList.remove('is-invalid');
+        const combinedPub = FormUtils.combineDateParts(pubYear, pubMonth, pubDay);
+        if (combinedPub) {
+          document.getElementById('publicationDate').value = combinedPub;
+        }
+      }
+
+      // Validate and Combine creation date
+      const creYear = document.getElementById('work-creation-date-year').value;
+      const creMonth = document.getElementById('work-creation-date-month').value;
+      const creDay = document.getElementById('work-creation-date-day').value;
+
+      const creValidation = FormUtils.validateDateInput(creYear, creMonth, creDay, {
+        yearRequired: '{{ _("Creation date: Year is required if you enter month or day") }}',
+        yearInvalid: '{{ _("Creation date: Year must be a valid 4-digit number") }}',
+        monthInvalid: '{{ _("Creation date: Month must be between 0-12 (use 0 for unknown)") }}',
+        dayInvalid: '{{ _("Creation date: Day must be between 0-31 (use 0 for unknown)") }}',
+        monthRequiredForDay: '{{ _("Creation date: Month cannot be 0 if day is specified") }}',
+        monthRequiredForYear: '{{ _("Creation date: Month is required if you enter day and year") }}'
+      });
+      
+      if (!creValidation.valid) {
+        isValid = false;
+        errors.push(creValidation.message);
+        document.getElementById('work-creation-date-year').classList.add('is-invalid');
+      } else {
+        document.getElementById('work-creation-date-year').classList.remove('is-invalid');
+        const combinedCre = FormUtils.combineDateParts(creYear, creMonth, creDay);
+        if (combinedCre) {
+          document.getElementById('creationDate').value = combinedCre;
+        }
+      }
+
+      if (!isValid) {
+        alert(formMessages.fillRequired + '\n- ' + errors.join('\n- '));
+        FormUtils.scrollToFirstError(workForm);
+        return false;
+      }
+
+      this.submit();
+    });
+  }
+
+  // RESET FORM FUNCTION
+
+  window.resetWorkForm = function() {
+    if (!confirm(formMessages.confirmReset)) {
+      return;
+    }
+    
+    workForm.reset();
+
+    fetch('/clear_form_data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = '/add-work?cleared=1';
+      }
+    })
+    .catch(error => {
+      console.error('Error clearing form data:', error);
+      alert('Could not connect to server. Please refresh the page manually to clear all data.');
+    });
+  };
+
+  // RESTORE FORM DATA ON ERROR
+
+  function restoreFormData() {
+    const dataStore = document.getElementById('form-data-store');
+    if (!dataStore) return;
+    
+    let formData = {};
+    try {
+      const jsonData = dataStore.dataset.allFormData;
+      if (jsonData) {
+        formData = JSON.parse(jsonData);
+      } else {
+        return;
+      }
+    } catch (e) {
+      return;
+    }
+    
+    // Restore Instance Of
+    if (formData.instanceOfQid && formData.instanceOf) {
+      if (window.instanceOfSearch) {
+        window.instanceOfSearch.selectItem({
+          id: formData.instanceOfQid,
+          label: formData.instanceOf,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Authors (multi-select)
+    if (formData.authorQids && formData.author) {
+      if (window.authorSearch) {
+        const authorQids = formData.authorQids.split(',').filter(q => q.trim());
+        const authorLabels = formData.author.split(',').filter(l => l.trim());
+        authorQids.forEach((qid, index) => {
+          if (qid && authorLabels[index]) {
+            window.authorSearch.selectItem({
+              id: qid,
+              label: authorLabels[index],
+              description: ''
+            });
+          }
+        });
+
+        window.authorSearch.input.style.display = 'none';
+        window.authorSearch.updateSelectedItemsDisplay();
+      }
+    }
+    
+    // Restore Language
+    if (formData.languageQid && formData.language) {
+      if (window.languageSearch) {
+        window.languageSearch.selectItem({
+          id: formData.languageQid,
+          label: formData.language,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Country
+    if (formData.countryQid && formData.country) {
+      if (window.countrySearch) {
+        window.countrySearch.selectItem({
+          id: formData.countryQid,
+          label: formData.country,
+          description: ''
+        });
+      }
+    }
+    
+    // Restore Image Preview
+    if (formData.imageUrl) {
+      if (window.imagePreview) {
+        const imageUrlInput = document.getElementById('work-image-url');
+        if (imageUrlInput) {
+          imageUrlInput.value = formData.imageUrl;
+          imageUrlInput.dispatchEvent(new Event('input'));
+        }
+      }
+    }
+
+    // Restore publication date parts
+    if (formData.publicationDate) {
+      const pubParts = formData.publicationDate.split('-');
+      if (pubParts.length >= 1 && pubParts[0]) {
+        document.getElementById('work-publication-date-year').value = pubParts[0];
+      }
+      if (pubParts.length >= 2 && pubParts[1] && pubParts[1] !== '00') {
+        document.getElementById('work-publication-date-month').value = parseInt(pubParts[1], 10);
+      }
+      if (pubParts.length >= 3 && pubParts[2] && pubParts[2] !== '00') {
+        document.getElementById('work-publication-date-day').value = parseInt(pubParts[2], 10);
+      }
+    }
+    
+    // Restore creation date parts
+    if (formData.creationDate) {
+      const creParts = formData.creationDate.split('-');
+      if (creParts.length >= 1 && creParts[0]) {
+        document.getElementById('work-creation-date-year').value = creParts[0];
+      }
+      if (creParts.length >= 2 && creParts[1] && creParts[1] !== '00') {
+        document.getElementById('work-creation-date-month').value = parseInt(creParts[1], 10);
+      }
+      if (creParts.length >= 3 && creParts[2] && creParts[2] !== '00') {
+        document.getElementById('work-creation-date-day').value = parseInt(creParts[2], 10);
+      }
+    }
+    
+    // Restore References for all fields
+    const fieldIds = [
+      'work-instance-of',
+      'work-author',
+      'work-language',
+      'work-country',
+      'work-publication-date',
+      'work-creation-date'
+    ];
+    
+    fieldIds.forEach(fieldId => {
+      for (let i = 0; i < 3; i++) {
+        const refUrl = formData[`${fieldId}_ref_url_${i}`];
+        const refTitle = formData[`${fieldId}_ref_title_${i}`];
+        const refRetrieved = formData[`${fieldId}_ref_retrieved_${i}`];
+        
+        if (refUrl) {
+          const refSection = document.getElementById(`${fieldId}-references`);
+          if (refSection && refSection.classList.contains('d-none')) {
+            window.refManager.toggleReference(fieldId);
+          }
+          
+          if (window.refManager) {
+            const container = document.getElementById(`${fieldId}-reference-container`);
+            if (container) {
+              const existingRefs = container.querySelectorAll('.reference-item').length;
+              
+              if (existingRefs <= i) {
+                window.refManager.addReference(fieldId);
+              }
+              
+              const urlInput = document.querySelector(`input[name="${fieldId}_ref_url_${i}"]`);
+              const titleInput = document.querySelector(`input[name="${fieldId}_ref_title_${i}"]`);
+              const retrievedInput = document.querySelector(`input[name="${fieldId}_ref_retrieved_${i}"]`);
+              
+              if (urlInput) urlInput.value = refUrl;
+              if (titleInput && refTitle) titleInput.value = refTitle;
+              if (retrievedInput && refRetrieved) retrievedInput.value = refRetrieved;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Call restore function if data exists 
+  if (document.getElementById('form-data-store')) {
+    setTimeout(restoreFormData, 500);
+  }
+
+});
+
+// GLOBAL FUNCTIONS FOR REFERENCE BUTTONS
+
+function toggleReference(fieldId) {
+  window.refManager.toggleReference(fieldId);
+}
+
+function addReference(fieldId) {
+  window.refManager.addReference(fieldId);
+}
+
+function fillReferenceTemplate(fieldId, template) {
+  window.refManager.fillTemplate(fieldId, template);
+}
+
+//Toggle plus/minus icons for collapsible sections
+const collapsibleSections = [
+  { trigger: '[data-bs-target="#work-image-section"]', icon: null },
+  { trigger: '[data-bs-target="#work-external-links-section"]', icon: null }
+];
+
+collapsibleSections.forEach(section => {
+  const trigger = document.querySelector(section.trigger);
+  if (trigger) {
+    section.icon = trigger.querySelector('i');
+    
+    const targetId = trigger.getAttribute('data-bs-target');
+    const targetElement = document.querySelector(targetId);
+    
+    if (targetElement) {
+      targetElement.addEventListener('show.bs.collapse', function() {
+        if (section.icon) {
+          section.icon.classList.remove('bi-plus-circle');
+          section.icon.classList.add('bi-dash-circle');
+        }
+      });
+      
+      targetElement.addEventListener('hide.bs.collapse', function() {
+        if (section.icon) {
+          section.icon.classList.remove('bi-dash-circle');
+          section.icon.classList.add('bi-plus-circle');
+        }
+      });
+    }
+  }
+});
+</script>
+
+{% endblock %}

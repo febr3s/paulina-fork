@@ -22,12 +22,13 @@ class ReferenceManager {
     const section = document.getElementById(`${fieldId}-references`);
     if (!section) return;
     
-    section.classList.toggle('d-none');
-
-    // Add first reference if none exist
-     if (!section.classList.contains('d-none') && !this.references[fieldId]) {
-    this.addReference(fieldId);
+    // Show the section if hidden
+    if (section.classList.contains('d-none')) {
+      section.classList.remove('d-none');
     }
+    
+    // Add a reference 
+    this.addReference(fieldId);
   }
   
   addReference(fieldId) {

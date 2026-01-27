@@ -31,6 +31,8 @@ else:
 WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
 
 import wikidata_api
+from wikidata_constants import FORM_GENDERS, WIKIDATA_TEST_MODE
+
 
 # Configure Wikidata API URLs based on mode
 if WIKIDATA_TEST_MODE:
@@ -538,7 +540,8 @@ def logout():
     session.pop('oauth_token', None)
     session.pop('wikimedia_username', None)
     session.pop('wikimedia_userid', None)
-    session.pop('form_data', None)
+    session.pop('author_form_data', None)
+    session.pop('work_form_data', None)
     
     flash(_('You have been logged out.'), 'info')
     return redirect(request.referrer or url_for('home'))
@@ -583,10 +586,10 @@ def add_author():
                 
                 paulina_url = url_for('author_page', author_data=item_id, _external=False)
                 
-                # Clear the form after successful creation
-                session.pop('form_data', None)
+                # Clear the author form data after successful creation
+                session.pop('author_form_data', None)
                 
-                session['success_data'] = {
+                session['author_success_data'] = {
                     'item_id': item_id,
                     'wikidata_url': wikidata_url,
                     'paulina_url': paulina_url
@@ -607,36 +610,36 @@ def add_author():
                     flash(_('Error creating author: %(error)s', error=error_text), 'danger')
                 
                 # Store form data in session for restoration
-                session['form_data'] = dict(request.form)
+                session['author_form_data'] = dict(request.form)
                 
                 return render_template('add-author.html', 
                                      title=_('Add Author'),
-                                     form_data=session['form_data'],
-                                    form_genders=wikidata_api.FORM_GENDERS)
+                                     form_data=session['author_form_data'],
+                                    form_genders=FORM_GENDERS)
         
         except Exception as e:
             app.logger.error(f"Author creation failed: {str(e)}", exc_info=True)
             flash(_('An error occurred while creating the author. Please try again.'), 'danger')
             
             # Store form data for restoration
-            session['form_data'] = dict(request.form)
+            session['author_form_data'] = dict(request.form)
             
             return render_template('add-author.html', 
                                  title=_('Add Author'),
-                                 form_data=session['form_data'],
-                                 form_genders=wikidata_api.FORM_GENDERS)
+                                 form_data=session['author_form_data'],
+                                 form_genders=FORM_GENDERS)
     
     # GET request handling
     if request.args.get('cleared') == '1':
-        session.pop('form_data', None)
-        session.pop('success_data', None) 
+        session.pop('author_form_data', None)
+        session.pop('author_success_data', None) 
         form_data = None
         success_item_id = None
         wikidata_url = None
         paulina_url = None
     elif request.args.get('success') == '1':
         # Show success message from session
-        success_data = session.pop('success_data', None) 
+        success_data = session.pop('author_success_data', None) 
         form_data = None
         if success_data:
             success_item_id = success_data.get('item_id')
@@ -647,7 +650,7 @@ def add_author():
             wikidata_url = None
             paulina_url = None
     else:
-        form_data = session.get('form_data', None)
+        form_data = session.get('author_form_data', None)
         success_item_id = None
         wikidata_url = None
         paulina_url = None
@@ -658,7 +661,120 @@ def add_author():
                         success_item_id=success_item_id,
                         wikidata_url=wikidata_url,
                         paulina_url=paulina_url,
-                        form_genders=wikidata_api.FORM_GENDERS)
+                        form_genders=FORM_GENDERS)
+
+
+@app.route('/add-work', methods=['GET', 'POST'])
+@limiter.limit("20 per hour", methods=['POST'])
+def add_work():
+    """Handle the Add Work form"""
+    
+    # Check if user is logged in
+    if 'wikimedia_username' not in session:
+        flash(_('Please login to add a work.'), 'warning')
+        return redirect(url_for('home'))
+    
+    # Refresh token if needed
+    if not oauth.token_refresh():
+        flash(_('Your session has expired. Please login again.'), 'warning')
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        try:
+            # Get OAuth session
+            oauth_session = oauth.get_oauth_session()
+            if not oauth_session:
+                flash(_('Session expired. Please login again.'), 'warning')
+                return redirect(url_for('login'))
+
+            wikidata = wikidata_api.WikidataAPI(app.config, oauth_session=oauth_session)
+
+            # Process the work form (validation + creation)
+            result = wikidata.process_work_form(request.form, current_lang=languages.get_locale())
+            
+            if result['success']:
+                item_id = result['item_id']
+               
+                # Build URLs for the new item
+                wikidata_url = f"https://www.wikidata.org/wiki/{item_id}"
+                if wikidata_api.WIKIDATA_TEST_MODE:
+                    wikidata_url = f"https://test.wikidata.org/wiki/{item_id}"
+                
+                paulina_url = url_for('work_page', work_data=item_id, _external=False)
+                
+                # Clear the work form data after successful creation
+                session.pop('work_form_data', None)
+                
+                session['work_success_data'] = {
+                    'item_id': item_id,
+                    'wikidata_url': wikidata_url,
+                    'paulina_url': paulina_url
+                }
+                    
+                return redirect(url_for('add_work', success=1))
+            
+            else:
+                if 'errors' in result:
+                    for error in result['errors']:
+                        flash(_(error), 'error')
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    if isinstance(error_msg, dict):
+                        error_text = error_msg.get('info', str(error_msg))
+                    else:
+                        error_text = str(error_msg)
+                    flash(_('Error creating work: %(error)s', error=error_text), 'danger')
+                
+                # Store form data in session for restoration
+                session['work_form_data'] = dict(request.form)
+                
+                return render_template('add-work.html', 
+                                     title=_('Add Work'),
+                                     form_data=session['work_form_data'])
+        
+        except Exception as e:
+            app.logger.error(f"Work creation failed: {str(e)}", exc_info=True)
+            flash(_('An error occurred while creating the work. Please try again.'), 'danger')
+            
+            # Store form data for restoration
+            session['work_form_data'] = dict(request.form)
+            
+            return render_template('add-work.html', 
+                                 title=_('Add Work'),
+                                 form_data=session['work_form_data'])
+    
+    # GET request handling
+    if request.args.get('cleared') == '1':
+        session.pop('work_form_data', None)
+        session.pop('work_success_data', None) 
+        form_data = None
+        success_item_id = None
+        wikidata_url = None
+        paulina_url = None
+    elif request.args.get('success') == '1':
+        # Show success message from session
+        success_data = session.pop('work_success_data', None) 
+        form_data = None
+        if success_data:
+            success_item_id = success_data.get('item_id')
+            wikidata_url = success_data.get('wikidata_url')
+            paulina_url = success_data.get('paulina_url')
+        else:
+            success_item_id = None
+            wikidata_url = None
+            paulina_url = None
+    else:
+        form_data = session.get('work_form_data', None)
+        success_item_id = None
+        wikidata_url = None
+        paulina_url = None
+    
+    return render_template('add-work.html', 
+                        title=_('Add Work'),
+                        form_data=form_data,
+                        success_item_id=success_item_id,
+                        wikidata_url=wikidata_url,
+                        paulina_url=paulina_url)
 
 
 @app.route('/clear_form_data', methods=['POST'])

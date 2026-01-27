@@ -1,83 +1,38 @@
 """
 Wikidata API Helper Module
 Handles creating and editing Wikidata items via the Wikibase REST API
-Includes Wikidata property/item ID constants and utility functions
+and utility functions
 """
-
 import json
 import requests
-import os
 import urllib.parse as urlparse
-from flask_babel import lazy_gettext as _l, gettext as _ 
+from flask_babel import gettext as _ 
 
-
-
-# WIKIDATA CONSTANTS - Test/Production Mode Configuration
-
-# Check for test mode
-WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
-
-# Property IDs (PIDs)
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata properties (from test.wikidata.org)
-    PID_INSTANCE_OF = 'P82'           # instance of
-    PID_SEX_OR_GENDER = 'P192'         # sex or gender
-    PID_COUNTRY_OF_CITIZENSHIP = 'P196' # country of citizenship
-    PID_DATE_OF_BIRTH = 'P18'         # date of birth
-    PID_DATE_OF_DEATH = 'P25'        # date of death
-    PID_PLACE_OF_BIRTH = 'P342'       # place of birth
-    PID_OCCUPATION = 'P204'           # occupation
-    PID_ETHNIC_GROUP = 'P84982'         # ethnic group
-    PID_IMAGE = 'P185'                # image
-    PID_OFFICIAL_WEBSITE = 'P206'     # official website
-    PID_REFERENCE_URL = 'P93'        # reference URL
-    PID_TITLE = 'P77107'                # title
-    PID_RETRIEVED = 'P388'            # retrieved
-else:
-    # Production Wikidata properties
-    PID_INSTANCE_OF = 'P31'
-    PID_SEX_OR_GENDER = 'P21'
-    PID_COUNTRY_OF_CITIZENSHIP = 'P27'
-    PID_DATE_OF_BIRTH = 'P569'
-    PID_DATE_OF_DEATH = 'P570'
-    PID_PLACE_OF_BIRTH = 'P19'
-    PID_OCCUPATION = 'P106'
-    PID_ETHNIC_GROUP = 'P172'
-    PID_IMAGE = 'P18'
-    PID_OFFICIAL_WEBSITE = 'P856'
-    PID_REFERENCE_URL = 'P854'
-    PID_TITLE = 'P1476'
-    PID_RETRIEVED = 'P813'
-
-# Item IDs (QIDs)
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata items
-    QID_HUMAN = 'Q224056'
-else:
-    # Production Wikidata items
-    QID_HUMAN = 'Q5'
-    
-    
-# Gender QIDs
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata QIDs for genders
-    FORM_GENDERS = [
-        {"qid": "Q216154", "gender_name": _l("Female")},
-        {"qid": "Q216156", "gender_name": _l("Male")},
-        {"qid": "Q243752", "gender_name": _l("Trans man")},
-        {"qid": "Q243753", "gender_name": _l("Trans woman")},
-        {"qid": "Q243754", "gender_name": _l("Non-binary")}
-    ]
-else:
-    # Production Wikidata QIDs for genders
-    FORM_GENDERS = [
-        {"qid": "Q6581072", "gender_name": _l("Female")},
-        {"qid": "Q6581097", "gender_name": _l("Male")},
-        {"qid": "Q2449503", "gender_name": _l("Trans man")},
-        {"qid": "Q1052281", "gender_name": _l("Trans woman")},
-        {"qid": "Q48270", "gender_name": _l("Non-binary")}
-    ]
-
+# Import Wikidata constants
+from wikidata_constants import (
+    WIKIDATA_TEST_MODE,
+    PID_INSTANCE_OF,
+    PID_SEX_OR_GENDER,
+    PID_COUNTRY_OF_CITIZENSHIP,
+    PID_DATE_OF_BIRTH,
+    PID_DATE_OF_DEATH,
+    PID_PLACE_OF_BIRTH,
+    PID_OCCUPATION,
+    PID_ETHNIC_GROUP,
+    PID_IMAGE,
+    PID_OFFICIAL_WEBSITE,
+    PID_REFERENCE_URL,
+    PID_TITLE,
+    PID_RETRIEVED,
+    PID_AUTHOR,
+    PID_LANGUAGE,
+    PID_COUNTRY_OF_ORIGIN,
+    PID_PUBLICATION_DATE,
+    PID_INCEPTION,
+    PID_FULL_WORK_URL,
+    PID_INTERNET_ARCHIVE,
+    QID_HUMAN,
+)
 
 # UTILITY FUNCTIONS
 
@@ -550,6 +505,166 @@ class WikidataAPI:
                 official_website = 'https://' + official_website
             statements.append(
                 self.build_statement(PID_OFFICIAL_WEBSITE, official_website, 'url')
+            )
+        
+        return statements
+    
+    # WORK FORM PROCESSING
+    
+    def process_work_form(self, form_data, current_lang='en'):
+        """
+        Processing of work form - validation, building labels/descriptions/statements.
+        
+        Args:
+            form_data: Flask request.form object
+            current_lang: Current language code for labels/descriptions
+        
+        Returns:
+            dict with 'success', 'item_id' or 'errors'
+        """
+        # Validate
+        is_valid, errors = self.validate_work_form_data(form_data)
+        if not is_valid:
+            return {'success': False, 'errors': errors}
+        
+        # Extract form data
+        title = form_data.get('title', '').strip()
+        description = form_data.get('description', '').strip()
+        
+        # Build labels and descriptions
+        labels = {current_lang: title}
+        descriptions = {current_lang: description} if description else {}
+        
+        # Build statements
+        statements = self.build_work_statements_from_form(form_data)
+        
+        # Create the item
+        result = self.create_item(labels, descriptions, statements)
+        
+        return result
+
+    def validate_work_form_data(self, form_data):
+        """
+        Validate required fields for work creation.
+        
+        Args:
+            form_data: Flask request.form object
+        
+        Returns:
+            Tuple of (is_valid, errors_list)
+        """
+        errors = []
+        
+        # Required fields
+        if not form_data.get('title', '').strip():
+            errors.append(_('Title is required'))
+        if not form_data.get('instanceOfQid', '').strip():
+            errors.append(_('Type of work is required'))
+        if not form_data.get('authorQids', '').strip():
+            errors.append(_('Author is required'))
+        
+        # Validate date formats
+        publication_date = form_data.get('publicationDate', '').strip()
+        if publication_date:
+            is_valid, error_msg = self.validate_date_format(publication_date)
+            if not is_valid:
+                errors.append(_('Publication date: %(error)s', error=error_msg))
+    
+        creation_date = form_data.get('creationDate', '').strip()
+        if creation_date:
+            is_valid, error_msg = self.validate_date_format(creation_date)
+            if not is_valid:
+                errors.append(_('Creation date: %(error)s', error=error_msg))
+        
+        return len(errors) == 0, errors
+
+    def build_work_statements_from_form(self, form_data):
+        """
+        Build all Wikidata statements for a work from form data.
+        Uses constants that adapt to test/production mode.
+        
+        Args:
+            form_data: Flask request.form object
+        
+        Returns:
+            List of statement dictionaries
+        """
+        statements = []
+        
+        # Instance of (type of work) - Required
+        instance_of = form_data.get('instanceOfQid', '').strip()
+        if instance_of:
+            refs = self.collect_references_from_form('work-instance-of', form_data)
+            statements.append(
+                self.build_statement(PID_INSTANCE_OF, instance_of, 'wikibase-item', refs)
+            )
+        
+        # Authors - can be multiple (Required)
+        authors = form_data.get('authorQids', '').strip()
+        if authors:
+            refs = self.collect_references_from_form('work-author', form_data)
+            for qid in authors.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_AUTHOR, qid, 'wikibase-item', refs)
+                    )
+        
+        # Language
+        language = form_data.get('languageQid', '').strip()
+        if language:
+            refs = self.collect_references_from_form('work-language', form_data)
+            statements.append(
+                self.build_statement(PID_LANGUAGE, language, 'wikibase-item', refs)
+            )
+        
+        # Country of origin
+        country = form_data.get('countryQid', '').strip()
+        if country:
+            refs = self.collect_references_from_form('work-country', form_data)
+            statements.append(
+                self.build_statement(PID_COUNTRY_OF_ORIGIN, country, 'wikibase-item', refs)
+            )
+        
+        # Publication date
+        publication_date = form_data.get('publicationDate', '').strip()
+        if publication_date:
+            refs = self.collect_references_from_form('work-publication-date', form_data)
+            statements.append(
+                self.build_statement(PID_PUBLICATION_DATE, publication_date, 'time', refs)
+            )
+        
+        # Creation date
+        creation_date = form_data.get('creationDate', '').strip()
+        if creation_date:
+            refs = self.collect_references_from_form('work-creation-date', form_data)
+            statements.append(
+                self.build_statement(PID_INCEPTION, creation_date, 'time', refs)
+            )
+        
+        # Image
+        image_url = form_data.get('imageUrl', '').strip()
+        if image_url:
+            filename = self.extract_commons_filename(image_url)
+            if filename:
+                statements.append(
+                    self.build_statement(PID_IMAGE, filename, 'commonsMedia')
+                )
+        
+        # Full work URL
+        full_work_url = form_data.get('fullWorkUrl', '').strip()
+        if full_work_url:
+            if not full_work_url.startswith(('http://', 'https://')):
+                full_work_url = 'https://' + full_work_url
+            statements.append(
+                self.build_statement(PID_FULL_WORK_URL, full_work_url, 'url')
+            )
+        
+        # Internet Archive ID
+        internet_archive_id = form_data.get('internetArchiveId', '').strip()
+        if internet_archive_id:
+            statements.append(
+                self.build_statement(PID_INTERNET_ARCHIVE, internet_archive_id, 'string')
             )
         
         return statements
