@@ -11,7 +11,6 @@ class ReferenceManager {
     this.msg = Object.assign({
       reference: 'Reference',
       url: 'Reference URL',
-      title: 'Title',
       retrieved: 'Date accessed',
       maxReached: 'Maximum 3 references per field',
       remove: 'Remove'
@@ -22,12 +21,13 @@ class ReferenceManager {
     const section = document.getElementById(`${fieldId}-references`);
     if (!section) return;
     
-    section.classList.toggle('d-none');
-
-    // Add first reference if none exist
-     if (!section.classList.contains('d-none') && !this.references[fieldId]) {
-    this.addReference(fieldId);
+    // Show the section if hidden
+    if (section.classList.contains('d-none')) {
+      section.classList.remove('d-none');
     }
+    
+    // Add a reference 
+    this.addReference(fieldId);
   }
   
   addReference(fieldId) {
@@ -61,11 +61,7 @@ class ReferenceManager {
       </div>
       <div class="mb-2">
         <label class="form-label small">${this.msg.url}</label>
-        <input type="url" class="form-control form-control-sm" name="${fieldId}_ref_url_${refIndex}" placeholder="Enter the full URL including https://">
-      </div>
-      <div class="mb-2">
-        <label class="form-label small">${this.msg.title}</label>
-        <input type="text" class="form-control form-control-sm" name="${fieldId}_ref_title_${refIndex}">
+        <input type="url" class="form-control form-control-sm" name="${fieldId}_ref_url_${refIndex}" placeholder="https://">
       </div>
       <div>
         <label class="form-label small">${this.msg.retrieved}</label>
@@ -89,34 +85,6 @@ class ReferenceManager {
     
     if (this.references[fieldId]) {
       this.references[fieldId] = this.references[fieldId].filter(id => id !== refId);
-    }
-  }
-  
-  fillTemplate(fieldId, template) {
-    const container = document.getElementById(`${fieldId}-reference-container`);
-    if (!container) return;
-    
-    // Get the last reference or add one
-    let lastRef = container.querySelector('.reference-item:last-child');
-    if (!lastRef) {
-      this.addReference(fieldId);
-      lastRef = container.querySelector('.reference-item:last-child');
-    }
-    
-    if (!lastRef) return;
-    
-    const urlInput = lastRef.querySelector('input[type="url"]');
-    
-    // Set template-specific placeholder
-    const templates = {
-      wikipedia: 'https://en.wikipedia.org/wiki/...',
-      library: 'https://viaf.org/... or https://id.loc.gov/...',
-      website: 'https://...'
-    };
-    
-    if (urlInput && templates[template]) {
-      urlInput.placeholder = templates[template];
-      urlInput.focus();
     }
   }
   

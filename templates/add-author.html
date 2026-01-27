@@ -1028,6 +1028,33 @@ function addReference(fieldId) {
 function fillReferenceTemplate(fieldId, template) {
   window.refManager.fillTemplate(fieldId, template);
 }
+
+// COLLAPSIBLE ICON TOGGLE
+
+// Toggle icons for collapsible sections
+document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+  const targetId = button.getAttribute('data-bs-target');
+  const targetElement = document.querySelector(targetId);
+  
+  if (targetElement) {
+    targetElement.addEventListener('show.bs.collapse', function() {
+      const icon = button.querySelector('i.bi-plus-circle');
+      if (icon) {
+        icon.classList.remove('bi-plus-circle');
+        icon.classList.add('bi-dash-circle');
+      }
+    });
+    
+    targetElement.addEventListener('hide.bs.collapse', function() {
+      const icon = button.querySelector('i.bi-dash-circle');
+      if (icon) {
+        icon.classList.remove('bi-dash-circle');
+        icon.classList.add('bi-plus-circle');
+      }
+    });
+  }
+});
+
 </script>
 
 {% endblock %}
