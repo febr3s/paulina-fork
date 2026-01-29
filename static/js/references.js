@@ -66,11 +66,11 @@ class ReferenceManager {
       </div>
       <div class="mb-2">
         <label class="form-label small">${this.msg.url}</label>
-        <input type="url" class="form-control form-control-sm" name="${fieldId}_ref_url_${refIndex}" placeholder="https://">
+        <input type="url" class="form-control form-control-sm ref-url" name="${fieldId}_ref_url_${refIndex}" placeholder="https://">
       </div>
       <div>
         <label class="form-label small">${this.msg.retrieved}</label>
-        <input type="date" class="form-control form-control-sm" name="${fieldId}_ref_retrieved_${refIndex}" value="${this.getTodayDate()}">
+        <input type="date" class="form-control form-control-sm ref-retrieved" name="${fieldId}_ref_retrieved_${refIndex}" value="${this.getTodayDate()}">
       </div>
     `;
     
@@ -101,9 +101,18 @@ class ReferenceManager {
     
     const references = container.querySelectorAll('.reference-item');
     references.forEach((ref, index) => {
+      ref.dataset.refIndex = index;
       const label = ref.querySelector('strong');
       if (label) {
         label.textContent = `${this.msg.reference} ${index + 1}`;
+      }
+      const refUrl = ref.querySelector('.ref-url');
+      if (refUrl) {
+        refUrl.name = `${fieldId}_ref_url_${index}`;
+      }
+      const refRetrieved = ref.querySelector('.ref-retrieved');
+      if (refRetrieved) {
+        refRetrieved.name = `${fieldId}_ref_retrieved_${index}`;
       }
     });
   }
