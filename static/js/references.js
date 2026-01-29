@@ -5,7 +5,7 @@
 class ReferenceManager {
   constructor(config = {}) {
     this.maxReferences = config.maxReferences || 3;
-    this.references = {};
+    this.referenceCounters = {}; // Track next index for each field
     
     // Translatable messages with English fallbacks
     this.msg = Object.assign({
@@ -34,27 +34,32 @@ class ReferenceManager {
     const container = document.getElementById(`${fieldId}-reference-container`);
     if (!container) return;
     
-    if (!this.references[fieldId]) {
-      this.references[fieldId] = [];
-    }
-    
-    if (this.references[fieldId].length >= this.maxReferences) {
+    // Count existing references in the DOM
+    const existingRefs = container.querySelectorAll('.reference-item');
+    if (existingRefs.length >= this.maxReferences) {
       alert(this.msg.maxReached);
       return;
     }
     
-    const refIndex = this.references[fieldId].length;
+    // Initialize counter for this field if it doesn't exist
+    if (!this.referenceCounters[fieldId]) {
+      this.referenceCounters[fieldId] = 0;
+    }
+    
+    const refIndex = this.referenceCounters[fieldId];
     const refId = `${fieldId}-ref-${refIndex}`;
     
-    this.references[fieldId].push(refId);
+    // Increment counter for next reference
+    this.referenceCounters[fieldId]++;
     
     const refDiv = document.createElement('div');
     refDiv.className = 'reference-item mb-3 p-2 border rounded bg-light';
     refDiv.id = refId;
+    refDiv.dataset.refIndex = refIndex;
     
     refDiv.innerHTML = `
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <strong>${this.msg.reference} ${refIndex + 1}</strong>
+        <strong>${this.msg.reference} ${existingRefs.length + 1}</strong>
         <button type="button" class="btn btn-sm btn-outline-danger remove-ref-btn" aria-label="${this.msg.remove}">
           <i class="bi bi-trash"></i>
         </button>
@@ -75,6 +80,9 @@ class ReferenceManager {
     });
     
     container.appendChild(refDiv);
+    
+    // Update reference numbers for all references
+    this.updateReferenceNumbers(fieldId);
   }
   
   removeReference(fieldId, refId) {
@@ -83,9 +91,21 @@ class ReferenceManager {
       refDiv.remove();
     }
     
-    if (this.references[fieldId]) {
-      this.references[fieldId] = this.references[fieldId].filter(id => id !== refId);
-    }
+    // Update reference numbers after removal
+    this.updateReferenceNumbers(fieldId);
+  }
+  
+  updateReferenceNumbers(fieldId) {
+    const container = document.getElementById(`${fieldId}-reference-container`);
+    if (!container) return;
+    
+    const references = container.querySelectorAll('.reference-item');
+    references.forEach((ref, index) => {
+      const label = ref.querySelector('strong');
+      if (label) {
+        label.textContent = `${this.msg.reference} ${index + 1}`;
+      }
+    });
   }
   
   getTodayDate() {
@@ -94,27 +114,37 @@ class ReferenceManager {
   
   reset() {
     // Clear all reference containers
-    Object.keys(this.references).forEach(fieldId => {
-      const container = document.getElementById(`${fieldId}-reference-container`);
-      if (container) {
-        container.innerHTML = '';
-      }
-      
-      const section = document.getElementById(`${fieldId}-references`);
-      if (section) {
-        section.style.display = 'none';
-      }
+    const containers = document.querySelectorAll('[id$="-reference-container"]');
+    containers.forEach(container => {
+      container.innerHTML = '';
     });
     
-    this.references = {};
+    const sections = document.querySelectorAll('[id$="-references"]');
+    sections.forEach(section => {
+      section.classList.add('d-none');
+    });
+    
+    // Reset counters
+    this.referenceCounters = {};
   }
   
   getReferences(fieldId) {
-    return this.references[fieldId] || [];
+    const container = document.getElementById(`${fieldId}-reference-container`);
+    if (!container) return [];
+    
+    return Array.from(container.querySelectorAll('.reference-item')).map(ref => ref.id);
   }
   
   getAllReferences() {
-    return this.references;
+    const allRefs = {};
+    const containers = document.querySelectorAll('[id$="-reference-container"]');
+    
+    containers.forEach(container => {
+      const fieldId = container.id.replace('-reference-container', '');
+      allRefs[fieldId] = this.getReferences(fieldId);
+    });
+    
+    return allRefs;
   }
 }
 
