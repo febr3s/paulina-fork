@@ -229,13 +229,12 @@ class WikidataAPI:
                 'content': value
             }
     
-    def build_reference(self, url, title=None, retrieved_date=None):
+    def build_reference(self, url, retrieved_date=None):
         """
         Build a reference structure.
         
         Args:
             url: Reference URL
-            title: Title of the source (optional)
             retrieved_date: Date accessed in YYYY-MM-DD format (optional)
         
         Returns:
@@ -247,18 +246,6 @@ class WikidataAPI:
             parts.append({
                 'property': {'id': PID_REFERENCE_URL},
                 'value': {'type': 'value', 'content': url}
-            })
-        
-        if title:
-            parts.append({
-                'property': {'id': PID_TITLE},
-                'value': {
-                    'type': 'value',
-                    'content': {
-                        'text': title,
-                        'language': 'en'
-                    }
-                }
             })
         
         if retrieved_date:
@@ -275,7 +262,7 @@ class WikidataAPI:
             })
         
         return {'parts': parts}
-    
+        
     
     # AUTHOR FORM PROCESSING
     
@@ -380,7 +367,6 @@ class WikidataAPI:
         # Check for up to 3 references per field
         for i in range(3):
             url = form_data.get(f'{field_id}_ref_url_{i}', '').strip()
-            title = form_data.get(f'{field_id}_ref_title_{i}', '').strip()
             retrieved = form_data.get(f'{field_id}_ref_retrieved_{i}', '').strip()
             
             if url:
@@ -388,7 +374,7 @@ class WikidataAPI:
                 if not url.startswith(('http://', 'https://')):
                     url = 'https://' + url
                 
-                ref = self.build_reference(url, title, retrieved)
+                ref = self.build_reference(url, retrieved)
                 references.append(ref)
         
         return references if references else None
