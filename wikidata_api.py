@@ -5,6 +5,8 @@ and utility functions
 """
 import json
 import requests
+import os
+import traceback
 import urllib.parse as urlparse
 from flask_babel import gettext as _ 
 
@@ -78,13 +80,13 @@ class WikidataAPI:
             if 'query' in data and 'tokens' in data['query']:
                 csrf_token = data['query']['tokens'].get('csrftoken')
                 if csrf_token:
-                    print(_("CSRF token obtained: %(token)s...", token=csrf_token[:20]))
+                    print(f"CSRF token obtained: {csrf_token[:20]}...")
                     return csrf_token
             
             raise Exception(_("Unexpected token response: %(data)s", data=str(data)))
             
         except Exception as e:
-            print(_("Error getting CSRF token: %(error)s", error=str(e)))
+            print(f"Error getting CSRF token: {e}")
             raise
     
     # ITEM CREATION
@@ -125,10 +127,10 @@ class WikidataAPI:
                 token = self.oauth_session.token
                 headers['Authorization'] = f"Bearer {token['access_token']}"
             else:
-                print(_("Test mode - no authentication required"))
+                print(f"Test mode - no authentication required")
             
-            print(_("Creating item at: %(url)s", url=create_url))
-            print(_("Item data: %(data)s", data=json.dumps(item_data, indent=2, ensure_ascii=False, default=str)))
+            print(f"Creating item at: {create_url}")
+            print(f"Item data: {json.dumps(item_data, indent=2, ensure_ascii=False, default=str)}")
 
             # Use regular requests for test mode, oauth_session for production
             if WIKIDATA_TEST_MODE:
@@ -136,13 +138,13 @@ class WikidataAPI:
             else:
                 response = self.oauth_session.post(create_url, json=item_data, headers=headers)
             
-            print(_("Response status: %(status)s", status=response.status_code))
-            print(_("Response body: %(body)s", body=response.text))
+            print(f"Response status: {response.status_code}")
+            print(f"Response body: {response.text}")
             
             if response.status_code in [200, 201]:
                 result = response.json()
                 item_id = result.get('id')
-                print(_("Item created successfully: %(item_id)s", item_id=item_id))
+                print(f"Item created successfully: {item_id}")
                 return {
                     'success': True,
                     'item_id': item_id,
@@ -150,15 +152,14 @@ class WikidataAPI:
                 }
             else:
                 error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
-                print(_("Failed to create item: %(error)s", error=str(error_data)))
+                print(f"Failed to create item: {error_data}")
                 return {
                     'success': False,
                     'error': error_data
                 }
                 
         except Exception as e:
-            print(_("Exception creating item: %(error)s", error=str(e)))
-            import traceback
+            print(f"Exception creating item: {e}")
             traceback.print_exc()
             return {
                 'success': False,

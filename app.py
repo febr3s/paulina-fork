@@ -9,6 +9,7 @@ import requests
 import os
 import sys
 import time
+import traceback
 
 # Local modules
 import pdclasses
@@ -17,6 +18,7 @@ import languages
 import squeries
 import filters
 import oauth
+import wikidata_api
 
 # Determine Wikidata mode from  environment
 if 'test' in sys.argv:
@@ -447,7 +449,6 @@ def login():
         return redirect(authorization_url)
     
     except Exception as e:
-        import traceback
         traceback.print_exc()
         flash(_('Login failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
@@ -528,7 +529,6 @@ def oauth_callback():
         return redirect(url_for('home'))
     
     except Exception as e:
-        import traceback
         traceback.print_exc()
         flash(_('Authentication failed. Please try again.'), 'danger')
         return redirect(url_for('home'))
