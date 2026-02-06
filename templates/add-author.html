@@ -838,7 +838,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => {
       console.error('Error clearing form data:', error);
-      alert('Could not connect to server. Please refresh the page manually to clear all data.');
+       alert('{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}');
     });
   };
 

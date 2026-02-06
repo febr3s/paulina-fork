@@ -31,7 +31,7 @@ else:
 WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
 
 import wikidata_api
-from wikidata_constants import FORM_GENDERS, WIKIDATA_TEST_MODE
+from wikidata_constants import FORM_GENDERS, WIKIDATA_TEST_MODE, WORK_TYPES
 
 
 # Configure Wikidata API URLs based on mode
@@ -618,7 +618,6 @@ def add_author():
                                     form_genders=FORM_GENDERS)
         
         except Exception as e:
-            app.logger.error(f"Author creation failed: {str(e)}", exc_info=True)
             flash(_('An error occurred while creating the author. Please try again.'), 'danger')
             
             # Store form data for restoration
@@ -702,7 +701,7 @@ def add_work():
                 
                 paulina_url = url_for('work_page', work_data=item_id, _external=False)
                 
-                # Clear the work form data after successful creation
+                # Clear the form after successful creation
                 session.pop('work_form_data', None)
                 
                 session['work_success_data'] = {
@@ -730,10 +729,10 @@ def add_work():
                 
                 return render_template('add-work.html', 
                                      title=_('Add Work'),
-                                     form_data=session['work_form_data'])
+                                     form_data=session['work_form_data'],
+                                     work_types=WORK_TYPES)
         
         except Exception as e:
-            app.logger.error(f"Work creation failed: {str(e)}", exc_info=True)
             flash(_('An error occurred while creating the work. Please try again.'), 'danger')
             
             # Store form data for restoration
@@ -741,7 +740,8 @@ def add_work():
             
             return render_template('add-work.html', 
                                  title=_('Add Work'),
-                                 form_data=session['work_form_data'])
+                                 form_data=session['work_form_data'],
+                                 work_types=WORK_TYPES)
     
     # GET request handling
     if request.args.get('cleared') == '1':
@@ -774,8 +774,8 @@ def add_work():
                         form_data=form_data,
                         success_item_id=success_item_id,
                         wikidata_url=wikidata_url,
-                        paulina_url=paulina_url)
-
+                        paulina_url=paulina_url,
+                        work_types=WORK_TYPES)
 
 @app.route('/clear_form_data', methods=['POST'])
 def clear_form_data():
