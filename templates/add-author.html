@@ -1029,37 +1029,32 @@ function fillReferenceTemplate(fieldId, template) {
   window.refManager.fillTemplate(fieldId, template);
 }
 
-//Toggle plus/minus icons for collapsible sections
-const collapsibleSections = [
-  { trigger: '[data-bs-target="#author-image-section"]', icon: null },
-  { trigger: '[data-bs-target="#author-external-links-section"]', icon: null }
-];
+// COLLAPSIBLE ICON TOGGLE
 
-collapsibleSections.forEach(section => {
-  const trigger = document.querySelector(section.trigger);
-  if (trigger) {
-    section.icon = trigger.querySelector('i');
+// Toggle icons for collapsible sections
+document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+  const targetId = button.getAttribute('data-bs-target');
+  const targetElement = document.querySelector(targetId);
+  
+  if (targetElement) {
+    targetElement.addEventListener('show.bs.collapse', function() {
+      const icon = button.querySelector('i.bi-plus-circle');
+      if (icon) {
+        icon.classList.remove('bi-plus-circle');
+        icon.classList.add('bi-dash-circle');
+      }
+    });
     
-    const targetId = trigger.getAttribute('data-bs-target');
-    const targetElement = document.querySelector(targetId);
-    
-    if (targetElement) {
-      targetElement.addEventListener('show.bs.collapse', function() {
-        if (section.icon) {
-          section.icon.classList.remove('bi-plus-circle');
-          section.icon.classList.add('bi-dash-circle');
-        }
-      });
-      
-      targetElement.addEventListener('hide.bs.collapse', function() {
-        if (section.icon) {
-          section.icon.classList.remove('bi-dash-circle');
-          section.icon.classList.add('bi-plus-circle');
-        }
-      });
-    }
+    targetElement.addEventListener('hide.bs.collapse', function() {
+      const icon = button.querySelector('i.bi-dash-circle');
+      if (icon) {
+        icon.classList.remove('bi-dash-circle');
+        icon.classList.add('bi-plus-circle');
+      }
+    });
   }
 });
+
 </script>
 
 {% endblock %}
