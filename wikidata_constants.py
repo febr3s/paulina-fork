@@ -19,7 +19,6 @@ if WIKIDATA_TEST_MODE:
     PID_IMAGE = 'P185'
     PID_OFFICIAL_WEBSITE = 'P206'
     PID_REFERENCE_URL = 'P93'
-    PID_TITLE = 'P77107'
     PID_RETRIEVED = 'P388'
 else:
     PID_INSTANCE_OF = 'P31'
@@ -33,7 +32,6 @@ else:
     PID_IMAGE = 'P18'
     PID_OFFICIAL_WEBSITE = 'P856'
     PID_REFERENCE_URL = 'P854'
-    PID_TITLE = 'P1476'
     PID_RETRIEVED = 'P813'
 
 # Item IDs (QIDs)
@@ -64,13 +62,13 @@ else:
 # Work Property PIDs
 
 if WIKIDATA_TEST_MODE:
-    PID_AUTHOR = 'P65773'
+    PID_AUTHOR = 'P95656'
     PID_DIRECTOR = 'P778'
     PID_SCREENWRITER = 'P99723'
     PID_COMPOSER = 'P96555'
     PID_CREATOR = 'P728'
     PID_LYRICIST = 'P99724' 
-    PID_PERFORMER = 'P175'
+    PID_PERFORMER = 'P99740'
     PID_PRODUCER = 'P97838'
     PID_GENRE = 'P99710'
     PID_RECORD_LABEL = 'P95963'
@@ -141,7 +139,7 @@ WORK_TYPES = [
         "creator_pid": PID_AUTHOR, 
         "fields": {
             "required": ["author"],  
-            "optional": ["language", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "publicationDate"]
+            "optional": ["language", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "publicationDate", "externalLinks"]
         }
     },
     {
@@ -152,7 +150,7 @@ WORK_TYPES = [
         "creator_pid": PID_AUTHOR,  
         "fields": {
             "required": ["author"],  
-            "optional": ["language", "publicationDate", "country", "imageUrl", "fullWorkUrl", "internetArchiveId"]
+            "optional": ["language", "publicationDate", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "externalLinks"]
         }
     },
     {
@@ -163,7 +161,7 @@ WORK_TYPES = [
         "creator_pid": PID_AUTHOR, 
         "fields": {
             "required": ["author"],  
-            "optional": ["language", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "publicationDate"]
+            "optional": ["language", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "publicationDate", "externalLinks"]
         }
     },
     
@@ -176,7 +174,7 @@ WORK_TYPES = [
         "creator_pid": PID_DIRECTOR, 
         "fields": {
             "required": ["director"],  
-            "optional": ["screenwriter", "composer", "publicationDate", "languageFilm", "country", "imageUrl", "fullWorkUrl", "internetArchiveId"]
+            "optional": ["screenwriter", "composer", "publicationDate", "languageFilm", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "externalLinks"]
         }
     },
     {
@@ -187,7 +185,7 @@ WORK_TYPES = [
         "creator_pid": PID_DIRECTOR,  
         "fields": {
             "required": ["director"],  
-            "optional": ["screenwriter", "composer", "publicationDate", "languageFilm", "country", "imageUrl", "fullWorkUrl", "internetArchiveId"]
+            "optional": ["screenwriter", "composer", "publicationDate", "languageFilm", "country", "imageUrl", "fullWorkUrl", "internetArchiveId", "externalLinks"]
         }
     },
     
@@ -200,7 +198,7 @@ WORK_TYPES = [
         "creator_pid": PID_CREATOR, 
         "fields": {
             "required": ["creator"],  
-            "optional": ["creationDate", "location", "country", "imageUrl"]
+            "optional": ["creationDate", "location", "country", "imageUrl", "externalLinks", "fullWorkUrl", "internetArchiveId"]
         }
     },
     {
@@ -211,7 +209,7 @@ WORK_TYPES = [
         "creator_pid": PID_CREATOR,  
         "fields": {
             "required": ["creator"],  
-            "optional": ["creationDate", "location", "country", "imageUrl"]
+            "optional": ["creationDate", "location", "country", "imageUrl", "externalLinks", "fullWorkUrl", "internetArchiveId"]
         }
     },
     {
@@ -222,7 +220,7 @@ WORK_TYPES = [
         "creator_pid": PID_CREATOR,  
         "fields": {
             "required": ["creator"], 
-            "optional": ["creationDate", "location", "country", "imageUrl"]
+            "optional": ["creationDate", "location", "country", "imageUrl", "externalLinks", "fullWorkUrl", "internetArchiveId"]
         }
     },
     
@@ -235,7 +233,7 @@ WORK_TYPES = [
         "creator_pid": PID_COMPOSER,  
         "fields": {
             "required": ["composer"],  
-            "optional": ["lyricist", "publicationDate", "language", "country", "imageUrl", "fullWorkUrl"]
+            "optional": ["lyricist", "publicationDate", "language", "country", "imageUrl", "fullWorkUrl", "externalLinks", "internetArchiveId"]
         }
     },
     # Album
@@ -247,7 +245,7 @@ WORK_TYPES = [
         "creator_pid": PID_PERFORMER,
         "fields": {
             "required": ["performer"],
-            "optional": ["composer", "producer", "genre", "publicationDate", "countryOfPublication", "language", "recordLabel", "imageUrl", "fullWorkUrl"]
+            "optional": ["composer", "producer", "genre", "publicationDate", "countryOfPublication", "language", "recordLabel", "imageUrl", "fullWorkUrl", "externalLinks", "internetArchiveId"]
         }
     }
 ]

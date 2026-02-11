@@ -5,7 +5,6 @@ and utility functions
 """
 import json
 import requests
-import os
 import traceback
 import urllib.parse as urlparse
 from flask_babel import gettext as _ 
@@ -24,7 +23,6 @@ from wikidata_constants import (
     PID_IMAGE,
     PID_OFFICIAL_WEBSITE,
     PID_REFERENCE_URL,
-    PID_TITLE,
     PID_RETRIEVED,
     PID_AUTHOR,
     PID_LANGUAGE,
@@ -827,7 +825,7 @@ class WikidataAPI:
         # Country of Publication (P291) - Albums  
         country_of_publication = form_data.get('countryOfPublicationQid', '').strip()
         if country_of_publication:
-            refs = self.collect_references_from_form('work-country-of-publication', form_data)
+            refs = self.collect_references_from_form('work-country-publication', form_data)
             statements.append(
                 self.build_statement(PID_COUNTRY_OF_PUBLICATION, country_of_publication, 'wikibase-item', refs)
             )

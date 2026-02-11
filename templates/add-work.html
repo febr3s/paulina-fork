@@ -94,7 +94,6 @@
 
             <!-- Type of Work Selection -->
             <div class="mb-4">
-                <h3 class="h5 mb-3">{{ _('Work Type') }}</h3>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -121,6 +120,15 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- References -->
+                <button type="button" class="btn btn-sm btn-outline-secondary mt-1"
+                    onclick="window.refManager.toggleReference('work-type')">
+                    <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+                </button>
+                <div id="work-type-references" class="mt-3 d-none">
+                    <div id="work-type-reference-container"></div>
+                </div>
             </div>
 
             <!-- Dynamic Creator Fields Section -->
@@ -142,7 +150,8 @@
                     <input type="hidden" id="work-author-qids" name="authorQids">
                     <input type="hidden" id="work-author-labels" name="authorLabels">
                     <div id="work-author-results" class="wikidata-results-dropdown border rounded mt-1"
-                        style="display: none;"></div>
+                        style="display: none;">
+                    </div>
 
                     <!-- References -->
                     <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
@@ -190,7 +199,8 @@
                     <input type="hidden" id="work-creator-qids" name="creatorQids">
                     <input type="hidden" id="work-creator-labels" name="creatorLabels">
                     <div id="work-creator-results" class="wikidata-results-dropdown border rounded mt-1"
-                        style="display: none;"></div>
+                        style="display: none;">
+                    </div>
 
                     <!-- References -->
                     <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
@@ -380,50 +390,81 @@
                             </div>
                         </div>
 
-                        <!-- Country of Origin (P495) -->
-                        <div class="detail-field mb-3" data-field="country" style="display:none;">
-                            <label for="work-country" class="form-label">
-                                <strong class="field-label">{{ _('Country of origin') }} <span
+                        <!-- Location (P276) - Visual arts -->
+                        <div class="detail-field mb-3" data-field="location" style="display:none;">
+                            <label for="work-location" class="form-label">
+                                <strong class="field-label">{{ _('Location') }} <span
                                         class="text-danger required-mark">*</span></strong>
                             </label>
-                            <input type="text" class="form-control border-black shadow-none" id="work-country"
-                                name="country" placeholder="{{ _('Search for a country...') }}" autocomplete="off">
-                            <div id="work-country-selected" class="mt-2 d-none"></div>
-                            <input type="hidden" id="work-country-qid" name="countryQid">
-                            <div id="work-country-results" class="wikidata-results-dropdown border rounded mt-1"
+                            <input type="text" class="form-control border-black shadow-none" id="work-location"
+                                name="location" placeholder="{{ _('e.g., Louvre Museum') }}" autocomplete="off">
+                            <div id="work-location-selected" class="mt-2 d-none"></div>
+                            <input type="hidden" id="work-location-qid" name="locationQid">
+                            <div id="work-location-results" class="wikidata-results-dropdown border rounded mt-1"
                                 style="display: none;"></div>
 
                             <!-- References -->
                             <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
-                                onclick="window.refManager.toggleReference('work-country')">
+                                onclick="window.refManager.toggleReference('work-location')">
                                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
                             </button>
-                            <div id="work-country-references" class="mt-3 d-none">
-                                <div id="work-country-reference-container"></div>
+                            <div id="work-location-references" class="mt-3 d-none">
+                                <div id="work-location-reference-container"></div>
                             </div>
                         </div>
 
-                        <!-- Country of Publication (P291) - Albums -->
-                        <div class="detail-field mb-3" data-field="countryOfPublication" style="display:none;">
-                            <label for="work-country-publication" class="form-label">
-                                <strong class="field-label">{{ _('Country(ies) of Publication') }} <span
+                        <!-- Genre (P136) - Albums -->
+                        <div class="detail-field mb-3" data-field="genre" style="display:none;">
+                            <label for="work-genre" class="form-label">
+                                <strong class="field-label">{{ _('Genre(s)') }} <span
                                         class="text-danger required-mark">*</span></strong>
                             </label>
-                            <input type="text" class="form-control border-black shadow-none"
-                                id="work-country-publication" name="countryOfPublication"
-                                placeholder="{{ _('Search for country...') }}" autocomplete="off">
-                            <div id="work-country-publication-selected" class="mt-2 d-none"></div>
-                            <input type="hidden" id="work-country-publication-qid" name="countryOfPublicationQid">
-                            <div id="work-country-publication-results"
-                                class="wikidata-results-dropdown border rounded mt-1" style="display: none;"></div>
+                            <input type="text" class="form-control border-black shadow-none" id="work-genre"
+                                name="genre" placeholder="{{ _('Search for genre...') }}" autocomplete="off">
+                            <div id="work-selected-genres" class="mt-2"></div>
+                            <input type="hidden" id="work-genre-qids" name="genreQids">
+                            <input type="hidden" id="work-genre-labels" name="genreLabels">
+                            <div id="work-genre-results" class="wikidata-results-dropdown border rounded mt-1"
+                                style="display: none;"></div>
 
                             <!-- References -->
                             <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
-                                onclick="window.refManager.toggleReference('work-country-publication')">
+                                onclick="window.refManager.toggleReference('work-genre')">
                                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
                             </button>
-                            <div id="work-country-publication-references" class="mt-3 d-none">
-                                <div id="work-country-publication-reference-container"></div>
+                            <div id="work-genre-references" class="mt-3 d-none">
+                                <div id="work-genre-reference-container"></div>
+                            </div>
+                        </div>
+
+                        <!-- Creation Date (P571) -->
+                        <div class="detail-field mb-3" data-field="creationDate" style="display:none;">
+                            <label for="work-creation-date" class="form-label">
+                                <strong class="field-label">{{ _('Creation date') }}</strong>
+                            </label>
+                            <div class="date-input-group">
+                                <input type="number" id="work-creation-date-day" name="creationDateDay" placeholder="DD"
+                                    min="0" max="31" class="form-control date-part-input day-input"
+                                    aria-label="{{ _('Day') }}">
+                                <span class="date-separator">-</span>
+                                <input type="number" id="work-creation-date-month" name="creationDateMonth"
+                                    placeholder="MM" min="0" max="12" class="form-control date-part-input month-input"
+                                    aria-label="{{ _('Month') }}">
+                                <span class="date-separator">-</span>
+                                <input type="number" id="work-creation-date-year" name="creationDateYear"
+                                    placeholder="YYYY" min="1" max="9999"
+                                    class="form-control date-part-input year-input" aria-label="{{ _('Year') }}">
+                            </div>
+                            <input type="hidden" id="creationDate" name="creationDate"
+                                value="{{ form_data.get('creationDate', '') if form_data else '' }}">
+
+                            <!-- References -->
+                            <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                                onclick="window.refManager.toggleReference('work-creation-date')">
+                                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
+                            </button>
+                            <div id="work-creation-date-references" class="mt-3 d-none">
+                                <div id="work-creation-date-reference-container"></div>
                             </div>
                         </div>
 
@@ -461,49 +502,26 @@
 
                     <!-- Right Column -->
                     <div class="col-md-6">
-                        <!-- Location (P276) - Visual arts -->
-                        <div class="detail-field mb-3" data-field="location" style="display:none;">
-                            <label for="work-location" class="form-label">
-                                <strong class="field-label">{{ _('Location') }} <span
+                        <!-- Country of Origin (P495) -->
+                        <div class="detail-field mb-3" data-field="country" style="display:none;">
+                            <label for="work-country" class="form-label">
+                                <strong class="field-label">{{ _('Country of origin') }} <span
                                         class="text-danger required-mark">*</span></strong>
                             </label>
-                            <input type="text" class="form-control border-black shadow-none" id="work-location"
-                                name="location" placeholder="{{ _('e.g., Louvre Museum') }}" autocomplete="off">
-                            <div id="work-location-selected" class="mt-2 d-none"></div>
-                            <input type="hidden" id="work-location-qid" name="locationQid">
-                            <div id="work-location-results" class="wikidata-results-dropdown border rounded mt-1"
+                            <input type="text" class="form-control border-black shadow-none" id="work-country"
+                                name="country" placeholder="{{ _('Search for a country...') }}" autocomplete="off">
+                            <div id="work-country-selected" class="mt-2 d-none"></div>
+                            <input type="hidden" id="work-country-qid" name="countryQid">
+                            <div id="work-country-results" class="wikidata-results-dropdown border rounded mt-1"
                                 style="display: none;"></div>
 
                             <!-- References -->
                             <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
-                                onclick="window.refManager.toggleReference('work-location')">
+                                onclick="window.refManager.toggleReference('work-country')">
                                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
                             </button>
-                            <div id="work-location-references" class="mt-3 d-none">
-                                <div id="work-location-reference-container"></div>
-                            </div>
-                        </div>
-
-                        <!-- Genre (P136) - Albums -->
-                        <div class="detail-field mb-3" data-field="genre" style="display:none;">
-                            <label for="work-genre" class="form-label">
-                                <strong class="field-label">{{ _('Genre') }} <span
-                                        class="text-danger required-mark">*</span></strong>
-                            </label>
-                            <input type="text" class="form-control border-black shadow-none" id="work-genre"
-                                name="genre" placeholder="{{ _('Search for genre...') }}" autocomplete="off">
-                            <div id="work-genre-selected" class="mt-2 d-none"></div>
-                            <input type="hidden" id="work-genre-qid" name="genreQid">
-                            <div id="work-genre-results" class="wikidata-results-dropdown border rounded mt-1"
-                                style="display: none;"></div>
-
-                            <!-- References -->
-                            <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
-                                onclick="window.refManager.toggleReference('work-genre')">
-                                <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
-                            </button>
-                            <div id="work-genre-references" class="mt-3 d-none">
-                                <div id="work-genre-reference-container"></div>
+                            <div id="work-country-references" class="mt-3 d-none">
+                                <div id="work-country-reference-container"></div>
                             </div>
                         </div>
 
@@ -531,40 +549,32 @@
                             </div>
                         </div>
 
-                        <!-- Creation Date (P571) -->
-                        <div class="detail-field mb-3" data-field="creationDate" style="display:none;">
-                            <label for="work-creation-date" class="form-label">
-                                <strong class="field-label">{{ _('Creation date') }}</strong>
+                        <!-- Country of Publication (P291) - Albums -->
+                        <div class="detail-field mb-3" data-field="countryOfPublication" style="display:none;">
+                            <label for="work-country-publication" class="form-label">
+                                <strong class="field-label">{{ _('Country(ies) of Publication') }} <span
+                                        class="text-danger required-mark">*</span></strong>
                             </label>
-                            <div class="date-input-group">
-                                <input type="number" id="work-creation-date-day" name="creationDateDay" placeholder="DD"
-                                    min="0" max="31" class="form-control date-part-input day-input"
-                                    aria-label="{{ _('Day') }}">
-                                <span class="date-separator">-</span>
-                                <input type="number" id="work-creation-date-month" name="creationDateMonth"
-                                    placeholder="MM" min="0" max="12" class="form-control date-part-input month-input"
-                                    aria-label="{{ _('Month') }}">
-                                <span class="date-separator">-</span>
-                                <input type="number" id="work-creation-date-year" name="creationDateYear"
-                                    placeholder="YYYY" min="1" max="9999"
-                                    class="form-control date-part-input year-input" aria-label="{{ _('Year') }}">
-                            </div>
-                            <input type="hidden" id="creationDate" name="creationDate"
-                                value="{{ form_data.get('creationDate', '') if form_data else '' }}">
+                            <input type="text" class="form-control border-black shadow-none"
+                                id="work-country-publication" name="countryOfPublication"
+                                placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                            <div id="work-country-publication-selected" class="mt-2 d-none"></div>
+                            <input type="hidden" id="work-country-publication-qid" name="countryOfPublicationQid">
+                            <div id="work-country-publication-results"
+                                class="wikidata-results-dropdown border rounded mt-1" style="display: none;"></div>
 
                             <!-- References -->
                             <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
-                                onclick="window.refManager.toggleReference('work-creation-date')">
+                                onclick="window.refManager.toggleReference('work-country-publication')">
                                 <i class="bi bi-link-45deg"></i> {{ _('Add reference') }}
                             </button>
-                            <div id="work-creation-date-references" class="mt-3 d-none">
-                                <div id="work-creation-date-reference-container"></div>
+                            <div id="work-country-publication-references" class="mt-3 d-none">
+                                <div id="work-country-publication-reference-container"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <!-- Work Image Section - Collapsible -->
             <div class="detail-field" data-field="imageUrl" style="display:none;">
@@ -618,12 +628,19 @@
                                     <div class="col-md-4">
                                         <div class="mb-3 d-flex flex-column align-items-center text-center">
                                             <h5 class="h5 text-body-secondary mb-1 fs-6">{{ _('Image preview') }}</h5>
-                                            <div class="main-card-image-link work-image-link d-flex justify-content-center mx-auto"
-                                                style="max-width: 200px; transition: none !important;">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png"
-                                                    alt="{{ _('Image preview') }}" id="work-image-preview"
-                                                    class="img-fluid rounded"
-                                                    style="max-height: 200px; object-fit: cover;">
+                                            <div class="main-card-image-link work-image-link d-flex justify-content-center align-items-center mx-auto bg-light border rounded"
+                                                style="width: 200px; height: 200px; transition: none !important;">
+                                                <!-- Placeholder -->
+                                                <div id="work-image-placeholder"
+                                                    class="d-flex align-items-center justify-content-center"
+                                                    style="width: 100%; height: 100%;">
+                                                    <i class="bi bi-book-fill text-secondary"
+                                                        style="font-size: 4rem;"></i>
+                                                </div>
+                                                <!-- Actual image -->
+                                                <img src="" alt="{{ _('Image preview') }}" id="work-image-preview"
+                                                    class="img-fluid rounded d-none"
+                                                    style="width: 100%; height: 100%; object-fit: cover; position: absolute;">
                                             </div>
                                             <!-- Error Message -->
                                             <div id="work-image-error-message" class="alert alert-danger mt-2 d-none"
@@ -653,8 +670,9 @@
                 <div class="collapse" id="work-external-links-section">
                     <div class="mb-4">
                         <!-- Full Work URL -->
-                        <div class="mb-3">
-                            <label for="work-full-work-url" class="form-label">{{ _('Full work available at URL') }}</label>
+                        <div class="mb-3" data-field="fullWorkUrl" style="display:none;">
+                            <label for="work-full-work-url" class="form-label">{{ _('Full work available at URL')
+                                }}</label>
                             <input type="url" class="form-control border-black shadow-none" id="work-full-work-url"
                                 name="fullWorkUrl" value="{{ form_data.get('fullWorkUrl', '') if form_data else '' }}"
                                 placeholder="https://">
@@ -664,10 +682,11 @@
                         </div>
 
                         <!-- Internet Archive ID -->
-                        <div class="mb-3">
-                            <label for="work-internet-archive-id" class="form-label">{{ _('Internet Archive ID') }}</label>
-                            <input type="text" class="form-control border-black shadow-none" id="work-internet-archive-id"
-                                name="internetArchiveId"
+                        <div class="mb-3" data-field="internetArchiveId" style="display:none;">
+                            <label for="work-internet-archive-id" class="form-label">{{ _('Internet Archive ID')
+                                }}</label>
+                            <input type="text" class="form-control border-black shadow-none"
+                                id="work-internet-archive-id" name="internetArchiveId"
                                 value="{{ form_data.get('internetArchiveId', '') if form_data else '' }}"
                                 placeholder="e.g., donquixote00cerv">
                             <div class="form-text">
@@ -720,6 +739,129 @@
         const creatorFields = document.querySelectorAll('.creator-field');
         const detailFields = document.querySelectorAll('.detail-field');
 
+        //  hideAllFields function
+        function hideAllFields() {
+            creatorFields.forEach(field => {
+                field.style.display = 'none';
+
+                // Get the field ID from data-field attribute
+                const fieldName = field.getAttribute('data-field');
+
+                // Reset the corresponding WikidataItemSearch instance
+                if (fieldName === 'author' && authorSearch) {
+                    authorSearch.reset();
+                } else if (fieldName === 'director' && directorSearch) {
+                    directorSearch.reset();
+                } else if (fieldName === 'creator' && creatorSearch) {
+                    creatorSearch.reset();
+                } else if (fieldName === 'composer' && composerSearch) {
+                    composerSearch.reset();
+                } else if (fieldName === 'screenwriter' && screenwriterSearch) {
+                    screenwriterSearch.reset();
+                } else if (fieldName === 'lyricist' && lyricistSearch) {
+                    lyricistSearch.reset();
+                } else if (fieldName === 'performer' && performerSearch) {
+                    performerSearch.reset();
+                } else if (fieldName === 'producer' && producerSearch) {
+                    producerSearch.reset();
+                }
+
+                const refContainer = field.querySelector('[id*="reference-container"]');
+                if (refContainer) refContainer.innerHTML = '';
+                const refSection = field.querySelector('[id*="references"]');
+                if (refSection) refSection.classList.add('d-none');
+
+
+                const requiredMark = field.querySelector('.required-mark');
+                if (requiredMark) requiredMark.style.display = 'none';
+            });
+
+            detailFields.forEach(field => {
+                field.style.display = 'none';
+
+                // Get the field name from data-field attribute
+                const fieldName = field.getAttribute('data-field');
+
+                // Reset the corresponding WikidataItemSearch instance for detail fields
+                if (fieldName === 'language' && languageSearch) {
+                    languageSearch.reset();
+                } else if (fieldName === 'languageFilm' && languageFilmSearch) {
+                    languageFilmSearch.reset();
+                } else if (fieldName === 'country' && countrySearch) {
+                    countrySearch.reset();
+                } else if (fieldName === 'location' && locationSearch) {
+                    locationSearch.reset();
+                } else if (fieldName === 'genre' && genreSearch) {
+                    genreSearch.reset();
+                } else if (fieldName === 'recordLabel' && recordLabelSearch) {
+                    recordLabelSearch.reset();
+                } else if (fieldName === 'countryOfPublication' && countryOfPublicationSearch) {
+                    countryOfPublicationSearch.reset();
+                }
+
+                // Clear date inputs
+                const yearInput = field.querySelector('input[type="number"][id*="year"]');
+                if (yearInput) yearInput.value = '';
+                const monthInput = field.querySelector('input[type="number"][id*="month"]');
+                if (monthInput) monthInput.value = '';
+                const dayInput = field.querySelector('input[type="number"][id*="day"]');
+                if (dayInput) dayInput.value = '';
+
+                // Clear image URL
+                const imageUrlInput = field.querySelector('input[type="url"]');
+                if (imageUrlInput) imageUrlInput.value = '';
+
+                // Clear text inputs in external links section
+                const textInputs = field.querySelectorAll('input[type="text"], input[type="url"]');
+                textInputs.forEach(input => input.value = '');
+
+                // Clear references
+                const refContainer = field.querySelector('[id*="reference-container"]');
+                if (refContainer) refContainer.innerHTML = '';
+                const refSection = field.querySelector('[id*="references"]');
+                if (refSection) refSection.classList.add('d-none');
+
+                const requiredMark = field.querySelector('.required-mark');
+                if (requiredMark) requiredMark.style.display = 'none';
+            });
+        }
+
+
+        // showField function
+        function showField(fieldName, isRequired) {
+            // Find field by data-field attribute
+            const field = document.querySelector(`[data-field="${fieldName}"]`);
+
+            if (!field) {
+                console.warn(`Field not found: ${fieldName}`);
+                return;
+            }
+
+            // Show the field
+            field.style.display = 'block';
+
+            const input = field.querySelector('input[type="text"]:not([type="hidden"]), input[type="url"], select');
+            const requiredMark = field.querySelector('.required-mark');
+
+            if (input) {
+                input.style.display = '';  // Reset display to default
+
+                if (isRequired) {
+                    input.setAttribute('required', 'required');
+                } else {
+                    input.removeAttribute('required');
+                }
+            }
+
+            if (requiredMark) {
+                if (isRequired) {
+                    requiredMark.style.display = 'inline';
+                } else {
+                    requiredMark.style.display = 'none';
+                }
+            }
+        }
+
         // Handle work type change
         workTypeSelect.addEventListener('change', function () {
             const selectedOption = this.options[this.selectedIndex];
@@ -763,57 +905,6 @@
                 showField(fieldName, false);
             });
         });
-
-        function hideAllFields() {
-            creatorFields.forEach(field => {
-                field.style.display = 'none';
-                const input = field.querySelector('input[type="text"]');
-                if (input) input.removeAttribute('required');
-                const requiredMark = field.querySelector('.required-mark');
-                if (requiredMark) requiredMark.style.display = 'none';
-            });
-
-            detailFields.forEach(field => {
-                field.style.display = 'none';
-                const input = field.querySelector('input:not([type="hidden"]):not([type="number"]), select, textarea');
-                if (input) input.removeAttribute('required');
-                const requiredMark = field.querySelector('.required-mark');
-                if (requiredMark) requiredMark.style.display = 'none';
-            });
-        }
-
-        function showField(fieldName, isRequired) {
-            // Find field by data-field attribute
-            const field = document.querySelector(`[data-field="${fieldName}"]`);
-
-            if (!field) {
-                console.warn(`Field not found: ${fieldName}`);
-                return;
-            }
-
-            // Show the field
-            field.style.display = 'block';
-
-            // Find the input/select element
-            const input = field.querySelector('input[type="text"]:not([type="hidden"]), input[type="url"], select');
-            const requiredMark = field.querySelector('.required-mark');
-
-            if (isRequired) {
-                if (input) {
-                    input.setAttribute('required', 'required');
-                }
-                if (requiredMark) {
-                    requiredMark.style.display = 'inline';
-                }
-            } else {
-                if (input) {
-                    input.removeAttribute('required');
-                }
-                if (requiredMark) {
-                    requiredMark.style.display = 'none';
-                }
-            }
-        }
 
         // Initialize Wikidata Search for All Creator Fields
         let authorSearch, directorSearch, creatorSearch, composerSearch, screenwriterSearch, lyricistSearch;
@@ -970,10 +1061,10 @@
         if (document.getElementById('work-genre')) {
             genreSearch = new WikidataItemSearch({
                 inputId: 'work-genre',
-                hiddenInputId: 'work-genre-qid',
+                hiddenInputId: 'work-genre-qids',
                 resultsId: 'work-genre-results',
-                selectedItemsId: 'work-genre-selected',
-                multiSelect: false,
+                selectedItemsId: 'work-selected-genres',
+                multiSelect: true,
                 entityType: 'item'
             });
         }
@@ -1018,9 +1109,10 @@
         const imagePreview = new ImagePreview({
             inputId: 'work-image-url',
             previewId: 'work-image-preview',
+            placeholderId: 'work-image-placeholder',
             errorId: 'work-image-error-message',
             clearBtnId: 'work-clear-image-url',
-            requireCommons: true
+            requireCommons: true,
         });
 
         // Update Search Commons Button
@@ -1131,7 +1223,7 @@
             }
 
 
-            // Restore work type - this will trigger showing the correct fields
+            // Restore work type 
             if (formData.instanceOfQid) {
                 const workTypeSelect = document.getElementById('work-type-select');
                 if (workTypeSelect) {
@@ -1306,13 +1398,20 @@
                     });
                 }
 
-                // Restore Genre (single-select)
-                if (formData.genreQid && formData.genre && genreSearch) {
-                    genreSearch.selectItem({
-                        id: formData.genreQid,
-                        label: formData.genre,
-                        description: ''
+                // Restore Genre (multi-select) 
+                if (formData.genreQids && formData.genreLabels && genreSearch) {
+                    const qids = formData.genreQids.split(',').filter(q => q.trim());
+                    const labels = formData.genreLabels.split(',').filter(l => l.trim());
+                    qids.forEach((qid, index) => {
+                        if (qid && labels[index]) {
+                            genreSearch.selectItem({
+                                id: qid,
+                                label: labels[index],
+                                description: ''
+                            });
+                        }
                     });
+                    genreSearch.input.style.display = 'none';
                 }
 
                 // Restore Record Label (single-select)
@@ -1379,6 +1478,7 @@
 
                 // Restore References for all fields
                 const fieldIds = [
+                    'work-type',
                     'work-author',
                     'work-director',
                     'work-creator',
@@ -1401,37 +1501,40 @@
                 fieldIds.forEach(fieldId => {
                     for (let i = 0; i < 3; i++) {
                         const refUrl = formData[`${fieldId}_ref_url_${i}`];
-                        const refTitle = formData[`${fieldId}_ref_title_${i}`];
                         const refRetrieved = formData[`${fieldId}_ref_retrieved_${i}`];
 
                         if (refUrl) {
+                            // Toggle reference section visibility if hidden
                             const refSection = document.getElementById(`${fieldId}-references`);
                             if (refSection && refSection.classList.contains('d-none')) {
                                 window.refManager.toggleReference(fieldId);
                             }
 
-                            if (window.refManager) {
-                                const container = document.getElementById(`${fieldId}-reference-container`);
-                                if (container) {
-                                    const existingRefs = container.querySelectorAll('.reference-item').length;
+                            // Get the reference container
+                            const refContainer = document.getElementById(`${fieldId}-reference-container`);
+                            if (refContainer) {
+                                // Check how many references currently exist
+                                const existingRefs = refContainer.querySelectorAll('.reference-item');
 
-                                    if (existingRefs <= i) {
-                                        window.refManager.addReference(fieldId);
-                                    }
+                                if (existingRefs.length <= i) {
+                                    window.refManager.addReference(fieldId);
+                                }
 
-                                    const urlInput = document.querySelector(`input[name="${fieldId}_ref_url_${i}"]`);
-                                    const titleInput = document.querySelector(`input[name="${fieldId}_ref_title_${i}"]`);
-                                    const retrievedInput = document.querySelector(`input[name="${fieldId}_ref_retrieved_${i}"]`);
+                                const allRefs = refContainer.querySelectorAll('.reference-item');
+                                const targetRef = allRefs[i];
+
+                                if (targetRef) {
+                                    const urlInput = targetRef.querySelector('input[name*="ref_url"]');
+                                    const retrievedInput = targetRef.querySelector('input[name*="ref_retrieved"]');
 
                                     if (urlInput) urlInput.value = refUrl;
-                                    if (titleInput && refTitle) titleInput.value = refTitle;
-                                    if (retrievedInput && refRetrieved) retrievedInput.value = refRetrieved;
+                                    if (retrievedInput) retrievedInput.value = refRetrieved || '';
                                 }
                             }
                         }
                     }
                 });
-            }, 500); // Wait for dynamic fields to show
+            }, 500);
         }
 
         // Call restore function if data exists
