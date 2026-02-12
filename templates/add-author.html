@@ -467,17 +467,22 @@
                   </div>
                 </div>
 
-                <!-- Author Image Preview -->
-                <div class="col-md-4">
-                  <div class="mb-3 d-flex flex-column align-items-center text-center">
-                    <h5 class="h5 text-body-secondary mb-1 fs-6">{{ _('Image preview') }}</h5>
-                    <div class="main-card-image-link author-image-link d-flex justify-content-center mx-auto" style="max-width: 200px; transition: none !important;">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png" 
-                           alt="{{ _('Image preview') }}" 
-                           id="author-image-preview" 
-                           class="img-fluid rounded"
-                           style="max-height: 200px; object-fit: cover;">
+               <!-- Author Image Preview -->
+              <div class="col-md-4">
+                <div class="mb-3 d-flex flex-column align-items-center text-center">
+                  <h5 class="h5 text-body-secondary mb-1 fs-6">{{ _('Image preview') }}</h5>
+                  <div class="main-card-image-link author-image-link d-flex justify-content-center align-items-center mx-auto bg-light border rounded position-relative"
+                      style="width: 200px; height: 200px; transition: none !important;">
+                    <!-- Placeholder -->
+                    <div id="author-image-placeholder" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;">
+                      <i class="bi bi-person-square text-secondary" style="font-size: 4rem;"></i>
                     </div>
+                    <!-- Actual image-->
+                    <img src="" alt="{{ _('Image preview') }}" 
+                        id="author-image-preview" 
+                        class="img-fluid rounded d-none"
+                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+                  </div>
                     <!-- Error Message -->
                     <div id="author-image-error-message" class="alert alert-danger mt-2 d-none" role="alert">
                       <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -624,6 +629,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.imagePreview = new ImagePreview({
     inputId: 'author-image-url',
     previewId: 'author-image-preview',
+    placeholderId: 'author-image-placeholder', 
     errorId: 'author-image-error-message',
     clearBtnId: 'author-clear-image-url',
     requireCommons: true,
@@ -838,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => {
       console.error('Error clearing form data:', error);
-      alert('Could not connect to server. Please refresh the page manually to clear all data.');
+       alert('{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}');
     });
   };
 
@@ -976,7 +982,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fieldIds.forEach(fieldId => {
       for (let i = 0; i < 3; i++) {
         const refUrl = formData[`${fieldId}_ref_url_${i}`];
-        const refTitle = formData[`${fieldId}_ref_title_${i}`];
         const refRetrieved = formData[`${fieldId}_ref_retrieved_${i}`];
         
         if (refUrl) {
@@ -995,11 +1000,9 @@ document.addEventListener('DOMContentLoaded', function() {
               }
               
               const urlInput = document.querySelector(`input[name="${fieldId}_ref_url_${i}"]`);
-              const titleInput = document.querySelector(`input[name="${fieldId}_ref_title_${i}"]`);
               const retrievedInput = document.querySelector(`input[name="${fieldId}_ref_retrieved_${i}"]`);
               
               if (urlInput) urlInput.value = refUrl;
-              if (titleInput && refTitle) titleInput.value = refTitle;
               if (retrievedInput && refRetrieved) retrievedInput.value = refRetrieved;
             }
           }

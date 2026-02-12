@@ -1,117 +1,51 @@
 """
 Wikidata API Helper Module
 Handles creating and editing Wikidata items via the Wikibase REST API
-Includes Wikidata property/item ID constants and utility functions
+and utility functions
 """
-
 import json
 import requests
-import os
 import traceback
 import urllib.parse as urlparse
-from flask_babel import lazy_gettext as _l, gettext as _ 
+from flask_babel import gettext as _ 
 
-
-
-# WIKIDATA CONSTANTS - Test/Production Mode Configuration
-
-# Check for test mode
-WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
-
-# Property IDs (PIDs)
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata properties (from test.wikidata.org)
-    PID_INSTANCE_OF = 'P82'           # instance of
-    PID_SEX_OR_GENDER = 'P192'         # sex or gender
-    PID_COUNTRY_OF_CITIZENSHIP = 'P196' # country of citizenship
-    PID_DATE_OF_BIRTH = 'P18'         # date of birth
-    PID_DATE_OF_DEATH = 'P25'        # date of death
-    PID_PLACE_OF_BIRTH = 'P342'       # place of birth
-    PID_OCCUPATION = 'P204'           # occupation
-    PID_ETHNIC_GROUP = 'P84982'         # ethnic group
-    PID_IMAGE = 'P185'                # image
-    PID_OFFICIAL_WEBSITE = 'P206'     # official website
-    PID_REFERENCE_URL = 'P93'        # reference URL
-    PID_TITLE = 'P77107'                # title
-    PID_RETRIEVED = 'P388'            # retrieved
-else:
-    # Production Wikidata properties
-    PID_INSTANCE_OF = 'P31'
-    PID_SEX_OR_GENDER = 'P21'
-    PID_COUNTRY_OF_CITIZENSHIP = 'P27'
-    PID_DATE_OF_BIRTH = 'P569'
-    PID_DATE_OF_DEATH = 'P570'
-    PID_PLACE_OF_BIRTH = 'P19'
-    PID_OCCUPATION = 'P106'
-    PID_ETHNIC_GROUP = 'P172'
-    PID_IMAGE = 'P18'
-    PID_OFFICIAL_WEBSITE = 'P856'
-    PID_REFERENCE_URL = 'P854'
-    PID_TITLE = 'P1476'
-    PID_RETRIEVED = 'P813'
-
-# Item IDs (QIDs)
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata items
-    QID_HUMAN = 'Q224056'
-else:
-    # Production Wikidata items
-    QID_HUMAN = 'Q5'
-    
-    
-# Gender QIDs
-if WIKIDATA_TEST_MODE:
-    # Test Wikidata QIDs for genders
-    FORM_GENDERS = [
-        {"qid": "Q216154", "gender_name": _l("Female")},
-        {"qid": "Q216156", "gender_name": _l("Male")},
-        {"qid": "Q243752", "gender_name": _l("Trans man")},
-        {"qid": "Q243753", "gender_name": _l("Trans woman")},
-        {"qid": "Q243754", "gender_name": _l("Non-binary")}
-    ]
-else:
-    # Production Wikidata QIDs for genders
-    FORM_GENDERS = [
-        {"qid": "Q6581072", "gender_name": _l("Female")},
-        {"qid": "Q6581097", "gender_name": _l("Male")},
-        {"qid": "Q2449503", "gender_name": _l("Trans man")},
-        {"qid": "Q1052281", "gender_name": _l("Trans woman")},
-        {"qid": "Q48270", "gender_name": _l("Non-binary")}
-    ]
-
-
-# UTILITY FUNCTIONS
-
-def generate_author_description(nationality_label, date_of_birth=None, date_of_death=None, lang='en'):
-    """
-    Generate a simple standard description for an author.
-    Format: "creator from {nationality} (birthDate–deathDate)" or "creator from {nationality}"
-    
-    Args:
-        nationality_label: Human-readable nationality label
-        date_of_birth: Birth date string (YYYY-MM-DD format)
-        date_of_death: Death date string (YYYY-MM-DD format)
-        lang: Language code for the description
-    
-    Returns:
-        Generated description string (starts with lowercase per Wikidata rules)
-    """
-    # Base description 
-    if nationality_label:
-        description = _("creator from %(nationality)s", nationality=nationality_label)
-    else:
-        description = _("creator")
-
-    # Add dates if both birth and death are present
-    if date_of_birth and date_of_death:
-        try:
-            birth_year = date_of_birth.split('-')[0]
-            death_year = date_of_death.split('-')[0]
-            description += f" ({birth_year}–{death_year})" 
-        except:
-            pass  # Skip dates if parsing fails
-    
-    return description
+# Import Wikidata constants
+from wikidata_constants import (
+    WIKIDATA_TEST_MODE,
+    PID_INSTANCE_OF,
+    PID_SEX_OR_GENDER,
+    PID_COUNTRY_OF_CITIZENSHIP,
+    PID_DATE_OF_BIRTH,
+    PID_DATE_OF_DEATH,
+    PID_PLACE_OF_BIRTH,
+    PID_OCCUPATION,
+    PID_ETHNIC_GROUP,
+    PID_IMAGE,
+    PID_OFFICIAL_WEBSITE,
+    PID_REFERENCE_URL,
+    PID_RETRIEVED,
+    PID_AUTHOR,
+    PID_LANGUAGE,
+    PID_COUNTRY_OF_ORIGIN,
+    PID_PUBLICATION_DATE,
+    PID_INCEPTION,
+    PID_FULL_WORK_URL,
+    PID_INTERNET_ARCHIVE,
+    QID_HUMAN,
+    PID_DIRECTOR,
+    PID_SCREENWRITER,
+    PID_COMPOSER,
+    PID_CREATOR,
+    PID_LYRICIST,
+    PID_LOCATION,
+    PID_LANGUAGE_FILM,
+    PID_PERFORMER,
+    PID_PRODUCER,
+    PID_GENRE,
+    PID_RECORD_LABEL,
+    PID_COUNTRY_OF_PUBLICATION,
+    WORK_TYPES,
+)
 
 # WIKIDATA API CLASS
 
@@ -540,6 +474,389 @@ class WikidataAPI:
         
         return statements
     
+    # WORK FORM PROCESSING
+    
+    def process_work_form(self, form_data, current_lang='en'):
+        """
+        Processing of work form - validation, building labels/descriptions/statements.
+        
+        Args:
+            form_data: Flask request.form object
+            current_lang: Current language code for labels/descriptions
+        
+        Returns:
+            dict with 'success', 'item_id' or 'errors'
+        """
+        # Validate
+        is_valid, errors = self.validate_work_form_data(form_data)
+        if not is_valid:
+            return {'success': False, 'errors': errors}
+        
+        # Extract form data
+        title = form_data.get('title', '').strip()
+        description = form_data.get('description', '').strip()
+        
+        # Generate description if not provided
+        if not description:
+            # Get work type
+            instance_of_qid = form_data.get('instanceOfQid', '').strip()
+            work_type_config = None
+            
+            # Find the work type configuration
+            for wt in WORK_TYPES:
+                if wt['qid'] == instance_of_qid:
+                    work_type_config = wt
+                    break
+            
+            if work_type_config:
+                work_type_label = work_type_config['type_name']
+                creator_property = work_type_config['creator_property']
+                
+                # Get creator label(s) from the required creator field
+                # Map creator property name to form field name
+                creator_field_mapping = {
+                    'author': 'authorQids',
+                    'director': 'directorQids',
+                    'creator': 'creatorQids',
+                    'composer': 'composerQids',
+                    'performer': 'performerQids'
+                }
+                
+                creator_form_field = creator_field_mapping.get(creator_property)
+                creator_labels_field = creator_form_field.replace('Qids', 'Labels') if creator_form_field else None
+
+                creator_label = None
+                if creator_labels_field:
+                    creator_labels_str = form_data.get(creator_labels_field, '').strip()
+                    if creator_labels_str:
+                        creator_names = [name.strip() for name in creator_labels_str.split(',') if name.strip()]
+                        
+                        # Format the creator label based on count
+                        if len(creator_names) == 1:
+                            creator_label = creator_names[0]
+                        elif len(creator_names) == 2:
+                            creator_label = f"{creator_names[0]} and {creator_names[1]}"
+                        elif len(creator_names) > 2:
+                            # For 3+ creators: "Name1, Name2 and Name3"
+                            all_but_last = ', '.join(creator_names[:-1])
+                            creator_label = f"{all_but_last} and {creator_names[-1]}"
+                
+                # Get creation/publication date
+                creation_date = (form_data.get('publicationDate', '').strip() or 
+                                form_data.get('creationDate', '').strip())
+                
+                # Generate description
+                description = generate_work_description(
+                    work_type_label,
+                    creator_label,
+                    creation_date,
+                    current_lang
+                )
+            else:
+                # Fallback if work type not found
+                description = _("work")
+    
+        # Build labels and descriptions
+        labels = {current_lang: title}
+        descriptions = {current_lang: description} if description else {}
+        
+        # Build statements
+        statements = self.build_work_statements_from_form(form_data)
+        
+        # Create the item
+        result = self.create_item(labels, descriptions, statements)
+        
+        return result
+
+    def validate_work_form_data(self, form_data, current_lang='en'):
+        """
+        Validate required fields for work creation based on work type.
+        
+        Args:
+            form_data: Flask request.form object
+            current_lang: Current language code for error messages
+        
+        Returns:
+            Tuple of (is_valid, errors_list)
+        """
+        errors = []
+        
+        # Title is always required
+        if not form_data.get('title', '').strip():
+            errors.append(_('Title is required'))
+        
+        # Type of work is always required
+        instance_of_qid = form_data.get('instanceOfQid', '').strip()
+        if not instance_of_qid:
+            errors.append(_('Type of work is required'))
+            return False, errors
+        
+        # Find the work type configuration
+        work_type_config = None
+        for wt in WORK_TYPES:
+            if wt['qid'] == instance_of_qid:
+                work_type_config = wt
+                break
+        
+        if not work_type_config:
+            errors.append(_('Invalid work type selected'))
+            return False, errors
+        
+        # Get required fields for this work type
+        required_fields = work_type_config['fields']['required']
+        
+        # Field name mapping to form field names and display names
+        field_mapping = {
+            'author': ('authorQids', _('Author')),
+            'director': ('directorQids', _('Director')),
+            'creator': ('creatorQids', _('Creator')),
+            'composer': ('composerQids', _('Composer')),
+            'screenwriter': ('screenwriterQids', _('Screenwriter')),
+            'lyricist': ('lyricistQids', _('Lyricist')),
+            'performer': ('performerQids', _('Performer')),  
+            'producer': ('producerQids', _('Producer')),  
+            'language': ('languageQid', _('Language')),
+            'languageFilm': ('languageFilmQid', _('Original language')),
+            'country': ('countryQid', _('Country of origin')),
+            'countryOfPublication': ('countryOfPublicationQid', _('Country of publication')), 
+            'location': ('locationQid', _('Location')),
+            'genre': ('genreQid', _('Genre')),  
+            'recordLabel': ('recordLabelQid', _('Record label')), 
+            'publicationDate': ('publicationDate', _('Publication date')),
+            'creationDate': ('creationDate', _('Creation date')),
+        }
+        
+        # Validate required fields
+        for field in required_fields:
+            if field in field_mapping:
+                form_field_name, display_name = field_mapping[field]
+                if not form_data.get(form_field_name, '').strip():
+                    errors.append(_('%(field)s is required', field=display_name))
+        
+        # Validate date formats
+        publication_date = form_data.get('publicationDate', '').strip()
+        if publication_date:
+            is_valid, error_msg = self.validate_date_format(publication_date)
+            if not is_valid:
+                errors.append(_('Publication date: %(error)s', error=error_msg))
+
+        creation_date = form_data.get('creationDate', '').strip()
+        if creation_date:
+            is_valid, error_msg = self.validate_date_format(creation_date)
+            if not is_valid:
+                errors.append(_('Creation date: %(error)s', error=error_msg))
+        
+        return len(errors) == 0, errors
+
+    def build_work_statements_from_form(self, form_data):
+        """
+        Build all Wikidata statements for a work from form data.
+        Handles multiple creator types (author, director, composer, etc.)
+        Uses constants that adapt to test/production mode.
+        
+        Args:
+            form_data: Flask request.form object
+        
+        Returns:
+            List of statement dictionaries
+        """
+        statements = []
+        
+        # Instance of (type of work) - Required
+        instance_of = form_data.get('instanceOfQid', '').strip()
+        if instance_of:
+            refs = self.collect_references_from_form('work-type-select', form_data)
+            statements.append(
+                self.build_statement(PID_INSTANCE_OF, instance_of, 'wikibase-item', refs)
+            )
+        
+        # Authors (P50) - Literary works
+        authors = form_data.get('authorQids', '').strip()
+        if authors:
+            refs = self.collect_references_from_form('work-author', form_data)
+            for qid in authors.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_AUTHOR, qid, 'wikibase-item', refs)
+                    )
+        
+        # Directors (P57) - Films/Audiovisual
+        directors = form_data.get('directorQids', '').strip()
+        if directors:
+            refs = self.collect_references_from_form('work-director', form_data)
+            for qid in directors.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_DIRECTOR, qid, 'wikibase-item', refs)
+                    )
+        
+        # Creators (P170) - Visual arts
+        creators = form_data.get('creatorQids', '').strip()
+        if creators:
+            refs = self.collect_references_from_form('work-creator', form_data)
+            for qid in creators.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_CREATOR, qid, 'wikibase-item', refs)
+                    )
+        
+        # Composers (P86) - Music/Films
+        composers = form_data.get('composerQids', '').strip()
+        if composers:
+            refs = self.collect_references_from_form('work-composer', form_data)
+            for qid in composers.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_COMPOSER, qid, 'wikibase-item', refs)
+                    )
+        
+        # Screenwriters (P58) - Films (optional)
+        screenwriters = form_data.get('screenwriterQids', '').strip()
+        if screenwriters:
+            refs = self.collect_references_from_form('work-screenwriter', form_data)
+            for qid in screenwriters.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_SCREENWRITER, qid, 'wikibase-item', refs)
+                    )
+        
+        # Lyricists (P676) - Music (optional)
+        lyricists = form_data.get('lyricistQids', '').strip()
+        if lyricists:
+            refs = self.collect_references_from_form('work-lyricist', form_data)
+            for qid in lyricists.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_LYRICIST, qid, 'wikibase-item', refs)
+                    )
+        
+        # Performers (P175) - Albums
+        performers = form_data.get('performerQids', '').strip()
+        if performers:
+            refs = self.collect_references_from_form('work-performer', form_data)
+            for qid in performers.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_PERFORMER, qid, 'wikibase-item', refs)
+                    )
+        
+        # Producers (P162) - Albums/Films
+        producers = form_data.get('producerQids', '').strip()
+        if producers:
+            refs = self.collect_references_from_form('work-producer', form_data)
+            for qid in producers.split(','):
+                qid = qid.strip()
+                if qid:
+                    statements.append(
+                        self.build_statement(PID_PRODUCER, qid, 'wikibase-item', refs)
+                    )
+        
+        # Language (P407) - Literary/Music works
+        language = form_data.get('languageQid', '').strip()
+        if language:
+            refs = self.collect_references_from_form('work-language', form_data)
+            statements.append(
+                self.build_statement(PID_LANGUAGE, language, 'wikibase-item', refs)
+            )
+        
+        # Language (Film) (P364) - Films/Audiovisual
+        language_film = form_data.get('languageFilmQid', '').strip()
+        if language_film:
+            refs = self.collect_references_from_form('work-language-film', form_data)
+            statements.append(
+                self.build_statement(PID_LANGUAGE_FILM, language_film, 'wikibase-item', refs)
+            )
+        
+        # Country of origin (P495)
+        country = form_data.get('countryQid', '').strip()
+        if country:
+            refs = self.collect_references_from_form('work-country', form_data)
+            statements.append(
+                self.build_statement(PID_COUNTRY_OF_ORIGIN, country, 'wikibase-item', refs)
+            )
+        
+        # Location (P276) - Visual arts
+        location = form_data.get('locationQid', '').strip()
+        if location:
+            refs = self.collect_references_from_form('work-location', form_data)
+            statements.append(
+                self.build_statement(PID_LOCATION, location, 'wikibase-item', refs)
+            )
+        
+        # Publication date (P577)
+        publication_date = form_data.get('publicationDate', '').strip()
+        if publication_date:
+            refs = self.collect_references_from_form('work-publication-date', form_data)
+            statements.append(
+                self.build_statement(PID_PUBLICATION_DATE, publication_date, 'time', refs)
+            )
+        
+        # Creation date (P571)
+        creation_date = form_data.get('creationDate', '').strip()
+        if creation_date:
+            refs = self.collect_references_from_form('work-creation-date', form_data)
+            statements.append(
+                self.build_statement(PID_INCEPTION, creation_date, 'time', refs)
+            )
+        
+        # Genre (P136) - Albums/Music
+        genre = form_data.get('genreQid', '').strip()
+        if genre:
+            refs = self.collect_references_from_form('work-genre', form_data)
+            statements.append(
+                self.build_statement(PID_GENRE, genre, 'wikibase-item', refs)
+            )
+
+        # Record Label (P264) - Albums
+        record_label = form_data.get('recordLabelQid', '').strip()
+        if record_label:
+            refs = self.collect_references_from_form('work-record-label', form_data)
+            statements.append(
+                self.build_statement(PID_RECORD_LABEL, record_label, 'wikibase-item', refs)
+            )
+
+        # Country of Publication (P291) - Albums  
+        country_of_publication = form_data.get('countryOfPublicationQid', '').strip()
+        if country_of_publication:
+            refs = self.collect_references_from_form('work-country-publication', form_data)
+            statements.append(
+                self.build_statement(PID_COUNTRY_OF_PUBLICATION, country_of_publication, 'wikibase-item', refs)
+            )
+        
+        # Image
+        image_url = form_data.get('imageUrl', '').strip()
+        if image_url:
+            filename = self.extract_commons_filename(image_url)
+            if filename:
+                statements.append(
+                    self.build_statement(PID_IMAGE, filename, 'commonsMedia')
+                )
+        
+        # Full work URL
+        full_work_url = form_data.get('fullWorkUrl', '').strip()
+        if full_work_url:
+            if not full_work_url.startswith(('http://', 'https://')):
+                full_work_url = 'https://' + full_work_url
+            statements.append(
+                self.build_statement(PID_FULL_WORK_URL, full_work_url, 'url')
+            )
+        
+        # Internet Archive ID
+        internet_archive_id = form_data.get('internetArchiveId', '').strip()
+        if internet_archive_id:
+            statements.append(
+                self.build_statement(PID_INTERNET_ARCHIVE, internet_archive_id, 'string')
+            )
+        
+        return statements
+    
     # HELPER METHODS
     
     def _format_date(self, date_string):
@@ -648,3 +965,71 @@ class WikidataAPI:
             return urlparse.unquote(filename.split('&')[0])
         
         return None
+    
+
+
+# UTILITY FUNCTIONS
+
+def generate_author_description(nationality_label, date_of_birth=None, date_of_death=None, lang='en'):
+    """
+    Generate a simple standard description for an author.
+    Format: "creator from {nationality} (birthDate–deathDate)" or "creator from {nationality}"
+    
+    Args:
+        nationality_label: Human-readable nationality label
+        date_of_birth: Birth date string (YYYY-MM-DD format)
+        date_of_death: Death date string (YYYY-MM-DD format)
+        lang: Language code for the description
+    
+    Returns:
+        Generated description string (starts with lowercase per Wikidata rules)
+    """
+    # Base description 
+    if nationality_label:
+        description = _("creator from %(nationality)s", nationality=nationality_label)
+    else:
+        description = _("creator")
+
+    # Add dates if both birth and death are present
+    if date_of_birth and date_of_death:
+        try:
+            birth_year = date_of_birth.split('-')[0]
+            death_year = date_of_death.split('-')[0]
+            description += f" ({birth_year}–{death_year})" 
+        except:
+            pass  # Skip dates if parsing fails
+    
+    return description
+
+def generate_work_description(work_type_label, creator_label, creation_date=None, lang='en'):
+    """
+    Generate a simple standard description for a work.
+    Format: "{work_type} by {creator}" or "{work_type} by {creator} (year)"
+    
+    Args:
+        work_type_label: Human-readable work type label (e.g., "literary work", "film", "painting")
+        creator_label: Human-readable creator name(s) (can be multiple, comma-separated)
+        creation_date: Creation/publication date string in YYYY-MM-DD format (optional)
+        lang: Language code for the description
+    
+    Returns:
+        Generated description string 
+    """
+    # Base description with work type and creator(s)
+    if creator_label:
+        description = _("%(work_type)s by %(creator)s", 
+                       work_type=work_type_label, 
+                       creator=creator_label)
+    else:
+        description = work_type_label.lower()
+    
+    # Add creation year if present
+    if creation_date:
+        try:
+            year = creation_date.split('-')[0]
+            if year and year != '0000':
+                description += f" ({year})"
+        except:
+            pass  # Skip date if parsing fails
+    
+    return description

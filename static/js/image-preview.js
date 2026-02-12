@@ -6,6 +6,7 @@ class ImagePreview {
   constructor(config) {
     this.input = document.getElementById(config.inputId);
     this.preview = document.getElementById(config.previewId);
+    this.placeholder = config.placeholderId ? document.getElementById(config.placeholderId) : null;
     this.errorEl = document.getElementById(config.errorId);
     this.clearBtn = document.getElementById(config.clearBtnId);
     this.requireCommons = config.requireCommons !== false;
@@ -14,15 +15,16 @@ class ImagePreview {
     this.previewWidth = config.previewWidth || 400;
     this.previewHeight = config.previewHeight || 400;
     
-    this.defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
     this.isValidImage = true;
     this.hasImage = false;
+    this.isLoading = false;
     
     // Translatable messages with English fallbacks
     this.msg = Object.assign({
       invalidCommons: 'Please use an image from Wikimedia Commons.',
       loadError: 'Could not load image. Please check the URL.',
-      tiffNotSupported: 'TIFF images cannot be previewed in the browser, but will work on Wikidata.'
+      tiffNotSupported: 'TIFF images cannot be previewed in the browser, but will work on Wikidata.',
+      loading: 'Loading preview...'
     }, config.messages || {});
     
     this.init();
@@ -64,7 +66,6 @@ class ImagePreview {
       this.showWarning(this.msg.tiffNotSupported);
       this.isValidImage = true;
       this.hasImage = true;
-      this.preview.src = this.defaultImage;
       
       if (this.clearBtn) {
         this.clearBtn.classList.remove('d-none');
@@ -123,8 +124,50 @@ class ImagePreview {
     return `https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/${encodedFilename}&width=${this.previewWidth}&height=${this.previewHeight}`;
   }
   
-  loadImage(url) {
+  showLoading() {
+    this.isLoading = true;
     this.hideError();
+    
+    // Hide both placeholder and preview
+    if (this.placeholder) {
+      this.placeholder.classList.add('d-none');
+    }
+    this.preview.classList.add('d-none');
+    
+    // Show loading spinner
+    let loadingEl = this.placeholder ? this.placeholder.parentElement.querySelector('.image-loading') : null;
+    
+    if (!loadingEl && this.placeholder && this.placeholder.parentElement) {
+      loadingEl = document.createElement('div');
+      loadingEl.className = 'image-loading d-flex flex-column align-items-center justify-content-center';
+      loadingEl.style.width = '100%';
+      loadingEl.style.height = '100%';
+      loadingEl.innerHTML = `
+        <div class="spinner-border text-secondary mb-2" role="status">
+          <span class="visually-hidden">${this.msg.loading}</span>
+        </div>
+        <small class="text-secondary">${this.msg.loading}</small>
+      `;
+      this.placeholder.parentElement.appendChild(loadingEl);
+    } else if (loadingEl) {
+      loadingEl.classList.remove('d-none');
+    }
+  }
+  
+  hideLoading() {
+    this.isLoading = false;
+    
+    // Hide loading spinner
+    if (this.placeholder && this.placeholder.parentElement) {
+      const loadingEl = this.placeholder.parentElement.querySelector('.image-loading');
+      if (loadingEl) {
+        loadingEl.classList.add('d-none');
+      }
+    }
+  }
+  
+  loadImage(url) {
+    this.showLoading();
     
     // Convert to optimized Commons URL if it's a Commons image
     const optimizedUrl = this.isCommonsUrl(url) ? 
@@ -133,9 +176,16 @@ class ImagePreview {
     const img = new Image();
     
     img.onload = () => {
+      this.hideLoading();
       this.preview.src = optimizedUrl;
       this.isValidImage = true;
       this.hasImage = true;
+      
+      // Hide placeholder, show image
+      if (this.placeholder) {
+        this.placeholder.classList.add('d-none');
+      }
+      this.preview.classList.remove('d-none');
       
       if (this.clearBtn) {
         this.clearBtn.classList.remove('d-none');
@@ -143,9 +193,14 @@ class ImagePreview {
     };
     
     img.onerror = () => {
+      this.hideLoading();
       this.showError(this.msg.loadError);
       this.isValidImage = false;
-      this.preview.src = this.defaultImage;
+      
+      // Show placeholder again on error
+      if (this.placeholder) {
+        this.placeholder.classList.remove('d-none');
+      }
     };
     
     img.src = optimizedUrl;
@@ -189,7 +244,14 @@ class ImagePreview {
   
   reset() {
     this.input.value = '';
-    this.preview.src = this.defaultImage;
+    this.preview.src = '';
+    this.preview.classList.add('d-none');
+    this.hideLoading();
+    
+    if (this.placeholder) {
+      this.placeholder.classList.remove('d-none');
+    }
+    
     this.isValidImage = true;
     this.hasImage = false;
     this.hideError();

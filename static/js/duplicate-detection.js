@@ -103,15 +103,39 @@ class DuplicateDetector {
   
   displayResults(results) {
     if (!results || results.length === 0) {
-      this.hideSidebar();
-      if (this.noMatchMessage) {
-        this.noMatchMessage.classList.remove('d-none');
+      // No matches found
+      // Check if noMatchMessage is inside or outside the sidebar
+      const isMessageInsideSidebar = this.noMatchMessage && this.sidebar && this.sidebar.contains(this.noMatchMessage);
+      
+      if (isMessageInsideSidebar) {
+        // Case 1: Message is inside sidebar 
+        // Clear results, show sidebar with no-matches message, hide button
+        if (this.resultsContainer) {
+          this.resultsContainer.innerHTML = '';
+        }
+        if (this.noneMatchBtn) {
+          this.noneMatchBtn.classList.add('d-none');
+        }
+        if (this.noMatchMessage) {
+          this.noMatchMessage.classList.remove('d-none');
+        }
+        this.showSidebar();
+      } else {
+        // Case 2: Message is outside sidebar
+        // Hide sidebar completely, show external no-matches message
+        this.hideSidebar();
+        if (this.noMatchMessage) {
+          this.noMatchMessage.classList.remove('d-none');
+        }
       }
       return;
     }
     
     if (this.noMatchMessage) {
       this.noMatchMessage.classList.add('d-none');
+    }
+    if (this.noneMatchBtn) {
+      this.noneMatchBtn.classList.remove('d-none');
     }
     
     let resultsHTML = '';

@@ -690,3 +690,190 @@ h3 {
   font-weight: bold;
   user-select: none;
 }
+
+
+/* Add Work Form - Wikidata Search Inputs */
+#work-author,
+#work-director,
+#work-creator,
+#work-composer,
+#work-screenwriter,
+#work-lyricist,
+#work-performer,
+#work-producer,
+#work-language,
+#work-language-film,
+#work-country,
+#work-location,
+#work-genre,
+#work-record-label,
+#work-country-publication {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#work-author:focus,
+#work-director:focus,
+#work-creator:focus,
+#work-composer:focus,
+#work-screenwriter:focus,
+#work-lyricist:focus,
+#work-performer:focus,
+#work-producer:focus,
+#work-language:focus,
+#work-language-film:focus,
+#work-country:focus,
+#work-location:focus,
+#work-genre:focus,
+#work-record-label:focus,
+#work-country-publication:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+#work-author::placeholder,
+#work-director::placeholder,
+#work-creator::placeholder,
+#work-composer::placeholder,
+#work-screenwriter::placeholder,
+#work-lyricist::placeholder,
+#work-performer::placeholder,
+#work-producer::placeholder,
+#work-language::placeholder,
+#work-language-film::placeholder,
+#work-country::placeholder,
+#work-location::placeholder,
+#work-genre::placeholder,
+#work-record-label::placeholder,
+#work-country-publication::placeholder {
+  color: #000;
+  opacity: 0.7;
+}
+
+/* Selected items badges for work form */
+#work-selected-authors .badge,
+#work-selected-directors .badge,
+#work-selected-creators .badge,
+#work-selected-composers .badge,
+#work-selected-screenwriters .badge,
+#work-selected-lyricists .badge,
+#work-selected-performers .badge,
+#work-selected-producers .badge,
+#work-language-selected .badge,
+#work-language-film-selected .badge,
+#work-country-selected .badge,
+#work-location-selected .badge,
+#work-genre-selected .badge,
+#work-record-label-selected .badge,
+#work-country-publication-selected .badge {
+  background-color: #29a4e2;
+  color: white;
+  padding: 0.35em 0.65em;
+  font-size: 0.875em;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#work-selected-authors .badge .btn-close,
+#work-selected-directors .badge .btn-close,
+#work-selected-creators .badge .btn-close,
+#work-selected-composers .badge .btn-close,
+#work-selected-screenwriters .badge .btn-close,
+#work-selected-lyricists .badge .btn-close,
+#work-selected-performers .badge .btn-close,
+#work-selected-producers .badge .btn-close,
+#work-language-selected .badge .btn-close,
+#work-language-film-selected .badge .btn-close,
+#work-country-selected .badge .btn-close,
+#work-location-selected .badge .btn-close,
+#work-genre-selected .badge .btn-close,
+#work-record-label-selected .badge .btn-close,
+#work-country-publication-selected .badge .btn-close {
+  font-size: 0.75em;
+  opacity: 0.7;
+  filter: invert(1);
+}
+
+#work-selected-authors .badge .btn-close:hover,
+#work-selected-directors .badge .btn-close:hover,
+#work-selected-creators .badge .btn-close:hover,
+#work-selected-composers .badge .btn-close:hover,
+#work-selected-screenwriters .badge .btn-close:hover,
+#work-selected-lyricists .badge .btn-close:hover,
+#work-selected-performers .badge .btn-close:hover,
+#work-selected-producers .badge .btn-close:hover,
+#work-language-selected .badge .btn-close:hover,
+#work-language-film-selected .badge .btn-close:hover,
+#work-country-selected .badge .btn-close:hover,
+#work-location-selected .badge .btn-close:hover,
+#work-genre-selected .badge .btn-close:hover,
+#work-record-label-selected .badge .btn-close:hover,
+#work-country-publication-selected .badge .btn-close:hover {
+  opacity: 1;
+}
+
+/* Work form dropdown results */
+.wikidata-results-dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detail-field,
+.creator-field,
+.mb-3 {
+    position: relative;
+}
+
+.wikidata-results-dropdown .search-result-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.wikidata-results-dropdown .search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.wikidata-results-dropdown .search-result-item:last-child {
+  border-bottom: none;
+}
+
+.wikidata-results-dropdown .text-center {
+  padding: 1rem;
+  color: #6c757d;
+}
+
+/* work type select */
+#work-type-select {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#work-type-select:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Form retained notice */
+.form-retained-notice {
+  padding: 0.75rem 1rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}

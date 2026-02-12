@@ -69,6 +69,11 @@
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
+              <a class="dropdown-item" href="{{ url_for('add_work') }}">
+                <i class="bi bi-journal-plus"></i> {{ _('Add Work') }}
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item" href="{{ url_for('logout') }}">
                 <i class="bi bi-box-arrow-right"></i> {{ _('Logout') }}
@@ -114,6 +119,12 @@
                <li>
                 <a class="dropdown-item" href="{{ url_for('add_author') }}">
                   <i class="bi bi-person-plus"></i> {{ _('Add Author') }}
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+               <li>
+                <a class="dropdown-item" href="{{ url_for('add_work') }}">
+                  <i class="bi bi-journal-plus"></i> {{ _('Add Work') }}
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
