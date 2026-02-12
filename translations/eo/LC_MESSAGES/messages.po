@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-12 16:47-0300\n"
+"POT-Creation-Date: 2026-02-12 17:46-0300\n"
 "PO-Revision-Date: 2025-02-13 05:02+0000\n"
 "Last-Translator: Juan Sebastian Quintero Santacruz "
 "<juancho2291@hotmail.com>\n"
@@ -140,34 +140,34 @@ msgstr ""
 msgid "404 error"
 msgstr "Eraro 404"
 
-#: filters.py:6
+#: filters.py:6 wikidata_constants.py:47 wikidata_constants.py:55
 #, fuzzy
 msgid "Female"
 msgstr "Virina"
 
-#: filters.py:7
+#: filters.py:7 wikidata_constants.py:48 wikidata_constants.py:56
 #, fuzzy
 msgid "Male"
 msgstr "Vira"
 
-#: filters.py:8
+#: filters.py:8 wikidata_constants.py:49 wikidata_constants.py:57
 msgid "Trans man"
 msgstr "Transviro"
 
-#: filters.py:9
+#: filters.py:9 wikidata_constants.py:50 wikidata_constants.py:58
 msgid "Trans woman"
 msgstr "Transvirino"
 
-#: filters.py:10
+#: filters.py:10 wikidata_constants.py:51 wikidata_constants.py:59
 #, fuzzy
 msgid "Non-binary"
 msgstr "Neduuma"
 
-#: filters.py:17
+#: filters.py:17 wikidata_constants.py:171
 msgid "Film"
 msgstr "Filmo"
 
-#: filters.py:18
+#: filters.py:18 wikidata_constants.py:136
 msgid "Literary work"
 msgstr "Literatura verkaro"
 
@@ -175,12 +175,12 @@ msgstr "Literatura verkaro"
 msgid "Musical work"
 msgstr "Musika verkaro"
 
-#: filters.py:20
+#: filters.py:20 wikidata_constants.py:195
 #, fuzzy
 msgid "Painting"
 msgstr "Pentraĵo"
 
-#: filters.py:21
+#: filters.py:21 wikidata_constants.py:206
 #, fuzzy
 msgid "Sculpture"
 msgstr "Skulptaĵo"
@@ -415,6 +415,32 @@ msgstr ""
 #, python-format
 msgid "%(work_type)s by %(creator)s"
 msgstr ""
+
+#: wikidata_constants.py:147
+msgid "Written work (not literary)"
+msgstr ""
+
+#: wikidata_constants.py:158
+msgid "Edition of a written work"
+msgstr ""
+
+#: wikidata_constants.py:182
+msgid "Audiovisual work (other)"
+msgstr ""
+
+#: wikidata_constants.py:217
+msgid "Visual artwork (other)"
+msgstr ""
+
+#: wikidata_constants.py:230
+#, fuzzy
+msgid "Musical work/composition"
+msgstr "Musika verkaro"
+
+#: wikidata_constants.py:242
+#, fuzzy
+msgid "Album"
+msgstr "Pri"
 
 #: templates/404.html:7
 msgid "Page not found"

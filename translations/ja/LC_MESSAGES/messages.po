@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-12 16:47-0300\n"
+"POT-Creation-Date: 2026-02-12 17:46-0300\n"
 "PO-Revision-Date: 2025-08-21 01:01+0000\n"
 "Last-Translator: S H <higa432@gmail.com>\n"
 "Language: ja\n"
@@ -139,31 +139,31 @@ msgstr ""
 msgid "404 error"
 msgstr "404 エラー"
 
-#: filters.py:6
+#: filters.py:6 wikidata_constants.py:47 wikidata_constants.py:55
 msgid "Female"
 msgstr "女性"
 
-#: filters.py:7
+#: filters.py:7 wikidata_constants.py:48 wikidata_constants.py:56
 msgid "Male"
 msgstr "男性"
 
-#: filters.py:8
+#: filters.py:8 wikidata_constants.py:49 wikidata_constants.py:57
 msgid "Trans man"
 msgstr "トランス男性"
 
-#: filters.py:9
+#: filters.py:9 wikidata_constants.py:50 wikidata_constants.py:58
 msgid "Trans woman"
 msgstr "トランス女性"
 
-#: filters.py:10
+#: filters.py:10 wikidata_constants.py:51 wikidata_constants.py:59
 msgid "Non-binary"
 msgstr "ノンバイナリー"
 
-#: filters.py:17
+#: filters.py:17 wikidata_constants.py:171
 msgid "Film"
 msgstr "映画"
 
-#: filters.py:18
+#: filters.py:18 wikidata_constants.py:136
 msgid "Literary work"
 msgstr "文学作品"
 
@@ -171,11 +171,11 @@ msgstr "文学作品"
 msgid "Musical work"
 msgstr "ミュージカル作品"
 
-#: filters.py:20
+#: filters.py:20 wikidata_constants.py:195
 msgid "Painting"
 msgstr "絵画"
 
-#: filters.py:21
+#: filters.py:21 wikidata_constants.py:206
 msgid "Sculpture"
 msgstr "彫刻"
 
@@ -409,6 +409,32 @@ msgstr ""
 #, python-format
 msgid "%(work_type)s by %(creator)s"
 msgstr ""
+
+#: wikidata_constants.py:147
+msgid "Written work (not literary)"
+msgstr ""
+
+#: wikidata_constants.py:158
+msgid "Edition of a written work"
+msgstr ""
+
+#: wikidata_constants.py:182
+msgid "Audiovisual work (other)"
+msgstr ""
+
+#: wikidata_constants.py:217
+msgid "Visual artwork (other)"
+msgstr ""
+
+#: wikidata_constants.py:230
+#, fuzzy
+msgid "Musical work/composition"
+msgstr "ミュージカル作品"
+
+#: wikidata_constants.py:242
+#, fuzzy
+msgid "Album"
+msgstr "このサイトについて"
 
 #: templates/404.html:7
 msgid "Page not found"
