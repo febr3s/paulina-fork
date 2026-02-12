@@ -599,7 +599,7 @@ class WikidataAPI:
                 break
         
         if not work_type_config:
-            errors.append(_('Invalid work type selected'))
+            errors.append(_('Invalid type of work selected'))
             return False, errors
         
         # Get required fields for this work type
