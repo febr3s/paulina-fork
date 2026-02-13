@@ -246,6 +246,228 @@ h3 {
   border-bottom: none !important;
 }
 
+/* Author page individual field editing  */
+
+/* Author page individual field editing - Mobile friendly */
+.author-bio-field {
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.author-bio-field:hover {
+  background-color: #f8f9fa;
+}
+
+.author-field-display {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.author-field-edit-icon {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  color: #6c757d;
+  font-size: 0.875rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem !important;
+  line-height: 1;
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-bio-field:hover .author-field-edit-icon {
+  opacity: 1;
+}
+
+.author-field-edit-icon:hover,
+.author-field-edit-icon:focus {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+/* Always show clearly on mobile/touch devices */
+@media (max-width: 768px), (hover: none) {
+  .author-field-edit-icon {
+    opacity: 0.7;
+  }
+  
+  .author-field-edit-icon:active {
+    opacity: 1;
+  }
+}
+
+.author-field-edit {
+  position: relative; /* Changed: This makes dropdown position relative to this container */
+}
+
+.author-edit-controls {
+  max-width: 500px;
+  position: relative; /* Added: Ensures dropdown positions relative to controls */
+}
+
+
+/* Author edit icon styling */
+.author-field-edit-icon {
+  color: #f46527;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.author-field-edit-icon:hover {
+  color: #d94e15;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+/* Remove focus outline from input fields */
+.author-wikidata-search-input:focus,
+.author-date-input:focus {
+  outline: none;
+  box-shadow: none !important;
+  border-color: #dee2e6; /* Keep subtle border */
+}
+
+.author-wikidata-results-dropdown {
+  position: absolute; /* Position relative to parent */
+  top: 100%; /* Position right below the input */
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.25rem;
+  margin-top: 2px; /* Small gap between input and dropdown */
+}
+
+.author-wikidata-results-dropdown.show {
+  display: block;
+}
+
+.author-wikidata-results-dropdown .result-item {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.author-wikidata-results-dropdown .result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.author-wikidata-results-dropdown .result-item:last-child {
+  border-bottom: none;
+}
+
+.author-edit-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.author-edit-buttons .btn {
+  min-width: 44px;
+  min-height: 38px;
+}
+
+/* Remove focus outline from buttons too */
+.author-edit-buttons .btn:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Date input */
+.author-date-input {
+  max-width: 200px;
+}
+
+@media (max-width: 576px) {
+  .author-date-input {
+    max-width: 100%;
+  }
+}
+
+/* Wrapper for input and dropdown */
+.author-search-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem; /* Space before buttons */
+}
+
+.author-edit-controls {
+  max-width: 500px;
+}
+
+.author-field-edit {
+  position: static;
+}
+
+/* Toast notification */
+.author-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  min-width: 250px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.author-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 576px) {
+  .author-toast {
+    left: 10px;
+    right: 10px;
+    min-width: auto;
+  }
+  
+  .author-edit-buttons {
+    flex-direction: row;
+  }
+  
+  .author-edit-buttons .btn {
+    flex: 1;
+  }
+}
+
+/* Loading state */
+.author-bio-field.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Cancel button hover effect */
+.author-cancel-btn {
+  transition: all 0.2s ease;
+}
+
+.author-cancel-btn:hover {
+  background-color: #e9ecef !important;
+  border-color: #495057 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Hide edit buttons when JavaScript is disabled */
+@supports not (display: none) {
+  .author-field-edit-icon {
+    display: none !important;
+  }
+}
+
 /* WORK PAGE */
 
 /* Work image */

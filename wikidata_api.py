@@ -47,6 +47,9 @@ from wikidata_constants import (
     WORK_TYPES,
 )
 
+# Edit comment for Wikidata
+edit_comment = "using [[toolforge:paulina|Paulina]]: data for the public domain"
+
 # WIKIDATA API CLASS
 
 class WikidataAPI:
@@ -110,7 +113,7 @@ class WikidataAPI:
                     "descriptions": descriptions,
                     "statements": grouped_statements
                 },
-                "comment": "using [[toolforge:paulina|Paulina]]: data for the public domain",
+                "comment": edit_comment,
             }
             
             create_url = f"{self.rest_api_url}/entities/items"
@@ -856,6 +859,161 @@ class WikidataAPI:
             )
         
         return statements
+    
+    
+    # AUTHOR UPDATE PROCESSING
+
+    def update_author_field(self, author_id, property_id, value, field_name, is_date=False, is_multi_select=False):
+        """
+        Update a single author field on Wikidata.
+        
+        Args:
+            author_id: Wikidata item ID (e.g., 'Q123')
+            property_id: Wikidata property ID (e.g., 'P106')
+            value: New value (QID for items, date string for dates, comma-separated QIDs for multi-select)
+            field_name: Field identifier for error messages
+            is_date: Whether this is a date field
+            is_multi_select: Whether this is a multi-select field (e.g., occupation)
+        
+        Returns:
+            dict with 'success' and optional 'error' key
+        """
+        try:
+            # Get existing item data to find statement IDs
+            item_url = f"{self.rest_api_url}/entities/items/{author_id}"
+            item_response = self.oauth_session.get(
+                item_url,
+                headers={'User-Agent': self.user_agent}
+            )
+            
+            if item_response.status_code != 200:
+                return {
+                    'success': False,
+                    'error': _('Could not retrieve author data from Wikidata.')
+                }
+            
+            item_data = item_response.json()
+            existing_statements = item_data.get('statements', {})
+            existing_property_statements = existing_statements.get(property_id, [])
+            
+            if is_multi_select:
+                # For multi-select: replace all existing statements with new ones
+                # First, delete all existing statements
+                for stmt in existing_property_statements:
+                    statement_id = stmt.get('id')
+                    if statement_id:
+                        delete_url = f"{self.rest_api_url}/statements/{statement_id}"
+                        delete_params = {'comment': edit_comment}
+                        self.oauth_session.delete(
+                            delete_url,
+                            params=delete_params,
+                            headers={'User-Agent': self.user_agent}
+                        )
+                
+                # Add new statements for each value
+                qids = [qid.strip() for qid in value.split(',') if qid.strip()]
+                for qid in qids:
+                    statement = self.build_statement(
+                        property_id,
+                        qid,
+                        'wikibase-item'
+                    )
+                    
+                    add_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                    add_data = {
+                        'statement': statement,
+                        'comment': edit_comment
+                    }
+                    response = self.oauth_session.post(
+                        add_url,
+                        json=add_data,
+                        headers={
+                            'Content-Type': 'application/json',
+                            'User-Agent': self.user_agent
+                        }
+                    )
+                    
+                    if response.status_code not in [200, 201]:
+                        return {
+                            'success': False,
+                            'error': _('Failed to add statement: %(error)s', error=response.text)
+                        }
+                
+                return {'success': True}
+                
+            elif existing_property_statements:
+                # Single-value property with existing statement - update it
+                statement_id = existing_property_statements[0].get('id')
+                
+                if is_date:
+                    new_value = self._build_value(value, 'time')
+                else:
+                    new_value = self._build_value(value, 'wikibase-item')
+                
+                # Use PATCH to update the statement value
+                patch_url = f"{self.rest_api_url}/statements/{statement_id}"
+                patch_data = {
+                    'patch': [
+                        {
+                            'op': 'replace',
+                            'path': '/value',
+                            'value': new_value
+                        }
+                    ],
+                    'comment': edit_comment
+                }
+                
+                response = self.oauth_session.patch(
+                    patch_url,
+                    json=patch_data,
+                    headers={
+                        'Content-Type': 'application/json-patch+json',
+                        'User-Agent': self.user_agent
+                    }
+                )
+                
+                if response.status_code == 200:
+                    return {'success': True}
+                else:
+                    return {
+                        'success': False,
+                        'error': _('Failed to update statement: %(error)s', error=response.text)
+                    }
+                    
+            else:
+                # No existing statement - create new one
+                if is_date:
+                    statement = self.build_statement(property_id, value, 'time')
+                else:
+                    statement = self.build_statement(property_id, value, 'wikibase-item')
+                
+                add_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                add_data = {
+                    'statement': statement,
+                    'comment': edit_comment
+                }
+                response = self.oauth_session.post(
+                    add_url,
+                    json=add_data,
+                    headers={
+                        'Content-Type': 'application/json',
+                        'User-Agent': self.user_agent
+                    }
+                )
+                
+                if response.status_code in [200, 201]:
+                    return {'success': True}
+                else:
+                    return {
+                        'success': False,
+                        'error': _('Failed to add statement: %(error)s', error=response.text)
+                    }
+                    
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e)
+            }
     
     # HELPER METHODS
     

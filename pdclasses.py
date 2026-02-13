@@ -157,20 +157,32 @@ class Author(Parent):
 
         self.wikisource_link = self.wikidata_item.get('sitelinks', {}).get(languages.get_locale() + 'wikisource', {}).get('url')
         self.official_website = build_field(self.wikidata_item.get('statements', {}).get('P856'), field_type="plain_value")
+        
+        # Nationality - store both label and QID
         self.nationality = build_field(self.wikidata_item.get('statements', {}).get('P27'))
+        self.nationality_qid = build_field(self.wikidata_item.get('statements', {}).get('P27'), field_type="plain_value")
+        
+        # Gender - store both label and QID
         self.gender = build_field(self.wikidata_item.get('statements', {}).get('P21'))
+        self.gender_qid = build_field(self.wikidata_item.get('statements', {}).get('P21'), field_type="plain_value")
+        
         self.date_of_birth = build_date(self.wikidata_item.get('statements', {}).get('P569'))
         self.date_of_death = build_date(self.wikidata_item.get('statements', {}).get('P570'))
+        
+        # Ethnicity - store both label and QID
         self.ethnicity = build_field(self.wikidata_item.get('statements', {}).get('P172'))
+        self.ethnicity_qid = build_field(self.wikidata_item.get('statements', {}).get('P172'), field_type="plain_value")
 
         if self.date_of_death and isinstance(self.date_of_death["date object"], datetime.date):
             self.date_enter_public_domain = self.date_of_death['date object'].year + 101
         else:
             self.date_enter_public_domain = None
 
+        # Occupation - store both labels and QIDs
         occupations = self.wikidata_item.get('statements', {}).get('P106')
         if occupations is None:
             self.occupation = None
+            self.occupation_qid = None
         else:
             occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
             occupations_labels = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
@@ -179,9 +191,13 @@ class Author(Parent):
                                                 )
             self.occupation = [occupation_item.get('itemLabel', {}).get('value')
                                for occupation_item in occupations_labels]
+            # Store QIDs as comma-separated string
+            self.occupation_qid = ','.join(occupations_ids) if occupations_ids else None
 
+        # Place of birth - store both label and QID
         place_of_birth = self.wikidata_item.get('statements', {}).get('P19')
         self.place_of_birth = build_field(place_of_birth)
+        self.place_of_birth_qid = build_field(place_of_birth, field_type="plain_value")
 
         # Country of birth is built taking the place of birth and looking in what country it is.
         if place_of_birth:
@@ -193,12 +209,17 @@ class Author(Parent):
                                                   )
                 try:
                     self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+                    # Store the country QID (extract from the country_of_birth query result)
+                    self.country_of_birth_qid = country_of_birth[0].get('item', {}).get('value').split("/")[-1] if country_of_birth[0].get('item') else None
                 except:
                     self.country_of_birth = None
+                    self.country_of_birth_qid = None
             else:
                 self.country_of_birth = None
+                self.country_of_birth_qid = None
         else:
             self.country_of_birth = None
+            self.country_of_birth_qid = None
 
         image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:

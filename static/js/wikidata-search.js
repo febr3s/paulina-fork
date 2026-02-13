@@ -10,6 +10,7 @@ class WikidataItemSearch {
     this.multiSelect = config.multiSelect || false;
     this.selectedItemsId = config.selectedItemsId || null;
     this.apiEndpoint = config.apiEndpoint || "/api/search-wikidata-items";
+    this.keepInputVisible = config.keepInputVisible || false;
     this.selectedItems = [];
     this.lastQuery = "";
     this.highlightedIndex = -1;
@@ -216,33 +217,71 @@ class WikidataItemSearch {
   }
 
   selectItem(item) {
-    if (this.multiSelect) {
-      if (this.selectedItems.some((i) => i.id === item.id)) {
-        alert(this.messages.alreadySelected);
-        return;
-      }
-
-      this.selectedItems.push(item);
-      this.updateSelectedItemsDisplay();
-      this.updateHiddenInput();
-      this.updateVisibleInput();
-      this.input.value = ""; // Clear input
-      this.hideResults(); // Hide results
-      this.input.focus(); // Keep focus on input for next selection
-    } else {
-      // Single select: replace any existing selection
-      this.selectedItems = [item];
-      this.hiddenInput.value = item.id;
-      this.input.value = item.label;
-      this.updateSingleSelectDisplay();
-      this.hideResults();
+  if (this.multiSelect) {
+    if (this.selectedItems.some((i) => i.id === item.id)) {
+      alert(this.messages.alreadySelected);
+      return;
     }
 
-    this.input.dispatchEvent(
-      new CustomEvent("wikidata:select", {
-        detail: item,
-      })
-    );
+    this.selectedItems.push(item);
+    this.updateSelectedItemsDisplay();
+    this.updateHiddenInput();
+    this.updateVisibleInput();
+    this.input.value = ""; // Clear input
+    this.hideResults(); // Hide results
+    this.input.focus(); // Keep focus on input for next selection
+  } else {
+    // Single select: replace any existing selection
+    this.selectedItems = [item];
+    this.hiddenInput.value = item.id;
+    this.input.value = item.label;
+    
+    // Only show pill if keepInputVisible is false
+    if (!this.keepInputVisible) {
+      this.updateSingleSelectDisplay();
+    }
+    
+    this.hideResults();
+  }
+
+  this.input.dispatchEvent(
+    new CustomEvent("wikidata:select", {
+      detail: item,
+    })
+  );
+}
+
+
+
+    prePopulate(items) {
+    /**
+     * Pre-populate the component with existing items without triggering selection events.
+     * Used for inline editing to show current values.
+     * 
+     * @param {Array} items - Array of {id, label, description} objects
+     */
+    if (!Array.isArray(items)) {
+      console.error('prePopulate expects an array of items');
+      return;
+    }
+
+    this.selectedItems = items;
+    this.updateHiddenInput();
+    
+    if (this.multiSelect) {
+      // Multi-select: show badges and clear input
+      this.updateSelectedItemsDisplay();
+      this.input.value = '';
+    } else {
+      // Single-select: set input and hidden input directly
+      if (items.length > 0) {
+        this.input.value = items[0].label;
+        this.hiddenInput.value = items[0].id;
+      } else {
+        this.input.value = '';
+        this.hiddenInput.value = '';
+      }
+    }
   }
 
   updateSingleSelectDisplay() {
