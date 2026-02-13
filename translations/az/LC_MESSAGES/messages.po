@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-23 14:12-0300\n"
+"POT-Creation-Date: 2026-02-12 17:46-0300\n"
 "PO-Revision-Date: 2025-05-11 22:03+0000\n"
 "Last-Translator: Nemoralis <50991261+nemoralis@users.noreply.github.com>\n"
 "Language: az\n"
@@ -17,134 +17,153 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.16.0\n"
 
-#: app.py:127
+#: app.py:131
 msgid "No value"
 msgstr "Dəyər yoxdur"
 
-#: app.py:129
+#: app.py:133
 msgid "Unknown value"
 msgstr "Naməlum dəyər"
 
-#: app.py:139 templates/layout.html:53 templates/layout.html:95
+#: app.py:143 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "Ana səhifə"
 
-#: app.py:146 templates/layout.html:98 templates/layout.html:320
+#: app.py:150 templates/layout.html:103 templates/layout.html:331
 msgid "About"
 msgstr "Haqqında"
 
-#: app.py:179 app.py:196
+#: app.py:183 app.py:200
 msgid "Results"
 msgstr "Nəticələr"
 
-#: app.py:186 app.py:203 app.py:208
+#: app.py:190 app.py:207 app.py:212
 msgid "No results found"
 msgstr "Nəticə tapılmadı"
 
-#: app.py:256
+#: app.py:260
 msgid "List of works"
 msgstr "Əsərlərinin siyahısı"
 
-#: app.py:324
+#: app.py:328
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s siyahısı"
 
-#: app.py:341
+#: app.py:345
 msgid "Unknown term"
 msgstr "Naməlum ifadə"
 
-#: app.py:343 templates/countries.html:7 templates/layout.html:101
-#: templates/layout.html:337
+#: app.py:347 templates/countries.html:7 templates/layout.html:106
+#: templates/layout.html:348
 msgid "Countries and terms"
 msgstr "Ölkələr və şərtlər"
 
-#: app.py:449
+#: app.py:453
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:459 app.py:529
+#: app.py:463 app.py:533
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:464
+#: app.py:468
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:471
+#: app.py:475
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:491
+#: app.py:495
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:518
+#: app.py:522
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:541
+#: app.py:546
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:553
+#: app.py:558
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:558
+#: app.py:563 app.py:678
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:566
+#: app.py:571 app.py:686
 msgid "Session expired. Please login again."
 msgstr ""
 
-#: app.py:605
+#: app.py:610
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Ölüm tarixi"
 
-#: app.py:611 app.py:623 app.py:654 templates/add-author.html:39
-#: templates/layout.html:67 templates/layout.html:116
+#: app.py:616 app.py:627 app.py:658 templates/add-author.html:39
+#: templates/layout.html:67 templates/layout.html:121
 #, fuzzy
 msgid "Add Author"
 msgstr "Müəlliflər"
 
-#: app.py:617
+#: app.py:621
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:672
+#: app.py:673
+msgid "Please login to add a work."
+msgstr ""
+
+#: app.py:725
+#, fuzzy, python-format
+msgid "Error creating work: %(error)s"
+msgstr "Ölüm tarixi"
+
+#: app.py:731 app.py:742 app.py:773 templates/add-work.html:39
+#: templates/layout.html:73 templates/layout.html:127
+#, fuzzy
+msgid "Add Work"
+msgstr "Əsərləri tap"
+
+#: app.py:736
+msgid "An error occurred while creating the work. Please try again."
+msgstr ""
+
+#: app.py:790
 msgid "404 error"
 msgstr "404 xətası"
 
-#: filters.py:6
+#: filters.py:6 wikidata_constants.py:47 wikidata_constants.py:55
 msgid "Female"
 msgstr "Qadın"
 
-#: filters.py:7
+#: filters.py:7 wikidata_constants.py:48 wikidata_constants.py:56
 msgid "Male"
 msgstr "Kişi"
 
-#: filters.py:8
+#: filters.py:8 wikidata_constants.py:49 wikidata_constants.py:57
 msgid "Trans man"
 msgstr "Trans kişi"
 
-#: filters.py:9
+#: filters.py:9 wikidata_constants.py:50 wikidata_constants.py:58
 msgid "Trans woman"
 msgstr "Trans qadın"
 
-#: filters.py:10
+#: filters.py:10 wikidata_constants.py:51 wikidata_constants.py:59
 msgid "Non-binary"
 msgstr "Qeyri-binar"
 
-#: filters.py:17
+#: filters.py:17 wikidata_constants.py:171
 msgid "Film"
 msgstr "Film"
 
-#: filters.py:18
+#: filters.py:18 wikidata_constants.py:136
 msgid "Literary work"
 msgstr "Ədəbi əsər"
 
@@ -152,11 +171,11 @@ msgstr "Ədəbi əsər"
 msgid "Musical work"
 msgstr "Musiqi əsəri"
 
-#: filters.py:20
+#: filters.py:20 wikidata_constants.py:195
 msgid "Painting"
 msgstr "Rəsm"
 
-#: filters.py:21
+#: filters.py:21 wikidata_constants.py:206
 msgid "Sculpture"
 msgstr "Heykəl"
 
@@ -205,79 +224,221 @@ msgstr "%(title)s şəkli."
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s bayrağı."
 
-#: wikidata_api.py:101
-#, python-format
-msgid "creator from %(nationality)s"
-msgstr ""
-
-#: wikidata_api.py:103
-msgid "creator"
-msgstr ""
-
-#: wikidata_api.py:133 wikidata_api.py:161
+#: wikidata_api.py:67 wikidata_api.py:95
 msgid "No OAuth session available"
 msgstr ""
 
-#: wikidata_api.py:150
+#: wikidata_api.py:84
 #, python-format
 msgid "Unexpected token response: %(data)s"
 msgstr ""
 
-#: templates/add-author.html:586 wikidata_api.py:406
+#: templates/add-author.html:591 wikidata_api.py:327
 msgid "Name is required"
 msgstr ""
 
-#: templates/add-author.html:587 wikidata_api.py:408
+#: templates/add-author.html:592 wikidata_api.py:329
 msgid "Gender is required"
 msgstr ""
 
-#: templates/add-author.html:588 wikidata_api.py:410
+#: templates/add-author.html:593 wikidata_api.py:331
 #, fuzzy
 msgid "Nationality is required"
 msgstr "Milliyəti"
 
-#: templates/add-author.html:589 wikidata_api.py:412
+#: templates/add-author.html:594 wikidata_api.py:333
 #, fuzzy
 msgid "Place of birth is required"
 msgstr "Doğum yeri"
 
-#: templates/add-author.html:590 wikidata_api.py:414
+#: templates/add-author.html:595 wikidata_api.py:335
 #, fuzzy
 msgid "Occupation is required"
 msgstr "Peşəsi"
 
-#: wikidata_api.py:421
+#: wikidata_api.py:342
 #, fuzzy, python-format
 msgid "Date of birth: %(error)s"
 msgstr "Doğum tarixi"
 
-#: wikidata_api.py:427
+#: wikidata_api.py:348
 #, fuzzy, python-format
 msgid "Date of death: %(error)s"
 msgstr "Ölüm tarixi"
 
-#: wikidata_api.py:609
+#: wikidata_api.py:557
+#, fuzzy
+msgid "work"
+msgstr "Əsərlər"
+
+#: templates/add-work.html:1557 wikidata_api.py:586
+#, fuzzy
+msgid "Title is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1564 wikidata_api.py:591
+#, fuzzy
+msgid "Type of work is required"
+msgstr "Doğum yeri"
+
+#: wikidata_api.py:602
+#, fuzzy
+msgid "Invalid type of work selected"
+msgstr "Doğum yeri"
+
+#: wikidata_api.py:610
+#, fuzzy
+msgid "Author"
+msgstr "Müəlliflər"
+
+#: wikidata_api.py:611
+msgid "Director"
+msgstr ""
+
+#: wikidata_api.py:612
+#, fuzzy
+msgid "Creator"
+msgstr "Nəşr tarixi"
+
+#: wikidata_api.py:613
+msgid "Composer"
+msgstr ""
+
+#: wikidata_api.py:614
+msgid "Screenwriter"
+msgstr ""
+
+#: wikidata_api.py:615
+msgid "Lyricist"
+msgstr ""
+
+#: wikidata_api.py:616
+msgid "Performer"
+msgstr ""
+
+#: wikidata_api.py:617
+msgid "Producer"
+msgstr ""
+
+#: templates/add-work.html:350 templates/work.html:77 wikidata_api.py:618
+msgid "Language"
+msgstr "Dil"
+
+#: templates/add-work.html:372 wikidata_api.py:619
+#, fuzzy
+msgid "Original language"
+msgstr "Dil"
+
+#: templates/add-work.html:508 templates/layout.html:268 templates/work.html:83
+#: wikidata_api.py:620
+msgid "Country of origin"
+msgstr "Mənşə ölkəsi"
+
+#: wikidata_api.py:621
+#, fuzzy
+msgid "Country of publication"
+msgstr "Doğulduğu ölkə"
+
+#: templates/add-work.html:396 wikidata_api.py:622
+#, fuzzy
+msgid "Location"
+msgstr "Peşəsi"
+
+#: wikidata_api.py:623
+#, fuzzy
+msgid "Genre"
+msgstr "Cinsi"
+
+#: templates/add-work.html:531 wikidata_api.py:624
+msgid "Record label"
+msgstr ""
+
+#: templates/add-work.html:474 templates/work.html:65 wikidata_api.py:625
+msgid "Publication date"
+msgstr "Nəşr tarixi"
+
+#: templates/add-work.html:443 templates/work.html:71 wikidata_api.py:626
+#, fuzzy
+msgid "Creation date"
+msgstr "Nəşr tarixi"
+
+#: wikidata_api.py:634
+#, fuzzy, python-format
+msgid "%(field)s is required"
+msgstr "Milliyəti"
+
+#: wikidata_api.py:641
+#, fuzzy, python-format
+msgid "Publication date: %(error)s"
+msgstr "Nəşr tarixi"
+
+#: wikidata_api.py:647
+#, fuzzy, python-format
+msgid "Creation date: %(error)s"
+msgstr "Ölüm tarixi"
+
+#: wikidata_api.py:912
 #, python-format
 msgid "Invalid date: contains '%(pattern)s'"
 msgstr ""
 
-#: wikidata_api.py:615
+#: wikidata_api.py:918
 msgid "Invalid date format"
 msgstr ""
 
-#: wikidata_api.py:623
+#: wikidata_api.py:926
 msgid "Year is required and must be a valid 4-digit number"
 msgstr ""
 
-#: wikidata_api.py:628
+#: wikidata_api.py:931
 #, python-format
 msgid "Invalid month: %(month)s. Must be 01-12 or 00 for unknown"
 msgstr ""
 
-#: wikidata_api.py:633
+#: wikidata_api.py:936
 #, python-format
 msgid "Invalid day: %(day)s. Must be 01-31 or 00 for unknown"
 msgstr ""
+
+#: wikidata_api.py:989
+#, python-format
+msgid "creator from %(nationality)s"
+msgstr ""
+
+#: wikidata_api.py:991
+msgid "creator"
+msgstr ""
+
+#: wikidata_api.py:1020
+#, python-format
+msgid "%(work_type)s by %(creator)s"
+msgstr ""
+
+#: wikidata_constants.py:147
+msgid "Written work (not literary)"
+msgstr ""
+
+#: wikidata_constants.py:158
+msgid "Edition of a written work"
+msgstr ""
+
+#: wikidata_constants.py:182
+msgid "Audiovisual work (other)"
+msgstr ""
+
+#: wikidata_constants.py:217
+msgid "Visual artwork (other)"
+msgstr ""
+
+#: wikidata_constants.py:230
+#, fuzzy
+msgid "Musical work/composition"
+msgstr "Musiqi əsəri"
+
+#: wikidata_constants.py:242
+#, fuzzy
+msgid "Album"
+msgstr "Haqqında"
 
 #: templates/404.html:7
 msgid "Page not found"
@@ -292,7 +453,7 @@ msgstr "ana səhifə"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Zəhmət olmasa, %(home_page)s gedin və yenidən cəhd edin."
 
-#: templates/about.html:7 templates/layout.html:317
+#: templates/about.html:7 templates/layout.html:328
 msgid "About Paulina"
 msgstr "Paulina haqqında"
 
@@ -301,19 +462,19 @@ msgstr "Paulina haqqında"
 msgid "Wikidata"
 msgstr "Vikidata"
 
-#: templates/about.html:9 templates/layout.html:303
+#: templates/about.html:9 templates/layout.html:314
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Onlayn mədəniyyət mərkəzi"
 
-#: templates/about.html:10 templates/layout.html:306
+#: templates/about.html:10 templates/layout.html:317
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruqvay"
 
-#: templates/about.html:11 templates/layout.html:309
+#: templates/about.html:11 templates/layout.html:320
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:312
+#: templates/about.html:12 templates/layout.html:323
 #, fuzzy
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas de Uruguay"
@@ -474,11 +635,11 @@ msgstr ""
 "Paulina azad proqramdır. %(agpl_link)s lisenziyası altında dərc olunur. "
 "%(repository_link)s səhifəsinə daxil olun."
 
-#: templates/add-author.html:10
+#: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
 msgstr ""
 
-#: templates/add-author.html:18
+#: templates/add-author.html:18 templates/add-work.html:17
 msgid "Close"
 msgstr ""
 
@@ -490,12 +651,12 @@ msgstr ""
 msgid "The author has been added to Wikidata with ID:"
 msgstr ""
 
-#: templates/add-author.html:26
+#: templates/add-author.html:26 templates/add-work.html:26
 #, fuzzy
 msgid "View on Wikidata"
 msgstr "Vikidata"
 
-#: templates/add-author.html:29
+#: templates/add-author.html:29 templates/add-work.html:29
 #, fuzzy
 msgid "View on Paulina"
 msgstr "Paulina haqqında"
@@ -517,7 +678,7 @@ msgstr ""
 msgid "Matching authors will appear as you type"
 msgstr ""
 
-#: templates/add-author.html:74
+#: templates/add-author.html:74 templates/add-work.html:86
 msgid "Description"
 msgstr ""
 
@@ -529,15 +690,16 @@ msgstr ""
 msgid "Please enter a brief description"
 msgstr ""
 
-#: templates/add-author.html:91
+#: templates/add-author.html:91 templates/add-work.html:66
 msgid "Possible matches on Wikidata:"
 msgstr ""
 
-#: templates/add-author.html:98
+#: templates/add-author.html:98 templates/add-work.html:74
 msgid "None of these match - Continue"
 msgstr ""
 
-#: templates/add-author.html:103 templates/add-author.html:566
+#: templates/add-author.html:103 templates/add-author.html:571
+#: templates/add-work.html:79
 msgid "No exact match found."
 msgstr ""
 
@@ -552,29 +714,39 @@ msgid "Biographical Information"
 msgstr "Çatışmayan məlumat var?"
 
 #: templates/add-author.html:122 templates/author.html:113
-#: templates/layout.html:212
+#: templates/layout.html:223
 msgid "Nationality"
 msgstr "Milliyəti"
 
-#: templates/add-author.html:129
+#: templates/add-author.html:129 templates/add-work.html:512
+#: templates/add-work.html:560
 msgid "Search for a country..."
 msgstr ""
 
 #: templates/add-author.html:146 templates/add-author.html:182
 #: templates/add-author.html:221 templates/add-author.html:261
 #: templates/add-author.html:304 templates/add-author.html:361
-#: templates/add-author.html:416
+#: templates/add-author.html:416 templates/add-work.html:127
+#: templates/add-work.html:159 templates/add-work.html:183
+#: templates/add-work.html:208 templates/add-work.html:233
+#: templates/add-work.html:257 templates/add-work.html:281
+#: templates/add-work.html:305 templates/add-work.html:329
+#: templates/add-work.html:362 templates/add-work.html:386
+#: templates/add-work.html:409 templates/add-work.html:433
+#: templates/add-work.html:464 templates/add-work.html:495
+#: templates/add-work.html:521 templates/add-work.html:545
+#: templates/add-work.html:569
 msgid "Add reference"
 msgstr ""
 
 #: templates/add-author.html:159 templates/author.html:125
-#: templates/layout.html:201
+#: templates/layout.html:212
 msgid "Gender"
 msgstr "Cinsi"
 
-#: templates/add-author.html:166 templates/layout.html:203
-#: templates/layout.html:225 templates/layout.html:248
-#: templates/layout.html:269
+#: templates/add-author.html:166 templates/layout.html:214
+#: templates/layout.html:236 templates/layout.html:259
+#: templates/layout.html:280
 msgid "Any"
 msgstr "Hər hansı"
 
@@ -616,15 +788,18 @@ msgid "Date of birth"
 msgstr "Doğum tarixi"
 
 #: templates/add-author.html:332 templates/add-author.html:387
+#: templates/add-work.html:448 templates/add-work.html:479
 #, fuzzy
 msgid "Day"
 msgstr "Hər hansı"
 
 #: templates/add-author.html:342 templates/add-author.html:397
+#: templates/add-work.html:452 templates/add-work.html:483
 msgid "Month"
 msgstr ""
 
 #: templates/add-author.html:352 templates/add-author.html:407
+#: templates/add-work.html:456 templates/add-work.html:487
 #, fuzzy
 msgid "Year"
 msgstr "Axtar"
@@ -652,196 +827,491 @@ msgstr ""
 msgid "Search Commons for"
 msgstr "Əsərləri axtar"
 
-#: templates/add-author.html:449
+#: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
 "Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
 "below."
 msgstr ""
 
-#: templates/add-author.html:455
+#: templates/add-author.html:455 templates/add-work.html:611
 msgid "Image URL"
 msgstr ""
 
-#: templates/add-author.html:473 templates/add-author.html:476
-#: templates/add-author.html:596
+#: templates/add-author.html:473 templates/add-author.html:481
+#: templates/add-author.html:601 templates/add-work.html:628
+#: templates/add-work.html:639
 msgid "Image preview"
 msgstr ""
 
-#: templates/add-author.html:484
+#: templates/add-author.html:489 templates/add-work.html:647
 msgid "Could not load image"
 msgstr ""
 
-#: templates/add-author.html:497
+#: templates/add-author.html:502 templates/add-work.html:664
 msgid "Add external links (optional)"
 msgstr ""
 
-#: templates/add-author.html:504
-msgid "Official Website"
+#: templates/add-author.html:509 templates/author.html:98
+msgid "Official website"
 msgstr ""
 
-#: templates/add-author.html:512
+#: templates/add-author.html:517 templates/add-work.html:678
 msgid "Enter the full URL including https://, e.g. https://example.com"
 msgstr ""
 
-#: templates/add-author.html:532
+#: templates/add-author.html:537 templates/add-work.html:707
 #, fuzzy
 msgid "Reset"
 msgstr "Nəticələr"
 
-#: templates/add-author.html:535
+#: templates/add-author.html:540 templates/add-work.html:711
 msgid "Submit"
 msgstr ""
 
-#: templates/add-author.html:555
+#: templates/add-author.html:560
 msgid "Searching Wikidata..."
 msgstr ""
 
-#: templates/add-author.html:556
+#: templates/add-author.html:561
 #, fuzzy
 msgid "No Wikidata results found"
 msgstr "Nəticə tapılmadı"
 
-#: templates/add-author.html:557 templates/add-author.html:568
+#: templates/add-author.html:562 templates/add-author.html:573
 msgid "No description"
 msgstr ""
 
-#: templates/add-author.html:558 templates/add-author.html:567
+#: templates/add-author.html:563 templates/add-author.html:572
 msgid "Error searching Wikidata"
 msgstr ""
 
-#: templates/add-author.html:559
+#: templates/add-author.html:564
 msgid "This item is already added"
 msgstr ""
 
-#: templates/add-author.html:560
+#: templates/add-author.html:565
 msgid "This item is already selected"
 msgstr ""
 
-#: templates/add-author.html:561 templates/add-author.html:577
+#: templates/add-author.html:566 templates/add-author.html:582
 msgid "Remove"
 msgstr ""
 
-#: templates/add-author.html:565
+#: templates/add-author.html:570
 #, fuzzy
 msgid "Searching..."
 msgstr "Axtar"
 
-#: templates/add-author.html:572
+#: templates/add-author.html:577
 msgid "Reference"
 msgstr ""
 
-#: templates/add-author.html:573
+#: templates/add-author.html:578
 msgid "Reference URL"
 msgstr ""
 
-#: templates/add-author.html:574
+#: templates/add-author.html:579 templates/add-work.html:50
 msgid "Title"
 msgstr ""
 
-#: templates/add-author.html:575
+#: templates/add-author.html:580
 msgid "Date accessed"
 msgstr ""
 
-#: templates/add-author.html:576
+#: templates/add-author.html:581
 msgid "Maximum 3 references per field"
 msgstr ""
 
-#: templates/add-author.html:581
+#: templates/add-author.html:586
 msgid "Please use an image from Wikimedia Commons."
 msgstr ""
 
-#: templates/add-author.html:582
+#: templates/add-author.html:587
 msgid "Could not load image. Please check the URL."
 msgstr ""
 
-#: templates/add-author.html:591
+#: templates/add-author.html:596
 #, fuzzy
 msgid "Image must be from Wikimedia Commons"
 msgstr "Vikianbar"
 
-#: templates/add-author.html:592
+#: templates/add-author.html:597
 msgid "Please fill in all required fields:"
 msgstr ""
 
-#: templates/add-author.html:593
+#: templates/add-author.html:598 templates/add-work.html:1181
 msgid "Are you sure you want to reset the form? All entered data will be lost."
 msgstr ""
 
-#: templates/add-author.html:594
+#: templates/add-author.html:599
 msgid "Please enter the author name first to search for images"
 msgstr ""
 
-#: templates/add-author.html:595
+#: templates/add-author.html:600
 #, fuzzy
 msgid "author name"
 msgstr "Müəlliflər"
 
-#: templates/add-author.html:597
+#: templates/add-author.html:602
 msgid "Year is required"
 msgstr ""
 
-#: templates/add-author.html:598
+#: templates/add-author.html:603
 msgid "Year must be a valid 4-digit number"
 msgstr ""
 
-#: templates/add-author.html:599
+#: templates/add-author.html:604
 msgid "Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:600
+#: templates/add-author.html:605
 msgid "Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:601
+#: templates/add-author.html:606
 msgid "Month cannot be 0 if day is specified"
 msgstr ""
 
-#: templates/add-author.html:757
+#: templates/add-author.html:763
 msgid "Date of birth: Year is required"
 msgstr ""
 
-#: templates/add-author.html:758
+#: templates/add-author.html:764
 msgid "Date of birth: Year must be a valid 4-digit number"
 msgstr ""
 
-#: templates/add-author.html:759
+#: templates/add-author.html:765
 msgid "Date of birth: Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:760
+#: templates/add-author.html:766
 msgid "Date of birth: Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:761
+#: templates/add-author.html:767
 msgid "Date of birth: Month cannot be 0 if day is specified"
 msgstr ""
 
-#: templates/add-author.html:762
+#: templates/add-author.html:768
 msgid "Date of birth: Month is required if you enter day"
 msgstr ""
 
-#: templates/add-author.html:784
+#: templates/add-author.html:790
 msgid "Date of death: Year is required if you enter month or day"
 msgstr ""
 
-#: templates/add-author.html:785
+#: templates/add-author.html:791
 msgid "Date of death: Year must be a valid 4-digit number"
 msgstr ""
 
-#: templates/add-author.html:786
+#: templates/add-author.html:792
 msgid "Date of death: Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:787
+#: templates/add-author.html:793
 msgid "Date of death: Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:788
+#: templates/add-author.html:794
 msgid "Date of death: Month cannot be 0 if day is specified"
 msgstr ""
 
-#: templates/add-author.html:789
+#: templates/add-author.html:795
 msgid "Date of death: Month is required if you enter day and year"
+msgstr ""
+
+#: templates/add-author.html:847 templates/add-work.html:1199
+msgid ""
+"Could not connect to server. Please refresh the page manually to clear "
+"all data."
+msgstr ""
+
+#: templates/add-work.html:18
+msgid "Work Created Successfully!"
+msgstr ""
+
+#: templates/add-work.html:20
+msgid "The work has been added to Wikidata with ID:"
+msgstr ""
+
+#: templates/add-work.html:54
+msgid "e.g., Don Quixote"
+msgstr ""
+
+#: templates/add-work.html:56
+msgid "Please enter the work title"
+msgstr ""
+
+#: templates/add-work.html:59
+msgid "Matching works will appear as you type"
+msgstr ""
+
+#: templates/add-work.html:90
+msgid "e.g., Spanish novel by Miguel de Cervantes"
+msgstr ""
+
+#: templates/add-work.html:101 templates/country.html:34
+#: templates/layout.html:257
+msgid "Type of work"
+msgstr "Əsərin tipi"
+
+#: templates/add-work.html:105
+#, fuzzy
+msgid "Select type of work..."
+msgstr "Əsərin tipi"
+
+#: templates/add-work.html:118
+msgid "Please select a type of work."
+msgstr ""
+
+#: templates/add-work.html:138
+#, fuzzy
+msgid "Creators"
+msgstr "Müəlliflər"
+
+#: templates/add-work.html:144
+#, fuzzy
+msgid "Author(s)"
+msgstr "Müəlliflər"
+
+#: templates/add-work.html:148
+#, fuzzy
+msgid "Search for author..."
+msgstr "Müəllifləri kəşf et"
+
+#: templates/add-work.html:169
+msgid "Director(s)"
+msgstr ""
+
+#: templates/add-work.html:173
+msgid "Search for director..."
+msgstr ""
+
+#: templates/add-work.html:193
+msgid "Creator(s)"
+msgstr ""
+
+#: templates/add-work.html:197
+msgid "Search for creator..."
+msgstr ""
+
+#: templates/add-work.html:219
+msgid "Performer(s)"
+msgstr ""
+
+#: templates/add-work.html:223
+msgid "Search for performer..."
+msgstr ""
+
+#: templates/add-work.html:243
+msgid "Composer(s)"
+msgstr ""
+
+#: templates/add-work.html:247
+#, fuzzy
+msgid "Search for composer..."
+msgstr "Əsərləri axtar"
+
+#: templates/add-work.html:267
+msgid "Screenwriter(s)"
+msgstr ""
+
+#: templates/add-work.html:271
+msgid "Search for screenwriter..."
+msgstr ""
+
+#: templates/add-work.html:291
+msgid "Lyricist(s)"
+msgstr ""
+
+#: templates/add-work.html:295
+msgid "Search for lyricist..."
+msgstr ""
+
+#: templates/add-work.html:315
+msgid "Producer(s)"
+msgstr ""
+
+#: templates/add-work.html:319
+msgid "Search for producer..."
+msgstr ""
+
+#: templates/add-work.html:341 templates/work.html:61
+msgid "Work details"
+msgstr ""
+
+#: templates/add-work.html:353 templates/add-work.html:376
+#, fuzzy
+msgid "Search for a language..."
+msgstr "Axtar"
+
+#: templates/add-work.html:400
+msgid "e.g., Louvre Museum"
+msgstr ""
+
+#: templates/add-work.html:419
+msgid "Genre(s)"
+msgstr ""
+
+#: templates/add-work.html:423
+#, fuzzy
+msgid "Search for genre..."
+msgstr "Axtar"
+
+#: templates/add-work.html:535
+msgid "Search for record label..."
+msgstr ""
+
+#: templates/add-work.html:555
+#, fuzzy
+msgid "Country(ies) of publication"
+msgstr "Doğulduğu ölkə"
+
+#: templates/add-work.html:584
+msgid "Add work image (optional)"
+msgstr ""
+
+#: templates/add-work.html:594
+msgid ""
+"Search Wikimedia Commons for work's image, or enter the Commons image URL"
+" directly:"
+msgstr ""
+
+#: templates/add-work.html:601
+#, fuzzy
+msgid "Search Wikimedia Commons for"
+msgstr "Əsərləri axtar"
+
+#: templates/add-work.html:602 templates/add-work.html:1122
+#: templates/add-work.html:1126
+msgid "work title"
+msgstr ""
+
+#: templates/add-work.html:672
+msgid "Full work available at URL"
+msgstr ""
+
+#: templates/add-work.html:684
+msgid "Internet Archive ID"
+msgstr ""
+
+#: templates/add-work.html:691
+msgid "The unique identifier from archive.org"
+msgstr ""
+
+#: templates/add-work.html:1583
+#, fuzzy
+msgid "At least one author is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1584
+#, fuzzy
+msgid "At least one director is required"
+msgstr "Doğum yeri"
+
+#: templates/add-work.html:1585
+#, fuzzy
+msgid "At least one screenwriter is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1586
+#, fuzzy
+msgid "At least one composer is required"
+msgstr "Doğum yeri"
+
+#: templates/add-work.html:1587
+#, fuzzy
+msgid "At least one creator is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1588
+#, fuzzy
+msgid "At least one lyricist is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1589
+#, fuzzy
+msgid "At least one performer is required"
+msgstr "Doğum yeri"
+
+#: templates/add-work.html:1590
+msgid "At least one producer is required"
+msgstr ""
+
+#: templates/add-work.html:1591
+#, fuzzy
+msgid "Language is required"
+msgstr "Peşəsi"
+
+#: templates/add-work.html:1592
+#, fuzzy
+msgid "Original language is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1593
+#, fuzzy
+msgid "Country of origin is required"
+msgstr "Mənşə ölkəsi"
+
+#: templates/add-work.html:1594
+#, fuzzy
+msgid "Country of publication is required"
+msgstr "Peşəsi"
+
+#: templates/add-work.html:1595
+#, fuzzy
+msgid "Location is required"
+msgstr "Peşəsi"
+
+#: templates/add-work.html:1596
+#, fuzzy
+msgid "Genre is required"
+msgstr "Peşəsi"
+
+#: templates/add-work.html:1613
+#, fuzzy
+msgid "Publication date: Year is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1614
+msgid "Publication date: Year must be a valid 4-digit number"
+msgstr ""
+
+#: templates/add-work.html:1615
+msgid "Publication date: Month must be between 0-12"
+msgstr ""
+
+#: templates/add-work.html:1616
+msgid "Publication date: Day must be between 0-31"
+msgstr ""
+
+#: templates/add-work.html:1617
+msgid "Publication date: Month cannot be 0 if day is specified"
+msgstr ""
+
+#: templates/add-work.html:1643
+#, fuzzy
+msgid "Creation date: Year is required"
+msgstr "Milliyəti"
+
+#: templates/add-work.html:1644
+msgid "Creation date: Year must be a valid 4-digit number"
+msgstr ""
+
+#: templates/add-work.html:1645
+msgid "Creation date: Month must be between 0-12"
+msgstr ""
+
+#: templates/add-work.html:1646
+msgid "Creation date: Day must be between 0-31"
+msgstr ""
+
+#: templates/add-work.html:1647
+msgid "Creation date: Month cannot be 0 if day is specified"
+msgstr ""
+
+#: templates/add-work.html:1665
+msgid "Please fix the following errors:"
 msgstr ""
 
 #: templates/author.html:7 templates/work.html:7
@@ -914,10 +1384,6 @@ msgstr "Vikimənbə keçidi"
 msgid "Wikiquote"
 msgstr "Vikisitat keçidi"
 
-#: templates/author.html:98
-msgid "Official website"
-msgstr ""
-
 #: templates/author.html:134 templates/author.html:160
 #, python-format
 msgid "(%(author_age)s years)"
@@ -971,17 +1437,13 @@ msgstr "İctimai mülkiyyətdə olsun"
 msgid "Number of works identified as being in the public domain on Wikidata"
 msgstr "Vikidatada ictimai mülkiyyətdə olduğu müəyyən edilən əsərlərin sayı"
 
-#: templates/country.html:34 templates/layout.html:246
-msgid "Type of work"
-msgstr "Əsərin tipi"
-
 #: templates/country.html:35
 msgid "Number of works in public domain"
 msgstr "İctimai mülkiyyətdə olan əsərlərinin siyahısı"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:350 templates/layout.html:352
-#: templates/layout.html:354
+#: templates/layout.html:361 templates/layout.html:363
+#: templates/layout.html:365
 msgid "Paulina logo"
 msgstr "Paulina loqosu"
 
@@ -1080,95 +1542,91 @@ msgstr ""
 "hüququ şərtlərinin başa düşülməsini asanlaşdırır və əsərin hər bir ölkədə"
 " ictimai mülkiyyətə nə vaxt daxil olduğunu bilməyə kömək edir."
 
-#: templates/layout.html:31 templates/layout.html:357
+#: templates/layout.html:31 templates/layout.html:368
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - İctimai mülkiyyət datası"
 
-#: templates/layout.html:74 templates/layout.html:122
+#: templates/layout.html:79 templates/layout.html:133
 msgid "Logout"
 msgstr ""
 
-#: templates/layout.html:81
+#: templates/layout.html:86
 msgid "Login with Wikimedia"
 msgstr ""
 
-#: templates/layout.html:128
+#: templates/layout.html:139
 msgid "Login with your Wikimedia account to add/edit data"
 msgstr ""
 
-#: templates/layout.html:130
+#: templates/layout.html:141
 msgid "Login"
 msgstr ""
 
-#: templates/layout.html:148
+#: templates/layout.html:159
 msgid "Select"
 msgstr "Seç"
 
-#: templates/layout.html:183 templates/layout.html:186
+#: templates/layout.html:194 templates/layout.html:197
 msgid "Authors"
 msgstr "Müəlliflər"
 
-#: templates/layout.html:184 templates/layout.html:187
+#: templates/layout.html:195 templates/layout.html:198
 msgid "Works"
 msgstr "Əsərlər"
 
-#: templates/layout.html:191
+#: templates/layout.html:202
 msgid "Search with Paulina"
 msgstr "Paulina ilə axtar"
 
-#: templates/layout.html:191 templates/layout.html:193
+#: templates/layout.html:202 templates/layout.html:204
 msgid "Search"
 msgstr "Axtar"
 
-#: templates/layout.html:198
+#: templates/layout.html:209
 msgid "Advanced search"
 msgstr "Ətraflı axtarış"
 
-#: templates/layout.html:216 templates/layout.html:261
+#: templates/layout.html:227 templates/layout.html:272
 msgid "Type to filter..."
 msgstr "Filtr üçün yaz..."
 
-#: templates/layout.html:238
+#: templates/layout.html:249
 msgid "In public domain"
 msgstr "İctimai mülkiyyətdə olsun"
 
-#: templates/layout.html:241
+#: templates/layout.html:252
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "Əsərləri ən azı bir yurisdiksiyada ictimai mülkiyyətdə olan müəlliflər"
 
-#: templates/layout.html:257 templates/work.html:83
-msgid "Country of origin"
-msgstr "Mənşə ölkəsi"
-
-#: templates/layout.html:300
+#: templates/layout.html:311
 msgid "Paulina is supported by:"
 msgstr "Paulinanı dəstəkləyənlər:"
 
-#: templates/layout.html:323
+#: templates/layout.html:334
 msgid "Source code"
 msgstr "Mənbə kodu"
 
-#: templates/layout.html:326
+#: templates/layout.html:337
 msgid "Help translate"
 msgstr "Tərcüməyə kömək edin"
 
-#: templates/layout.html:331
+#: templates/layout.html:342
 msgid "Help"
 msgstr "Kömək"
 
-#: templates/layout.html:334
+#: templates/layout.html:345
 msgid "Documentation"
 msgstr "Sənədləşdirmə"
 
-#: templates/layout.html:358
+#: templates/layout.html:369
 msgid "Powered by Wikidata."
 msgstr "Vikidata sayəsində işləyir."
 
-#: templates/layout.html:414
+#: templates/layout.html:425
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:510
+#: templates/layout.html:521
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
@@ -1209,23 +1667,6 @@ msgstr "Yükləmək üçün mövcuddur"
 #: templates/work.html:29
 msgid "Author/s"
 msgstr "Müəllif(lər)"
-
-#: templates/work.html:61
-msgid "Work details"
-msgstr ""
-
-#: templates/work.html:65
-msgid "Publication date"
-msgstr "Nəşr tarixi"
-
-#: templates/work.html:71
-#, fuzzy
-msgid "Creation date"
-msgstr "Nəşr tarixi"
-
-#: templates/work.html:77
-msgid "Language"
-msgstr "Dil"
 
 #: templates/work.html:93
 msgid "Copyright status"

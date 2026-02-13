@@ -98,11 +98,11 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="work-type-select" class="form-label">
-                                <strong>{{ _('Type of Work') }} <span class="text-danger">*</span></strong>
+                                <strong>{{ _('Type of work') }} <span class="text-danger">*</span></strong>
                             </label>
                             <select class="form-select border-black shadow-none" id="work-type-select"
                                 name="instanceOfQid" required>
-                                <option value="">{{ _('Select work type...') }}</option>
+                                <option value="">{{ _('Select type of work...') }}</option>
                                 {% for work_type in work_types %}
                                 <option value="{{ work_type.qid }}"
                                     data-required-fields='{{ work_type.fields.required | tojson }}'
@@ -115,7 +115,7 @@
                                 {% endfor %}
                             </select>
                             <div class="invalid-feedback">
-                                {{ _('Please select a work type.') }}
+                                {{ _('Please select a type of work.') }}
                             </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@
             <div id="details-fields-section" class="mb-4 d-none">
                 <div class="d-flex align-items-center mb-3">
                     <i class="bi bi-info-circle me-2 section-icon"></i>
-                    <h3 class="mb-0">{{ _('Work Details') }}</h3>
+                    <h3 class="mb-0">{{ _('Work details') }}</h3>
                 </div>
 
                 <div class="row">
@@ -528,7 +528,7 @@
                         <!-- Record Label (P264) - Albums -->
                         <div class="detail-field mb-3" data-field="recordLabel" style="display:none;">
                             <label for="work-record-label" class="form-label">
-                                <strong class="field-label">{{ _('Record Label') }} <span
+                                <strong class="field-label">{{ _('Record label') }} <span
                                         class="text-danger required-mark">*</span></strong>
                             </label>
                             <input type="text" class="form-control border-black shadow-none" id="work-record-label"
@@ -552,12 +552,12 @@
                         <!-- Country of Publication (P291) - Albums -->
                         <div class="detail-field mb-3" data-field="countryOfPublication" style="display:none;">
                             <label for="work-country-publication" class="form-label">
-                                <strong class="field-label">{{ _('Country(ies) of Publication') }} <span
+                                <strong class="field-label">{{ _('Country(ies) of publication') }} <span
                                         class="text-danger required-mark">*</span></strong>
                             </label>
                             <input type="text" class="form-control border-black shadow-none"
                                 id="work-country-publication" name="countryOfPublication"
-                                placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                                placeholder="{{ _('Search for a country...') }}" autocomplete="off">
                             <div id="work-country-publication-selected" class="mt-2 d-none"></div>
                             <input type="hidden" id="work-country-publication-qid" name="countryOfPublicationQid">
                             <div id="work-country-publication-results"
@@ -591,8 +591,7 @@
                             <div class="p-3 border border-black rounded">
                                 <div class="row d-flex justify-content-between align-items-start">
                                     <div class="col-md-8">
-                                        <p class="mb-3">{{ _("Search Wikimedia Commons for work's image, or enter the
-                                            Commons image URL directly:") }}</p>
+                                        <p class="mb-3">{{ _("Search Wikimedia Commons for work's image, or enter the Commons image URL directly:") }}</p>
 
                                         <!-- Search Button -->
                                         <div class="mb-3">
@@ -603,8 +602,7 @@
                                                 <span id="work-title-display">{{ _('work title') }}</span>
                                             </button>
                                             <div class="form-text mt-2">
-                                                {{ _('Opens Wikimedia Commons in a new tab. Copy the image URL and paste
-                                                it below.') }}
+                                                {{ _('Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below.') }}
                                             </div>
                                         </div>
 
@@ -677,7 +675,7 @@
                                 name="fullWorkUrl" value="{{ form_data.get('fullWorkUrl', '') if form_data else '' }}"
                                 placeholder="https://">
                             <div class="form-text">
-                                {{ _('Enter the full URL including https://. e.g. https://example.com') }}
+                                {{ _('Enter the full URL including https://, e.g. https://example.com') }}
                             </div>
                         </div>
 
@@ -1563,7 +1561,7 @@
                 const workTypeQid = document.getElementById('work-type-select').value;
                 if (!workTypeQid) {
                     isValid = false;
-                    errors.push('{{ _("Work type is required") }}');
+                    errors.push('{{ _("Type of work is required") }}');
                 }
 
                 // Validate required creator and detail fields based on work type
