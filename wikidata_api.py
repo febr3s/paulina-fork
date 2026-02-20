@@ -862,8 +862,7 @@ class WikidataAPI:
     
     
     # AUTHOR UPDATE PROCESSING
-
-    def update_author_field(self, author_id, property_id, value, field_name, is_date=False, is_multi_select=False):
+    def update_author_field(self, author_id, property_id, value, field_name, is_date=False, is_multi_select=False, references=None):
         """
         Update a single author field on Wikidata.
         
@@ -874,146 +873,164 @@ class WikidataAPI:
             field_name: Field identifier for error messages
             is_date: Whether this is a date field
             is_multi_select: Whether this is a multi-select field (e.g., occupation)
+            references: List of reference dicts with 'url' and 'retrieved' keys (optional)
         
         Returns:
             dict with 'success' and optional 'error' key
         """
         try:
-            # Get existing item data to find statement IDs
+            if not self.oauth_session:
+                return {'success': False, 'error': 'Not authenticated'}
+            
+            # Get the current item to find existing statements
             item_url = f"{self.rest_api_url}/entities/items/{author_id}"
-            item_response = self.oauth_session.get(
-                item_url,
-                headers={'User-Agent': self.user_agent}
-            )
+            headers = {'User-Agent': self.user_agent}
             
-            if item_response.status_code != 200:
-                return {
-                    'success': False,
-                    'error': _('Could not retrieve author data from Wikidata.')
-                }
+            get_response = self.oauth_session.get(item_url, headers=headers)
             
-            item_data = item_response.json()
-            existing_statements = item_data.get('statements', {})
-            existing_property_statements = existing_statements.get(property_id, [])
+            if get_response.status_code != 200:
+                return {'success': False, 'error': f'Could not retrieve item: {get_response.status_code}'}
             
+            item_data = get_response.json()
+            statements = item_data.get('statements', {})
+            
+            # Build reference objects if provided
+            built_references = []
+            if references:
+                for ref_data in references:
+                    url = ref_data.get('url', '').strip()
+                    retrieved = ref_data.get('retrieved', '').strip()
+                    
+                    if url:
+                        # Auto-prepend https:// if protocol is missing
+                        if not url.startswith(('http://', 'https://')):
+                            url = 'https://' + url
+                        built_ref = self.build_reference(url, retrieved if retrieved else None)
+                        built_references.append(built_ref)
+            
+           # Handle multi-select (occupation)
             if is_multi_select:
-                # For multi-select: replace all existing statements with new ones
-                # First, delete all existing statements
-                for stmt in existing_property_statements:
-                    statement_id = stmt.get('id')
-                    if statement_id:
-                        delete_url = f"{self.rest_api_url}/statements/{statement_id}"
-                        delete_params = {'comment': edit_comment}
-                        self.oauth_session.delete(
+                qids = [qid.strip() for qid in value.split(',') if qid.strip()]
+                
+                # Get existing statement IDs for this property
+                existing_statements = statements.get(property_id, [])
+                existing_qids_to_stmt = {stmt['value']['content']: stmt['id'] for stmt in existing_statements if stmt.get('value', {}).get('content')}
+                
+                
+                # Step 1: Delete statements that are no longer in the list
+                for existing_qid, stmt_id in list(existing_qids_to_stmt.items()):
+                    if existing_qid not in qids:
+                        print(f"Deleting statement {stmt_id} for QID {existing_qid}")
+                        delete_url = f"{self.rest_api_url}/statements/{stmt_id}"
+                        delete_response = self.oauth_session.delete(
                             delete_url,
-                            params=delete_params,
                             headers={'User-Agent': self.user_agent}
                         )
+                        
+                        if delete_response.status_code in [200, 204]:
+                            print(f"Successfully deleted {existing_qid}")
+                            del existing_qids_to_stmt[existing_qid]
+                        else:
+                            print(f"Warning: Failed to delete statement {stmt_id}: {delete_response.status_code} - {delete_response.text}")
                 
-                # Add new statements for each value
-                qids = [qid.strip() for qid in value.split(',') if qid.strip()]
+                # Step 2: Add new statements that don't exist yet
                 for qid in qids:
-                    statement = self.build_statement(
-                        property_id,
-                        qid,
-                        'wikibase-item'
-                    )
+                    if qid not in existing_qids_to_stmt:
+                        print(f"Adding new statement for QID {qid}")
+                        # Create new statement with references
+                        new_statement = self.build_statement(property_id, qid, 'wikibase-item', None)
+                        
+                        create_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                        create_response = self.oauth_session.post(
+                            create_url,
+                            json={'statement': new_statement, 'comment': edit_comment},
+                            headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
+                        )
+                        
+                        if create_response.status_code == 201:
+                            print(f"Successfully added {qid}")
+                        else:
+                            print(f"Failed to add {qid}: {create_response.status_code} - {create_response.text}")
+                            return {'success': False, 'error': f'Failed to add {qid}: {create_response.text}'}
+            
+                return {'success': True}
+            
+            # Handle single-value fields (dates or single items)
+            else:
+                # Find existing statement for this property
+                existing_statements = statements.get(property_id, [])
+                
+                if existing_statements:
+                    # Update existing statement using PATCH
+                    statement_id = existing_statements[0]['id']
+                    patch_url = f"{self.rest_api_url}/statements/{statement_id}"
                     
-                    add_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
-                    add_data = {
-                        'statement': statement,
+                    # Build the patch operation for the value
+                    if is_date:
+                        new_value = {
+                            'time': self._format_date(value),
+                            'precision': self._get_date_precision(value),
+                            'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
+                        }
+                    else:
+                        new_value = value  # QID string
+                    
+                    patch_data = {
+                        'patch': [
+                            {
+                                'op': 'replace',
+                                'path': '/value/content',
+                                'value': new_value
+                            }
+                        ],
                         'comment': edit_comment
                     }
-                    response = self.oauth_session.post(
-                        add_url,
-                        json=add_data,
-                        headers={
-                            'Content-Type': 'application/json',
-                            'User-Agent': self.user_agent
-                        }
+                    
+                    
+                    # Replace all references with the new one (if provided), or clear them
+                    if built_references:
+                        patch_data['patch'].append({
+                            'op': 'add',
+                            'path': '/references',
+                            'value': [built_references[0]]  # Overwrites entire references array
+                        })
+                    else:
+                        patch_data['patch'].append({
+                            'op': 'add',
+                            'path': '/references',
+                            'value': []
+                        })
+                                        
+                    patch_response = self.oauth_session.patch(
+                        patch_url,
+                        json=patch_data,
+                        headers={'Content-Type': 'application/json-patch+json', 'User-Agent': self.user_agent}
                     )
                     
-                    if response.status_code not in [200, 201]:
-                        return {
-                            'success': False,
-                            'error': _('Failed to add statement: %(error)s', error=response.text)
-                        }
+                    if patch_response.status_code != 200:
+                        return {'success': False, 'error': f'Failed to update statement: {patch_response.status_code} - {patch_response.text}'}
+                
+                else:
+                    # Create new statement with references
+                    if is_date:
+                        new_statement = self.build_statement(property_id, value, 'time', built_references if built_references else None)
+                    else:
+                        new_statement = self.build_statement(property_id, value, 'wikibase-item', built_references if built_references else None)
+                    
+                    create_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                    create_response = self.oauth_session.post(
+                        create_url,
+                        json={'statement': new_statement, 'comment': edit_comment},
+                        headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
+                    )
+                    
+                    if create_response.status_code != 201:
+                        return {'success': False, 'error': f'Failed to create statement: {create_response.status_code} - {create_response.text}'}
                 
                 return {'success': True}
-                
-            elif existing_property_statements:
-                # Single-value property with existing statement - update it
-                statement_id = existing_property_statements[0].get('id')
-                
-                if is_date:
-                    new_value = self._build_value(value, 'time')
-                else:
-                    new_value = self._build_value(value, 'wikibase-item')
-                
-                # Use PATCH to update the statement value
-                patch_url = f"{self.rest_api_url}/statements/{statement_id}"
-                patch_data = {
-                    'patch': [
-                        {
-                            'op': 'replace',
-                            'path': '/value',
-                            'value': new_value
-                        }
-                    ],
-                    'comment': edit_comment
-                }
-                
-                response = self.oauth_session.patch(
-                    patch_url,
-                    json=patch_data,
-                    headers={
-                        'Content-Type': 'application/json-patch+json',
-                        'User-Agent': self.user_agent
-                    }
-                )
-                
-                if response.status_code == 200:
-                    return {'success': True}
-                else:
-                    return {
-                        'success': False,
-                        'error': _('Failed to update statement: %(error)s', error=response.text)
-                    }
-                    
-            else:
-                # No existing statement - create new one
-                if is_date:
-                    statement = self.build_statement(property_id, value, 'time')
-                else:
-                    statement = self.build_statement(property_id, value, 'wikibase-item')
-                
-                add_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
-                add_data = {
-                    'statement': statement,
-                    'comment': edit_comment
-                }
-                response = self.oauth_session.post(
-                    add_url,
-                    json=add_data,
-                    headers={
-                        'Content-Type': 'application/json',
-                        'User-Agent': self.user_agent
-                    }
-                )
-                
-                if response.status_code in [200, 201]:
-                    return {'success': True}
-                else:
-                    return {
-                        'success': False,
-                        'error': _('Failed to add statement: %(error)s', error=response.text)
-                    }
                     
         except Exception as e:
-            return {
-                'success': False,
-                'error': str(e)
-            }
+            return {'success': False, 'error': str(e)}
     
     # HELPER METHODS
     

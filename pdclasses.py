@@ -185,15 +185,24 @@ class Author(Parent):
             self.occupation_qid = None
         else:
             occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
-            occupations_labels = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
-                                                qnames="wd:" + " wd:".join(occupations_ids),
-                                                lang=languages.get_locale()
-                                                )
-            self.occupation = [occupation_item.get('itemLabel', {}).get('value')
-                               for occupation_item in occupations_labels]
+            occupations_labels_response = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
+                                                    qnames="wd:" + " wd:".join(occupations_ids),
+                                                    lang=languages.get_locale()
+                                                    )
+            
+            # Build a mapping of QID -> label to ensure correct order
+            qid_to_label = {}
+            for item in occupations_labels_response:
+                qid = item.get('item', {}).get('value', '').split('/')[-1]  # Extract QID from full URI
+                label = item.get('itemLabel', {}).get('value')
+                if qid and label:
+                    qid_to_label[qid] = label
+            
+            # Maintain the original order of QIDs
+            self.occupation = [qid_to_label.get(qid, qid) for qid in occupations_ids]
             # Store QIDs as comma-separated string
             self.occupation_qid = ','.join(occupations_ids) if occupations_ids else None
-
+            
         # Place of birth - store both label and QID
         place_of_birth = self.wikidata_item.get('statements', {}).get('P19')
         self.place_of_birth = build_field(place_of_birth)

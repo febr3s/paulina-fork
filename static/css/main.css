@@ -248,7 +248,6 @@ h3 {
 
 /* Author page individual field editing  */
 
-/* Author page individual field editing - Mobile friendly */
 .author-bio-field {
   transition: background-color 0.2s;
   position: relative;
@@ -290,7 +289,7 @@ h3 {
   text-decoration: none;
 }
 
-/* Always show clearly on mobile/touch devices */
+
 @media (max-width: 768px), (hover: none) {
   .author-field-edit-icon {
     opacity: 0.7;
@@ -302,12 +301,12 @@ h3 {
 }
 
 .author-field-edit {
-  position: relative; /* Changed: This makes dropdown position relative to this container */
+  position: relative; 
 }
 
 .author-edit-controls {
   max-width: 500px;
-  position: relative; /* Added: Ensures dropdown positions relative to controls */
+  position: relative;
 }
 
 
@@ -323,17 +322,17 @@ h3 {
   transform: scale(1.1);
   transition: all 0.2s ease;
 }
-/* Remove focus outline from input fields */
+
 .author-wikidata-search-input:focus,
 .author-date-input:focus {
   outline: none;
   box-shadow: none !important;
-  border-color: #dee2e6; /* Keep subtle border */
+  border-color: #dee2e6; 
 }
 
 .author-wikidata-results-dropdown {
-  position: absolute; /* Position relative to parent */
-  top: 100%; /* Position right below the input */
+  position: absolute;
+  top: 100%; 
   left: 0;
   right: 0;
   z-index: 1000;
@@ -345,7 +344,7 @@ h3 {
   width: 100%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   border-radius: 0.25rem;
-  margin-top: 2px; /* Small gap between input and dropdown */
+  margin-top: 2px; 
 }
 
 .author-wikidata-results-dropdown.show {
@@ -377,7 +376,6 @@ h3 {
   min-height: 38px;
 }
 
-/* Remove focus outline from buttons too */
 .author-edit-buttons .btn:focus {
   outline: none;
   box-shadow: none !important;
@@ -397,7 +395,7 @@ h3 {
 /* Wrapper for input and dropdown */
 .author-search-wrapper {
   position: relative;
-  margin-bottom: 0.5rem; /* Space before buttons */
+  margin-bottom: 0.5rem; 
 }
 
 .author-edit-controls {
@@ -466,6 +464,44 @@ h3 {
   .author-field-edit-icon {
     display: none !important;
   }
+}
+
+/* Author inline editing date fields */
+
+.date-input-group .author-date-day-input,
+.date-input-group .author-date-month-input {
+  width: 65px;
+  min-width: 65px;
+}
+
+.date-input-group .author-date-year-input {
+  width: 85px;
+  min-width: 85px;
+}
+
+.date-separator {
+  font-weight: bold;
+  color: #666;
+  flex-shrink: 0;
+}
+
+/* Author page gender select dropdown */
+.author-gender-select {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.author-gender-select:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Hide remove button on inline edit reference cards */
+#author-biography-section .remove-ref-btn {
+  display: none !important;
 }
 
 /* WORK PAGE */
