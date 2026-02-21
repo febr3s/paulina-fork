@@ -213,6 +213,7 @@ def results():
                                         search_request=search_request)
     except:
         abort(404)
+        
 
 @app.route("/author/<author_data>")
 def author_page(author_data):
@@ -220,6 +221,7 @@ def author_page(author_data):
     if 'wikimedia_username' in session:
         try:
             author = pdclasses.Author(author_data)
+            edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
             
            # Convert dates to ISO format for date inputs
             author_date_of_birth_iso = None
@@ -264,7 +266,8 @@ def author_page(author_data):
                 author_is_in_public_domain=print_field(author.isInPublicDomain()),
                 author_wikidata_link=print_field(author.wikidata_link),
                 author_date_enter_public_domain=print_field(author.date_enter_public_domain),
-                form_genders=FORM_GENDERS
+                form_genders=FORM_GENDERS,
+                edit_eligibility=edit_eligibility
             )
         except:
             abort(404)
@@ -276,6 +279,8 @@ def author_page(author_data):
 def _cached_author_page(author_data):
     try:
         author = pdclasses.Author(author_data)
+        edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
+        
         
         # Convert dates to ISO format for date inputs
         author_date_of_birth_iso = None
@@ -319,7 +324,8 @@ def _cached_author_page(author_data):
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
             author_wikidata_link=print_field(author.wikidata_link),
             author_date_enter_public_domain=print_field(author.date_enter_public_domain),
-            form_genders=FORM_GENDERS
+            form_genders=FORM_GENDERS,
+            edit_eligibility=edit_eligibility
         )
     except:
         abort(404)

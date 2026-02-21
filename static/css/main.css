@@ -504,6 +504,12 @@ h3 {
   display: none !important;
 }
 
+.author-field-edit-icon-disabled {
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
 /* WORK PAGE */
 
 /* Work image */

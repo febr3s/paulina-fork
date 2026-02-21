@@ -316,7 +316,39 @@ class Author(Parent):
             else:
                 work['downloads'] = False
         return works
-
+    
+def get_author_field_edit_eligibility(wikidata_item):
+    """Check which fields have only one value and are therefore editable."""
+    statements = wikidata_item.get('statements', {})
+    
+    # Fields that are always locked regardless of value count
+    always_locked = {'countryOfBirth'} # This field is derived from place of birth, so it should not be directly editable.
+    
+    # Fields that are always editable regardless of value count
+    always_editable = {'occupation'}
+    
+    field_properties = {
+        'nationality':  'P27',
+        'ethnicity':    'P172',
+        'gender':       'P21',
+        'dateOfBirth':  'P569',
+        'occupation':   'P106',
+        'placeOfBirth': 'P19',
+        'dateOfDeath':  'P570',
+    }
+    
+    eligibility = {}
+    for field, pid in field_properties.items():
+        if field in always_locked:
+            eligibility[field] = False
+        elif field in always_editable:
+            eligibility[field] = True
+        else:
+            count = len(statements.get(pid, []))
+            eligibility[field] = (count <= 1)
+    
+    eligibility['countryOfBirth'] = False  # Always locked — derived field
+    return eligibility
 
 class Work(Parent):
     """A class for cultural works."""

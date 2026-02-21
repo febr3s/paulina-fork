@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container-fluid p-2">
-  <!-- Edit Wikidata link / Login prompt -->
+  <!--  Login prompt -->
   <div class="text-end mb-2">
     {% if session.get('wikimedia_username') %}
     <!-- Logged in users: show visible edit field icons -->
@@ -140,11 +140,22 @@
             <div class="author-field-display">
               <span class="field-value">{{author_nationality}}</span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('nationality', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'nationality')" aria-label="{{ _('Edit nationality') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -183,11 +194,22 @@
             <div class="author-field-display">
               <span class="field-value">{{author_ethnicity}}</span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('ethnicity', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'ethnicity')" aria-label="{{ _('Edit ethnicity') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -226,10 +248,21 @@
             <div class="author-field-display">
               <span class="field-value">{{author_gender}}</span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('gender', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'gender')" aria-label="{{ _('Edit gender') }}" title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -273,11 +306,22 @@
                 {% endif %}
               </span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('dateOfBirth', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'dateOfBirth')" aria-label="{{ _('Edit date of birth') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -324,11 +368,22 @@
             <div class="author-field-display">
               <span class="field-value">{{author_occupation}}</span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('occupation', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'occupation')" aria-label="{{ _('Edit occupation') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -368,11 +423,22 @@
             <div class="author-field-display">
               <span class="field-value">{{author_place_of_birth}}</span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('placeOfBirth', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'placeOfBirth')" aria-label="{{ _('Edit place of birth') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -411,11 +477,12 @@
             <div class="author-field-display">
               <span class="field-value">{{author_country_of_birth}}</span>
               {% if session.get('wikimedia_username') %}
-              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
-                onclick="editAuthorField(this, 'countryOfBirth')" aria-label="{{ _('Edit country of birth') }}"
-                title="{{ _('Edit') }}">
-                <i class="bi bi-pencil-fill"></i>
-              </button>
+              <span class="author-field-edit-icon-disabled ms-2 d-flex align-items-center gap-1"
+                title="{{ _('Country of birth is derived from place of birth.')}}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+              </span>
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -426,16 +493,7 @@
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
                 <input type="hidden" class="author-selected-qid">
-                <div class="author-edit-buttons">
-                  <button class="btn btn-sm border-black rounded-pill" type="button"
-                    onclick="saveAuthorField(this, 'countryOfBirth')" style="background-color: #f46527; color: black;">
-                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
-                  </button>
-                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
-                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
-                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
-                  </button>
-                </div>
+
                 <div id="countryOfBirth-references" class="d-none mt-3">
                   <div id="countryOfBirth-reference-container"></div>
                 </div>
@@ -457,11 +515,22 @@
                 {% endif %}
               </span>
               {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('dateOfDeath', True) %}
               <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
                 onclick="editAuthorField(this, 'dateOfDeath')" aria-label="{{ _('Edit date of death') }}"
                 title="{{ _('Edit') }}">
                 <i class="bi bi-pencil-fill"></i>
               </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
               {% endif %}
             </div>
             <div class="author-field-edit d-none">
@@ -902,7 +971,7 @@
         cancelAuthorEdit(button);
 
         // Show success toast
-        showAuthorToast('{{ _("Changes published successfully!") }}', 'success');
+        showAuthorToast('{{ _("Edit published successfully!") }}', 'success');
 
       } else {
         alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
@@ -958,6 +1027,11 @@
 
     return references;
   }
+
+  // Initialize Bootstrap tooltips
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el);
+  });
 
 </script>
 
