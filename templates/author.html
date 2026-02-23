@@ -296,7 +296,7 @@
 
         {% if author_date_of_birth %}
         <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P569" data-field="dateOfBirth"
-          data-current-value="{{ author_date_of_birth }}" data-is-date="true">
+          data-current-value="{{ author_date_of_birth_iso|default('', true) }}" data-is-date="true">
           <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
           <div class="col-md-9">
             <div class="author-field-display">
@@ -478,8 +478,7 @@
               <span class="field-value">{{author_country_of_birth}}</span>
               {% if session.get('wikimedia_username') %}
               <span class="author-field-edit-icon-disabled ms-2 d-flex align-items-center gap-1"
-                title="{{ _('Country of birth is derived from place of birth.')}}"
-                data-bs-toggle="tooltip">
+                title="{{ _('Country of birth is derived from place of birth.')}}" data-bs-toggle="tooltip">
                 <i class="bi bi-pencil-fill text-muted opacity-50"></i>
                 <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
               </span>
@@ -505,7 +504,7 @@
 
         {% if author_date_of_death %}
         <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P570" data-field="dateOfDeath"
-          data-current-value="{{ author_date_of_death }}" data-is-date="true">
+         data-current-value="{{ author_date_of_death_iso|default('', true) }}" data-is-date="true">
           <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
           <div class="col-md-9">
             <div class="author-field-display">
@@ -684,18 +683,9 @@
       if (yearInput && monthInput && dayInput) {
         // Parse current date value (YYYY-MM-DD format)
         const currentValue = fieldContainer.dataset.currentValue || '';
-        if (currentValue) {
-          const dateParts = currentValue.split('-');
-          if (dateParts.length >= 1 && dateParts[0]) {
-            yearInput.value = dateParts[0];
-          }
-          if (dateParts.length >= 2 && dateParts[1] && dateParts[1] !== '00') {
-            monthInput.value = parseInt(dateParts[1], 10);
-          }
-          if (dateParts.length >= 3 && dateParts[2] && dateParts[2] !== '00') {
-            dayInput.value = parseInt(dateParts[2], 10);
-          }
-        }
+        yearInput.value = '';
+        monthInput.value = '';
+        dayInput.value = '';
 
         setTimeout(() => yearInput.focus(), 100);
       }

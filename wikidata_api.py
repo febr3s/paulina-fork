@@ -175,7 +175,7 @@ class WikidataAPI:
         Build a statement structure for the API
         
         Args:
-            property_id: Wikidata property ID (e.g., 'P31')
+            property_id: Wikidata property ID 
             value: The value (Q-id for items, string for strings, etc.)
             value_type: Type of value ('wikibase-item', 'string', 'time', 'url', 'commonsMedia')
             references: List of reference dicts (optional)
@@ -861,18 +861,18 @@ class WikidataAPI:
         return statements
     
     
-    # AUTHOR UPDATE PROCESSING
-    def update_author_field(self, author_id, property_id, value, field_name, is_date=False, is_multi_select=False, references=None):
+# STATEMENT UPDATE PROCESSING
+    def update_statement_field(self, item_id, property_id, value, field_name, is_date=False, is_multi_select=False, references=None):
         """
-        Update a single author field on Wikidata.
+        Update a single statement field on any Wikidata item (author, work, etc.).
         
         Args:
-            author_id: Wikidata item ID (e.g., 'Q123')
-            property_id: Wikidata property ID (e.g., 'P106')
-            value: New value (QID for items, date string for dates, comma-separated QIDs for multi-select)
+            item_id: Wikidata item ID 
+            property_id: Wikidata property ID 
+            value: New value 
             field_name: Field identifier for error messages
             is_date: Whether this is a date field
-            is_multi_select: Whether this is a multi-select field (e.g., occupation)
+            is_multi_select: Whether this is a multi-select field 
             references: List of reference dicts with 'url' and 'retrieved' keys (optional)
         
         Returns:
@@ -883,7 +883,7 @@ class WikidataAPI:
                 return {'success': False, 'error': 'Not authenticated'}
             
             # Get the current item to find existing statements
-            item_url = f"{self.rest_api_url}/entities/items/{author_id}"
+            item_url = f"{self.rest_api_url}/entities/items/{item_id}"
             headers = {'User-Agent': self.user_agent}
             
             get_response = self.oauth_session.get(item_url, headers=headers)
@@ -902,33 +902,31 @@ class WikidataAPI:
                     retrieved = ref_data.get('retrieved', '').strip()
                     
                     if url:
-                        # Auto-prepend https:// if protocol is missing
                         if not url.startswith(('http://', 'https://')):
                             url = 'https://' + url
                         built_ref = self.build_reference(url, retrieved if retrieved else None)
                         built_references.append(built_ref)
             
-           # Handle multi-select (occupation)
+            # Handle multi-select fields 
             if is_multi_select:
                 qids = [qid.strip() for qid in value.split(',') if qid.strip()]
                 
-                # Get existing statement IDs for this property
                 existing_statements = statements.get(property_id, [])
-                existing_qids_to_stmt = {stmt['value']['content']: stmt['id'] for stmt in existing_statements if stmt.get('value', {}).get('content')}
+                existing_qids_to_stmt = {
+                    stmt['value']['content']: stmt['id']
+                    for stmt in existing_statements
+                    if stmt.get('value', {}).get('content')
+                }
                 
-                
-                # Step 1: Delete statements that are no longer in the list
+                # Step 1: Delete statements no longer in the list
                 for existing_qid, stmt_id in list(existing_qids_to_stmt.items()):
                     if existing_qid not in qids:
-                        print(f"Deleting statement {stmt_id} for QID {existing_qid}")
                         delete_url = f"{self.rest_api_url}/statements/{stmt_id}"
                         delete_response = self.oauth_session.delete(
                             delete_url,
                             headers={'User-Agent': self.user_agent}
                         )
-                        
                         if delete_response.status_code in [200, 204]:
-                            print(f"Successfully deleted {existing_qid}")
                             del existing_qids_to_stmt[existing_qid]
                         else:
                             print(f"Warning: Failed to delete statement {stmt_id}: {delete_response.status_code} - {delete_response.text}")
@@ -936,28 +934,20 @@ class WikidataAPI:
                 # Step 2: Add new statements that don't exist yet
                 for qid in qids:
                     if qid not in existing_qids_to_stmt:
-                        print(f"Adding new statement for QID {qid}")
-                        # Create new statement with references
                         new_statement = self.build_statement(property_id, qid, 'wikibase-item', None)
-                        
-                        create_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                        create_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
                         create_response = self.oauth_session.post(
                             create_url,
                             json={'statement': new_statement, 'comment': edit_comment},
                             headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
                         )
-                        
-                        if create_response.status_code == 201:
-                            print(f"Successfully added {qid}")
-                        else:
-                            print(f"Failed to add {qid}: {create_response.status_code} - {create_response.text}")
+                        if create_response.status_code != 201:
                             return {'success': False, 'error': f'Failed to add {qid}: {create_response.text}'}
-            
+                
                 return {'success': True}
             
             # Handle single-value fields (dates or single items)
             else:
-                # Find existing statement for this property
                 existing_statements = statements.get(property_id, [])
                 
                 if existing_statements:
@@ -965,7 +955,6 @@ class WikidataAPI:
                     statement_id = existing_statements[0]['id']
                     patch_url = f"{self.rest_api_url}/statements/{statement_id}"
                     
-                    # Build the patch operation for the value
                     if is_date:
                         new_value = {
                             'time': self._format_date(value),
@@ -986,21 +975,13 @@ class WikidataAPI:
                         'comment': edit_comment
                     }
                     
+                    # Replace all references with the new one, or clear them
+                    patch_data['patch'].append({
+                        'op': 'add',
+                        'path': '/references',
+                        'value': [built_references[0]] if built_references else []
+                    })
                     
-                    # Replace all references with the new one (if provided), or clear them
-                    if built_references:
-                        patch_data['patch'].append({
-                            'op': 'add',
-                            'path': '/references',
-                            'value': [built_references[0]]  # Overwrites entire references array
-                        })
-                    else:
-                        patch_data['patch'].append({
-                            'op': 'add',
-                            'path': '/references',
-                            'value': []
-                        })
-                                        
                     patch_response = self.oauth_session.patch(
                         patch_url,
                         json=patch_data,
@@ -1011,13 +992,13 @@ class WikidataAPI:
                         return {'success': False, 'error': f'Failed to update statement: {patch_response.status_code} - {patch_response.text}'}
                 
                 else:
-                    # Create new statement with references
+                    # Create new statement
                     if is_date:
                         new_statement = self.build_statement(property_id, value, 'time', built_references if built_references else None)
                     else:
                         new_statement = self.build_statement(property_id, value, 'wikibase-item', built_references if built_references else None)
                     
-                    create_url = f"{self.rest_api_url}/entities/items/{author_id}/statements"
+                    create_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
                     create_response = self.oauth_session.post(
                         create_url,
                         json={'statement': new_statement, 'comment': edit_comment},
@@ -1182,7 +1163,7 @@ def generate_work_description(work_type_label, creator_label, creation_date=None
     Format: "{work_type} by {creator}" or "{work_type} by {creator} (year)"
     
     Args:
-        work_type_label: Human-readable work type label (e.g., "literary work", "film", "painting")
+        work_type_label: Human-readable work type label 
         creator_label: Human-readable creator name(s) (can be multiple, comma-separated)
         creation_date: Creation/publication date string in YYYY-MM-DD format (optional)
         lang: Language code for the description

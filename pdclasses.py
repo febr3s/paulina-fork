@@ -383,7 +383,9 @@ class Work(Parent):
         self.authors = dict_of_authors
 
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
+        self.country_of_origin_qid = build_field(self.wikidata_item.get('statements', {}).get('P495'), field_type="plain_value")
         self.language = build_field(self.wikidata_item.get('statements', {}).get('P407'))
+        self.language_qid = build_field(self.wikidata_item.get('statements', {}).get('P407'), field_type="plain_value")
         self.publication_date = build_date(self.wikidata_item.get('statements', {}).get('P577'))
         self.creation_date = build_date(self.wikidata_item.get('statements', {}).get('P571'))
 
@@ -428,6 +430,20 @@ class Work(Parent):
             return copyright_status
         # Other attributes to be created: identifiers, form of creative work, genre, Gutenberg link, etc
 
+def get_work_field_edit_eligibility(wikidata_item):
+    """Check which work fields have only one value and are therefore editable."""
+    statements = wikidata_item.get('statements', {})
+    field_properties = {
+        'publicationDate':  'P577',
+        'creationDate':     'P571',
+        'workLanguage':     'P407',
+        'countryOfOrigin':  'P495',
+    }
+    eligibility = {}
+    for field, pid in field_properties.items():
+        count = len(statements.get(pid, []))
+        eligibility[field] = (count <= 1)
+    return eligibility
 
 class Country(Parent):
     """A class for countries."""
