@@ -10,13 +10,13 @@ msgstr ""
 "POT-Creation-Date: 2026-02-24 19:48-0300\n"
 "PO-Revision-Date: 2025-04-22 16:08+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/paulina/paulina-"
+"app/fi/>\n"
 "Language: fi\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/paulina"
-"/paulina-app/fi/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:131
@@ -235,13 +235,13 @@ msgstr "(vuosituhat)"
 
 #: pdclasses.py:237
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that "
-"there is no free image of the person available, and that if you own one, "
-"you can click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that there "
+"is no free image of the person available, and that if you own one, you can "
+"click on the placeholder link."
 msgstr ""
-"Henkilön mallikuva. Yllä oleva tekstin mukaan kyseisestä henkilöstä ei "
-"ole saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit "
-"ladata sen klikkaamalla mallikuvan linkkiä."
+"Henkilön mallikuva. Yllä oleva tekstin mukaan kyseisestä henkilöstä ei ole "
+"saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit ladata sen "
+"klikkaamalla mallikuvan linkkiä."
 
 #: pdclasses.py:242
 #, python-format
@@ -250,12 +250,12 @@ msgstr "Kuva %(name)s."
 
 #: pdclasses.py:363
 msgid ""
-"Image of a generic work. The text above it indicates that there is no "
-"free image of the work available, and that if you own one, you can click "
-"on the placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no free "
+"image of the work available, and that if you own one, you can click on the "
+"placeholder link to upload it."
 msgstr ""
-"Teoksen mallikuva. Yllä olevan tekstin mukaan teoksesta ei ole saatavilla"
-" avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
+"Teoksen mallikuva. Yllä olevan tekstin mukaan teoksesta ei ole saatavilla "
+"avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
 "klikkaamalla mallikuvan linkkiä."
 
 #: pdclasses.py:368
@@ -547,39 +547,38 @@ msgstr ""
 #: templates/about.html:19
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
-"search for people and find out if they have freely accessible works in "
-"the public domain. It also facilitates the understanding of copyright "
-"terms and helps to know when a work enters the public domain in each "
-"country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
+"for people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
 "Paulina kutsuu sinut tutustumaan ihmiskunnan kulttuuriperintöön. Se on "
-"monikielinen työkalu, joka perustuu %(wikidata_link)s. Sen avulla voit "
-"etsiä henkilöitä ja selvittää, onko heillä vapaasti saatavilla olevia "
+"monikielinen työkalu, joka perustuu %(wikidata_link)s. Sen avulla voit etsiä "
+"henkilöitä ja selvittää, onko heillä vapaasti saatavilla olevia "
 "tekijänoikeudettomia teoksia. Paulina auttaa myös ymmärtämään "
-"tekijänoikeuden ehtoja ja päättelemään, milloin teos tulee public "
-"domainiin kussakin maassa."
+"tekijänoikeuden ehtoja ja päättelemään, milloin teos tulee public domainiin "
+"kussakin maassa."
 
 #: templates/about.html:21
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database"
-" maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database "
+"maintained by the Wikimedia Foundation."
 msgstr ""
 "Paulinan data tulee Wikidatasta, Wikimedia Foundationin ylläpitämästä "
 "avoimesta ja yhteisöllisestä tietokannasta."
 
 #: templates/about.html:22
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete."
-" Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete. "
+"Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
 "Joskus käytetyt tiedot voivat sisältää virheitä tai olla epätäydellisiä. "
-"Paulina auttaa tunnistamaan puutteita ja epätarkkuuksia kulttuuriperintöä"
-" koskevissa tiedoissa ja kutsuu sinut parantamaan Wikidatan ja sen kautta"
-" Internetin tietoja."
+"Paulina auttaa tunnistamaan puutteita ja epätarkkuuksia kulttuuriperintöä "
+"koskevissa tiedoissa ja kutsuu sinut parantamaan Wikidatan ja sen kautta "
+"Internetin tietoja."
 
 #: templates/about.html:23
 msgid "Local tools"
@@ -588,12 +587,12 @@ msgstr "Paikalliset työkalut"
 #: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the "
-"needs of each community."
+"national, regional or thematic versions of the tool, according to the needs "
+"of each community."
 msgstr ""
 "Tämä verkkosivusto on osa laajempaa hanketta, jonka tarkoituksena on "
-"helpottaa työkalun kansallisten, alueellisten tai temaattisten versioiden"
-" luomista kunkin yhteisön tarpeiden mukaan."
+"helpottaa työkalun kansallisten, alueellisten tai temaattisten versioiden "
+"luomista kunkin yhteisön tarpeiden mukaan."
 
 #: templates/about.html:25
 msgid "Who makes Paulina"
@@ -605,8 +604,8 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
-"Paulinaa tukevat %(artica_link)s, %(cc_uruguay_link)s, "
-"%(data_uruguay_link)s ja %(wm_uruguay_link)s."
+"Paulinaa tukevat %(artica_link)s, %(cc_uruguay_link)s, %(data_uruguay_link)s "
+"ja %(wm_uruguay_link)s."
 
 #: templates/about.html:27
 #, python-format
@@ -620,11 +619,11 @@ msgstr "Sisältölisenssit"
 #: templates/about.html:29
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from"
-" Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from "
+"Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"Kaikki kirjoittajia, teoksia, maita ja termejä koskevien sivujen tiedot "
-"ovat peräisin Wikidatasta, ja ne ovat %(CC0_link)s-ehtojen mukaisia."
+"Kaikki kirjoittajia, teoksia, maita ja termejä koskevien sivujen tiedot ovat "
+"peräisin Wikidatasta, ja ne ovat %(CC0_link)s-ehtojen mukaisia."
 
 #: templates/about.html:30
 #, python-format
@@ -638,30 +637,30 @@ msgstr ""
 #: templates/about.html:31
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and "
-"terms come from %(wm_commons_link)s and are under different free licenses"
-" or in the public domain. We recommend consulting the information of each"
-" content on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and terms "
+"come from %(wm_commons_link)s and are under different free licenses or in "
+"the public domain. We recommend consulting the information of each content "
+"on Wikimedia Commons."
 msgstr ""
-"Tekijöitä, teoksia, maita ja termejä käsittelevillä sivuilla olevat kuvat"
-" ja mediat ovat peräisin %(wm_commons_link)s-sivuilta, ja ne ovat eri "
-"avoimien lisenssien alaisia tai tekijänoikeudettomia. Suosittelemme "
-"tutustumaan kunkin kohteen tietoihin Wikimedia Commonsissa."
+"Tekijöitä, teoksia, maita ja termejä käsittelevillä sivuilla olevat kuvat ja "
+"mediat ovat peräisin %(wm_commons_link)s-sivuilta, ja ne ovat eri avoimien "
+"lisenssien alaisia tai tekijänoikeudettomia. Suosittelemme tutustumaan "
+"kunkin kohteen tietoihin Wikimedia Commonsissa."
 
 #: templates/about.html:32
 msgid ""
-"The works accessible through links to external sites are available to the"
-" public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. "
-"We recommend consulting the information of each work on the websites "
-"where they are hosted."
+"The works accessible through links to external sites are available to the "
+"public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. We "
+"recommend consulting the information of each work on the websites where they "
+"are hosted."
 msgstr ""
 "Ulkopuolisille sivustoille johtavien linkkien kautta saatavilla olevat "
 "teokset ovat avoimesti saatavilla yleensä siksi, että ne ovat "
 "tekijänoikeudettomia tai avoimesti lisensoituja, mutta jotkin niistä "
 "saattavat olla tekijänoikeuden alaisia joillakin lainkäyttöalueilla. "
-"Suosittelemme tutustumaan kunkin teoksen tietoihin sivustoilla, joilla ne"
-" sijaitsevat."
+"Suosittelemme tutustumaan kunkin teoksen tietoihin sivustoilla, joilla ne "
+"sijaitsevat."
 
 #: templates/about.html:33
 msgid "Free software"
@@ -670,11 +669,11 @@ msgstr "Vapaa ohjelmisto"
 #: templates/about.html:34
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit "
-"the %(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
+"%(repository_link)s."
 msgstr ""
-"Paulina on vapaa ohjelmisto. Se on julkaistu lisenssillä %(agpl_link)s. "
-"Käy osoitteessa %(repository_link)s."
+"Paulina on vapaa ohjelmisto. Se on julkaistu lisenssillä %(agpl_link)s. Käy "
+"osoitteessa %(repository_link)s."
 
 #: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
@@ -864,8 +863,8 @@ msgstr ""
 
 #: templates/add-author.html:438
 msgid ""
-"Search Wikimedia Commons for author's image, or enter the Commons image "
-"URL directly:"
+"Search Wikimedia Commons for author's image, or enter the Commons image URL "
+"directly:"
 msgstr ""
 
 #: templates/add-author.html:446
@@ -875,8 +874,7 @@ msgstr "Etsi teoksia"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
-"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
-"below."
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
 msgstr ""
 
 #: templates/add-author.html:455 templates/add-work.html:611
@@ -1082,8 +1080,8 @@ msgstr ""
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
-"Could not connect to server. Please refresh the page manually to clear "
-"all data."
+"Could not connect to server. Please refresh the page manually to clear all "
+"data."
 msgstr ""
 
 #: templates/add-work.html:18
@@ -1234,8 +1232,8 @@ msgstr ""
 
 #: templates/add-work.html:594
 msgid ""
-"Search Wikimedia Commons for work's image, or enter the Commons image URL"
-" directly:"
+"Search Wikimedia Commons for work's image, or enter the Commons image URL "
+"directly:"
 msgstr ""
 
 #: templates/add-work.html:601
@@ -1628,8 +1626,8 @@ msgstr ""
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain "
-"in each country."
+"This grid indicates the period after which works enter the public domain in "
+"each country."
 msgstr ""
 "Tässä taulukossa ilmoitetaan ajanjakso, jonka jälkeen teosten "
 "tekijänoikeuden suoja päättyy kussakin maassa."
@@ -1685,8 +1683,8 @@ msgstr "Tutustu kirjailijoihin"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the "
-"world and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the world "
+"and learn about their works."
 msgstr ""
 "Paulina on yksinkertainen hakutyökalu, jonka avulla voit löytää "
 "kirjailijoita kaikkialta maailmasta ja tutustua heidän teoksiinsa."
@@ -1713,8 +1711,8 @@ msgstr "Löydä teoksia"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and"
-" knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and "
+"knowledge found on Wikidata."
 msgstr ""
 "Löydä helposti tietoa Wikidatasta löytyvistä kulttuuriteoksista kaikilta "
 "taiteen ja tiedon aloilta."
@@ -1761,11 +1759,11 @@ msgstr "Paulina"
 
 #: templates/layout.html:13 templates/layout.html:35
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by Wikidata, that allows you to search "
-"for people and find out if they have freely accessible works in the "
-"public domain. It also facilitates the understanding of copyright terms "
-"and helps to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by Wikidata, that allows you to search for "
+"people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
 "Paulina kutsuu sinut tutustumaan ihmiskunnan kulttuuriperintöön. Se on "
 "monikielinen Wikidata-työkalu, jonka avulla voit etsiä henkilöitä ja "
@@ -1949,9 +1947,9 @@ msgstr "Maat ja tekijänoikeuden kestot"
 
 #: templates/work.html:366
 msgid ""
-"Copyright status information is not available for this work. The "
-"copyright status depends on the jurisdiction, the author's date of death "
-"and the date the work was created or published."
+"Copyright status information is not available for this work. The copyright "
+"status depends on the jurisdiction, the author's date of death and the date "
+"the work was created or published."
 msgstr ""
 
 #: templates/work.html:367
@@ -2045,6 +2043,7 @@ msgstr ""
 #~ msgid "Search filters"
 #~ msgstr "Hakutulokset"
 
+#, python-format
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)s tekijänoikeuskausi"
 
@@ -2053,7 +2052,3 @@ msgstr ""
 
 #~ msgid "Unknown"
 #~ msgstr "Tuntematon"
-
-#~ msgid "(%(author_age)s years)"
-#~ msgstr ""
-
