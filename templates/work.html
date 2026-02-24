@@ -361,13 +361,10 @@
             </div>
             {% endfor %}
             {% else %}
-            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms
-              page') }}</a>{% endset %}
+            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
             <div class="copyright-status-unknown">
-              <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the
-                jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
-              <p>{{ _('To learn more about copyright terms in different countries, visit the
-                %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
+              <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
+              <p>{{ _('To learn more about copyright terms in different countries, visit the %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
             </div>
             {% endif %}
           </div>

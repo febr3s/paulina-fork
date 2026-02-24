@@ -716,7 +716,7 @@ def add_author():
             # Get OAuth session
             oauth_session = oauth.get_oauth_session()
             if not oauth_session:
-                flash(_('Session expired. Please login again.'), 'warning')
+                flash(_('Session expired. Please log in again.'), 'warning')
                 return redirect(url_for('login'))
 
             wikidata = wikidata_api.WikidataAPI(app.config, oauth_session=oauth_session)
@@ -831,7 +831,7 @@ def add_work():
             # Get OAuth session
             oauth_session = oauth.get_oauth_session()
             if not oauth_session:
-                flash(_('Session expired. Please login again.'), 'warning')
+                flash(_('Session expired. Please log in again.'), 'warning')
                 return redirect(url_for('login'))
 
             wikidata = wikidata_api.WikidataAPI(app.config, oauth_session=oauth_session)

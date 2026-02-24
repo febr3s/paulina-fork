@@ -82,8 +82,7 @@
           </div>
           {% elif author_is_in_public_domain == 'Unknown' %}
           <div class="public-domain-badge pd-unknown mb-2">
-            <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth
-            and death.') }}
+            <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth and death.') }}
             <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
           </div>
           {% endif %}

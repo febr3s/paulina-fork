@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-12 17:46-0300\n"
+"POT-Creation-Date: 2026-02-24 19:05-0300\n"
 "PO-Revision-Date: 2025-08-21 01:01+0000\n"
 "Last-Translator: S H <higa432@gmail.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/paulina/paulina-"
-"app/ja/>\n"
 "Language: ja\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/paulina"
+"/paulina-app/ja/>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:131
@@ -43,99 +43,139 @@ msgstr "結果"
 msgid "No results found"
 msgstr "結果はありません"
 
-#: app.py:260
+#: app.py:341
 msgid "List of works"
 msgstr "作品のリスト"
 
-#: app.py:328
+#: app.py:476
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)sのリスト"
 
-#: app.py:345
+#: app.py:493
 msgid "Unknown term"
 msgstr "不明な条項"
 
-#: app.py:347 templates/countries.html:7 templates/layout.html:106
+#: app.py:495 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:348
 msgid "Countries and terms"
 msgstr "各国の著作権条項"
 
-#: app.py:453
+#: app.py:601
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:463 app.py:533
+#: app.py:611 app.py:681
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:468
+#: app.py:616
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:475
+#: app.py:623
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:495
+#: app.py:643
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:522
+#: app.py:670
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:546
+#: app.py:694
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:558
+#: app.py:706
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:563 app.py:678
+#: app.py:711 app.py:826
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:571 app.py:686
-msgid "Session expired. Please login again."
+#: app.py:719 app.py:834 app.py:945 app.py:1045
+msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:610
+#: app.py:758
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "死亡年月日"
 
-#: app.py:616 app.py:627 app.py:658 templates/add-author.html:39
+#: app.py:764 app.py:775 app.py:806 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 #, fuzzy
 msgid "Add Author"
 msgstr "作家"
 
-#: app.py:621
+#: app.py:769
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:673
+#: app.py:821
 msgid "Please login to add a work."
 msgstr ""
 
-#: app.py:725
+#: app.py:873
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "死亡年月日"
 
-#: app.py:731 app.py:742 app.py:773 templates/add-work.html:39
+#: app.py:879 app.py:890 app.py:921 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 #, fuzzy
 msgid "Add Work"
 msgstr "作品を探す"
 
-#: app.py:736
+#: app.py:884
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:790
+#: app.py:938 app.py:1039
+msgid "You must be logged in to edit."
+msgstr ""
+
+#: app.py:954 app.py:1051
+msgid "Invalid request data."
+msgstr ""
+
+#: app.py:961 app.py:1055
+msgid "No changes provided."
+msgstr ""
+
+#: app.py:981 app.py:1071
+#, python-format
+msgid "Missing property or value for field: %(field)s"
+msgstr ""
+
+#: app.py:1004 app.py:1091
+#, fuzzy, python-format
+msgid "Error updating %(field)s: %(error)s"
+msgstr "死亡年月日"
+
+#: app.py:1010 app.py:1094
+msgid "Successfully updated!"
+msgstr ""
+
+#: app.py:1015 app.py:1096
+#, fuzzy
+msgid "Updated with some errors."
+msgstr "生年月日"
+
+#: app.py:1021 app.py:1098
+msgid "Failed to update fields."
+msgstr ""
+
+#: app.py:1028 app.py:1101
+#, fuzzy, python-format
+msgid "Server error: %(error)s"
+msgstr "生年月日"
+
+#: app.py:1116
 msgid "404 error"
 msgstr "404 エラー"
 
@@ -191,227 +231,221 @@ msgstr "(世紀)"
 msgid "(millennium)"
 msgstr "(千年紀)"
 
-#: pdclasses.py:207
+#: pdclasses.py:237
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
-msgstr ""
-"一般的な人間のシルエットの画像。上のテキストは、その人のフリー画像がないこ"
-"と、および画像を持っている場合はプレースホルダリンクをクリックできることを示"
-"しています。"
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
+msgstr "一般的な人間のシルエットの画像。上のテキストは、その人のフリー画像がないこと、および画像を持っている場合はプレースホルダリンクをクリックできることを示しています。"
 
-#: pdclasses.py:212
+#: pdclasses.py:242
 #, python-format
 msgid "Image of %(name)s."
 msgstr "%(name)sの画像。"
 
-#: pdclasses.py:301
+#: pdclasses.py:363
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
-msgstr ""
-"一般的な作品の画像。その上のテキストは、その作品のフリー画像がないことを示し"
-"ており、もしあなたが持っていれば、プレースホルダーリンクをクリックしてアップ"
-"ロードすることができます。"
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
+msgstr "一般的な作品の画像。その上のテキストは、その作品のフリー画像がないことを示しており、もしあなたが持っていれば、プレースホルダーリンクをクリックしてアップロードすることができます。"
 
-#: pdclasses.py:306
+#: pdclasses.py:368
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)sの画像。"
 
-#: pdclasses.py:382 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:460 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)sの旗。"
 
-#: wikidata_api.py:67 wikidata_api.py:95
+#: wikidata_api.py:70 wikidata_api.py:98
 msgid "No OAuth session available"
 msgstr ""
 
-#: wikidata_api.py:84
+#: wikidata_api.py:87
 #, python-format
 msgid "Unexpected token response: %(data)s"
 msgstr ""
 
-#: templates/add-author.html:591 wikidata_api.py:327
+#: templates/add-author.html:591 wikidata_api.py:322
 msgid "Name is required"
 msgstr ""
 
-#: templates/add-author.html:592 wikidata_api.py:329
+#: templates/add-author.html:592 wikidata_api.py:324
 msgid "Gender is required"
 msgstr ""
 
-#: templates/add-author.html:593 wikidata_api.py:331
+#: templates/add-author.html:593 wikidata_api.py:326
 #, fuzzy
 msgid "Nationality is required"
 msgstr "国籍"
 
-#: templates/add-author.html:594 wikidata_api.py:333
+#: templates/add-author.html:594 wikidata_api.py:328
 #, fuzzy
 msgid "Place of birth is required"
 msgstr "出生地"
 
-#: templates/add-author.html:595 wikidata_api.py:335
+#: templates/add-author.html:595 wikidata_api.py:330
 #, fuzzy
 msgid "Occupation is required"
 msgstr "職業"
 
-#: wikidata_api.py:342
+#: wikidata_api.py:337
 #, fuzzy, python-format
 msgid "Date of birth: %(error)s"
 msgstr "生年月日"
 
-#: wikidata_api.py:348
+#: wikidata_api.py:343
 #, fuzzy, python-format
 msgid "Date of death: %(error)s"
 msgstr "死亡年月日"
 
-#: wikidata_api.py:557
+#: wikidata_api.py:552
 #, fuzzy
 msgid "work"
 msgstr "作品"
 
-#: templates/add-work.html:1557 wikidata_api.py:586
+#: templates/add-work.html:1557 wikidata_api.py:581
 #, fuzzy
 msgid "Title is required"
 msgstr "国籍"
 
-#: templates/add-work.html:1564 wikidata_api.py:591
+#: templates/add-work.html:1564 wikidata_api.py:586
 #, fuzzy
 msgid "Type of work is required"
 msgstr "出生地"
 
-#: wikidata_api.py:602
+#: wikidata_api.py:597
 #, fuzzy
 msgid "Invalid type of work selected"
 msgstr "出生地"
 
-#: wikidata_api.py:610
+#: wikidata_api.py:605
 #, fuzzy
 msgid "Author"
 msgstr "作家"
 
-#: wikidata_api.py:611
+#: wikidata_api.py:606
 msgid "Director"
 msgstr ""
 
-#: wikidata_api.py:612
+#: wikidata_api.py:607
 #, fuzzy
 msgid "Creator"
 msgstr "出版日"
 
-#: wikidata_api.py:613
+#: wikidata_api.py:608
 msgid "Composer"
 msgstr ""
 
-#: wikidata_api.py:614
+#: wikidata_api.py:609
 msgid "Screenwriter"
 msgstr ""
 
-#: wikidata_api.py:615
+#: wikidata_api.py:610
 msgid "Lyricist"
 msgstr ""
 
-#: wikidata_api.py:616
+#: wikidata_api.py:611
 msgid "Performer"
 msgstr ""
 
-#: wikidata_api.py:617
+#: wikidata_api.py:612
 msgid "Producer"
 msgstr ""
 
-#: templates/add-work.html:350 templates/work.html:77 wikidata_api.py:618
+#: templates/add-work.html:350 templates/work.html:220 wikidata_api.py:613
 msgid "Language"
 msgstr "言語"
 
-#: templates/add-work.html:372 wikidata_api.py:619
+#: templates/add-work.html:372 wikidata_api.py:614
 #, fuzzy
 msgid "Original language"
 msgstr "言語"
 
-#: templates/add-work.html:508 templates/layout.html:268 templates/work.html:83
-#: wikidata_api.py:620
+#: templates/add-work.html:508 templates/layout.html:268
+#: templates/work.html:280 wikidata_api.py:615
 msgid "Country of origin"
 msgstr "本国"
 
-#: wikidata_api.py:621
+#: wikidata_api.py:616
 #, fuzzy
 msgid "Country of publication"
 msgstr "出生国"
 
-#: templates/add-work.html:396 wikidata_api.py:622
+#: templates/add-work.html:396 wikidata_api.py:617
 #, fuzzy
 msgid "Location"
 msgstr "職業"
 
-#: wikidata_api.py:623
+#: wikidata_api.py:618
 #, fuzzy
 msgid "Genre"
 msgstr "性別"
 
-#: templates/add-work.html:531 wikidata_api.py:624
+#: templates/add-work.html:531 wikidata_api.py:619
 msgid "Record label"
 msgstr ""
 
-#: templates/add-work.html:474 templates/work.html:65 wikidata_api.py:625
+#: templates/add-work.html:474 templates/work.html:91 wikidata_api.py:620
 msgid "Publication date"
 msgstr "出版日"
 
-#: templates/add-work.html:443 templates/work.html:71 wikidata_api.py:626
+#: templates/add-work.html:443 templates/work.html:155 wikidata_api.py:621
 #, fuzzy
 msgid "Creation date"
 msgstr "出版日"
 
-#: wikidata_api.py:634
+#: wikidata_api.py:629
 #, fuzzy, python-format
 msgid "%(field)s is required"
 msgstr "国籍"
 
-#: wikidata_api.py:641
+#: wikidata_api.py:636
 #, fuzzy, python-format
 msgid "Publication date: %(error)s"
 msgstr "出版日"
 
-#: wikidata_api.py:647
+#: wikidata_api.py:642
 #, fuzzy, python-format
 msgid "Creation date: %(error)s"
 msgstr "死亡年月日"
 
-#: wikidata_api.py:912
+#: wikidata_api.py:1060
 #, python-format
 msgid "Invalid date: contains '%(pattern)s'"
 msgstr ""
 
-#: wikidata_api.py:918
+#: templates/author.html:852 templates/work.html:606 wikidata_api.py:1066
 msgid "Invalid date format"
 msgstr ""
 
-#: wikidata_api.py:926
+#: wikidata_api.py:1074
 msgid "Year is required and must be a valid 4-digit number"
 msgstr ""
 
-#: wikidata_api.py:931
+#: wikidata_api.py:1079
 #, python-format
 msgid "Invalid month: %(month)s. Must be 01-12 or 00 for unknown"
 msgstr ""
 
-#: wikidata_api.py:936
+#: wikidata_api.py:1084
 #, python-format
 msgid "Invalid day: %(day)s. Must be 01-31 or 00 for unknown"
 msgstr ""
 
-#: wikidata_api.py:989
+#: wikidata_api.py:1137
 #, python-format
 msgid "creator from %(nationality)s"
 msgstr ""
 
-#: wikidata_api.py:991
+#: wikidata_api.py:1139
 msgid "creator"
 msgstr ""
 
-#: wikidata_api.py:1020
+#: wikidata_api.py:1168
 #, python-format
 msgid "%(work_type)s by %(creator)s"
 msgstr ""
@@ -459,8 +493,8 @@ msgstr "%(home_page)sでもう一度試してください。"
 msgid "About Paulina"
 msgstr "Paulina（ポーリナ）について"
 
-#: templates/about.html:8 templates/about.html:20 templates/author.html:83
-#: templates/work.html:40
+#: templates/about.html:8 templates/about.html:20 templates/author.html:91
+#: templates/work.html:48
 msgid "Wikidata"
 msgstr "ウィキデータ"
 
@@ -489,7 +523,7 @@ msgstr "Creative Commons CC0 1.0 Universal Public Domain Dedication"
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
 msgstr "Creative Commons Attribution-ShareAlike 4.0 International License"
 
-#: templates/about.html:15 templates/author.html:89 templates/work.html:46
+#: templates/about.html:15 templates/author.html:97 templates/work.html:54
 msgid "Wikimedia Commons"
 msgstr "ウィキメディア・コモンズ"
 
@@ -509,37 +543,27 @@ msgstr ""
 #: templates/about.html:19
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
-msgstr ""
-"Paulina（ポーリナ）は、人類の文化遺産の学習にあなたを招待します。これ"
-"は%(wikidata_link)sを利用した多言語ツールで、人物を検索してパブリックドメイン"
-"で自由にアクセスできる作品を持っているかどうかを調べることができます。また、"
-"著作権条項の理解を容易にし、各国で作品がいつパブリックドメインになったかを知"
-"るのにも役立ちます。"
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
+msgstr "Paulina（ポーリナ）は、人類の文化遺産の学習にあなたを招待します。これは%(wikidata_link)sを利用した多言語ツールで、人物を検索してパブリックドメインで自由にアクセスできる作品を持っているかどうかを調べることができます。また、著作権条項の理解を容易にし、各国で作品がいつパブリックドメインになったかを知るのにも役立ちます。"
 
 #: templates/about.html:21
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
-msgstr ""
-"Paulina（ポーリナ）は、ウィキメディア財団が管理するフリーな協働データベースで"
-"あるウィキデータのデータを利用しています。"
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
+msgstr "Paulina（ポーリナ）は、ウィキメディア財団が管理するフリーな協働データベースであるウィキデータのデータを利用しています。"
 
 #: templates/about.html:22
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
-msgstr ""
-"場合により、参照情報にエラーが含まれていたり、不完全であったりすることがあり"
-"ます。Paulina（ポーリナ）は、文化遺産に関する情報のギャップや不正確さを特定す"
-"るのに役立ち、ウィキデータのデータ、そしてそれを通じてインターネット上のデー"
-"タ改善に招待します。"
+msgstr "場合により、参照情報にエラーが含まれていたり、不完全であったりすることがあります。Paulina（ポーリナ）は、文化遺産に関する情報のギャップや不正確さを特定するのに役立ち、ウィキデータのデータ、そしてそれを通じてインターネット上のデータ改善に招待します。"
 
 #: templates/about.html:23
 msgid "Local tools"
@@ -548,11 +572,9 @@ msgstr "ローカル・ツール"
 #: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
-msgstr ""
-"このウェブサイトは、各コミュニティのニーズに応じて、ツールの国別、地域別、"
-"テーマ別バージョンの作成を促進するための大規模なプロジェクトの一部です。"
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
+msgstr "このウェブサイトは、各コミュニティのニーズに応じて、ツールの国別、地域別、テーマ別バージョンの作成を促進するための大規模なプロジェクトの一部です。"
 
 #: templates/about.html:25
 msgid "Who makes Paulina"
@@ -564,8 +586,8 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
-"Paulina（ポーリナ）は%(artica_link)s, %(cc_uruguay_link)s, "
-"%(data_uruguay_link)s そして %(wm_uruguay_link)sのサポートを受けています。"
+"Paulina（ポーリナ）は%(artica_link)s, %(cc_uruguay_link)s, %(data_uruguay_link)s"
+" そして %(wm_uruguay_link)sのサポートを受けています。"
 
 #: templates/about.html:27
 #, python-format
@@ -579,46 +601,34 @@ msgstr "コンテンツのライセンス"
 #: templates/about.html:29
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
-msgstr ""
-"作家、作品、各国の著作権条項に関するページのすべてのデータはウィキデータから"
-"のものであり、%(CC0_link)sの条件の下にあります。"
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
+msgstr "作家、作品、各国の著作権条項に関するページのすべてのデータはウィキデータからのものであり、%(CC0_link)sの条件の下にあります。"
 
 #: templates/about.html:30
 #, python-format
 msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
-msgstr ""
-"このウェブサイトのテキストやその他のオリジナルコンテンツは%(ccbysa_link)sの下"
-"にあります。"
+msgstr "このウェブサイトのテキストやその他のオリジナルコンテンツは%(ccbysa_link)sの下にあります。"
 
 #: templates/about.html:31
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
-msgstr ""
-"作家、作品、各国の著作権条項に関するページの画像とメディア"
-"は%(wm_commons_link)sからのものであり、異なるフリーライセンスの下にあるか、パ"
-"ブリックドメインにあります。ウィキメディア・コモンズの各コンテンツの情報を参"
-"照することをお勧めします。"
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
+msgstr "作家、作品、各国の著作権条項に関するページの画像とメディアは%(wm_commons_link)sからのものであり、異なるフリーライセンスの下にあるか、パブリックドメインにあります。ウィキメディア・コモンズの各コンテンツの情報を参照することをお勧めします。"
 
 #: templates/about.html:32
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
-msgstr ""
-"外部サイトへのリンクを通じてアクセス可能な作品は、主にパブリックドメインにあ"
-"るか、フリーライセンスの下にあるため、一般に公開されていますが、一部の作品は"
-"一部の法域で著作権の下にある場合があります。各作品がホストされているウェブサ"
-"イトでその情報を参照することをお勧めします。"
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
+msgstr "外部サイトへのリンクを通じてアクセス可能な作品は、主にパブリックドメインにあるか、フリーライセンスの下にあるため、一般に公開されていますが、一部の作品は一部の法域で著作権の下にある場合があります。各作品がホストされているウェブサイトでその情報を参照することをお勧めします。"
 
 #: templates/about.html:33
 msgid "Free software"
@@ -627,11 +637,9 @@ msgstr "フリーソフトウェア"
 #: templates/about.html:34
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
-msgstr ""
-"Paulina（ポーリナ）はフリーソフトウェアです。%(agpl_link)sの下に公開されてい"
-"ます。%(repository_link)sを参照。"
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
+msgstr "Paulina（ポーリナ）はフリーソフトウェアです。%(agpl_link)sの下に公開されています。%(repository_link)sを参照。"
 
 #: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
@@ -701,7 +709,7 @@ msgstr ""
 msgid "No exact match found."
 msgstr ""
 
-#: templates/add-author.html:111 templates/author.html:107
+#: templates/add-author.html:111 templates/author.html:115
 msgid "Biography"
 msgstr "略歴"
 
@@ -710,7 +718,7 @@ msgstr "略歴"
 msgid "Biographical Information"
 msgstr "情報が不足していますか？"
 
-#: templates/add-author.html:122 templates/author.html:113
+#: templates/add-author.html:122 templates/author.html:137
 #: templates/layout.html:223
 msgid "Nationality"
 msgstr "国籍"
@@ -736,7 +744,7 @@ msgstr ""
 msgid "Add reference"
 msgstr ""
 
-#: templates/add-author.html:159 templates/author.html:125
+#: templates/add-author.html:159 templates/author.html:249
 #: templates/layout.html:212
 msgid "Gender"
 msgstr "性別"
@@ -747,11 +755,11 @@ msgstr "性別"
 msgid "Any"
 msgstr "任意"
 
-#: templates/add-author.html:176
+#: templates/add-author.html:176 templates/author.html:870
 msgid "Please select a gender"
 msgstr ""
 
-#: templates/add-author.html:197 templates/author.html:145
+#: templates/add-author.html:197 templates/author.html:426
 msgid "Place of birth"
 msgstr "出生地"
 
@@ -759,7 +767,7 @@ msgstr "出生地"
 msgid "e.g., Buenos Aires, Tokyo, Lagos"
 msgstr ""
 
-#: templates/add-author.html:234 templates/author.html:139
+#: templates/add-author.html:234 templates/author.html:369
 msgid "Occupation"
 msgstr "職業"
 
@@ -767,7 +775,7 @@ msgstr "職業"
 msgid "e.g., writer, painter, sculptor"
 msgstr ""
 
-#: templates/add-author.html:276 templates/author.html:119
+#: templates/add-author.html:276 templates/author.html:193
 msgid "Ethnicity"
 msgstr ""
 
@@ -780,28 +788,34 @@ msgstr ""
 msgid "Type to search Wikidata"
 msgstr "ウィキデータに追加"
 
-#: templates/add-author.html:320 templates/author.html:131
+#: templates/add-author.html:320 templates/author.html:303
 msgid "Date of birth"
 msgstr "生年月日"
 
 #: templates/add-author.html:332 templates/add-author.html:387
 #: templates/add-work.html:448 templates/add-work.html:479
+#: templates/author.html:335 templates/author.html:548 templates/work.html:119
+#: templates/work.html:183
 #, fuzzy
 msgid "Day"
 msgstr "任意"
 
 #: templates/add-author.html:342 templates/add-author.html:397
 #: templates/add-work.html:452 templates/add-work.html:483
+#: templates/author.html:339 templates/author.html:552 templates/work.html:123
+#: templates/work.html:187
 msgid "Month"
 msgstr ""
 
 #: templates/add-author.html:352 templates/add-author.html:407
 #: templates/add-work.html:456 templates/add-work.html:487
+#: templates/author.html:343 templates/author.html:556 templates/work.html:127
+#: templates/work.html:191
 #, fuzzy
 msgid "Year"
 msgstr "検索"
 
-#: templates/add-author.html:374 templates/author.html:157
+#: templates/add-author.html:374 templates/author.html:516
 msgid "Date of death"
 msgstr "死亡年月日"
 
@@ -815,8 +829,8 @@ msgstr ""
 
 #: templates/add-author.html:438
 msgid ""
-"Search Wikimedia Commons for author's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for author's image, or enter the Commons image "
+"URL directly:"
 msgstr ""
 
 #: templates/add-author.html:446
@@ -826,7 +840,8 @@ msgstr "作品を検索"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
-"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
+"below."
 msgstr ""
 
 #: templates/add-author.html:455 templates/add-work.html:611
@@ -848,7 +863,7 @@ msgstr ""
 msgid "Add external links (optional)"
 msgstr "外部リンク"
 
-#: templates/add-author.html:509 templates/author.html:98
+#: templates/add-author.html:509 templates/author.html:106
 msgid "Official website"
 msgstr "公式ウェブサイト"
 
@@ -865,32 +880,40 @@ msgstr "結果"
 msgid "Submit"
 msgstr ""
 
-#: templates/add-author.html:560
+#: templates/add-author.html:560 templates/author.html:597
+#: templates/work.html:423
 msgid "Searching Wikidata..."
 msgstr ""
 
-#: templates/add-author.html:561
+#: templates/add-author.html:561 templates/author.html:598
+#: templates/work.html:424
 #, fuzzy
 msgid "No Wikidata results found"
 msgstr "結果はありません"
 
 #: templates/add-author.html:562 templates/add-author.html:573
+#: templates/author.html:599 templates/work.html:425
 msgid "No description"
 msgstr ""
 
 #: templates/add-author.html:563 templates/add-author.html:572
+#: templates/author.html:600 templates/work.html:426
 msgid "Error searching Wikidata"
 msgstr ""
 
-#: templates/add-author.html:564
+#: templates/add-author.html:564 templates/author.html:601
+#: templates/work.html:427
 msgid "This item is already added"
 msgstr ""
 
-#: templates/add-author.html:565
+#: templates/add-author.html:565 templates/author.html:602
+#: templates/work.html:428
 msgid "This item is already selected"
 msgstr ""
 
 #: templates/add-author.html:566 templates/add-author.html:582
+#: templates/author.html:603 templates/author.html:614 templates/work.html:429
+#: templates/work.html:439
 msgid "Remove"
 msgstr ""
 
@@ -899,11 +922,13 @@ msgstr ""
 msgid "Searching..."
 msgstr "検索"
 
-#: templates/add-author.html:577
+#: templates/add-author.html:577 templates/author.html:610
+#: templates/work.html:435
 msgid "Reference"
 msgstr ""
 
-#: templates/add-author.html:578
+#: templates/add-author.html:578 templates/author.html:611
+#: templates/work.html:436
 msgid "Reference URL"
 msgstr ""
 
@@ -911,7 +936,8 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/add-author.html:580
+#: templates/add-author.html:580 templates/author.html:612
+#: templates/work.html:437
 msgid "Date accessed"
 msgstr ""
 
@@ -949,23 +975,26 @@ msgstr ""
 msgid "author name"
 msgstr "作家"
 
-#: templates/add-author.html:602
+#: templates/add-author.html:602 templates/author.html:830
+#: templates/work.html:586
 msgid "Year is required"
 msgstr ""
 
-#: templates/add-author.html:603
+#: templates/add-author.html:603 templates/author.html:831
+#: templates/work.html:587
 msgid "Year must be a valid 4-digit number"
 msgstr ""
 
-#: templates/add-author.html:604
+#: templates/add-author.html:604 templates/author.html:832
 msgid "Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:605
+#: templates/add-author.html:605 templates/author.html:833
 msgid "Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
 
-#: templates/add-author.html:606
+#: templates/add-author.html:606 templates/author.html:834
+#: templates/work.html:590
 msgid "Month cannot be 0 if day is specified"
 msgstr ""
 
@@ -1019,8 +1048,8 @@ msgstr ""
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
-"Could not connect to server. Please refresh the page manually to clear all "
-"data."
+"Could not connect to server. Please refresh the page manually to clear "
+"all data."
 msgstr ""
 
 #: templates/add-work.html:18
@@ -1133,7 +1162,7 @@ msgstr ""
 msgid "Search for producer..."
 msgstr ""
 
-#: templates/add-work.html:341 templates/work.html:61
+#: templates/add-work.html:341 templates/work.html:84
 msgid "Work details"
 msgstr "作品の詳細"
 
@@ -1170,8 +1199,8 @@ msgstr ""
 
 #: templates/add-work.html:594
 msgid ""
-"Search Wikimedia Commons for work's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for work's image, or enter the Commons image URL"
+" directly:"
 msgstr ""
 
 #: templates/add-work.html:601
@@ -1312,83 +1341,256 @@ msgstr ""
 msgid "Please fix the following errors:"
 msgstr ""
 
-#: templates/author.html:7 templates/work.html:7
+#: templates/author.html:12 templates/work.html:10
 msgid "Missing/wrong data?"
 msgstr "データが不明/誤り？"
 
-#: templates/author.html:7 templates/work.html:7
-msgid "Edit Wikidata item"
-msgstr "ウィキデータ項目を編集"
+#: templates/author.html:13
+msgid "Log in to edit"
+msgstr ""
 
-#: templates/author.html:29
+#: templates/author.html:37
 msgid "Search works"
 msgstr "作品を検索"
 
-#: templates/author.html:42 templates/author.html:46 templates/work.html:98
+#: templates/author.html:50 templates/author.html:54 templates/work.html:350
 #, fuzzy
 msgid "in"
 msgstr "in"
 
-#: templates/author.html:51
+#: templates/author.html:59
 msgid "everywhere in the world"
 msgstr ""
 
-#: templates/author.html:54
+#: templates/author.html:62
 #, python-format
 msgid "in %(jurisdiction_label)s"
 msgstr ""
 
-#: templates/author.html:61
+#: templates/author.html:69
 msgid "Works are in the public domain"
 msgstr "作品はパブリックドメインにあります"
 
-#: templates/author.html:65
+#: templates/author.html:73
 msgid "Works are not in the worldwide public domain"
 msgstr "作品は全世界共通のパブリックドメインにはありません。"
 
-#: templates/author.html:67
+#: templates/author.html:75
 msgid "until January 1, "
 msgstr "以下の年の1月1日になるまで： "
 
-#: templates/author.html:73
+#: templates/author.html:81
 msgid "Consult individual works for public domain status"
 msgstr "パブリックドメインの状態について各作品を確認"
 
-#: templates/author.html:77
+#: templates/author.html:85
+#, fuzzy
 msgid ""
 "Public domain status unknown due to lack of available dates of birth and "
 "death."
 msgstr "生年及び死亡年月日が不明のためパブリックドメインの状態は不明。"
 
-#: templates/author.html:78
+#: templates/author.html:86
 msgid "Consult individual works."
 msgstr "各作品を確認。"
 
-#: templates/author.html:86 templates/work.html:43
+#: templates/author.html:94 templates/work.html:51
 msgid "Wikipedia"
 msgstr "ウィキペディア"
 
-#: templates/author.html:92 templates/work.html:134
+#: templates/author.html:100 templates/work.html:386
 msgid "Wikisource"
 msgstr "ウィキソース"
 
-#: templates/author.html:95 templates/work.html:49
+#: templates/author.html:103 templates/work.html:57
 msgid "Wikiquote"
 msgstr "ウィキクォート"
 
-#: templates/author.html:134 templates/author.html:160
-#, python-format
-msgid "(%(author_age)s years)"
-msgstr "(%(author_age)s 歳)"
+#: templates/author.html:123 templates/work.html:70
+msgid "Please enable JavaScript (it is required for inline editing), or"
+msgstr ""
 
-#: templates/author.html:151
+#: templates/author.html:125 templates/work.html:72
+#, fuzzy
+msgid "edit on Wikidata"
+msgstr "ウィキデータに追加"
+
+#: templates/author.html:144
+#, fuzzy
+msgid "Edit nationality"
+msgstr "国籍"
+
+#: templates/author.html:145 templates/author.html:201
+#: templates/author.html:256 templates/author.html:315
+#: templates/author.html:377 templates/author.html:434
+#: templates/author.html:528 templates/work.html:99 templates/work.html:163
+#: templates/work.html:228 templates/work.html:288
+msgid "Edit"
+msgstr ""
+
+#: templates/author.html:150 templates/author.html:206
+#: templates/author.html:261 templates/author.html:320
+#: templates/author.html:382 templates/author.html:439
+#: templates/author.html:533 templates/work.html:104 templates/work.html:168
+#: templates/work.html:233 templates/work.html:293
+msgid "This field has multiple values. Please edit directly on Wikidata."
+msgstr ""
+
+#: templates/author.html:153 templates/author.html:209
+#: templates/author.html:264 templates/author.html:323
+#: templates/author.html:385 templates/author.html:442
+#: templates/author.html:536 templates/work.html:107 templates/work.html:171
+#: templates/work.html:236 templates/work.html:296
+#, fuzzy
+msgid "Edit on Wikidata"
+msgstr "ウィキデータに追加"
+
+#: templates/author.html:165 templates/author.html:499
+#, fuzzy
+msgid "Search for country..."
+msgstr "作家を調べる"
+
+#: templates/author.html:165
+#, fuzzy
+msgid "Search for nationality"
+msgstr "作家を調べる"
+
+#: templates/author.html:176 templates/author.html:232
+#: templates/author.html:287 templates/author.html:351
+#: templates/author.html:409 templates/author.html:465
+#: templates/author.html:564 templates/work.html:137 templates/work.html:201
+#: templates/work.html:261 templates/work.html:321
+msgid "Publish"
+msgstr ""
+
+#: templates/author.html:180 templates/author.html:236
+#: templates/author.html:291 templates/author.html:355
+#: templates/author.html:413 templates/author.html:469
+#: templates/author.html:568 templates/work.html:141 templates/work.html:205
+#: templates/work.html:265 templates/work.html:325
+msgid "Cancel"
+msgstr ""
+
+#: templates/author.html:200
+msgid "Edit ethnicity"
+msgstr ""
+
+#: templates/author.html:221
+#, fuzzy
+msgid "Search for ethnicity..."
+msgstr "検索"
+
+#: templates/author.html:221
+#, fuzzy
+msgid "Search for ethnicity"
+msgstr "検索"
+
+#: templates/author.html:256
+#, fuzzy
+msgid "Edit gender"
+msgstr "性別"
+
+#: templates/author.html:275
+#, fuzzy
+msgid "Select gender"
+msgstr "選択"
+
+#: templates/author.html:276
+#, fuzzy
+msgid "Select gender..."
+msgstr "作品の種別"
+
+#: templates/author.html:308 templates/author.html:521
+#, fuzzy
+msgid "years"
+msgstr "検索"
+
+#: templates/author.html:314
+#, fuzzy
+msgid "Edit date of birth"
+msgstr "生年月日"
+
+#: templates/author.html:376
+#, fuzzy
+msgid "Edit occupation"
+msgstr "職業"
+
+#: templates/author.html:397
+#, fuzzy
+msgid "Search for occupation(s)..."
+msgstr "作家を調べる"
+
+#: templates/author.html:397
+#, fuzzy
+msgid "Search for occupation"
+msgstr "作家を調べる"
+
+#: templates/author.html:433
+#, fuzzy
+msgid "Edit place of birth"
+msgstr "出生地"
+
+#: templates/author.html:454
+#, fuzzy
+msgid "Search for place..."
+msgstr "検索"
+
+#: templates/author.html:454
+#, fuzzy
+msgid "Search for place of birth"
+msgstr "出生地"
+
+#: templates/author.html:482
 msgid "Country of birth"
 msgstr "出生国"
 
+#: templates/author.html:488
+msgid "Country of birth is derived from place of birth."
+msgstr ""
+
+#: templates/author.html:499
+#, fuzzy
+msgid "Search for country of birth"
+msgstr "出生国"
+
+#: templates/author.html:527
+#, fuzzy
+msgid "Edit date of death"
+msgstr "死亡年月日"
+
+#: templates/author.html:613 templates/work.html:438
+msgid "Maximum 1 reference per field"
+msgstr ""
+
+#: templates/author.html:835 templates/work.html:591
+msgid "Month is required if you enter day"
+msgstr ""
+
+#: templates/author.html:882
+msgid "Please select at least one value"
+msgstr ""
+
+#: templates/author.html:974 templates/work.html:675
+msgid "Edit published successfully!"
+msgstr ""
+
+#: templates/author.html:977 templates/work.html:678
+msgid "Error publishing changes:"
+msgstr ""
+
+#: templates/author.html:977 templates/work.html:678
+#, fuzzy
+msgid "Unknown error"
+msgstr "不明な条項"
+
+#: templates/author.html:984 templates/work.html:685
+msgid "Network error. Please try again."
+msgstr ""
+
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr "この枠は、各国で作品がパブリックドメインになる経過期間を示しています。"
 
 #: templates/countries.html:9
@@ -1441,11 +1643,9 @@ msgstr "作家を調べる"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
-msgstr ""
-"Paulina（ポーリナ）は、世界中の作家を見つけて彼らの作品について学ぶためのシン"
-"プルな検索ツールです。"
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
+msgstr "Paulina（ポーリナ）は、世界中の作家を見つけて彼らの作品について学ぶためのシンプルな検索ツールです。"
 
 #: templates/home.html:33
 msgid "Mary Shelley"
@@ -1469,11 +1669,9 @@ msgstr "作品を探す"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
-msgstr ""
-"ウィキデータにある芸術と知識のあらゆる分野の文化作品に関する情報を簡単に見つ"
-"けることができます。"
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
+msgstr "ウィキデータにある芸術と知識のあらゆる分野の文化作品に関する情報を簡単に見つけることができます。"
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -1499,9 +1697,7 @@ msgstr "パブリックドメインについて調べる"
 msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
-msgstr ""
-"様々な国でどの作品がパブリックドメインにあるを調べて、オンラインで利用可能な"
-"バージョンにアクセスしてみましょう。"
+msgstr "様々な国でどの作品がパブリックドメインにあるを調べて、オンラインで利用可能なバージョンにアクセスしてみましょう。"
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -1517,16 +1713,12 @@ msgstr "Paulina（ポーリナ）"
 
 #: templates/layout.html:13 templates/layout.html:35
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
-msgstr ""
-"Paulina（ポーリナ）は、人類の文化遺産の学習に招待します。これはウィキデータを"
-"利用した多言語ツールで、人物を検索し、パブリックドメインで自由にアクセスでき"
-"る作品があるかどうかを調べることができます。また、著作権条項の理解を容易に"
-"し、各国で作品がいつパブリックドメインになったかを知るのにも役立ちます。"
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
+msgstr "Paulina（ポーリナ）は、人類の文化遺産の学習に招待します。これはウィキデータを利用した多言語ツールで、人物を検索し、パブリックドメインで自由にアクセスできる作品があるかどうかを調べることができます。また、著作権条項の理解を容易にし、各国で作品がいつパブリックドメインになったかを知るのにも役立ちます。"
 
 #: templates/layout.html:31 templates/layout.html:368
 msgid "Paulina - Data for the Public Domain"
@@ -1648,55 +1840,100 @@ msgstr "検索結果が多すぎます。条件を見直してください。"
 msgid "Available for download"
 msgstr "ダウンロード可能"
 
-#: templates/work.html:29
+#: templates/work.html:11
+msgid "Edit Wikidata item"
+msgstr "ウィキデータ項目を編集"
+
+#: templates/work.html:36
 msgid "Author/s"
 msgstr "作家"
 
-#: templates/work.html:93
+#: templates/work.html:98
+#, fuzzy
+msgid "Edit publication date"
+msgstr "出版日"
+
+#: templates/work.html:162
+#, fuzzy
+msgid "Edit creation date"
+msgstr "出版日"
+
+#: templates/work.html:227
+#, fuzzy
+msgid "Edit language"
+msgstr "言語"
+
+#: templates/work.html:248 templates/work.html:308
+#, fuzzy
+msgid "Search Wikidata..."
+msgstr "ウィキデータに追加"
+
+#: templates/work.html:248
+#, fuzzy
+msgid "Search for language"
+msgstr "検索"
+
+#: templates/work.html:287
+#, fuzzy
+msgid "Edit country of origin"
+msgstr "本国"
+
+#: templates/work.html:308
+#, fuzzy
+msgid "Search for country of origin"
+msgstr "本国"
+
+#: templates/work.html:341
 msgid "Copyright status"
 msgstr "著作権の状況"
 
-#: templates/work.html:112
+#: templates/work.html:364
+#, fuzzy
 msgid "countries and terms page"
-msgstr "各国の著作権条項のページ"
+msgstr "各国の著作権条項"
 
-#: templates/work.html:114
+#: templates/work.html:366
+#, fuzzy
 msgid ""
-"Copyright status information is not available for this work. The copyright "
-"status depends on the jurisdiction, the author's date of death and the date "
-"the work was created or published."
-msgstr ""
-"この作品の著作権の状況についての情報がありません。著作権の状況は、法域、作家"
-"の死亡日、および作品が作成または公開された日によって異なります。"
+"Copyright status information is not available for this work. The "
+"copyright status depends on the jurisdiction, the author's date of death "
+"and the date the work was created or published."
+msgstr "この作品の著作権の状況についての情報がありません。著作権の状況は、法域、作家の死亡日、および作品が作成または公開された日によって異なります。"
 
-#: templates/work.html:115
-#, python-format
+#: templates/work.html:367
+#, fuzzy, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
-msgstr ""
-"様々な国の著作権条項については %(countries_and_terms_page_link)sで調べてくだ"
-"さい。"
+msgstr "様々な国の著作権条項については %(countries_and_terms_page_link)sで調べてください。"
 
-#: templates/work.html:126
+#: templates/work.html:379
 msgid "Access work"
 msgstr "作品にアクセス"
 
-#: templates/work.html:147
+#: templates/work.html:395
 msgid "Internet Archive"
 msgstr "インターネット・アーカイブ"
 
-#: templates/work.html:150
+#: templates/work.html:396
 msgid "Access on Internet Archive"
 msgstr "インターネット・アーカイブにアクセス"
 
-#: templates/work.html:159
+#: templates/work.html:403
 msgid "External link"
 msgstr "外部リンク"
 
-#: templates/work.html:162
+#: templates/work.html:404
 msgid "Access online"
 msgstr "オンラインでアクセス"
+
+#: templates/work.html:588
+msgid "Month must be between 0-12"
+msgstr ""
+
+#: templates/work.html:589
+msgid "Day must be between 0-31"
+msgstr ""
 
 #: templates/works-list.html:9
 #, python-format
@@ -1720,17 +1957,18 @@ msgstr "%(author_name)sによる作品のリスト"
 msgid "View this query on the Wikidata Query Service"
 msgstr ""
 
-#, fuzzy
 #~ msgid "Official Website"
 #~ msgstr "公式ウェブサイト"
 
-#, python-format
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)sの著作権条項"
 
-#, python-format
 #~ msgid "%(country_name)s's statistics"
 #~ msgstr "%(country_name)sの統計"
 
 #~ msgid "Unknown"
 #~ msgstr "不明"
+
+#~ msgid "(%(author_age)s years)"
+#~ msgstr "(%(author_age)s 歳)"
+
