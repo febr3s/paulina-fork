@@ -35,7 +35,7 @@ class WikidataItemSearch {
 
     if (!this.input || !this.hiddenInput || !this.resultsContainer) {
       console.error(
-        `WikidataItemSearch: Elements not found for ${this.inputId}`
+        `WikidataItemSearch: Elements not found for ${this.inputId}`,
       );
       return;
     }
@@ -43,7 +43,7 @@ class WikidataItemSearch {
     // For single-select, create container for the selected pill
     if (!this.multiSelect) {
       this.selectedContainer = document.getElementById(
-        `${this.inputId}-selected`
+        `${this.inputId}-selected`,
       );
     } else {
       this.selectedContainer = document.getElementById(this.selectedItemsId);
@@ -145,7 +145,7 @@ class WikidataItemSearch {
     try {
       const lang = document.documentElement.lang || "en";
       const response = await fetch(
-        `${this.apiEndpoint}?q=${encodeURIComponent(query)}&lang=${lang}`
+        `${this.apiEndpoint}?q=${encodeURIComponent(query)}&lang=${lang}`,
       );
       const data = await response.json();
 
@@ -217,69 +217,66 @@ class WikidataItemSearch {
   }
 
   selectItem(item) {
-  if (this.multiSelect) {
-    if (this.selectedItems.some((i) => i.id === item.id)) {
-      alert(this.messages.alreadySelected);
-      return;
+    if (this.multiSelect) {
+      if (this.selectedItems.some((i) => i.id === item.id)) {
+        alert(this.messages.alreadySelected);
+        return;
+      }
+
+      this.selectedItems.push(item);
+      this.updateSelectedItemsDisplay();
+      this.updateHiddenInput();
+      this.updateVisibleInput();
+      this.input.value = ""; // Clear input
+      this.hideResults(); // Hide results
+      this.input.focus(); // Keep focus on input for next selection
+    } else {
+      // Single select: replace any existing selection
+      this.selectedItems = [item];
+      this.hiddenInput.value = item.id;
+      this.input.value = item.label;
+
+      // Only show pill if keepInputVisible is false
+      if (!this.keepInputVisible) {
+        this.updateSingleSelectDisplay();
+      }
+
+      this.hideResults();
     }
 
-    this.selectedItems.push(item);
-    this.updateSelectedItemsDisplay();
-    this.updateHiddenInput();
-    this.updateVisibleInput();
-    this.input.value = ""; // Clear input
-    this.hideResults(); // Hide results
-    this.input.focus(); // Keep focus on input for next selection
-  } else {
-    // Single select: replace any existing selection
-    this.selectedItems = [item];
-    this.hiddenInput.value = item.id;
-    this.input.value = item.label;
-    
-    // Only show pill if keepInputVisible is false
-    if (!this.keepInputVisible) {
-      this.updateSingleSelectDisplay();
-    }
-    
-    this.hideResults();
+    this.input.dispatchEvent(
+      new CustomEvent("wikidata:select", {
+        detail: item,
+      }),
+    );
   }
 
-  this.input.dispatchEvent(
-    new CustomEvent("wikidata:select", {
-      detail: item,
-    })
-  );
-}
-
-
-
-    prePopulate(items) {
+  prePopulate(items) {
     /**
      * Pre-populate the component with existing items without triggering selection events.
      * Used for inline editing to show current values.
-     * 
+     *
      * @param {Array} items - Array of {id, label, description} objects
      */
     if (!Array.isArray(items)) {
-      console.error('prePopulate expects an array of items');
+      console.error("prePopulate expects an array of items");
       return;
     }
 
     this.selectedItems = items;
     this.updateHiddenInput();
-    
+
     if (this.multiSelect) {
-      // Multi-select: show badges and clear input
+      this.input.style.display = "block";
       this.updateSelectedItemsDisplay();
-      this.input.value = '';
+      this.input.value = "";
     } else {
-      // Single-select: set input and hidden input directly
       if (items.length > 0) {
         this.input.value = items[0].label;
         this.hiddenInput.value = items[0].id;
       } else {
-        this.input.value = '';
-        this.hiddenInput.value = '';
+        this.input.value = "";
+        this.hiddenInput.value = "";
       }
     }
   }
@@ -421,7 +418,7 @@ class WikidataItemSearch {
     }
 
     this.input.dispatchEvent(
-      new CustomEvent("wikidata:remove", { detail: { index } })
+      new CustomEvent("wikidata:remove", { detail: { index } }),
     );
   }
 

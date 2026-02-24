@@ -114,18 +114,23 @@
               <div class="work-field-edit d-none">
                 <div class="work-edit-controls">
                   <div class="date-input-group d-flex align-items-center gap-2 mb-2">
-                    <input type="number"
+                    <input type="number" name="publicationDate-day"
                       class="form-control form-control-sm border-black shadow-none work-date-day-input" placeholder="DD"
                       min="0" max="31" step="1" aria-label="{{ _('Day') }}">
                     <span class="date-separator">-</span>
-                    <input type="number"
+                    <input type="number" name="publicationDate-month"
                       class="form-control form-control-sm border-black shadow-none work-date-month-input"
                       placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
                     <span class="date-separator">-</span>
-                    <input type="number"
+                    <input type="number" name="publicationDate-year"
                       class="form-control form-control-sm border-black shadow-none work-date-year-input"
                       placeholder="YYYY" min="0" max="9999" step="1" aria-label="{{ _('Year') }}">
                   </div>
+
+                  <div id="publicationDate-references" class="d-none mt-3">
+                    <div id="publicationDate-reference-container"></div>
+                  </div>
+
                   <div class="work-edit-buttons">
                     <button class="btn btn-sm border-black rounded-pill" type="button"
                       onclick="saveWorkField(this, 'publicationDate')" style="background-color: #f46527; color: black;">
@@ -136,9 +141,7 @@
                       <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                     </button>
                   </div>
-                  <div id="publicationDate-references" class="d-none mt-3">
-                    <div id="publicationDate-reference-container"></div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -175,18 +178,23 @@
               <div class="work-field-edit d-none">
                 <div class="work-edit-controls">
                   <div class="date-input-group d-flex align-items-center gap-2 mb-2">
-                    <input type="number"
+                    <input type="number" name="creationDate-day"
                       class="form-control form-control-sm border-black shadow-none work-date-day-input" placeholder="DD"
                       min="0" max="31" step="1" aria-label="{{ _('Day') }}">
                     <span class="date-separator">-</span>
-                    <input type="number"
+                    <input type="number" name="creationDate-month"
                       class="form-control form-control-sm border-black shadow-none work-date-month-input"
                       placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
                     <span class="date-separator">-</span>
-                    <input type="number"
+                    <input type="number" name="creationDate-year"
                       class="form-control form-control-sm border-black shadow-none work-date-year-input"
                       placeholder="YYYY" min="0" max="9999" step="1" aria-label="{{ _('Year') }}">
                   </div>
+
+                  <div id="creationDate-references" class="d-none mt-3">
+                    <div id="creationDate-reference-container"></div>
+                  </div>
+
                   <div class="work-edit-buttons">
                     <button class="btn btn-sm border-black rounded-pill" type="button"
                       onclick="saveWorkField(this, 'creationDate')" style="background-color: #f46527; color: black;">
@@ -197,9 +205,7 @@
                       <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                     </button>
                   </div>
-                  <div id="creationDate-references" class="d-none mt-3">
-                    <div id="creationDate-reference-container"></div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -237,12 +243,18 @@
               <div class="work-field-edit d-none">
                 <div class="work-edit-controls">
                   <div class="work-search-wrapper">
-                    <input type="text"
+                    <input type="text" name="workLanguage-search"
                       class="form-control form-control-sm border-black shadow-none work-wikidata-search-input"
-                      placeholder="{{ _('Search Wikidata...') }}" autocomplete="off">
+                      placeholder="{{ _('Search Wikidata...') }}" aria-label="{{ _('Search for language') }}"
+                      autocomplete="off">
                     <div class="work-wikidata-results-dropdown"></div>
                   </div>
-                  <input type="hidden" class="work-selected-qid">
+                  <input type="hidden" name="workLanguage-qid" class="work-selected-qid">
+
+                  <div id="workLanguage-references" class="d-none mt-3">
+                    <div id="workLanguage-reference-container"></div>
+                  </div>
+
                   <div class="work-edit-buttons mt-2">
                     <button class="btn btn-sm border-black rounded-pill" type="button"
                       onclick="saveWorkField(this, 'workLanguage')" style="background-color: #f46527; color: black;">
@@ -253,9 +265,7 @@
                       <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                     </button>
                   </div>
-                  <div id="workLanguage-references" class="d-none mt-3">
-                    <div id="workLanguage-reference-container"></div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -293,12 +303,18 @@
               <div class="work-field-edit d-none">
                 <div class="work-edit-controls">
                   <div class="work-search-wrapper">
-                    <input type="text"
+                    <input type="text" name="countryOfOrigin-search"
                       class="form-control form-control-sm border-black shadow-none work-wikidata-search-input"
-                      placeholder="{{ _('Search Wikidata...') }}" autocomplete="off">
+                      placeholder="{{ _('Search Wikidata...') }}" aria-label="{{ _('Search for country of origin') }}"
+                      autocomplete="off">
                     <div class="work-wikidata-results-dropdown"></div>
                   </div>
-                  <input type="hidden" class="work-selected-qid">
+                  <input type="hidden" name="countryOfOrigin-qid" class="work-selected-qid">
+
+                  <div id="countryOfOrigin-references" class="d-none mt-3">
+                    <div id="countryOfOrigin-reference-container"></div>
+                  </div>
+
                   <div class="work-edit-buttons mt-2">
                     <button class="btn btn-sm border-black rounded-pill" type="button"
                       onclick="saveWorkField(this, 'countryOfOrigin')" style="background-color: #f46527; color: black;">
@@ -308,9 +324,6 @@
                       onclick="cancelWorkEdit(this)" style="background-color: white; color: black;">
                       <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                     </button>
-                  </div>
-                  <div id="countryOfOrigin-references" class="d-none mt-3">
-                    <div id="countryOfOrigin-reference-container"></div>
                   </div>
                 </div>
               </div>

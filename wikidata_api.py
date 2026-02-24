@@ -123,21 +123,13 @@ class WikidataAPI:
                 'User-Agent': self.user_agent
             }
             
-            # Add Bearer token only for production Wikidata
-            if not WIKIDATA_TEST_MODE:
-                token = self.oauth_session.token
-                headers['Authorization'] = f"Bearer {token['access_token']}"
-            else:
-                print(f"Test mode - no authentication required")
-            
+            token = self.oauth_session.token
+            headers['Authorization'] = f"Bearer {token['access_token']}"
+
             print(f"Creating item at: {create_url}")
             print(f"Item data: {json.dumps(item_data, indent=2, ensure_ascii=False, default=str)}")
 
-            # Use regular requests for test mode, oauth_session for production
-            if WIKIDATA_TEST_MODE:
-                response = requests.post(create_url, json=item_data, headers=headers)
-            else:
-                response = self.oauth_session.post(create_url, json=item_data, headers=headers)
+            response = self.oauth_session.post(create_url, json=item_data, headers=headers)
             
             print(f"Response status: {response.status_code}")
             print(f"Response body: {response.text}")
@@ -946,53 +938,53 @@ class WikidataAPI:
                 
                 return {'success': True}
             
-            # Handle single-value fields (dates or single items)
+           # Handle single-value fields (dates or single items)
             else:
                 existing_statements = statements.get(property_id, [])
                 
                 if existing_statements:
-                    # Update existing statement using PATCH
+                    # PUT replaces the entire statement: value, references, qualifiers, rank
                     statement_id = existing_statements[0]['id']
-                    patch_url = f"{self.rest_api_url}/statements/{statement_id}"
+                    put_url = f"{self.rest_api_url}/statements/{statement_id}"
                     
                     if is_date:
                         new_value = {
-                            'time': self._format_date(value),
-                            'precision': self._get_date_precision(value),
-                            'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
+                            'type': 'value',
+                            'content': {
+                                'time': self._format_date(value),
+                                'precision': self._get_date_precision(value),
+                                'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
+                            }
                         }
                     else:
-                        new_value = value  # QID string
+                        new_value = {
+                            'type': 'value',
+                            'content': value  
+                        }
                     
-                    patch_data = {
-                        'patch': [
-                            {
-                                'op': 'replace',
-                                'path': '/value/content',
-                                'value': new_value
-                            }
-                        ],
+                    put_data = {
+                        'statement': {
+                            'id': statement_id,
+                            'property': {'id': property_id},
+                            'value': new_value,
+                            'qualifiers': [],      
+                            'references': [built_references[0]] if built_references else [],
+                            'rank': 'normal'
+                        },
                         'comment': edit_comment
                     }
                     
-                    # Replace all references with the new one, or clear them
-                    patch_data['patch'].append({
-                        'op': 'add',
-                        'path': '/references',
-                        'value': [built_references[0]] if built_references else []
-                    })
-                    
-                    patch_response = self.oauth_session.patch(
-                        patch_url,
-                        json=patch_data,
-                        headers={'Content-Type': 'application/json-patch+json', 'User-Agent': self.user_agent}
+                    put_response = self.oauth_session.put(
+                        put_url,
+                        json=put_data,
+                        headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
                     )
                     
-                    if patch_response.status_code != 200:
-                        return {'success': False, 'error': f'Failed to update statement: {patch_response.status_code} - {patch_response.text}'}
+                    if put_response.status_code != 200:
+                        return {'success': False, 'error': f'Failed to update statement: {put_response.status_code} - {put_response.text}'}
                 
                 else:
-                    # Create new statement
+                    # Create new statement if no existing statement to replace
                     if is_date:
                         new_statement = self.build_statement(property_id, value, 'time', built_references if built_references else None)
                     else:

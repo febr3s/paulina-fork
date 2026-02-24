@@ -161,11 +161,16 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="author-search-wrapper">
-                  <input type="text" class="form-control form-control-sm author-wikidata-search-input"
-                    placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                  <input type="text" name="nationality-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for country...') }}" aria-label="{{ _('Search for nationality') }}"
+                    autocomplete="off">
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
-                <input type="hidden" class="author-selected-qid">
+                <input type="hidden" name="nationality-qid" class="author-selected-qid">
+                <div id="nationality-references" class="d-none mt-3">
+                  <div id="nationality-reference-container"></div>
+                </div>
                 <div class="author-edit-buttons">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
                     onclick="saveAuthorField(this, 'nationality')" style="background-color: #f46527; color: black;">
@@ -175,9 +180,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="nationality-references" class="d-none mt-3">
-                  <div id="nationality-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -215,11 +217,16 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="author-search-wrapper">
-                  <input type="text" class="form-control form-control-sm author-wikidata-search-input"
-                    placeholder="{{ _('Search for ethnicity...') }}" autocomplete="off">
+                  <input type="text" name="ethnicity-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for ethnicity...') }}" aria-label="{{ _('Search for ethnicity') }}"
+                    autocomplete="off">
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
-                <input type="hidden" class="author-selected-qid">
+                <input type="hidden" name="ethnicity-qid" class="author-selected-qid">
+                <div id="ethnicity-references" class="d-none mt-3">
+                  <div id="ethnicity-reference-container"></div>
+                </div>
                 <div class="author-edit-buttons">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
                     onclick="saveAuthorField(this, 'ethnicity')" style="background-color: #f46527; color: black;">
@@ -229,9 +236,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="ethnicity-references" class="d-none mt-3">
-                  <div id="ethnicity-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -267,14 +271,17 @@
             </div>
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
-
-                <select class="form-select form-select-sm border-black shadow-none author-gender-select">
+                <select name="gender-select"
+                  class="form-select form-select-sm border-black shadow-none author-gender-select"
+                  aria-label="{{ _('Select gender') }}">
                   <option value="">{{ _('Select gender...') }}</option>
                   {% for gender in form_genders %}
                   <option value="{{ gender.qid }}">{{ gender.gender_name }}</option>
                   {% endfor %}
                 </select>
-
+                <div id="gender-references" class="d-none mt-3">
+                  <div id="gender-reference-container"></div>
+                </div>
                 <div class="author-edit-buttons mt-2">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
                     onclick="saveAuthorField(this, 'gender')" style="background-color: #f46527; color: black;">
@@ -284,9 +291,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="gender-references" class="d-none mt-3">
-                  <div id="gender-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -327,17 +331,20 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="date-input-group d-flex align-items-center gap-2 mb-2">
-                  <input type="number"
+                  <input type="number" name="dateOfBirth-day"
                     class="form-control form-control-sm border-black shadow-none author-date-day-input" placeholder="DD"
                     min="0" max="31" step="1" aria-label="{{ _('Day') }}">
                   <span class="date-separator">-</span>
-                  <input type="number"
+                  <input type="number" name="dateOfBirth-month"
                     class="form-control form-control-sm border-black shadow-none author-date-month-input"
                     placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
                   <span class="date-separator">-</span>
-                  <input type="number"
+                  <input type="number" name="dateOfBirth-year"
                     class="form-control form-control-sm border-black shadow-none author-date-year-input"
                     placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                </div>
+                <div id="dateOfBirth-references" class="d-none mt-3">
+                  <div id="dateOfBirth-reference-container"></div>
                 </div>
                 <div class="author-edit-buttons">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
@@ -348,9 +355,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="dateOfBirth-references" class="d-none mt-3">
-                  <div id="dateOfBirth-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -389,12 +393,17 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls w-100">
                 <div class="author-search-wrapper w-100">
-                  <input type="text" class="form-control form-control-sm author-wikidata-search-input"
-                    placeholder="{{ _('Search for occupation(s)...') }}" autocomplete="off">
+                  <input type="text" name="occupation-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for occupation(s)...') }}" aria-label="{{ _('Search for occupation') }}"
+                    autocomplete="off">
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
                 <div class="author-selected-items mt-2"></div>
-                <input type="hidden" class="author-selected-qid">
+                <input type="hidden" name="occupation-qid" class="author-selected-qid">
+                <div id="occupation-references" class="d-none mt-3">
+                  <div id="occupation-reference-container"></div>
+                </div>
                 <div class="author-edit-buttons mt-2">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
                     onclick="saveAuthorField(this, 'occupation')" style="background-color: #f46527; color: black;">
@@ -404,9 +413,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="occupation-references" class="d-none mt-3">
-                  <div id="occupation-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -444,11 +450,16 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="author-search-wrapper">
-                  <input type="text" class="form-control form-control-sm author-wikidata-search-input"
-                    placeholder="{{ _('Search for place...') }}" autocomplete="off">
+                  <input type="text" name="placeOfBirth-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for place...') }}" aria-label="{{ _('Search for place of birth') }}"
+                    autocomplete="off">
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
-                <input type="hidden" class="author-selected-qid">
+                <input type="hidden" name="placeOfBirth-qid" class="author-selected-qid">
+                <div id="placeOfBirth-references" class="d-none mt-3">
+                  <div id="placeOfBirth-reference-container"></div>
+                </div>
                 <div class="author-edit-buttons">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
                     onclick="saveAuthorField(this, 'placeOfBirth')" style="background-color: #f46527; color: black;">
@@ -458,9 +469,6 @@
                     onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
-                </div>
-                <div id="placeOfBirth-references" class="d-none mt-3">
-                  <div id="placeOfBirth-reference-container"></div>
                 </div>
               </div>
             </div>
@@ -487,12 +495,13 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="author-search-wrapper">
-                  <input type="text" class="form-control form-control-sm author-wikidata-search-input"
-                    placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                  <input type="text" name="countryOfBirth-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for country...') }}" aria-label="{{ _('Search for country of birth') }}"
+                    autocomplete="off">
                   <div class="author-wikidata-results-dropdown"></div>
                 </div>
-                <input type="hidden" class="author-selected-qid">
-
+                <input type="hidden" name="countryOfBirth-qid" class="author-selected-qid">
                 <div id="countryOfBirth-references" class="d-none mt-3">
                   <div id="countryOfBirth-reference-container"></div>
                 </div>
@@ -504,7 +513,7 @@
 
         {% if author_date_of_death %}
         <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P570" data-field="dateOfDeath"
-         data-current-value="{{ author_date_of_death_iso|default('', true) }}" data-is-date="true">
+          data-current-value="{{ author_date_of_death_iso|default('', true) }}" data-is-date="true">
           <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
           <div class="col-md-9">
             <div class="author-field-display">
@@ -535,17 +544,20 @@
             <div class="author-field-edit d-none">
               <div class="author-edit-controls">
                 <div class="date-input-group d-flex align-items-center gap-2 mb-2">
-                  <input type="number"
+                  <input type="number" name="dateOfDeath-day"
                     class="form-control form-control-sm border-black shadow-none author-date-day-input" placeholder="DD"
                     min="0" max="31" step="1" aria-label="{{ _('Day') }}">
                   <span class="date-separator">-</span>
-                  <input type="number"
+                  <input type="number" name="dateOfDeath-month"
                     class="form-control form-control-sm border-black shadow-none author-date-month-input"
                     placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
                   <span class="date-separator">-</span>
-                  <input type="number"
+                  <input type="number" name="dateOfDeath-year"
                     class="form-control form-control-sm border-black shadow-none author-date-year-input"
                     placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                </div>
+                <div id="dateOfDeath-references" class="d-none mt-3">
+                  <div id="dateOfDeath-reference-container"></div>
                 </div>
                 <div class="author-edit-buttons">
                   <button class="btn btn-sm border-black rounded-pill" type="button"
@@ -557,9 +569,6 @@
                     <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
                   </button>
                 </div>
-                <div id="dateOfDeath-references" class="d-none mt-3">
-                  <div id="dateOfDeath-reference-container"></div>
-                </div>
               </div>
             </div>
           </div>
@@ -569,6 +578,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Load Wikidata search script -->
 <script src="{{ url_for('static', filename='js/wikidata-search.js') }}"></script>
