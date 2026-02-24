@@ -246,6 +246,271 @@ h3 {
   border-bottom: none !important;
 }
 
+/* Author page individual field editing  */
+
+.author-bio-field {
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.author-bio-field:hover {
+  background-color: #f8f9fa;
+}
+
+.author-field-display {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.author-field-edit-icon {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  color: #6c757d;
+  font-size: 0.875rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem !important;
+  line-height: 1;
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-bio-field:hover .author-field-edit-icon {
+  opacity: 1;
+}
+
+.author-field-edit-icon:hover,
+.author-field-edit-icon:focus {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+
+@media (max-width: 768px), (hover: none) {
+  .author-field-edit-icon {
+    opacity: 0.7;
+  }
+  
+  .author-field-edit-icon:active {
+    opacity: 1;
+  }
+}
+
+.author-field-edit {
+  position: relative; 
+}
+
+.author-edit-controls {
+  max-width: 500px;
+  position: relative;
+}
+
+
+/* Author edit icon styling */
+.author-field-edit-icon {
+  color: #f46527;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.author-field-edit-icon:hover {
+  color: #d94e15;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+.author-wikidata-search-input:focus,
+.author-date-input:focus {
+  outline: none;
+  box-shadow: none !important;
+  border-color: #dee2e6; 
+}
+
+.author-wikidata-results-dropdown {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.25rem;
+  margin-top: 2px; 
+}
+
+.author-wikidata-results-dropdown.show {
+  display: block;
+}
+
+.author-wikidata-results-dropdown .result-item {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.author-wikidata-results-dropdown .result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.author-wikidata-results-dropdown .result-item:last-child {
+  border-bottom: none;
+}
+
+.author-edit-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.author-edit-buttons .btn {
+  min-width: 44px;
+  min-height: 38px;
+}
+
+.author-edit-buttons .btn:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Date input */
+.author-date-input {
+  max-width: 200px;
+}
+
+@media (max-width: 576px) {
+  .author-date-input {
+    max-width: 100%;
+  }
+}
+
+/* Wrapper for input and dropdown */
+.author-search-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem; 
+}
+
+.author-edit-controls {
+  max-width: 500px;
+}
+
+.author-field-edit {
+  position: static;
+}
+
+/* Toast notification */
+.author-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  min-width: 250px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.author-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 576px) {
+  .author-toast {
+    left: 10px;
+    right: 10px;
+    min-width: auto;
+  }
+  
+  .author-edit-buttons {
+    flex-direction: row;
+  }
+  
+  .author-edit-buttons .btn {
+    flex: 1;
+  }
+}
+
+/* Loading state */
+.author-bio-field.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Cancel button hover effect */
+.author-cancel-btn {
+  transition: all 0.2s ease;
+}
+
+.author-cancel-btn:hover {
+  background-color: #e9ecef !important;
+  border-color: #495057 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Hide edit buttons when JavaScript is disabled */
+@supports not (display: none) {
+  .author-field-edit-icon {
+    display: none !important;
+  }
+}
+
+/* Author inline editing date fields */
+
+.date-input-group .author-date-day-input,
+.date-input-group .author-date-month-input {
+  width: 65px;
+  min-width: 65px;
+}
+
+.date-input-group .author-date-year-input {
+  width: 85px;
+  min-width: 85px;
+}
+
+.date-separator {
+  font-weight: bold;
+  color: #666;
+  flex-shrink: 0;
+}
+
+/* Author page gender select dropdown */
+.author-gender-select {
+  background-color: #ffe65b;
+  border: 1px solid #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.author-gender-select:focus {
+  background-color: #ffe65b;
+  border-color: #000;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Hide remove button and reference number on author inline edit reference cards */
+#author-biography-section .remove-ref-btn,
+#author-biography-section .reference-item > div:first-child strong {
+  display: none !important;
+}
+
+.author-field-edit-icon-disabled {
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
 /* WORK PAGE */
 
 /* Work image */
@@ -334,7 +599,231 @@ h3 {
   border-left: 3px solid #dc3545;
 }
 
-/* Forms */
+/* Work page individual field editing */
+
+.work-bio-field {
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.work-bio-field:hover {
+  background-color: #f8f9fa;
+}
+
+.work-field-display {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.work-field-edit-icon {
+  color: #f46527;
+  text-decoration: none;
+  opacity: 1;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem !important;
+  line-height: 1;
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.work-bio-field:hover .work-field-edit-icon {
+  opacity: 1;
+}
+
+.work-field-edit-icon:hover,
+.work-field-edit-icon:focus {
+  color: #d94e15;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+@media (max-width: 768px), (hover: none) {
+  .work-field-edit-icon {
+    opacity: 0.7;
+  }
+
+  .work-field-edit-icon:active {
+    opacity: 1;
+  }
+}
+
+.work-field-edit {
+  position: relative;
+}
+
+.work-edit-controls {
+  max-width: 500px;
+  position: relative;
+}
+
+.work-wikidata-search-input:focus,
+.work-date-input:focus {
+  outline: none;
+  box-shadow: none !important;
+  border-color: #dee2e6;
+}
+
+.work-wikidata-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  margin-top: 2px;
+}
+
+.work-wikidata-results-dropdown.show {
+  display: block;
+}
+
+.work-wikidata-results-dropdown .result-item {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.work-wikidata-results-dropdown .result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.work-wikidata-results-dropdown .result-item:last-child {
+  border-bottom: none;
+}
+
+.work-edit-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.work-edit-buttons .btn {
+  min-width: 44px;
+  min-height: 38px;
+}
+
+.work-edit-buttons .btn:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Work search wrapper */
+.work-search-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+/* Work date inputs */
+.work-edit-controls .work-date-day-input,
+.work-edit-controls .work-date-month-input {
+  width: 65px;
+  min-width: 65px;
+}
+
+.work-edit-controls .work-date-year-input {
+  width: 85px;
+  min-width: 85px;
+}
+
+@media (max-width: 576px) {
+  .work-edit-controls .work-date-day-input,
+  .work-edit-controls .work-date-month-input,
+  .work-edit-controls .work-date-year-input {
+    max-width: 100%;
+  }
+}
+
+/* Work toast notification */
+.work-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  min-width: 250px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.work-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 576px) {
+  .work-toast {
+    left: 10px;
+    right: 10px;
+    min-width: auto;
+  }
+
+  .work-edit-buttons {
+    flex-direction: row;
+  }
+
+  .work-edit-buttons .btn {
+    flex: 1;
+  }
+}
+
+/* Work loading state */
+.work-bio-field.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Work cancel button hover */
+.work-cancel-btn {
+  transition: all 0.2s ease;
+}
+
+.work-cancel-btn:hover {
+  background-color: #e9ecef !important;
+  border-color: #495057 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Work disabled edit icon */
+.work-field-edit-icon-disabled {
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
+/* Hide work edit buttons when JavaScript is disabled */
+@supports not (display: none) {
+  .work-field-edit-icon {
+    display: none !important;
+  }
+}
+
+/* Hide remove button and reference number on work inline edit reference cards */
+.work-bio-field .remove-ref-btn,
+.work-bio-field .reference-item > div:first-child strong {
+  display: none !important;
+}/* Hide remove button and reference number on author inline edit reference cards */
+#author-biography-section .remove-ref-btn,
+#author-biography-section .reference-item > div:first-child strong {
+  display: none !important;
+}
+
+/* FORMS */
 .form-select.search {
   color: black;
   width: fit-content;

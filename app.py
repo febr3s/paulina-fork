@@ -98,7 +98,7 @@ cache = Cache(app)  # Initializes Flask-Caching
 def before_request():
     setattr(request, "language", languages.get_locale())
 
-def make_cache_key(**kwargs) -> str:
+def make_cache_key(*args, **kwargs) -> str:
    """Creates a cache key combining the request path and the locale."""
    request_language = request.language
    request_path = request.path
@@ -213,25 +213,105 @@ def results():
                                         search_request=search_request)
     except:
         abort(404)
+        
 
 @app.route("/author/<author_data>")
-@cache.cached(make_cache_key=make_cache_key)
 def author_page(author_data):
+    # Skip cache for logged-in users
+    if 'wikimedia_username' in session:
+        try:
+            author = pdclasses.Author(author_data)
+            edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
+            
+           # Convert dates to ISO format for date inputs
+            author_date_of_birth_iso = None
+            if author.date_of_birth and isinstance(author.date_of_birth.get('date object'), datetime.date):
+                author_date_of_birth_iso = author.date_of_birth['date object'].isoformat()
+            
+            author_date_of_death_iso = None
+            if author.date_of_death and isinstance(author.date_of_death.get('date object'), datetime.date):
+                author_date_of_death_iso = author.date_of_death['date object'].isoformat() 
+            
+            
+            return render_template("author.html",
+                title=print_field(author.name),
+                author_name=print_field(author.name),
+                author_id=print_field(author.wikidata_item_id),
+                author_description=print_field(author.description),
+                author_nationality=print_field(author.nationality),
+                author_nationality_qid=author.nationality_qid, 
+                author_gender=print_field(author.gender),
+                author_gender_qid=author.gender_qid, 
+                author_ethnicity=print_field(author.ethnicity),
+                author_ethnicity_qid=author.ethnicity_qid, 
+                author_date_of_birth=print_field(author.date_of_birth),  # Display format
+                author_date_of_birth_iso=author_date_of_birth_iso,  # ISO format for input
+                author_occupation=", ".join(print_field(author.occupation)) if isinstance(author.occupation, list) else print_field(author.occupation),
+                author_occupation_qid=author.occupation_qid, 
+                author_place_of_birth=print_field(author.place_of_birth),
+                author_place_of_birth_qid=author.place_of_birth_qid, 
+                author_country_of_birth=print_field(author.country_of_birth),
+                author_country_of_birth_qid=author.country_of_birth_qid, 
+                author_date_of_death=print_field(author.date_of_death),  # Display format
+                author_date_of_death_iso=author_date_of_death_iso,  # ISO format for input
+                author_age=print_field(author.ageOfAuthor()),
+                author_image=print_field(author.image),
+                author_image_link=print_field(author.image_link),
+                author_image_alt_text=print_field(author.image_alt_text),
+                author_wikipedia_link=print_field(author.wikipedia_link),
+                author_commons_link=print_field(author.commons_link),
+                author_wikisource_link=print_field(author.wikisource_link),
+                author_wikiquote_link=print_field(author.wikiquote_link),
+                author_official_website=print_field(author.official_website),
+                author_is_in_public_domain=print_field(author.isInPublicDomain()),
+                author_wikidata_link=print_field(author.wikidata_link),
+                author_date_enter_public_domain=print_field(author.date_enter_public_domain),
+                form_genders=FORM_GENDERS,
+                edit_eligibility=edit_eligibility
+            )
+        except:
+            abort(404)
+    
+    # Use cached version for anonymous users
+    return _cached_author_page(author_data)
+
+@cache.cached(make_cache_key=make_cache_key)
+def _cached_author_page(author_data):
     try:
         author = pdclasses.Author(author_data)
+        edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
+        
+        
+        # Convert dates to ISO format for date inputs
+        author_date_of_birth_iso = None
+        if author.date_of_birth and isinstance(author.date_of_birth.get('date object'), datetime.date):
+            author_date_of_birth_iso = author.date_of_birth['date object'].isoformat()
+        
+        author_date_of_death_iso = None
+        if author.date_of_death and isinstance(author.date_of_death.get('date object'), datetime.date):
+            author_date_of_death_iso = author.date_of_death['date object'].isoformat()
+        
         return render_template("author.html",
             title=print_field(author.name),
             author_name=print_field(author.name),
             author_id=print_field(author.wikidata_item_id),
             author_description=print_field(author.description),
             author_nationality=print_field(author.nationality),
+            author_nationality_qid=author.nationality_qid, 
             author_gender=print_field(author.gender),
+            author_gender_qid=author.gender_qid, 
             author_ethnicity=print_field(author.ethnicity),
-            author_date_of_birth=print_field(author.date_of_birth),
-            author_occupation=", ".join(print_field(author.occupation)),
+            author_ethnicity_qid=author.ethnicity_qid, 
+            author_date_of_birth=print_field(author.date_of_birth),  # Display format
+            author_date_of_birth_iso=author_date_of_birth_iso,  # ISO format for input
+            author_occupation=", ".join(print_field(author.occupation)) if isinstance(author.occupation, list) else print_field(author.occupation),
+            author_occupation_qid=author.occupation_qid, 
             author_place_of_birth=print_field(author.place_of_birth),
+            author_place_of_birth_qid=author.place_of_birth_qid, 
             author_country_of_birth=print_field(author.country_of_birth),
-            author_date_of_death=print_field(author.date_of_death),
+            author_country_of_birth_qid=author.country_of_birth_qid, 
+            author_date_of_death=print_field(author.date_of_death),  # Display format
+            author_date_of_death_iso=author_date_of_death_iso,  # ISO format for input
             author_age=print_field(author.ageOfAuthor()),
             author_image=print_field(author.image),
             author_image_link=print_field(author.image_link),
@@ -243,11 +323,12 @@ def author_page(author_data):
             author_official_website=print_field(author.official_website),
             author_is_in_public_domain=print_field(author.isInPublicDomain()),
             author_wikidata_link=print_field(author.wikidata_link),
-            author_date_enter_public_domain=print_field(author.date_enter_public_domain)
+            author_date_enter_public_domain=print_field(author.date_enter_public_domain),
+            form_genders=FORM_GENDERS,
+            edit_eligibility=edit_eligibility
         )
-    except:  # If the Q number doesn't match any item or the item is not about a human
+    except:
         abort(404)
-
 
 @app.route("/works-list/<author_id>")
 @cache.cached(make_cache_key=make_cache_key)
@@ -268,12 +349,74 @@ def works_list(author_id):
 
 
 @app.route("/work/<work_data>")
-@cache.cached(make_cache_key=make_cache_key)
 def work_page(work_data):
+    # Skip cache for logged-in users
+    if 'wikimedia_username' in session:
+        try:
+            work = pdclasses.Work(work_data)
+            work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
+
+            # Convert dates to ISO format for date inputs
+            work_publication_date_iso = None
+            if work.publication_date and isinstance(work.publication_date.get('date object'), datetime.date):
+                work_publication_date_iso = work.publication_date['date object'].isoformat()
+
+            work_creation_date_iso = None
+            if work.creation_date and isinstance(work.creation_date.get('date object'), datetime.date):
+                work_creation_date_iso = work.creation_date['date object'].isoformat()
+
+            return render_template("work.html",
+                title=print_field(work.name),
+                work_id=print_field(work.wikidata_item_id),
+                work_title=print_field(work.name),
+                work_description=print_field(work.description),
+                work_image=print_field(work.image),
+                work_image_link=print_field(work.image_link),
+                work_image_alt_text=print_field(work.image_alt_text),
+                work_authors=print_field(work.authors),
+                work_publication_date=print_field(work.publication_date),
+                work_publication_date_iso=work_publication_date_iso,
+                work_creation_date=print_field(work.creation_date),
+                work_creation_date_iso=work_creation_date_iso,
+                work_language=print_field(work.language),
+                work_language_qid=work.language_qid,
+                work_country=print_field(work.country_of_origin),
+                work_country_qid=work.country_of_origin_qid,
+                work_wikipedia_link=print_field(work.wikipedia_link),
+                work_commons_link=print_field(work.commons_link),
+                work_wikisource_links=print_field(work.wikisource_links),
+                work_wikiquote_link=print_field(work.wikiquote_link),
+                work_internet_archive_link=print_field(work.internet_archive_link),
+                work_full_work_link=print_field(work.full_work_link),
+                work_wikidata_link=print_field(work.wikidata_link),
+                work_copyright_status=print_field(work.getCopyrightStatus()),
+                work_edit_eligibility=work_edit_eligibility
+            )
+        except:
+            abort(404)
+
+    # Use cached version for anonymous users
+    return _cached_work_page(work_data)
+
+
+@cache.cached(make_cache_key=make_cache_key)
+def _cached_work_page(work_data):
     try:
-        work = pdclasses.Work(work_data)  # Make a work object
+        work = pdclasses.Work(work_data)
+        work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
+
+        # Convert dates to ISO format for date inputs
+        work_publication_date_iso = None
+        if work.publication_date and isinstance(work.publication_date.get('date object'), datetime.date):
+            work_publication_date_iso = work.publication_date['date object'].isoformat()
+
+        work_creation_date_iso = None
+        if work.creation_date and isinstance(work.creation_date.get('date object'), datetime.date):
+            work_creation_date_iso = work.creation_date['date object'].isoformat()
+
         return render_template("work.html",
-            title=print_field(work.name),  # This is for Open Graph meta tags
+            title=print_field(work.name),
+            work_id=print_field(work.wikidata_item_id),
             work_title=print_field(work.name),
             work_description=print_field(work.description),
             work_image=print_field(work.image),
@@ -281,9 +424,13 @@ def work_page(work_data):
             work_image_alt_text=print_field(work.image_alt_text),
             work_authors=print_field(work.authors),
             work_publication_date=print_field(work.publication_date),
+            work_publication_date_iso=work_publication_date_iso,
             work_creation_date=print_field(work.creation_date),
+            work_creation_date_iso=work_creation_date_iso,
             work_language=print_field(work.language),
+            work_language_qid=work.language_qid,
             work_country=print_field(work.country_of_origin),
+            work_country_qid=work.country_of_origin_qid,
             work_wikipedia_link=print_field(work.wikipedia_link),
             work_commons_link=print_field(work.commons_link),
             work_wikisource_links=print_field(work.wikisource_links),
@@ -291,9 +438,10 @@ def work_page(work_data):
             work_internet_archive_link=print_field(work.internet_archive_link),
             work_full_work_link=print_field(work.full_work_link),
             work_wikidata_link=print_field(work.wikidata_link),
-            work_copyright_status=print_field(work.getCopyrightStatus())
+            work_copyright_status=print_field(work.getCopyrightStatus()),
+            work_edit_eligibility=work_edit_eligibility
         )
-    except:  # If the Q number doesn't match any item
+    except:
         abort(404)
 
 
@@ -776,6 +924,184 @@ def add_work():
                         wikidata_url=wikidata_url,
                         paulina_url=paulina_url,
                         work_types=WORK_TYPES)
+    
+
+@app.route('/update-author/<author_id>', methods=['PATCH'])
+@limiter.limit("30 per hour")
+def update_author(author_id):
+    """Handle inline editing of author biography fields"""
+    
+    # Check if user is logged in
+    if 'wikimedia_username' not in session:
+        return jsonify({
+            'success': False,
+            'message': _('You must be logged in to edit.')
+        }), 401
+    
+    # Refresh OAuth token if needed
+    if not oauth.token_refresh():
+        return jsonify({
+            'success': False,
+            'message': _('Session expired. Please log in again.')
+        }), 401
+    
+    try:
+        # Get the changes from request body
+        data = request.get_json()
+        if not data or 'changes' not in data:
+            return jsonify({
+                'success': False,
+                'message': _('Invalid request data.')
+            }), 400
+        
+        changes = data['changes']
+        if not changes or not isinstance(changes, list):
+            return jsonify({
+                'success': False,
+                'message': _('No changes provided.')
+            }), 400
+        
+        # Initialize WikidataAPI with OAuth session
+        oauth_session = oauth.get_oauth_session()
+        wikidata = wikidata_api.WikidataAPI(app.config, oauth_session)
+        
+        # Process each change
+        success_count = 0
+        errors = []
+        
+        for change in changes:
+            property_id = change.get('property')
+            field_name = change.get('field')
+            value = change.get('value')
+            is_date = change.get('isDate', False)
+            is_multi_select = change.get('isMultiSelect', False)
+            references = change.get('references', [])
+            
+            if not property_id or not value:
+                errors.append(_('Missing property or value for field: %(field)s', field=field_name))
+                continue
+            
+            # Use the helper function to update the field
+            result = wikidata.update_statement_field(
+                item_id=author_id,
+                property_id=property_id,
+                value=value,
+                field_name=field_name,
+                is_date=is_date,
+                is_multi_select=is_multi_select,
+                references=references
+            )
+            
+            if result['success']:
+                success_count += 1
+                
+                # Clear cache for this author page
+                cache_key = f"{request.language}, /author/{author_id}, {{}}"
+                cache.delete(cache_key)
+            else:
+                errors.append(_('Error updating %(field)s: %(error)s', 
+                              field=field_name, 
+                              error=result.get('error', _('Unknown error'))))
+        
+        # Return result
+        if success_count > 0 and not errors:
+            return jsonify({
+                'success': True,
+                'message': _('Successfully updated!')
+            }), 200
+        elif success_count > 0 and errors:
+            return jsonify({
+                'success': True,
+                'message': _('Updated with some errors.'),
+                'errors': errors
+            }), 207  # Multi-Status
+        else:
+            return jsonify({
+                'success': False,
+                'message': _('Failed to update fields.'),
+                'errors': errors
+            }), 400
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': _('Server error: %(error)s', error=str(e))
+        }), 500
+        
+@app.route('/update-work/<work_id>', methods=['PATCH'])
+@limiter.limit("30 per hour")
+def update_work(work_id):
+    """Handle inline editing of work fields"""
+    
+    if 'wikimedia_username' not in session:
+        return jsonify({
+            'success': False,
+            'message': _('You must be logged in to edit.')
+        }), 401
+    
+    if not oauth.token_refresh():
+        return jsonify({
+            'success': False,
+            'message': _('Session expired. Please log in again.')
+        }), 401
+    
+    try:
+        data = request.get_json()
+        if not data or 'changes' not in data:
+            return jsonify({'success': False, 'message': _('Invalid request data.')}), 400
+        
+        changes = data['changes']
+        if not changes or not isinstance(changes, list):
+            return jsonify({'success': False, 'message': _('No changes provided.')}), 400
+        
+        oauth_session = oauth.get_oauth_session()
+        wikidata = wikidata_api.WikidataAPI(app.config, oauth_session)
+        
+        success_count = 0
+        errors = []
+        
+        for change in changes:
+            property_id = change.get('property')
+            field_name = change.get('field')
+            value = change.get('value')
+            is_date = change.get('isDate', False)
+            references = change.get('references', [])
+            
+            if not property_id or not value:
+                errors.append(_('Missing property or value for field: %(field)s', field=field_name))
+                continue
+            
+            result = wikidata.update_statement_field(
+                item_id=work_id,
+                property_id=property_id,
+                value=value,
+                field_name=field_name,
+                is_date=is_date,
+                is_multi_select=False,
+                references=references
+            )
+            
+            if result['success']:
+                success_count += 1
+                cache_key = f"{request.language}, /work/{work_id}, {{}}"
+                cache.delete(cache_key)
+            else:
+                errors.append(_('Error updating %(field)s: %(error)s',
+                              field=field_name,
+                              error=result.get('error', _('Unknown error'))))
+        
+        if success_count > 0 and not errors:
+            return jsonify({'success': True, 'message': _('Successfully updated!')}), 200
+        elif success_count > 0 and errors:
+            return jsonify({'success': True, 'message': _('Updated with some errors.'), 'errors': errors}), 207
+        else:
+            return jsonify({'success': False, 'message': _('Failed to update fields.'), 'errors': errors}), 400
+            
+    except Exception as e:
+        return jsonify({'success': False, 'message': _('Server error: %(error)s', error=str(e))}), 500
+
+
+
 
 @app.route('/clear_form_data', methods=['POST'])
 def clear_form_data():

@@ -10,6 +10,7 @@ class WikidataItemSearch {
     this.multiSelect = config.multiSelect || false;
     this.selectedItemsId = config.selectedItemsId || null;
     this.apiEndpoint = config.apiEndpoint || "/api/search-wikidata-items";
+    this.keepInputVisible = config.keepInputVisible || false;
     this.selectedItems = [];
     this.lastQuery = "";
     this.highlightedIndex = -1;
@@ -34,7 +35,7 @@ class WikidataItemSearch {
 
     if (!this.input || !this.hiddenInput || !this.resultsContainer) {
       console.error(
-        `WikidataItemSearch: Elements not found for ${this.inputId}`
+        `WikidataItemSearch: Elements not found for ${this.inputId}`,
       );
       return;
     }
@@ -42,7 +43,7 @@ class WikidataItemSearch {
     // For single-select, create container for the selected pill
     if (!this.multiSelect) {
       this.selectedContainer = document.getElementById(
-        `${this.inputId}-selected`
+        `${this.inputId}-selected`,
       );
     } else {
       this.selectedContainer = document.getElementById(this.selectedItemsId);
@@ -144,7 +145,7 @@ class WikidataItemSearch {
     try {
       const lang = document.documentElement.lang || "en";
       const response = await fetch(
-        `${this.apiEndpoint}?q=${encodeURIComponent(query)}&lang=${lang}`
+        `${this.apiEndpoint}?q=${encodeURIComponent(query)}&lang=${lang}`,
       );
       const data = await response.json();
 
@@ -234,15 +235,50 @@ class WikidataItemSearch {
       this.selectedItems = [item];
       this.hiddenInput.value = item.id;
       this.input.value = item.label;
-      this.updateSingleSelectDisplay();
+
+      // Only show pill if keepInputVisible is false
+      if (!this.keepInputVisible) {
+        this.updateSingleSelectDisplay();
+      }
+
       this.hideResults();
     }
 
     this.input.dispatchEvent(
       new CustomEvent("wikidata:select", {
         detail: item,
-      })
+      }),
     );
+  }
+
+  prePopulate(items) {
+    /**
+     * Pre-populate the component with existing items without triggering selection events.
+     * Used for inline editing to show current values.
+     *
+     * @param {Array} items - Array of {id, label, description} objects
+     */
+    if (!Array.isArray(items)) {
+      console.error("prePopulate expects an array of items");
+      return;
+    }
+
+    this.selectedItems = items;
+    this.updateHiddenInput();
+
+    if (this.multiSelect) {
+      this.input.style.display = "block";
+      this.updateSelectedItemsDisplay();
+      this.input.value = "";
+    } else {
+      if (items.length > 0) {
+        this.input.value = items[0].label;
+        this.hiddenInput.value = items[0].id;
+      } else {
+        this.input.value = "";
+        this.hiddenInput.value = "";
+      }
+    }
   }
 
   updateSingleSelectDisplay() {
@@ -382,7 +418,7 @@ class WikidataItemSearch {
     }
 
     this.input.dispatchEvent(
-      new CustomEvent("wikidata:remove", { detail: { index } })
+      new CustomEvent("wikidata:remove", { detail: { index } }),
     );
   }
 

@@ -2,10 +2,17 @@
 
 {% block content %}
 <div class="container-fluid p-2">
-  <!-- Edit Wikidata link -->
+  <!-- Edit prompt -->
   <div class="text-end mb-2">
-    <small class="text-body-secondary">{{ _('Missing/wrong data?') }} <a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></small>
+    {% if session.get('wikimedia_username') %}
+    {% else %}
+    <small class="text-body-secondary">
+      {{ _('Missing/wrong data?') }}
+      <a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a>
+    </small>
+    {% endif %}
   </div>
+
   <!-- Work card -->
   <div class="card main-card mb-4 p-4">
     <!-- Work card upper section -->
@@ -30,7 +37,8 @@
         {% for type_of_author, authors in work_authors.items() %}
         <p class="mb-1"><span class="fw-semibold text-light-emphasis">{{ type_of_author }}:</span>
           {% for author in authors %}
-          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>{% if not loop.last %}, {% endif %}
+          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>{% if not loop.last
+          %}, {% endif %}
           {% endfor %}
         </p>
         {% endfor %}
@@ -49,43 +57,283 @@
           | <a href="{{work_wikiquote_link}}" target="_blank">{{ _('Wikiquote') }}</a>
           {% endif %}
         </p>
-      </div>    
+      </div>
     </div>
+
     <hr class="my-4">
+
+    <!-- No-JS warning (only for logged-in users) -->
+    {% if session.get('wikimedia_username') %}
+    <noscript>
+      <div class="alert alert-info alert-sm mt-2 mb-3">
+        <i class="bi bi-info-circle"></i>
+        {{ _('Please enable JavaScript (it is required for inline editing), or') }}
+        <a href="{{work_wikidata_link}}" target="_blank" class="alert-link">
+          {{ _('edit on Wikidata') }}
+        </a>
+      </div>
+    </noscript>
+    {% endif %}
+
     <!-- Work details section -->
-    <div class="row">      
+    <div class="row">
       <div class="col-md-6">
         <!-- General details card -->
         <div class="detail-card">
           <h3 class="detail-card-title">
             <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
           </h3>
+
+          <!-- Publication date -->
           {% if work_publication_date %}
-          <div class="detail-item">
-            <span class="detail-label">{{ _('Publication date') }}:</span>
-            {{ work_publication_date }}
+          <div class="work-bio-field bio-row py-2 border-bottom" data-property="P577" data-field="publicationDate"
+            data-current-value="{{ work_publication_date_iso|default('', true) }}" data-is-date="true">
+            <div class="fw-bold text-body-secondary detail-label">{{ _('Publication date') }}</div>
+            <div class="col-md-9">
+              <div class="work-field-display">
+                <span class="field-value">{{ work_publication_date }}</span>
+                {% if session.get('wikimedia_username') %}
+                {% if work_edit_eligibility.get('publicationDate', True) %}
+                <button class="btn btn-link work-field-edit-icon p-0 ms-2" type="button"
+                  onclick="editWorkField(this, 'publicationDate')" aria-label="{{ _('Edit publication date') }}"
+                  title="{{ _('Edit') }}">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                {% else %}
+                <span class="work-field-edit-icon-disabled ms-2"
+                  title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                  data-bs-toggle="tooltip">
+                  <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                  <a href="{{ work_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                    <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                  </a>
+                </span>
+                {% endif %}
+                {% endif %}
+              </div>
+              <div class="work-field-edit d-none">
+                <div class="work-edit-controls">
+                  <div class="date-input-group d-flex align-items-center gap-2 mb-2">
+                    <input type="number" name="publicationDate-day"
+                      class="form-control form-control-sm border-black shadow-none work-date-day-input" placeholder="DD"
+                      min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                    <span class="date-separator">-</span>
+                    <input type="number" name="publicationDate-month"
+                      class="form-control form-control-sm border-black shadow-none work-date-month-input"
+                      placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                    <span class="date-separator">-</span>
+                    <input type="number" name="publicationDate-year"
+                      class="form-control form-control-sm border-black shadow-none work-date-year-input"
+                      placeholder="YYYY" min="0" max="9999" step="1" aria-label="{{ _('Year') }}">
+                  </div>
+
+                  <div id="publicationDate-references" class="d-none mt-3">
+                    <div id="publicationDate-reference-container"></div>
+                  </div>
+
+                  <div class="work-edit-buttons">
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="saveWorkField(this, 'publicationDate')" style="background-color: #f46527; color: black;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill work-cancel-btn" type="button"
+                      onclick="cancelWorkEdit(this)" style="background-color: white; color: black;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
-          {% endif %}          
+          {% endif %}
+
+          <!-- Creation date -->
           {% if work_creation_date %}
-          <div class="detail-item">
-            <span class="detail-label">{{ _('Creation date') }}:</span>
-            {{ work_creation_date }}
+          <div class="work-bio-field bio-row py-2 border-bottom" data-property="P571" data-field="creationDate"
+            data-current-value="{{ work_creation_date_iso|default('', true) }}" data-is-date="true">
+            <div class="fw-bold text-body-secondary detail-label">{{ _('Creation date') }}</div>
+            <div class="col-md-9">
+              <div class="work-field-display">
+                <span class="field-value">{{ work_creation_date }}</span>
+                {% if session.get('wikimedia_username') %}
+                {% if work_edit_eligibility.get('creationDate', True) %}
+                <button class="btn btn-link work-field-edit-icon p-0 ms-2" type="button"
+                  onclick="editWorkField(this, 'creationDate')" aria-label="{{ _('Edit creation date') }}"
+                  title="{{ _('Edit') }}">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                {% else %}
+                <span class="work-field-edit-icon-disabled ms-2"
+                  title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                  data-bs-toggle="tooltip">
+                  <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                  <a href="{{ work_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                    <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                  </a>
+                </span>
+                {% endif %}
+                {% endif %}
+              </div>
+              <div class="work-field-edit d-none">
+                <div class="work-edit-controls">
+                  <div class="date-input-group d-flex align-items-center gap-2 mb-2">
+                    <input type="number" name="creationDate-day"
+                      class="form-control form-control-sm border-black shadow-none work-date-day-input" placeholder="DD"
+                      min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                    <span class="date-separator">-</span>
+                    <input type="number" name="creationDate-month"
+                      class="form-control form-control-sm border-black shadow-none work-date-month-input"
+                      placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                    <span class="date-separator">-</span>
+                    <input type="number" name="creationDate-year"
+                      class="form-control form-control-sm border-black shadow-none work-date-year-input"
+                      placeholder="YYYY" min="0" max="9999" step="1" aria-label="{{ _('Year') }}">
+                  </div>
+
+                  <div id="creationDate-references" class="d-none mt-3">
+                    <div id="creationDate-reference-container"></div>
+                  </div>
+
+                  <div class="work-edit-buttons">
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="saveWorkField(this, 'creationDate')" style="background-color: #f46527; color: black;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill work-cancel-btn" type="button"
+                      onclick="cancelWorkEdit(this)" style="background-color: white; color: black;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
           {% endif %}
+
+          <!-- Language -->
           {% if work_language %}
-          <div class="detail-item">
-            <span class="detail-label">{{ _('Language') }}:</span>
-            {{ work_language }}
+          <div class="work-bio-field bio-row py-2 border-bottom" data-property="P407" data-field="workLanguage"
+            data-current-qid="{{ work_language_qid|default('', true) }}" data-current-label="{{ work_language }}"
+            data-entity-type="item">
+            <div class="fw-bold text-body-secondary detail-label">{{ _('Language') }}</div>
+            <div class="col-md-9">
+              <div class="work-field-display">
+                <span class="field-value">{{ work_language }}</span>
+                {% if session.get('wikimedia_username') %}
+                {% if work_edit_eligibility.get('workLanguage', True) %}
+                <button class="btn btn-link work-field-edit-icon p-0 ms-2" type="button"
+                  onclick="editWorkField(this, 'workLanguage')" aria-label="{{ _('Edit language') }}"
+                  title="{{ _('Edit') }}">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                {% else %}
+                <span class="work-field-edit-icon-disabled ms-2"
+                  title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                  data-bs-toggle="tooltip">
+                  <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                  <a href="{{ work_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                    <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                  </a>
+                </span>
+                {% endif %}
+                {% endif %}
+              </div>
+              <div class="work-field-edit d-none">
+                <div class="work-edit-controls">
+                  <div class="work-search-wrapper">
+                    <input type="text" name="workLanguage-search"
+                      class="form-control form-control-sm border-black shadow-none work-wikidata-search-input"
+                      placeholder="{{ _('Search Wikidata...') }}" aria-label="{{ _('Search for language') }}"
+                      autocomplete="off">
+                    <div class="work-wikidata-results-dropdown"></div>
+                  </div>
+                  <input type="hidden" name="workLanguage-qid" class="work-selected-qid">
+
+                  <div id="workLanguage-references" class="d-none mt-3">
+                    <div id="workLanguage-reference-container"></div>
+                  </div>
+
+                  <div class="work-edit-buttons mt-2">
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="saveWorkField(this, 'workLanguage')" style="background-color: #f46527; color: black;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill work-cancel-btn" type="button"
+                      onclick="cancelWorkEdit(this)" style="background-color: white; color: black;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
           {% endif %}
+
+          <!-- Country of origin -->
           {% if work_country %}
-          <div class="detail-item">
-            <span class="detail-label">{{ _('Country of origin') }}:</span>
-            {{ work_country }}
+          <div class="work-bio-field bio-row py-2 border-bottom" data-property="P495" data-field="countryOfOrigin"
+            data-current-qid="{{ work_country_qid|default('', true) }}" data-current-label="{{ work_country }}"
+            data-entity-type="country">
+            <div class="fw-bold text-body-secondary detail-label">{{ _('Country of origin') }}</div>
+            <div class="col-md-9">
+              <div class="work-field-display">
+                <span class="field-value">{{ work_country }}</span>
+                {% if session.get('wikimedia_username') %}
+                {% if work_edit_eligibility.get('countryOfOrigin', True) %}
+                <button class="btn btn-link work-field-edit-icon p-0 ms-2" type="button"
+                  onclick="editWorkField(this, 'countryOfOrigin')" aria-label="{{ _('Edit country of origin') }}"
+                  title="{{ _('Edit') }}">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                {% else %}
+                <span class="work-field-edit-icon-disabled ms-2"
+                  title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                  data-bs-toggle="tooltip">
+                  <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                  <a href="{{ work_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                    <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                  </a>
+                </span>
+                {% endif %}
+                {% endif %}
+              </div>
+              <div class="work-field-edit d-none">
+                <div class="work-edit-controls">
+                  <div class="work-search-wrapper">
+                    <input type="text" name="countryOfOrigin-search"
+                      class="form-control form-control-sm border-black shadow-none work-wikidata-search-input"
+                      placeholder="{{ _('Search Wikidata...') }}" aria-label="{{ _('Search for country of origin') }}"
+                      autocomplete="off">
+                    <div class="work-wikidata-results-dropdown"></div>
+                  </div>
+                  <input type="hidden" name="countryOfOrigin-qid" class="work-selected-qid">
+
+                  <div id="countryOfOrigin-references" class="d-none mt-3">
+                    <div id="countryOfOrigin-reference-container"></div>
+                  </div>
+
+                  <div class="work-edit-buttons mt-2">
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="saveWorkField(this, 'countryOfOrigin')" style="background-color: #f46527; color: black;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill work-cancel-btn" type="button"
+                      onclick="cancelWorkEdit(this)" style="background-color: white; color: black;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           {% endif %}
+
         </div>
       </div>
+
       <div class="col-md-6">
         <!-- Copyright status card -->
         <div class="detail-card">
@@ -93,8 +341,12 @@
             <i class="bi bi-shield-check section-icon"></i>{{ _('Copyright status') }}
           </h3>
           {% if work_copyright_status %}
-            {% for claim in work_copyright_status %}
-            {% if claim['status_id'] == 'Q50423863' %}<div class="copyright-status-item copyright-status-private-domain">{% else %}<div class="copyright-status-item">{% endif %}
+          {% for claim in work_copyright_status %}
+          {% if claim['status_id'] == 'Q50423863' %}
+          <div class="copyright-status-item copyright-status-private-domain">
+            {% else %}
+            <div class="copyright-status-item">
+              {% endif %}
               {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %} {{ _('in') }}
               {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
               <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
@@ -108,66 +360,374 @@
               {% endif %}
             </div>
             {% endfor %}
-          {% else %}
-          {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
-          <div class="copyright-status-unknown">
-            <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
-            <p>{{ _('To learn more about copyright terms in different countries, visit the %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
+            {% else %}
+            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms
+              page') }}</a>{% endset %}
+            <div class="copyright-status-unknown">
+              <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the
+                jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
+              <p>{{ _('To learn more about copyright terms in different countries, visit the
+                %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
+            </div>
+            {% endif %}
           </div>
-          {% endif %}
-        </div>        
+        </div>
       </div>
-    </div>
-    {% if work_wikisource_links or work_internet_archive_link or work_full_work_link %}
-    <hr class="my-4">
-    <!-- Access work section -->
-    <div class="d-flex align-items-center mb-2">
-      <i class="bi bi-book-half me-2 section-icon"></i>
-      <h3 class="mb-0">{{ _('Access work') }}</h3>
-    </div>
-    <div class="row list-group border-0 flex-row">
-      {% if work_wikisource_links %}
-      {% for wikisource_version, wikisource_link in work_wikisource_links.items() %}
-      <div class="col-md-6 mb-3">
-        <a href="{{wikisource_link['url']}}" target="_blank" class="list-group-item list-group-item-action">
-          <div>
-            <i class="bi bi-journal-text"></i> {{ _('Wikisource') }} {{wikisource_link['language']}}
-          </div>
-          <div class="fw-semibold text-light-emphasis">
-            {{wikisource_link['title']}}
-          </div>
-        </a>
+
+      {% if work_wikisource_links or work_internet_archive_link or work_full_work_link %}
+      <hr class="my-4">
+      <!-- Access work section -->
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-book-half me-2 section-icon"></i>
+        <h3 class="mb-0">{{ _('Access work') }}</h3>
       </div>
-      {% endfor %}
-      {% endif %}
-      {% if work_internet_archive_link %}
-      <div class="col-md-6 mb-3">
-        <a href="{{work_internet_archive_link}}" target="_blank" class="list-group-item list-group-item-action">
-          <div>
-            <i class="bi bi-archive"></i> {{ _('Internet Archive') }}
-          </div>
-          <div class="fw-semibold text-light-emphasis">
-            {{ _('Access on Internet Archive') }}
-          </div>
-        </a>
-      </div>
-      {% endif %}
-      {% if work_full_work_link %}
-      <div class="col-md-6 mb-3">
-        <a href="{{work_full_work_link}}" target="_blank" class="list-group-item list-group-item-action">
-          <div>
-            <i class="bi bi-link-45deg"></i> {{ _('External link') }}
-          </div>
-          <div class="fw-semibold text-light-emphasis">
-            {{ _('Access online') }}
-          </div>
-        </a>
+      <div class="row list-group border-0 flex-row">
+        {% if work_wikisource_links %}
+        {% for wikisource_version, wikisource_link in work_wikisource_links.items() %}
+        <div class="col-md-6 mb-3">
+          <a href="{{wikisource_link['url']}}" target="_blank" class="list-group-item list-group-item-action">
+            <div><i class="bi bi-journal-text"></i> {{ _('Wikisource') }} {{wikisource_link['language']}}</div>
+            <div class="fw-semibold text-light-emphasis">{{wikisource_link['title']}}</div>
+          </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if work_internet_archive_link %}
+        <div class="col-md-6 mb-3">
+          <a href="{{work_internet_archive_link}}" target="_blank" class="list-group-item list-group-item-action">
+            <div><i class="bi bi-archive"></i> {{ _('Internet Archive') }}</div>
+            <div class="fw-semibold text-light-emphasis">{{ _('Access on Internet Archive') }}</div>
+          </a>
+        </div>
+        {% endif %}
+        {% if work_full_work_link %}
+        <div class="col-md-6 mb-3">
+          <a href="{{work_full_work_link}}" target="_blank" class="list-group-item list-group-item-action">
+            <div><i class="bi bi-link-45deg"></i> {{ _('External link') }}</div>
+            <div class="fw-semibold text-light-emphasis">{{ _('Access online') }}</div>
+          </a>
+        </div>
+        {% endif %}
       </div>
       {% endif %}
     </div>
-    {% else %}
-    <!-- No access work section if there are no links -->
-    {% endif %}
   </div>
-</div>
-{% endblock %}
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/wikidata-search.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/references.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/form-utils.js') }}"></script>
+
+  <script>
+    let workSearchInstances = {};
+    let currentlyEditingWorkField = null;
+
+    const wikidataMessages = {
+      searching: '{{ _("Searching Wikidata...") }}',
+      noResults: '{{ _("No Wikidata results found") }}',
+      noDescription: '{{ _("No description") }}',
+      error: '{{ _("Error searching Wikidata") }}',
+      alreadyAdded: '{{ _("This item is already added") }}',
+      alreadySelected: '{{ _("This item is already selected") }}',
+      remove: '{{ _("Remove") }}'
+    };
+
+    const referenceManager = new ReferenceManager({
+      maxReferences: 1,
+      messages: {
+        reference: '{{ _("Reference") }}',
+        url: '{{ _("Reference URL") }}',
+        retrieved: '{{ _("Date accessed") }}',
+        maxReached: '{{ _("Maximum 1 reference per field") }}',
+        remove: '{{ _("Remove") }}'
+      }
+    });
+
+    function formatDateForDisplay(dateString) {
+      if (!dateString) return '';
+      const parts = dateString.split('-');
+      if (parts.length !== 3) return dateString;
+      const year = parts[0];
+      const month = parts[1];
+      const day = parts[2];
+      let display = year;
+      if (month && month !== '00') {
+        display = `${month}/${display}`;
+        if (day && day !== '00') {
+          display = `${day}/${display}`;
+        }
+      }
+      return display;
+    }
+
+    function editWorkField(button, fieldName) {
+      // Close any other open field first
+      if (currentlyEditingWorkField && currentlyEditingWorkField !== fieldName) {
+        const otherField = document.querySelector(`[data-field="${currentlyEditingWorkField}"]`);
+        if (otherField) {
+          const cancelBtn = otherField.querySelector('.work-field-edit .work-cancel-btn');
+          if (cancelBtn) cancelWorkEdit(cancelBtn);
+        }
+      }
+
+      const fieldContainer = button.closest('.work-bio-field');
+      const displayDiv = fieldContainer.querySelector('.work-field-display');
+      const editDiv = fieldContainer.querySelector('.work-field-edit');
+      const isDate = fieldContainer.dataset.isDate === 'true';
+
+      displayDiv.classList.add('d-none');
+      editDiv.classList.remove('d-none');
+      currentlyEditingWorkField = fieldName;
+
+      // Auto-show reference section
+      const refSection = document.getElementById(`${fieldName}-references`);
+      if (refSection && refSection.classList.contains('d-none')) {
+        referenceManager.toggleReference(fieldName);
+      }
+
+      // Handle date fields
+      if (isDate) {
+        const yearInput = editDiv.querySelector('.work-date-year-input');
+        const monthInput = editDiv.querySelector('.work-date-month-input');
+        const dayInput = editDiv.querySelector('.work-date-day-input');
+
+        if (yearInput && monthInput && dayInput) {
+          const currentValue = fieldContainer.dataset.currentValue || '';
+          yearInput.value = '';
+          monthInput.value = '';
+          dayInput.value = '';
+          setTimeout(() => yearInput.focus(), 100);
+        }
+        return;
+      }
+
+      // Handle Wikidata search fields
+      const input = editDiv.querySelector('.work-wikidata-search-input');
+      const resultsDiv = editDiv.querySelector('.work-wikidata-results-dropdown');
+      const hiddenInput = editDiv.querySelector('.work-selected-qid');
+      const entityType = fieldContainer.dataset.entityType || 'item';
+
+      if (!input) return;
+
+      if (!workSearchInstances[fieldName]) {
+        const uniqueId = `work-${fieldName}-${Date.now()}`;
+        input.id = `${uniqueId}-input`;
+        resultsDiv.id = `${uniqueId}-results`;
+        hiddenInput.id = `${uniqueId}-qid`;
+
+        try {
+          workSearchInstances[fieldName] = new WikidataItemSearch({
+            inputId: input.id,
+            hiddenInputId: hiddenInput.id,
+            resultsId: resultsDiv.id,
+            selectedItemsId: null,
+            multiSelect: false,
+            entityType: entityType,
+            messages: wikidataMessages,
+            keepInputVisible: true
+          });
+        } catch (error) {
+          console.error('Error initializing WikidataItemSearch:', error);
+          return;
+        }
+      }
+
+      const currentQid = fieldContainer.dataset.currentQid || '';
+      const currentLabel = fieldContainer.dataset.currentLabel || '';
+      const searchInstance = workSearchInstances[fieldName];
+
+      if (currentQid.trim() && currentLabel.trim()) {
+        searchInstance.prePopulate([{ id: currentQid.trim(), label: currentLabel.trim(), description: '' }]);
+      } else {
+        searchInstance.prePopulate([]);
+      }
+
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function cancelWorkEdit(button) {
+      const fieldContainer = button.closest('.work-bio-field');
+      const displayDiv = fieldContainer.querySelector('.work-field-display');
+      const editDiv = fieldContainer.querySelector('.work-field-edit');
+      const fieldName = fieldContainer.dataset.field;
+
+      const refSection = document.getElementById(`${fieldName}-references`);
+      if (refSection) {
+        refSection.classList.add('d-none');
+        const container = document.getElementById(`${fieldName}-reference-container`);
+        if (container) container.innerHTML = '';
+      }
+
+      displayDiv.classList.remove('d-none');
+      editDiv.classList.add('d-none');
+      currentlyEditingWorkField = null;
+    }
+
+    async function saveWorkField(button, fieldName) {
+      const fieldContainer = button.closest('.work-bio-field');
+      const property = fieldContainer.dataset.property;
+      const isDate = fieldContainer.dataset.isDate === 'true';
+
+      button.disabled = true;
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+
+      let newValue, newLabel;
+
+      const references = collectWorkReferences(fieldName);
+
+      if (isDate) {
+        const yearInput = fieldContainer.querySelector('.work-date-year-input');
+        const monthInput = fieldContainer.querySelector('.work-date-month-input');
+        const dayInput = fieldContainer.querySelector('.work-date-day-input');
+
+        const year = yearInput ? yearInput.value : '';
+        const month = monthInput ? monthInput.value : '';
+        const day = dayInput ? dayInput.value : '';
+
+        const dateValidation = FormUtils.validateDateInput(year, month, day, {
+          yearRequired: '{{ _("Year is required") }}',
+          yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+          monthInvalid: '{{ _("Month must be between 0-12") }}',
+          dayInvalid: '{{ _("Day must be between 0-31") }}',
+          monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
+          monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+        });
+
+        if (!dateValidation.valid) {
+          alert(dateValidation.message);
+          yearInput.classList.add('is-invalid');
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          return;
+        }
+
+        yearInput.classList.remove('is-invalid');
+
+        const combinedDate = FormUtils.combineDateParts(year, month, day);
+        if (!combinedDate) {
+          alert('{{ _("Invalid date format") }}');
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          return;
+        }
+
+        newValue = combinedDate;
+        newLabel = formatDateForDisplay(combinedDate);
+
+      } else {
+        const hiddenInput = fieldContainer.querySelector('.work-selected-qid');
+        newValue = hiddenInput ? hiddenInput.value : '';
+        const searchInput = fieldContainer.querySelector('.work-wikidata-search-input');
+        newLabel = searchInput ? searchInput.value : '';
+      }
+
+      const currentValue = isDate
+        ? fieldContainer.dataset.currentValue
+        : fieldContainer.dataset.currentQid;
+
+      if (!newValue || newValue === currentValue) {
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+        cancelWorkEdit(button);
+        return;
+      }
+
+      const payload = {
+        changes: [{
+          property: property,
+          field: fieldName,
+          value: newValue,
+          label: newLabel,
+          isDate: isDate,
+          isMultiSelect: false,
+          references: references
+        }]
+      };
+
+      try {
+        const response = await fetch('/update-work/{{ work_id }}', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          const valueSpan = fieldContainer.querySelector('.field-value');
+          if (valueSpan) valueSpan.textContent = newLabel;
+
+          if (isDate) {
+            fieldContainer.dataset.currentValue = newValue;
+          } else {
+            fieldContainer.dataset.currentQid = newValue;
+            fieldContainer.dataset.currentLabel = newLabel;
+          }
+
+          const refSection = document.getElementById(`${fieldName}-references`);
+          if (refSection) {
+            refSection.classList.add('d-none');
+            const container = document.getElementById(`${fieldName}-reference-container`);
+            if (container) container.innerHTML = '';
+          }
+
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          cancelWorkEdit(button);
+          showWorkToast('{{ _("Edit published successfully!") }}', 'success');
+
+        } else {
+          alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+        }
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('{{ _("Network error. Please try again.") }}');
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+      }
+    }
+
+    function collectWorkReferences(fieldName) {
+      const container = document.getElementById(`${fieldName}-reference-container`);
+      if (!container) return [];
+
+      const referenceItems = container.querySelectorAll('.reference-item');
+      const references = [];
+
+      if (referenceItems.length > 0) {
+        const item = referenceItems[0];
+        const urlInput = item.querySelector(`input[name="${fieldName}_ref_url_0"]`);
+        const retrievedInput = item.querySelector(`input[name="${fieldName}_ref_retrieved_0"]`);
+
+        if (urlInput && urlInput.value.trim()) {
+          references.push({
+            url: urlInput.value.trim(),
+            retrieved: retrievedInput && retrievedInput.value ? retrievedInput.value : null
+          });
+        }
+      }
+      return references;
+    }
+
+    function showWorkToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = `alert alert-${type} work-toast`;
+      toast.innerHTML = `<i class="bi bi-check-circle me-2"></i>${message}`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 100);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+      new bootstrap.Tooltip(el);
+    });
+  </script>
+
+  {% endblock %}

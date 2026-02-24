@@ -47,6 +47,9 @@ from wikidata_constants import (
     WORK_TYPES,
 )
 
+# Edit comment for Wikidata
+edit_comment = "using [[toolforge:paulina|Paulina]]: data for the public domain"
+
 # WIKIDATA API CLASS
 
 class WikidataAPI:
@@ -110,7 +113,7 @@ class WikidataAPI:
                     "descriptions": descriptions,
                     "statements": grouped_statements
                 },
-                "comment": "using [[toolforge:paulina|Paulina]]: data for the public domain",
+                "comment": edit_comment,
             }
             
             create_url = f"{self.rest_api_url}/entities/items"
@@ -120,21 +123,13 @@ class WikidataAPI:
                 'User-Agent': self.user_agent
             }
             
-            # Add Bearer token only for production Wikidata
-            if not WIKIDATA_TEST_MODE:
-                token = self.oauth_session.token
-                headers['Authorization'] = f"Bearer {token['access_token']}"
-            else:
-                print(f"Test mode - no authentication required")
-            
+            token = self.oauth_session.token
+            headers['Authorization'] = f"Bearer {token['access_token']}"
+
             print(f"Creating item at: {create_url}")
             print(f"Item data: {json.dumps(item_data, indent=2, ensure_ascii=False, default=str)}")
 
-            # Use regular requests for test mode, oauth_session for production
-            if WIKIDATA_TEST_MODE:
-                response = requests.post(create_url, json=item_data, headers=headers)
-            else:
-                response = self.oauth_session.post(create_url, json=item_data, headers=headers)
+            response = self.oauth_session.post(create_url, json=item_data, headers=headers)
             
             print(f"Response status: {response.status_code}")
             print(f"Response body: {response.text}")
@@ -172,7 +167,7 @@ class WikidataAPI:
         Build a statement structure for the API
         
         Args:
-            property_id: Wikidata property ID (e.g., 'P31')
+            property_id: Wikidata property ID 
             value: The value (Q-id for items, string for strings, etc.)
             value_type: Type of value ('wikibase-item', 'string', 'time', 'url', 'commonsMedia')
             references: List of reference dicts (optional)
@@ -857,6 +852,159 @@ class WikidataAPI:
         
         return statements
     
+    
+# STATEMENT UPDATE PROCESSING
+    def update_statement_field(self, item_id, property_id, value, field_name, is_date=False, is_multi_select=False, references=None):
+        """
+        Update a single statement field on any Wikidata item (author, work, etc.).
+        
+        Args:
+            item_id: Wikidata item ID 
+            property_id: Wikidata property ID 
+            value: New value 
+            field_name: Field identifier for error messages
+            is_date: Whether this is a date field
+            is_multi_select: Whether this is a multi-select field 
+            references: List of reference dicts with 'url' and 'retrieved' keys (optional)
+        
+        Returns:
+            dict with 'success' and optional 'error' key
+        """
+        try:
+            if not self.oauth_session:
+                return {'success': False, 'error': 'Not authenticated'}
+            
+            # Get the current item to find existing statements
+            item_url = f"{self.rest_api_url}/entities/items/{item_id}"
+            headers = {'User-Agent': self.user_agent}
+            
+            get_response = self.oauth_session.get(item_url, headers=headers)
+            
+            if get_response.status_code != 200:
+                return {'success': False, 'error': f'Could not retrieve item: {get_response.status_code}'}
+            
+            item_data = get_response.json()
+            statements = item_data.get('statements', {})
+            
+            # Build reference objects if provided
+            built_references = []
+            if references:
+                for ref_data in references:
+                    url = ref_data.get('url', '').strip()
+                    retrieved = ref_data.get('retrieved', '').strip()
+                    
+                    if url:
+                        if not url.startswith(('http://', 'https://')):
+                            url = 'https://' + url
+                        built_ref = self.build_reference(url, retrieved if retrieved else None)
+                        built_references.append(built_ref)
+            
+            # Handle multi-select fields 
+            if is_multi_select:
+                qids = [qid.strip() for qid in value.split(',') if qid.strip()]
+                
+                existing_statements = statements.get(property_id, [])
+                existing_qids_to_stmt = {
+                    stmt['value']['content']: stmt['id']
+                    for stmt in existing_statements
+                    if stmt.get('value', {}).get('content')
+                }
+                
+                # Step 1: Delete statements no longer in the list
+                for existing_qid, stmt_id in list(existing_qids_to_stmt.items()):
+                    if existing_qid not in qids:
+                        delete_url = f"{self.rest_api_url}/statements/{stmt_id}"
+                        delete_response = self.oauth_session.delete(
+                            delete_url,
+                            headers={'User-Agent': self.user_agent}
+                        )
+                        if delete_response.status_code in [200, 204]:
+                            del existing_qids_to_stmt[existing_qid]
+                        else:
+                            print(f"Warning: Failed to delete statement {stmt_id}: {delete_response.status_code} - {delete_response.text}")
+                
+                # Step 2: Add new statements that don't exist yet
+                for qid in qids:
+                    if qid not in existing_qids_to_stmt:
+                        new_statement = self.build_statement(property_id, qid, 'wikibase-item', None)
+                        create_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
+                        create_response = self.oauth_session.post(
+                            create_url,
+                            json={'statement': new_statement, 'comment': edit_comment},
+                            headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
+                        )
+                        if create_response.status_code != 201:
+                            return {'success': False, 'error': f'Failed to add {qid}: {create_response.text}'}
+                
+                return {'success': True}
+            
+           # Handle single-value fields (dates or single items)
+            else:
+                existing_statements = statements.get(property_id, [])
+                
+                if existing_statements:
+                    # PUT replaces the entire statement: value, references, qualifiers, rank
+                    statement_id = existing_statements[0]['id']
+                    put_url = f"{self.rest_api_url}/statements/{statement_id}"
+                    
+                    if is_date:
+                        new_value = {
+                            'type': 'value',
+                            'content': {
+                                'time': self._format_date(value),
+                                'precision': self._get_date_precision(value),
+                                'calendarmodel': 'http://www.wikidata.org/entity/Q1985727'
+                            }
+                        }
+                    else:
+                        new_value = {
+                            'type': 'value',
+                            'content': value  
+                        }
+                    
+                    put_data = {
+                        'statement': {
+                            'id': statement_id,
+                            'property': {'id': property_id},
+                            'value': new_value,
+                            'qualifiers': [],      
+                            'references': [built_references[0]] if built_references else [],
+                            'rank': 'normal'
+                        },
+                        'comment': edit_comment
+                    }
+                    
+                    put_response = self.oauth_session.put(
+                        put_url,
+                        json=put_data,
+                        headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
+                    )
+                    
+                    if put_response.status_code != 200:
+                        return {'success': False, 'error': f'Failed to update statement: {put_response.status_code} - {put_response.text}'}
+                
+                else:
+                    # Create new statement if no existing statement to replace
+                    if is_date:
+                        new_statement = self.build_statement(property_id, value, 'time', built_references if built_references else None)
+                    else:
+                        new_statement = self.build_statement(property_id, value, 'wikibase-item', built_references if built_references else None)
+                    
+                    create_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
+                    create_response = self.oauth_session.post(
+                        create_url,
+                        json={'statement': new_statement, 'comment': edit_comment},
+                        headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
+                    )
+                    
+                    if create_response.status_code != 201:
+                        return {'success': False, 'error': f'Failed to create statement: {create_response.status_code} - {create_response.text}'}
+                
+                return {'success': True}
+                    
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+    
     # HELPER METHODS
     
     def _format_date(self, date_string):
@@ -1007,7 +1155,7 @@ def generate_work_description(work_type_label, creator_label, creation_date=None
     Format: "{work_type} by {creator}" or "{work_type} by {creator} (year)"
     
     Args:
-        work_type_label: Human-readable work type label (e.g., "literary work", "film", "painting")
+        work_type_label: Human-readable work type label 
         creator_label: Human-readable creator name(s) (can be multiple, comma-separated)
         creation_date: Creation/publication date string in YYYY-MM-DD format (optional)
         lang: Language code for the description

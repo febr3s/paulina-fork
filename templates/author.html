@@ -2,9 +2,17 @@
 
 {% block content %}
 <div class="container-fluid p-2">
-  <!-- Edit Wikidata link -->
+  <!--  Login prompt -->
   <div class="text-end mb-2">
-    <small class="text-body-secondary">{{ _('Missing/wrong data?') }} <a href="{{author_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a></small>
+    {% if session.get('wikimedia_username') %}
+    <!-- Logged in users: show visible edit field icons -->
+    {% else %}
+    <!-- Not logged in: show login prompt -->
+    <small class="text-body-secondary">
+      {{ _('Missing/wrong data?') }}
+      <a href="{{ url_for('login') }}">{{ _('Log in to edit') }}</a>
+    </small>
+    {% endif %}
   </div>
   <!-- Author card -->
   <div class="card main-card mb-4 p-4">
@@ -25,18 +33,18 @@
         <p>{{author_description}}</p>
         <div class="my-4">
           <a href="{{ url_for('works_list', author_id=author_id) }}" role="button"
-          class="btn border-black rounded-pill pill-custom orange">
-          {{ _('Search works') }}
+            class="btn border-black rounded-pill pill-custom orange">
+            {{ _('Search works') }}
           </a>
         </div>
         {% if author_is_in_public_domain is iterable and (
-          author_is_in_public_domain is not string and 
-          author_is_in_public_domain is not mapping
-          ) %}
-          {% for claim in author_is_in_public_domain %}
-            {% if claim['status_id'] == 'Q73555012' %}
-            <div class="public-domain-badge pd-no mb-2"><span class="pd-icon">&cross;</span>{% else %}
-            <div class="public-domain-badge pd-yes mb-2"><span class="pd-icon">&check;</span>{% endif %}
+        author_is_in_public_domain is not string and
+        author_is_in_public_domain is not mapping
+        ) %}
+        {% for claim in author_is_in_public_domain %}
+        {% if claim['status_id'] == 'Q73555012' %}
+        <div class="public-domain-badge pd-no mb-2"><span class="pd-icon">&cross;</span>{% else %}
+          <div class="public-domain-badge pd-yes mb-2"><span class="pd-icon">&check;</span>{% endif %}
             {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %}
             {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
             {{ _('in') }} <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
@@ -56,111 +64,976 @@
             {% endif %}
           </div>
           {% endfor %}
-        {% elif author_is_in_public_domain == True %}
-        <div class="public-domain-badge pd-yes mb-2">
-          <span class="pd-icon">&check;</span> {{ _('Works are in the public domain') }}
-        </div>
-        {% elif author_is_in_public_domain == False %}
-        <div class="public-domain-badge pd-no mb-2">
-          <span class="pd-icon">&cross;</span> {{ _('Works are not in the worldwide public domain') }}
-          {% if author_date_enter_public_domain %}
-          {{ _('until January 1, ') }} {{author_date_enter_public_domain}}
+          {% elif author_is_in_public_domain == True %}
+          <div class="public-domain-badge pd-yes mb-2">
+            <span class="pd-icon">&check;</span> {{ _('Works are in the public domain') }}
+          </div>
+          {% elif author_is_in_public_domain == False %}
+          <div class="public-domain-badge pd-no mb-2">
+            <span class="pd-icon">&cross;</span> {{ _('Works are not in the worldwide public domain') }}
+            {% if author_date_enter_public_domain %}
+            {{ _('until January 1, ') }} {{author_date_enter_public_domain}}
+            {% endif %}
+          </div>
+          {% elif author_is_in_public_domain == 'Consult individual works' %}
+          <div class="public-domain-badge pd-consult mb-2">
+            <span class="pd-icon">!</span> <a href="{{ url_for('works_list', author_id=author_id) }}">
+              {{ _('Consult individual works for public domain status') }}</a>
+          </div>
+          {% elif author_is_in_public_domain == 'Unknown' %}
+          <div class="public-domain-badge pd-unknown mb-2">
+            <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth
+            and death.') }}
+            <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
+          </div>
           {% endif %}
+          <div class="mb-2">
+            {% if author_wikidata_link %}
+            <a href="{{author_wikidata_link}}" target="_blank">{{ _('Wikidata') }}</a>
+            {% endif %}
+            {% if author_wikipedia_link %}
+            | <a href="{{author_wikipedia_link}}" target="_blank">{{ _('Wikipedia') }}</a>
+            {% endif %}
+            {% if author_commons_link %}
+            | <a href="{{author_commons_link}}" target="_blank">{{ _('Wikimedia Commons') }}</a>
+            {% endif %}
+            {% if author_wikisource_link %}
+            | <a href="{{author_wikisource_link}}" target="_blank">{{ _('Wikisource') }}</a>
+            {% endif %}
+            {% if author_wikiquote_link %}
+            | <a href="{{author_wikiquote_link}}" target="_blank">{{ _('Wikiquote') }}</a>
+            {% endif %}
+            {% if author_official_website %}
+            | <a href="{{author_official_website}}" target="_blank">{{ _('Official website') }}</a>
+            {% endif %}
+          </div>
         </div>
-        {% elif author_is_in_public_domain == 'Consult individual works' %}
-        <div class="public-domain-badge pd-consult mb-2">
-          <span class="pd-icon">!</span> <a href="{{ url_for('works_list', author_id=author_id) }}">
-            {{ _('Consult individual works for public domain status') }}</a>
+      </div>
+      <hr>
+      <!-- Author card biography section -->
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi bi-person-lines-fill me-2 section-icon"></i>
+        <h3 class="mb-0">{{ _('Biography') }}</h3>
+      </div>
+
+      <!-- No-JS warning (only for logged-in users) -->
+      {% if session.get('wikimedia_username') %}
+      <noscript>
+        <div class="alert alert-info alert-sm mt-2 mb-3">
+          <i class="bi bi-info-circle"></i>
+          {{ _('Please enable JavaScript (it is required for inline editing), or') }}
+          <a href="{{author_wikidata_link}}" target="_blank" class="alert-link">
+            {{ _('edit on Wikidata') }}
+          </a>
         </div>
-        {% elif author_is_in_public_domain == 'Unknown' %}
-        <div class="public-domain-badge pd-unknown mb-2">
-          <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth and death.') }}
-        <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
+      </noscript>
+      {% endif %}
+
+      <!-- Biography details -->
+      <div class="mt-2" id="author-biography-section">
+        {% if author_nationality %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P27" data-field="nationality"
+          data-current-qid="{{ author_nationality_qid|default('', true) }}"
+          data-current-label="{{ author_nationality }}" data-entity-type="country">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Nationality') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_nationality}}</span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('nationality', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'nationality')" aria-label="{{ _('Edit nationality') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="author-search-wrapper">
+                  <input type="text" name="nationality-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for country...') }}" aria-label="{{ _('Search for nationality') }}"
+                    autocomplete="off">
+                  <div class="author-wikidata-results-dropdown"></div>
+                </div>
+                <input type="hidden" name="nationality-qid" class="author-selected-qid">
+                <div id="nationality-references" class="d-none mt-3">
+                  <div id="nationality-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'nationality')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         {% endif %}
-        <div class="mb-2">
-          {% if author_wikidata_link %}
-          <a href="{{author_wikidata_link}}" target="_blank">{{ _('Wikidata') }}</a>
-          {% endif %}
-          {% if author_wikipedia_link %}
-          | <a href="{{author_wikipedia_link}}" target="_blank">{{ _('Wikipedia') }}</a>
-          {% endif %}
-          {% if author_commons_link %}
-          | <a href="{{author_commons_link}}" target="_blank">{{ _('Wikimedia Commons') }}</a>
-          {% endif %}
-          {% if author_wikisource_link %}
-          | <a href="{{author_wikisource_link}}" target="_blank">{{ _('Wikisource') }}</a>
-          {% endif %}
-          {% if author_wikiquote_link %}
-          | <a href="{{author_wikiquote_link}}" target="_blank">{{ _('Wikiquote') }}</a>
-          {% endif %}
-          {% if author_official_website %}
-          | <a href="{{author_official_website}}" target="_blank">{{ _('Official website') }}</a>
-          {% endif %}
+
+        {% if author_ethnicity %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P172" data-field="ethnicity"
+          data-current-qid="{{ author_ethnicity_qid|default('', true) }}" data-current-label="{{ author_ethnicity }}"
+          data-entity-type="item">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Ethnicity') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_ethnicity}}</span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('ethnicity', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'ethnicity')" aria-label="{{ _('Edit ethnicity') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="author-search-wrapper">
+                  <input type="text" name="ethnicity-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for ethnicity...') }}" aria-label="{{ _('Search for ethnicity') }}"
+                    autocomplete="off">
+                  <div class="author-wikidata-results-dropdown"></div>
+                </div>
+                <input type="hidden" name="ethnicity-qid" class="author-selected-qid">
+                <div id="ethnicity-references" class="d-none mt-3">
+                  <div id="ethnicity-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'ethnicity')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        {% endif %}
+
+        {% if author_gender %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P21" data-field="gender"
+          data-current-qid="{{ author_gender_qid|default('', true) }}" data-current-label="{{ author_gender }}"
+          data-entity-type="item">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Gender') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_gender}}</span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('gender', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'gender')" aria-label="{{ _('Edit gender') }}" title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <select name="gender-select"
+                  class="form-select form-select-sm border-black shadow-none author-gender-select"
+                  aria-label="{{ _('Select gender') }}">
+                  <option value="">{{ _('Select gender...') }}</option>
+                  {% for gender in form_genders %}
+                  <option value="{{ gender.qid }}">{{ gender.gender_name }}</option>
+                  {% endfor %}
+                </select>
+                <div id="gender-references" class="d-none mt-3">
+                  <div id="gender-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons mt-2">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'gender')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if author_date_of_birth %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P569" data-field="dateOfBirth"
+          data-current-value="{{ author_date_of_birth_iso|default('', true) }}" data-is-date="true">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_date_of_birth}}
+                {% if author_age and not author_date_of_death %}
+                <span class="text-muted">({{author_age}} {{ _('years') }})</span>
+                {% endif %}
+              </span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('dateOfBirth', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'dateOfBirth')" aria-label="{{ _('Edit date of birth') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="date-input-group d-flex align-items-center gap-2 mb-2">
+                  <input type="number" name="dateOfBirth-day"
+                    class="form-control form-control-sm border-black shadow-none author-date-day-input" placeholder="DD"
+                    min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                  <span class="date-separator">-</span>
+                  <input type="number" name="dateOfBirth-month"
+                    class="form-control form-control-sm border-black shadow-none author-date-month-input"
+                    placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                  <span class="date-separator">-</span>
+                  <input type="number" name="dateOfBirth-year"
+                    class="form-control form-control-sm border-black shadow-none author-date-year-input"
+                    placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                </div>
+                <div id="dateOfBirth-references" class="d-none mt-3">
+                  <div id="dateOfBirth-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'dateOfBirth')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if author_occupation %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P106" data-field="occupation"
+          data-current-qid="{{ author_occupation_qid|default('', true) }}"
+          data-current-label="{{ author_occupation|join(', ') if author_occupation is iterable and author_occupation is not string else author_occupation }}"
+          data-entity-type="item" data-multi-select="true">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Occupation') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_occupation}}</span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('occupation', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'occupation')" aria-label="{{ _('Edit occupation') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls w-100">
+                <div class="author-search-wrapper w-100">
+                  <input type="text" name="occupation-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for occupation(s)...') }}" aria-label="{{ _('Search for occupation') }}"
+                    autocomplete="off">
+                  <div class="author-wikidata-results-dropdown"></div>
+                </div>
+                <div class="author-selected-items mt-2"></div>
+                <input type="hidden" name="occupation-qid" class="author-selected-qid">
+                <div id="occupation-references" class="d-none mt-3">
+                  <div id="occupation-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons mt-2">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'occupation')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if author_place_of_birth %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P19" data-field="placeOfBirth"
+          data-current-qid="{{ author_place_of_birth_qid|default('', true) }}"
+          data-current-label="{{ author_place_of_birth }}" data-entity-type="item">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Place of birth') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_place_of_birth}}</span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('placeOfBirth', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'placeOfBirth')" aria-label="{{ _('Edit place of birth') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="author-search-wrapper">
+                  <input type="text" name="placeOfBirth-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for place...') }}" aria-label="{{ _('Search for place of birth') }}"
+                    autocomplete="off">
+                  <div class="author-wikidata-results-dropdown"></div>
+                </div>
+                <input type="hidden" name="placeOfBirth-qid" class="author-selected-qid">
+                <div id="placeOfBirth-references" class="d-none mt-3">
+                  <div id="placeOfBirth-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'placeOfBirth')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if author_country_of_birth %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P27" data-field="countryOfBirth"
+          data-current-qid="{{ author_country_of_birth_qid|default('', true) }}"
+          data-current-label="{{ author_country_of_birth }}" data-entity-type="country">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Country of birth') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_country_of_birth}}</span>
+              {% if session.get('wikimedia_username') %}
+              <span class="author-field-edit-icon-disabled ms-2 d-flex align-items-center gap-1"
+                title="{{ _('Country of birth is derived from place of birth.') }}" data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+              </span>
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="author-search-wrapper">
+                  <input type="text" name="countryOfBirth-search"
+                    class="form-control form-control-sm author-wikidata-search-input"
+                    placeholder="{{ _('Search for country...') }}" aria-label="{{ _('Search for country of birth') }}"
+                    autocomplete="off">
+                  <div class="author-wikidata-results-dropdown"></div>
+                </div>
+                <input type="hidden" name="countryOfBirth-qid" class="author-selected-qid">
+                <div id="countryOfBirth-references" class="d-none mt-3">
+                  <div id="countryOfBirth-reference-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if author_date_of_death %}
+        <div class="author-bio-field row bio-row py-2 border-bottom" data-property="P570" data-field="dateOfDeath"
+          data-current-value="{{ author_date_of_death_iso|default('', true) }}" data-is-date="true">
+          <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
+          <div class="col-md-9">
+            <div class="author-field-display">
+              <span class="field-value">{{author_date_of_death}}
+                {% if author_age and author_date_of_death %}
+                <span class="text-muted">({{author_age}} {{ _('years') }})</span>
+                {% endif %}
+              </span>
+              {% if session.get('wikimedia_username') %}
+              {% if edit_eligibility.get('dateOfDeath', True) %}
+              <button class="btn btn-link author-field-edit-icon p-0 ms-2" type="button"
+                onclick="editAuthorField(this, 'dateOfDeath')" aria-label="{{ _('Edit date of death') }}"
+                title="{{ _('Edit') }}">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              {% else %}
+              <span class="author-field-edit-icon-disabled ms-2"
+                title="{{ _('This field has multiple values. Please edit directly on Wikidata.') }}"
+                data-bs-toggle="tooltip">
+                <i class="bi bi-pencil-fill text-muted opacity-50"></i>
+                <a href="{{ author_wikidata_link }}" target="_blank" class="ms-1" title="{{ _('Edit on Wikidata') }}">
+                  <i class="bi bi-question-circle text-muted" style="font-size: 0.85em;"></i>
+                </a>
+              </span>
+              {% endif %}
+              {% endif %}
+            </div>
+            <div class="author-field-edit d-none">
+              <div class="author-edit-controls">
+                <div class="date-input-group d-flex align-items-center gap-2 mb-2">
+                  <input type="number" name="dateOfDeath-day"
+                    class="form-control form-control-sm border-black shadow-none author-date-day-input" placeholder="DD"
+                    min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                  <span class="date-separator">-</span>
+                  <input type="number" name="dateOfDeath-month"
+                    class="form-control form-control-sm border-black shadow-none author-date-month-input"
+                    placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                  <span class="date-separator">-</span>
+                  <input type="number" name="dateOfDeath-year"
+                    class="form-control form-control-sm border-black shadow-none author-date-year-input"
+                    placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                </div>
+                <div id="dateOfDeath-references" class="d-none mt-3">
+                  <div id="dateOfDeath-reference-container"></div>
+                </div>
+                <div class="author-edit-buttons">
+                  <button class="btn btn-sm border-black rounded-pill" type="button"
+                    onclick="saveAuthorField(this, 'dateOfDeath')" style="background-color: #f46527; color: black;">
+                    <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                  </button>
+                  <button class="btn btn-sm border-black rounded-pill author-cancel-btn" type="button"
+                    onclick="cancelAuthorEdit(this)" style="background-color: white; color: black;">
+                    <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
-    </div>
-    <hr>
-    <!-- Author card biography section -->
-    <div class="d-flex align-items-center mb-2">
-      <i class="bi bi-person-lines-fill me-2 section-icon"></i>
-      <h3 class="mb-0">{{ _('Biography') }}</h3>
-    </div>
-    <!-- Biography details -->
-    <div class="mt-2">
-      {% if author_nationality %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Nationality') }}</div>
-        <div class="col-md-9">{{author_nationality}}</div>
-      </div>
-      {% endif %}
-      {% if author_ethnicity %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Ethnicity') }}</div>
-        <div class="col-md-9">{{author_ethnicity}}</div>
-      </div>
-      {% endif %}
-      {% if author_gender %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Gender') }}</div>
-        <div class="col-md-9">{{author_gender}}</div>
-      </div>
-      {% endif %}
-      {% if author_date_of_birth %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of birth') }}</div>
-        <div class="col-md-9">{{author_date_of_birth}}
-          {% if author_age and not author_date_of_death %}
-          {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
-      </div>
-      {% endif %}
-      {% if author_occupation %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Occupation') }}</div>
-        <div class="col-md-9">{{author_occupation}}</div>
-      </div>
-      {% endif %}
-      {% if author_place_of_birth %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Place of birth') }}</div>
-        <div class="col-md-9">{{author_place_of_birth}}</div>
-      </div>
-      {% endif %}
-      {% if author_country_of_birth %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Country of birth') }}</div>
-        <div class="col-md-9">{{author_country_of_birth}}</div>
-      </div>
-      {% endif %}
-      {% if author_date_of_death %}
-      <div class="row bio-row py-2 border-bottom">
-        <div class="col-md-3 fw-bold text-body-secondary">{{ _('Date of death') }}</div>
-        <div class="col-md-9">{{author_date_of_death}}
-          {% if author_age and author_date_of_death %}
-          {% trans %}({{author_age}} years){% endtrans %}{% endif %}</div>
-      </div>
-      {% endif %}      
     </div>
   </div>
 </div>
+
+
+
+<!-- Load Wikidata search script -->
+<script src="{{ url_for('static', filename='js/wikidata-search.js') }}"></script>
+<!-- Load Reference Manager -->
+<script src="{{ url_for('static', filename='js/references.js') }}"></script>
+<!-- Load Form Utils -->
+<script src="{{ url_for('static', filename='js/form-utils.js') }}"></script>
+
+<script>
+  // Author field editing functionality
+  let authorSearchInstances = {};
+  let currentlyEditingField = null;
+
+  // Translatable messages for WikidataItemSearch
+  const wikidataMessages = {
+    searching: '{{ _("Searching Wikidata...") }}',
+    noResults: '{{ _("No Wikidata results found") }}',
+    noDescription: '{{ _("No description") }}',
+    error: '{{ _("Error searching Wikidata") }}',
+    alreadyAdded: '{{ _("This item is already added") }}',
+    alreadySelected: '{{ _("This item is already selected") }}',
+    remove: '{{ _("Remove") }}'
+  };
+
+  // Initialize Reference Manager
+  const referenceManager = new ReferenceManager({
+    maxReferences: 1,
+    messages: {
+      reference: '{{ _("Reference") }}',
+      url: '{{ _("Reference URL") }}',
+      retrieved: '{{ _("Date accessed") }}',
+      maxReached: '{{ _("Maximum 1 reference per field") }}',
+      remove: '{{ _("Remove") }}'
+    }
+  });
+
+  function toggleFieldReference(button, fieldName) {
+    referenceManager.toggleReference(fieldName);
+  }
+
+  function formatDateForDisplay(dateString) {
+    // Convert YYYY-MM-DD to more readable format
+    if (!dateString) return '';
+
+    const parts = dateString.split('-');
+    if (parts.length !== 3) return dateString;
+
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    // Build display string
+    let display = year;
+
+    if (month && month !== '00') {
+      display = `${month}/${display}`;
+
+      if (day && day !== '00') {
+        display = `${day}/${display}`;
+      }
+    }
+
+    return display;
+  }
+
+  function editAuthorField(button, fieldName) {
+    // Close any other open field first
+    if (currentlyEditingField && currentlyEditingField !== fieldName) {
+      const otherField = document.querySelector(`[data-field="${currentlyEditingField}"]`);
+      if (otherField) {
+        const cancelBtn = otherField.querySelector('.author-field-edit .author-cancel-btn');
+        if (cancelBtn) cancelAuthorEdit(cancelBtn);
+      }
+    }
+
+    const fieldContainer = button.closest('.author-bio-field');
+    const displayDiv = fieldContainer.querySelector('.author-field-display');
+    const editDiv = fieldContainer.querySelector('.author-field-edit');
+    const isDate = fieldContainer.dataset.isDate === 'true';
+    const isMultiSelect = fieldContainer.dataset.multiSelect === 'true';
+
+    // Hide display, show edit
+    displayDiv.classList.add('d-none');
+    editDiv.classList.remove('d-none');
+    currentlyEditingField = fieldName;
+
+    // Auto-show reference section except for occupation
+    if (fieldName !== 'occupation') {
+      const refSection = document.getElementById(`${fieldName}-references`);
+      if (refSection && refSection.classList.contains('d-none')) {
+        referenceManager.toggleReference(fieldName);
+      }
+    }
+
+    // Handle gender dropdown
+    if (fieldName === 'gender') {
+      const select = editDiv.querySelector('.author-gender-select');
+      if (select) {
+        const currentQid = fieldContainer.dataset.currentQid || '';
+        select.value = currentQid;
+        setTimeout(() => select.focus(), 100);
+      }
+      return;
+    }
+
+    // Handle date fields 
+    if (isDate) {
+      const yearInput = editDiv.querySelector('.author-date-year-input');
+      const monthInput = editDiv.querySelector('.author-date-month-input');
+      const dayInput = editDiv.querySelector('.author-date-day-input');
+
+      if (yearInput && monthInput && dayInput) {
+        // Parse current date value (YYYY-MM-DD format)
+        const currentValue = fieldContainer.dataset.currentValue || '';
+        yearInput.value = '';
+        monthInput.value = '';
+        dayInput.value = '';
+
+        setTimeout(() => yearInput.focus(), 100);
+      }
+      return;
+    }
+
+    // Handle Wikidata search fields
+    const input = editDiv.querySelector('.author-wikidata-search-input');
+    const resultsDiv = editDiv.querySelector('.author-wikidata-results-dropdown');
+    const hiddenInput = editDiv.querySelector('.author-selected-qid');
+    const selectedItemsDiv = editDiv.querySelector('.author-selected-items');
+    const entityType = fieldContainer.dataset.entityType || 'item';
+
+    if (!input) return;
+
+    // Initialize search instance only once per field
+    if (!authorSearchInstances[fieldName]) {
+      // Give the elements unique IDs
+      const uniqueId = `author-${fieldName}-${Date.now()}`;
+      input.id = `${uniqueId}-input`;
+      resultsDiv.id = `${uniqueId}-results`;
+      hiddenInput.id = `${uniqueId}-qid`;
+      if (selectedItemsDiv) {
+        selectedItemsDiv.id = `${uniqueId}-selected`;
+      }
+
+      try {
+        const searchInstance = new WikidataItemSearch({
+          inputId: input.id,
+          hiddenInputId: hiddenInput.id,
+          resultsId: resultsDiv.id,
+          selectedItemsId: selectedItemsDiv ? selectedItemsDiv.id : null,
+          multiSelect: isMultiSelect,
+          entityType: entityType,
+          messages: wikidataMessages,
+          keepInputVisible: !isMultiSelect  // Keep input visible for single-select
+        });
+
+        authorSearchInstances[fieldName] = searchInstance;
+      } catch (error) {
+        console.error('Error initializing WikidataItemSearch:', error);
+        return;
+      }
+    }
+
+    // Get current values from data attributes
+    const currentQid = fieldContainer.dataset.currentQid || '';
+    const currentLabel = fieldContainer.dataset.currentLabel || '';
+    const searchInstance = authorSearchInstances[fieldName];
+
+    // Pre-populate with current values using the prePopulate method
+    if (currentQid.trim() && currentLabel.trim()) {
+      if (isMultiSelect) {
+        // Multi-select: parse comma-separated values
+        const qids = currentQid.split(',').map(q => q.trim()).filter(q => q);
+        const labels = currentLabel.split(',').map(l => l.trim()).filter(l => l);
+
+        const items = qids.map((qid, index) => ({
+          id: qid,
+          label: labels[index] || '',
+          description: ''
+        }));
+        searchInstance.prePopulate(items);
+      } else {
+        // Single-select: one item
+        const item = {
+          id: currentQid.trim(),
+          label: currentLabel.trim(),
+          description: ''
+        };
+        searchInstance.prePopulate([item]);
+      }
+    } else {
+      // No current value - clear everything
+      searchInstance.prePopulate([]);
+    }
+
+    // Focus the input
+    setTimeout(() => {
+      input.focus();
+    }, 100);
+  }
+
+  function cancelAuthorEdit(button) {
+    const fieldContainer = button.closest('.author-bio-field');
+    const displayDiv = fieldContainer.querySelector('.author-field-display');
+    const editDiv = fieldContainer.querySelector('.author-field-edit');
+    const fieldName = fieldContainer.dataset.field;
+
+    // Hide and clear references
+    if (fieldName !== 'occupation') {
+      const refSection = document.getElementById(`${fieldName}-references`);
+      if (refSection) {
+        refSection.classList.add('d-none');
+        const container = document.getElementById(`${fieldName}-reference-container`);
+        if (container) container.innerHTML = '';
+      }
+    }
+
+    displayDiv.classList.remove('d-none');
+    editDiv.classList.add('d-none');
+    currentlyEditingField = null;
+  }
+
+  async function saveAuthorField(button, fieldName) {
+    const fieldContainer = button.closest('.author-bio-field');
+    const property = fieldContainer.dataset.property;
+    const isDate = fieldContainer.dataset.isDate === 'true';
+    const isMultiSelect = fieldContainer.dataset.multiSelect === 'true';
+
+    // Disable button while saving - MUST be at the top before any validation
+    button.disabled = true;
+    const originalHTML = button.innerHTML;
+    button.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+
+    let newValue, newLabel;
+
+    // Collect references
+    const references = collectFieldReferences(fieldName);
+
+    if (isDate) {
+      const yearInput = fieldContainer.querySelector('.author-date-year-input');
+      const monthInput = fieldContainer.querySelector('.author-date-month-input');
+      const dayInput = fieldContainer.querySelector('.author-date-day-input');
+
+      const year = yearInput ? yearInput.value : '';
+      const month = monthInput ? monthInput.value : '';
+      const day = dayInput ? dayInput.value : '';
+
+      // Validate date inputs using FormUtils
+      const dateValidation = FormUtils.validateDateInput(year, month, day, {
+        yearRequired: '{{ _("Year is required") }}',
+        yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+        monthInvalid: '{{ _("Month must be between 0-12 (use 0 for unknown)") }}',
+        dayInvalid: '{{ _("Day must be between 0-31 (use 0 for unknown)") }}',
+        monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
+        monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+      });
+
+      if (!dateValidation.valid) {
+        alert(dateValidation.message);
+        yearInput.classList.add('is-invalid');
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+        return;
+      }
+
+      // Remove validation styling on success
+      yearInput.classList.remove('is-invalid');
+
+      // Combine date parts using FormUtils
+      const combinedDate = FormUtils.combineDateParts(year, month, day);
+      if (!combinedDate) {
+        alert('{{ _("Invalid date format") }}');
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+        return;
+      }
+
+      newValue = combinedDate;
+      newLabel = formatDateForDisplay(combinedDate);
+
+    } else {
+
+      // Handle gender dropdown
+      if (fieldName === 'gender') {
+        const select = fieldContainer.querySelector('.author-gender-select');
+        newValue = select ? select.value : '';
+        newLabel = select ? select.options[select.selectedIndex]?.text : '';
+
+        if (!newValue) {
+          alert('{{ _("Please select a gender") }}');
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          return;
+        }
+
+      } else if (isMultiSelect && authorSearchInstances[fieldName]) {
+        // Multi-select: use getValue() to get current selected items
+        const searchInstance = authorSearchInstances[fieldName];
+        const selectedData = searchInstance.getValue();
+
+        if (!selectedData || !selectedData.qids || selectedData.qids.length === 0) {
+          alert('{{ _("Please select at least one value") }}');
+          button.disabled = false;
+          button.innerHTML = originalHTML;
+          return;
+        }
+
+        newValue = selectedData.qids.join(',');
+        newLabel = searchInstance.selectedItems.map(item => item.label).join(', ');
+
+      } else {
+        // Single-select: read from hidden input
+        const hiddenInput = fieldContainer.querySelector('.author-selected-qid');
+        newValue = hiddenInput.value;
+
+        // Get label from search input
+        const searchInput = fieldContainer.querySelector('.author-wikidata-search-input');
+        newLabel = searchInput ? searchInput.value : '';
+      }
+    }
+
+    // Check if value changed
+    const currentValue = isDate ?
+      fieldContainer.dataset.currentValue :
+      fieldContainer.dataset.currentQid;
+
+    if (!newValue || newValue === currentValue) {
+      button.disabled = false;
+      button.innerHTML = originalHTML;
+      cancelAuthorEdit(button);
+      return;
+    }
+
+    const payload = {
+      changes: [{
+        property: property,
+        field: fieldName,
+        value: newValue,
+        label: newLabel,
+        isDate: isDate,
+        isMultiSelect: isMultiSelect,
+        references: references
+      }]
+    };
+
+    try {
+      const response = await fetch('/update-author/{{ author_id }}', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Update the display value
+        const valueSpan = fieldContainer.querySelector('.field-value');
+        if (valueSpan) {
+          // For dates with age, preserve the age span
+          if (isDate && valueSpan.querySelector('.text-muted')) {
+            const ageSpan = valueSpan.querySelector('.text-muted').outerHTML;
+            valueSpan.innerHTML = newLabel + ' ' + ageSpan;
+          } else {
+            valueSpan.textContent = newLabel;
+          }
+        }
+
+        // Update data attributes with new values
+        if (isDate) {
+          fieldContainer.dataset.currentValue = newValue;
+        } else {
+          fieldContainer.dataset.currentQid = newValue;
+          fieldContainer.dataset.currentLabel = newLabel;
+        }
+
+        // Clear references after successful save
+        if (fieldName !== 'occupation') {
+          const refSection = document.getElementById(`${fieldName}-references`);
+          if (refSection) {
+            refSection.classList.add('d-none');
+            document.getElementById(`${fieldName}-reference-container`).innerHTML = '';
+          }
+        }
+
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+
+        // Close edit mode
+        cancelAuthorEdit(button);
+
+        // Show success toast
+        showAuthorToast('{{ _("Edit published successfully!") }}', 'success');
+
+      } else {
+        alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('{{ _("Network error. Please try again.") }}');
+      button.disabled = false;
+      button.innerHTML = originalHTML;
+    }
+  }
+
+  function showAuthorToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `alert alert-${type} author-toast`;
+    toast.innerHTML = `<i class="bi bi-check-circle me-2"></i>${message}`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  // Function to collect references
+  function collectFieldReferences(fieldName) {
+    const container = document.getElementById(`${fieldName}-reference-container`);
+    if (!container) return [];
+
+    const referenceItems = container.querySelectorAll('.reference-item');
+    const references = [];
+
+    // Only collect the first reference (max 1)
+    if (referenceItems.length > 0) {
+      const item = referenceItems[0];
+      const urlInput = item.querySelector(`input[name="${fieldName}_ref_url_0"]`);
+      const retrievedInput = item.querySelector(`input[name="${fieldName}_ref_retrieved_0"]`);
+
+      if (urlInput && urlInput.value.trim()) {
+        references.push({
+          url: urlInput.value.trim(),
+          retrieved: retrievedInput && retrievedInput.value ? retrievedInput.value : null
+        });
+      }
+    }
+
+    return references;
+  }
+
+  // Initialize Bootstrap tooltips
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el);
+  });
+
+</script>
+
 {% endblock %}
