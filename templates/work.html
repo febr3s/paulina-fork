@@ -2,13 +2,15 @@
 
 {% block content %}
 <div class="container-fluid p-2">
-  <!-- Edit prompt -->
+  <!--  Login prompt -->
   <div class="text-end mb-2">
     {% if session.get('wikimedia_username') %}
+    <!-- Logged in users: show visible edit field icons -->
     {% else %}
+    <!-- Not logged in: show login prompt -->
     <small class="text-body-secondary">
       {{ _('Missing/wrong data?') }}
-      <a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a>
+      <a href="{{ url_for('login') }}">{{ _('Log in to edit') }}</a>
     </small>
     {% endif %}
   </div>
