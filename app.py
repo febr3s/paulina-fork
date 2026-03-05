@@ -694,8 +694,9 @@ def logout():
     flash(_('You have been logged out.'), 'info')
     return redirect(request.referrer or url_for('home'))
 
-# Wikidata Editing Routes
+# WIKIDATA EDITING ROUTES
 
+# Add author route
 @app.route('/add-author', methods=['GET', 'POST'])
 @limiter.limit("20 per hour", methods=['POST'])
 def add_author():
@@ -810,7 +811,7 @@ def add_author():
                         paulina_url=paulina_url,
                         form_genders=FORM_GENDERS)
 
-
+# Add work route
 @app.route('/add-work', methods=['GET', 'POST'])
 @limiter.limit("20 per hour", methods=['POST'])
 def add_work():
@@ -925,7 +926,7 @@ def add_work():
                         paulina_url=paulina_url,
                         work_types=WORK_TYPES)
     
-
+# Update fields - author page
 @app.route('/update-author/<author_id>', methods=['PATCH'])
 @limiter.limit("30 per hour")
 def update_author(author_id):
@@ -1027,7 +1028,8 @@ def update_author(author_id):
             'success': False,
             'message': _('Server error: %(error)s', error=str(e))
         }), 500
-        
+
+# Update fields - work page
 @app.route('/update-work/<work_id>', methods=['PATCH'])
 @limiter.limit("30 per hour")
 def update_work(work_id):
@@ -1101,8 +1103,7 @@ def update_work(work_id):
         return jsonify({'success': False, 'message': _('Server error: %(error)s', error=str(e))}), 500
 
 
-
-
+# Clear form data from session
 @app.route('/clear_form_data', methods=['POST'])
 def clear_form_data():
     """Clear stored form data from session"""

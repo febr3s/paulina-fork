@@ -856,7 +856,7 @@ class WikidataAPI:
 # STATEMENT UPDATE PROCESSING
     def update_statement_field(self, item_id, property_id, value, field_name, is_date=False, is_multi_select=False, references=None):
         """
-        Update a single statement field on any Wikidata item (author, work, etc.).
+        Update statement fields on any Wikidata item (author and work).
         
         Args:
             item_id: Wikidata item ID 

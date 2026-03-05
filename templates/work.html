@@ -2,13 +2,15 @@
 
 {% block content %}
 <div class="container-fluid p-2">
-  <!-- Edit prompt -->
+  <!--  Login prompt -->
   <div class="text-end mb-2">
     {% if session.get('wikimedia_username') %}
+    <!-- Logged in users: show visible edit field icons -->
     {% else %}
+    <!-- Not logged in: show login prompt -->
     <small class="text-body-secondary">
       {{ _('Missing/wrong data?') }}
-      <a href="{{work_wikidata_link}}" target="_blank">{{ _('Edit Wikidata item') }}</a>
+      <a href="{{ url_for('login') }}">{{ _('Log in to edit') }}</a>
     </small>
     {% endif %}
   </div>
@@ -80,9 +82,19 @@
       <div class="col-md-6">
         <!-- General details card -->
         <div class="detail-card">
-          <h3 class="detail-card-title">
-            <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
-          </h3>
+          <div class="d-flex align-items-center mb-2">
+            <h3 class="detail-card-title mb-0">
+              <i class="bi bi-info-circle section-icon"></i>{{ _('Work details') }}
+            </h3>
+            {% if session.get('wikimedia_username') %}
+            {% if not work_publication_date or not work_creation_date or not work_language or not work_country %}
+            <button class="btn btn-sm ms-auto" type="button" id="add-missing-data-btn"
+              onclick="toggleMissingWorkDataPanel()">
+              <i class="bi bi-plus-circle me-1" style="color: #f46527;"></i>{{ _('Add information') }}
+            </button>
+            {% endif %}
+            {% endif %}
+          </div>
 
           <!-- Publication date -->
           {% if work_publication_date %}
@@ -330,6 +342,141 @@
             </div>
           </div>
           {% endif %}
+          <!-- Add missing data panel -->
+          {% if session.get('wikimedia_username') %}
+          <div id="missing-work-data-panel" class="d-none">
+            <div class="bio-row py-2 border-bottom">
+              <div class="mb-3">
+                <p class="text-muted mb-3">{{ _('Fill in any missing fields below.') }}</p>
+
+                <div class="row">
+                  <div class="col-md-9">
+                    <!-- Publication Date -->
+                    {% if not work_publication_date %}
+                    <div class="mb-3" data-field="publicationDate" data-type="date" data-property="P577">
+                      <label class="form-label fw-bold text-body-secondary">{{ _('Publication date') }}</label>
+                      <div class="work-edit-controls">
+                        <div class="date-input-group d-flex align-items-center gap-2">
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-day-input missing-work-field-input flex-fill"
+                            placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                          <span class="date-separator">-</span>
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-month-input missing-work-field-input flex-fill"
+                            placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                          <span class="date-separator">-</span>
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-year-input missing-work-field-input flex-fill"
+                            placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                        onclick="toggleMissingWorkFieldReference('publicationDate')">
+                        <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                      </button>
+                      <div id="publicationDate-missing-references" class="d-none mt-2">
+                        <div id="publicationDate-missing-reference-container"></div>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Creation Date -->
+                    {% if not work_creation_date %}
+                    <div class="mb-3" data-field="creationDate" data-type="date" data-property="P571">
+                      <label class="form-label fw-bold text-body-secondary">{{ _('Creation date') }}</label>
+                      <div class="work-edit-controls">
+                        <div class="date-input-group d-flex align-items-center gap-2">
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-day-input missing-work-field-input flex-fill"
+                            placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                          <span class="date-separator">-</span>
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-month-input missing-work-field-input flex-fill"
+                            placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                          <span class="date-separator">-</span>
+                          <input type="number"
+                            class="form-control form-control-sm border-black shadow-none work-date-year-input missing-work-field-input flex-fill"
+                            placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                        onclick="toggleMissingWorkFieldReference('creationDate')">
+                        <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                      </button>
+                      <div id="creationDate-missing-references" class="d-none mt-2">
+                        <div id="creationDate-missing-reference-container"></div>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Language -->
+                    {% if not work_language %}
+                    <div class="mb-3" data-field="workLanguage" data-type="search" data-property="P407"
+                      data-entity-type="item">
+                      <label class="form-label fw-bold text-body-secondary">{{ _('Language') }}</label>
+                      <div class="work-edit-controls">
+                        <div class="work-search-wrapper w-100">
+                          <input type="text"
+                            class="form-control form-control-sm border-black shadow-none work-wikidata-search-input missing-work-field-input"
+                            placeholder="{{ _('Search for language...') }}" autocomplete="off">
+                          <div class="work-wikidata-results-dropdown"></div>
+                        </div>
+                        <input type="hidden" class="work-selected-qid missing-work-field-qid">
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                        onclick="toggleMissingWorkFieldReference('workLanguage')">
+                        <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                      </button>
+                      <div id="workLanguage-missing-references" class="d-none mt-2">
+                        <div id="workLanguage-missing-reference-container"></div>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Country of Origin -->
+                    {% if not work_country %}
+                    <div class="mb-3" data-field="countryOfOrigin" data-type="search" data-property="P495"
+                      data-entity-type="country">
+                      <label class="form-label fw-bold text-body-secondary">{{ _('Country of origin') }}</label>
+                      <div class="work-edit-controls">
+                        <div class="work-search-wrapper w-100">
+                          <input type="text"
+                            class="form-control form-control-sm border-black shadow-none work-wikidata-search-input missing-work-field-input"
+                            placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                          <div class="work-wikidata-results-dropdown"></div>
+                        </div>
+                        <input type="hidden" class="work-selected-qid missing-work-field-qid">
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                        onclick="toggleMissingWorkFieldReference('countryOfOrigin')">
+                        <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                      </button>
+                      <div id="countryOfOrigin-missing-references" class="d-none mt-2">
+                        <div id="countryOfOrigin-missing-reference-container"></div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <!-- Action buttons -->
+
+                  <div class="d-flex justify-content-center justify-content-md-end gap-2 mt-3">
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="saveAllMissingWorkFields()"
+                      style="background-color: #f46527; color: black; min-width: 100px;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill" type="button"
+                      onclick="cancelAllMissingWorkFields()"
+                      style="background-color: white; color: black; min-width: 100px;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
 
         </div>
       </div>
@@ -361,10 +508,13 @@
             </div>
             {% endfor %}
             {% else %}
-            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
+            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms
+              page') }}</a>{% endset %}
             <div class="copyright-status-unknown">
-              <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
-              <p>{{ _('To learn more about copyright terms in different countries, visit the %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
+              <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the
+                jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
+              <p>{{ _('To learn more about copyright terms in different countries, visit the
+                %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>
             </div>
             {% endif %}
           </div>
@@ -725,6 +875,247 @@
     document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
       new bootstrap.Tooltip(el);
     });
+  </script>
+  <script>
+    // ADD MISSING WORK DATA FUNCTIONALITY
+
+    let missingWorkFieldsSearchInstances = {};
+
+    function toggleMissingWorkDataPanel() {
+      const panel = document.getElementById('missing-work-data-panel');
+      panel.classList.toggle('d-none');
+
+      if (!panel.classList.contains('d-none')) {
+        initializeMissingWorkFields();
+      } else {
+        cleanupMissingWorkFields();
+      }
+    }
+
+    function initializeMissingWorkFields() {
+      // Initialize WikidataItemSearch for each search field
+      const searchFields = document.querySelectorAll('#missing-work-data-panel [data-type="search"]');
+
+      searchFields.forEach(fieldContainer => {
+        const fieldName = fieldContainer.dataset.field;
+        const entityType = fieldContainer.dataset.entityType || 'item';
+
+        const input = fieldContainer.querySelector('.work-wikidata-search-input');
+        const resultsDiv = fieldContainer.querySelector('.work-wikidata-results-dropdown');
+        const hiddenInput = fieldContainer.querySelector('.work-selected-qid');
+
+        if (!input) return;
+
+        // Give unique IDs
+        const uniqueId = `missing-work-${fieldName}-${Date.now()}`;
+        input.id = `${uniqueId}-input`;
+        resultsDiv.id = `${uniqueId}-results`;
+        hiddenInput.id = `${uniqueId}-qid`;
+
+        try {
+          missingWorkFieldsSearchInstances[fieldName] = new WikidataItemSearch({
+            inputId: input.id,
+            hiddenInputId: hiddenInput.id,
+            resultsId: resultsDiv.id,
+            selectedItemsId: null,
+            multiSelect: false,
+            entityType: entityType,
+            messages: wikidataMessages,
+            keepInputVisible: true
+          });
+        } catch (error) {
+          console.error(`Error initializing WikidataItemSearch for ${fieldName}:`, error);
+        }
+      });
+    }
+
+    function cleanupMissingWorkFields() {
+      // Clear all inputs
+      document.querySelectorAll('#missing-work-data-panel .missing-work-field-input').forEach(input => {
+        input.value = '';
+      });
+
+      // Clear all reference sections
+      const fieldContainers = document.querySelectorAll('#missing-work-data-panel [data-field]');
+      fieldContainers.forEach(container => {
+        const fieldName = container.dataset.field;
+        const refSection = document.getElementById(`${fieldName}-missing-references`);
+        if (refSection) {
+          refSection.classList.add('d-none');
+          const refContainer = document.getElementById(`${fieldName}-missing-reference-container`);
+          if (refContainer) refContainer.innerHTML = '';
+        }
+      });
+
+      // Reset search instances
+      missingWorkFieldsSearchInstances = {};
+    }
+
+    function cancelAllMissingWorkFields() {
+      cleanupMissingWorkFields();
+      document.getElementById('missing-work-data-panel').classList.add('d-none');
+    }
+
+    function toggleMissingWorkFieldReference(fieldName) {
+      const refSection = document.getElementById(`${fieldName}-missing-references`);
+      const refContainer = document.getElementById(`${fieldName}-missing-reference-container`);
+
+      if (!refSection) return;
+
+      // Check if reference section is currently visible
+      if (refSection.classList.contains('d-none')) {
+        if (refContainer && refContainer.children.length === 0) {
+          referenceManager.toggleReference(`${fieldName}-missing`);
+        } else {
+          refSection.classList.remove('d-none');
+        }
+      } else {
+        refSection.classList.add('d-none');
+      }
+    }
+
+    function collectMissingWorkFieldReferences(fieldName) {
+      const container = document.getElementById(`${fieldName}-missing-reference-container`);
+      if (!container) return [];
+
+      const referenceItems = container.querySelectorAll('.reference-item');
+      const references = [];
+
+      if (referenceItems.length > 0) {
+        const item = referenceItems[0];
+        const urlInput = item.querySelector(`input[name="${fieldName}-missing_ref_url_0"]`);
+        const retrievedInput = item.querySelector(`input[name="${fieldName}-missing_ref_retrieved_0"]`);
+
+        if (urlInput && urlInput.value.trim()) {
+          references.push({
+            url: urlInput.value.trim(),
+            retrieved: retrievedInput && retrievedInput.value ? retrievedInput.value : null
+          });
+        }
+      }
+
+      return references;
+    }
+
+    async function saveAllMissingWorkFields() {
+      const changes = [];
+      const fieldContainers = document.querySelectorAll('#missing-work-data-panel [data-field]');
+
+      // Collect data from each field
+      fieldContainers.forEach(container => {
+        const fieldName = container.dataset.field;
+        const fieldType = container.dataset.type;
+        const property = container.dataset.property;
+
+        let value = null;
+        let label = '';
+
+        if (fieldType === 'search') {
+          const searchInstance = missingWorkFieldsSearchInstances[fieldName];
+          if (searchInstance) {
+            const hiddenInput = container.querySelector('.work-selected-qid');
+            const textInput = container.querySelector('.work-wikidata-search-input');
+            value = hiddenInput ? hiddenInput.value : '';
+            label = textInput ? textInput.value : '';
+          }
+        } else if (fieldType === 'date') {
+          const yearInput = container.querySelector('.work-date-year-input');
+          const monthInput = container.querySelector('.work-date-month-input');
+          const dayInput = container.querySelector('.work-date-day-input');
+
+          const year = yearInput ? yearInput.value : '';
+          const month = monthInput ? monthInput.value : '';
+          const day = dayInput ? dayInput.value : '';
+
+          // Only validate if user entered something
+          if (year || month || day) {
+            const validation = FormUtils.validateDateInput(year, month, day, {
+              yearRequired: '{{ _("Year is required") }}',
+              yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+              monthInvalid: '{{ _("Month must be between 0-12") }}',
+              dayInvalid: '{{ _("Day must be between 0-31") }}',
+              monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
+              monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+            });
+
+            if (!validation.valid) {
+              alert(`${fieldName}: ${validation.message}`);
+              yearInput.classList.add('is-invalid');
+              return;
+            }
+
+            yearInput.classList.remove('is-invalid');
+            value = FormUtils.combineDateParts(year, month, day);
+            label = formatDateForDisplay(value);
+          }
+        }
+
+        // Only add to changes if there's a value
+        if (value) {
+          const references = collectMissingWorkFieldReferences(fieldName);
+
+          changes.push({
+            property: property,
+            field: fieldName,
+            value: value,
+            label: label,
+            isDate: fieldType === 'date',
+            isMultiSelect: false,
+            references: references
+          });
+        }
+      });
+
+      // Check if at least one field has data
+      if (changes.length === 0) {
+        alert('{{ _("Please fill in at least one field before publishing.") }}');
+        return;
+      }
+
+      // Disable publish button
+      const btn = event.target;
+      btn.disabled = true;
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+
+      const payload = { changes: changes };
+
+      try {
+        const response = await fetch('/update-work/{{ work_id }}', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // Disable the "Add information" button
+          const addInfoBtn = document.getElementById('add-missing-data-btn');
+          if (addInfoBtn) {
+            addInfoBtn.disabled = true;
+            addInfoBtn.classList.add('add-info-btn-disabled');
+          }
+
+          showWorkToast('{{ _("Edit published successfully!") }}', 'success');
+
+          // Reload page after a short delay
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+
+        } else {
+          alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+          btn.disabled = false;
+          btn.innerHTML = originalHTML;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('{{ _("Network error. Please try again.") }}');
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
+    }
   </script>
 
   {% endblock %}

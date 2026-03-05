@@ -14,6 +14,7 @@
     </small>
     {% endif %}
   </div>
+
   <!-- Author card -->
   <div class="card main-card mb-4 p-4">
     <!-- Author card upper section -->
@@ -82,7 +83,8 @@
           </div>
           {% elif author_is_in_public_domain == 'Unknown' %}
           <div class="public-domain-badge pd-unknown mb-2">
-            <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth and death.') }}
+            <span class="pd-icon">?</span> {{ _('Public domain status unknown due to lack of available dates of birth
+            and death.') }}
             <a href="{{ url_for('works_list', author_id=author_id) }}">{{ _('Consult individual works.') }}</a>
           </div>
           {% endif %}
@@ -113,6 +115,14 @@
       <div class="d-flex align-items-center mb-2">
         <i class="bi bi-person-lines-fill me-2 section-icon"></i>
         <h3 class="mb-0">{{ _('Biography') }}</h3>
+        {% if session.get('wikimedia_username') %}
+        {% if not author_nationality or not author_ethnicity or not author_gender or not author_date_of_birth or not
+        author_occupation or not author_place_of_birth or not author_date_of_death %}
+        <button class="btn btn-sm ms-auto" type="button" id="add-missing-data-btn" onclick="toggleMissingDataPanel()">
+          <i class="bi bi-plus-circle me-1" style="color: #f46527;"></i>{{ _('Add information') }}
+        </button>
+        {% endif %}
+        {% endif %}
       </div>
 
       <!-- No-JS warning (only for logged-in users) -->
@@ -573,6 +583,217 @@
           </div>
         </div>
         {% endif %}
+
+        <!-- Add missing data panel -->
+        {% if session.get('wikimedia_username') %}
+        <div id="missing-data-panel" class="d-none">
+          <div class="bio-row py-2 border-bottom">
+            <div class="mb-3">
+              <p class="text-muted mb-3">{{ _('Fill in any missing fields below.') }}</p>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <!-- Nationality -->
+                  {% if not author_nationality %}
+                  <div class="mb-3" data-field="nationality" data-type="search" data-property="P27"
+                    data-entity-type="country">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Nationality') }}</label>
+                    <div class="author-edit-controls">
+                      <div class="author-search-wrapper w-100">
+                        <input type="text"
+                          class="form-control form-control-sm border-black shadow-none author-wikidata-search-input missing-field-input"
+                          placeholder="{{ _('Search for country...') }}" autocomplete="off">
+                        <div class="author-wikidata-results-dropdown"></div>
+                      </div>
+                      <input type="hidden" class="author-selected-qid missing-field-qid">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('nationality')"></button>
+                    <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="nationality-missing-references" class="d-none mt-2">
+                      <div id="nationality-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- Ethnicity -->
+                  {% if not author_ethnicity %}
+                  <div class="mb-3" data-field="ethnicity" data-type="search" data-property="P172"
+                    data-entity-type="item">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Ethnicity') }}</label>
+                    <div class="author-edit-controls">
+                      <div class="author-search-wrapper w-100">
+                        <input type="text"
+                          class="form-control form-control-sm border-black shadow-none author-wikidata-search-input missing-field-input"
+                          placeholder="{{ _('Search for ethnicity...') }}" autocomplete="off">
+                        <div class="author-wikidata-results-dropdown"></div>
+                      </div>
+                      <input type="hidden" class="author-selected-qid missing-field-qid">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('ethnicity')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="ethnicity-missing-references" class="d-none mt-2">
+                      <div id="ethnicity-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- Gender -->
+                  {% if not author_gender %}
+                  <div class="mb-3" data-field="gender" data-type="gender" data-property="P21">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Gender') }}</label>
+                    <div class="author-edit-controls">
+                      <select
+                        class="form-select form-select-sm border-black shadow-none author-gender-select missing-field-input"
+                        aria-label="{{ _('Select gender') }}">
+                        <option value="">{{ _('Select gender...') }}</option>
+                        {% for gender in form_genders %}
+                        <option value="{{ gender.qid }}" data-label="{{ gender.gender_name }}">{{ gender.gender_name }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('gender')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="gender-missing-references" class="d-none mt-2">
+                      <div id="gender-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- Date of Birth -->
+                  {% if not author_date_of_birth %}
+                  <div class="mb-3" data-field="dateOfBirth" data-type="date" data-property="P569">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Date of birth') }}</label>
+                    <div class="author-edit-controls">
+                      <div class="date-input-group d-flex align-items-center gap-2">
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-day-input missing-field-input flex-fill"
+                          placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                        <span class="date-separator">-</span>
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-month-input missing-field-input flex-fill"
+                          placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                        <span class="date-separator">-</span>
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-year-input missing-field-input flex-fill"
+                          placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('dateOfBirth')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="dateOfBirth-missing-references" class="d-none mt-2">
+                      <div id="dateOfBirth-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- Occupation -->
+                  {% if not author_occupation %}
+                  <div class="mb-3" data-field="occupation" data-type="multiselect" data-property="P106"
+                    data-entity-type="item">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Occupation') }}</label>
+                    <div class="author-edit-controls w-100">
+                      <div class="author-search-wrapper w-100">
+                        <input type="text"
+                          class="form-control form-control-sm border-black shadow-none author-wikidata-search-input missing-field-input"
+                          placeholder="{{ _('Search for occupation(s)...') }}" autocomplete="off">
+                        <div class="author-wikidata-results-dropdown"></div>
+                      </div>
+                      <div class="author-selected-items mt-2"></div>
+                      <input type="hidden" class="author-selected-qid missing-field-qid">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('occupation')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="occupation-missing-references" class="d-none mt-2">
+                      <div id="occupation-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <!-- Place of Birth -->
+                  {% if not author_place_of_birth %}
+                  <div class="mb-3" data-field="placeOfBirth" data-type="search" data-property="P19"
+                    data-entity-type="item">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Place of birth') }}</label>
+                    <div class="author-edit-controls">
+                      <div class="author-search-wrapper w-100">
+                        <input type="text"
+                          class="form-control form-control-sm border-black shadow-none author-wikidata-search-input missing-field-input"
+                          placeholder="{{ _('Search for place...') }}" autocomplete="off">
+                        <div class="author-wikidata-results-dropdown"></div>
+                      </div>
+                      <input type="hidden" class="author-selected-qid missing-field-qid">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('placeOfBirth')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="placeOfBirth-missing-references" class="d-none mt-2">
+                      <div id="placeOfBirth-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+
+
+                  <!-- Date of Death -->
+                  {% if not author_date_of_death %}
+                  <div class="mb-3" data-field="dateOfDeath" data-type="date" data-property="P570">
+                    <label class="form-label fw-bold text-body-secondary">{{ _('Date of death') }}</label>
+                    <div class="author-edit-controls">
+                      <div class="date-input-group d-flex align-items-center gap-2">
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-day-input missing-field-input flex-fill"
+                          placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}">
+                        <span class="date-separator">-</span>
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-month-input missing-field-input flex-fill"
+                          placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+                        <span class="date-separator">-</span>
+                        <input type="number"
+                          class="form-control form-control-sm border-black shadow-none author-date-year-input missing-field-input flex-fill"
+                          placeholder="YYYY" min="1" max="9999" step="1" aria-label="{{ _('Year') }}">
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+                      onclick="toggleMissingFieldReference('dateOfDeath')">
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                    </button>
+                    <div id="dateOfDeath-missing-references" class="d-none mt-2">
+                      <div id="dateOfDeath-missing-reference-container"></div>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+
+                <!-- Action buttons  -->
+                <div class="col-md-3 d-flex align-items-end">
+                  <div class="author-edit-buttons d-flex flex-row gap-2 w-100">
+                    <button class="btn btn-sm border-black rounded-pill flex-fill" type="button"
+                      onclick="saveAllMissingFields()" style="background-color: #f46527; color: black;">
+                      <i class="bi bi-check-circle me-1"></i>{{ _('Publish') }}
+                    </button>
+                    <button class="btn btn-sm border-black rounded-pill author-cancel-btn flex-fill" type="button"
+                      onclick="cancelAllMissingFields()" style="background-color: white; color: black;">
+                      <i class="bi bi-x-circle me-1"></i>{{ _('Cancel') }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </div>
@@ -731,7 +952,7 @@
           multiSelect: isMultiSelect,
           entityType: entityType,
           messages: wikidataMessages,
-          keepInputVisible: !isMultiSelect  // Keep input visible for single-select
+          keepInputVisible: !isMultiSelect
         });
 
         authorSearchInstances[fieldName] = searchInstance;
@@ -806,7 +1027,7 @@
     const isDate = fieldContainer.dataset.isDate === 'true';
     const isMultiSelect = fieldContainer.dataset.multiSelect === 'true';
 
-    // Disable button while saving - MUST be at the top before any validation
+    // Disable button while saving 
     button.disabled = true;
     const originalHTML = button.innerHTML;
     button.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
@@ -829,8 +1050,8 @@
       const dateValidation = FormUtils.validateDateInput(year, month, day, {
         yearRequired: '{{ _("Year is required") }}',
         yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
-        monthInvalid: '{{ _("Month must be between 0-12 (use 0 for unknown)") }}',
-        dayInvalid: '{{ _("Day must be between 0-31 (use 0 for unknown)") }}',
+        monthInvalid: '{{ _("Month must be between 0-12") }}',
+        dayInvalid: '{{ _("Day must be between 0-31") }}',
         monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
         monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
       });
@@ -1033,6 +1254,273 @@
     new bootstrap.Tooltip(el);
   });
 
+</script>
+<script>
+  // ADD MISSING DATA FUNCTIONALITY 
+
+  let missingFieldsSearchInstances = {};
+
+  function toggleMissingDataPanel() {
+    const panel = document.getElementById('missing-data-panel');
+    panel.classList.toggle('d-none');
+
+    if (!panel.classList.contains('d-none')) {
+      initializeMissingFields();
+    } else {
+      cleanupMissingFields();
+    }
+  }
+
+  function initializeMissingFields() {
+    // Initialize WikidataItemSearch for each search field
+    const searchFields = document.querySelectorAll('#missing-data-panel [data-type="search"], #missing-data-panel [data-type="multiselect"]');
+
+    searchFields.forEach(fieldContainer => {
+      const fieldName = fieldContainer.dataset.field;
+      const fieldType = fieldContainer.dataset.type;
+      const entityType = fieldContainer.dataset.entityType || 'item';
+      const isMultiSelect = fieldType === 'multiselect';
+
+      const input = fieldContainer.querySelector('.author-wikidata-search-input');
+      const resultsDiv = fieldContainer.querySelector('.author-wikidata-results-dropdown');
+      const hiddenInput = fieldContainer.querySelector('.author-selected-qid');
+      const selectedItemsDiv = fieldContainer.querySelector('.author-selected-items');
+
+      if (!input) return;
+
+      // Give unique IDs
+      const uniqueId = `missing-${fieldName}-${Date.now()}`;
+      input.id = `${uniqueId}-input`;
+      resultsDiv.id = `${uniqueId}-results`;
+      hiddenInput.id = `${uniqueId}-qid`;
+      if (selectedItemsDiv) {
+        selectedItemsDiv.id = `${uniqueId}-selected`;
+      }
+
+      try {
+        missingFieldsSearchInstances[fieldName] = new WikidataItemSearch({
+          inputId: input.id,
+          hiddenInputId: hiddenInput.id,
+          resultsId: resultsDiv.id,
+          selectedItemsId: selectedItemsDiv ? selectedItemsDiv.id : null,
+          multiSelect: isMultiSelect,
+          entityType: entityType,
+          messages: wikidataMessages,
+          keepInputVisible: !isMultiSelect
+        });
+      } catch (error) {
+        console.error(`Error initializing WikidataItemSearch for ${fieldName}:`, error);
+      }
+    });
+  }
+
+  function cleanupMissingFields() {
+    // Clear all inputs
+    document.querySelectorAll('#missing-data-panel .missing-field-input').forEach(input => {
+      if (input.tagName === 'SELECT') {
+        input.value = '';
+      } else {
+        input.value = '';
+      }
+    });
+
+    // Clear selected items for multiselect
+    document.querySelectorAll('#missing-data-panel .author-selected-items').forEach(container => {
+      container.innerHTML = '';
+    });
+
+    // Clear all reference sections
+    const fieldContainers = document.querySelectorAll('#missing-data-panel [data-field]');
+    fieldContainers.forEach(container => {
+      const fieldName = container.dataset.field;
+      const refSection = document.getElementById(`${fieldName}-missing-references`);
+      if (refSection) {
+        refSection.classList.add('d-none');
+        const refContainer = document.getElementById(`${fieldName}-missing-reference-container`);
+        if (refContainer) refContainer.innerHTML = '';
+      }
+    });
+
+    // Reset search instances
+    missingFieldsSearchInstances = {};
+  }
+
+  function cancelAllMissingFields() {
+    cleanupMissingFields();
+    document.getElementById('missing-data-panel').classList.add('d-none');
+  }
+
+  function toggleMissingFieldReference(fieldName) {
+    const refSection = document.getElementById(`${fieldName}-missing-references`);
+    const refContainer = document.getElementById(`${fieldName}-missing-reference-container`);
+
+    if (!refSection) return;
+
+    // Check if reference section is currently visible
+    if (refSection.classList.contains('d-none')) {
+      if (refContainer && refContainer.children.length === 0) {
+        referenceManager.toggleReference(`${fieldName}-missing`);
+      } else {
+        refSection.classList.remove('d-none');
+      }
+    } else {
+      refSection.classList.add('d-none');
+    }
+  }
+
+  function collectMissingFieldReferences(fieldName) {
+    const container = document.getElementById(`${fieldName}-missing-reference-container`);
+    if (!container) return [];
+
+    const referenceItems = container.querySelectorAll('.reference-item');
+    const references = [];
+
+    if (referenceItems.length > 0) {
+      const item = referenceItems[0];
+      const urlInput = item.querySelector(`input[name="${fieldName}-missing_ref_url_0"]`);
+      const retrievedInput = item.querySelector(`input[name="${fieldName}-missing_ref_retrieved_0"]`);
+
+      if (urlInput && urlInput.value.trim()) {
+        references.push({
+          url: urlInput.value.trim(),
+          retrieved: retrievedInput && retrievedInput.value ? retrievedInput.value : null
+        });
+      }
+    }
+
+    return references;
+  }
+
+  async function saveAllMissingFields() {
+    const changes = [];
+    const fieldContainers = document.querySelectorAll('#missing-data-panel [data-field]');
+
+    // Collect data from each field
+    fieldContainers.forEach(container => {
+      const fieldName = container.dataset.field;
+      const fieldType = container.dataset.type;
+      const property = container.dataset.property;
+
+      let value = null;
+      let label = '';
+
+      if (fieldType === 'search' || fieldType === 'multiselect') {
+        const searchInstance = missingFieldsSearchInstances[fieldName];
+        if (searchInstance) {
+          if (fieldType === 'multiselect') {
+            const data = searchInstance.getValue();
+            if (data && data.qids && data.qids.length > 0) {
+              value = data.qids.join(',');
+              label = searchInstance.selectedItems.map(i => i.label).join(', ');
+            }
+          } else {
+            const hiddenInput = container.querySelector('.author-selected-qid');
+            const textInput = container.querySelector('.author-wikidata-search-input');
+            value = hiddenInput ? hiddenInput.value : '';
+            label = textInput ? textInput.value : '';
+          }
+        }
+      } else if (fieldType === 'gender') {
+        const select = container.querySelector('.author-gender-select');
+        value = select ? select.value : '';
+        label = select && select.value ? select.options[select.selectedIndex].dataset.label : '';
+      } else if (fieldType === 'date') {
+        const yearInput = container.querySelector('.author-date-year-input');
+        const monthInput = container.querySelector('.author-date-month-input');
+        const dayInput = container.querySelector('.author-date-day-input');
+
+        const year = yearInput ? yearInput.value : '';
+        const month = monthInput ? monthInput.value : '';
+        const day = dayInput ? dayInput.value : '';
+
+
+        if (year || month || day) {
+          const validation = FormUtils.validateDateInput(year, month, day, {
+            yearRequired: '{{ _("Year is required") }}',
+            yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
+            monthInvalid: '{{ _("Month must be between 0-12") }}',
+            dayInvalid: '{{ _("Day must be between 0-31") }}',
+            monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
+            monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+          });
+
+          if (!validation.valid) {
+            alert(`${fieldName}: ${validation.message}`);
+            yearInput.classList.add('is-invalid');
+            return;
+          }
+
+          yearInput.classList.remove('is-invalid');
+          value = FormUtils.combineDateParts(year, month, day);
+          label = formatDateForDisplay(value);
+        }
+      }
+
+      if (value) {
+        const references = collectMissingFieldReferences(fieldName);
+
+        changes.push({
+          property: property,
+          field: fieldName,
+          value: value,
+          label: label,
+          isDate: fieldType === 'date',
+          isMultiSelect: fieldType === 'multiselect',
+          references: references
+        });
+      }
+    });
+
+    // Check if at least one field has data
+    if (changes.length === 0) {
+      alert('{{ _("Please fill in at least one field before publishing.") }}');
+      return;
+    }
+
+    // Disable publish button
+    const btn = event.target;
+    btn.disabled = true;
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+
+    const payload = { changes: changes };
+
+    try {
+      const response = await fetch('/update-author/{{ author_id }}', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Disable the "Add information" button
+        const addInfoBtn = document.getElementById('add-missing-data-btn');
+        if (addInfoBtn) {
+          addInfoBtn.disabled = true;
+          addInfoBtn.classList.add('add-info-btn-disabled');
+        }
+
+        showAuthorToast('{{ _("Edit published successfully!") }}', 'success');
+
+        // Reload page after a short delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+      } else {
+        alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('{{ _("Network error. Please try again.") }}');
+      btn.disabled = false;
+      btn.innerHTML = originalHTML;
+    }
+  }
 </script>
 
 {% endblock %}
