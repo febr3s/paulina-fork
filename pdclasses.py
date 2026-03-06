@@ -232,7 +232,7 @@ class Author(Parent):
 
         image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:
-            self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Image_is_needed_female.svg/240px-Image_is_needed_female.svg.png"
+            self.image = "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/No_portrait_(female).svg&width=400&height=200"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
             self.image_alt_text = _('Image of a generic human silhouette. The text above it indicates that there is no free image of the person available, and that if you own one, you can click on the placeholder link.')
         else:
@@ -358,7 +358,7 @@ class Work(Parent):
 
         image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:
-            self.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/464px-Placeholder_book.svg.png"
+            self.image = "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Placeholder_book.svg&width=400&height=200"
             self.image_link = "https://commons.wikimedia.org/wiki/Commons:Welcome"
             self.image_alt_text = _('Image of a generic work. The text above it indicates that there is no free image of the work available, and that if you own one, you can click on the placeholder link to upload it.')
         else:
