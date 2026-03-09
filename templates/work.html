@@ -930,9 +930,21 @@
     }
 
     function cleanupMissingWorkFields() {
-      // Clear all inputs
-      document.querySelectorAll('#missing-work-data-panel .missing-work-field-input').forEach(input => {
+      // Clear all text inputs and date inputs
+      document.querySelectorAll('#missing-work-data-panel input[type="text"], #missing-work-data-panel input[type="number"]').forEach(input => {
         input.value = '';
+      });
+
+      // Clear hidden QID inputs
+      document.querySelectorAll('#missing-work-data-panel .work-selected-qid').forEach(input => {
+        input.value = '';
+      });
+
+      Object.keys(missingWorkFieldsSearchInstances).forEach(fieldName => {
+        const instance = missingWorkFieldsSearchInstances[fieldName];
+        if (instance && typeof instance.clear === 'function') {
+          instance.clear();
+        }
       });
 
       // Clear all reference sections
@@ -946,9 +958,6 @@
           if (refContainer) refContainer.innerHTML = '';
         }
       });
-
-      // Reset search instances
-      missingWorkFieldsSearchInstances = {};
     }
 
     function cancelAllMissingWorkFields() {

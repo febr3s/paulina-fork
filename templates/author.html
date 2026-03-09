@@ -609,7 +609,7 @@
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary mt-2"
                       onclick="toggleMissingFieldReference('nationality')">
-                    <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
+                      <i class="bi bi-link-45deg me-1"></i>{{ _('Add reference') }}
                     </button>
                     <div id="nationality-missing-references" class="d-none mt-2">
                       <div id="nationality-missing-reference-container"></div>
@@ -1315,18 +1315,31 @@
   }
 
   function cleanupMissingFields() {
-    // Clear all inputs
-    document.querySelectorAll('#missing-data-panel .missing-field-input').forEach(input => {
-      if (input.tagName === 'SELECT') {
-        input.value = '';
-      } else {
-        input.value = '';
-      }
+    // Clear all text inputs and date inputs
+    document.querySelectorAll('#missing-data-panel input[type="text"], #missing-data-panel input[type="number"]').forEach(input => {
+      input.value = '';
     });
 
-    // Clear selected items for multiselect
+    // Clear all select dropdowns
+    document.querySelectorAll('#missing-data-panel select').forEach(select => {
+      select.value = '';
+    });
+
+    // Clear hidden QID inputs
+    document.querySelectorAll('#missing-data-panel .author-selected-qid').forEach(input => {
+      input.value = '';
+    });
+
+    // Clear selected items display for multiselect
     document.querySelectorAll('#missing-data-panel .author-selected-items').forEach(container => {
       container.innerHTML = '';
+    });
+
+    Object.keys(missingFieldsSearchInstances).forEach(fieldName => {
+      const instance = missingFieldsSearchInstances[fieldName];
+      if (instance && typeof instance.clear === 'function') {
+        instance.clear();
+      }
     });
 
     // Clear all reference sections
@@ -1341,8 +1354,6 @@
       }
     });
 
-    // Reset search instances
-    missingFieldsSearchInstances = {};
   }
 
   function cancelAllMissingFields() {

@@ -901,40 +901,43 @@ class WikidataAPI:
             
             # Handle multi-select fields 
             if is_multi_select:
-                qids = [qid.strip() for qid in value.split(',') if qid.strip()]
+                # For multi-select fields, value is comma-separated QIDs
+                new_qids = set(value.split(',')) if value else set()
                 
+                # Get existing statements for this property
                 existing_statements = statements.get(property_id, [])
-                existing_qids_to_stmt = {
-                    stmt['value']['content']: stmt['id']
-                    for stmt in existing_statements
-                    if stmt.get('value', {}).get('content')
-                }
+                existing_qids = set()
                 
-                # Step 1: Delete statements no longer in the list
-                for existing_qid, stmt_id in list(existing_qids_to_stmt.items()):
-                    if existing_qid not in qids:
-                        delete_url = f"{self.rest_api_url}/statements/{stmt_id}"
-                        delete_response = self.oauth_session.delete(
-                            delete_url,
-                            headers={'User-Agent': self.user_agent}
-                        )
-                        if delete_response.status_code in [200, 204]:
-                            del existing_qids_to_stmt[existing_qid]
-                        else:
-                            print(f"Warning: Failed to delete statement {stmt_id}: {delete_response.status_code} - {delete_response.text}")
+                for stmt in existing_statements:
+                    stmt_value = stmt.get('value', {})
+                    if stmt_value.get('type') == 'value':
+                        content = stmt_value.get('content')
+                        if isinstance(content, dict) and 'id' in content:
+                            existing_qids.add(content['id'])
                 
-                # Step 2: Add new statements that don't exist yet
-                for qid in qids:
-                    if qid not in existing_qids_to_stmt:
-                        new_statement = self.build_statement(property_id, qid, 'wikibase-item', None)
-                        create_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
-                        create_response = self.oauth_session.post(
-                            create_url,
-                            json={'statement': new_statement, 'comment': edit_comment},
-                            headers={'Content-Type': 'application/json', 'User-Agent': self.user_agent}
-                        )
-                        if create_response.status_code != 201:
-                            return {'success': False, 'error': f'Failed to add {qid}: {create_response.text}'}
+                # Delete statements that are no longer in the new list
+                for qid in existing_qids - new_qids:
+                    for stmt in existing_statements:
+                        stmt_value = stmt.get('value', {})
+                        if stmt_value.get('type') == 'value':
+                            content = stmt_value.get('content')
+                            if isinstance(content, dict) and content.get('id') == qid:
+                                statement_id = stmt.get('id')
+                                if statement_id:
+                                    delete_url = f"{self.rest_api_url}/statements/{statement_id}"
+                                    delete_response = self.oauth_session.delete(delete_url, headers=headers)
+                                    if delete_response.status_code not in [200, 204]:
+                                        return {'success': False, 'error': f'Failed to delete statement: {delete_response.text}'}
+                
+                # Add new statements
+                for qid in new_qids - existing_qids:
+                    new_statement = self.build_statement(property_id, qid, 'wikibase-item', built_references if built_references else None)
+                    
+                    add_url = f"{self.rest_api_url}/entities/items/{item_id}/statements"
+                    add_response = self.oauth_session.post(add_url, json={'statement': new_statement, 'comment': edit_comment}, headers=headers)
+                    
+                    if add_response.status_code not in [200, 201]:
+                        return {'success': False, 'error': f'Failed to add statement: {add_response.text}'}
                 
                 return {'success': True}
             
