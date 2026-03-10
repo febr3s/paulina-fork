@@ -1010,8 +1010,12 @@
       const changes = [];
       const fieldContainers = document.querySelectorAll('#missing-work-data-panel [data-field]');
 
+      let hasValidationError = false;
+
       // Collect data from each field
       fieldContainers.forEach(container => {
+        if (hasValidationError) return;
+
         const fieldName = container.dataset.field;
         const fieldType = container.dataset.type;
         const property = container.dataset.property;
@@ -1036,7 +1040,6 @@
           const month = monthInput ? monthInput.value : '';
           const day = dayInput ? dayInput.value : '';
 
-          // Only validate if user entered something
           if (year || month || day) {
             const validation = FormUtils.validateDateInput(year, month, day, {
               yearRequired: '{{ _("Year is required") }}',
@@ -1050,6 +1053,7 @@
             if (!validation.valid) {
               alert(`${fieldName}: ${validation.message}`);
               yearInput.classList.add('is-invalid');
+              hasValidationError = true; // Set error flag
               return;
             }
 
@@ -1075,6 +1079,10 @@
         }
       });
 
+      if (hasValidationError) {
+        return;
+      }
+
       // Check if at least one field has data
       if (changes.length === 0) {
         alert('{{ _("Please fill in at least one field before publishing.") }}');
@@ -1099,7 +1107,6 @@
         const result = await response.json();
 
         if (response.ok && result.success) {
-          // Disable the "Add information" button
           const addInfoBtn = document.getElementById('add-missing-data-btn');
           if (addInfoBtn) {
             addInfoBtn.disabled = true;
@@ -1108,7 +1115,6 @@
 
           showWorkToast('{{ _("Edit published successfully!") }}', 'success');
 
-          // Reload page after a short delay
           setTimeout(() => {
             window.location.reload();
           }, 1000);
