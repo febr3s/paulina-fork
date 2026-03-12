@@ -557,53 +557,53 @@ document.addEventListener('DOMContentLoaded', function() {
   // TRANSLATABLE MESSAGES
   
   const wikidataMessages = {
-    searching: '{{ _("Searching Wikidata...") }}',
-    noResults: '{{ _("No Wikidata results found") }}',
-    noDescription: '{{ _("No description") }}',
-    error: '{{ _("Error searching Wikidata") }}',
-    alreadyAdded: '{{ _("This item is already added") }}',
-    alreadySelected: '{{ _("This item is already selected") }}',
-    remove: '{{ _("Remove") }}'
+    searching: `{{ _("Searching Wikidata...") }}`,
+    noResults: `{{ _("No Wikidata results found") }}`,
+    noDescription: `{{ _("No description") }}`,
+    error: `{{ _("Error searching Wikidata") }}`,
+    alreadyAdded: `{{ _("This item is already added") }}`,
+    alreadySelected: `{{ _("This item is already selected") }}`,
+    remove: `{{ _("Remove") }}`
   };
   
   const duplicateMessages = {
-    searching: '{{ _("Searching...") }}',
-    noMatch: '{{ _("No exact match found.") }}',
-    error: '{{ _("Error searching Wikidata") }}',
-    noDescription: '{{ _("No description") }}'
+    searching: `{{ _("Searching...") }}`,
+    noMatch: `{{ _("No exact match found.") }}`,
+    error: `{{ _("Error searching Wikidata") }}`,
+    noDescription: `{{ _("No description") }}`
   };
   
   const referenceMessages = {
-    reference: '{{ _("Reference") }}',
-    url: '{{ _("Reference URL") }}',
-    title: '{{ _("Title") }}',
-    retrieved: '{{ _("Date accessed") }}',
-    maxReached: '{{ _("Maximum 3 references per field") }}',
-    remove: '{{ _("Remove") }}'
+    reference: `{{ _("Reference") }}`,
+    url: `{{ _("Reference URL") }}`,
+    title: `{{ _("Title") }}`,
+    retrieved: `{{ _("Date accessed") }}`,
+    maxReached: `{{ _("Maximum 3 references per field") }}`,
+    remove: `{{ _("Remove") }}`
   };
   
   const imageMessages = {
-    invalidCommons: '{{ _("Please use an image from Wikimedia Commons.") }}',
-    loadError: '{{ _("Could not load image. Please check the URL.") }}'
+    invalidCommons: `{{ _("Please use an image from Wikimedia Commons.") }}`,
+    loadError: `{{ _("Could not load image. Please check the URL.") }}`
   };
   
   const formMessages = {
-    nameRequired: '{{ _("Name is required") }}',
-    genderRequired: '{{ _("Gender is required") }}',
-    nationalityRequired: '{{ _("Nationality is required") }}',
-    placeOfBirthRequired: '{{ _("Place of birth is required") }}',
-    occupationRequired: '{{ _("Occupation is required") }}',
-    imageCommonsRequired: '{{ _("Image must be from Wikimedia Commons") }}',
-    fillRequired: '{{ _("Please fill in all required fields:") }}',
-    confirmReset: '{{ _("Are you sure you want to reset the form? All entered data will be lost.") }}',
-    enterNameFirst: '{{ _("Please enter the author name first to search for images") }}',
-    authorName: '{{ _("author name") }}',
-    imagePreview: '{{ _("Image preview") }}',
-    dateYearRequired: '{{ _("Year is required") }}',
-    dateYearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
-    dateMonthInvalid: '{{ _("Month must be between 0-12 (use 0 for unknown)") }}',
-    dateDayInvalid: '{{ _("Day must be between 0-31 (use 0 for unknown)") }}',
-    dateMonthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}'
+    nameRequired: `{{ _("Name is required") }}`,
+    genderRequired: `{{ _("Gender is required") }}`,
+    nationalityRequired: `{{ _("Nationality is required") }}`,
+    placeOfBirthRequired: `{{ _("Place of birth is required") }}`,
+    occupationRequired: `{{ _("Occupation is required") }}`,
+    imageCommonsRequired: `{{ _("Image must be from Wikimedia Commons") }}`,
+    fillRequired: `{{ _("Please fill in all required fields:") }}`,
+    confirmReset: `{{ _("Are you sure you want to reset the form? All entered data will be lost.") }}`,
+    enterNameFirst: `{{ _("Please enter the author name first to search for images") }}`,
+    authorName: `{{ _("author name") }}`,
+    imagePreview: `{{ _("Image preview") }}`,
+    dateYearRequired: `{{ _("Year is required") }}`,
+    dateYearInvalid: `{{ _("Year must be a valid 4-digit number") }}`,
+    dateMonthInvalid: `{{ _("Month must be between 0-12 (use 0 for unknown)") }}`,
+    dateDayInvalid: `{{ _("Day must be between 0-31 (use 0 for unknown)") }}`,
+    dateMonthRequiredForDay: `{{ _("Month cannot be 0 if day is specified") }}`
     };
 
   // INITIALIZE COMPONENTS
@@ -760,12 +760,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const dobDay = document.getElementById('author-date-of-birth-day').value;
       
       const dobValidation = FormUtils.validateDateInput(dobYear, dobMonth, dobDay, {
-      yearRequired: '{{ _("Date of birth: Year is required") }}',
-      yearInvalid: '{{ _("Date of birth: Year must be a valid 4-digit number") }}',
-      monthInvalid: '{{ _("Date of birth: Month must be between 0-12 (use 0 for unknown)") }}',
-      dayInvalid: '{{ _("Date of birth: Day must be between 0-31 (use 0 for unknown)") }}',
-      monthRequiredForDay: '{{ _("Date of birth: Month cannot be 0 if day is specified") }}',
-      monthRequiredForYear: '{{ _("Date of birth: Month is required if you enter day") }}'
+      yearRequired: `{{ _("Date of birth: Year is required") }}`,
+      yearInvalid: `{{ _("Date of birth: Year must be a valid 4-digit number") }}`,
+      monthInvalid: `{{ _("Date of birth: Month must be between 0-12 (use 0 for unknown)") }}`,
+      dayInvalid: `{{ _("Date of birth: Day must be between 0-31 (use 0 for unknown)") }}`,
+      monthRequiredForDay: `{{ _("Date of birth: Month cannot be 0 if day is specified") }}`,
+      monthRequiredForYear: `{{ _("Date of birth: Month is required if you enter day") }}`
     });
     
     if (!dobValidation.valid) {
@@ -787,12 +787,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const dodDay = document.getElementById('author-date-of-death-day').value;
 
     const dodValidation = FormUtils.validateDateInput(dodYear, dodMonth, dodDay, {
-    yearRequired: '{{ _("Date of death: Year is required if you enter month or day") }}',
-    yearInvalid: '{{ _("Date of death: Year must be a valid 4-digit number") }}',
-    monthInvalid: '{{ _("Date of death: Month must be between 0-12 (use 0 for unknown)") }}',
-    dayInvalid: '{{ _("Date of death: Day must be between 0-31 (use 0 for unknown)") }}',
-    monthRequiredForDay: '{{ _("Date of death: Month cannot be 0 if day is specified") }}',
-    monthRequiredForYear: '{{ _("Date of death: Month is required if you enter day and year") }}'
+    yearRequired: `{{ _("Date of death: Year is required if you enter month or day") }}`,
+    yearInvalid: `{{ _("Date of death: Year must be a valid 4-digit number") }}`,
+    monthInvalid: `{{ _("Date of death: Month must be between 0-12 (use 0 for unknown)") }}`,
+    dayInvalid: `{{ _("Date of death: Day must be between 0-31 (use 0 for unknown)") }}`,
+    monthRequiredForDay: `{{ _("Date of death: Month cannot be 0 if day is specified") }}`,
+    monthRequiredForYear: `{{ _("Date of death: Month is required if you enter day and year") }}`
   });
   
   if (!dodValidation.valid) {
@@ -844,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => {
       console.error('Error clearing form data:', error);
-       alert('{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}');
+       alert(`{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}`);
     });
   };
 

@@ -1196,7 +1196,7 @@
                         }
                     })
                     .catch(error => {
-                        alert('{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}');
+                        alert(`{{ _("Could not connect to server. Please refresh the page manually to clear all data.") }}`);
                     });
             });
         }
@@ -1554,14 +1554,14 @@
                 const titleInput = document.getElementById('work-title');
                 if (!titleInput.value.trim()) {
                     isValid = false;
-                    errors.push('{{ _("Title is required") }}');
+                    errors.push(`{{ _("Title is required") }}`);
                 }
 
                 // Validate work type
                 const workTypeQid = document.getElementById('work-type-select').value;
                 if (!workTypeQid) {
                     isValid = false;
-                    errors.push('{{ _("Type of work is required") }}');
+                    errors.push(`{{ _("Type of work is required") }}`);
                 }
 
                 // Validate required creator and detail fields based on work type
@@ -1580,20 +1580,20 @@
                                 isValid = false;
                                 // Map field names to human-readable labels
                                 const fieldLabels = {
-                                    'author': '{{ _("At least one author is required") }}',
-                                    'director': '{{ _("At least one director is required") }}',
-                                    'screenwriter': '{{ _("At least one screenwriter is required") }}',
-                                    'composer': '{{ _("At least one composer is required") }}',
-                                    'creator': '{{ _("At least one creator is required") }}',
-                                    'lyricist': '{{ _("At least one lyricist is required") }}',
-                                    'performer': '{{ _("At least one performer is required") }}',
-                                    'producer': '{{ _("At least one producer is required") }}',
-                                    'language': '{{ _("Language is required") }}',
-                                    'languageFilm': '{{ _("Original language is required") }}',
-                                    'country': '{{ _("Country of origin is required") }}',
-                                    'countryOfPublication': '{{ _("Country of publication is required") }}',
-                                    'location': '{{ _("Location is required") }}',
-                                    'genre': '{{ _("Genre is required") }}'
+                                    'author': `{{ _("At least one author is required") }}`,
+                                    'director': `{{ _("At least one director is required") }}`,
+                                    'screenwriter': `{{ _("At least one screenwriter is required") }}`,
+                                    'composer': `{{ _("At least one composer is required") }}`,
+                                    'creator': `{{ _("At least one creator is required") }}`,
+                                    'lyricist': `{{ _("At least one lyricist is required") }}`,
+                                    'performer': `{{ _("At least one performer is required") }}`,
+                                    'producer': `{{ _("At least one producer is required") }}`,
+                                    'language': `{{ _("Language is required") }}`,
+                                    'languageFilm': `{{ _("Original language is required") }}`,
+                                    'country': `{{ _("Country of origin is required") }}`,
+                                    'countryOfPublication': `{{ _("Country of publication is required") }}`,
+                                    'location': `{{ _("Location is required") }}`,
+                                    'genre': `{{ _("Genre is required") }}`
                                 };
                                 errors.push(fieldLabels[fieldName] || `${fieldName} is required`);
                             }
@@ -1610,11 +1610,11 @@
 
                     if (pubYear || pubMonth || pubDay) {
                         const pubValidation = FormUtils.validateDateInput(pubYear, pubMonth, pubDay, {
-                            yearRequired: '{{ _("Publication date: Year is required") }}',
-                            yearInvalid: '{{ _("Publication date: Year must be a valid 4-digit number") }}',
-                            monthInvalid: '{{ _("Publication date: Month must be between 0-12") }}',
-                            dayInvalid: '{{ _("Publication date: Day must be between 0-31") }}',
-                            monthRequiredForDay: '{{ _("Publication date: Month cannot be 0 if day is specified") }}'
+                            yearRequired: `{{ _("Publication date: Year is required") }}`,
+                            yearInvalid: `{{ _("Publication date: Year must be a valid 4-digit number") }}`,
+                            monthInvalid: `{{ _("Publication date: Month must be between 0-12") }}`,
+                            dayInvalid: `{{ _("Publication date: Day must be between 0-31") }}`,
+                            monthRequiredForDay: `{{ _("Publication date: Month cannot be 0 if day is specified") }}`
                         });
 
                         if (!pubValidation.valid) {
@@ -1640,11 +1640,11 @@
 
                     if (createYear || createMonth || createDay) {
                         const createValidation = FormUtils.validateDateInput(createYear, createMonth, createDay, {
-                            yearRequired: '{{ _("Creation date: Year is required") }}',
-                            yearInvalid: '{{ _("Creation date: Year must be a valid 4-digit number") }}',
-                            monthInvalid: '{{ _("Creation date: Month must be between 0-12") }}',
-                            dayInvalid: '{{ _("Creation date: Day must be between 0-31") }}',
-                            monthRequiredForDay: '{{ _("Creation date: Month cannot be 0 if day is specified") }}'
+                            yearRequired: `{{ _("Creation date: Year is required") }}`,
+                            yearInvalid: `{{ _("Creation date: Year must be a valid 4-digit number") }}`,
+                            monthInvalid: `{{ _("Creation date: Month must be between 0-12") }}`,
+                            dayInvalid: `{{ _("Creation date: Day must be between 0-31") }}`,
+                            monthRequiredForDay: `{{ _("Creation date: Month cannot be 0 if day is specified") }}`
                         });
 
                         if (!createValidation.valid) {
@@ -1662,7 +1662,7 @@
                 }
 
                 if (!isValid) {
-                    alert('{{ _("Please fix the following errors:") }}\n- ' + errors.join('\n- '));
+                    alert(`{{ _("Please fix the following errors:") }}\n- ` + errors.join('\n- '));
                     return false;
                 }
 

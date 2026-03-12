@@ -814,24 +814,24 @@
 
   // Translatable messages for WikidataItemSearch
   const wikidataMessages = {
-    searching: '{{ _("Searching Wikidata...") }}',
-    noResults: '{{ _("No Wikidata results found") }}',
-    noDescription: '{{ _("No description") }}',
-    error: '{{ _("Error searching Wikidata") }}',
-    alreadyAdded: '{{ _("This item is already added") }}',
-    alreadySelected: '{{ _("This item is already selected") }}',
-    remove: '{{ _("Remove") }}'
+    searching: `{{ _("Searching Wikidata...") }}`,
+    noResults: `{{ _("No Wikidata results found") }}`,
+    noDescription: `{{ _("No description") }}`,
+    error: `{{ _("Error searching Wikidata") }}`,
+    alreadyAdded: `{{ _("This item is already added") }}`,
+    alreadySelected: `{{ _("This item is already selected") }}`,
+    remove: `{{ _("Remove") }}`
   };
 
   // Initialize Reference Manager
   const referenceManager = new ReferenceManager({
     maxReferences: 1,
     messages: {
-      reference: '{{ _("Reference") }}',
-      url: '{{ _("Reference URL") }}',
-      retrieved: '{{ _("Date accessed") }}',
-      maxReached: '{{ _("Maximum 1 reference per field") }}',
-      remove: '{{ _("Remove") }}'
+      reference: `{{ _("Reference") }}`,
+      url: `{{ _("Reference URL") }}`,
+      retrieved: `{{ _("Date accessed") }}`,
+      maxReached: `{{ _("Maximum 1 reference per field") }}`,
+      remove: `{{ _("Remove") }}`
     }
   });
 
@@ -1047,12 +1047,12 @@
 
       // Validate date inputs using FormUtils
       const dateValidation = FormUtils.validateDateInput(year, month, day, {
-        yearRequired: '{{ _("Year is required") }}',
-        yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
-        monthInvalid: '{{ _("Month must be between 0-12") }}',
-        dayInvalid: '{{ _("Day must be between 0-31") }}',
-        monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
-        monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+        yearRequired: `{{ _("Year is required") }}`,
+        yearInvalid: `{{ _("Year must be a valid 4-digit number") }}`,
+        monthInvalid: `{{ _("Month must be between 0-12") }}`,
+        dayInvalid: `{{ _("Day must be between 0-31") }}`,
+        monthRequiredForDay: `{{ _("Month cannot be 0 if day is specified") }}`,
+        monthRequiredForYear: `{{ _("Month is required if you enter day") }}`
       });
 
       if (!dateValidation.valid) {
@@ -1069,7 +1069,7 @@
       // Combine date parts using FormUtils
       const combinedDate = FormUtils.combineDateParts(year, month, day);
       if (!combinedDate) {
-        alert('{{ _("Invalid date format") }}');
+        alert(`{{ _("Invalid date format") }}`);
         button.disabled = false;
         button.innerHTML = originalHTML;
         return;
@@ -1087,7 +1087,7 @@
         newLabel = select ? select.options[select.selectedIndex]?.text : '';
 
         if (!newValue) {
-          alert('{{ _("Please select a gender") }}');
+          alert(`{{ _("Please select a gender") }}`);
           button.disabled = false;
           button.innerHTML = originalHTML;
           return;
@@ -1099,7 +1099,7 @@
         const selectedData = searchInstance.getValue();
 
         if (!selectedData || !selectedData.qids || selectedData.qids.length === 0) {
-          alert('{{ _("Please select at least one value") }}');
+          alert(`{{ _("Please select at least one value") }}`);
           button.disabled = false;
           button.innerHTML = originalHTML;
           return;
@@ -1191,17 +1191,17 @@
         cancelAuthorEdit(button);
 
         // Show success toast
-        showAuthorToast('{{ _("Edit published successfully!") }}', 'success');
+        showAuthorToast(`{{ _("Edit published successfully!") }}`, 'success');
 
       } else {
-        alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+        alert(`{{ _("Error publishing changes:") }} ` + (result.message || `{{ _("Unknown error") }}`));
         button.disabled = false;
         button.innerHTML = originalHTML;
       }
 
     } catch (error) {
       console.error('Error:', error);
-      alert('{{ _("Network error. Please try again.") }}');
+      alert(`{{ _("Network error. Please try again.") }}`);
       button.disabled = false;
       button.innerHTML = originalHTML;
     }
@@ -1449,12 +1449,12 @@
 
         if (year || month || day) {
           const validation = FormUtils.validateDateInput(year, month, day, {
-            yearRequired: '{{ _("Year is required") }}',
-            yearInvalid: '{{ _("Year must be a valid 4-digit number") }}',
-            monthInvalid: '{{ _("Month must be between 0-12") }}',
-            dayInvalid: '{{ _("Day must be between 0-31") }}',
-            monthRequiredForDay: '{{ _("Month cannot be 0 if day is specified") }}',
-            monthRequiredForYear: '{{ _("Month is required if you enter day") }}'
+            yearRequired: `{{ _("Year is required") }}`,
+            yearInvalid: `{{ _("Year must be a valid 4-digit number") }}`,
+            monthInvalid: `{{ _("Month must be between 0-12") }}`,
+            dayInvalid: `{{ _("Day must be between 0-31") }}`,
+            monthRequiredForDay: `{{ _("Month cannot be 0 if day is specified") }}`,
+            monthRequiredForYear: `{{ _("Month is required if you enter day") }}`
           });
 
           if (!validation.valid) {
@@ -1491,7 +1491,7 @@
 
     // Check if at least one field has data
     if (changes.length === 0) {
-      alert('{{ _("Please fill in at least one field before publishing.") }}');
+      alert(`{{ _("Please fill in at least one field before publishing.") }}`);
       return;
     }
 
@@ -1519,20 +1519,20 @@
           addInfoBtn.classList.add('add-info-btn-disabled');
         }
 
-        showAuthorToast('{{ _("Edit published successfully!") }}', 'success');
+        showAuthorToast(`{{ _("Edit published successfully!") }}`, 'success');
 
         setTimeout(() => {
           window.location.reload();
         }, 1000);
 
       } else {
-        alert('{{ _("Error publishing changes:") }} ' + (result.message || '{{ _("Unknown error") }}'));
+        alert(`{{ _("Error publishing changes:") }} ` + (result.message || `{{ _("Unknown error") }}`));
         btn.disabled = false;
         btn.innerHTML = originalHTML;
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('{{ _("Network error. Please try again.") }}');
+      alert(`{{ _("Network error. Please try again.") }}`);
       btn.disabled = false;
       btn.innerHTML = originalHTML;
     }
