@@ -1394,7 +1394,6 @@ msgid "Consult individual works for public domain status"
 msgstr "Consultar obres individuals per conèixer l'estatus de domini públic"
 
 #: templates/author.html:86
-#, fuzzy
 msgid ""
 "Public domain status unknown due to lack of available dates of birth and "
 "death."
@@ -1910,7 +1909,6 @@ msgid "Search for country of origin"
 msgstr "Cerca país d'origen"
 
 #: templates/work.html:421
-#, fuzzy
 msgid "Search for language..."
 msgstr "Cerca idioma..."
 
@@ -1919,12 +1917,10 @@ msgid "Copyright status"
 msgstr "Estat de drets d’autor"
 
 #: templates/work.html:511
-#, fuzzy
 msgid "countries and terms page"
-msgstr "Països i terminis"
+msgstr "pàgina de països i termes"
 
 #: templates/work.html:513
-#, fuzzy
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1935,7 +1931,7 @@ msgstr ""
 " de mort de l'autor i la data de creació o publicació de l'obra."
 
 #: templates/work.html:514
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
@@ -2044,9 +2040,4 @@ msgstr "Visualitza aquesta consulta al servei de consultes de Wikidata"
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Edita l’element al Wikidata"
-
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "pàgina de països i termes"
 

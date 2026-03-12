@@ -2014,7 +2014,3 @@ msgstr "Ver esta consulta en el Servicio de Consultas de Wikidata"
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Editar elemento de Wikidata"
 
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "página de países y plazos"

@@ -1971,12 +1971,10 @@ msgid "Copyright status"
 msgstr "Status de direitos autorais"
 
 #: templates/work.html:511
-#, fuzzy
 msgid "countries and terms page"
-msgstr "Países e termos"
+msgstr "página de países e prazos"
 
 #: templates/work.html:513
-#, fuzzy
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1988,7 +1986,7 @@ msgstr ""
 "publicada."
 
 #: templates/work.html:514
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
@@ -2100,9 +2098,4 @@ msgstr "Veja esta consulta no Serviço de Consultas do Wikidata"
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Editar item do Wikidata"
-
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "página de países e prazos"
 

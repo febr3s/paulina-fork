@@ -1935,12 +1935,10 @@ msgid "Copyright status"
 msgstr "著作権の状況"
 
 #: templates/work.html:511
-#, fuzzy
 msgid "countries and terms page"
-msgstr "各国の著作権条項"
+msgstr "各国の著作権条項のページ"
 
 #: templates/work.html:513
-#, fuzzy
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1948,7 +1946,7 @@ msgid ""
 msgstr "この作品の著作権の状況についての情報がありません。著作権の状況は、法域、作家の死亡日、および作品が作成または公開された日によって異なります。"
 
 #: templates/work.html:514
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
@@ -2013,9 +2011,4 @@ msgstr ""
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "ウィキデータ項目を編集"
-
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "各国の著作権条項のページ"
 

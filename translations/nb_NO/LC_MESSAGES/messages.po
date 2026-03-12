@@ -1979,12 +1979,10 @@ msgid "Copyright status"
 msgstr "Opphavsrettsstatus"
 
 #: templates/work.html:511
-#, fuzzy
 msgid "countries and terms page"
-msgstr "Land og vilkår"
+msgstr "siden for land og vilkå"
 
 #: templates/work.html:513
-#, fuzzy
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1995,7 +1993,7 @@ msgstr ""
 "datoen verket ble skapt eller utgitt."
 
 #: templates/work.html:514
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
@@ -2095,9 +2093,4 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Rediger Wikidata-element"
-
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "siden for land og vilkår"
 

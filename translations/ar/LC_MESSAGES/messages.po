@@ -1940,12 +1940,10 @@ msgid "Copyright status"
 msgstr "حالة حقوق الطبع"
 
 #: templates/work.html:511
-#, fuzzy
 msgid "countries and terms page"
-msgstr "الدول والشروط"
+msgstr "صفحة الدول والشروط"
 
 #: templates/work.html:513
-#, fuzzy
 msgid ""
 "Copyright status information is not available for this work. The "
 "copyright status depends on the jurisdiction, the author's date of death "
@@ -1955,7 +1953,7 @@ msgstr ""
 "الولاية القضائية وتاريخ وفاة المؤلف وتاريخ إنشاء العمل أو نشره."
 
 #: templates/work.html:514
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
@@ -2016,9 +2014,4 @@ msgstr ""
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "تحرير عنصر ويكي بيانات"
-
-#~ msgid ""
-#~ "countries and terms\n"
-#~ "              page"
-#~ msgstr "صفحة الدول والشروط"
 
