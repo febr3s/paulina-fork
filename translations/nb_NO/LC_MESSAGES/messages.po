@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-12 16:43-0300\n"
+"POT-Creation-Date: 2026-03-12 18:53-0300\n"
 "PO-Revision-Date: 2025-10-14 22:05+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language: nb_NO\n"
@@ -1428,7 +1428,6 @@ msgid "Consult individual works for public domain status"
 msgstr "Sjekk individuelle verk for offentlig eiendomsstatus"
 
 #: templates/author.html:86
-#, fuzzy
 msgid ""
 "Public domain status unknown due to lack of available dates of birth and "
 "death."
@@ -1980,7 +1979,7 @@ msgstr "Opphavsrettsstatus"
 
 #: templates/work.html:511
 msgid "countries and terms page"
-msgstr "siden for land og vilkå"
+msgstr "siden for land og vilkår"
 
 #: templates/work.html:513
 msgid ""
