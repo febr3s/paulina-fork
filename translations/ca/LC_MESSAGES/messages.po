@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-02-24 19:48-0300\n"
-"PO-Revision-Date: 2026-02-13 17:04+0000\n"
+"PO-Revision-Date: 2026-03-12 19:16+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/ca/>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.17-dev\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: app.py:131
@@ -99,7 +100,7 @@ msgstr "La teva sessió ha finalitzat. Si us plau, torna a fer-ho."
 
 #: app.py:719 app.py:834 app.py:945 app.py:1045
 msgid "Session expired. Please log in again."
-msgstr ""
+msgstr "La sessió ha caducat. Si us plau, torneu a iniciar la sessió."
 
 #: app.py:758
 #, python-format
@@ -108,9 +109,8 @@ msgstr "Error creant l'autor: %(error)s"
 
 #: app.py:764 app.py:775 app.py:806 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
-#, fuzzy
 msgid "Add Author"
-msgstr "Autors"
+msgstr "Afegir autor"
 
 #: app.py:769
 msgid "An error occurred while creating the author. Please try again."
@@ -127,9 +127,8 @@ msgstr "Error creant l'obra: %(error)s"
 
 #: app.py:879 app.py:890 app.py:921 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
-#, fuzzy
 msgid "Add Work"
-msgstr "Troba obres"
+msgstr "Afegir obres"
 
 #: app.py:884
 msgid "An error occurred while creating the work. Please try again."
@@ -138,43 +137,42 @@ msgstr ""
 
 #: app.py:938 app.py:1039
 msgid "You must be logged in to edit."
-msgstr ""
+msgstr "Heu d'iniciar la sessió per editar."
 
 #: app.py:954 app.py:1051
 msgid "Invalid request data."
-msgstr ""
+msgstr "Dades de sol·licitud no vàlides."
 
 #: app.py:961 app.py:1055
 msgid "No changes provided."
-msgstr ""
+msgstr "No s'han proporcionat canvis."
 
 #: app.py:981 app.py:1071
 #, python-format
 msgid "Missing property or value for field: %(field)s"
-msgstr ""
+msgstr "Falta una propietat o un valor per al camp: %(field)s"
 
 #: app.py:1004 app.py:1091
-#, fuzzy, python-format
+#, python-format
 msgid "Error updating %(field)s: %(error)s"
-msgstr "Data de defunció"
+msgstr "S'ha produït un error en actualitzar %(field)s: %(error)s"
 
 #: app.py:1010 app.py:1094
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Actualitzat correctament!"
 
 #: app.py:1015 app.py:1096
-#, fuzzy
 msgid "Updated with some errors."
-msgstr "Data de naixença"
+msgstr "Actualitzat amb alguns errors."
 
 #: app.py:1021 app.py:1098
 msgid "Failed to update fields."
-msgstr ""
+msgstr "No s'han pogut actualitzar els camps."
 
 #: app.py:1028 app.py:1101
-#, fuzzy, python-format
+#, python-format
 msgid "Server error: %(error)s"
-msgstr "Data de naixença"
+msgstr "Error del servidor: %(error)s"
 
 #: app.py:1116
 msgid "404 error"
@@ -260,44 +258,41 @@ msgstr ""
 #: pdclasses.py:368
 #, python-format
 msgid "Image of %(title)s."
-msgstr ""
+msgstr "Imatge de %(title)s."
 
 #: pdclasses.py:460 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
-msgstr ""
+msgstr "Bandera dels %(country_name)s."
 
 #: wikidata_api.py:70 wikidata_api.py:98
 msgid "No OAuth session available"
-msgstr ""
+msgstr "No hi ha cap sessió d'OAuth disponible"
 
 #: wikidata_api.py:87
 #, python-format
 msgid "Unexpected token response: %(data)s"
-msgstr ""
+msgstr "Resposta de token inesperada: %(data)s"
 
 #: templates/add-author.html:591 wikidata_api.py:322
 msgid "Name is required"
-msgstr ""
+msgstr "El nom és obligatori"
 
 #: templates/add-author.html:592 wikidata_api.py:324
 msgid "Gender is required"
-msgstr ""
+msgstr "El gènere és obligatori"
 
 #: templates/add-author.html:593 wikidata_api.py:326
-#, fuzzy
 msgid "Nationality is required"
-msgstr "Nacionalitat"
+msgstr "La nacionalitat és obligatòria"
 
 #: templates/add-author.html:594 wikidata_api.py:328
-#, fuzzy
 msgid "Place of birth is required"
-msgstr "Lloc de naixença"
+msgstr "Lloc de naixença és obligatori"
 
 #: templates/add-author.html:595 wikidata_api.py:330
-#, fuzzy
 msgid "Occupation is required"
-msgstr "Ocupació"
+msgstr "L'ocupació és obligatòria"
 
 #: wikidata_api.py:337
 #, python-format
@@ -310,24 +305,20 @@ msgid "Date of death: %(error)s"
 msgstr "Data de defunció: %(error)s"
 
 #: wikidata_api.py:552
-#, fuzzy
 msgid "work"
-msgstr "Obres"
+msgstr "Treball"
 
 #: templates/add-work.html:1557 wikidata_api.py:581
-#, fuzzy
 msgid "Title is required"
-msgstr "Nacionalitat"
+msgstr "Cal un títol"
 
 #: templates/add-work.html:1564 wikidata_api.py:586
-#, fuzzy
 msgid "Type of work is required"
-msgstr "Lloc de naixença"
+msgstr "Es requereix el tipus de treball"
 
 #: wikidata_api.py:597
-#, fuzzy
 msgid "Invalid type of work selected"
-msgstr "Lloc de naixença"
+msgstr "Tipus de treball seleccionat no vàlid"
 
 #: wikidata_api.py:605
 msgid "Author"
@@ -335,7 +326,7 @@ msgstr "Autor/a"
 
 #: wikidata_api.py:606
 msgid "Director"
-msgstr ""
+msgstr "Director"
 
 #: wikidata_api.py:607
 msgid "Creator"
@@ -343,32 +334,31 @@ msgstr "Creador"
 
 #: wikidata_api.py:608
 msgid "Composer"
-msgstr ""
+msgstr "Compositor"
 
 #: wikidata_api.py:609
 msgid "Screenwriter"
-msgstr ""
+msgstr "Guionista"
 
 #: wikidata_api.py:610
 msgid "Lyricist"
-msgstr ""
+msgstr "Lletrista"
 
 #: wikidata_api.py:611
 msgid "Performer"
-msgstr ""
+msgstr "intèrpret"
 
 #: wikidata_api.py:612
 msgid "Producer"
-msgstr ""
+msgstr "Productor"
 
 #: templates/add-work.html:350 templates/work.html:220 wikidata_api.py:613
 msgid "Language"
-msgstr "Llengua"
+msgstr "Idioma"
 
 #: templates/add-work.html:372 wikidata_api.py:614
-#, fuzzy
 msgid "Original language"
-msgstr "Llengua"
+msgstr "Idioma original"
 
 #: templates/add-work.html:508 templates/layout.html:268
 #: templates/work.html:280 wikidata_api.py:615
@@ -376,110 +366,104 @@ msgid "Country of origin"
 msgstr "País d’origen"
 
 #: wikidata_api.py:616
-#, fuzzy
 msgid "Country of publication"
-msgstr "País de naixença"
+msgstr "País de publicació"
 
 #: templates/add-work.html:396 wikidata_api.py:617
-#, fuzzy
 msgid "Location"
-msgstr "Ocupació"
+msgstr "Lloc"
 
 #: wikidata_api.py:618
-#, fuzzy
 msgid "Genre"
-msgstr "Gènere"
+msgstr "Sexe"
 
 #: templates/add-work.html:531 wikidata_api.py:619
 msgid "Record label"
-msgstr ""
+msgstr "Segell discogràfic"
 
 #: templates/add-work.html:474 templates/work.html:91 wikidata_api.py:620
 msgid "Publication date"
 msgstr "Data de publicació"
 
 #: templates/add-work.html:443 templates/work.html:155 wikidata_api.py:621
-#, fuzzy
 msgid "Creation date"
-msgstr "Data de publicació"
+msgstr "Data de creació"
 
 #: wikidata_api.py:629
-#, fuzzy, python-format
+#, python-format
 msgid "%(field)s is required"
-msgstr "Nacionalitat"
+msgstr "%(field)s és obligatori"
 
 #: wikidata_api.py:636
-#, fuzzy, python-format
+#, python-format
 msgid "Publication date: %(error)s"
-msgstr "Data de publicació"
+msgstr "Data de publicació: %(error)s"
 
 #: wikidata_api.py:642
-#, fuzzy, python-format
+#, python-format
 msgid "Creation date: %(error)s"
-msgstr "Data de defunció"
+msgstr "Data de creació: %(error)s"
 
 #: wikidata_api.py:1060
 #, python-format
 msgid "Invalid date: contains '%(pattern)s'"
-msgstr ""
+msgstr "Data no vàlida: conté '%(pattern)s'"
 
 #: templates/author.html:852 templates/work.html:606 wikidata_api.py:1066
 msgid "Invalid date format"
-msgstr ""
+msgstr "Format de data no vàlid"
 
 #: wikidata_api.py:1074
 msgid "Year is required and must be a valid 4-digit number"
-msgstr ""
+msgstr "L'any és obligatori i ha de ser un número vàlid de 4 dígits"
 
 #: wikidata_api.py:1079
 #, python-format
 msgid "Invalid month: %(month)s. Must be 01-12 or 00 for unknown"
-msgstr ""
+msgstr "Mes no vàlid: %(month)s. Ha de ser 01-12 o 00 per a desconeguts"
 
 #: wikidata_api.py:1084
 #, python-format
 msgid "Invalid day: %(day)s. Must be 01-31 or 00 for unknown"
-msgstr ""
+msgstr "Dia no vàlid: %(day)s. Ha de ser 01-31 o 00 per a desconeguts"
 
 #: wikidata_api.py:1137
 #, python-format
 msgid "creator from %(nationality)s"
-msgstr ""
+msgstr "Autor de %(nationality)s"
 
 #: wikidata_api.py:1139
 msgid "creator"
-msgstr ""
+msgstr "creador"
 
 #: wikidata_api.py:1168
 #, python-format
 msgid "%(work_type)s by %(creator)s"
-msgstr ""
+msgstr "%(work_type)s per %(creator)s"
 
 #: wikidata_constants.py:147
 msgid "Written work (not literary)"
-msgstr ""
+msgstr "Obra escrita (no literària)"
 
 #: wikidata_constants.py:158
 msgid "Edition of a written work"
-msgstr ""
+msgstr "Edició d'una obra escrita"
 
 #: wikidata_constants.py:182
 msgid "Audiovisual work (other)"
-msgstr ""
+msgstr "Obra audiovisual (altres)"
 
 #: wikidata_constants.py:217
 msgid "Visual artwork (other)"
-msgstr ""
+msgstr "Treball visual (altres)"
 
 #: wikidata_constants.py:230
-#, fuzzy
 msgid "Musical work/composition"
-msgstr "Obra musical"
+msgstr "Obra/composició musical"
 
 #: wikidata_constants.py:242
-#, fuzzy
 msgid "Album"
-msgstr "Quant a"
+msgstr "Àlbum"
 
 #: templates/404.html:7
 msgid "Page not found"
@@ -492,7 +476,7 @@ msgstr "pàgina d’inici"
 #: templates/404.html:9
 #, python-format
 msgid "Please go to the %(home_page)s and try again."
-msgstr ""
+msgstr "Si us plau, aneu a %(home_page)s i torneu-ho a intentar."
 
 #: templates/about.html:7 templates/layout.html:328
 msgid "About Paulina"
@@ -509,19 +493,19 @@ msgstr "Ártica - Online Centre Cultural"
 
 #: templates/about.html:10 templates/layout.html:317
 msgid "Creative Commons Uruguay"
-msgstr ""
+msgstr "Creative Commons Uruguai"
 
 #: templates/about.html:11 templates/layout.html:320
 msgid "Data Uruguay"
-msgstr ""
+msgstr "Dades Uruguai"
 
 #: templates/about.html:12 templates/layout.html:323
 msgid "Wikimedistas de Uruguay"
-msgstr ""
+msgstr "Vikimèdistes de l'Uruguai"
 
 #: templates/about.html:13
 msgid "Creative Commons CC0 1.0 Universal Public Domain Dedication"
-msgstr ""
+msgstr "Dedicació de Domini Públic Universal de Creative Commons CC0 1.0"
 
 #: templates/about.html:14
 msgid "Creative Commons Attribution-ShareAlike 4.0 International License"
@@ -530,11 +514,11 @@ msgstr ""
 
 #: templates/about.html:15 templates/author.html:97 templates/work.html:54
 msgid "Wikimedia Commons"
-msgstr ""
+msgstr "Wikimedia Commons"
 
 #: templates/about.html:16
 msgid "GNU Affero General Public License Version 3"
-msgstr ""
+msgstr "Llicència pública general GNU Affero versió 3"
 
 #: templates/about.html:17
 msgid "project's code repository"
@@ -553,12 +537,19 @@ msgid ""
 "domain. It also facilitates the understanding of copyright terms and helps "
 "to know when a work enters the public domain in each country."
 msgstr ""
+"Paulina us convida a aprendre sobre el patrimoni cultural de la humanitat. "
+"És una eina multilingüe, impulsada per %(wikidata_link)s, que us permet "
+"cercar persones i esbrinar si tenen obres de lliure accés en el domini "
+"públic. També facilita la comprensió dels termes dels drets d'autor i ajuda "
+"a saber quan una obra entra en el domini públic a cada país."
 
 #: templates/about.html:21
 msgid ""
 "Paulina is fed by data from Wikidata, the free and collaborative database "
 "maintained by the Wikimedia Foundation."
 msgstr ""
+"Paulina s'alimenta de dades de Wikidata, la base de dades gratuïta i "
+"col·laborativa mantinguda per la Fundació Wikimedia."
 
 #: templates/about.html:22
 msgid ""
@@ -567,6 +558,10 @@ msgid ""
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
+"De vegades, la informació consultada pot contenir errors o ser incompleta. "
+"Paulina ajuda a identificar llacunes i inexactituds en la informació sobre "
+"el patrimoni cultural i us convida a millorar les dades de Wikidata i, a "
+"través d'ella, a Internet."
 
 #: templates/about.html:23
 msgid "Local tools"
@@ -578,6 +573,9 @@ msgid ""
 "national, regional or thematic versions of the tool, according to the needs "
 "of each community."
 msgstr ""
+"Aquest lloc web forma part d'un projecte més ampli per facilitar la creació "
+"de versions nacionals, regionals o temàtiques de l'eina, segons les "
+"necessitats de cada comunitat."
 
 #: templates/about.html:25
 msgid "Who makes Paulina"
@@ -589,11 +587,13 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
+"Paulina rep el suport de %(artica_link)s, %(cc_uruguay_link)s, %"
+"(data_uruguay_link)s i %(wm_uruguay_link)s."
 
 #: templates/about.html:27
 #, python-format
 msgid "See the %(credits_link)s."
-msgstr ""
+msgstr "Vegeu els %(credits_link)s."
 
 #: templates/about.html:28
 msgid "Content licenses"
@@ -605,6 +605,8 @@ msgid ""
 "All data in the pages about authors, works, countries and terms come from "
 "Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
+"Totes les dades de les pàgines sobre autors, obres, països i termes provenen "
+"de Wikidata i estan sota els termes dels %(CC0_link)s."
 
 #: templates/about.html:30
 #, python-format
@@ -612,6 +614,8 @@ msgid ""
 "The texts and other original content of this website are under a "
 "%(ccbysa_link)s."
 msgstr ""
+"Els textos i altres continguts originals d'aquest lloc web estan sota la "
+"llicència de %(ccbysa_link)s."
 
 #: templates/about.html:31
 #, python-format
@@ -621,6 +625,10 @@ msgid ""
 "the public domain. We recommend consulting the information of each content "
 "on Wikimedia Commons."
 msgstr ""
+"Les imatges i els continguts multimèdia de les pàgines sobre autors, obres, "
+"països i termes provenen de %(wm_commons_link)s i estan sota diferents "
+"llicències lliures o de domini públic. Recomanem consultar la informació de "
+"cada contingut a Wikimedia Commons."
 
 #: templates/about.html:32
 msgid ""
@@ -630,6 +638,11 @@ msgid ""
 "recommend consulting the information of each work on the websites where they "
 "are hosted."
 msgstr ""
+"Les obres accessibles a través d'enllaços a llocs externs estan disponibles "
+"per al públic, principalment perquè són de domini públic o sota llicències "
+"lliures, però algunes d'elles poden estar protegides per drets d'autor en "
+"algunes jurisdiccions. Recomanem consultar la informació de cada obra als "
+"llocs web on estan allotjades."
 
 #: templates/about.html:33
 msgid "Free software"
@@ -641,49 +654,48 @@ msgid ""
 "Paulina is free software. It is published under the %(agpl_link)s. Visit the "
 "%(repository_link)s."
 msgstr ""
+"Paulina és programari lliure. Està publicat sota la llicència %(agpl_link)s. "
+"Visiteu els %(repository_link)s."
 
 #: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
-msgstr ""
+msgstr "Si us plau, corregiu els errors i torneu a enviar."
 
 #: templates/add-author.html:18 templates/add-work.html:17
 msgid "Close"
-msgstr ""
+msgstr "Tancar"
 
 #: templates/add-author.html:19
 msgid "Author Created Successfully!"
-msgstr ""
+msgstr "Autor creat correctament!"
 
 #: templates/add-author.html:21
 msgid "The author has been added to Wikidata with ID:"
-msgstr ""
+msgstr "L'autor s'ha afegit a Wikidata amb l'ID:"
 
 #: templates/add-author.html:26 templates/add-work.html:26
-#, fuzzy
 msgid "View on Wikidata"
-msgstr "Wikidata"
+msgstr "Veure a Wikidata"
 
 #: templates/add-author.html:29 templates/add-work.html:29
-#, fuzzy
 msgid "View on Paulina"
-msgstr "Quant al Paulina"
+msgstr "Veure a Paulina"
 
 #: templates/add-author.html:53
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: templates/add-author.html:60
-#, fuzzy
 msgid "e.g., Paulina Luisi"
-msgstr "Paulina Luisi"
+msgstr "p. ex., Paulina Luisi"
 
 #: templates/add-author.html:64
 msgid "Please enter the author name"
-msgstr ""
+msgstr "Si us plau, introduïu el nom de l'autor"
 
 #: templates/add-author.html:67
 msgid "Matching authors will appear as you type"
-msgstr ""
+msgstr "Els autors coincidents apareixeran a mesura que escriviu"
 
 #: templates/add-author.html:74 templates/add-work.html:86
 msgid "Description"
@@ -691,24 +703,24 @@ msgstr "Descripció"
 
 #: templates/add-author.html:80
 msgid "e.g., Uruguayan doctor, writer, and politician"
-msgstr ""
+msgstr "p. ex., metge, escriptor i polític uruguaià"
 
 #: templates/add-author.html:82
 msgid "Please enter a brief description"
-msgstr ""
+msgstr "Si us plau, introduïu una breu descripció"
 
 #: templates/add-author.html:91 templates/add-work.html:66
 msgid "Possible matches on Wikidata:"
-msgstr ""
+msgstr "Possibles coincidències a Wikidata:"
 
 #: templates/add-author.html:98 templates/add-work.html:74
 msgid "None of these match - Continue"
-msgstr ""
+msgstr "Cap d'aquests coincideix - Continua"
 
 #: templates/add-author.html:103 templates/add-author.html:571
 #: templates/add-work.html:79
 msgid "No exact match found."
-msgstr ""
+msgstr "No s'ha trobat cap coincidència exacta."
 
 #: templates/add-author.html:111 templates/author.html:115
 msgid "Biography"
@@ -716,7 +728,7 @@ msgstr "Biografia"
 
 #: templates/add-author.html:114
 msgid "Biographical Information"
-msgstr ""
+msgstr "Informació biogràfica"
 
 #: templates/add-author.html:122 templates/author.html:137
 #: templates/layout.html:223
@@ -726,7 +738,7 @@ msgstr "Nacionalitat"
 #: templates/add-author.html:129 templates/add-work.html:512
 #: templates/add-work.html:560
 msgid "Search for a country..."
-msgstr ""
+msgstr "Cerca un país..."
 
 #: templates/add-author.html:146 templates/add-author.html:182
 #: templates/add-author.html:221 templates/add-author.html:261
@@ -742,7 +754,7 @@ msgstr ""
 #: templates/add-work.html:521 templates/add-work.html:545
 #: templates/add-work.html:569
 msgid "Add reference"
-msgstr ""
+msgstr "Afegeix una referència"
 
 #: templates/add-author.html:159 templates/author.html:249
 #: templates/layout.html:212
@@ -757,7 +769,7 @@ msgstr "Qualsevol"
 
 #: templates/add-author.html:176 templates/author.html:870
 msgid "Please select a gender"
-msgstr ""
+msgstr "Si us plau, seleccioneu un sexe"
 
 #: templates/add-author.html:197 templates/author.html:426
 msgid "Place of birth"
@@ -765,7 +777,7 @@ msgstr "Lloc de naixença"
 
 #: templates/add-author.html:204
 msgid "e.g., Buenos Aires, Tokyo, Lagos"
-msgstr ""
+msgstr "per exemple, Buenos Aires, Tòquio, Lagos"
 
 #: templates/add-author.html:234 templates/author.html:369
 msgid "Occupation"
@@ -773,19 +785,19 @@ msgstr "Ocupació"
 
 #: templates/add-author.html:240
 msgid "e.g., writer, painter, sculptor"
-msgstr ""
+msgstr "p. ex., escriptor, pintor, escultor"
 
 #: templates/add-author.html:276 templates/author.html:193
 msgid "Ethnicity"
-msgstr ""
+msgstr "Ètnia"
 
 #: templates/add-author.html:283
 msgid "e.g., Aymara, Inuit, Zulu"
-msgstr ""
+msgstr "p. ex., aimara, inuit, zulu"
 
 #: templates/add-author.html:298
 msgid "Type to search Wikidata"
-msgstr ""
+msgstr "Escriu per cercar a Wikidata"
 
 #: templates/add-author.html:320 templates/author.html:303
 msgid "Date of birth"
@@ -795,24 +807,22 @@ msgstr "Data de naixença"
 #: templates/add-work.html:448 templates/add-work.html:479
 #: templates/author.html:335 templates/author.html:548 templates/work.html:119
 #: templates/work.html:183
-#, fuzzy
 msgid "Day"
-msgstr "Qualsevol"
+msgstr "Dia"
 
 #: templates/add-author.html:342 templates/add-author.html:397
 #: templates/add-work.html:452 templates/add-work.html:483
 #: templates/author.html:339 templates/author.html:552 templates/work.html:123
 #: templates/work.html:187
 msgid "Month"
-msgstr ""
+msgstr "Mes"
 
 #: templates/add-author.html:352 templates/add-author.html:407
 #: templates/add-work.html:456 templates/add-work.html:487
 #: templates/author.html:343 templates/author.html:556 templates/work.html:127
 #: templates/work.html:191
-#, fuzzy
 msgid "Year"
-msgstr "Cerca"
+msgstr "Any"
 
 #: templates/add-author.html:374 templates/author.html:516
 msgid "Date of death"
@@ -820,46 +830,48 @@ msgstr "Data de defunció"
 
 #: templates/add-author.html:375
 msgid "if applicable"
-msgstr ""
+msgstr "si escau"
 
 #: templates/add-author.html:428
 msgid "Add author image (optional)"
-msgstr ""
+msgstr "Afegeix una imatge d'autor (opcional)"
 
 #: templates/add-author.html:438
 msgid ""
 "Search Wikimedia Commons for author's image, or enter the Commons image URL "
 "directly:"
 msgstr ""
+"Cerca la imatge de l'autor a Wikimedia Commons o introdueix directament "
+"l'URL de la imatge de Commons:"
 
 #: templates/add-author.html:446
-#, fuzzy
 msgid "Search Commons for"
-msgstr "Cerca obres"
+msgstr "Cerca a Commons per a"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
 "Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
 msgstr ""
+"Obre Wikimedia Commons en una pestanya nova. Copia l'URL de la imatge i "
+"enganxa-la a sota."
 
 #: templates/add-author.html:455 templates/add-work.html:611
 msgid "Image URL"
-msgstr ""
+msgstr "Imatge URL"
 
 #: templates/add-author.html:473 templates/add-author.html:481
 #: templates/add-author.html:601 templates/add-work.html:628
 #: templates/add-work.html:639
 msgid "Image preview"
-msgstr ""
+msgstr "Previsualització de la imatge"
 
 #: templates/add-author.html:489 templates/add-work.html:647
 msgid "Could not load image"
-msgstr ""
+msgstr "No s'ha pogut carregar la imatge"
 
 #: templates/add-author.html:502 templates/add-work.html:664
-#, fuzzy
 msgid "Add external links (optional)"
-msgstr "Enllaç extern"
+msgstr "Afegir enllaços externs (opcional)"
 
 #: templates/add-author.html:509 templates/author.html:106
 msgid "Official website"
@@ -868,210 +880,219 @@ msgstr "Lloc web oficial"
 #: templates/add-author.html:517 templates/add-work.html:678
 msgid "Enter the full URL including https://, e.g. https://example.com"
 msgstr ""
+"Introduïu l'URL completa, incloent-hi https://, p. ex. https://example.com"
 
 #: templates/add-author.html:537 templates/add-work.html:707
-#, fuzzy
 msgid "Reset"
-msgstr "Resultats"
+msgstr "Reiniciar"
 
 #: templates/add-author.html:540 templates/add-work.html:711
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 #: templates/add-author.html:560 templates/author.html:597
 #: templates/work.html:423
 msgid "Searching Wikidata..."
-msgstr ""
+msgstr "Cercant a Wikidata..."
 
 #: templates/add-author.html:561 templates/author.html:598
 #: templates/work.html:424
-#, fuzzy
 msgid "No Wikidata results found"
-msgstr "No s’ha trobat cap resultat"
+msgstr "No s’ha trobat cap resultat a Wikidata"
 
 #: templates/add-author.html:562 templates/add-author.html:573
 #: templates/author.html:599 templates/work.html:425
 msgid "No description"
-msgstr ""
+msgstr "Sense descripció"
 
 #: templates/add-author.html:563 templates/add-author.html:572
 #: templates/author.html:600 templates/work.html:426
 msgid "Error searching Wikidata"
-msgstr ""
+msgstr "S'ha produït un error en cercar a Wikidata"
 
 #: templates/add-author.html:564 templates/author.html:601
 #: templates/work.html:427
 msgid "This item is already added"
-msgstr ""
+msgstr "Aquest element ja s'ha afegit"
 
 #: templates/add-author.html:565 templates/author.html:602
 #: templates/work.html:428
 msgid "This item is already selected"
-msgstr ""
+msgstr "Aquest element ja està seleccionat"
 
 #: templates/add-author.html:566 templates/add-author.html:582
 #: templates/author.html:603 templates/author.html:614 templates/work.html:429
 #: templates/work.html:439
 msgid "Remove"
-msgstr ""
+msgstr "Elimina"
 
 #: templates/add-author.html:570
-#, fuzzy
 msgid "Searching..."
-msgstr "Cerca"
+msgstr "Cercant..."
 
 #: templates/add-author.html:577 templates/author.html:610
 #: templates/work.html:435
 msgid "Reference"
-msgstr ""
+msgstr "Referència"
 
 #: templates/add-author.html:578 templates/author.html:611
 #: templates/work.html:436
 msgid "Reference URL"
-msgstr ""
+msgstr "URL de referència"
 
 #: templates/add-author.html:579 templates/add-work.html:50
 msgid "Title"
-msgstr ""
+msgstr "Títol"
 
 #: templates/add-author.html:580 templates/author.html:612
 #: templates/work.html:437
 msgid "Date accessed"
-msgstr ""
+msgstr "Data d'accés"
 
 #: templates/add-author.html:581
 msgid "Maximum 3 references per field"
-msgstr ""
+msgstr "Màxim 3 referències per camp"
 
 #: templates/add-author.html:586
 msgid "Please use an image from Wikimedia Commons."
-msgstr ""
+msgstr "Si us plau, feu servir una imatge de Wikimedia Commons."
 
 #: templates/add-author.html:587
 msgid "Could not load image. Please check the URL."
-msgstr ""
+msgstr "No s'ha pogut carregar la imatge. Si us plau, comproveu l'URL."
 
 #: templates/add-author.html:596
 msgid "Image must be from Wikimedia Commons"
-msgstr ""
+msgstr "La imatge ha de ser de Wikimedia Commons"
 
 #: templates/add-author.html:597
 msgid "Please fill in all required fields:"
-msgstr ""
+msgstr "Si us plau, ompliu tots els camps obligatoris:"
 
 #: templates/add-author.html:598 templates/add-work.html:1181
 msgid "Are you sure you want to reset the form? All entered data will be lost."
 msgstr ""
+"Esteu segur que voleu restablir el formulari? Es perdran totes les dades "
+"introduïdes."
 
 #: templates/add-author.html:599
 msgid "Please enter the author name first to search for images"
-msgstr ""
+msgstr "Si us plau, introduïu primer el nom de l'autor per cercar imatges"
 
 #: templates/add-author.html:600
-#, fuzzy
 msgid "author name"
-msgstr "Autors"
+msgstr "Nom de l'autor"
 
 #: templates/add-author.html:602 templates/author.html:830
 #: templates/work.html:586
 msgid "Year is required"
-msgstr ""
+msgstr "L'any és obligatori"
 
 #: templates/add-author.html:603 templates/author.html:831
 #: templates/work.html:587
 msgid "Year must be a valid 4-digit number"
-msgstr ""
+msgstr "L'any ha de ser un número vàlid de 4 dígits"
 
 #: templates/add-author.html:604 templates/author.html:832
 msgid "Month must be between 0-12 (use 0 for unknown)"
-msgstr ""
+msgstr "El mes ha d'estar entre 0 i 12 (feu servir 0 per a desconegut)"
 
 #: templates/add-author.html:605 templates/author.html:833
 msgid "Day must be between 0-31 (use 0 for unknown)"
-msgstr ""
+msgstr "El dia ha d'estar entre 0 i 31 (feu servir 0 per a desconegut)"
 
 #: templates/add-author.html:606 templates/author.html:834
 #: templates/work.html:590
 msgid "Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "El mes no pot ser 0 si s'especifica el dia"
 
 #: templates/add-author.html:763
 msgid "Date of birth: Year is required"
-msgstr ""
+msgstr "Data de naixement: Cal introduir l'any"
 
 #: templates/add-author.html:764
 msgid "Date of birth: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Data de naixement: l'any ha de ser un número vàlid de 4 dígits"
 
 #: templates/add-author.html:765
 msgid "Date of birth: Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
+"Data de naixement: El mes ha d'estar entre 0 i 12 (feu servir 0 per a "
+"desconegut)"
 
 #: templates/add-author.html:766
 msgid "Date of birth: Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
+"Data de naixement: El dia ha d'estar entre 0 i 31 (feu servir 0 si és "
+"desconegut)"
 
 #: templates/add-author.html:767
 msgid "Date of birth: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Data de naixement: El mes no pot ser 0 si s'especifica el dia"
 
 #: templates/add-author.html:768
 msgid "Date of birth: Month is required if you enter day"
-msgstr ""
+msgstr "Data de naixement: Cal introduir el mes si s'introdueix el dia"
 
 #: templates/add-author.html:790
 msgid "Date of death: Year is required if you enter month or day"
-msgstr ""
+msgstr "Data de la mort: Cal introduir l'any si s'introdueix el mes o el dia"
 
 #: templates/add-author.html:791
 msgid "Date of death: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Data de la mort: L'any ha de ser un número vàlid de 4 dígits"
 
 #: templates/add-author.html:792
 msgid "Date of death: Month must be between 0-12 (use 0 for unknown)"
 msgstr ""
+"Data de la mort: El mes ha d'estar entre 0 i 12 (feu servir 0 si és "
+"desconegut)"
 
 #: templates/add-author.html:793
 msgid "Date of death: Day must be between 0-31 (use 0 for unknown)"
 msgstr ""
+"Data de la mort: El dia ha d'estar entre 0 i 31 (feu servir 0 si és "
+"desconegut)"
 
 #: templates/add-author.html:794
 msgid "Date of death: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Data de la mort: El mes no pot ser 0 si s'especifica el dia"
 
 #: templates/add-author.html:795
 msgid "Date of death: Month is required if you enter day and year"
-msgstr ""
+msgstr "Data de la mort: Cal introduir el mes si s'introdueix el dia i l'any"
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
 "Could not connect to server. Please refresh the page manually to clear all "
 "data."
 msgstr ""
+"No s'ha pogut connectar al servidor. Si us plau, actualitzeu la pàgina "
+"manualment per esborrar totes les dades."
 
 #: templates/add-work.html:18
 msgid "Work Created Successfully!"
-msgstr ""
+msgstr "Treball creat correctament!"
 
 #: templates/add-work.html:20
 msgid "The work has been added to Wikidata with ID:"
-msgstr ""
+msgstr "L'obra s'ha afegit a Wikidata amb l'ID:"
 
 #: templates/add-work.html:54
 msgid "e.g., Don Quixote"
-msgstr ""
+msgstr "p. ex., Don Quixot"
 
 #: templates/add-work.html:56
 msgid "Please enter the work title"
-msgstr ""
+msgstr "Si us plau, introduïu el títol de l'obra"
 
 #: templates/add-work.html:59
 msgid "Matching works will appear as you type"
-msgstr ""
+msgstr "Les obres coincidents apareixeran a mesura que escriviu"
 
 #: templates/add-work.html:90
 msgid "e.g., Spanish novel by Miguel de Cervantes"
-msgstr ""
+msgstr "Per exemple, novel·la en espanyol de Miguel de Cervantes"
 
 #: templates/add-work.html:101 templates/country.html:34
 #: templates/layout.html:257
@@ -1079,270 +1100,249 @@ msgid "Type of work"
 msgstr "Tipus d’obra"
 
 #: templates/add-work.html:105
-#, fuzzy
 msgid "Select type of work..."
-msgstr "Tipus d’obra"
+msgstr "Selecciona el tipus d’obra..."
 
 #: templates/add-work.html:118
 msgid "Please select a type of work."
-msgstr ""
+msgstr "Si us plau, seleccioneu un tipus de treball."
 
 #: templates/add-work.html:138
-#, fuzzy
 msgid "Creators"
-msgstr "Autors"
+msgstr "Creadors"
 
 #: templates/add-work.html:144
-#, fuzzy
 msgid "Author(s)"
-msgstr "Autors"
+msgstr "Autor(s("
 
 #: templates/add-work.html:148
 msgid "Search for author..."
-msgstr ""
+msgstr "Cerca autor..."
 
 #: templates/add-work.html:169
 msgid "Director(s)"
-msgstr ""
+msgstr "Director(s)"
 
 #: templates/add-work.html:173
 msgid "Search for director..."
-msgstr ""
+msgstr "Cerca director..."
 
 #: templates/add-work.html:193
 msgid "Creator(s)"
-msgstr ""
+msgstr "Creador(s)"
 
 #: templates/add-work.html:197
 msgid "Search for creator..."
-msgstr ""
+msgstr "Cerca creador..."
 
 #: templates/add-work.html:219
 msgid "Performer(s)"
-msgstr ""
+msgstr "Intèrpret(s)"
 
 #: templates/add-work.html:223
 msgid "Search for performer..."
-msgstr ""
+msgstr "Cerca intèrpret..."
 
 #: templates/add-work.html:243
 msgid "Composer(s)"
-msgstr ""
+msgstr "Compositor(s)"
 
 #: templates/add-work.html:247
-#, fuzzy
 msgid "Search for composer..."
-msgstr "Cerca obres"
+msgstr "Cerca compositor..."
 
 #: templates/add-work.html:267
 msgid "Screenwriter(s)"
-msgstr ""
+msgstr "Guionista(s)"
 
 #: templates/add-work.html:271
 msgid "Search for screenwriter..."
-msgstr ""
+msgstr "Cerca guionista..."
 
 #: templates/add-work.html:291
 msgid "Lyricist(s)"
-msgstr ""
+msgstr "Lletrista(s)"
 
 #: templates/add-work.html:295
 msgid "Search for lyricist..."
-msgstr ""
+msgstr "Cerca lletrista..."
 
 #: templates/add-work.html:315
 msgid "Producer(s)"
-msgstr ""
+msgstr "Productor(s)"
 
 #: templates/add-work.html:319
 msgid "Search for producer..."
-msgstr ""
+msgstr "Cerca productor..."
 
 #: templates/add-work.html:341 templates/work.html:84
 msgid "Work details"
-msgstr ""
+msgstr "Detalls de l'obra"
 
 #: templates/add-work.html:353 templates/add-work.html:376
-#, fuzzy
 msgid "Search for a language..."
-msgstr "Cerca"
+msgstr "Cerca idioma..."
 
 #: templates/add-work.html:400
 msgid "e.g., Louvre Museum"
-msgstr ""
+msgstr "p. ex., Museu del Louvre"
 
 #: templates/add-work.html:419
 msgid "Genre(s)"
-msgstr ""
+msgstr "Gènere(s)"
 
 #: templates/add-work.html:423
-#, fuzzy
 msgid "Search for genre..."
-msgstr "Cerca"
+msgstr "Cerca gènere..."
 
 #: templates/add-work.html:535
 msgid "Search for record label..."
-msgstr ""
+msgstr "Cerca segell discogràfic..."
 
 #: templates/add-work.html:555
-#, fuzzy
 msgid "Country(ies) of publication"
-msgstr "País de naixença"
+msgstr "País(sos) de publicació"
 
 #: templates/add-work.html:584
 msgid "Add work image (optional)"
-msgstr ""
+msgstr "Afegeix una imatge de l'obra (opcional)"
 
 #: templates/add-work.html:594
 msgid ""
 "Search Wikimedia Commons for work's image, or enter the Commons image URL "
 "directly:"
 msgstr ""
+"Cerca la imatge de l'obra a Wikimedia Commons o introdueix directament l'URL "
+"de la imatge de Commons:"
 
 #: templates/add-work.html:601
-#, fuzzy
 msgid "Search Wikimedia Commons for"
-msgstr "Cerca obres"
+msgstr "Cerca a Wikimedia Commons"
 
 #: templates/add-work.html:602 templates/add-work.html:1122
 #: templates/add-work.html:1126
 msgid "work title"
-msgstr ""
+msgstr "Títol de l'obra"
 
 #: templates/add-work.html:672
 msgid "Full work available at URL"
-msgstr ""
+msgstr "Obra completa disponible a la URL"
 
 #: templates/add-work.html:684
 msgid "Internet Archive ID"
-msgstr ""
+msgstr "ID d'Internet Archive"
 
 #: templates/add-work.html:691
 msgid "The unique identifier from archive.org"
-msgstr ""
+msgstr "L'identificador únic d'archive.org"
 
 #: templates/add-work.html:1583
-#, fuzzy
 msgid "At least one author is required"
-msgstr "Nacionalitat"
+msgstr "Cal com a mínim un autor"
 
 #: templates/add-work.html:1584
-#, fuzzy
 msgid "At least one director is required"
-msgstr "Lloc de naixença"
+msgstr "Es requereix com a mínim un director"
 
 #: templates/add-work.html:1585
-#, fuzzy
 msgid "At least one screenwriter is required"
-msgstr "Nacionalitat"
+msgstr "Es requereix com a mínim un guionista"
 
 #: templates/add-work.html:1586
-#, fuzzy
 msgid "At least one composer is required"
-msgstr "Lloc de naixença"
+msgstr "Es requereix com a mínim un compositor"
 
 #: templates/add-work.html:1587
-#, fuzzy
 msgid "At least one creator is required"
-msgstr "Nacionalitat"
+msgstr "Es requereix com a mínim un creador"
 
 #: templates/add-work.html:1588
-#, fuzzy
 msgid "At least one lyricist is required"
-msgstr "Nacionalitat"
+msgstr "Es requereix com a mínim un lletrista"
 
 #: templates/add-work.html:1589
-#, fuzzy
 msgid "At least one performer is required"
-msgstr "Lloc de naixença"
+msgstr "Es requereix com a mínim un intèrpret"
 
 #: templates/add-work.html:1590
 msgid "At least one producer is required"
-msgstr ""
+msgstr "Es requereix com a mínim un productor"
 
 #: templates/add-work.html:1591
-#, fuzzy
 msgid "Language is required"
-msgstr "Ocupació"
+msgstr "Cal un idioma"
 
 #: templates/add-work.html:1592
-#, fuzzy
 msgid "Original language is required"
-msgstr "Nacionalitat"
+msgstr "Cal idioma original"
 
 #: templates/add-work.html:1593
-#, fuzzy
 msgid "Country of origin is required"
-msgstr "País d’origen"
+msgstr "Cal país d'origen"
 
 #: templates/add-work.html:1594
-#, fuzzy
 msgid "Country of publication is required"
-msgstr "Ocupació"
+msgstr "Cal el país de publicació"
 
 #: templates/add-work.html:1595
-#, fuzzy
 msgid "Location is required"
-msgstr "Ocupació"
+msgstr "Cal una ubicació"
 
 #: templates/add-work.html:1596
-#, fuzzy
 msgid "Genre is required"
-msgstr "Ocupació"
+msgstr "Cal un gènere"
 
 #: templates/add-work.html:1613
-#, fuzzy
 msgid "Publication date: Year is required"
-msgstr "Nacionalitat"
+msgstr "Data de publicació: Cal l'any"
 
 #: templates/add-work.html:1614
 msgid "Publication date: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Data de publicació: L'any ha de ser un número vàlid de 4 dígits"
 
 #: templates/add-work.html:1615
 msgid "Publication date: Month must be between 0-12"
-msgstr ""
+msgstr "Data de publicació: el mes ha d'estar entre 0 i 12"
 
 #: templates/add-work.html:1616
 msgid "Publication date: Day must be between 0-31"
-msgstr ""
+msgstr "Data de publicació: el dia ha d'estar entre 0 i 31"
 
 #: templates/add-work.html:1617
 msgid "Publication date: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Data de publicació: El mes no pot ser 0 si s'especifica el dia"
 
 #: templates/add-work.html:1643
-#, fuzzy
 msgid "Creation date: Year is required"
-msgstr "Nacionalitat"
+msgstr "Data de creació: Cal l'any"
 
 #: templates/add-work.html:1644
 msgid "Creation date: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Data de creació: L'any ha de ser un número vàlid de 4 dígits"
 
 #: templates/add-work.html:1645
 msgid "Creation date: Month must be between 0-12"
-msgstr ""
+msgstr "Data de creació: el mes ha d'estar entre 0 i 12"
 
 #: templates/add-work.html:1646
 msgid "Creation date: Day must be between 0-31"
-msgstr ""
+msgstr "Data de creació: el dia ha d'estar entre 0 i 31"
 
 #: templates/add-work.html:1647
 msgid "Creation date: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Data de creació: El mes no pot ser 0 si s'especifica el dia"
 
 #: templates/add-work.html:1665
 msgid "Please fix the following errors:"
-msgstr ""
+msgstr "Si us plau, corregiu els errors següents:"
 
 #: templates/author.html:12 templates/work.html:10
 msgid "Missing/wrong data?"
-msgstr ""
+msgstr "Dades falten/incorrectes?"
 
 #: templates/author.html:13
 msgid "Log in to edit"
-msgstr ""
+msgstr "Inicia la sessió per editar"
 
 #: templates/author.html:37
 msgid "Search works"
@@ -1354,41 +1354,40 @@ msgstr "a"
 
 #: templates/author.html:59
 msgid "everywhere in the world"
-msgstr ""
+msgstr "a tot arreu del món"
 
 #: templates/author.html:62
 #, python-format
 msgid "in %(jurisdiction_label)s"
-msgstr ""
+msgstr "en %(jurisdiction_label)s"
 
 #: templates/author.html:69
-#, fuzzy
 msgid "Works are in the public domain"
-msgstr "Més informació quant al domini públic"
+msgstr "Les obres són de domini públic"
 
 #: templates/author.html:73
-#, fuzzy
 msgid "Works are not in the worldwide public domain"
-msgstr "Més informació quant al domini públic"
+msgstr "Les obres no són de domini públic mundial"
 
 #: templates/author.html:75
 msgid "until January 1, "
-msgstr ""
+msgstr "fins a l'1 de gener, "
 
 #: templates/author.html:81
 msgid "Consult individual works for public domain status"
-msgstr ""
+msgstr "Consultar obres individuals per conèixer l'estatus de domini públic"
 
 #: templates/author.html:85
-#, fuzzy
 msgid ""
 "Public domain status unknown due to lack of available dates of birth and "
 "death."
-msgstr "Es desconeix perquè no estan disponibles les dates de naixença i mort."
+msgstr ""
+"L'estat de domini públic és desconegut per manca de dates de naixement i "
+"defunció disponibles."
 
 #: templates/author.html:86
 msgid "Consult individual works."
-msgstr ""
+msgstr "Consultar obres individuals."
 
 #: templates/author.html:94 templates/work.html:51
 msgid "Wikipedia"
@@ -1405,16 +1404,15 @@ msgstr "Viquidites"
 #: templates/author.html:123 templates/work.html:70
 msgid "Please enable JavaScript (it is required for inline editing), or"
 msgstr ""
+"Si us plau, activeu JavaScript (és necessari per a l'edició en línia), o"
 
 #: templates/author.html:125 templates/work.html:72
-#, fuzzy
 msgid "edit on Wikidata"
-msgstr "Wikidata"
+msgstr "editar a Wikidata"
 
 #: templates/author.html:144
-#, fuzzy
 msgid "Edit nationality"
-msgstr "Nacionalitat"
+msgstr "Editar nacionalitat"
 
 #: templates/author.html:145 templates/author.html:201
 #: templates/author.html:256 templates/author.html:315
@@ -1422,7 +1420,7 @@ msgstr "Nacionalitat"
 #: templates/author.html:528 templates/work.html:99 templates/work.html:163
 #: templates/work.html:228 templates/work.html:288
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: templates/author.html:150 templates/author.html:206
 #: templates/author.html:261 templates/author.html:320
@@ -1431,25 +1429,23 @@ msgstr ""
 #: templates/work.html:233 templates/work.html:293
 msgid "This field has multiple values. Please edit directly on Wikidata."
 msgstr ""
+"Aquest camp té diversos valors. Si us plau, editeu-lo directament a Wikidata."
 
 #: templates/author.html:153 templates/author.html:209
 #: templates/author.html:264 templates/author.html:323
 #: templates/author.html:385 templates/author.html:442
 #: templates/author.html:536 templates/work.html:107 templates/work.html:171
 #: templates/work.html:236 templates/work.html:296
-#, fuzzy
 msgid "Edit on Wikidata"
-msgstr "Wikidata"
+msgstr "Editar a Wikidata"
 
 #: templates/author.html:165 templates/author.html:499
-#, fuzzy
 msgid "Search for country..."
-msgstr "Cerca"
+msgstr "Cerca país..."
 
 #: templates/author.html:165
-#, fuzzy
 msgid "Search for nationality"
-msgstr "Nacionalitat"
+msgstr "Cerca nacionalitat"
 
 #: templates/author.html:176 templates/author.html:232
 #: templates/author.html:287 templates/author.html:351
@@ -1457,7 +1453,7 @@ msgstr "Nacionalitat"
 #: templates/author.html:564 templates/work.html:137 templates/work.html:201
 #: templates/work.html:261 templates/work.html:321
 msgid "Publish"
-msgstr ""
+msgstr "Publicar"
 
 #: templates/author.html:180 templates/author.html:236
 #: templates/author.html:291 templates/author.html:355
@@ -1465,76 +1461,63 @@ msgstr ""
 #: templates/author.html:568 templates/work.html:141 templates/work.html:205
 #: templates/work.html:265 templates/work.html:325
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·lar"
 
 #: templates/author.html:200
 msgid "Edit ethnicity"
-msgstr ""
+msgstr "Editar ètnia"
 
 #: templates/author.html:221
-#, fuzzy
 msgid "Search for ethnicity..."
-msgstr "Cerca"
+msgstr "Cerca ètnia..."
 
 #: templates/author.html:221
-#, fuzzy
 msgid "Search for ethnicity"
-msgstr "Cerca"
+msgstr "Cerca ètnia"
 
 #: templates/author.html:256
-#, fuzzy
 msgid "Edit gender"
-msgstr "Gènere"
+msgstr "Editar gènere"
 
 #: templates/author.html:275
-#, fuzzy
 msgid "Select gender"
-msgstr "Selecciona"
+msgstr "Selecciona gènere"
 
 #: templates/author.html:276
-#, fuzzy
 msgid "Select gender..."
-msgstr "Tipus d’obra"
+msgstr "Selecciona el sexe..."
 
 #: templates/author.html:308 templates/author.html:521
-#, fuzzy
 msgid "years"
-msgstr "Cerca"
+msgstr "Anys"
 
 #: templates/author.html:314
-#, fuzzy
 msgid "Edit date of birth"
-msgstr "Data de naixença"
+msgstr "Editar data de naixença"
 
 #: templates/author.html:376
-#, fuzzy
 msgid "Edit occupation"
-msgstr "Ocupació"
+msgstr "Editar ocupació"
 
 #: templates/author.html:397
-#, fuzzy
 msgid "Search for occupation(s)..."
-msgstr "Cerca obres"
+msgstr "Cerca ocupació(ns)..."
 
 #: templates/author.html:397
-#, fuzzy
 msgid "Search for occupation"
-msgstr "Ocupació"
+msgstr "Cerca ocupació"
 
 #: templates/author.html:433
-#, fuzzy
 msgid "Edit place of birth"
-msgstr "Lloc de naixença"
+msgstr "Editar lloc de naixença"
 
 #: templates/author.html:454
-#, fuzzy
 msgid "Search for place..."
-msgstr "Cerca"
+msgstr "Cerca lloc..."
 
 #: templates/author.html:454
-#, fuzzy
 msgid "Search for place of birth"
-msgstr "Lloc de naixença"
+msgstr "Cerca lloc de naixença"
 
 #: templates/author.html:482
 msgid "Country of birth"
@@ -1542,72 +1525,70 @@ msgstr "País de naixença"
 
 #: templates/author.html:488
 msgid "Country of birth is derived from place of birth."
-msgstr ""
+msgstr "El país de naixement ve del lloc de naixement."
 
 #: templates/author.html:499
-#, fuzzy
 msgid "Search for country of birth"
-msgstr "País de naixença"
+msgstr "Cerca país de naixença"
 
 #: templates/author.html:527
-#, fuzzy
 msgid "Edit date of death"
-msgstr "Data de defunció"
+msgstr "Editar data de defunció"
 
 #: templates/author.html:613 templates/work.html:438
 msgid "Maximum 1 reference per field"
-msgstr ""
+msgstr "Màxim 1 referència per camp"
 
 #: templates/author.html:835 templates/work.html:591
 msgid "Month is required if you enter day"
-msgstr ""
+msgstr "Cal el mes si introduïu el dia"
 
 #: templates/author.html:882
 msgid "Please select at least one value"
-msgstr ""
+msgstr "Sisplau, seleccioneu com a mínim un valor"
 
 #: templates/author.html:974 templates/work.html:675
 msgid "Edit published successfully!"
-msgstr ""
+msgstr "Edició publicada correctament!"
 
 #: templates/author.html:977 templates/work.html:678
 msgid "Error publishing changes:"
-msgstr ""
+msgstr "Error en publicar els canvis:"
 
 #: templates/author.html:977 templates/work.html:678
-#, fuzzy
 msgid "Unknown error"
-msgstr "Termini desconegut"
+msgstr "Error desconegut"
 
 #: templates/author.html:984 templates/work.html:685
 msgid "Network error. Please try again."
-msgstr ""
+msgstr "Error de xarxa. Sisplau, torna-ho a intentar."
 
 #: templates/countries.html:8
 msgid ""
 "This grid indicates the period after which works enter the public domain in "
 "each country."
 msgstr ""
+"Aquesta taula indica el període després del qual les obres entren al domini "
+"públic a cada país."
 
 #: templates/countries.html:9
 msgid "The period indicated is post mortem auctoris."
-msgstr ""
+msgstr "El període indicat és posterior a la mort de l'autor."
 
 #: templates/countries.html:10
 msgid ""
 "By clicking on each country, you can access more information about the "
 "country."
-msgstr ""
+msgstr "Si feu clic a cada país, en podreu accedir a més informació."
 
 #: templates/country.html:10
-#, fuzzy
 msgid "Copyright term"
-msgstr "Estat de drets d’autor"
+msgstr "Termini dels drets d'autor"
 
 #: templates/country.html:16
 #, python-format
 msgid "%(country_name)s is part of"
-msgstr ""
+msgstr "%(country_name)s forma part de"
 
 #: templates/country.html:21
 #, python-format
@@ -1615,34 +1596,34 @@ msgid "Applies to %(countries)s"
 msgstr "Aplicable a %(countries)s"
 
 #: templates/country.html:29
-#, fuzzy
 msgid "Public domain statistics"
-msgstr "És al domini públic"
+msgstr "Estadístiques de domini públic"
 
 #: templates/country.html:30
 msgid "Number of works identified as being in the public domain on Wikidata"
-msgstr ""
+msgstr "Nombre d'obres identificades com de domini públic a Wikidata"
 
 #: templates/country.html:35
-#, fuzzy
 msgid "Number of works in public domain"
-msgstr "És al domini públic"
+msgstr "Nombre d'obres de domini públic"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
 #: templates/layout.html:361 templates/layout.html:363
 #: templates/layout.html:365
 msgid "Paulina logo"
-msgstr ""
+msgstr "Logo de Paulina"
 
 #: templates/home.html:28
 msgid "Discover authors"
-msgstr ""
+msgstr "Descobreix autors"
 
 #: templates/home.html:29
 msgid ""
 "Paulina is a simple search tool to discover authors from all over the world "
 "and learn about their works."
 msgstr ""
+"Paulina és una eina de cerca senzilla per descobrir autors de tot el món i "
+"conèixer les seves obres."
 
 #: templates/home.html:33
 msgid "Mary Shelley"
@@ -1669,6 +1650,8 @@ msgid ""
 "Easily find information on cultural works from all disciplines of art and "
 "knowledge found on Wikidata."
 msgstr ""
+"Troba fàcilment informació sobre obres culturals de totes les disciplines de "
+"l'art i el coneixement que es troba a Wikidata."
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -1680,11 +1663,11 @@ msgstr "Orlando"
 
 #: templates/home.html:53
 msgid "Metropolis"
-msgstr ""
+msgstr "Metròpoli"
 
 #: templates/home.html:55
 msgid "Pampa"
-msgstr ""
+msgstr "Pampa"
 
 #: templates/home.html:60
 msgid "Learn about the public domain"
@@ -1695,14 +1678,16 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
+"Esbrineu quines obres són de domini públic en diferents països i accediu a "
+"les versions disponibles en línia."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
-msgstr ""
+msgstr "Països amb 50 anys post mortem auctoris"
 
 #: templates/home.html:67
 msgid "Countries with 70 years post mortem auctoris"
-msgstr ""
+msgstr "Països amb 70 anys post mortem auctoris"
 
 #: templates/layout.html:12
 msgid "Paulina"
@@ -1716,6 +1701,11 @@ msgid ""
 "domain. It also facilitates the understanding of copyright terms and helps "
 "to know when a work enters the public domain in each country."
 msgstr ""
+"Paulina us convida a aprendre sobre el patrimoni cultural de la humanitat. "
+"És una eina multilingüe, impulsada per Wikidata, que us permet cercar "
+"persones i esbrinar si tenen obres de lliure accés en el domini públic. "
+"També facilita la comprensió dels termes dels drets d'autor i ajuda a saber "
+"quan una obra entra en el domini públic a cada país."
 
 #: templates/layout.html:31 templates/layout.html:368
 msgid "Paulina - Data for the Public Domain"
@@ -1723,19 +1713,19 @@ msgstr "Paulina: dades per al domini públic"
 
 #: templates/layout.html:79 templates/layout.html:133
 msgid "Logout"
-msgstr ""
+msgstr "Tanca la sessió"
 
 #: templates/layout.html:86
 msgid "Login with Wikimedia"
-msgstr ""
+msgstr "Inicia la sessió amb Wikimedia"
 
 #: templates/layout.html:139
 msgid "Login with your Wikimedia account to add/edit data"
-msgstr ""
+msgstr "Inicia la sessió amb el teu compte de Wikimedia per afegir/editar dades"
 
 #: templates/layout.html:141
 msgid "Login"
-msgstr ""
+msgstr "Inicia la sessió"
 
 #: templates/layout.html:159
 msgid "Select"
@@ -1751,7 +1741,7 @@ msgstr "Obres"
 
 #: templates/layout.html:202
 msgid "Search with Paulina"
-msgstr ""
+msgstr "Cerca amb Paulina"
 
 #: templates/layout.html:202 templates/layout.html:204
 msgid "Search"
@@ -1772,10 +1762,11 @@ msgstr "És al domini públic"
 #: templates/layout.html:252
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
+"Autors les obres dels quals són de domini públic en almenys una jurisdicció"
 
 #: templates/layout.html:311
 msgid "Paulina is supported by:"
-msgstr ""
+msgstr "Paulina rep el suport de:"
 
 #: templates/layout.html:334
 msgid "Source code"
@@ -1795,15 +1786,15 @@ msgstr "Documentació"
 
 #: templates/layout.html:369
 msgid "Powered by Wikidata."
-msgstr ""
+msgstr "Amb la tecnologia de Wikidata."
 
 #: templates/layout.html:425
 msgid "No matching option"
-msgstr ""
+msgstr "No hi ha cap opció coincident"
 
 #: templates/layout.html:521
 msgid "Please select a valid option from the country dropdown."
-msgstr ""
+msgstr "Sisplau, seleccioneu una opció vàlida del menú desplegable de països."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -1811,19 +1802,19 @@ msgstr "No s’ha trobat cap resultat. Torneu-ho a provar."
 
 #: templates/oauth-callback.html:2
 msgid "Authenticating..."
-msgstr ""
+msgstr "Autenticació..."
 
 #: templates/oauth-callback.html:10
 msgid "Loading..."
-msgstr ""
+msgstr "S'està carregant..."
 
 #: templates/oauth-callback.html:12
 msgid "Authenticating with Wikimedia..."
-msgstr ""
+msgstr "Autenticació amb Wikimedia..."
 
 #: templates/oauth-callback.html:13
 msgid "Please wait while we complete your login."
-msgstr ""
+msgstr "Si us plau, espereu mentre completem l'inici de sessió."
 
 #: templates/results.html:6
 msgid "Search results"
@@ -1831,7 +1822,7 @@ msgstr "Resultats de la cerca"
 
 #: templates/results.html:10
 msgid "Your search returned too many results. Please refine your search."
-msgstr ""
+msgstr "La teva cerca ha retornat massa resultats. Si us plau, refina la cerca."
 
 #: templates/results.html:32 templates/works-list.html:29
 msgid "Available for download"
@@ -1846,48 +1837,40 @@ msgid "Author/s"
 msgstr "Autor/s"
 
 #: templates/work.html:98
-#, fuzzy
 msgid "Edit publication date"
-msgstr "Data de publicació"
+msgstr "Edita la data de publicació"
 
 #: templates/work.html:162
-#, fuzzy
 msgid "Edit creation date"
-msgstr "Data de publicació"
+msgstr "Edita la data de creació"
 
 #: templates/work.html:227
-#, fuzzy
 msgid "Edit language"
-msgstr "Llengua"
+msgstr "Edita l'idioma"
 
 #: templates/work.html:248 templates/work.html:308
-#, fuzzy
 msgid "Search Wikidata..."
-msgstr "Cerca"
+msgstr "Cerca a Wikidata..."
 
 #: templates/work.html:248
-#, fuzzy
 msgid "Search for language"
-msgstr "Cerca"
+msgstr "Cerca idioma"
 
 #: templates/work.html:287
-#, fuzzy
 msgid "Edit country of origin"
-msgstr "País d’origen"
+msgstr "Edita el país d'origen"
 
 #: templates/work.html:308
-#, fuzzy
 msgid "Search for country of origin"
-msgstr "País d’origen"
+msgstr "Cerca país d'origen"
 
 #: templates/work.html:341
 msgid "Copyright status"
 msgstr "Estat de drets d’autor"
 
 #: templates/work.html:364
-#, fuzzy
 msgid "countries and terms page"
-msgstr "Països i terminis"
+msgstr "pàgina de països i termes"
 
 #: templates/work.html:366
 msgid ""
@@ -1895,6 +1878,9 @@ msgid ""
 "status depends on the jurisdiction, the author's date of death and the date "
 "the work was created or published."
 msgstr ""
+"No hi ha informació disponible sobre l'estat dels drets d'autor per a "
+"aquesta obra. L'estat dels drets d'autor depèn de la jurisdicció, la data de "
+"mort de l'autor i la data de creació o publicació de l'obra."
 
 #: templates/work.html:367
 #, python-format
@@ -1902,18 +1888,20 @@ msgid ""
 "To learn more about copyright terms in different countries, visit the "
 "%(countries_and_terms_page_link)s."
 msgstr ""
+"Per obtenir més informació sobre els terminis dels drets d'autor en "
+"diferents països, visiteu %(countries_and_terms_page_link)s."
 
 #: templates/work.html:379
 msgid "Access work"
-msgstr ""
+msgstr "Accés a l'obra"
 
 #: templates/work.html:395
 msgid "Internet Archive"
-msgstr ""
+msgstr "Internet Archive"
 
 #: templates/work.html:396
 msgid "Access on Internet Archive"
-msgstr ""
+msgstr "Accés a Internet Archive"
 
 #: templates/work.html:403
 msgid "External link"
@@ -1921,28 +1909,28 @@ msgstr "Enllaç extern"
 
 #: templates/work.html:404
 msgid "Access online"
-msgstr ""
+msgstr "Accés en línia"
 
 #: templates/work.html:588
 msgid "Month must be between 0-12"
-msgstr ""
+msgstr "El mes ha d'estar entre 0 i 12"
 
 #: templates/work.html:589
 msgid "Day must be between 0-31"
-msgstr ""
+msgstr "El dia ha d'estar entre 0 i 31"
 
 #: templates/works-list.html:9
 #, python-format
 msgid "No works by %(author_name)s were found"
-msgstr ""
+msgstr "No s'han trobat obres per %(author_name)s"
 
 #: templates/works-list.html:10
 msgid "Missing information?"
-msgstr ""
+msgstr "Falta informació?"
 
 #: templates/works-list.html:11
 msgid "Add it to Wikidata"
-msgstr ""
+msgstr "Afegeix-ho a Wikidata"
 
 #: templates/works-list.html:14
 #, python-format
@@ -1951,7 +1939,7 @@ msgstr "Llista d’obres de: %(author_name)s"
 
 #: templates/works-list.html:18
 msgid "View this query on the Wikidata Query Service"
-msgstr ""
+msgstr "Visualitza aquesta consulta al servei de consultes de Wikidata"
 
 #, python-format
 #~ msgid "(%(author_age)s years)"
