@@ -499,7 +499,7 @@ def countries_main():
 
 @app.route("/robots.txt")
 def show_robots_txt():
-    ROBOTS_TXT = "User-agent: *\nAllow: /\n"
+    ROBOTS_TXT = "User-agent: *\nCrawl-Delay: 10\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
 
 
