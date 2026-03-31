@@ -27,7 +27,7 @@ WHERE
    WHERE
      {{ 
        VALUES ?languages {{ "{lang}" "mul" "en" }}. 
-       ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 | wd:P175 | wd:P9191 | wd:P10837 ) wd:{qname} . 
+       ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 | wdt:P175 | wdt:P9191 | wdt:P10837 ) wd:{qname} . 
        ?item rdfs:label ?itemLabel .
        FILTER ( LANG( ?itemLabel ) = ?languages ) . 
        MINUS {{ 
