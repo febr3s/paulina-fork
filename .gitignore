@@ -5,5 +5,7 @@ __pycache__/
 .venv/
 
 # Ignore main config file
-/config.py
+config.py
 
+# Ignore vim session
+Session.vim
