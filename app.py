@@ -105,6 +105,10 @@ def make_cache_key(*args, **kwargs) -> str:
    request_args = {key:value for key, value in request.args.items() if key!= "language"}   
    return f"{request_language}, {request_path}, {request_args}"
 
+def user_is_logged_in() -> bool:
+    """Checks if the user is logged in"""
+    return 'wikimedia_username' in session
+
 # Initialize Rate Limiter
 def get_user_identifier():
     """Get user identifier for rate limiting (Wikimedia user ID or IP)"""
@@ -216,71 +220,11 @@ def results():
         
 
 @app.route("/author/<author_data>")
+@cache.cached(make_cache_key=make_cache_key, unless=user_is_logged_in)  # Prevent caching if user is logged in
 def author_page(author_data):
-    # Skip cache for logged-in users
-    if 'wikimedia_username' in session:
-        try:
-            author = pdclasses.Author(author_data)
-            edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
-            
-           # Convert dates to ISO format for date inputs
-            author_date_of_birth_iso = None
-            if author.date_of_birth and isinstance(author.date_of_birth.get('date object'), datetime.date):
-                author_date_of_birth_iso = author.date_of_birth['date object'].isoformat()
-            
-            author_date_of_death_iso = None
-            if author.date_of_death and isinstance(author.date_of_death.get('date object'), datetime.date):
-                author_date_of_death_iso = author.date_of_death['date object'].isoformat() 
-            
-            
-            return render_template("author.html",
-                title=print_field(author.name),
-                author_name=print_field(author.name),
-                author_id=print_field(author.wikidata_item_id),
-                author_description=print_field(author.description),
-                author_nationality=print_field(author.nationality),
-                author_nationality_qid=author.nationality_qid, 
-                author_gender=print_field(author.gender),
-                author_gender_qid=author.gender_qid, 
-                author_ethnicity=print_field(author.ethnicity),
-                author_ethnicity_qid=author.ethnicity_qid, 
-                author_date_of_birth=print_field(author.date_of_birth),  # Display format
-                author_date_of_birth_iso=author_date_of_birth_iso,  # ISO format for input
-                author_occupation=", ".join(print_field(author.occupation)) if isinstance(author.occupation, list) else print_field(author.occupation),
-                author_occupation_qid=author.occupation_qid, 
-                author_place_of_birth=print_field(author.place_of_birth),
-                author_place_of_birth_qid=author.place_of_birth_qid, 
-                author_country_of_birth=print_field(author.country_of_birth),
-                author_country_of_birth_qid=author.country_of_birth_qid, 
-                author_date_of_death=print_field(author.date_of_death),  # Display format
-                author_date_of_death_iso=author_date_of_death_iso,  # ISO format for input
-                author_age=print_field(author.ageOfAuthor()),
-                author_image=print_field(author.image),
-                author_image_link=print_field(author.image_link),
-                author_image_alt_text=print_field(author.image_alt_text),
-                author_wikipedia_link=print_field(author.wikipedia_link),
-                author_commons_link=print_field(author.commons_link),
-                author_wikisource_link=print_field(author.wikisource_link),
-                author_wikiquote_link=print_field(author.wikiquote_link),
-                author_official_website=print_field(author.official_website),
-                author_is_in_public_domain=print_field(author.isInPublicDomain()),
-                author_wikidata_link=print_field(author.wikidata_link),
-                author_date_enter_public_domain=print_field(author.date_enter_public_domain),
-                form_genders=FORM_GENDERS,
-                edit_eligibility=edit_eligibility
-            )
-        except:
-            abort(404)
-    
-    # Use cached version for anonymous users
-    return _cached_author_page(author_data)
-
-@cache.cached(make_cache_key=make_cache_key)
-def _cached_author_page(author_data):
     try:
         author = pdclasses.Author(author_data)
         edit_eligibility = pdclasses.get_author_field_edit_eligibility(author.wikidata_item)
-        
         
         # Convert dates to ISO format for date inputs
         author_date_of_birth_iso = None
@@ -289,7 +233,8 @@ def _cached_author_page(author_data):
         
         author_date_of_death_iso = None
         if author.date_of_death and isinstance(author.date_of_death.get('date object'), datetime.date):
-            author_date_of_death_iso = author.date_of_death['date object'].isoformat()
+            author_date_of_death_iso = author.date_of_death['date object'].isoformat() 
+        
         
         return render_template("author.html",
             title=print_field(author.name),
@@ -330,6 +275,7 @@ def _cached_author_page(author_data):
     except:
         abort(404)
 
+
 @app.route("/works-list/<author_id>")
 @cache.cached(make_cache_key=make_cache_key)
 def works_list(author_id):
@@ -349,58 +295,8 @@ def works_list(author_id):
 
 
 @app.route("/work/<work_data>")
+@cache.cached(make_cache_key=make_cache_key, unless=user_is_logged_in)  # Prevent caching if user is logged in
 def work_page(work_data):
-    # Skip cache for logged-in users
-    if 'wikimedia_username' in session:
-        try:
-            work = pdclasses.Work(work_data)
-            work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
-
-            # Convert dates to ISO format for date inputs
-            work_publication_date_iso = None
-            if work.publication_date and isinstance(work.publication_date.get('date object'), datetime.date):
-                work_publication_date_iso = work.publication_date['date object'].isoformat()
-
-            work_creation_date_iso = None
-            if work.creation_date and isinstance(work.creation_date.get('date object'), datetime.date):
-                work_creation_date_iso = work.creation_date['date object'].isoformat()
-
-            return render_template("work.html",
-                title=print_field(work.name),
-                work_id=print_field(work.wikidata_item_id),
-                work_title=print_field(work.name),
-                work_description=print_field(work.description),
-                work_image=print_field(work.image),
-                work_image_link=print_field(work.image_link),
-                work_image_alt_text=print_field(work.image_alt_text),
-                work_authors=print_field(work.authors),
-                work_publication_date=print_field(work.publication_date),
-                work_publication_date_iso=work_publication_date_iso,
-                work_creation_date=print_field(work.creation_date),
-                work_creation_date_iso=work_creation_date_iso,
-                work_language=print_field(work.language),
-                work_language_qid=work.language_qid,
-                work_country=print_field(work.country_of_origin),
-                work_country_qid=work.country_of_origin_qid,
-                work_wikipedia_link=print_field(work.wikipedia_link),
-                work_commons_link=print_field(work.commons_link),
-                work_wikisource_links=print_field(work.wikisource_links),
-                work_wikiquote_link=print_field(work.wikiquote_link),
-                work_internet_archive_link=print_field(work.internet_archive_link),
-                work_full_work_link=print_field(work.full_work_link),
-                work_wikidata_link=print_field(work.wikidata_link),
-                work_copyright_status=print_field(work.getCopyrightStatus()),
-                work_edit_eligibility=work_edit_eligibility
-            )
-        except:
-            abort(404)
-
-    # Use cached version for anonymous users
-    return _cached_work_page(work_data)
-
-
-@cache.cached(make_cache_key=make_cache_key)
-def _cached_work_page(work_data):
     try:
         work = pdclasses.Work(work_data)
         work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
@@ -703,7 +599,7 @@ def add_author():
     """Handle the Add Author form"""
     
     # Check if user is logged in
-    if 'wikimedia_username' not in session:
+    if not user_is_logged_in():
         flash(_('Please login to add an author.'), 'warning')
         return redirect(url_for('home'))
     
@@ -818,7 +714,7 @@ def add_work():
     """Handle the Add Work form"""
     
     # Check if user is logged in
-    if 'wikimedia_username' not in session:
+    if not user_is_logged_in():
         flash(_('Please login to add a work.'), 'warning')
         return redirect(url_for('home'))
     
@@ -933,7 +829,7 @@ def update_author(author_id):
     """Handle inline editing of author biography fields"""
     
     # Check if user is logged in
-    if 'wikimedia_username' not in session:
+    if not user_is_logged_in():
         return jsonify({
             'success': False,
             'message': _('You must be logged in to edit.')
@@ -1035,7 +931,7 @@ def update_author(author_id):
 def update_work(work_id):
     """Handle inline editing of work fields"""
     
-    if 'wikimedia_username' not in session:
+    if not user_is_logged_in():
         return jsonify({
             'success': False,
             'message': _('You must be logged in to edit.')
@@ -1121,5 +1017,4 @@ def page_not_found(e):
 if __name__ == "__main__":
     
     app.run(debug=True)
-
 
