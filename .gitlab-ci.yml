@@ -51,7 +51,7 @@ Deploy to staging:
             git clone --depth 1 "$GITHUB_REPO" .
           fi
 
-          webservice --cpu=1000m --mem=2Gi python3.11 restart &&
+          webservice --cpu=2000m --mem=4Gi python3.13 restart &&
           echo "Paulina correctly updated. Congratulations!"
 
 
@@ -106,7 +106,7 @@ Deploy to production:
             git clone --depth 1 "$GITHUB_REPO" .
           fi
 
-          webservice --cpu=1000m --mem=2Gi python3.11 restart &&
+          webservice --cpu=2000m --mem=4Gi python3.13 restart &&
           echo "Paulina correctly updated. Congratulations!"
 
 
