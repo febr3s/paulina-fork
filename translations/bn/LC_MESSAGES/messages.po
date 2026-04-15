@@ -7,176 +7,175 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-12 18:53-0300\n"
+"POT-Creation-Date: 2026-04-15 17:23-0300\n"
 "PO-Revision-Date: 2026-03-21 08:09+0000\n"
 "Last-Translator: Bodhisattwa Mandal <bodhisattwa.rgkmc@gmail.com>\n"
-"Language-Team: Bengali <https://hosted.weblate.org/projects/paulina/paulina-"
-"app/bn/>\n"
 "Language: bn\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Bengali <https://hosted.weblate.org/projects/paulina"
+"/paulina-app/bn/>\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:131
+#: app.py:135
 msgid "No value"
 msgstr "মান নেই"
 
-#: app.py:133
+#: app.py:137
 msgid "Unknown value"
 msgstr "অজানা মান"
 
-#: app.py:143 templates/layout.html:53 templates/layout.html:100
+#: app.py:147 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "প্রধান পাতা"
 
-#: app.py:150 templates/layout.html:103 templates/layout.html:331
+#: app.py:154 templates/layout.html:103 templates/layout.html:342
 msgid "About"
 msgstr "সম্পর্কে"
 
-#: app.py:183 app.py:200
+#: app.py:188 app.py:205
 msgid "Results"
 msgstr "ফলাফল"
 
-#: app.py:190 app.py:207 app.py:212
+#: app.py:195 app.py:212 app.py:217
 msgid "No results found"
 msgstr "কোন ফলাফল পাওয়া যায়নি"
 
-#: app.py:341
+#: app.py:288
 msgid "List of works"
 msgstr "কর্মের তালিকা"
 
-#: app.py:476
+#: app.py:373
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s-এর তালিকা"
 
-#: app.py:493
+#: app.py:390
 msgid "Unknown term"
 msgstr "অজানা শর্ত"
 
-#: app.py:495 templates/countries.html:7 templates/layout.html:106
-#: templates/layout.html:348
+#: app.py:392 templates/countries.html:7 templates/layout.html:106
+#: templates/layout.html:359
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:601
+#: app.py:499
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:611 app.py:681
+#: app.py:509 app.py:579
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:616
+#: app.py:514
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:623
+#: app.py:521
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:643
+#: app.py:541
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:670
+#: app.py:568
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:694
+#: app.py:592
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:707
+#: app.py:605
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:712 app.py:827
+#: app.py:610 app.py:725
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:720 app.py:835 app.py:946 app.py:1047
+#: app.py:618 app.py:733 app.py:844 app.py:945
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:759
+#: app.py:657
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:765 app.py:776 app.py:807 templates/add-author.html:39
+#: app.py:663 app.py:674 app.py:705 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 #, fuzzy
 msgid "Add Author"
 msgstr "লেখক"
 
-#: app.py:770
+#: app.py:668
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:822
+#: app.py:720
 msgid "Please login to add a work."
 msgstr "একটি সাহিত্যকর্ম যোগ করতে দয়া করে লগইন করুন।"
 
-#: app.py:874
+#: app.py:772
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:880 app.py:891 app.py:922 templates/add-work.html:39
+#: app.py:778 app.py:789 app.py:820 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 #, fuzzy
 msgid "Add Work"
 msgstr "লেখক"
 
-#: app.py:885
+#: app.py:783
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:939 app.py:1041
+#: app.py:837 app.py:939
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:955 app.py:1053
+#: app.py:853 app.py:951
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:962 app.py:1057
+#: app.py:860 app.py:955
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:982 app.py:1073
+#: app.py:880 app.py:971
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:1005 app.py:1093
+#: app.py:903 app.py:991
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:1011 app.py:1096
+#: app.py:909 app.py:994
 msgid "Successfully updated!"
 msgstr "সফলভাবে হালনাগাদ হয়েছে!"
 
-#: app.py:1016 app.py:1098
+#: app.py:914 app.py:996
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "জন্মতারিখ"
 
-#: app.py:1022 app.py:1100
+#: app.py:920 app.py:998
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:1029 app.py:1103
+#: app.py:927 app.py:1001
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "জন্মতারিখ"
 
-#: app.py:1117
+#: app.py:1015
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
@@ -200,23 +199,60 @@ msgstr ""
 msgid "Non-binary"
 msgstr ""
 
-#: filters.py:17 wikidata_constants.py:171
+#: filters.py:16
+msgid "Academia"
+msgstr ""
+
+#: filters.py:24
+msgid "Architecture"
+msgstr ""
+
+#: filters.py:30
+msgid "Cinema"
+msgstr ""
+
+#: filters.py:36
+msgid "Journalism"
+msgstr ""
+
+#: filters.py:42
+msgid "Music"
+msgstr ""
+
+#: filters.py:52
+msgid "Performing arts"
+msgstr ""
+
+#: filters.py:58
+msgid "Programming"
+msgstr ""
+
+#: filters.py:64
+msgid "Visual arts"
+msgstr ""
+
+#: filters.py:76
+#, fuzzy
+msgid "Writing"
+msgstr "চিত্র কর্ম"
+
+#: filters.py:91 wikidata_constants.py:171
 msgid "Film"
 msgstr "চলচ্চিত্র"
 
-#: filters.py:18 wikidata_constants.py:136
+#: filters.py:92 wikidata_constants.py:136
 msgid "Literary work"
 msgstr "সাহিত্য কর্ম"
 
-#: filters.py:19
+#: filters.py:93
 msgid "Musical work"
 msgstr "সঙ্গীত"
 
-#: filters.py:20 wikidata_constants.py:195
+#: filters.py:94 wikidata_constants.py:195
 msgid "Painting"
 msgstr "চিত্র কর্ম"
 
-#: filters.py:21 wikidata_constants.py:206
+#: filters.py:95 wikidata_constants.py:206
 msgid "Sculpture"
 msgstr "ভাস্কর্য"
 
@@ -234,9 +270,9 @@ msgstr "(সহস্রাব্দ)"
 
 #: pdclasses.py:237
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
 msgstr ""
 
 #: pdclasses.py:242
@@ -246,9 +282,9 @@ msgstr "%(name)s-এর চিত্র"
 
 #: pdclasses.py:363
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
 msgstr ""
 
 #: pdclasses.py:368
@@ -366,7 +402,7 @@ msgstr "ভাষা"
 msgid "Original language"
 msgstr "ভাষা"
 
-#: templates/add-work.html:508 templates/layout.html:268
+#: templates/add-work.html:508 templates/layout.html:279
 #: templates/work.html:292 templates/work.html:440 wikidata_api.py:615
 msgid "Country of origin"
 msgstr "উৎপত্তির দেশ"
@@ -492,7 +528,7 @@ msgstr "প্রধান পাতা"
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:328
+#: templates/about.html:7 templates/layout.html:339
 msgid "About Paulina"
 msgstr "পাউলিনা সম্পর্কে"
 
@@ -501,19 +537,19 @@ msgstr "পাউলিনা সম্পর্কে"
 msgid "Wikidata"
 msgstr "উইকিউপাত্ত"
 
-#: templates/about.html:9 templates/layout.html:314
+#: templates/about.html:9 templates/layout.html:325
 msgid "Ártica - Online Cultural Center"
 msgstr "আফ্রিকা - অনলাইন কালচারাল সেণ্টার"
 
-#: templates/about.html:10 templates/layout.html:317
+#: templates/about.html:10 templates/layout.html:328
 msgid "Creative Commons Uruguay"
 msgstr "ক্রিয়েটিভ কমন্স উরুগুয়ে"
 
-#: templates/about.html:11 templates/layout.html:320
+#: templates/about.html:11 templates/layout.html:331
 msgid "Data Uruguay"
 msgstr "ডাটা উরুগুয়ে"
 
-#: templates/about.html:12 templates/layout.html:323
+#: templates/about.html:12 templates/layout.html:334
 msgid "Wikimedistas de Uruguay"
 msgstr "উইকিমেদিস্তাস দে উরুগুয়ে"
 
@@ -544,23 +580,24 @@ msgstr "এই প্রকল্পে অবদানকারী ব্যক
 #: templates/about.html:19
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
 msgstr ""
 
 #: templates/about.html:21
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
 msgstr ""
 
 #: templates/about.html:22
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
@@ -572,8 +609,8 @@ msgstr ""
 #: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
 msgstr ""
 
 #: templates/about.html:25
@@ -586,8 +623,8 @@ msgid ""
 "Paulina is supported by %(artica_link)s, %(cc_uruguay_link)s, "
 "%(data_uruguay_link)s and %(wm_uruguay_link)s."
 msgstr ""
-"পাউলিনাকে সহায়তা করছে %(artica_link)s, %(cc_uruguay_link)s, %(data_uruguay_link)"
-"s ও %(wm_uruguay_link)s।"
+"পাউলিনাকে সহায়তা করছে %(artica_link)s, %(cc_uruguay_link)s, "
+"%(data_uruguay_link)s ও %(wm_uruguay_link)s।"
 
 #: templates/about.html:27
 #, python-format
@@ -601,8 +638,8 @@ msgstr ""
 #: templates/about.html:29
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
 
 #: templates/about.html:30
@@ -615,19 +652,19 @@ msgstr ""
 #: templates/about.html:31
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
 msgstr ""
 
 #: templates/about.html:32
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
 msgstr ""
 
 #: templates/about.html:33
@@ -637,8 +674,8 @@ msgstr "মুক্ত সফ্‌টওয়্যার"
 #: templates/about.html:34
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
 msgstr ""
 
 #: templates/add-author.html:10 templates/add-work.html:9
@@ -718,7 +755,7 @@ msgid "Biographical Information"
 msgstr "জীবনীমূলক তথ্য"
 
 #: templates/add-author.html:122 templates/author.html:146
-#: templates/author.html:599 templates/layout.html:223
+#: templates/author.html:599 templates/layout.html:234
 msgid "Nationality"
 msgstr "জাতীয়তা"
 
@@ -753,8 +790,8 @@ msgid "Gender"
 msgstr "লিঙ্গ"
 
 #: templates/add-author.html:166 templates/layout.html:214
-#: templates/layout.html:236 templates/layout.html:259
-#: templates/layout.html:280
+#: templates/layout.html:225 templates/layout.html:247
+#: templates/layout.html:270 templates/layout.html:291
 msgid "Any"
 msgstr "যে কোন"
 
@@ -840,8 +877,8 @@ msgstr ""
 
 #: templates/add-author.html:438
 msgid ""
-"Search Wikimedia Commons for author's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for author's image, or enter the Commons image "
+"URL directly:"
 msgstr ""
 
 #: templates/add-author.html:446
@@ -851,7 +888,8 @@ msgstr "কর্ম অনুসন্ধান করুন"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
-"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
+"below."
 msgstr ""
 
 #: templates/add-author.html:455 templates/add-work.html:611
@@ -1057,8 +1095,8 @@ msgstr ""
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
-"Could not connect to server. Please refresh the page manually to clear all "
-"data."
+"Could not connect to server. Please refresh the page manually to clear "
+"all data."
 msgstr ""
 
 #: templates/add-work.html:18
@@ -1086,7 +1124,7 @@ msgid "e.g., Spanish novel by Miguel de Cervantes"
 msgstr ""
 
 #: templates/add-work.html:101 templates/country.html:34
-#: templates/layout.html:257
+#: templates/layout.html:268
 msgid "Type of work"
 msgstr "কর্মের ধরণ"
 
@@ -1207,8 +1245,8 @@ msgstr ""
 
 #: templates/add-work.html:594
 msgid ""
-"Search Wikimedia Commons for work's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for work's image, or enter the Commons image URL"
+" directly:"
 msgstr ""
 
 #: templates/add-work.html:601
@@ -1624,8 +1662,8 @@ msgstr ""
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr ""
 
 #: templates/countries.html:9
@@ -1668,8 +1706,8 @@ msgid "Number of works in public domain"
 msgstr "পাবলিক ডোমেইনে রয়েছে"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:361 templates/layout.html:363
-#: templates/layout.html:365
+#: templates/layout.html:372 templates/layout.html:374
+#: templates/layout.html:376
 msgid "Paulina logo"
 msgstr "পাউলিনা লোগো"
 
@@ -1679,8 +1717,8 @@ msgstr ""
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
 msgstr ""
 
 #: templates/home.html:33
@@ -1705,8 +1743,8 @@ msgstr ""
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
 msgstr ""
 
 #: templates/home.html:49
@@ -1749,14 +1787,14 @@ msgstr "পাউলিনা"
 
 #: templates/layout.html:13 templates/layout.html:35
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:368
+#: templates/layout.html:31 templates/layout.html:379
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -1802,47 +1840,52 @@ msgstr "অনুসন্ধান করুন"
 msgid "Advanced search"
 msgstr "উন্নত অনুসন্ধান"
 
-#: templates/layout.html:227 templates/layout.html:272
+#: templates/layout.html:223
+#, fuzzy
+msgid "Creative Area"
+msgstr "প্রকাশনার তারিখ"
+
+#: templates/layout.html:238 templates/layout.html:283
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:249
+#: templates/layout.html:260
 msgid "In public domain"
 msgstr "পাবলিক ডোমেইনে রয়েছে"
 
-#: templates/layout.html:252
+#: templates/layout.html:263
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:311
+#: templates/layout.html:322
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:334
+#: templates/layout.html:345
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:337
+#: templates/layout.html:348
 msgid "Help translate"
 msgstr "অনুবাদ করতে সহায়তা করুন"
 
-#: templates/layout.html:342
+#: templates/layout.html:353
 msgid "Help"
 msgstr "সাহায্য"
 
-#: templates/layout.html:345
+#: templates/layout.html:356
 msgid "Documentation"
 msgstr "নথি"
 
-#: templates/layout.html:369
+#: templates/layout.html:380
 msgid "Powered by Wikidata."
 msgstr ""
 
-#: templates/layout.html:425
+#: templates/layout.html:436
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:521
+#: templates/layout.html:532
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
@@ -1933,9 +1976,9 @@ msgstr "দেশ এবং শর্ত"
 
 #: templates/work.html:513
 msgid ""
-"Copyright status information is not available for this work. The copyright "
-"status depends on the jurisdiction, the author's date of death and the date "
-"the work was created or published."
+"Copyright status information is not available for this work. The "
+"copyright status depends on the jurisdiction, the author's date of death "
+"and the date the work was created or published."
 msgstr ""
 
 #: templates/work.html:514
@@ -1990,7 +2033,6 @@ msgstr ""
 #~ msgid "Edit Wikidata item"
 #~ msgstr "উইকিউপাত্ত আইটেম সম্পাদনা করুন"
 
-#, python-format
 #~ msgid "(%(author_age)s years)"
 #~ msgstr "(%(author_age)s বছর)"
 
@@ -2027,13 +2069,12 @@ msgstr ""
 #~ msgid "Search filters"
 #~ msgstr "ফলাফল অনুসন্ধান করুন"
 
-#, python-format
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)s-এর কপিরাইট শর্ত"
 
-#, python-format
 #~ msgid "%(country_name)s's statistics"
 #~ msgstr "%(country_name)s-এর পরিসংখ্যান"
 
 #~ msgid "Unknown"
 #~ msgstr "অজানা"
+

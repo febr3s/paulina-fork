@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-12 18:53-0300\n"
+"POT-Creation-Date: 2026-04-15 17:23-0300\n"
 "PO-Revision-Date: 2025-08-15 15:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: tr\n"
@@ -19,161 +19,161 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app.py:131
+#: app.py:135
 msgid "No value"
 msgstr ""
 
-#: app.py:133
+#: app.py:137
 msgid "Unknown value"
 msgstr ""
 
-#: app.py:143 templates/layout.html:53 templates/layout.html:100
+#: app.py:147 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "Ana Ssyfa"
 
-#: app.py:150 templates/layout.html:103 templates/layout.html:331
+#: app.py:154 templates/layout.html:103 templates/layout.html:342
 msgid "About"
 msgstr "Hakkında"
 
-#: app.py:183 app.py:200
+#: app.py:188 app.py:205
 msgid "Results"
 msgstr "Sonuçlar"
 
-#: app.py:190 app.py:207 app.py:212
+#: app.py:195 app.py:212 app.py:217
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
-#: app.py:341
+#: app.py:288
 msgid "List of works"
 msgstr "Eserlerinin listesi"
 
-#: app.py:476
+#: app.py:373
 #, python-format
 msgid "List of %(term_name)s"
 msgstr ""
 
-#: app.py:493
+#: app.py:390
 msgid "Unknown term"
 msgstr "Bilinmeyen terim"
 
-#: app.py:495 templates/countries.html:7 templates/layout.html:106
-#: templates/layout.html:348
+#: app.py:392 templates/countries.html:7 templates/layout.html:106
+#: templates/layout.html:359
 msgid "Countries and terms"
 msgstr "Ülkeler ve şartlar"
 
-#: app.py:601
+#: app.py:499
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:611 app.py:681
+#: app.py:509 app.py:579
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:616
+#: app.py:514
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:623
+#: app.py:521
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:643
+#: app.py:541
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:670
+#: app.py:568
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:694
+#: app.py:592
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:707
+#: app.py:605
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:712 app.py:827
+#: app.py:610 app.py:725
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:720 app.py:835 app.py:946 app.py:1047
+#: app.py:618 app.py:733 app.py:844 app.py:945
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:759
+#: app.py:657
 #, python-format
 msgid "Error creating author: %(error)s"
 msgstr ""
 
-#: app.py:765 app.py:776 app.py:807 templates/add-author.html:39
+#: app.py:663 app.py:674 app.py:705 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 msgid "Add Author"
 msgstr ""
 
-#: app.py:770
+#: app.py:668
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:822
+#: app.py:720
 msgid "Please login to add a work."
 msgstr ""
 
-#: app.py:874
+#: app.py:772
 #, python-format
 msgid "Error creating work: %(error)s"
 msgstr ""
 
-#: app.py:880 app.py:891 app.py:922 templates/add-work.html:39
+#: app.py:778 app.py:789 app.py:820 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 #, fuzzy
 msgid "Add Work"
 msgstr "Müzik eseri"
 
-#: app.py:885
+#: app.py:783
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:939 app.py:1041
+#: app.py:837 app.py:939
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:955 app.py:1053
+#: app.py:853 app.py:951
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:962 app.py:1057
+#: app.py:860 app.py:955
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:982 app.py:1073
+#: app.py:880 app.py:971
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:1005 app.py:1093
+#: app.py:903 app.py:991
 #, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr ""
 
-#: app.py:1011 app.py:1096
+#: app.py:909 app.py:994
 msgid "Successfully updated!"
 msgstr ""
 
-#: app.py:1016 app.py:1098
+#: app.py:914 app.py:996
 msgid "Updated with some errors."
 msgstr ""
 
-#: app.py:1022 app.py:1100
+#: app.py:920 app.py:998
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:1029 app.py:1103
+#: app.py:927 app.py:1001
 #, python-format
 msgid "Server error: %(error)s"
 msgstr ""
 
-#: app.py:1117
+#: app.py:1015
 msgid "404 error"
 msgstr "404 Hata"
 
@@ -197,23 +197,60 @@ msgstr "Trans kadın"
 msgid "Non-binary"
 msgstr ""
 
-#: filters.py:17 wikidata_constants.py:171
+#: filters.py:16
+msgid "Academia"
+msgstr ""
+
+#: filters.py:24
+msgid "Architecture"
+msgstr ""
+
+#: filters.py:30
+msgid "Cinema"
+msgstr ""
+
+#: filters.py:36
+msgid "Journalism"
+msgstr ""
+
+#: filters.py:42
+msgid "Music"
+msgstr ""
+
+#: filters.py:52
+msgid "Performing arts"
+msgstr ""
+
+#: filters.py:58
+msgid "Programming"
+msgstr ""
+
+#: filters.py:64
+msgid "Visual arts"
+msgstr ""
+
+#: filters.py:76
+#, fuzzy
+msgid "Writing"
+msgstr "Resim"
+
+#: filters.py:91 wikidata_constants.py:171
 msgid "Film"
 msgstr "Film"
 
-#: filters.py:18 wikidata_constants.py:136
+#: filters.py:92 wikidata_constants.py:136
 msgid "Literary work"
 msgstr "Edebi eser"
 
-#: filters.py:19
+#: filters.py:93
 msgid "Musical work"
 msgstr "Müzik eseri"
 
-#: filters.py:20 wikidata_constants.py:195
+#: filters.py:94 wikidata_constants.py:195
 msgid "Painting"
 msgstr "Resim"
 
-#: filters.py:21 wikidata_constants.py:206
+#: filters.py:95 wikidata_constants.py:206
 msgid "Sculpture"
 msgstr "Heykel"
 
@@ -357,7 +394,7 @@ msgstr ""
 msgid "Original language"
 msgstr ""
 
-#: templates/add-work.html:508 templates/layout.html:268
+#: templates/add-work.html:508 templates/layout.html:279
 #: templates/work.html:292 templates/work.html:440 wikidata_api.py:615
 msgid "Country of origin"
 msgstr ""
@@ -479,7 +516,7 @@ msgstr "ana sayfa"
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:328
+#: templates/about.html:7 templates/layout.html:339
 msgid "About Paulina"
 msgstr "Paulina hakkında"
 
@@ -488,19 +525,19 @@ msgstr "Paulina hakkında"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:314
+#: templates/about.html:9 templates/layout.html:325
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Çevrimiçi Kültür Merkezi"
 
-#: templates/about.html:10 templates/layout.html:317
+#: templates/about.html:10 templates/layout.html:328
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguay"
 
-#: templates/about.html:11 templates/layout.html:320
+#: templates/about.html:11 templates/layout.html:331
 msgid "Data Uruguay"
 msgstr "Data Uruguay"
 
-#: templates/about.html:12 templates/layout.html:323
+#: templates/about.html:12 templates/layout.html:334
 msgid "Wikimedistas de Uruguay"
 msgstr "Uruguaylı vikipedistler"
 
@@ -705,7 +742,7 @@ msgid "Biographical Information"
 msgstr ""
 
 #: templates/add-author.html:122 templates/author.html:146
-#: templates/author.html:599 templates/layout.html:223
+#: templates/author.html:599 templates/layout.html:234
 msgid "Nationality"
 msgstr ""
 
@@ -740,8 +777,8 @@ msgid "Gender"
 msgstr ""
 
 #: templates/add-author.html:166 templates/layout.html:214
-#: templates/layout.html:236 templates/layout.html:259
-#: templates/layout.html:280
+#: templates/layout.html:225 templates/layout.html:247
+#: templates/layout.html:270 templates/layout.html:291
 msgid "Any"
 msgstr ""
 
@@ -1068,7 +1105,7 @@ msgid "e.g., Spanish novel by Miguel de Cervantes"
 msgstr ""
 
 #: templates/add-work.html:101 templates/country.html:34
-#: templates/layout.html:257
+#: templates/layout.html:268
 msgid "Type of work"
 msgstr ""
 
@@ -1607,8 +1644,8 @@ msgid "Number of works in public domain"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:361 templates/layout.html:363
-#: templates/layout.html:365
+#: templates/layout.html:372 templates/layout.html:374
+#: templates/layout.html:376
 msgid "Paulina logo"
 msgstr ""
 
@@ -1695,7 +1732,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:368
+#: templates/layout.html:31 templates/layout.html:379
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -1739,47 +1776,51 @@ msgstr ""
 msgid "Advanced search"
 msgstr ""
 
-#: templates/layout.html:227 templates/layout.html:272
+#: templates/layout.html:223
+msgid "Creative Area"
+msgstr ""
+
+#: templates/layout.html:238 templates/layout.html:283
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:249
+#: templates/layout.html:260
 msgid "In public domain"
 msgstr ""
 
-#: templates/layout.html:252
+#: templates/layout.html:263
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:311
+#: templates/layout.html:322
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:334
+#: templates/layout.html:345
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:337
+#: templates/layout.html:348
 msgid "Help translate"
 msgstr ""
 
-#: templates/layout.html:342
+#: templates/layout.html:353
 msgid "Help"
 msgstr ""
 
-#: templates/layout.html:345
+#: templates/layout.html:356
 msgid "Documentation"
 msgstr ""
 
-#: templates/layout.html:369
+#: templates/layout.html:380
 msgid "Powered by Wikidata."
 msgstr ""
 
-#: templates/layout.html:425
+#: templates/layout.html:436
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:521
+#: templates/layout.html:532
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
