@@ -3,14 +3,21 @@ import requests
 # Local modules
 import squeries
 import languages
+import filters
 
 
-def search_filters(gender=None, nationality=None, type_of_work=None, country_of_origin=None, in_public_domain=None) -> str:
+def search_filters(gender=None, nationality=None, creative_area=None,
+                   in_public_domain=None, type_of_work=None, country_of_origin=None) -> str:
     filters_string = ""
     if gender:
         filters_string = filters_string + f"%20haswbstatement:P21={gender}"
     if nationality:
         filters_string = filters_string + f"%20haswbstatement:P27={nationality}"
+    if creative_area:
+        for ca in filters.CREATIVE_AREAS:
+            if creative_area == ca["area_value"]:
+                selected_area = ca
+        filters_string = filters_string + f"%20haswbstatement:{'|'.join("P106=" + area for area in selected_area["qids"]) }"
     if in_public_domain:
         filters_string = filters_string + f"%20haswbstatement:P7763=Q71887839|P7763=Q75700125"
     if type_of_work:
@@ -19,13 +26,14 @@ def search_filters(gender=None, nationality=None, type_of_work=None, country_of_
         filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}"
     return filters_string
 
-def search_author(user_search: str, gender:str, nationality:str, in_public_domain:bool) -> list:
+def search_author(user_search: str, gender:str, nationality:str, creative_area:str, in_public_domain:bool) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.
     Results are filtered in order to get only human beings."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&generator=search&gsrlimit=200&gsrsearch="
     human_being_filter = "%20haswbstatement:P31=Q5|P31=Q21070568"
-    user_filters = search_filters(gender=gender, nationality=nationality, in_public_domain=in_public_domain)
+    user_filters = search_filters(gender=gender, nationality=nationality,
+                                  creative_area=creative_area, in_public_domain=in_public_domain)
     search_url_suffix = "&prop=entityterms&wbetlanguage="
     search_language = languages.get_locale()
     search_format = "&format=json"

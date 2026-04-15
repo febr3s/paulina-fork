@@ -220,6 +220,17 @@
               </select>
             </div>
             <div class="py-2 px-2">
+              <label for="creative-area"><strong>{{ _('Creative Area') }}</strong></label>
+              <select class="form-select filter border-black shadow-none" name="creative-area" id="creative-area">
+                <option value="">{{ _('Any') }}</option>
+                {% for area in CREATIVE_AREAS %}
+                <option value="{{ area['area_value'] }}"
+                {% if request.args.get('creative-area') == area['area_value'] %}selected{% endif %}>
+                {{ _(area['area_name']) }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="py-2 px-2">
               <label for="nationality-combobox"><strong>{{ _('Nationality') }}</strong></label>
               <div class="combobox-container">
                 <input type="text" class="form-control filter border-black shadow-none"

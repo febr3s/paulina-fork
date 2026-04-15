@@ -180,8 +180,9 @@ def results():
         if type_of_search == "author":
             gender = request.args.get("gender")
             nationality = request.args.get("nationality")
+            creative_area = request.args.get("creative-area")
             in_public_domain = request.args.get("in-public-domain")
-            search_result, complete = search.search_author(search_request, gender, nationality, in_public_domain)
+            search_result, complete = search.search_author(search_request, gender, nationality, creative_area, in_public_domain)
             if len(search_result) > 0:
                 return render_template('results.html',
                                         title=_("Results"),
@@ -416,6 +417,7 @@ def inject_filters():
                   for country in filters.COUNTRIES ]  # Check: North Macedonia doesn't have Asturian label in Babel
     return {        
         "GENDERS": filters.GENDERS,
+        "CREATIVE_AREAS": filters.CREATIVE_AREAS,
         "TYPES_OF_WORK": filters.TYPES_OF_WORK,
         "COUNTRIES": countries
         }

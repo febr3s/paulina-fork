@@ -10,6 +10,80 @@ GENDERS = [
     {"qid": "Q48270", "gender_name": _("Non-binary")}
     ]
 
+CREATIVE_AREAS = [
+    {
+        "area_value": "academia",
+        "area_name": _("Academia"),
+        # researcher, university teacher, academic, scientist, professor, literary scholar, lecturer,
+        # assistant professor, research fellow, historian
+        "qids": ("Q1650915", "Q1622272", "Q3400985", "Q901", "Q121594", "Q17167049", "Q9379869",
+                 "Q5669847", "Q1706722", "Q201788")
+    },
+    {
+        "area_value": "architecture",
+        "area_name": _("Architecture"),
+        # architect
+        "qids": ("Q42973",)
+    },
+    {
+        "area_value": "cinema",
+        "area_name": _("Cinema"),
+        # screenwriter, film director, film producer, filmmaker, film actor
+        "qids": ("Q28389", "Q2526255", "Q3282637", "Q1414443", "Q10800557")
+    },
+    {
+        "area_value": "journalism",
+        "area_name": _("Journalism"),
+        # journalist, opinion journalist, editing staff, chronicler, editor-in-chief, podcaster
+        "qids": ("Q1930187", "Q6051619", "Q876864", "Q3330547", "Q589298", "Q15077007")
+    },
+    {
+        "area_value": "music",
+        "area_name": _("Music"),
+        # composer, musician, singer, record producer, pianist, songwriter, conductor, 
+        # opera singer, singer-songwriter, guitarist, jazz musician, rapper, violinist,
+        # organist, lyricist
+        "qids": ("Q36834", "Q639669", "Q177220", "Q183945", "Q486748", "Q753110", "Q158852",
+                 "Q2865819", "Q488205", "Q855091", "Q15981151", "Q2252262", "Q1259917",
+                 "Q765778", "Q822146")
+    },
+    {
+        "area_value": "performing-arts",
+        "area_name": _("Performing arts"),
+        # playwright, theatrical director, actor, stage actor, theatrical adapter
+        "qids": ("Q214917", "Q10798782", "Q33999", "Q2259451", "Q130258037")
+    },
+    {
+        "area_value": "programming",
+        "area_name": _("Programming"),
+        # computer scientist, programmer
+        "qids": ("Q82594", "Q5482740")
+    },
+    {
+        "area_value": "visual-arts",
+        "area_name": _("Visual arts"),
+        # painter, sculptor, illustrator, photographer, visual artist, draftsperson,
+        # graphic artist, mangaka, lithographer, printmaker, comics artist, curator,
+        # penciler, textile artist, conceptual artist, scientific illustrator, engraver
+        # designer, cartographer, creator
+        "qids": ("Q1028181", "Q1281618", "Q644687", "Q33231", "Q3391743", "Q15296811",
+                 "Q1925963", "Q191633", "Q16947657", "Q11569986", "Q715301", "Q674426",
+                 "Q17098559", "Q10694573", "Q21550489", "Q19507792", "Q329439",
+                 "Q5322166", "Q1734662", "Q2500638")
+    },
+    {
+        "area_value": "writing",
+        "area_name": _("Writing"),
+        # writer, poet, novelist, philosopher, children's writer, editor, mangaka,
+        # essayist, non-fiction writer, science fiction writer, literary critic,
+        # publisher, prose writer, biographer, television writer, music critic,
+        # film critic, art critic, translator, author
+        "qids": ("Q36180", "Q49757", "Q6625963", "Q4964182", "Q4853732", "Q1607826", "Q191633",
+                 "Q11774202", "Q15980158", "Q18844224", "Q4263842",
+                 "Q2516866", "Q12144794", "Q864380", "Q73306227", "Q1350157",
+                 "Q4220892", "Q4164507", "Q333634", "Q482980")
+    }
+]
 
 # Filters for works
 
