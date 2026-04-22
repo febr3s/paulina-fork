@@ -18,7 +18,6 @@ import languages
 import squeries
 import filters
 import oauth
-import wikidata_api
 
 # Determine Wikidata mode from  environment
 if 'test' in sys.argv:
@@ -33,7 +32,7 @@ else:
 WIKIDATA_TEST_MODE = os.environ.get('WIKIDATA_TEST_MODE', 'false').lower() == 'true'
 
 import wikidata_api
-from wikidata_constants import FORM_GENDERS, WIKIDATA_TEST_MODE, WORK_TYPES
+from wikidata_constants import FORM_GENDERS, WORK_TYPES
 
 
 # Configure Wikidata API URLs based on mode
@@ -1017,6 +1016,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    
-    app.run(debug=True)
+    app.run()
 
