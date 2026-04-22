@@ -57,11 +57,9 @@ RATELIMIT_HEADERS_ENABLED = True
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dev-secret-key'
 
-# Load user config (use absolute path for CI/testing compatibility)
-config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.py')
-app.config.from_pyfile(config_path, silent=True)
+# Load user config
+app.config.from_pyfile('config.py')
 
 # Add config settings to app.config
 app.config['WIKIDATA_TEST_MODE'] = WIKIDATA_TEST_MODE
@@ -300,10 +298,7 @@ def works_list(author_id):
 @cache.cached(make_cache_key=make_cache_key, unless=user_is_logged_in)  # Prevent caching if user is logged in
 def work_page(work_data):
     try:
-        work = pdclasses.Work(work_data)  # Make a work object
-        if not work.name:  # If work object is invalid
-            abort(404)
-        
+        work = pdclasses.Work(work_data)
         work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
 
         # Convert dates to ISO format for date inputs
@@ -342,8 +337,7 @@ def work_page(work_data):
             work_copyright_status=print_field(work.getCopyrightStatus()),
             work_edit_eligibility=work_edit_eligibility
         )
-    except Exception as e:  # If the Q number doesn't match any item
-        print(f"Error loading work: {e}")
+    except:
         abort(404)
 
 
