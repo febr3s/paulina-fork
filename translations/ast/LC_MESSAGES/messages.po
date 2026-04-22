@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-15 17:23-0300\n"
+"POT-Creation-Date: 2026-04-22 19:20-0300\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: ast\n"
@@ -17,166 +17,166 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 
-#: app.py:135
+#: app.py:134
 msgid "No value"
 msgstr "Ensin valir"
 
-#: app.py:137
+#: app.py:136
 msgid "Unknown value"
 msgstr "Valir desconocíu"
 
-#: app.py:147 templates/layout.html:53 templates/layout.html:100
+#: app.py:146 templates/layout.html:53 templates/layout.html:100
 #, fuzzy
 msgid "Home"
 msgstr "Entamu"
 
-#: app.py:154 templates/layout.html:103 templates/layout.html:342
+#: app.py:153 templates/layout.html:103 templates/layout.html:342
 msgid "About"
 msgstr "Tocante a"
 
-#: app.py:188 app.py:205
+#: app.py:187 app.py:204
 msgid "Results"
 msgstr "Resultaos"
 
-#: app.py:195 app.py:212 app.py:217
+#: app.py:194 app.py:211 app.py:216
 msgid "No results found"
 msgstr "Nengún resultáu alcontráu"
 
-#: app.py:288
+#: app.py:287
 msgid "List of works"
 msgstr "Llista trabayos"
 
-#: app.py:373
+#: app.py:372
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Llista de %(term_name)s"
 
-#: app.py:390
+#: app.py:389
 msgid "Unknown term"
 msgstr "Términu desconocíu"
 
-#: app.py:392 templates/countries.html:7 templates/layout.html:106
+#: app.py:391 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:359
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:499
+#: app.py:498
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:509 app.py:579
+#: app.py:508 app.py:578
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:514
+#: app.py:513
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:521
+#: app.py:520
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:541
+#: app.py:540
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:568
+#: app.py:567
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:592
+#: app.py:591
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:605
+#: app.py:604
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:610 app.py:725
+#: app.py:609 app.py:724
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:618 app.py:733 app.py:844 app.py:945
+#: app.py:617 app.py:732 app.py:843 app.py:944
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:657
+#: app.py:656
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:663 app.py:674 app.py:705 templates/add-author.html:39
+#: app.py:662 app.py:673 app.py:704 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 #, fuzzy
 msgid "Add Author"
 msgstr "Descubrir autores"
 
-#: app.py:668
+#: app.py:667
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:720
+#: app.py:719
 msgid "Please login to add a work."
 msgstr ""
 
-#: app.py:772
+#: app.py:771
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:778 app.py:789 app.py:820 templates/add-work.html:39
+#: app.py:777 app.py:788 app.py:819 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 #, fuzzy
 msgid "Add Work"
 msgstr "Descubrir autores"
 
-#: app.py:783
+#: app.py:782
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:837 app.py:939
+#: app.py:836 app.py:938
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:853 app.py:951
+#: app.py:852 app.py:950
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:860 app.py:955
+#: app.py:859 app.py:954
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:880 app.py:971
+#: app.py:879 app.py:970
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:903 app.py:991
+#: app.py:902 app.py:990
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:909 app.py:994
+#: app.py:908 app.py:993
 msgid "Successfully updated!"
 msgstr ""
 
-#: app.py:914 app.py:996
+#: app.py:913 app.py:995
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "Data de nacimientu"
 
-#: app.py:920 app.py:998
+#: app.py:919 app.py:997
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:927 app.py:1001
+#: app.py:926 app.py:1000
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "Data de nacimientu"
 
-#: app.py:1015
+#: app.py:1014
 msgid "404 error"
 msgstr "Error 404"
 
@@ -1594,10 +1594,10 @@ msgstr "Esbillar"
 msgid "Select gender..."
 msgstr "Triba d'obra"
 
-#: templates/author.html:317 templates/author.html:530
-#, fuzzy
-msgid "years"
-msgstr "Guetar"
+#: templates/author.html:317
+#, python-format
+msgid "age %(author_age)s"
+msgstr ""
 
 #: templates/author.html:323
 #, fuzzy
@@ -1646,6 +1646,11 @@ msgstr ""
 #, fuzzy
 msgid "Search for country of birth"
 msgstr "País de nacimientu"
+
+#: templates/author.html:530
+#, python-format
+msgid "aged %(author_age)s"
+msgstr ""
 
 #: templates/author.html:536
 #, fuzzy
@@ -2128,4 +2133,7 @@ msgstr ""
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Editar elementu de Wikidata"
+
+#~ msgid "years"
+#~ msgstr "Guetar"
 

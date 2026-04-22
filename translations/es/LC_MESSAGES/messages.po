@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-15 17:23-0300\n"
-"PO-Revision-Date: 2026-04-15 17:25-0300\n"
+"POT-Creation-Date: 2026-04-22 19:20-0300\n"
+"PO-Revision-Date: 2026-04-22 19:42-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-app/"
 "es/>\n"
@@ -17,163 +17,163 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: app.py:135
+#: app.py:134
 msgid "No value"
 msgstr "Sin valor"
 
-#: app.py:137
+#: app.py:136
 msgid "Unknown value"
 msgstr "Valor desconocido"
 
-#: app.py:147 templates/layout.html:53 templates/layout.html:100
+#: app.py:146 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "Inicio"
 
-#: app.py:154 templates/layout.html:103 templates/layout.html:342
+#: app.py:153 templates/layout.html:103 templates/layout.html:342
 msgid "About"
 msgstr "Acerca de"
 
-#: app.py:188 app.py:205
+#: app.py:187 app.py:204
 msgid "Results"
 msgstr "Resultados"
 
-#: app.py:195 app.py:212 app.py:217
+#: app.py:194 app.py:211 app.py:216
 msgid "No results found"
 msgstr "No se encontraron resultados"
 
-#: app.py:288
+#: app.py:287
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:373
+#: app.py:372
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:390
+#: app.py:389
 msgid "Unknown term"
 msgstr "Plazo desconocido"
 
-#: app.py:392 templates/countries.html:7 templates/layout.html:106
+#: app.py:391 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:359
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:499
+#: app.py:498
 msgid "Login failed. Please try again."
 msgstr "El inicio de sesión falló. Por favor, intenta de nuevo."
 
-#: app.py:509 app.py:579
+#: app.py:508 app.py:578
 msgid "Authentication failed. Please try again."
 msgstr "La autenticación falló. Por favor, intenta de nuevo."
 
-#: app.py:514
+#: app.py:513
 msgid "Login session expired. Please try again."
 msgstr "La sesión expiró. Por favor, intenta de nuevo."
 
-#: app.py:521
+#: app.py:520
 msgid "Invalid state parameter. Please try again."
 msgstr "Parámetro de estado inválido. Por favor, intenta de nuevo."
 
-#: app.py:541
+#: app.py:540
 msgid "Failed to obtain access token. Please try again."
 msgstr "Error al obtener el token de acceso. Por favor, intenta de nuevo."
 
-#: app.py:568
+#: app.py:567
 msgid "Failed to get user profile. Please try again."
 msgstr "Error al obtener el perfil de usuario. Por favor, intenta de nuevo."
 
-#: app.py:592
+#: app.py:591
 msgid "You have been logged out."
 msgstr "Has cerrado sesión correctamente."
 
-#: app.py:605
+#: app.py:604
 msgid "Please login to add an author."
 msgstr "Por favor, inicia sesión para agregar un autor o autora."
 
-#: app.py:610 app.py:725
+#: app.py:609 app.py:724
 msgid "Your session has expired. Please login again."
 msgstr "Tu sesión ha expirado. Por favor, inicia sesión de nuevo."
 
-#: app.py:618 app.py:733 app.py:844 app.py:945
+#: app.py:617 app.py:732 app.py:843 app.py:944
 msgid "Session expired. Please log in again."
 msgstr "Sesión expirada. Por favor, inicia sesión de nuevo."
 
-#: app.py:657
+#: app.py:656
 #, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Error al crear el/la autor/a: %(error)s"
 
-#: app.py:663 app.py:674 app.py:705 templates/add-author.html:39
+#: app.py:662 app.py:673 app.py:704 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 msgid "Add Author"
 msgstr "Agregar autor/a"
 
-#: app.py:668
+#: app.py:667
 msgid "An error occurred while creating the author. Please try again."
 msgstr "Ocurrió un error al crear el/la autor/a. Por favor, intenta de nuevo."
 
-#: app.py:720
+#: app.py:719
 msgid "Please login to add a work."
 msgstr "Por favor, inicia sesión para agregar una obra."
 
-#: app.py:772
+#: app.py:771
 #, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Error al crear la obra: %(error)s"
 
-#: app.py:778 app.py:789 app.py:820 templates/add-work.html:39
+#: app.py:777 app.py:788 app.py:819 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 msgid "Add Work"
 msgstr "Agregar obra"
 
-#: app.py:783
+#: app.py:782
 msgid "An error occurred while creating the work. Please try again."
 msgstr "Ocurrió un error al crear la obra. Por favor, intenta de nuevo."
 
-#: app.py:837 app.py:939
+#: app.py:836 app.py:938
 msgid "You must be logged in to edit."
 msgstr "Debes iniciar sesión para editar."
 
-#: app.py:853 app.py:951
+#: app.py:852 app.py:950
 msgid "Invalid request data."
 msgstr "Datos de solicitud inválidos."
 
-#: app.py:860 app.py:955
+#: app.py:859 app.py:954
 msgid "No changes provided."
 msgstr "No se proporcionaron cambios."
 
-#: app.py:880 app.py:971
+#: app.py:879 app.py:970
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr "Propiedad o valor faltante para el campo: %(field)s"
 
-#: app.py:903 app.py:991
+#: app.py:902 app.py:990
 #, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Error al actualizar %(field)s: %(error)s"
 
-#: app.py:909 app.py:994
+#: app.py:908 app.py:993
 msgid "Successfully updated!"
 msgstr "¡Actualizado con éxito!"
 
-#: app.py:914 app.py:996
+#: app.py:913 app.py:995
 msgid "Updated with some errors."
 msgstr "Actualizado con algunos errores."
 
-#: app.py:920 app.py:998
+#: app.py:919 app.py:997
 msgid "Failed to update fields."
 msgstr "Error al actualizar los campos."
 
-#: app.py:927 app.py:1001
+#: app.py:926 app.py:1000
 #, python-format
 msgid "Server error: %(error)s"
 msgstr "Error del servidor: %(error)s"
 
-#: app.py:1015
+#: app.py:1014
 msgid "404 error"
 msgstr "Error 404"
 
@@ -1518,9 +1518,10 @@ msgstr "Seleccionar género"
 msgid "Select gender..."
 msgstr "Seleccionar género..."
 
-#: templates/author.html:317 templates/author.html:530
-msgid "years"
-msgstr "años"
+#: templates/author.html:317
+#, python-format
+msgid "age %(author_age)s"
+msgstr "%(author_age)s años"
 
 #: templates/author.html:323
 msgid "Edit date of birth"
@@ -1561,6 +1562,11 @@ msgstr "El país de nacimiento se deriva del lugar de nacimiento."
 #: templates/author.html:508
 msgid "Search for country of birth"
 msgstr "Buscar país de nacimiento"
+
+#: templates/author.html:530
+#, python-format
+msgid "aged %(author_age)s"
+msgstr "a los %(author_age)s años"
 
 #: templates/author.html:536
 msgid "Edit date of death"
@@ -2054,3 +2060,6 @@ msgstr "Ver esta consulta en el Servicio de Consultas de Wikidata"
 
 #~ msgid "Edit Wikidata item"
 #~ msgstr "Editar elemento de Wikidata"
+
+#~ msgid "years"
+#~ msgstr "años"
