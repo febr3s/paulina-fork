@@ -314,7 +314,7 @@
             <div class="author-field-display">
               <span class="field-value">{{author_date_of_birth}}
                 {% if author_age and not author_date_of_death %}
-                <span class="text-muted">({{author_age}} {{ _('years') }})</span>
+                <span class="text-muted">({{ _('age %(author_age)s', author_age=author_age) }})</span>
                 {% endif %}
               </span>
               {% if session.get('wikimedia_username') %}
@@ -527,7 +527,7 @@
             <div class="author-field-display">
               <span class="field-value">{{author_date_of_death}}
                 {% if author_age and author_date_of_death %}
-                <span class="text-muted">({{author_age}} {{ _('years') }})</span>
+                <span class="text-muted">({{ _('aged %(author_age)s', author_age=author_age) }})</span>
                 {% endif %}
               </span>
               {% if session.get('wikimedia_username') %}
