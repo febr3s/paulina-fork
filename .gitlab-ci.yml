@@ -1,7 +1,21 @@
 stages:
+  - test
   - deploy
 
-Deploy to staging:
+# Run tests on all branches
+pytest:
+  stage: test
+  image: python:3.13
+  before_script:
+    - cp config-sample.py config.py
+    - sed -i 's/SECRET_KEY = ""/SECRET_KEY = "test-secret-key"/' config.py
+    - pip install -r requirements.txt
+  script:
+    - pytest -v --cov=. --cov-report=term-missing
+  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
+  allow_failure: true
+
+deploy_staging:
   stage: deploy
   image: alpine:latest
   only:
@@ -111,4 +125,3 @@ Deploy to production:
 
 
       EOF
-  

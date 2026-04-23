@@ -3,7 +3,7 @@ This project aims to build a global and multilingual search interface for author
 and works in the public domain using Wikidata and Python.
 
 ## Requirements
-* Python 3.12 or later.
+* Python 3.13 or later.
 * Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, python-dateutil, requests, requests-oauthlib.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
