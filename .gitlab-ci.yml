@@ -5,7 +5,7 @@ stages:
 # Run tests on all branches
 pytest:
   stage: test
-  image: python:3.11
+  image: python:3.13
   before_script:
     - pip install -r requirements.txt
   script:
