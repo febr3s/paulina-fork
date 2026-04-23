@@ -5,7 +5,7 @@ stages:
 # Run tests on all branches
 pytest:
   stage: test
-  image: python:3.13
+  image: ghcr.io/astral-sh/uv:python3.13-trixie
   before_script:
     - cp config-sample.py config.py
     - sed -i 's/SECRET_KEY = ""/SECRET_KEY = "test-secret-key"/' config.py
