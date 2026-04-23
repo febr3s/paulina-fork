@@ -1,0 +1,18 @@
+[project]
+name = "paulina"
+version = "1.0.0"
+description = "Multilingual web tool to discover and access cultural heritage. Developed in Python with the Flask framework, and powered by Wikidata."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.3",
+    "flask-babel>=4.0.0",
+    "flask-caching>=2.4.0",
+    "flask-limiter>=4.1.1",
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
+    "pytest-flask>=1.3.0",
+    "python-dateutil>=2.9.0.post0",
+    "requests>=2.33.1",
+    "requests-oauthlib>=2.0.0",
+]
