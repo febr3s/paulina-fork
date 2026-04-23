@@ -8,6 +8,7 @@ pytest:
   image: python:3.13
   before_script:
     - cp config-sample.py config.py
+    - sed -i 's/SECRET_KEY = ""/SECRET_KEY = "test-secret-key"/' config.py
     - pip install -r requirements.txt
   script:
     - pytest -v --cov=. --cov-report=term-missing
