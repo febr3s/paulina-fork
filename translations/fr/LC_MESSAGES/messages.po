@@ -1657,7 +1657,7 @@ msgstr "Pays de naissance"
 #: templates/author.html:530
 #, python-format
 msgid "aged %(author_age)s"
-msgstr ""
+msgstr "à %(author_age)s ans"
 
 #: templates/author.html:536
 #, fuzzy
