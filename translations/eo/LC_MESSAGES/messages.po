@@ -1616,7 +1616,7 @@ msgstr "Naskiĝlando"
 #: templates/author.html:530
 #, python-format
 msgid "aged %(author_age)s"
-msgstr ""
+msgstr "%(author_age)s-jaraĝa"
 
 #: templates/author.html:536
 #, fuzzy
