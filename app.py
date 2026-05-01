@@ -160,6 +160,15 @@ def results():
         type_of_search = request.args.get("type_of_search")
         search_request = request.args.get("query")
         language = request.args.get("language")
+        page = request.args.get("page", 1, type=int)
+
+        # Ensure page is at least 1
+        if page < 1:
+            page = 1
+
+        # Calculate offset for pagination (50 items per page)
+        page_size = 50
+        offset = (page - 1) * page_size
 
         # Show results when there is no query (for example in case of changing the language)
         if search_request is None:
@@ -179,16 +188,24 @@ def results():
         if type_of_search == "author":
             gender = request.args.get("gender")
             nationality = request.args.get("nationality")
-            creative_area = request.args.get("creative-area")
-            in_public_domain = request.args.get("in-public-domain")
-            search_result, complete = search.search_author(search_request, gender, nationality, creative_area, in_public_domain)
+            creative_area = request.args.get("creative_area")
+            in_public_domain = request.args.get("in_public_domain")
+            search_result, complete, continue_offset = search.search_author(search_request, gender, nationality,
+                                                           creative_area, in_public_domain, offset)
             if len(search_result) > 0:
+                # Calculate pagination info
+                has_next = continue_offset is not None
+                has_prev = page > 1
+
                 return render_template('results.html',
                                         title=_("Results"),
                                         list_of_authors=search_result,
                                         search_request=search_request,
                                         type_of_search=type_of_search,
-                                        complete=complete)
+                                        complete=complete,
+                                        page=page,
+                                        has_next=has_next,
+                                        has_prev=has_prev)
             else:
                 return render_template("no-results.html",
                                         title=_("No results found"),

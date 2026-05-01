@@ -220,12 +220,12 @@
               </select>
             </div>
             <div class="py-2 px-2">
-              <label for="creative-area"><strong>{{ _('Creative Area') }}</strong></label>
-              <select class="form-select filter border-black shadow-none" name="creative-area" id="creative-area">
+              <label for="creative_area"><strong>{{ _('Creative Area') }}</strong></label>
+              <select class="form-select filter border-black shadow-none" name="creative_area" id="creative_area">
                 <option value="">{{ _('Any') }}</option>
                 {% for area in CREATIVE_AREAS %}
                 <option value="{{ area['area_value'] }}"
-                {% if request.args.get('creative-area') == area['area_value'] %}selected{% endif %}>
+                {% if request.args.get('creative_area') == area['area_value'] %}selected{% endif %}>
                 {{ _(area['area_name']) }}</option>
                 {% endfor %}
               </select>
@@ -257,9 +257,9 @@
               </div>
             </div>
             <div class="py-2 px-2">
-              <label for="in-public-domain"><strong>{{ _('In public domain') }}</strong></label>
-              <input type="checkbox" id="in-public-domain" name="in-public-domain" value="yes"
-              {% if request.args.get('in-public-domain') == 'yes' %}checked{% endif %}>
+              <label for="in_public_domain"><strong>{{ _('In public domain') }}</strong></label>
+              <input type="checkbox" id="in_public_domain" name="in_public_domain" value="yes"
+              {% if request.args.get('in_public_domain') == 'yes' %}checked{% endif %}>
               <br><small>{{ _('Authors whose works are in public domain in at least one jurisdiction') }}</small>
             </div>
           </div>
