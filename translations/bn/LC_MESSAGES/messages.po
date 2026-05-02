@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-22 19:20-0300\n"
+"POT-Creation-Date: 2026-05-02 19:37-0300\n"
 "PO-Revision-Date: 2026-03-21 08:09+0000\n"
 "Last-Translator: Bodhisattwa Mandal <bodhisattwa.rgkmc@gmail.com>\n"
 "Language: bn\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: app.py:134
 msgid "No value"
@@ -35,147 +35,147 @@ msgstr "প্রধান পাতা"
 msgid "About"
 msgstr "সম্পর্কে"
 
-#: app.py:187 app.py:204
+#: app.py:206 app.py:237
 msgid "Results"
 msgstr "ফলাফল"
 
-#: app.py:194 app.py:211 app.py:216
+#: app.py:218 app.py:249 app.py:254
 msgid "No results found"
 msgstr "কোন ফলাফল পাওয়া যায়নি"
 
-#: app.py:287
+#: app.py:343
 msgid "List of works"
 msgstr "কর্মের তালিকা"
 
-#: app.py:372
+#: app.py:431
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s-এর তালিকা"
 
-#: app.py:389
+#: app.py:448
 msgid "Unknown term"
 msgstr "অজানা শর্ত"
 
-#: app.py:391 templates/countries.html:7 templates/layout.html:106
+#: app.py:450 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:359
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:498
+#: app.py:557
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:508 app.py:578
+#: app.py:567 app.py:637
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:513
+#: app.py:572
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:520
+#: app.py:579
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:540
+#: app.py:599
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:567
+#: app.py:626
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:591
+#: app.py:650
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:604
+#: app.py:663
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:609 app.py:724
+#: app.py:668 app.py:783
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:617 app.py:732 app.py:843 app.py:944
+#: app.py:676 app.py:791 app.py:902 app.py:1003
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:656
+#: app.py:715
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:662 app.py:673 app.py:704 templates/add-author.html:39
+#: app.py:721 app.py:732 app.py:763 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:121
 #, fuzzy
 msgid "Add Author"
 msgstr "লেখক"
 
-#: app.py:667
+#: app.py:726
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:719
+#: app.py:778
 msgid "Please login to add a work."
 msgstr "একটি সাহিত্যকর্ম যোগ করতে দয়া করে লগইন করুন।"
 
-#: app.py:771
+#: app.py:830
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:777 app.py:788 app.py:819 templates/add-work.html:39
+#: app.py:836 app.py:847 app.py:878 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:127
 #, fuzzy
 msgid "Add Work"
 msgstr "লেখক"
 
-#: app.py:782
+#: app.py:841
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:836 app.py:938
+#: app.py:895 app.py:997
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:852 app.py:950
+#: app.py:911 app.py:1009
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:859 app.py:954
+#: app.py:918 app.py:1013
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:879 app.py:970
+#: app.py:938 app.py:1029
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:902 app.py:990
+#: app.py:959 app.py:1047
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:908 app.py:993
+#: app.py:967 app.py:1052
 msgid "Successfully updated!"
 msgstr "সফলভাবে হালনাগাদ হয়েছে!"
 
-#: app.py:913 app.py:995
+#: app.py:972 app.py:1054
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "জন্মতারিখ"
 
-#: app.py:919 app.py:997
+#: app.py:978 app.py:1056
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:926 app.py:1000
+#: app.py:985 app.py:1059
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "জন্মতারিখ"
 
-#: app.py:1014
+#: app.py:1073
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
@@ -280,19 +280,19 @@ msgstr ""
 msgid "Image of %(name)s."
 msgstr "%(name)s-এর চিত্র"
 
-#: pdclasses.py:363
+#: pdclasses.py:381
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
 "on the placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:368
+#: pdclasses.py:386
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)s-এর চিত্র"
 
-#: pdclasses.py:460 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:478 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s-এর পতাকা"
@@ -1918,13 +1918,34 @@ msgstr ""
 msgid "Search results"
 msgstr "ফলাফল অনুসন্ধান করুন"
 
-#: templates/results.html:10
-msgid "Your search returned too many results. Please refine your search."
+#: templates/results.html:7
+#, python-format
+msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr ""
 
-#: templates/results.html:32 templates/works-list.html:29
+#: templates/results.html:30 templates/works-list.html:29
 msgid "Available for download"
 msgstr "ডাউনলোডের জন্য উপলব্ধ"
+
+#: templates/results.html:42 templates/works-list.html:39
+#, fuzzy
+msgid "Pagination"
+msgstr "চিত্র কর্ম"
+
+#: templates/results.html:46 templates/results.html:50
+#: templates/works-list.html:43 templates/works-list.html:47
+msgid "Previous"
+msgstr ""
+
+#: templates/results.html:55 templates/works-list.html:52
+#, fuzzy, python-format
+msgid "Page %(page)s"
+msgstr ""
+
+#: templates/results.html:60 templates/results.html:64
+#: templates/works-list.html:57 templates/works-list.html:61
+msgid "Next"
+msgstr ""
 
 #: templates/work.html:38
 msgid "Author/s"
@@ -2085,4 +2106,7 @@ msgstr ""
 
 #~ msgid "years"
 #~ msgstr "অনুসন্ধান করুন"
+
+#~ msgid "Your search returned too many results. Please refine your search."
+#~ msgstr ""
 
