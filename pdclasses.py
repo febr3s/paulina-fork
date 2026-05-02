@@ -306,8 +306,26 @@ class Author(Parent):
                 return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
             
 
-    def getWorks(self, lang):
-        works = squeries.retrieve_query(squeries.query_for_works_by_an_author, qname=self.wikidata_item_id, lang=lang)
+    def getWorks(self, lang, limit=50, offset=0):
+        """Get works by this author with pagination support.
+
+        Args:
+            lang: Language code for labels
+            limit: Maximum number of results to return (default: 50)
+            offset: Number of results to skip (default: 0)
+
+        Returns:
+            List of works with download information
+        """
+        limit_clause = f"LIMIT {limit}" if limit else ""
+        offset_clause = f"OFFSET {offset}" if offset > 0 else ""
+        works = squeries.retrieve_query(
+            squeries.query_for_works_by_an_author,
+            qname=self.wikidata_item_id,
+            lang=lang,
+            limit_clause=limit_clause,
+            offset_clause=offset_clause
+        )
         for work in works:  # Check if there are links to access the work
             if (int(work['wikisourceFullWork']['value']) > 0
                     or int(work['iaDownloads']['value']) > 0

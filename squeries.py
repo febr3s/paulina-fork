@@ -34,6 +34,9 @@ WHERE
          VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} 
          ?item wdt:P31 ?typeOfItem . }} 
      }} 
+   ORDER BY ASC ( ?itemLabel ) 
+   {limit_clause} 
+   {offset_clause} 
   }} 
   OPTIONAL {{ ?item wdt:P724 ?iaID . }}
   OPTIONAL {{ ?item wdt:P953 ?download . }}

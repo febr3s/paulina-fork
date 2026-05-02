@@ -318,14 +318,35 @@ def author_page(author_data):
 @cache.cached(make_cache_key=make_cache_key)
 def works_list(author_id):
     try:
-        query = squeries.query_for_works_by_an_author.format(qname=author_id, lang=languages.get_locale())
+        page = request.args.get("page", 1, type=int)
+
+        # Ensure page is at least 1
+        if page < 1:
+            page = 1
+
+        # Calculate offset for pagination (50 items per page)
+        page_size = 50
+        offset = (page - 1) * page_size
+
+        # To show the query link at the top of the results 
+        query = squeries.query_for_works_by_an_author.format(qname=author_id, lang=languages.get_locale(), 
+                                                             limit_clause="", offset_clause="")
         wqs_link = "https://query.wikidata.org/#" + requests.utils.quote(query)
+
         author = pdclasses.Author(author_id)
+        author_works = author.getWorks(languages.get_locale(), limit=page_size, offset=offset)
+        # Check if there are more results by trying to get one more result
+        has_next = len(author.getWorks(languages.get_locale(), limit=1, offset=offset + page_size)) > 0
+        has_prev = page > 1
+
         return render_template("works-list.html",
             title=_('List of works') + " - " + print_field(author.name),
             author_name=print_field(author.name),
             wqs_link=wqs_link,
-            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
+            author_works=print_field(author_works),
+            page=page,
+            has_next=has_next,
+            has_prev=has_prev
         )
 
     except:  # If the Q number doesn't match any item or the item is not about a human

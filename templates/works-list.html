@@ -35,6 +35,35 @@
     </a>
     {% endfor %}
   </div>
+    {% if has_prev or has_next %}
+    <nav aria-label="{{ _('Pagination') }}" class="mt-4">
+      <ul class="pagination justify-content-center">
+        {% if has_prev %}
+        <li class="page-item">
+          <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page-1) }}">{{ _('Previous') }}</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">{{ _('Previous') }}</span>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+          <span class="page-link">{{ _('Page %(page)s', page=page) }}</span>
+        </li>
+
+        {% if has_next %}
+        <li class="page-item">
+          <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page+1) }}">{{ _('Next') }}</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">{{ _('Next') }}</span>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
   {% endif %}    
 </div>
 
