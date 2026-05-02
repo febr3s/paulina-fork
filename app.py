@@ -190,19 +190,26 @@ def results():
             nationality = request.args.get("nationality")
             creative_area = request.args.get("creative_area")
             in_public_domain = request.args.get("in_public_domain")
-            search_result, complete, continue_offset = search.search_author(search_request, gender, nationality,
+            search_result, complete, continue_offset, results_quantity = search.search_author(search_request, gender, nationality,
                                                            creative_area, in_public_domain, offset)
+            if results_quantity > 10000:
+                results_quantity = 10000
+            
+            page_range = {"start": offset + 1,
+                          "end": offset + page_size if (offset + page_size) <= results_quantity else results_quantity}
+
             if len(search_result) > 0:
                 # Calculate pagination info
                 has_next = continue_offset is not None
                 has_prev = page > 1
-
                 return render_template('results.html',
                                         title=_("Results"),
                                         list_of_authors=search_result,
                                         search_request=search_request,
                                         type_of_search=type_of_search,
                                         complete=complete,
+                                        results_quantity=results_quantity,
+                                        page_range=page_range,
                                         page=page,
                                         has_next=has_next,
                                         has_prev=has_prev)

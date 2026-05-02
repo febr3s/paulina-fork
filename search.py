@@ -49,8 +49,9 @@ def search_author(user_search: str, gender:str, nationality:str,
     search_results = search_response.json()
     complete = not ("continue" in search_results)
     continue_offset = search_results.get("continue", {}).get("sroffset")
+    results_quantity = search_results.get("query", {}).get("searchinfo", {}).get("totalhits")
     if not search_results.get("query", {}).get("search"):
-        return {}, complete, continue_offset
+        return {}, complete, continue_offset, results_quantity
     search_results = search_results["query"]["search"]
     search_results_qids = [search_result["title"] for search_result in search_results]
     search_results_qids = "|".join(search_results_qids)
@@ -64,7 +65,7 @@ def search_author(user_search: str, gender:str, nationality:str,
                                    )
     label_search_results = label_search_response.json()
     label_search_results = label_search_results.get("entities")
-    return label_search_results, complete, continue_offset
+    return label_search_results, complete, continue_offset, results_quantity
 
 def search_work(user_search: str, type_of_work: str, country_of_origin: str) -> list:
     """Takes a user search string and returns a list of search results using the Wikidata API.

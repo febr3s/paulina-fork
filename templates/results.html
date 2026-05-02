@@ -3,7 +3,8 @@
 {% block content %}
 
 <div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">{{ _('Search results') }}</h2>
+  <h2 class="mb-2 p-1">{{ _('Search results') }}</h2>
+  <p class="p-1">{{ _('%(first)s-%(last)s of %(results_quantity)s results', first=page_range["start"], last=page_range["end"], results_quantity=results_quantity) }}</p>
   <div class="list-group p-1">
     {% if list_of_authors %}
     {% for author in list_of_authors.values() %}
