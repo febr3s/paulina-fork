@@ -3,21 +3,19 @@
 {% block content %}
 
 <div class="container-fluid col-12 col-xl-9 p-2">
-  <h2 class="mb-4 p-1">{{ _('Search results') }}</h2>
+  <h2 class="mb-2 p-1">{{ _('Search results') }}</h2>
+  <p class="p-1">{{ _('%(first)s-%(last)s of %(results_quantity)s results', first=page_range["start"], last=page_range["end"], results_quantity=results_quantity) }}</p>
   <div class="list-group p-1">
-    {% if not complete %}
-    <div class="alert alert-warning" role="alert">
-      <p class="p-1">{{ _('Your search returned too many results. Please refine your search.') }}</p>
-    </div>
-    {% endif %}
     {% if list_of_authors %}
-    {% for author in list_of_authors %}
-    <a href="{{ url_for('author_page', author_data=author['title']) }}" class="list-group-item list-group-item-action">
+    {% for author in list_of_authors.values() %}
+    <a href="{{ url_for('author_page', author_data=author['id']) }}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ author['entityterms']['label'][0] }}</h5>
+        {% set author_label = author.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
+        <h5 class="mb-1">{{ author_label }}</h5>
       </div>
-      <p class="mb-1">{% if author['entityterms']['description'] %}
-        {{ author['entityterms']['description'][0] }}{% endif %}</p>
+      {% set author_description = author.get('descriptions', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
+      <p class="mb-1">{% if author_description %}
+        {{ author_description }}{% endif %}</p>
     </a>
     {% endfor %}
     {% endif %}
@@ -40,6 +38,36 @@
     {% endif %}
 
   </div>
+  {% if has_prev or has_next %}
+  <nav aria-label="{{ _('Pagination') }}" class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if has_prev %}
+      <li class="page-item">
+        <a class="page-link" style="color: black;" href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page-1) }}">{{ _('Previous') }}</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">{{ _('Previous') }}</span>
+      </li>
+      {% endif %}
+
+      <li class="page-item active">
+        <span class="page-link" style="color: black;">{{ _('Page %(page)s', page=page) }}</span>
+      </li>
+
+      {% if has_next %}
+      <li class="page-item">
+        <a class="page-link" style="color: black;" href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page+1) }}">{{ _('Next') }}</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">{{ _('Next') }}</span>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
 
 </div>
 {% endblock %}

@@ -160,6 +160,15 @@ def results():
         type_of_search = request.args.get("type_of_search")
         search_request = request.args.get("query")
         language = request.args.get("language")
+        page = request.args.get("page", 1, type=int)
+
+        # Ensure page is at least 1
+        if page < 1:
+            page = 1
+
+        # Calculate offset for pagination (50 items per page)
+        page_size = 50
+        offset = (page - 1) * page_size
 
         # Show results when there is no query (for example in case of changing the language)
         if search_request is None:
@@ -179,33 +188,62 @@ def results():
         if type_of_search == "author":
             gender = request.args.get("gender")
             nationality = request.args.get("nationality")
-            creative_area = request.args.get("creative-area")
-            in_public_domain = request.args.get("in-public-domain")
-            search_result, complete = search.search_author(search_request, gender, nationality, creative_area, in_public_domain)
+            creative_area = request.args.get("creative_area")
+            in_public_domain = request.args.get("in_public_domain")
+            search_result, complete, continue_offset, results_quantity = search.search_author(search_request, gender, nationality,
+                                                           creative_area, in_public_domain, offset)
+            if results_quantity > 10000:
+                results_quantity = 10000
+            
+            page_range = {"start": offset + 1,
+                          "end": offset + page_size if (offset + page_size) <= results_quantity else results_quantity}
+
             if len(search_result) > 0:
+                # Calculate pagination info
+                has_next = continue_offset is not None
+                has_prev = page > 1
                 return render_template('results.html',
                                         title=_("Results"),
                                         list_of_authors=search_result,
                                         search_request=search_request,
                                         type_of_search=type_of_search,
-                                        complete=complete)
+                                        complete=complete,
+                                        results_quantity=results_quantity,
+                                        page_range=page_range,
+                                        page=page,
+                                        has_next=has_next,
+                                        has_prev=has_prev)
             else:
                 return render_template("no-results.html",
                                         title=_("No results found"),
                                         search_request=search_request,
                                         type_of_search=type_of_search)
         elif type_of_search == "work":
-            #if no search parameters have been input for Works search, show message
             type_of_work = request.args.get("type_of_work")
             country_of_origin = request.args.get("country_of_origin")
-            search_result, complete = search.search_work(search_request, type_of_work, country_of_origin)
+            search_result, complete, continue_offset, results_quantity = search.search_work(search_request, type_of_work, 
+                                                                                            country_of_origin, offset)
+            if results_quantity > 10000:
+                results_quantity = 10000
+            
+            page_range = {"start": offset + 1,
+                          "end": offset + page_size if (offset + page_size) <= results_quantity else results_quantity}
+
             if len(search_result) > 0:
+                # Calculate pagination info
+                has_next = continue_offset is not None
+                has_prev = page > 1
                 return render_template('results.html',
                                         title=_("Results"),
                                         list_of_works=search_result,
                                         search_request=search_request,
                                         type_of_search=type_of_search,
-                                        complete=complete)
+                                        complete=complete,
+                                        results_quantity=results_quantity,
+                                        page_range=page_range,
+                                        page=page,
+                                        has_next=has_next,
+                                        has_prev=has_prev)
             else:
                 return render_template("no-results.html",
                                         title=_("No results found"),
@@ -280,14 +318,35 @@ def author_page(author_data):
 @cache.cached(make_cache_key=make_cache_key)
 def works_list(author_id):
     try:
-        query = squeries.query_for_works_by_an_author.format(qname=author_id, lang=languages.get_locale())
+        page = request.args.get("page", 1, type=int)
+
+        # Ensure page is at least 1
+        if page < 1:
+            page = 1
+
+        # Calculate offset for pagination (50 items per page)
+        page_size = 50
+        offset = (page - 1) * page_size
+
+        # To show the query link at the top of the results 
+        query = squeries.query_for_works_by_an_author.format(qname=author_id, lang=languages.get_locale(), 
+                                                             limit_clause="", offset_clause="")
         wqs_link = "https://query.wikidata.org/#" + requests.utils.quote(query)
+
         author = pdclasses.Author(author_id)
+        author_works = author.getWorks(languages.get_locale(), limit=page_size, offset=offset)
+        # Check if there are more results by trying to get one more result
+        has_next = len(author.getWorks(languages.get_locale(), limit=1, offset=offset + page_size)) > 0
+        has_prev = page > 1
+
         return render_template("works-list.html",
             title=_('List of works') + " - " + print_field(author.name),
             author_name=print_field(author.name),
             wqs_link=wqs_link,
-            author_works=print_field(author.getWorks(languages.get_locale()))  # Get list of works
+            author_works=print_field(author_works),
+            page=page,
+            has_next=has_next,
+            has_prev=has_prev
         )
 
     except:  # If the Q number doesn't match any item or the item is not about a human
