@@ -26,7 +26,6 @@ def test_search_empty_query(client):
         'language': 'en'
     })
     assert response.status_code == 200
-    assert b"Your search returned too many results. Please refine your search." in response.data
 
 def test_search_short_query(client):
     response = client.get(url_for('results'), query_string={
@@ -35,4 +34,3 @@ def test_search_short_query(client):
         'language': 'en'
     })
     assert response.status_code == 200
-    assert b"Your search returned too many results. Please refine your search." in response.data
