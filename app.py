@@ -219,17 +219,31 @@ def results():
                                         search_request=search_request,
                                         type_of_search=type_of_search)
         elif type_of_search == "work":
-            #if no search parameters have been input for Works search, show message
             type_of_work = request.args.get("type_of_work")
             country_of_origin = request.args.get("country_of_origin")
-            search_result, complete = search.search_work(search_request, type_of_work, country_of_origin)
+            search_result, complete, continue_offset, results_quantity = search.search_work(search_request, type_of_work, 
+                                                                                            country_of_origin, offset)
+            if results_quantity > 10000:
+                results_quantity = 10000
+            
+            page_range = {"start": offset + 1,
+                          "end": offset + page_size if (offset + page_size) <= results_quantity else results_quantity}
+
             if len(search_result) > 0:
+                # Calculate pagination info
+                has_next = continue_offset is not None
+                has_prev = page > 1
                 return render_template('results.html',
                                         title=_("Results"),
                                         list_of_works=search_result,
                                         search_request=search_request,
                                         type_of_search=type_of_search,
-                                        complete=complete)
+                                        complete=complete,
+                                        results_quantity=results_quantity,
+                                        page_range=page_range,
+                                        page=page,
+                                        has_next=has_next,
+                                        has_prev=has_prev)
             else:
                 return render_template("no-results.html",
                                         title=_("No results found"),
