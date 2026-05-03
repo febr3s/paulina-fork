@@ -269,8 +269,8 @@
               <select class="form-select filter border-black shadow-none" name="type_of_work" id="type-of-work">
                 <option value="">{{ _('Any') }}</option>
                 {% for type_of_work in TYPES_OF_WORK %}
-                <option value="{{type_of_work['qid']}}"
-                {% if request.args.get('type_of_work') == type_of_work['qid'] %}selected{% endif %}>
+                <option value="{{type_of_work['type_value']}}"
+                {% if request.args.get('type_of_work') == type_of_work['type_value'] %}selected{% endif %}>
                 {{ _(type_of_work['type_name']) }}</option>
                 {% endfor %}
               </select>

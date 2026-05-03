@@ -88,13 +88,86 @@ CREATIVE_AREAS = [
 # Filters for works
 
 TYPES_OF_WORK = [
-    {"qid": "Q11424", "type_name": _("Film")},
-    {"qid": "Q7725634", "type_name": _("Literary work")},
-    {"qid": "Q105543609", "type_name": _("Musical work")},
-    {"qid": "Q3305213", "type_name": _("Painting")},
-    {"qid": "Q860861", "type_name": _("Sculpture")}
-    ]
-
+    {
+        "type_value": "academia",
+        "type_name": _("Academia"),
+        # scholarly article, doctoral thesis, academic journal article, conference paper, report, 
+        # master's thesis, scholarly chapter, scientific publication, thesis, monograph
+        "qids": ("Q13442814", "Q187685", "Q18918145", "Q23927052", "Q10870555", 
+                 "Q1907875", "Q21481766", "Q591041", "Q1266946", "Q193495")
+    },
+    {
+        "type_value": "architecture",
+        "type_name": _("Architecture"),
+        # church building, building, monument, architectural structure, memorial, architectural plan
+        "qids": ("Q16970", "Q41176", "Q4989906", "Q811979", "Q5003624", "Q47597")
+    },
+    {
+        "type_value": "cinema and audiovisual",
+        "type_name": _("Cinema and audiovisual"),
+        # film, short film, television series, television film, animated short film, television program,
+        # animated film, video album, miniseries, anime television series, silent film, 
+        # animated television series, music video, documentary film, radio drama 
+        "qids": ("Q11424", "Q24862", "Q5398426", "Q506240", "Q17517379", "Q15416", 
+                 "Q202866", "Q10590726", "Q1259759", "Q63952888", "Q226730",
+                 "Q117467246", "Q193977", "Q93204", "Q2635894")
+    },
+    {
+        "type_value": "design and decorative arts",
+        "type_name": _("Design and decorative arts"),
+        # decorative art, poster, logo
+        "qids": ("Q631931", "Q429785", "Q1886349")
+    },
+    {
+        "type_value": "journalism",
+        "type_name": _("Journalism"),
+        # editorial, news article, magazine article
+        "qids": ("Q871232", "Q5707594", "Q30070590")
+    },
+    {
+        "type_value": "music",
+        "type_name": _("Music"),
+        # album, musical work/composition, single, music track with vocals, extended play, 
+        # song, lyrics, audio track, dramatico-musical work, video album, 
+        # music track without lyrics, 7″ single, music video, concert 
+        "qids": ("Q482994", "Q105543609", "Q134556", "Q55850593", "Q169930", 
+                 "Q7366","Q602446", "Q7302866", "Q58483083", "Q10590726", 
+                 "Q55850643", "Q6128115", "Q193977", "Q182832")
+    },
+    {
+        "type_value": "performing arts",
+        "type_name": _("Performing arts"),
+        # performing arts production, performance work, theatrical production, dramatico-musical work,
+        # dance production, performance artwork 
+        "qids": ("Q43099500", "Q17538722", "Q7777570", "Q58483083", "Q43099869", "Q22672348")
+    },
+    {
+        "type_value": "programming",
+        "type_name": _("Programming"),
+        # video game, application software, free software, website, web page 
+        "qids": ("Q7889" ,"Q166142", "Q341", "Q35127", "Q36774")
+    },
+    {
+        "type_value": "visual arts",
+        "type_name": _("Visual arts"),
+        # painting, sculpture, drawing, statue, etching print, pastel painting,
+        # lithograph print, relief sculpture, woodcut print, bust, mezzotint print, 
+        # aquatint print, mural, installation artwork, etching, collage, fresco, 
+        # graffiti, textile artwork, artist's book, video artwork, photograph
+        "qids": ("Q3305213", "Q860861", "Q93184", "Q179700", "Q18218093", "Q12043905", 
+                 "Q15123870", "Q245117", "Q18219090", "Q241045", "Q21647744", 
+                 "Q18396864", "Q219423", "Q20437094", "Q186986", "Q22669857", "Q22669139", 
+                 "Q3567529", "Q22075301", "Q1062404", "Q20742776", "Q125191")
+    },
+    {
+        "type_value": "writing",
+        "type_name": _("Writing"),
+        # version, edition or translation, literary work, written work, article, chapter, book review, 
+        # manuscript, comics, blog post, reference work, essay, graphic novel
+        "qids": ("Q3331189", "Q7725634", "Q47461344", "Q191067", "Q1980247", "Q637866", 
+                 "Q87167", "Q1004", "Q17928402", "Q13136", "Q35760", "Q725377")
+    },
+]
 
 # Filter for authors (nationality) and for works (country of origin)
 

@@ -17,13 +17,17 @@ def search_filters(gender=None, nationality=None, creative_area=None,
         for ca in filters.CREATIVE_AREAS:
             if creative_area == ca["area_value"]:
                 selected_area = ca
-        filters_string = filters_string + f"%20haswbstatement:{'|'.join("P106=" + area for area in selected_area["qids"]) }"
+        filters_string = filters_string + f"%20haswbstatement:{'|'.join("P106=" + qid for qid in selected_area["qids"]) }"
     if in_public_domain:
         filters_string = filters_string + f"%20haswbstatement:P7763=Q71887839|P7763=Q75700125"
     if type_of_work:
-        filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
+        for tow in filters.TYPES_OF_WORK:
+            if type_of_work == tow["type_value"]:
+                selected_type = tow
+        filters_string = filters_string + f"%20haswbstatement:{'|'.join("P31=" + qid for qid in selected_type["qids"]) }"
+        # filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
     if country_of_origin:
-        filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}"
+        filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}|P17={country_of_origin}"
     return filters_string
 
 def search_author(user_search: str, gender:str, nationality:str, 
