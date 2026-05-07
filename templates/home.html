@@ -67,6 +67,22 @@
         href="{{ url_for('term_page', term_id='Q73560261') }}">{{ _('Countries with 70 years post mortem auctoris') }}</a>
       </p>
     </div>
+    <div class="col-md p-2 m-2">
+      <div class="text-center p-3 mb-3 border border-black h-75" style="background-color:#71e2a4; max-height: 60%;">
+        <h3>{{ _('On this day') }}</h3>
+        <p>{{ _('Discover writers, musicians, visual artists and more born or who died on this day.') }}</p>
+      </div>
+      <p class="my-4">
+        {% if today_widget %}
+          {% for item in today_widget %}
+          <a class="btn border-black rounded-pill pill-custom green"
+             href="{{ url_for('author_page', author_data=item.author.qid) }}">{{ item.author.name }}</a>
+          {% endfor %}
+        {% endif %}
+        <a class="btn border-black rounded-pill pill-custom green"
+           href="{{ url_for('literature_today') }}">{{ _('See all') }} &rarr;</a>
+      </p>
+    </div>
   </div>
 </div>
       {% endblock %}

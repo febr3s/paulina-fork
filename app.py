@@ -18,6 +18,7 @@ import languages
 import squeries
 import filters
 import oauth
+import today as on_this_day
 
 # Determine Wikidata mode from  environment
 if 'test' in sys.argv:
@@ -142,8 +143,23 @@ def print_field(field: str | dict | None) -> str:
 
 @app.route("/")
 def home():
+    today_d = datetime.date.today()
+    locale = languages.get_locale()
+    cache_root = os.path.join(app.root_path, "cache", "today")
+    user_agent = app.config.get("USER_AGENT", "")
+    data = on_this_day.get_literature_today(
+        today_d.month, today_d.day, locale, user_agent, cache_root,
+        allow_remote_fetch=True,
+    )
+    born = data.get("born") or []
+    died = data.get("died") or []
+    today_widget = [
+        {"author": r, "event": tag}
+        for r, tag in on_this_day.widget_entries(born, died, limit=4)
+    ]
     return render_template("home.html",
-                           title=_("Home")
+                           title=_("Home"),
+                           today_widget=today_widget
                            )
 
 
@@ -450,6 +466,59 @@ def countries_main():
                            title=_('Countries and terms'),
                            countries_info=print_field(countries_info)
                            )
+
+
+@app.route("/on-this-day/", endpoint="on_this_day")
+def on_this_day_redirect():
+    return redirect(url_for("literature_today", **request.args))
+
+
+@app.route("/today")
+def literature_today():
+    from flask_babel import format_date
+    month, day = on_this_day.parse_month_day_from_request(request.args)
+    locale = languages.get_locale()
+    user_agent = app.config.get("USER_AGENT", "")
+    cache_root = os.path.join(app.root_path, "cache", "today")
+    data = on_this_day.get_literature_today(
+        month,
+        day,
+        locale,
+        user_agent,
+        cache_root,
+        allow_remote_fetch=True,
+    )
+    born = data.get("born") or []
+    died = data.get("died") or []
+
+    featured = on_this_day.featured_authors(born, died)
+    featured_qids = {r["qid"] for r, _ in featured}
+    born = [r for r in born if r["qid"] not in featured_qids]
+    died = [r for r in died if r["qid"] not in featured_qids]
+
+    base_year = 2024 if (month == 2 and day == 29) else 2000
+    try:
+        current_d = datetime.date(base_year, month, day)
+    except ValueError:
+        current_d = datetime.date.today()
+    prev_d = current_d - datetime.timedelta(days=1)
+    next_d = current_d + datetime.timedelta(days=1)
+
+    today_d = datetime.date.today()
+
+    return render_template(
+        "today.html",
+        title=_("On this day"),
+        born=born,
+        died=died,
+        display_date=format_date(current_d, format="d MMMM"),
+        prev_month=prev_d.month, prev_day=prev_d.day,
+        next_month=next_d.month, next_day=next_d.day,
+        is_today=(month == today_d.month and day == today_d.day),
+        featured=featured,
+        fetched_at=data.get("fetched_at"),
+        fetch_error=data.get("fetch_error"),
+    )
 
 
 @app.route("/robots.txt")

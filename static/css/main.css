@@ -71,6 +71,10 @@ h3 {
   --bs-btn-bg: #29a4e2;
 }
 
+.pill-custom.green {
+  --bs-btn-bg: #71e2a4;
+}
+
 .country-card:hover {
   background-color: #f8f9fa;
 }

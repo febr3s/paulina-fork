@@ -328,6 +328,42 @@ ORDER BY ?itemLabel
 # "Q954": "Zimbabwe"
 # }
 
+_on_this_day_occupation_values = (
+    "wd:Q36180 wd:Q49757 wd:Q6625963 wd:Q4964182 wd:Q482980 "
+    "wd:Q4853732 wd:Q11774202 wd:Q1028181 wd:Q1281618 "
+    "wd:Q33231 wd:Q644687 wd:Q639669 wd:Q36834 wd:Q177220 "
+    "wd:Q753110 wd:Q2526255 wd:Q28389 wd:Q1414443 "
+    "wd:Q42973 wd:Q1930187 wd:Q214917 wd:Q33999 "
+    "wd:Q901 wd:Q201788"
+)
+
+query_for_authors_on_this_day = '''
+SELECT DISTINCT ?item ?itemLabel ?itemDescription ?eventType (SAMPLE(?date) AS ?eventDate) ?sitelinks
+WHERE {{
+  {{
+    ?item wdt:P31 wd:Q5 ;
+          wdt:P106 ?occ ;
+          wdt:P569 ?date .
+    VALUES ?occ {{ {occ_values} }}
+    FILTER(MONTH(?date) = {month} && DAY(?date) = {day})
+    BIND("birth" AS ?eventType)
+  }} UNION {{
+    ?item wdt:P31 wd:Q5 ;
+          wdt:P106 ?occ ;
+          wdt:P570 ?date .
+    VALUES ?occ {{ {occ_values} }}
+    FILTER(MONTH(?date) = {month} && DAY(?date) = {day})
+    BIND("death" AS ?eventType)
+  }}
+  ?item wikibase:sitelinks ?sitelinks .
+  FILTER(?sitelinks >= 3)
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }}
+}}
+GROUP BY ?item ?itemLabel ?itemDescription ?eventType ?sitelinks
+ORDER BY DESC(?sitelinks) ?item
+LIMIT 200
+'''
+
 query_for_country_of_birth = '''
 SELECT DISTINCT ?item ?itemLabel 
 WHERE {{ 

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="mb-4">
+  <h1 class="h2">{{ _('On this day') }} &mdash; {{ display_date }}</h1>
+  <p class="text-muted">{{ _('Authors born or deceased on this date, ranked by Wikipedia sitelinks.') }}</p>
+
+  <!-- Date navigation -->
+  <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <a href="{{ url_for('literature_today', month=prev_month, day=prev_day) }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
+      &laquo; {{ _("Previous day") }}
+    </a>
+    <a href="{{ url_for('literature_today', month=next_month, day=next_day) }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
+      {{ _("Next day") }} &raquo;
+    </a>
+    {% if not is_today %}
+    <a href="{{ url_for('literature_today') }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
+      {{ _("Today") }}
+    </a>
+    {% endif %}
+  </div>
+
+  {% if fetch_error %}
+  <div class="alert alert-warning" role="alert">
+    {{ _('Could not refresh data from Wikidata. Showing last cached or empty results.') }}
+  </div>
+  {% endif %}
+
+  {% if featured %}
+  <div class="row mb-4">
+    {% for author, event in featured %}
+    <div class="col-md-4 mb-2">
+      <div class="card border-black h-100" style="background-color: #fcdb1a;">
+        <div class="card-body">
+          <h2 class="h6 mb-1">
+            {{ _('Featured author') }} &mdash;
+            {% if event == 'born' %}{{ _('Born') }}{% else %}{{ _('Died') }}{% endif %}
+          </h2>
+          <p class="mb-0">
+            <a href="{{ url_for('author_page', author_data=author.qid) }}" class="fw-semibold link-dark">{{ author.name }}</a>
+            {% if author.year %}<span class="text-muted"> - {{ author.year }}</span>{% endif %}
+          </p>
+          {% if author.description %}<p class="small mb-0 mt-2">{{ author.description }}</p>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <h2 class="h4">{{ _('Born on this day') }}</h2>
+      {% if born %}
+      <ul class="list-group list-group-flush border border-black">
+        {% for a in born %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <a href="{{ url_for('author_page', author_data=a.qid) }}">{{ a.name }}</a>
+            {% if a.year %}<span class="text-muted ms-1">({{ a.year }})</span>{% endif %}
+            {% if a.description %}<br><small class="text-muted">{{ a.description }}</small>{% endif %}
+          </div>
+          <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted">{{ _('No authors found for this date.') }}</p>
+      {% endif %}
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <h2 class="h4">{{ _('Died on this day') }}</h2>
+      {% if died %}
+      <ul class="list-group list-group-flush border border-black">
+        {% for a in died %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <a href="{{ url_for('author_page', author_data=a.qid) }}">{{ a.name }}</a>
+            {% if a.year %}<span class="text-muted ms-1">({{ a.year }})</span>{% endif %}
+            {% if a.description %}<br><small class="text-muted">{{ a.description }}</small>{% endif %}
+          </div>
+          <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted">{{ _('No authors found for this date.') }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
