@@ -62,16 +62,16 @@ def search_author(user_search: str, gender:str, nationality:str,
     search_results_qids = [search_result["title"] for search_result in search_results]
     search_results_qids = "|".join(search_results_qids)
 
-    url_for_labels_and_descriptions = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+    url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
                                        f"&ids={search_results_qids}&props=labels|descriptions"
                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
 
-    label_search_response = requests.get(url_for_labels_and_descriptions, headers=headers
+    results_data_response = requests.get(url_for_results_data, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
-    label_search_results = label_search_response.json()
-    label_search_results = label_search_results.get("entities")
-    return label_search_results, complete, continue_offset, results_quantity
+    results_data = results_data_response.json()
+    results_data = results_data.get("entities")
+    return results_data, complete, continue_offset, results_quantity
 
 def search_work(user_search: str, type_of_work: str, country_of_origin: str, offset:int=0) -> tuple:
     """The function takes a user search string and search filters.
@@ -102,28 +102,25 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str, off
     search_results_qids = [search_result["title"] for search_result in search_results]
     search_results_qids = "|".join(search_results_qids)
 
-    url_for_labels_and_descriptions = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
-                                       f"&ids={search_results_qids}&props=labels|descriptions"
+    url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+                                       f"&ids={search_results_qids}&props=labels|descriptions|sitelinks|claims"
                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
 
-    label_search_response = requests.get(url_for_labels_and_descriptions, headers=headers
+    results_data_response = requests.get(url_for_results_data, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
-    label_search_results = label_search_response.json()
-    label_search_results = label_search_results.get("entities")
+    results_data = results_data_response.json()
+    results_data = results_data.get("entities")
 
-    results_q_and_index = {item["id"]: index for index, item in enumerate(list(label_search_results.values()))}
-    results_with_downloads_info = squeries.retrieve_query(squeries.query_for_downloads_from_search_results,
-                                        qnames="wd:" + " wd:".join(results_q_and_index),
-                                        lang=languages.get_locale()
-                                        )
-    # Sort the filtered query results by the index of the original search results
-    ordered_results = sorted(results_with_downloads_info, key=lambda x: results_q_and_index[x["item"]["value"].split("/")[-1]])
-    for work in ordered_results:  # Check if there are links to access the work
-        if (int(work['wikisourceFullWork']['value']) > 0
-                or int(work['iaDownloads']['value']) > 0
-                or int(work['otherDownloads']['value']) > 0):
-            work['downloads'] = True
-        else:
-            work['downloads'] = False
-    return ordered_results, complete, continue_offset, results_quantity
+    # Check if there are downloads to access the work
+    for result in results_data.values():
+        if result.get("claims"):
+            # If Internet Archive ID or work available at URL
+            if "P724" in result["claims"] or "P953" in result["claims"]:
+                result["downloads"] = True
+        if result.get("sitelinks"):
+            for sitelink in result["sitelinks"]:
+                if sitelink.endswith("wikisource"):
+                    result["downloads"] = True
+
+    return results_data, complete, continue_offset, results_quantity
