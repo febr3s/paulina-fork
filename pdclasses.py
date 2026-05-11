@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_babel import _, format_date, get_locale
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
@@ -112,7 +113,7 @@ def retrieve_item(wikidata_item_id: str, data_type: str ="item") -> dict:
     else:
         item_url_suffix = ""
     item_url = item_url_prefix + wikidata_item_id + item_url_suffix
-    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     item_response = requests.get(item_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )

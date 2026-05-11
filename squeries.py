@@ -1,4 +1,5 @@
 # SPARQL queries module
+from flask import current_app
 import requests
 
 # old query_for_works = '''SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE {{ SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en, {lang}". }} {{ SELECT DISTINCT ?item WHERE {{ VALUES ?languages {{"en" "{lang}"}}. ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 ) wd:{qname} . ?item rdfs:label ?itemLabel . FILTER(lang(?itemLabel) = ?languages ) . MINUS {{ VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} ?item wdt:P31 ?typeOfItem . }} }} }} }} ORDER BY ASC (?itemLabel)'''
@@ -10,7 +11,7 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
     query = requests.utils.quote(query)  # URL encoded
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
-    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     query_results = requests.get(query_url, headers=headers
                                  # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                  )

@@ -1,3 +1,4 @@
+from flask import current_app
 import requests
 
 # Local modules
@@ -47,7 +48,7 @@ def search_author(user_search: str, gender:str, nationality:str,
     offset_param = f"&sroffset={offset}" if offset > 0 else ""
     search_format = "&format=json"
     search_url = search_url_prefix + search + human_being_filter + user_filters + offset_param + search_format
-    headers = {'user-agent': 'PaulinaApp/1.0 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
@@ -87,7 +88,7 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str, off
     offset_param = f"&sroffset={offset}" if offset > 0 else ""
     search_format = "&format=json"
     search_url = search_url_prefix + search + work_filter + user_filters + offset_param + search_format
-    headers = {'user-agent': 'PaulinaApp/1.0 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     search_response = requests.get(search_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
