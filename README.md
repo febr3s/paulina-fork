@@ -7,6 +7,15 @@ and works in the public domain using Wikidata and Python.
 * Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, python-dateutil, requests, requests-oauthlib.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
+## Server configuration
+Consider creating a `uwsgi.ini` file with these settings:
+
+    [uwsgi]
+    buffer-size = 8192
+    log-maxsize = 100000000
+
+The settings increase the default buffer limit to handle OAuth requests, and limits the `uwsgi.log` file size. On Toolforge, the path for the `uwsgi.ini` file should be `$HOME/www/python/uwsgi.ini`
+
 ## Config file
 You must copy the `config-sample.py` file to `config.py`. In this file you must uncomment the first line and enter a secret key, e.g.:
 
