@@ -11,7 +11,9 @@
     <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blank">{{ _('Add it to Wikidata') }}</a>.</p>
 
   {% else %}
-  <h2 class="mb-4 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
+  <h2 class="mb-2 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
+  <!-- Page range -->
+  <p class="p-1">{{ _('%(first)s-%(last)s of %(results_quantity)s results', first=page_range["start"], last=page_range["end"], results_quantity=results_quantity) }}</p>
   <!-- View query on the Wikidata Query Service -->
   <div class="text-end mb-2 px-1">
     <small class="text-body-secondary"><a href="{{ wqs_link }}" target="_blank">
@@ -19,51 +21,52 @@
   </div>
   <!-- List of works -->
   <div class="list-group p-1">
-    {% for work in author_works %}
-    <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}"
-    class="list-group-item list-group-item-action">
+    {% for work in author_works.values() %}
+    <a href="{{ url_for('work_page', work_data=work['id']) }}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
+        {% set work_label = work.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
         <h5 class="mb-1">
-          {{ work['itemLabel']['value'] }}
+          {% if work_label %}{{ work_label }}{% else %}{{ work['id'] }}{% endif %}
           {% if work['downloads'] %}
           <i title="{{ _('Available for download') }}" class="bi bi-cloud-arrow-down"></i>
           {% endif %}
         </h5>
       </div>
-      <p class="mb-1">{% if work['itemDescription'] %}
-        {{ work['itemDescription']['value'] }}{% endif %}</p>
+      {% set work_description = work.get('descriptions', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
+      <p class="mb-1">{% if work_description %}
+        {{ work_description }}{% endif %}</p>
     </a>
     {% endfor %}
   </div>
-    {% if has_prev or has_next %}
-    <nav aria-label="{{ _('Pagination') }}" class="mt-4">
-      <ul class="pagination justify-content-center">
-        {% if has_prev %}
-        <li class="page-item">
-          <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page-1) }}">{{ _('Previous') }}</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-          <span class="page-link">{{ _('Previous') }}</span>
-        </li>
-        {% endif %}
+  {% if has_prev or has_next %}
+  <nav aria-label="{{ _('Pagination') }}" class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page-1) }}">{{ _('Previous') }}</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">{{ _('Previous') }}</span>
+      </li>
+      {% endif %}
 
-        <li class="page-item active">
-          <span class="page-link">{{ _('Page %(page)s', page=page) }}</span>
-        </li>
+      <li class="page-item active">
+        <span class="page-link">{{ _('Page %(page)s', page=page) }}</span>
+      </li>
 
-        {% if has_next %}
-        <li class="page-item">
-          <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page+1) }}">{{ _('Next') }}</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-          <span class="page-link">{{ _('Next') }}</span>
-        </li>
-        {% endif %}
-      </ul>
-    </nav>
-    {% endif %}
+      {% if has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page+1) }}">{{ _('Next') }}</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">{{ _('Next') }}</span>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
   {% endif %}    
 </div>
 

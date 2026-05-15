@@ -26,7 +26,6 @@ def search_filters(gender=None, nationality=None, creative_area=None,
             if type_of_work == tow["type_value"]:
                 selected_type = tow
         filters_string = filters_string + f"%20haswbstatement:{'|'.join("P31=" + qid for qid in selected_type["qids"]) }"
-        # filters_string = filters_string + f"%20haswbstatement:P31={type_of_work}"
     if country_of_origin:
         filters_string = filters_string + f"%20haswbstatement:P495={country_of_origin}|P17={country_of_origin}"
     return filters_string
@@ -83,7 +82,7 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str, off
     - and the total result hits of the search."""
     search = requests.utils.quote(user_search)  # URL encoded
     search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&list=search&srlimit=50&srprop=&srsearch="
-    work_filter = "%20haswbstatement:P170|P50|P57|P58|P84|P86|P87|P110|P676|P943|P175|P9191|P10837%20-haswbstatement:P31=Q3658341|P31=Q187931|P31=Q3375722|P31=Q13442814"
+    work_filter = "%20haswbstatement:P170|P50|P57|P58|P84|P86|P87|P110|P676|P943|P175|P9191|P10837%20-haswbstatement:P31=Q3658341|P31=Q187931|P31=Q3375722"
     user_filters = search_filters(type_of_work=type_of_work, country_of_origin=country_of_origin)
     offset_param = f"&sroffset={offset}" if offset > 0 else ""
     search_format = "&format=json"

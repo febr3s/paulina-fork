@@ -307,7 +307,7 @@ class Author(Parent):
                 return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
             
 
-    def getWorks(self, lang, limit=50, offset=0):
+    def getWorks(self, limit=50, offset=0):
         """Get works by this author with pagination support.
 
         Args:
@@ -318,24 +318,56 @@ class Author(Parent):
         Returns:
             List of works with download information
         """
-        limit_clause = f"LIMIT {limit}" if limit else ""
-        offset_clause = f"OFFSET {offset}" if offset > 0 else ""
-        works = squeries.retrieve_query(
-            squeries.query_for_works_by_an_author,
-            qname=self.wikidata_item_id,
-            lang=lang,
-            limit_clause=limit_clause,
-            offset_clause=offset_clause
-        )
-        for work in works:  # Check if there are links to access the work
-            if (int(work['wikisourceFullWork']['value']) > 0
-                    or int(work['iaDownloads']['value']) > 0
-                    or int(work['otherDownloads']['value']) > 0):
-                work['downloads'] = True
-            else:
-                work['downloads'] = False
-        return works
-    
+
+        search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&list=search&srlimit=50&srprop=&srsearch="
+        works_by_this_author_filter = (f"%20haswbstatement:P170={self.wikidata_item_id}|P50={self.wikidata_item_id}|"
+                       f"P57={self.wikidata_item_id}|P58={self.wikidata_item_id}|P84={self.wikidata_item_id}|"
+                       f"P86={self.wikidata_item_id}|P87={self.wikidata_item_id}|P110={self.wikidata_item_id}|"
+                       f"P676={self.wikidata_item_id}|P943={self.wikidata_item_id}|P175={self.wikidata_item_id}|"
+                       f"P9191={self.wikidata_item_id}|P10837={self.wikidata_item_id}"
+                       f"%20-haswbstatement:P31=Q3658341|P31=Q187931|P31=Q3375722")
+        offset_param = f"&sroffset={offset}" if offset > 0 else ""
+        search_format = "&format=json"
+        search_url = search_url_prefix + works_by_this_author_filter + offset_param + search_format
+        headers = {'user-agent': current_app.config['USER_AGENT']}
+        search_response = requests.get(search_url, headers=headers
+                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                   )
+        search_results = search_response.json()
+
+        complete = not ("continue" in search_results)
+        continue_offset = search_results.get("continue", {}).get("sroffset")
+        results_quantity = search_results.get("query", {}).get("searchinfo", {}).get("totalhits")
+        if not search_results.get("query", {}).get("search"):
+            return {}, complete, continue_offset, results_quantity
+        search_results = search_results["query"]["search"]
+        search_results_qids = [search_result["title"] for search_result in search_results]
+        search_results_qids = "|".join(search_results_qids)
+
+        url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+                                        f"&ids={search_results_qids}&props=labels|descriptions|sitelinks|claims"
+                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
+
+        results_data_response = requests.get(url_for_results_data, headers=headers
+                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                    )
+        results_data = results_data_response.json()
+        results_data = results_data.get("entities")
+
+        # Check if there are downloads to access the work
+        for result in results_data.values():
+            if result.get("claims"):
+                # If Internet Archive ID or work available at URL
+                if "P724" in result["claims"] or "P953" in result["claims"]:
+                    result["downloads"] = True
+            if result.get("sitelinks"):
+                for sitelink in result["sitelinks"]:
+                    if sitelink.endswith("wikisource"):
+                        result["downloads"] = True
+
+        return results_data, complete, continue_offset, results_quantity
+
+
 def get_author_field_edit_eligibility(wikidata_item):
     """Check which fields have only one value and are therefore editable."""
     statements = wikidata_item.get('statements', {})

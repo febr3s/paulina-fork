@@ -49,22 +49,6 @@ GROUP BY ?item ?itemLabel ?itemDescription
 ORDER BY ASC ( ?itemLabel )
 '''
 
-# old_query_for_downloads_from_search_results = '''
-# SELECT DISTINCT ?item ?itemLabel ?itemDescription ( COUNT ( DISTINCT ?wikisource ) as ?wikisourceFullWork ) ( COUNT ( DISTINCT ?iaID ) as ?iaDownloads ) ( COUNT ( DISTINCT ?download ) as ?otherDownloads ) 
-# WHERE 
-# {{ 
-#   VALUES ?item {{ {qnames} }} 
-#   ?item wdt:P31 ?any . 
-#   OPTIONAL {{ ?item wdt:P724 ?iaID . }} 
-#   OPTIONAL {{ ?item wdt:P953 ?download . }} 
-#   OPTIONAL {{ 
-#   ?wikisource schema:about ?item . 
-#   ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }} 
-#   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
-# }} 
-# GROUP BY ?item ?itemLabel ?itemDescription
-# '''
-
 query_for_countries_by_copyright_term = '''
 SELECT DISTINCT ?item ?itemLabel ?flag 
 WHERE 
