@@ -124,11 +124,11 @@ Project Lead: Jorge Gemetto.
 
 Maintainers: David Coronel, Jorge Gemetto, Nat Hernández Clavijo.
 
-Contributors: Adaobi Chuma-Okeke, Adebawojo Mosopefoluwa, Anba Nguyen, Aradhya Yadav, David Coronel, Dipanshu Vishwakarma, Jorge Gemetto, Kimbrene Kakande, Mariana Fossatti, Nat Hernández Clavijo, Nurah Wakili, Shreya Bhagat, Sudhanshu Gautam, Tunde-Ajayi Olamiposi.
+Contributors: Adaobi Chuma-Okeke, Adebawojo Mosopefoluwa, Ademola Omosanya, Anba Nguyen, Aradhya Yadav, David Coronel, Dipanshu Vishwakarma, Jorge Gemetto, Josef Anthony, Kimbrene Kakande, Mariana Fossatti, Nat Hernández Clavijo, Nurah Wakili, Shreya Bhagat, Sudhanshu Gautam, Tunde-Ajayi Olamiposi.
 
 Translators: Adolfo Jayme Barrientos, Allan Nordhøy, AtaZh, Bodhisattwa Mandal, ButterflyOfFire, EdoAug, Hubaishan, Jorge Gemetto, Juan Sebastian Quintero Santacruz, Nathan, Nemoralis, Phlostically, S. H., Steven Sun, Supaplex, Susanna Ånäs, Yunus Emre Bayraktar.
 
-Community advisors: Alex Stinson, Carla Toro, Diego de la Hera.
+Community advisors: Alex Stinson, Carla Toro, Diego de la Hera, Mariana Fossatti.
 
 Paulina logo designer: Gonzalo Saavedra.
 
