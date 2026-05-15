@@ -185,24 +185,24 @@ class Author(Parent):
             self.occupation = None
             self.occupation_qid = None
         else:
-            occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
-            occupations_labels_response = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
-                                                    qnames="wd:" + " wd:".join(occupations_ids),
-                                                    lang=languages.get_locale()
-                                                    )
-            
-            # Build a mapping of QID -> label to ensure correct order
-            qid_to_label = {}
-            for item in occupations_labels_response:
-                qid = item.get('item', {}).get('value', '').split('/')[-1]  # Extract QID from full URI
-                label = item.get('itemLabel', {}).get('value')
-                if qid and label:
-                    qid_to_label[qid] = label
-            
-            # Maintain the original order of QIDs
-            self.occupation = [qid_to_label.get(qid, qid) for qid in occupations_ids]
+            occupations_qids = [occupation.get('value', {}).get('content') for occupation in occupations]
+            if len(occupations_qids) > 50:
+                occupations_qids = occupations_qids[:50]  # Limit to max 50 occupations to use only one API call
+            occupations_qids_string_for_api_call = "|".join(occupations_qids)
+
+            url_for_occupations_labels = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+                                            f"&ids={occupations_qids_string_for_api_call}&props=labels"
+                                            f"&languages={languages.get_locale()}&languagefallback=&format=json")
+
+            headers = {'user-agent': current_app.config['USER_AGENT']}
+            occupations_labels_response = requests.get(url_for_occupations_labels, headers=headers)
+            occupations_labels = occupations_labels_response.json()
+            occupations_labels = occupations_labels.get("entities")
+            occupations_labels = [occupation.get('labels', {}).get(languages.get_locale(), {}).get('value') 
+                                  for occupation in occupations_labels.values()]
+            self.occupation = occupations_labels
             # Store QIDs as comma-separated string
-            self.occupation_qid = ','.join(occupations_ids) if occupations_ids else None
+            self.occupation_qid = ','.join(occupations_qids) if occupations_qids else None
             
         # Place of birth - store both label and QID
         place_of_birth = self.wikidata_item.get('statements', {}).get('P19')

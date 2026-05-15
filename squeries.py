@@ -320,14 +320,6 @@ WHERE {{
 }}
 '''
 
-query_for_labels_of_list_of_items = '''
-SELECT DISTINCT ?item ?itemLabel 
-WHERE {{ 
-  VALUES ?item {{ {qnames} }} . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }} 
-}}
-'''
-
 query_for_copyright_status_of_work = '''
 SELECT DISTINCT ?cstatus ?cstatusLabel ?jurisdiction ?jurisdictionLabel ?jurisdictionIsInstanceOf ?jurisdictionIsInstanceOfLabel 
 WHERE {{ 
