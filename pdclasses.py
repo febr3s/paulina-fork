@@ -186,8 +186,7 @@ class Author(Parent):
             self.occupation_qid = None
         else:
             occupations_qids = [occupation.get('value', {}).get('content') for occupation in occupations]
-            if len(occupations_qids) > 50:
-                occupations_qids = occupations_qids[:50]  # Limit to max 50 occupations to use only one API call
+            occupations_qids = occupations_qids[:50]  # Limit to max 50 occupations to use only one API call
             occupations_qids_string_for_api_call = "|".join(occupations_qids)
 
             url_for_occupations_labels = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
