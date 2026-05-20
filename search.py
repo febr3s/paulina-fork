@@ -7,6 +7,15 @@ import languages
 import filters
 
 
+def make_api_request(request_url: str) -> dict:
+    headers = {'user-agent': current_app.config['USER_AGENT']}
+    api_response = requests.get(request_url, headers=headers
+                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                   )
+    parsed_response = api_response.json()
+    return parsed_response
+
+
 def search_filters(gender=None, nationality=None, creative_area=None,
                    in_public_domain=None, type_of_work=None, country_of_origin=None) -> str:
     filters_string = ""
@@ -47,11 +56,7 @@ def search_author(user_search: str, gender:str, nationality:str,
     offset_param = f"&sroffset={offset}" if offset > 0 else ""
     search_format = "&format=json"
     search_url = search_url_prefix + search + human_being_filter + user_filters + offset_param + search_format
-    headers = {'user-agent': current_app.config['USER_AGENT']}
-    search_response = requests.get(search_url, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
-    search_results = search_response.json()
+    search_results = make_api_request(search_url)
     complete = not ("continue" in search_results)
     continue_offset = search_results.get("continue", {}).get("sroffset")
     results_quantity = search_results.get("query", {}).get("searchinfo", {}).get("totalhits")
@@ -64,11 +69,7 @@ def search_author(user_search: str, gender:str, nationality:str,
     url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
                                        f"&ids={search_results_qids}&props=labels|descriptions"
                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
-
-    results_data_response = requests.get(url_for_results_data, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
-    results_data = results_data_response.json()
+    results_data = make_api_request(url_for_results_data)
     results_data = results_data.get("entities")
     return results_data, complete, continue_offset, results_quantity
 
@@ -87,11 +88,7 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str, off
     offset_param = f"&sroffset={offset}" if offset > 0 else ""
     search_format = "&format=json"
     search_url = search_url_prefix + search + work_filter + user_filters + offset_param + search_format
-    headers = {'user-agent': current_app.config['USER_AGENT']}
-    search_response = requests.get(search_url, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
-    search_results = search_response.json()
+    search_results = make_api_request(search_url)
     complete = not ("continue" in search_results)
     continue_offset = search_results.get("continue", {}).get("sroffset")
     results_quantity = search_results.get("query", {}).get("searchinfo", {}).get("totalhits")
@@ -104,11 +101,7 @@ def search_work(user_search: str, type_of_work: str, country_of_origin: str, off
     url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
                                        f"&ids={search_results_qids}&props=labels|descriptions|sitelinks|claims"
                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
-
-    results_data_response = requests.get(url_for_results_data, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
-    results_data = results_data_response.json()
+    results_data = make_api_request(url_for_results_data)
     results_data = results_data.get("entities")
 
     # Check if there are downloads to access the work
