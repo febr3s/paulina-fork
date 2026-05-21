@@ -1,4 +1,4 @@
-# SPARQL queries module
+# SPARQL and GraphQL queries module
 from flask import current_app
 import requests
 
@@ -16,6 +16,18 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
                                  )
     query_results = query_results.json()
     query_results = query_results["results"]["bindings"]
+    return query_results
+
+
+def retrieve_graphql_query(query: str, **kwargs: str):
+    """Takes a GraphQL query, makes de API call and returns the results."""
+    query_endpoint = "https://www.wikidata.org/w/api.php?action=wbgraphql&format=json"
+    query_dict = {}
+    query_dict["query"] = query.format(**kwargs)
+    headers = {'user-agent': current_app.config['USER_AGENT']}
+    query_results = requests.post(query_endpoint, json=query_dict, headers=headers)
+    query_results = query_results.json()
+    query_results = query_results["data"]
     return query_results
 
 
@@ -317,6 +329,24 @@ SELECT DISTINCT ?item ?itemLabel
 WHERE {{ 
   wd:{qname} wdt:P17 ?item . 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
+}}
+'''
+
+graphql_query_for_country_of_birth = '''
+query {{
+  item(id: "{qname}") {{
+    country: statements(propertyId: "P17") {{
+      value {{
+        ... on ItemValue {{
+          id
+          labelWithLanguageFallback(languageCode: "{lang}") {{
+            languageCode
+            value
+          }}
+        }}
+      }}
+    }}
+  }}
 }}
 '''
 

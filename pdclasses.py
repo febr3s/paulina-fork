@@ -212,14 +212,14 @@ class Author(Parent):
         if place_of_birth:
             place_of_birth_Q = build_field(place_of_birth, field_type="plain_value")
             if place_of_birth_Q:
-                country_of_birth = squeries.retrieve_query(squeries.query_for_country_of_birth,
-                                                  qname=place_of_birth_Q,
-                                                  lang=languages.get_locale()
-                                                  )
+                country_of_birth = squeries.retrieve_graphql_query(squeries.graphql_query_for_country_of_birth,
+                                                                   qname=place_of_birth_Q,
+                                                                   lang=languages.get_locale()
+                                                                   )
                 try:
-                    self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+                    self.country_of_birth = country_of_birth["item"]["country"][0]["value"]["labelWithLanguageFallback"]["value"]
                     # Store the country QID (extract from the country_of_birth query result)
-                    self.country_of_birth_qid = country_of_birth[0].get('item', {}).get('value').split("/")[-1] if country_of_birth[0].get('item') else None
+                    self.country_of_birth_qid = country_of_birth["item"]["country"][0]["value"]["id"]
                 except:
                     self.country_of_birth = None
                     self.country_of_birth_qid = None
