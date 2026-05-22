@@ -387,6 +387,60 @@ WHERE
 }}
 '''
 
+graphql_query_for_authors_of_a_work = '''
+fragment statementFragment on Statement {{
+  property {{
+    id
+    labelWithLanguageFallback(languageCode: "{lang}") {{
+      languageCode
+      value
+    }}
+  }}
+  value {{
+    ... on ItemValue {{
+      id
+      labelWithLanguageFallback(languageCode: "{lang}") {{
+        languageCode
+        value
+      }}
+    }}
+  }}
+}}query authorsOfAWork {{
+  item(id: "{qname}") {{
+    creator: statements(propertyId: "P170") {{
+      ...statementFragment
+    }}
+    author: statements(propertyId: "P50") {{
+      ...statementFragment
+    }}
+    director: statements(propertyId: "P57") {{
+      ...statementFragment
+    }}
+    screenwriter: statements(propertyId: "P58") {{
+      ...statementFragment
+    }}
+    architect: statements(propertyId: "P84") {{
+      ...statementFragment
+    }}
+    composer: statements(propertyId: "P86") {{
+      ...statementFragment
+    }}
+    librettist: statements(propertyId: "P87") {{
+      ...statementFragment
+    }}
+    illustrator: statements(propertyId: "P110") {{
+      ...statementFragment
+    }}
+    lyricsBy: statements(propertyId: "P676") {{
+      ...statementFragment
+    }}
+    programmer: statements(propertyId: "P943") {{
+      ...statementFragment
+    }}
+  }}
+}}
+'''
+
 # keys_for_types_of_author = {
 #     "creator": "P170",
 #     "author": "P50",

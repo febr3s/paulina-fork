@@ -417,19 +417,17 @@ class Work(Parent):
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(title)s.', title=self.name)
 
-        query_for_authors_response = squeries.retrieve_query(squeries.query_for_authors_of_a_work,
+        query_for_authors_response = squeries.retrieve_graphql_query(squeries.graphql_query_for_authors_of_a_work,
                                                    qname=wikidata_item_id,
                                                    lang=languages.get_locale()
                                                    )
+        preliminar_dict_of_authors = query_for_authors_response.get("item")
+        preliminar_dict_of_authors = {k: v for k, v in preliminar_dict_of_authors.items() if v}
         dict_of_authors = {}
-        for result in query_for_authors_response:
-            type_of_author = result.get('typeOfAuthorLabel', {}).get('value')
-            if type_of_author not in dict_of_authors:
-                dict_of_authors[type_of_author] = [{"name": result.get('authorLabel', {}).get('value'),
-                                                    "ID": result.get('author', {}).get('value').split("/")[-1]}]
-            else:
-                dict_of_authors[type_of_author].append({"name": result.get('authorLabel', {}).get('value'),
-                                                        "ID": result.get('author', {}).get('value').split("/")[-1]})
+        for statement_data in preliminar_dict_of_authors.values():
+            type_of_author = statement_data[0]["property"]["labelWithLanguageFallback"]["value"]
+            dict_of_authors[type_of_author] = [{"name": s.get("value", {}).get("labelWithLanguageFallback", {}).get("value"),
+                                                "ID": s.get("value", {}).get("id")} for s in statement_data]
         self.authors = dict_of_authors
 
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))
