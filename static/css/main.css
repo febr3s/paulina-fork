@@ -71,8 +71,8 @@ h3 {
   --bs-btn-bg: #29a4e2;
 }
 
-.pill-custom.green {
-  --bs-btn-bg: #71e2a4;
+.pill-custom.violet {
+  --bs-btn-bg: #c095f5;
 }
 
 .country-card:hover {
