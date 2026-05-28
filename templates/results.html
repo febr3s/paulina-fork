@@ -11,7 +11,7 @@
     <a href="{{ url_for('author_page', author_data=author['id']) }}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         {% set author_label = author.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
-        <h5 class="mb-1">{{ author_label }}</h5>
+        <h5 class="mb-1">{% if author_label %}{{ author_label }}{% else %}{{ author['id'] }}{% endif %}</h5>
       </div>
       {% set author_description = author.get('descriptions', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
       <p class="mb-1">{% if author_description %}
@@ -20,19 +20,20 @@
     {% endfor %}
     {% endif %}
     {% if list_of_works %}
-    {% for work in list_of_works %}
-    <a href="{{ url_for('work_page', work_data=work['item']['value'].split('/')[-1]) }}"
-       class="list-group-item list-group-item-action">
+    {% for work in list_of_works.values() %}
+    <a href="{{ url_for('work_page', work_data=work['id']) }}" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
+        {% set work_label = work.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
         <h5 class="mb-1">
-          {{ work['itemLabel']['value'] }}
+          {% if work_label %}{{ work_label }}{% else %}{{ work['id'] }}{% endif %}
           {% if work['downloads'] %}
           <i title="{{ _('Available for download') }}" class="bi bi-cloud-arrow-down"></i>
           {% endif %}
         </h5>
       </div>
-      <p class="mb-1">{% if work['itemDescription'] %}
-        {{ work['itemDescription']['value'] }}{% endif %}</p>
+      {% set work_description = work.get('descriptions', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
+      <p class="mb-1">{% if work_description %}
+        {{ work_description }}{% endif %}</p>
     </a>
     {% endfor %}
     {% endif %}

@@ -1,7 +1,7 @@
-# SPARQL queries module
+# SPARQL and GraphQL queries module
+from flask import current_app
 import requests
 
-# old query_for_works = '''SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE {{ SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en, {lang}". }} {{ SELECT DISTINCT ?item WHERE {{ VALUES ?languages {{"en" "{lang}"}}. ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 ) wd:{qname} . ?item rdfs:label ?itemLabel . FILTER(lang(?itemLabel) = ?languages ) . MINUS {{ VALUES ?typeOfItem {{ wd:Q3658341 wd:Q187931 wd:Q3375722 }} ?item wdt:P31 ?typeOfItem . }} }} }} }} ORDER BY ASC (?itemLabel)'''
 
 def retrieve_query(query: str, **kwargs: str) -> list[dict]:
     """Takes a SPARQL query, sends it to the Wikidata Query Service and returns a list of results."""
@@ -10,12 +10,24 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
     query = requests.utils.quote(query)  # URL encoded
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
-    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     query_results = requests.get(query_url, headers=headers
                                  # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                  )
     query_results = query_results.json()
     query_results = query_results["results"]["bindings"]
+    return query_results
+
+
+def retrieve_graphql_query(query: str, **kwargs: str):
+    """Takes a GraphQL query, makes de API call and returns the results."""
+    query_endpoint = "https://www.wikidata.org/w/api.php?action=wbgraphql&format=json"
+    query_dict = {}
+    query_dict["query"] = query.format(**kwargs)
+    headers = {'user-agent': current_app.config['USER_AGENT']}
+    query_results = requests.post(query_endpoint, json=query_dict, headers=headers)
+    query_results = query_results.json()
+    query_results = query_results["data"]
     return query_results
 
 
@@ -47,22 +59,6 @@ WHERE
 }} 
 GROUP BY ?item ?itemLabel ?itemDescription 
 ORDER BY ASC ( ?itemLabel )
-'''
-
-query_for_downloads_from_search_results = '''
-SELECT DISTINCT ?item ?itemLabel ?itemDescription ( COUNT ( DISTINCT ?wikisource ) as ?wikisourceFullWork ) ( COUNT ( DISTINCT ?iaID ) as ?iaDownloads ) ( COUNT ( DISTINCT ?download ) as ?otherDownloads ) 
-WHERE 
-{{ 
-  VALUES ?item {{ {qnames} }} 
-  ?item wdt:P31 ?any . 
-  OPTIONAL {{ ?item wdt:P724 ?iaID . }} 
-  OPTIONAL {{ ?item wdt:P953 ?download . }} 
-  OPTIONAL {{ 
-  ?wikisource schema:about ?item . 
-  ?wikisource schema:isPartOf [ wikibase:wikiGroup "wikisource" ] }} 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en" . }} 
-}} 
-GROUP BY ?item ?itemLabel ?itemDescription
 '''
 
 query_for_countries_by_copyright_term = '''
@@ -372,11 +368,21 @@ WHERE {{
 }}
 '''
 
-query_for_labels_of_list_of_items = '''
-SELECT DISTINCT ?item ?itemLabel 
-WHERE {{ 
-  VALUES ?item {{ {qnames} }} . 
-  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }} 
+graphql_query_for_country_of_birth = '''
+query {{
+  item(id: "{qname}") {{
+    country: statements(propertyId: "P17") {{
+      value {{
+        ... on ItemValue {{
+          id
+          labelWithLanguageFallback(languageCode: "{lang}") {{
+            languageCode
+            value
+          }}
+        }}
+      }}
+    }}
+  }}
 }}
 '''
 
@@ -414,6 +420,60 @@ WHERE
   ?typeOfAuthor wikibase:directClaim ?typeOfAuthorProp . 
   wd:{qname} ?typeOfAuthorProp ?author . 
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}, mul, en". }} 
+}}
+'''
+
+graphql_query_for_authors_of_a_work = '''
+fragment statementFragment on Statement {{
+  property {{
+    id
+    labelWithLanguageFallback(languageCode: "{lang}") {{
+      languageCode
+      value
+    }}
+  }}
+  value {{
+    ... on ItemValue {{
+      id
+      labelWithLanguageFallback(languageCode: "{lang}") {{
+        languageCode
+        value
+      }}
+    }}
+  }}
+}}query authorsOfAWork {{
+  item(id: "{qname}") {{
+    creator: statements(propertyId: "P170") {{
+      ...statementFragment
+    }}
+    author: statements(propertyId: "P50") {{
+      ...statementFragment
+    }}
+    director: statements(propertyId: "P57") {{
+      ...statementFragment
+    }}
+    screenwriter: statements(propertyId: "P58") {{
+      ...statementFragment
+    }}
+    architect: statements(propertyId: "P84") {{
+      ...statementFragment
+    }}
+    composer: statements(propertyId: "P86") {{
+      ...statementFragment
+    }}
+    librettist: statements(propertyId: "P87") {{
+      ...statementFragment
+    }}
+    illustrator: statements(propertyId: "P110") {{
+      ...statementFragment
+    }}
+    lyricsBy: statements(propertyId: "P676") {{
+      ...statementFragment
+    }}
+    programmer: statements(propertyId: "P943") {{
+      ...statementFragment
+    }}
+  }}
 }}
 '''
 

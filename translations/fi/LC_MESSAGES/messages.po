@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-02 19:37-0300\n"
+"POT-Creation-Date: 2026-05-14 11:29-0300\n"
 "PO-Revision-Date: 2025-04-22 16:08+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: fi\n"
@@ -200,11 +200,11 @@ msgstr ""
 msgid "Non-binary"
 msgstr ""
 
-#: filters.py:16
+#: filters.py:16 filters.py:93
 msgid "Academia"
 msgstr ""
 
-#: filters.py:24
+#: filters.py:24 filters.py:101
 msgid "Architecture"
 msgstr ""
 
@@ -212,64 +212,51 @@ msgstr ""
 msgid "Cinema"
 msgstr ""
 
-#: filters.py:36
+#: filters.py:36 filters.py:123
 msgid "Journalism"
 msgstr ""
 
-#: filters.py:42
+#: filters.py:42 filters.py:129
 msgid "Music"
 msgstr ""
 
-#: filters.py:52
+#: filters.py:52 filters.py:139
 msgid "Performing arts"
 msgstr ""
 
-#: filters.py:58
+#: filters.py:58 filters.py:146
 msgid "Programming"
 msgstr ""
 
-#: filters.py:64
+#: filters.py:64 filters.py:152
 msgid "Visual arts"
 msgstr ""
 
-#: filters.py:76
+#: filters.py:76 filters.py:164
 msgid "Writing"
 msgstr ""
 
-#: filters.py:91 wikidata_constants.py:171
-msgid "Film"
+#: filters.py:107
+msgid "Cinema and audiovisual"
 msgstr ""
 
-#: filters.py:92 wikidata_constants.py:136
-#, fuzzy
-msgid "Literary work"
-msgstr "Etsi teoksia"
-
-#: filters.py:93
-msgid "Musical work"
+#: filters.py:117
+msgid "Design and decorative arts"
 msgstr ""
 
-#: filters.py:94 wikidata_constants.py:195
-msgid "Painting"
-msgstr ""
-
-#: filters.py:95 wikidata_constants.py:206
-msgid "Sculpture"
-msgstr ""
-
-#: pdclasses.py:97
+#: pdclasses.py:98
 msgid "(decade)"
 msgstr "(vuosikymmen)"
 
-#: pdclasses.py:99
+#: pdclasses.py:100
 msgid "(century)"
 msgstr "(vuosisata)"
 
-#: pdclasses.py:101
+#: pdclasses.py:102
 msgid "(millennium)"
 msgstr "(vuosituhat)"
 
-#: pdclasses.py:237
+#: pdclasses.py:238
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
@@ -279,12 +266,12 @@ msgstr ""
 "ole saatavilla avointa kuvaa. Jos sinulla on avoin kuva hänestä, voit "
 "ladata sen klikkaamalla mallikuvan linkkiä."
 
-#: pdclasses.py:242
+#: pdclasses.py:243
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Kuva %(name)s."
 
-#: pdclasses.py:381
+#: pdclasses.py:382
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
@@ -294,12 +281,12 @@ msgstr ""
 " avointa kuvaa. Jos sinulla on avoin kuva teoksesta, voit ladata sen "
 "klikkaamalla mallikuvan linkkiä."
 
-#: pdclasses.py:386
+#: pdclasses.py:387
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Kuva %(title)s."
 
-#: pdclasses.py:478 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:479 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s lippu."
@@ -496,6 +483,11 @@ msgstr ""
 msgid "%(work_type)s by %(creator)s"
 msgstr ""
 
+#: wikidata_constants.py:136
+#, fuzzy
+msgid "Literary work"
+msgstr "Etsi teoksia"
+
 #: wikidata_constants.py:147
 msgid "Written work (not literary)"
 msgstr ""
@@ -504,8 +496,20 @@ msgstr ""
 msgid "Edition of a written work"
 msgstr ""
 
+#: wikidata_constants.py:171
+msgid "Film"
+msgstr ""
+
 #: wikidata_constants.py:182
 msgid "Audiovisual work (other)"
+msgstr ""
+
+#: wikidata_constants.py:195
+msgid "Painting"
+msgstr ""
+
+#: wikidata_constants.py:206
+msgid "Sculpture"
 msgstr ""
 
 #: wikidata_constants.py:217
@@ -1988,22 +1992,22 @@ msgstr ""
 msgid "Available for download"
 msgstr "Ladattavissa"
 
-#: templates/results.html:42 templates/works-list.html:39
+#: templates/results.html:43 templates/works-list.html:39
 #, fuzzy
 msgid "Pagination"
 msgstr "Puuttuuko tietoja?"
 
-#: templates/results.html:46 templates/results.html:50
+#: templates/results.html:47 templates/results.html:51
 #: templates/works-list.html:43 templates/works-list.html:47
 msgid "Previous"
 msgstr ""
 
-#: templates/results.html:55 templates/works-list.html:52
+#: templates/results.html:56 templates/works-list.html:52
 #, fuzzy, python-format
 msgid "Page %(page)s"
 msgstr ""
 
-#: templates/results.html:60 templates/results.html:64
+#: templates/results.html:61 templates/results.html:65
 #: templates/works-list.html:57 templates/works-list.html:61
 msgid "Next"
 msgstr ""
@@ -2167,5 +2171,8 @@ msgstr ""
 #~ msgstr "Etsi"
 
 #~ msgid "Your search returned too many results. Please refine your search."
+#~ msgstr ""
+
+#~ msgid "Musical work"
 #~ msgstr ""
 

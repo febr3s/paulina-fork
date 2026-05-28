@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_babel import _, format_date, get_locale
 import datetime  # to calculate if the works are in public domain
 import dateutil.relativedelta as rd
@@ -112,7 +113,7 @@ def retrieve_item(wikidata_item_id: str, data_type: str ="item") -> dict:
     else:
         item_url_suffix = ""
     item_url = item_url_prefix + wikidata_item_id + item_url_suffix
-    headers = {'user-agent': 'PaulinaApp/0.9 (https://gitlab.wikimedia.org/toolforge-repos/paulina)'}
+    headers = {'user-agent': current_app.config['USER_AGENT']}
     item_response = requests.get(item_url, headers=headers
                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
                                    )
@@ -184,24 +185,23 @@ class Author(Parent):
             self.occupation = None
             self.occupation_qid = None
         else:
-            occupations_ids = [occupation.get('value', {}).get('content') for occupation in occupations]
-            occupations_labels_response = squeries.retrieve_query(squeries.query_for_labels_of_list_of_items,
-                                                    qnames="wd:" + " wd:".join(occupations_ids),
-                                                    lang=languages.get_locale()
-                                                    )
-            
-            # Build a mapping of QID -> label to ensure correct order
-            qid_to_label = {}
-            for item in occupations_labels_response:
-                qid = item.get('item', {}).get('value', '').split('/')[-1]  # Extract QID from full URI
-                label = item.get('itemLabel', {}).get('value')
-                if qid and label:
-                    qid_to_label[qid] = label
-            
-            # Maintain the original order of QIDs
-            self.occupation = [qid_to_label.get(qid, qid) for qid in occupations_ids]
+            occupations_qids = [occupation.get('value', {}).get('content') for occupation in occupations]
+            occupations_qids = occupations_qids[:50]  # Limit to max 50 occupations to use only one API call
+            occupations_qids_string_for_api_call = "|".join(occupations_qids)
+
+            url_for_occupations_labels = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+                                            f"&ids={occupations_qids_string_for_api_call}&props=labels"
+                                            f"&languages={languages.get_locale()}&languagefallback=&format=json")
+
+            headers = {'user-agent': current_app.config['USER_AGENT']}
+            occupations_labels_response = requests.get(url_for_occupations_labels, headers=headers)
+            occupations_labels = occupations_labels_response.json()
+            occupations_labels = occupations_labels.get("entities")
+            occupations_labels = [occupation.get('labels', {}).get(languages.get_locale(), {}).get('value') 
+                                  for occupation in occupations_labels.values()]
+            self.occupation = occupations_labels
             # Store QIDs as comma-separated string
-            self.occupation_qid = ','.join(occupations_ids) if occupations_ids else None
+            self.occupation_qid = ','.join(occupations_qids) if occupations_qids else None
             
         # Place of birth - store both label and QID
         place_of_birth = self.wikidata_item.get('statements', {}).get('P19')
@@ -212,14 +212,14 @@ class Author(Parent):
         if place_of_birth:
             place_of_birth_Q = build_field(place_of_birth, field_type="plain_value")
             if place_of_birth_Q:
-                country_of_birth = squeries.retrieve_query(squeries.query_for_country_of_birth,
-                                                  qname=place_of_birth_Q,
-                                                  lang=languages.get_locale()
-                                                  )
+                country_of_birth = squeries.retrieve_graphql_query(squeries.graphql_query_for_country_of_birth,
+                                                                   qname=place_of_birth_Q,
+                                                                   lang=languages.get_locale()
+                                                                   )
                 try:
-                    self.country_of_birth = country_of_birth[0].get('itemLabel', {}).get('value')
+                    self.country_of_birth = country_of_birth["item"]["country"][0]["value"]["labelWithLanguageFallback"]["value"]
                     # Store the country QID (extract from the country_of_birth query result)
-                    self.country_of_birth_qid = country_of_birth[0].get('item', {}).get('value').split("/")[-1] if country_of_birth[0].get('item') else None
+                    self.country_of_birth_qid = country_of_birth["item"]["country"][0]["value"]["id"]
                 except:
                     self.country_of_birth = None
                     self.country_of_birth_qid = None
@@ -306,7 +306,7 @@ class Author(Parent):
                 return rd.relativedelta(self.date_of_death["date object"], self.date_of_birth["date object"]).years  # If born AC, dates are datetime objects
             
 
-    def getWorks(self, lang, limit=50, offset=0):
+    def getWorks(self, limit=50, offset=0):
         """Get works by this author with pagination support.
 
         Args:
@@ -317,24 +317,56 @@ class Author(Parent):
         Returns:
             List of works with download information
         """
-        limit_clause = f"LIMIT {limit}" if limit else ""
-        offset_clause = f"OFFSET {offset}" if offset > 0 else ""
-        works = squeries.retrieve_query(
-            squeries.query_for_works_by_an_author,
-            qname=self.wikidata_item_id,
-            lang=lang,
-            limit_clause=limit_clause,
-            offset_clause=offset_clause
-        )
-        for work in works:  # Check if there are links to access the work
-            if (int(work['wikisourceFullWork']['value']) > 0
-                    or int(work['iaDownloads']['value']) > 0
-                    or int(work['otherDownloads']['value']) > 0):
-                work['downloads'] = True
-            else:
-                work['downloads'] = False
-        return works
-    
+
+        search_url_prefix = "https://www.wikidata.org/w/api.php?action=query&list=search&srlimit=50&srprop=&srsearch="
+        works_by_this_author_filter = (f"%20haswbstatement:P170={self.wikidata_item_id}|P50={self.wikidata_item_id}|"
+                       f"P57={self.wikidata_item_id}|P58={self.wikidata_item_id}|P84={self.wikidata_item_id}|"
+                       f"P86={self.wikidata_item_id}|P87={self.wikidata_item_id}|P110={self.wikidata_item_id}|"
+                       f"P676={self.wikidata_item_id}|P943={self.wikidata_item_id}|P175={self.wikidata_item_id}|"
+                       f"P9191={self.wikidata_item_id}|P10837={self.wikidata_item_id}"
+                       f"%20-haswbstatement:P31=Q3658341|P31=Q187931|P31=Q3375722")
+        offset_param = f"&sroffset={offset}" if offset > 0 else ""
+        search_format = "&format=json"
+        search_url = search_url_prefix + works_by_this_author_filter + offset_param + search_format
+        headers = {'user-agent': current_app.config['USER_AGENT']}
+        search_response = requests.get(search_url, headers=headers
+                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                   )
+        search_results = search_response.json()
+
+        complete = not ("continue" in search_results)
+        continue_offset = search_results.get("continue", {}).get("sroffset")
+        results_quantity = search_results.get("query", {}).get("searchinfo", {}).get("totalhits")
+        if not search_results.get("query", {}).get("search"):
+            return {}, complete, continue_offset, results_quantity
+        search_results = search_results["query"]["search"]
+        search_results_qids = [search_result["title"] for search_result in search_results]
+        search_results_qids = "|".join(search_results_qids)
+
+        url_for_results_data = (f"https://www.wikidata.org/w/api.php?action=wbgetentities"
+                                        f"&ids={search_results_qids}&props=labels|descriptions|sitelinks|claims"
+                                        f"&languages={languages.get_locale()}&languagefallback=&format=json")
+
+        results_data_response = requests.get(url_for_results_data, headers=headers
+                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
+                                    )
+        results_data = results_data_response.json()
+        results_data = results_data.get("entities")
+
+        # Check if there are downloads to access the work
+        for result in results_data.values():
+            if result.get("claims"):
+                # If Internet Archive ID or work available at URL
+                if "P724" in result["claims"] or "P953" in result["claims"]:
+                    result["downloads"] = True
+            if result.get("sitelinks"):
+                for sitelink in result["sitelinks"]:
+                    if sitelink.endswith("wikisource"):
+                        result["downloads"] = True
+
+        return results_data, complete, continue_offset, results_quantity
+
+
 def get_author_field_edit_eligibility(wikidata_item):
     """Check which fields have only one value and are therefore editable."""
     statements = wikidata_item.get('statements', {})
@@ -385,19 +417,17 @@ class Work(Parent):
             self.image_link = 'https://commons.wikimedia.org/wiki/File:' + image_file_name
             self.image_alt_text = _('Image of %(title)s.', title=self.name)
 
-        query_for_authors_response = squeries.retrieve_query(squeries.query_for_authors_of_a_work,
+        query_for_authors_response = squeries.retrieve_graphql_query(squeries.graphql_query_for_authors_of_a_work,
                                                    qname=wikidata_item_id,
                                                    lang=languages.get_locale()
                                                    )
+        preliminar_dict_of_authors = query_for_authors_response.get("item")
+        preliminar_dict_of_authors = {k: v for k, v in preliminar_dict_of_authors.items() if v}
         dict_of_authors = {}
-        for result in query_for_authors_response:
-            type_of_author = result.get('typeOfAuthorLabel', {}).get('value')
-            if type_of_author not in dict_of_authors:
-                dict_of_authors[type_of_author] = [{"name": result.get('authorLabel', {}).get('value'),
-                                                    "ID": result.get('author', {}).get('value').split("/")[-1]}]
-            else:
-                dict_of_authors[type_of_author].append({"name": result.get('authorLabel', {}).get('value'),
-                                                        "ID": result.get('author', {}).get('value').split("/")[-1]})
+        for statement_data in preliminar_dict_of_authors.values():
+            type_of_author = statement_data[0]["property"]["labelWithLanguageFallback"]["value"]
+            dict_of_authors[type_of_author] = [{"name": s.get("value", {}).get("labelWithLanguageFallback", {}).get("value"),
+                                                "ID": s.get("value", {}).get("id")} for s in statement_data]
         self.authors = dict_of_authors
 
         self.country_of_origin = build_field(self.wikidata_item.get('statements', {}).get('P495'))

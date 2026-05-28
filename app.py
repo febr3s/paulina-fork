@@ -350,16 +350,26 @@ def works_list(author_id):
         wqs_link = "https://query.wikidata.org/#" + requests.utils.quote(query)
 
         author = pdclasses.Author(author_id)
-        author_works = author.getWorks(languages.get_locale(), limit=page_size, offset=offset)
-        # Check if there are more results by trying to get one more result
-        has_next = len(author.getWorks(languages.get_locale(), limit=1, offset=offset + page_size)) > 0
+
+        search_result, complete, continue_offset, results_quantity = author.getWorks(limit=page_size, offset=offset)
+
+        if results_quantity > 10000:
+            results_quantity = 10000
+            
+        page_range = {"start": offset + 1, 
+                      "end": offset + page_size if (offset + page_size) <= results_quantity else results_quantity}
+
+        has_next = continue_offset is not None
         has_prev = page > 1
 
         return render_template("works-list.html",
             title=_('List of works') + " - " + print_field(author.name),
             author_name=print_field(author.name),
             wqs_link=wqs_link,
-            author_works=print_field(author_works),
+            author_works=search_result,
+            complete=complete,
+            results_quantity=results_quantity,
+            page_range=page_range,
             page=page,
             has_next=has_next,
             has_prev=has_prev
