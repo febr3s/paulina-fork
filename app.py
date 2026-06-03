@@ -142,13 +142,13 @@ def print_field(field: str | dict | None) -> str:
 
 
 @app.route("/")
+@cache.cached(timeout=3600, make_cache_key=make_cache_key)
 def home():
     today_d = datetime.date.today()
     locale = languages.get_locale()
-    cache_root = os.path.join(app.root_path, "cache", "today")
-    data = on_this_day.get_literature_today(
-        today_d.month, today_d.day, locale, cache_root,
-        allow_remote_fetch=True,
+
+    data = on_this_day.get_today_authors(
+        today_d.month, today_d.day, locale,
     )
     born = data.get("born") or []
     died = data.get("died") or []
@@ -477,23 +477,18 @@ def countries_main():
                            )
 
 
-@app.route("/on-this-day/", endpoint="on_this_day")
-def on_this_day_redirect():
-    return redirect(url_for("literature_today", **request.args))
 
-
-@app.route("/today")
-def literature_today():
+@app.route("/on-this-day/")
+@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+def on_this_day_authors():
     from flask_babel import format_date
     month, day = on_this_day.parse_month_day_from_request(request.args)
     locale = languages.get_locale()
     cache_root = os.path.join(app.root_path, "cache", "today")
-    data = on_this_day.get_literature_today(
+    data = on_this_day.get_today_authors(
         month,
         day,
         locale,
-        cache_root,
-        allow_remote_fetch=True,
     )
     born = data.get("born") or []
     died = data.get("died") or []
@@ -514,7 +509,7 @@ def literature_today():
     today_d = datetime.date.today()
 
     return render_template(
-        "today.html",
+        "on-this-day.html",
         title=_("On this day"),
         born=born,
         died=died,

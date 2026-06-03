@@ -4,28 +4,17 @@ On this day — Wikipedia REST API + Wikidata entity API, with file cache.
 Uses English Wikipedia on-this-day feed for births/deaths, then ranks by
 sitelinks fetched from the Wikidata entity API (no SPARQL).
 """
-from __future__ import annotations
 
 from flask import current_app
 import requests
 
-import json
-import logging
-import os
-import time
-
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timezone
-from pathlib import Path
+from datetime import date
 from typing import Any
 
 
-logger = logging.getLogger(__name__)
-
 WIKIPEDIA_ONTHISDAY_URL = "https://en.wikipedia.org/api/rest_v1/feed/onthisday"
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
-DEFAULT_CACHE_TTL_SECONDS = 86400
-
 
 CREATIVE_KEYWORDS = frozenset({
    
@@ -68,25 +57,12 @@ class AuthorRow:
     sitelinks: int
 
 
-def _cache_path(cache_root: str, month: int, day: int, locale: str) -> Path:
-    safe_locale = (locale or "en").replace(os.sep, "").replace("/", "")
-    mmdd = f"{month:02d}-{day:02d}"
-    return Path(cache_root) / safe_locale / f"{mmdd}.json"
-
-
-def _is_creative(description: str) -> bool:
+def is_creative(description: str) -> bool:
     desc_lower = description.lower()
     return any(kw in desc_lower for kw in CREATIVE_KEYWORDS)
 
 
-def _fetch_wikipedia_entries(month: int, day: int, event_type: str) -> list[dict]:
-    url = f"{WIKIPEDIA_ONTHISDAY_URL}/{event_type}/{month:02d}/{day:02d}"
-    r = requests.get(url, headers={"user-agent": current_app.config['USER_AGENT']}, timeout=(10, 30))
-    r.raise_for_status()
-    return r.json().get(event_type, [])
-
-
-def _entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
+def entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
     rows: list[AuthorRow] = []
     for entry in entries:
         pages = entry.get("pages", [])
@@ -97,80 +73,30 @@ def _entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
         if not qid:
             continue
         desc = page.get("description", "")
-        if not _is_creative(desc):
+        if not is_creative(desc):
             continue
         name = page.get("titles", {}).get("normalized") or page.get("title", "").replace("_", " ")
         rows.append(AuthorRow(qid=qid, name=name, description=desc, year=entry.get("year"), sitelinks=0))
     return rows
 
 
-def _fetch_sitelinks(qids: list[str]) -> dict[str, int]:
+def fetch_sitelinks(qids: list[str]) -> dict[str, int]:
     result: dict[str, int] = {}
     if not qids:
         return result
     for i in range(0, len(qids), 50):
         batch = qids[i : i + 50]
-        try:
-            r = requests.get(
-                WIKIDATA_API_URL,
-                params={"action": "wbgetentities", "ids": "|".join(batch), "props": "sitelinks", "format": "json"},
-                headers={"user-agent": current_app.config['USER_AGENT']},
-                timeout=(10, 30),
-            )
-            r.raise_for_status()
-            for qid, entity in r.json().get("entities", {}).items():
-                result[qid] = len(entity.get("sitelinks", {}))
-        except requests.RequestException as exc:
-            logger.warning("Sitelinks batch fetch failed: %s", exc)
+
+        r = requests.get(
+            WIKIDATA_API_URL,
+            params={"action": "wbgetentities", "ids": "|".join(batch), "props": "sitelinks", "format": "json"},
+            headers={"user-agent": current_app.config['USER_AGENT']},
+            timeout=(10, 30),
+        )
+
+        for qid, entity in r.json().get("entities", {}).items():
+            result[qid] = len(entity.get("sitelinks", {})) 
     return result
-
-
-def fetch_from_wikidata(month: int, day: int, locale: str) -> dict[str, Any]:
-    born_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "births"))
-    died_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "deaths"))
-
-    all_qids = list({r.qid for r in born_rows + died_rows})
-    sitelinks = _fetch_sitelinks(all_qids)
-    sitelinks_ok = bool(sitelinks and any(v > 0 for v in sitelinks.values()))
-    for r in born_rows + died_rows:
-        r.sitelinks = sitelinks.get(r.qid, 0)
-
-    born_rows.sort(key=lambda r: r.sitelinks, reverse=True)
-    died_rows.sort(key=lambda r: r.sitelinks, reverse=True)
-
-    return {
-        "month": month,
-        "day": day,
-        "locale": locale,
-        "born": [asdict(x) for x in born_rows[:30]],
-        "died": [asdict(x) for x in died_rows[:30]],
-        "fetched_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        # Retry soon if sitelinks fetch silently failed (all zeros).
-        "cache_ttl_seconds": DEFAULT_CACHE_TTL_SECONDS if sitelinks_ok else 600,
-    }
-
-
-def _write_cache(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-    tmp.replace(path)
-
-
-def _read_cache(path: Path) -> dict[str, Any] | None:
-    try:
-        with open(path, encoding="utf-8") as f:
-            return json.load(f)
-    except (OSError, json.JSONDecodeError):
-        return None
-
-
-def _needs_refresh(path: Path, ttl_seconds: int) -> bool:
-    if not path.is_file():
-        return True
-    age = time.time() - path.stat().st_mtime
-    return age > ttl_seconds
 
 
 def parse_month_day_from_request(args: Any) -> tuple[int, int]:
@@ -233,53 +159,30 @@ def widget_entries(born: list[dict], died: list[dict], limit: int = 5) -> list[t
     return tagged[:limit]
 
 
-def get_literature_today(
-    month: int,
-    day: int,
-    locale: str,
-    cache_root: str,
-    allow_remote_fetch: bool = True,
-    ttl_seconds: int = DEFAULT_CACHE_TTL_SECONDS,
-    force_refresh: bool = False,
-) -> dict[str, Any]:
-    """Return cached snapshot for (month, day, locale)."""
-    path = _cache_path(cache_root, month, day, locale)
-    cached = _read_cache(path) if path.is_file() else None
+def get_today_authors(month: int, day: int, locale:str) -> dict[str, Any]:
 
-    # Use the TTL stored in the cache (failure payloads use a short TTL).
-    effective_ttl = int(cached.get("cache_ttl_seconds", ttl_seconds)) if cached else ttl_seconds
-    needs_refresh = force_refresh or not cached or _needs_refresh(path, effective_ttl)
+    url_events = f"{WIKIPEDIA_ONTHISDAY_URL}/all/{month:02d}/{day:02d}"
 
-    if allow_remote_fetch and needs_refresh:
-        try:
-            payload = fetch_from_wikidata(month, day, locale)
-            _write_cache(path, payload)
-            return payload
-        except requests.RequestException as e:
-            logger.warning("WDQS fetch failed for %02d-%02d: %s", month, day, e)
-            if cached:
-                cached["fetch_error"] = str(e)
-                return cached
-            failure_payload = {
-                "month": month,
-                "day": day,
-                "locale": locale,
-                "born": [],
-                "died": [],
-                "fetched_at": None,
-                "fetch_error": str(e),
-                "cache_ttl_seconds": 600,
-            }
-            _write_cache(path, failure_payload)
-            return failure_payload
+    events_response = requests.get(url_events, headers={"user-agent": current_app.config['USER_AGENT']}, timeout=(10, 30))
+    events = events_response.json()
 
-    if cached:
-        return cached
+    born_rows = entries_to_rows(events.get("births", []))
+    died_rows = entries_to_rows(events.get("deaths", []))
+
+    all_qids = list({r.qid for r in born_rows + died_rows})
+    sitelinks = fetch_sitelinks(all_qids)
+    for r in born_rows + died_rows:
+        r.sitelinks = sitelinks.get(r.qid, 0)
+
+    born_rows.sort(key=lambda r: r.sitelinks, reverse=True)
+    died_rows.sort(key=lambda r: r.sitelinks, reverse=True)
+
     return {
         "month": month,
         "day": day,
         "locale": locale,
-        "born": [],
-        "died": [],
-        "fetched_at": None,
+        "born": [asdict(x) for x in born_rows[:30]],
+        "died": [asdict(x) for x in died_rows[:30]],
     }
+
+

@@ -7,18 +7,18 @@
 
   <!-- Date navigation -->
   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-    <a href="{{ url_for('literature_today', month=prev_month, day=prev_day) }}"
+    <a href="{{ url_for('on_this_day_authors', month=prev_month, day=prev_day) }}"
        class="btn btn-sm border-black"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
       &laquo; {{ _("Previous day") }}
     </a>
-    <a href="{{ url_for('literature_today', month=next_month, day=next_day) }}"
+    <a href="{{ url_for('on_this_day_authors', month=next_month, day=next_day) }}"
        class="btn btn-sm border-black"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
       {{ _("Next day") }} &raquo;
     </a>
     {% if not is_today %}
-    <a href="{{ url_for('literature_today') }}"
+    <a href="{{ url_for('on_this_day_authors') }}"
        class="btn btn-sm border-black"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
       {{ _("Today") }}
