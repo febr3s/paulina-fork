@@ -146,9 +146,8 @@ def home():
     today_d = datetime.date.today()
     locale = languages.get_locale()
     cache_root = os.path.join(app.root_path, "cache", "today")
-    user_agent = app.config.get("USER_AGENT", "")
     data = on_this_day.get_literature_today(
-        today_d.month, today_d.day, locale, user_agent, cache_root,
+        today_d.month, today_d.day, locale, cache_root,
         allow_remote_fetch=True,
     )
     born = data.get("born") or []
@@ -488,13 +487,11 @@ def literature_today():
     from flask_babel import format_date
     month, day = on_this_day.parse_month_day_from_request(request.args)
     locale = languages.get_locale()
-    user_agent = app.config.get("USER_AGENT", "")
     cache_root = os.path.join(app.root_path, "cache", "today")
     data = on_this_day.get_literature_today(
         month,
         day,
         locale,
-        user_agent,
         cache_root,
         allow_remote_fetch=True,
     )

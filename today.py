@@ -6,23 +6,26 @@ sitelinks fetched from the Wikidata entity API (no SPARQL).
 """
 from __future__ import annotations
 
+from flask import current_app
+import requests
+
 import json
 import logging
 import os
 import time
+
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import requests
 
 logger = logging.getLogger(__name__)
 
 WIKIPEDIA_ONTHISDAY_URL = "https://en.wikipedia.org/api/rest_v1/feed/onthisday"
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
 DEFAULT_CACHE_TTL_SECONDS = 86400
-_UA = "Paulina/1.0 (today-literature; https://paulina.toolforge.org/)"
+
 
 CREATIVE_KEYWORDS = frozenset({
    
@@ -76,9 +79,9 @@ def _is_creative(description: str) -> bool:
     return any(kw in desc_lower for kw in CREATIVE_KEYWORDS)
 
 
-def _fetch_wikipedia_entries(month: int, day: int, event_type: str, user_agent: str) -> list[dict]:
+def _fetch_wikipedia_entries(month: int, day: int, event_type: str) -> list[dict]:
     url = f"{WIKIPEDIA_ONTHISDAY_URL}/{event_type}/{month:02d}/{day:02d}"
-    r = requests.get(url, headers={"User-Agent": user_agent or _UA}, timeout=(10, 30))
+    r = requests.get(url, headers={"user-agent": current_app.config['USER_AGENT']}, timeout=(10, 30))
     r.raise_for_status()
     return r.json().get(event_type, [])
 
@@ -101,18 +104,17 @@ def _entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
     return rows
 
 
-def _fetch_sitelinks(qids: list[str], user_agent: str) -> dict[str, int]:
+def _fetch_sitelinks(qids: list[str]) -> dict[str, int]:
     result: dict[str, int] = {}
     if not qids:
         return result
-    headers = {"User-Agent": user_agent or _UA}
     for i in range(0, len(qids), 50):
         batch = qids[i : i + 50]
         try:
             r = requests.get(
                 WIKIDATA_API_URL,
                 params={"action": "wbgetentities", "ids": "|".join(batch), "props": "sitelinks", "format": "json"},
-                headers=headers,
+                headers={"user-agent": current_app.config['USER_AGENT']},
                 timeout=(10, 30),
             )
             r.raise_for_status()
@@ -123,12 +125,12 @@ def _fetch_sitelinks(qids: list[str], user_agent: str) -> dict[str, int]:
     return result
 
 
-def fetch_from_wikidata(month: int, day: int, locale: str, user_agent: str) -> dict[str, Any]:
-    born_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "births", user_agent))
-    died_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "deaths", user_agent))
+def fetch_from_wikidata(month: int, day: int, locale: str) -> dict[str, Any]:
+    born_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "births"))
+    died_rows = _entries_to_rows(_fetch_wikipedia_entries(month, day, "deaths"))
 
     all_qids = list({r.qid for r in born_rows + died_rows})
-    sitelinks = _fetch_sitelinks(all_qids, user_agent)
+    sitelinks = _fetch_sitelinks(all_qids)
     sitelinks_ok = bool(sitelinks and any(v > 0 for v in sitelinks.values()))
     for r in born_rows + died_rows:
         r.sitelinks = sitelinks.get(r.qid, 0)
@@ -201,7 +203,6 @@ def parse_month_day_from_request(args: Any) -> tuple[int, int]:
     return today.month, today.day
 
 
-
 def featured_authors(born: list[dict], died: list[dict]) -> list[tuple[dict, str]]:
     """Return up to 3 featured (author, event) tuples: overall top, top born, top died."""
     result: list[tuple[dict, str]] = []
@@ -236,9 +237,7 @@ def get_literature_today(
     month: int,
     day: int,
     locale: str,
-    user_agent: str,
     cache_root: str,
-    *,
     allow_remote_fetch: bool = True,
     ttl_seconds: int = DEFAULT_CACHE_TTL_SECONDS,
     force_refresh: bool = False,
@@ -253,7 +252,7 @@ def get_literature_today(
 
     if allow_remote_fetch and needs_refresh:
         try:
-            payload = fetch_from_wikidata(month, day, locale, user_agent)
+            payload = fetch_from_wikidata(month, day, locale)
             _write_cache(path, payload)
             return payload
         except requests.RequestException as e:
