@@ -9,6 +9,3 @@ config.py
 
 # Ignore vim session
 Session.vim
-
-# Ignore precomputed cache files
-cache/today/
