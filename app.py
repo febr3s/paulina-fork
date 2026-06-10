@@ -18,7 +18,7 @@ import languages
 import squeries
 import filters
 import oauth
-import today as on_this_day
+import onthisday
 
 # Determine Wikidata mode from  environment
 if 'test' in sys.argv:
@@ -154,12 +154,12 @@ def print_field(field: str | dict | None) -> str:
 def home():
     today_d = datetime.date.today()
 
-    data = on_this_day.get_today_authors(today_d.month, today_d.day)
+    data = onthisday.get_today_authors(today_d.month, today_d.day)
     born = data.get("born") or []
     died = data.get("died") or []
     today_widget = [
         {"author": r, "event": tag}
-        for r, tag in on_this_day.widget_entries(born, died, limit=4)
+        for r, tag in onthisday.widget_entries(born, died, limit=4)
     ]
     return render_template("home.html",
                            title=_("Home"),
@@ -486,12 +486,12 @@ def countries_main():
 @app.route("/on-this-day/")
 @cache.cached(timeout=86400, make_cache_key=make_cache_key)
 def on_this_day_authors():
-    month, day = on_this_day.parse_month_day_from_request(request.args)
-    data = on_this_day.get_today_authors(month, day)
+    month, day = onthisday.parse_month_day_from_request(request.args)
+    data = onthisday.get_today_authors(month, day)
     born = data.get("born") or []
     died = data.get("died") or []
 
-    featured = on_this_day.featured_authors(born, died)
+    featured = onthisday.featured_authors(born, died)
     featured_qids = {r["qid"] for r, _ in featured}
     born = [r for r in born if r["qid"] not in featured_qids]
     died = [r for r in died if r["qid"] not in featured_qids]

@@ -57,6 +57,7 @@ class AuthorRow:
     description: str
     year: int | None
     sitelinks: int
+    in_public_domain: bool
 
 
 def is_creative(description: str) -> bool:
@@ -77,7 +78,7 @@ def entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
         desc = page.get("description", "")
         if not is_creative(desc):
             continue
-        rows.append(AuthorRow(qid=qid, name="", description="", year=entry.get("year"), sitelinks=0))
+        rows.append(AuthorRow(qid=qid, name="", description="", year=entry.get("year"), sitelinks=0, in_public_domain=False))
     return rows
 
 
@@ -92,7 +93,7 @@ def fetch_labels_desc_and_sitelinks(qids: list[str]) -> dict[str, int]:
             WIKIDATA_API_URL,
             params={"action": "wbgetentities",
                     "ids": "|".join(batch),
-                    "props": "labels|descriptions|sitelinks",
+                    "props": "labels|descriptions|sitelinks|claims",
                     "languages": languages.get_locale(),
                     "languagefallback": "",
                     "format": "json"},
@@ -101,9 +102,17 @@ def fetch_labels_desc_and_sitelinks(qids: list[str]) -> dict[str, int]:
         )
 
         for qid, entity in r.json().get("entities", {}).items():
+            copyright_status = entity.get("claims", {}).get("P7763")
+            in_public_domain = False
+            if copyright_status:
+                for claim in copyright_status:
+                    if claim.get("mainsnak", {}).get("datavalue", {}).get("value", {}).get("id") == "Q71887839":
+                        in_public_domain = True
+
             result[qid] = {"sitelinks": len(entity.get("sitelinks", {})),
                            "label": entity.get('labels', {}).get(languages.get_locale(), {}).get('value'),
-                           "description": entity.get('descriptions', {}).get(languages.get_locale(), {}).get('value')}
+                           "description": entity.get('descriptions', {}).get(languages.get_locale(), {}).get('value'),
+                           "in_public_domain": in_public_domain}
     return result
 
 
@@ -183,6 +192,7 @@ def get_today_authors(month: int, day: int) -> dict[str, Any]:
         r.sitelinks = item_info.get(r.qid, 0).get("sitelinks", 0)
         r.name = item_info.get(r.qid, "").get("label", "")
         r.description = item_info.get(r.qid, "").get("description", "")
+        r.in_public_domain = item_info.get(r.qid, False).get("in_public_domain", False)
 
     born_rows.sort(key=lambda r: r.sitelinks, reverse=True)
     died_rows.sort(key=lambda r: r.sitelinks, reverse=True)
