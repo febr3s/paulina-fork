@@ -3,7 +3,7 @@
 {% block content %}
 <div class="mb-4">
   <h1 class="h2">{{ _('On this day') }} &mdash; {{ display_date }}</h1>
-  <p class="text-muted">{{ _('Authors born or deceased on this date, ranked by Wikipedia sitelinks.') }}</p>
+  <p class="text-muted">{{ _('Authors who were born or died on this day, ranked by Wikimedia sitelinks.') }}</p>
 
   <!-- Date navigation -->
   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
@@ -24,6 +24,15 @@
       {{ _("Today") }}
     </a>
     {% endif %}
+    {{ _('Or choose another date:') }}    
+    <form action="{{ url_for('on_this_day_authors') }}" method="GET">
+      <input type="number" class="mx-1" name="day" placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}"> -
+      <input type="number" class="mx-1" name="month" placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+      <button type="submit"
+      class="btn btn-sm border-black mb-1"
+      style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
+      {{ _('Apply') }}</button>
+    </form>
   </div>
 
   {% if featured %}
