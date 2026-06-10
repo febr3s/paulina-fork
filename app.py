@@ -150,7 +150,7 @@ def print_field(field: str | dict | None) -> str:
 
 
 @app.route("/")
-@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key)
+@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key, unless=user_is_logged_in)
 def home():
     today_d = datetime.date.today()
 
@@ -335,7 +335,7 @@ def author_page(author_data):
 
 
 @app.route("/works-list/<author_id>")
-@cache.cached(make_cache_key=make_cache_key)
+@cache.cached(make_cache_key=make_cache_key, unless=user_is_logged_in)
 def works_list(author_id):
     try:
         page = request.args.get("page", 1, type=int)
@@ -431,7 +431,7 @@ def work_page(work_data):
 
 
 @app.route("/country/<country_data>")
-@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+@cache.cached(timeout=86400, make_cache_key=make_cache_key, unless=user_is_logged_in)
 def country_page(country_data):
     try:
         country = pdclasses.Country(country_data)
@@ -450,7 +450,7 @@ def country_page(country_data):
 
 
 @app.route("/term/<term_id>")
-@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+@cache.cached(timeout=86400, make_cache_key=make_cache_key, unless=user_is_logged_in)
 def term_page(term_id):
     try:
         term = pdclasses.Term(term_id)
@@ -468,7 +468,7 @@ def term_page(term_id):
 
 
 @app.route("/countries/")
-@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+@cache.cached(timeout=86400, make_cache_key=make_cache_key, unless=user_is_logged_in)
 def countries_main():
     countries_info = squeries.retrieve_query(squeries.query_for_all_countries_info, lang=languages.get_locale())
     for country in countries_info:
@@ -484,7 +484,7 @@ def countries_main():
 
 
 @app.route("/on-this-day/")
-@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+@cache.cached(timeout=86400, make_cache_key=make_cache_key, unless=user_is_logged_in)
 def on_this_day_authors():
     month, day = onthisday.parse_month_day_from_request(request.args)
     data = onthisday.get_today_authors(month, day)
