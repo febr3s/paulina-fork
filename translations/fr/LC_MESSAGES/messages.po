@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 17:48-0300\n"
+"POT-Creation-Date: 2026-06-10 18:20-0300\n"
 "PO-Revision-Date: 2026-02-15 20:09+0000\n"
 "Last-Translator: Baptiste de Coulon <bdc@lelieuimaginaire.ch>\n"
 "Language: fr\n"
@@ -1943,7 +1943,8 @@ msgstr "Date de création"
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:263
+#: templates/layout.html:263 templates/on-this-day.html:51
+#: templates/on-this-day.html:70 templates/on-this-day.html:90
 msgid "In public domain"
 msgstr "Dans le domaine public"
 

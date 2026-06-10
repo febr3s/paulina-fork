@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 17:48-0300\n"
+"POT-Creation-Date: 2026-06-10 18:20-0300\n"
 "PO-Revision-Date: 2025-08-21 01:01+0000\n"
 "Last-Translator: S H <higa432@gmail.com>\n"
 "Language: ja\n"
@@ -1882,7 +1882,8 @@ msgstr "出版日"
 msgid "Type to filter..."
 msgstr "入力してフィルター..."
 
-#: templates/layout.html:263
+#: templates/layout.html:263 templates/on-this-day.html:51
+#: templates/on-this-day.html:70 templates/on-this-day.html:90
 msgid "In public domain"
 msgstr "パブリックドメイン"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 17:48-0300\n"
+"POT-Creation-Date: 2026-06-10 18:20-0300\n"
 "PO-Revision-Date: 2025-05-08 17:40+0000\n"
 "Last-Translator: AtaZh <ipomoea@hilarious.com>\n"
 "Language: uk\n"
@@ -1939,7 +1939,8 @@ msgstr "Дата публікації"
 msgid "Type to filter..."
 msgstr "Почніть вводити…"
 
-#: templates/layout.html:263
+#: templates/layout.html:263 templates/on-this-day.html:51
+#: templates/on-this-day.html:70 templates/on-this-day.html:90
 msgid "In public domain"
 msgstr "У суспільному надбанні"
 

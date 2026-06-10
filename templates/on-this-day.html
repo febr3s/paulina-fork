@@ -48,7 +48,7 @@
           <h5 class="mb-0">
             <a href="{{ url_for('author_page', author_data=author.qid) }}" class="fw-semibold link-dark">{{ author.name }}</a>
             {% if author.year %} - {{ author.year }}{% endif %}
-            {% if author.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}
+            {% if author.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}
           </h5>
           {% if author.description %}<p class="small mb-0 mt-2">{{ author.description }}</p>{% endif %}
         </div>
@@ -67,7 +67,7 @@
         <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
-              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}</h5>
+              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}</h5>
             <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
           </div>    
           {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}
@@ -87,7 +87,7 @@
         <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
-              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}</h5>
+              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}</h5>
             <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
           </div>    
           {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}

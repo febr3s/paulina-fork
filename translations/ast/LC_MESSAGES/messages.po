@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 17:48-0300\n"
+"POT-Creation-Date: 2026-06-10 18:20-0300\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: ast\n"
@@ -1921,7 +1921,8 @@ msgstr ""
 msgid "Type to filter..."
 msgstr "Escribi pa peñerar..."
 
-#: templates/layout.html:263
+#: templates/layout.html:263 templates/on-this-day.html:51
+#: templates/on-this-day.html:70 templates/on-this-day.html:90
 msgid "In public domain"
 msgstr "Nel dominiu públicu"
 
