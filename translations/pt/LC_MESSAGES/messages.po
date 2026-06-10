@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-14 11:29-0300\n"
-"PO-Revision-Date: 2026-05-14 11:45-0300\n"
+"POT-Creation-Date: 2026-06-10 17:48-0300\n"
+"PO-Revision-Date: 2026-06-10 18:10-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/paulina/paulina-"
 "app/pt/>\n"
@@ -20,164 +20,169 @@ msgstr ""
 "Generated-By: Babel 2.18.0\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: app.py:134
+#: app.py:143
 msgid "No value"
 msgstr "Sem valor"
 
-#: app.py:136
+#: app.py:145
 msgid "Unknown value"
 msgstr "Valor desconhecido"
 
-#: app.py:146 templates/layout.html:53 templates/layout.html:100
+#: app.py:165 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "Início"
 
-#: app.py:153 templates/layout.html:103 templates/layout.html:342
+#: app.py:173 templates/layout.html:103 templates/layout.html:345
 msgid "About"
 msgstr "Sobre"
 
-#: app.py:206 app.py:237
+#: app.py:226 app.py:257
 msgid "Results"
 msgstr "Resultados"
 
-#: app.py:218 app.py:249 app.py:254
+#: app.py:238 app.py:269 app.py:274
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
-#: app.py:343
+#: app.py:370
 msgid "List of works"
 msgstr "Lista de obras"
 
-#: app.py:431
+#: app.py:461
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Lista de %(term_name)s"
 
-#: app.py:448
+#: app.py:478
 msgid "Unknown term"
 msgstr "Termo desconhecido"
 
-#: app.py:450 templates/countries.html:7 templates/layout.html:106
-#: templates/layout.html:359
+#: app.py:480 templates/countries.html:7 templates/layout.html:106
+#: templates/layout.html:362
 msgid "Countries and terms"
 msgstr "Países e termos"
 
-#: app.py:557
+#: app.py:511 templates/home.html:74 templates/layout.html:109
+#: templates/on-this-day.html:5
+msgid "On this day"
+msgstr "Efemérides"
+
+#: app.py:624
 msgid "Login failed. Please try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: app.py:567 app.py:637
+#: app.py:634 app.py:704
 msgid "Authentication failed. Please try again."
 msgstr "A autenticação falhou. Por favor, tente novamente."
 
-#: app.py:572
+#: app.py:639
 msgid "Login session expired. Please try again."
 msgstr "A sessão expirou. Por favor, tente novamente."
 
-#: app.py:579
+#: app.py:646
 msgid "Invalid state parameter. Please try again."
 msgstr "Parâmetro de estado inválido. Por favor, tente novamente."
 
-#: app.py:599
+#: app.py:666
 msgid "Failed to obtain access token. Please try again."
 msgstr "Erro ao obter o token de acesso. Por favor, tente novamente."
 
-#: app.py:626
+#: app.py:693
 msgid "Failed to get user profile. Please try again."
 msgstr "Erro ao obter o perfil do usuário. Por favor, tente novamente."
 
-#: app.py:650
+#: app.py:717
 msgid "You have been logged out."
 msgstr "Você encerrou sua sessão com sucesso."
 
-#: app.py:663
+#: app.py:730
 msgid "Please login to add an author."
 msgstr "Por favor, faça login para adicionar um autor ou autora."
 
-#: app.py:668 app.py:783
+#: app.py:735 app.py:850
 msgid "Your session has expired. Please login again."
 msgstr "Sua sessão expirou. Por favor, faça login novamente."
 
-#: app.py:676 app.py:791 app.py:902 app.py:1003
+#: app.py:743 app.py:858 app.py:969 app.py:1070
 #, fuzzy
 msgid "Session expired. Please log in again."
 msgstr "A sessão expirou. Por favor, faça login novamente."
 
-#: app.py:715
+#: app.py:782
 #, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Erro ao criar o autor: %(error)s"
 
-#: app.py:721 app.py:732 app.py:763 templates/add-author.html:39
-#: templates/layout.html:67 templates/layout.html:121
+#: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
+#: templates/layout.html:67 templates/layout.html:124
 msgid "Add Author"
 msgstr "Adicionar autor/a"
 
-#: app.py:726
+#: app.py:793
 msgid "An error occurred while creating the author. Please try again."
 msgstr "Um erro ocorreu ao criar o autor. Por favor, tente novamente."
 
-#: app.py:778
+#: app.py:845
 msgid "Please login to add a work."
 msgstr "Por favor, faça login para adicionar uma obra."
 
-#: app.py:830
+#: app.py:897
 #, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Erro ao criar a obra: %(error)s"
 
-#: app.py:836 app.py:847 app.py:878 templates/add-work.html:39
-#: templates/layout.html:73 templates/layout.html:127
+#: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
+#: templates/layout.html:73 templates/layout.html:130
 msgid "Add Work"
 msgstr "Adicionar obra"
 
-#: app.py:841
+#: app.py:908
 msgid "An error occurred while creating the work. Please try again."
 msgstr "Um erro ocorreu ao criar a obra. Por favor, tente novamente."
 
-#: app.py:895 app.py:997
+#: app.py:962 app.py:1064
 #, fuzzy
 msgid "You must be logged in to edit."
 msgstr "Você encerrou sua sessão com sucesso."
 
-#: app.py:911 app.py:1009
+#: app.py:978 app.py:1076
 #, fuzzy
 msgid "Invalid request data."
 msgstr "Formato de data inválido"
 
-#: app.py:918 app.py:1013
+#: app.py:985 app.py:1080
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:938 app.py:1029
+#: app.py:1005 app.py:1096
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:959 app.py:1047
+#: app.py:1026 app.py:1114
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Erro ao criar a obra: %(error)s"
 
-#: app.py:967 app.py:1052
+#: app.py:1034 app.py:1119
 msgid "Successfully updated!"
 msgstr "Atualização concluída com sucesso!"
 
-#: app.py:972 app.py:1054
+#: app.py:1039 app.py:1121
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "Data de nascimento: %(error)s"
 
-#: app.py:978 app.py:1056
+#: app.py:1045 app.py:1123
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:985 app.py:1059
+#: app.py:1052 app.py:1126
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "Data de nascimento: %(error)s"
 
-#: app.py:1073
+#: app.py:1140
 msgid "404 error"
 msgstr "Erro 404"
 
@@ -259,7 +264,7 @@ msgstr "(século)"
 msgid "(millennium)"
 msgstr "(milênio)"
 
-#: pdclasses.py:238
+#: pdclasses.py:237
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that there is "
 "no free image of the person available, and that if you own one, you can click on "
@@ -269,12 +274,12 @@ msgstr ""
 "imagem livre da pessoa disponível, e que se você tiver uma, pode clicar no link "
 "do placeholder."
 
-#: pdclasses.py:243
+#: pdclasses.py:242
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Imagem de %(name)s."
 
-#: pdclasses.py:382
+#: pdclasses.py:413
 msgid ""
 "Image of a generic work. The text above it indicates that there is no free image "
 "of the work available, and that if you own one, you can click on the placeholder "
@@ -284,12 +289,12 @@ msgstr ""
 "livre da obra disponível, e que se você tiver uma, pode clicar no link do "
 "placeholder para carregá-la."
 
-#: pdclasses.py:387
+#: pdclasses.py:418
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Imagem de %(title)s."
 
-#: pdclasses.py:479 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:508 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Bandeira de %(country_name)s."
@@ -390,7 +395,7 @@ msgstr "Língua"
 msgid "Original language"
 msgstr "Idioma original"
 
-#: templates/add-work.html:508 templates/layout.html:279 templates/work.html:292
+#: templates/add-work.html:508 templates/layout.html:282 templates/work.html:292
 #: templates/work.html:440 wikidata_api.py:615
 msgid "Country of origin"
 msgstr "País de origem"
@@ -528,7 +533,7 @@ msgstr "página inicial"
 msgid "Please go to the %(home_page)s and try again."
 msgstr "Acesse %(home_page)s e tente novamente."
 
-#: templates/about.html:7 templates/layout.html:339
+#: templates/about.html:7 templates/layout.html:342
 msgid "About Paulina"
 msgstr "Sobre Paulina"
 
@@ -537,19 +542,19 @@ msgstr "Sobre Paulina"
 msgid "Wikidata"
 msgstr "Wikidata"
 
-#: templates/about.html:9 templates/layout.html:325
+#: templates/about.html:9 templates/layout.html:328
 msgid "Ártica - Online Cultural Center"
 msgstr "Ártica - Centro Cultural Online"
 
-#: templates/about.html:10 templates/layout.html:328
+#: templates/about.html:10 templates/layout.html:331
 msgid "Creative Commons Uruguay"
 msgstr "Creative Commons Uruguai"
 
-#: templates/about.html:11 templates/layout.html:331
+#: templates/about.html:11 templates/layout.html:334
 msgid "Data Uruguay"
 msgstr "Data Uruguai"
 
-#: templates/about.html:12 templates/layout.html:334
+#: templates/about.html:12 templates/layout.html:337
 msgid "Wikimedistas de Uruguay"
 msgstr "Wikimedistas do Uruguai"
 
@@ -731,7 +736,7 @@ msgstr "Sobre Paulina"
 
 #: templates/add-author.html:53
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: templates/add-author.html:60
 #, fuzzy
@@ -781,7 +786,7 @@ msgid "Biographical Information"
 msgstr "Falta informação?"
 
 #: templates/add-author.html:122 templates/author.html:146
-#: templates/author.html:599 templates/layout.html:234
+#: templates/author.html:599 templates/layout.html:237
 msgid "Nationality"
 msgstr "Nacionalidade"
 
@@ -810,13 +815,13 @@ msgid "Add reference"
 msgstr ""
 
 #: templates/add-author.html:159 templates/author.html:258
-#: templates/author.html:646 templates/layout.html:212
+#: templates/author.html:646 templates/layout.html:215
 msgid "Gender"
 msgstr "Género"
 
-#: templates/add-author.html:166 templates/layout.html:214
-#: templates/layout.html:225 templates/layout.html:247 templates/layout.html:270
-#: templates/layout.html:291
+#: templates/add-author.html:166 templates/layout.html:217
+#: templates/layout.html:228 templates/layout.html:250 templates/layout.html:273
+#: templates/layout.html:294
 msgid "Any"
 msgstr "Qualquer"
 
@@ -864,8 +869,8 @@ msgstr "Data de nascimento"
 #: templates/add-author.html:332 templates/add-author.html:387
 #: templates/add-work.html:448 templates/add-work.html:479
 #: templates/author.html:344 templates/author.html:557 templates/author.html:676
-#: templates/author.html:755 templates/work.html:131 templates/work.html:195
-#: templates/work.html:362 templates/work.html:391
+#: templates/author.html:755 templates/on-this-day.html:29 templates/work.html:131
+#: templates/work.html:195 templates/work.html:362 templates/work.html:391
 #, fuzzy
 msgid "Day"
 msgstr "Qualquer"
@@ -873,8 +878,8 @@ msgstr "Qualquer"
 #: templates/add-author.html:342 templates/add-author.html:397
 #: templates/add-work.html:452 templates/add-work.html:483
 #: templates/author.html:348 templates/author.html:561 templates/author.html:680
-#: templates/author.html:759 templates/work.html:135 templates/work.html:199
-#: templates/work.html:366 templates/work.html:395
+#: templates/author.html:759 templates/on-this-day.html:30 templates/work.html:135
+#: templates/work.html:199 templates/work.html:366 templates/work.html:395
 msgid "Month"
 msgstr ""
 
@@ -1140,7 +1145,7 @@ msgstr ""
 msgid "e.g., Spanish novel by Miguel de Cervantes"
 msgstr ""
 
-#: templates/add-work.html:101 templates/country.html:34 templates/layout.html:268
+#: templates/add-work.html:101 templates/country.html:34 templates/layout.html:271
 msgid "Type of work"
 msgstr "Tipo de obra"
 
@@ -1727,7 +1732,7 @@ msgid "Number of works in public domain"
 msgstr "Número de obras em domínio público"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:372 templates/layout.html:374 templates/layout.html:376
+#: templates/layout.html:375 templates/layout.html:377 templates/layout.html:379
 msgid "Paulina logo"
 msgstr "Logotipo de Paulina"
 
@@ -1807,6 +1812,18 @@ msgstr "Países com 50 anos post mortem auctoris"
 msgid "Countries with 70 years post mortem auctoris"
 msgstr "Países com 70 anos post mortem auctoris"
 
+#: templates/home.html:75
+msgid ""
+"Discover writers, musicians, visual artists and more who were born or died on "
+"this day."
+msgstr ""
+"Descubra escritores, músicos, artistas visuais e muitos outros que nasceram ou "
+"morreram neste dia."
+
+#: templates/home.html:85
+msgid "See all"
+msgstr "Veja mais"
+
 #: templates/layout.html:12
 msgid "Paulina"
 msgstr "Paulina"
@@ -1825,11 +1842,11 @@ msgstr ""
 "facilita a compreensão dos termos de direitos autorais e ajuda a saber quando "
 "uma obra entra em domínio público em cada país."
 
-#: templates/layout.html:31 templates/layout.html:379
+#: templates/layout.html:31 templates/layout.html:382
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Dados para o Domínio Público"
 
-#: templates/layout.html:79 templates/layout.html:133
+#: templates/layout.html:79 templates/layout.html:136
 msgid "Logout"
 msgstr ""
 
@@ -1837,84 +1854,84 @@ msgstr ""
 msgid "Login with Wikimedia"
 msgstr ""
 
-#: templates/layout.html:139
+#: templates/layout.html:142
 msgid "Login with your Wikimedia account to add/edit data"
 msgstr ""
 
-#: templates/layout.html:141
+#: templates/layout.html:144
 msgid "Login"
 msgstr ""
 
-#: templates/layout.html:159
+#: templates/layout.html:162
 msgid "Select"
 msgstr "Escolher"
 
-#: templates/layout.html:194 templates/layout.html:197
+#: templates/layout.html:197 templates/layout.html:200
 msgid "Authors"
 msgstr "Autores/as"
 
-#: templates/layout.html:195 templates/layout.html:198
+#: templates/layout.html:198 templates/layout.html:201
 msgid "Works"
 msgstr "Obras"
 
-#: templates/layout.html:202
+#: templates/layout.html:205
 msgid "Search with Paulina"
 msgstr "Pesquisar com Paulina"
 
-#: templates/layout.html:202 templates/layout.html:204
+#: templates/layout.html:205 templates/layout.html:207
 msgid "Search"
 msgstr "Pesquisar"
 
-#: templates/layout.html:209
+#: templates/layout.html:212
 msgid "Advanced search"
 msgstr "Pesquisa avançada"
 
-#: templates/layout.html:223
+#: templates/layout.html:226
 #, fuzzy
 msgid "Creative Area"
 msgstr "Data de criação"
 
-#: templates/layout.html:238 templates/layout.html:283
+#: templates/layout.html:241 templates/layout.html:286
 msgid "Type to filter..."
 msgstr "Digite para filtrar..."
 
-#: templates/layout.html:260
+#: templates/layout.html:263
 msgid "In public domain"
 msgstr "Em domínio público"
 
-#: templates/layout.html:263
+#: templates/layout.html:266
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr "Autores cujas obras estão no domínio público em pelo menos uma jurisdição"
 
-#: templates/layout.html:322
+#: templates/layout.html:325
 msgid "Paulina is supported by:"
 msgstr "Paulina é apoiada por:"
 
-#: templates/layout.html:345
+#: templates/layout.html:348
 msgid "Source code"
 msgstr "Código fonte"
 
-#: templates/layout.html:348
+#: templates/layout.html:351
 msgid "Help translate"
 msgstr "Ajude a traduzir"
 
-#: templates/layout.html:353
+#: templates/layout.html:356
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/layout.html:356
+#: templates/layout.html:359
 msgid "Documentation"
 msgstr "Documentação"
 
-#: templates/layout.html:380
+#: templates/layout.html:383
 msgid "Powered by Wikidata."
 msgstr "Com base nos dados do Wikidata."
 
-#: templates/layout.html:436
+#: templates/layout.html:439
 msgid "No matching option"
 msgstr "Nenhuma opção corresponde"
 
-#: templates/layout.html:532
+#: templates/layout.html:535
 msgid "Please select a valid option from the country dropdown."
 msgstr "Por favor, selecione uma opção válida no menu suspenso de países."
 
@@ -1938,38 +1955,89 @@ msgstr ""
 msgid "Please wait while we complete your login."
 msgstr ""
 
+#: templates/on-this-day.html:6
+msgid "Authors who were born or died on this day, ranked by Wikimedia sitelinks."
+msgstr ""
+"Autores que nasceram ou morreram neste dia, ordenados por sitelinks da Wikimedia."
+
+#: templates/on-this-day.html:13
+msgid "Previous day"
+msgstr "Dia anterior"
+
+#: templates/on-this-day.html:18
+msgid "Next day"
+msgstr "Próximo dia"
+
+#: templates/on-this-day.html:24
+#, fuzzy
+msgid "Today"
+msgstr "Qualquer"
+
+#: templates/on-this-day.html:27
+msgid "Or choose another date:"
+msgstr "Ou escolha outra data:"
+
+#: templates/on-this-day.html:34
+msgid "Apply"
+msgstr "Aplicar"
+
+#: templates/on-this-day.html:45
+#, fuzzy
+msgid "Featured author"
+msgstr "Adicionar autor/a"
+
+#: templates/on-this-day.html:46
+msgid "Born"
+msgstr "Nasceu"
+
+#: templates/on-this-day.html:46
+msgid "Died"
+msgstr "Morreu"
+
+#: templates/on-this-day.html:63
+msgid "Born on this day"
+msgstr "Nasceram neste dia"
+
+#: templates/on-this-day.html:78 templates/on-this-day.html:98
+msgid "No authors found for this date."
+msgstr "Nenhum autor encontrado para esta data."
+
+#: templates/on-this-day.html:83
+msgid "Died on this day"
+msgstr "Morreram neste dia"
+
 #: templates/results.html:6
 msgid "Search results"
 msgstr "Resultados da pesquisa"
 
-#: templates/results.html:7
+#: templates/results.html:7 templates/works-list.html:16
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr ""
 
-#: templates/results.html:30 templates/works-list.html:29
+#: templates/results.html:30 templates/works-list.html:31
 msgid "Available for download"
 msgstr "Disponível para download"
 
-#: templates/results.html:43 templates/works-list.html:39
+#: templates/results.html:43 templates/works-list.html:42
 #, fuzzy
 msgid "Pagination"
 msgstr "Pintura"
 
-#: templates/results.html:47 templates/results.html:51 templates/works-list.html:43
-#: templates/works-list.html:47
+#: templates/results.html:47 templates/results.html:51 templates/works-list.html:46
+#: templates/works-list.html:50
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
-#: templates/results.html:56 templates/works-list.html:52
+#: templates/results.html:56 templates/works-list.html:55
 #, python-format
 msgid "Page %(page)s"
 msgstr "Página %(page)s"
 
-#: templates/results.html:61 templates/results.html:65 templates/works-list.html:57
-#: templates/works-list.html:61
+#: templates/results.html:61 templates/results.html:65 templates/works-list.html:60
+#: templates/works-list.html:64
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 #: templates/work.html:38
 msgid "Author/s"
@@ -2080,7 +2148,7 @@ msgstr "Adicionar ao Wikidata"
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
 
-#: templates/works-list.html:18
+#: templates/works-list.html:20
 msgid "View this query on the Wikidata Query Service"
 msgstr "Veja esta consulta no Serviço de Consultas do Wikidata"
 

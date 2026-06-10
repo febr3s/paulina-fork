@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-05-14 11:29-0300\n"
+"POT-Creation-Date: 2026-06-10 17:48-0300\n"
 "PO-Revision-Date: 2026-03-21 08:09+0000\n"
 "Last-Translator: Bodhisattwa Mandal <bodhisattwa.rgkmc@gmail.com>\n"
 "Language: bn\n"
@@ -19,163 +19,168 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: app.py:134
+#: app.py:143
 msgid "No value"
 msgstr "মান নেই"
 
-#: app.py:136
+#: app.py:145
 msgid "Unknown value"
 msgstr "অজানা মান"
 
-#: app.py:146 templates/layout.html:53 templates/layout.html:100
+#: app.py:165 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "প্রধান পাতা"
 
-#: app.py:153 templates/layout.html:103 templates/layout.html:342
+#: app.py:173 templates/layout.html:103 templates/layout.html:345
 msgid "About"
 msgstr "সম্পর্কে"
 
-#: app.py:206 app.py:237
+#: app.py:226 app.py:257
 msgid "Results"
 msgstr "ফলাফল"
 
-#: app.py:218 app.py:249 app.py:254
+#: app.py:238 app.py:269 app.py:274
 msgid "No results found"
 msgstr "কোন ফলাফল পাওয়া যায়নি"
 
-#: app.py:343
+#: app.py:370
 msgid "List of works"
 msgstr "কর্মের তালিকা"
 
-#: app.py:431
+#: app.py:461
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "%(term_name)s-এর তালিকা"
 
-#: app.py:448
+#: app.py:478
 msgid "Unknown term"
 msgstr "অজানা শর্ত"
 
-#: app.py:450 templates/countries.html:7 templates/layout.html:106
-#: templates/layout.html:359
+#: app.py:480 templates/countries.html:7 templates/layout.html:106
+#: templates/layout.html:362
 msgid "Countries and terms"
 msgstr "দেশ এবং শর্ত"
 
-#: app.py:557
+#: app.py:511 templates/home.html:74 templates/layout.html:109
+#: templates/on-this-day.html:5
+msgid "On this day"
+msgstr ""
+
+#: app.py:624
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:567 app.py:637
+#: app.py:634 app.py:704
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:572
+#: app.py:639
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:579
+#: app.py:646
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:599
+#: app.py:666
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:626
+#: app.py:693
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:650
+#: app.py:717
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:663
+#: app.py:730
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:668 app.py:783
+#: app.py:735 app.py:850
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:676 app.py:791 app.py:902 app.py:1003
+#: app.py:743 app.py:858 app.py:969 app.py:1070
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:715
+#: app.py:782
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:721 app.py:732 app.py:763 templates/add-author.html:39
-#: templates/layout.html:67 templates/layout.html:121
+#: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
+#: templates/layout.html:67 templates/layout.html:124
 #, fuzzy
 msgid "Add Author"
 msgstr "লেখক"
 
-#: app.py:726
+#: app.py:793
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:778
+#: app.py:845
 msgid "Please login to add a work."
 msgstr "একটি সাহিত্যকর্ম যোগ করতে দয়া করে লগইন করুন।"
 
-#: app.py:830
+#: app.py:897
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:836 app.py:847 app.py:878 templates/add-work.html:39
-#: templates/layout.html:73 templates/layout.html:127
+#: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
+#: templates/layout.html:73 templates/layout.html:130
 #, fuzzy
 msgid "Add Work"
 msgstr "লেখক"
 
-#: app.py:841
+#: app.py:908
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:895 app.py:997
+#: app.py:962 app.py:1064
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:911 app.py:1009
+#: app.py:978 app.py:1076
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:918 app.py:1013
+#: app.py:985 app.py:1080
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:938 app.py:1029
+#: app.py:1005 app.py:1096
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:959 app.py:1047
+#: app.py:1026 app.py:1114
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "মৃত্যুতারিখ"
 
-#: app.py:967 app.py:1052
+#: app.py:1034 app.py:1119
 msgid "Successfully updated!"
 msgstr "সফলভাবে হালনাগাদ হয়েছে!"
 
-#: app.py:972 app.py:1054
+#: app.py:1039 app.py:1121
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "জন্মতারিখ"
 
-#: app.py:978 app.py:1056
+#: app.py:1045 app.py:1123
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:985 app.py:1059
+#: app.py:1052 app.py:1126
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "জন্মতারিখ"
 
-#: app.py:1073
+#: app.py:1140
 msgid "404 error"
 msgstr "৪০৪ ত্রুটি"
 
@@ -256,31 +261,31 @@ msgstr "(শতাব্দী)"
 msgid "(millennium)"
 msgstr "(সহস্রাব্দ)"
 
-#: pdclasses.py:238
+#: pdclasses.py:237
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
 "there is no free image of the person available, and that if you own one, "
 "you can click on the placeholder link."
 msgstr ""
 
-#: pdclasses.py:243
+#: pdclasses.py:242
 #, python-format
 msgid "Image of %(name)s."
 msgstr "%(name)s-এর চিত্র"
 
-#: pdclasses.py:382
+#: pdclasses.py:413
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
 "on the placeholder link to upload it."
 msgstr ""
 
-#: pdclasses.py:387
+#: pdclasses.py:418
 #, python-format
 msgid "Image of %(title)s."
 msgstr "%(title)s-এর চিত্র"
 
-#: pdclasses.py:479 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:508 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "%(country_name)s-এর পতাকা"
@@ -390,7 +395,7 @@ msgstr "ভাষা"
 msgid "Original language"
 msgstr "ভাষা"
 
-#: templates/add-work.html:508 templates/layout.html:279
+#: templates/add-work.html:508 templates/layout.html:282
 #: templates/work.html:292 templates/work.html:440 wikidata_api.py:615
 msgid "Country of origin"
 msgstr "উৎপত্তির দেশ"
@@ -532,7 +537,7 @@ msgstr "প্রধান পাতা"
 msgid "Please go to the %(home_page)s and try again."
 msgstr ""
 
-#: templates/about.html:7 templates/layout.html:339
+#: templates/about.html:7 templates/layout.html:342
 msgid "About Paulina"
 msgstr "পাউলিনা সম্পর্কে"
 
@@ -541,19 +546,19 @@ msgstr "পাউলিনা সম্পর্কে"
 msgid "Wikidata"
 msgstr "উইকিউপাত্ত"
 
-#: templates/about.html:9 templates/layout.html:325
+#: templates/about.html:9 templates/layout.html:328
 msgid "Ártica - Online Cultural Center"
 msgstr "আফ্রিকা - অনলাইন কালচারাল সেণ্টার"
 
-#: templates/about.html:10 templates/layout.html:328
+#: templates/about.html:10 templates/layout.html:331
 msgid "Creative Commons Uruguay"
 msgstr "ক্রিয়েটিভ কমন্স উরুগুয়ে"
 
-#: templates/about.html:11 templates/layout.html:331
+#: templates/about.html:11 templates/layout.html:334
 msgid "Data Uruguay"
 msgstr "ডাটা উরুগুয়ে"
 
-#: templates/about.html:12 templates/layout.html:334
+#: templates/about.html:12 templates/layout.html:337
 msgid "Wikimedistas de Uruguay"
 msgstr "উইকিমেদিস্তাস দে উরুগুয়ে"
 
@@ -759,7 +764,7 @@ msgid "Biographical Information"
 msgstr "জীবনীমূলক তথ্য"
 
 #: templates/add-author.html:122 templates/author.html:146
-#: templates/author.html:599 templates/layout.html:234
+#: templates/author.html:599 templates/layout.html:237
 msgid "Nationality"
 msgstr "জাতীয়তা"
 
@@ -789,13 +794,13 @@ msgid "Add reference"
 msgstr "তথ্যসূত্র যোগ করুন"
 
 #: templates/add-author.html:159 templates/author.html:258
-#: templates/author.html:646 templates/layout.html:212
+#: templates/author.html:646 templates/layout.html:215
 msgid "Gender"
 msgstr "লিঙ্গ"
 
-#: templates/add-author.html:166 templates/layout.html:214
-#: templates/layout.html:225 templates/layout.html:247
-#: templates/layout.html:270 templates/layout.html:291
+#: templates/add-author.html:166 templates/layout.html:217
+#: templates/layout.html:228 templates/layout.html:250
+#: templates/layout.html:273 templates/layout.html:294
 msgid "Any"
 msgstr "যে কোন"
 
@@ -843,7 +848,8 @@ msgstr "জন্ম তারিখ"
 #: templates/add-author.html:332 templates/add-author.html:387
 #: templates/add-work.html:448 templates/add-work.html:479
 #: templates/author.html:344 templates/author.html:557
-#: templates/author.html:676 templates/author.html:755 templates/work.html:131
+#: templates/author.html:676 templates/author.html:755
+#: templates/on-this-day.html:29 templates/work.html:131
 #: templates/work.html:195 templates/work.html:362 templates/work.html:391
 #, fuzzy
 msgid "Day"
@@ -852,7 +858,8 @@ msgstr "যে কোন"
 #: templates/add-author.html:342 templates/add-author.html:397
 #: templates/add-work.html:452 templates/add-work.html:483
 #: templates/author.html:348 templates/author.html:561
-#: templates/author.html:680 templates/author.html:759 templates/work.html:135
+#: templates/author.html:680 templates/author.html:759
+#: templates/on-this-day.html:30 templates/work.html:135
 #: templates/work.html:199 templates/work.html:366 templates/work.html:395
 msgid "Month"
 msgstr ""
@@ -1128,7 +1135,7 @@ msgid "e.g., Spanish novel by Miguel de Cervantes"
 msgstr ""
 
 #: templates/add-work.html:101 templates/country.html:34
-#: templates/layout.html:268
+#: templates/layout.html:271
 msgid "Type of work"
 msgstr "কর্মের ধরণ"
 
@@ -1715,8 +1722,8 @@ msgid "Number of works in public domain"
 msgstr "পাবলিক ডোমেইনে রয়েছে"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:372 templates/layout.html:374
-#: templates/layout.html:376
+#: templates/layout.html:375 templates/layout.html:377
+#: templates/layout.html:379
 msgid "Paulina logo"
 msgstr "পাউলিনা লোগো"
 
@@ -1790,6 +1797,16 @@ msgstr ""
 msgid "Countries with 70 years post mortem auctoris"
 msgstr ""
 
+#: templates/home.html:75
+msgid ""
+"Discover writers, musicians, visual artists and more who were born or "
+"died on this day."
+msgstr ""
+
+#: templates/home.html:85
+msgid "See all"
+msgstr ""
+
 #: templates/layout.html:12
 msgid "Paulina"
 msgstr "পাউলিনা"
@@ -1803,11 +1820,11 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:379
+#: templates/layout.html:31 templates/layout.html:382
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
-#: templates/layout.html:79 templates/layout.html:133
+#: templates/layout.html:79 templates/layout.html:136
 msgid "Logout"
 msgstr ""
 
@@ -1815,86 +1832,86 @@ msgstr ""
 msgid "Login with Wikimedia"
 msgstr "উইকিমিডিয়া দিয়ে লগইন করুন"
 
-#: templates/layout.html:139
+#: templates/layout.html:142
 msgid "Login with your Wikimedia account to add/edit data"
 msgstr ""
 
-#: templates/layout.html:141
+#: templates/layout.html:144
 msgid "Login"
 msgstr ""
 
-#: templates/layout.html:159
+#: templates/layout.html:162
 msgid "Select"
 msgstr ""
 
-#: templates/layout.html:194 templates/layout.html:197
+#: templates/layout.html:197 templates/layout.html:200
 #, fuzzy
 msgid "Authors"
 msgstr "লেখক"
 
-#: templates/layout.html:195 templates/layout.html:198
+#: templates/layout.html:198 templates/layout.html:201
 #, fuzzy
 msgid "Works"
 msgstr "কর্ম"
 
-#: templates/layout.html:202
+#: templates/layout.html:205
 msgid "Search with Paulina"
 msgstr ""
 
-#: templates/layout.html:202 templates/layout.html:204
+#: templates/layout.html:205 templates/layout.html:207
 msgid "Search"
 msgstr "অনুসন্ধান করুন"
 
-#: templates/layout.html:209
+#: templates/layout.html:212
 msgid "Advanced search"
 msgstr "উন্নত অনুসন্ধান"
 
-#: templates/layout.html:223
+#: templates/layout.html:226
 #, fuzzy
 msgid "Creative Area"
 msgstr "প্রকাশনার তারিখ"
 
-#: templates/layout.html:238 templates/layout.html:283
+#: templates/layout.html:241 templates/layout.html:286
 msgid "Type to filter..."
 msgstr ""
 
-#: templates/layout.html:260
+#: templates/layout.html:263
 msgid "In public domain"
 msgstr "পাবলিক ডোমেইনে রয়েছে"
 
-#: templates/layout.html:263
+#: templates/layout.html:266
 msgid "Authors whose works are in public domain in at least one jurisdiction"
 msgstr ""
 
-#: templates/layout.html:322
+#: templates/layout.html:325
 msgid "Paulina is supported by:"
 msgstr ""
 
-#: templates/layout.html:345
+#: templates/layout.html:348
 msgid "Source code"
 msgstr ""
 
-#: templates/layout.html:348
+#: templates/layout.html:351
 msgid "Help translate"
 msgstr "অনুবাদ করতে সহায়তা করুন"
 
-#: templates/layout.html:353
+#: templates/layout.html:356
 msgid "Help"
 msgstr "সাহায্য"
 
-#: templates/layout.html:356
+#: templates/layout.html:359
 msgid "Documentation"
 msgstr "নথি"
 
-#: templates/layout.html:380
+#: templates/layout.html:383
 msgid "Powered by Wikidata."
 msgstr ""
 
-#: templates/layout.html:436
+#: templates/layout.html:439
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:532
+#: templates/layout.html:535
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
@@ -1918,36 +1935,86 @@ msgstr ""
 msgid "Please wait while we complete your login."
 msgstr ""
 
+#: templates/on-this-day.html:6
+msgid "Authors who were born or died on this day, ranked by Wikimedia sitelinks."
+msgstr ""
+
+#: templates/on-this-day.html:13
+msgid "Previous day"
+msgstr ""
+
+#: templates/on-this-day.html:18
+msgid "Next day"
+msgstr ""
+
+#: templates/on-this-day.html:24
+#, fuzzy
+msgid "Today"
+msgstr "যে কোন"
+
+#: templates/on-this-day.html:27
+msgid "Or choose another date:"
+msgstr ""
+
+#: templates/on-this-day.html:34
+msgid "Apply"
+msgstr ""
+
+#: templates/on-this-day.html:45
+#, fuzzy
+msgid "Featured author"
+msgstr "লেখক"
+
+#: templates/on-this-day.html:46
+msgid "Born"
+msgstr ""
+
+#: templates/on-this-day.html:46
+msgid "Died"
+msgstr ""
+
+#: templates/on-this-day.html:63
+msgid "Born on this day"
+msgstr ""
+
+#: templates/on-this-day.html:78 templates/on-this-day.html:98
+msgid "No authors found for this date."
+msgstr ""
+
+#: templates/on-this-day.html:83
+msgid "Died on this day"
+msgstr ""
+
 #: templates/results.html:6
 msgid "Search results"
 msgstr "ফলাফল অনুসন্ধান করুন"
 
-#: templates/results.html:7
+#: templates/results.html:7 templates/works-list.html:16
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr ""
 
-#: templates/results.html:30 templates/works-list.html:29
+#: templates/results.html:30 templates/works-list.html:31
 msgid "Available for download"
 msgstr "ডাউনলোডের জন্য উপলব্ধ"
 
-#: templates/results.html:43 templates/works-list.html:39
+#: templates/results.html:43 templates/works-list.html:42
 #, fuzzy
 msgid "Pagination"
 msgstr "চিত্র কর্ম"
 
 #: templates/results.html:47 templates/results.html:51
-#: templates/works-list.html:43 templates/works-list.html:47
+#: templates/works-list.html:46 templates/works-list.html:50
 msgid "Previous"
 msgstr ""
 
-#: templates/results.html:56 templates/works-list.html:52
+#: templates/results.html:56 templates/works-list.html:55
 #, fuzzy, python-format
 msgid "Page %(page)s"
 msgstr ""
 
 #: templates/results.html:61 templates/results.html:65
-#: templates/works-list.html:57 templates/works-list.html:61
+#: templates/works-list.html:60 templates/works-list.html:64
 msgid "Next"
 msgstr ""
 
@@ -2056,7 +2123,7 @@ msgstr "উইকিউপাত্তে যোগ করুন"
 msgid "List of works by %(author_name)s"
 msgstr ""
 
-#: templates/works-list.html:18
+#: templates/works-list.html:20
 msgid "View this query on the Wikidata Query Service"
 msgstr ""
 
