@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session, jsonify
 from flask_caching import Cache
-from flask_babel import Babel, _, get_locale
+from flask_babel import Babel, _, get_locale, format_date
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from requests_oauthlib import OAuth2Session
@@ -18,6 +18,7 @@ import languages
 import squeries
 import filters
 import oauth
+import onthisday
 
 # Determine Wikidata mode from  environment
 if 'test' in sys.argv:
@@ -89,7 +90,8 @@ babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
 
 # Cache configuration
 app.config.update(CACHE_TYPE="SimpleCache",
-                  CACHE_DEFAULT_TIMEOUT=300)
+                  CACHE_DEFAULT_TIMEOUT=300,
+                  CACHE_THRESHOLD=1500)
 
 cache = Cache(app)  # Initializes Flask-Caching
 
@@ -107,6 +109,13 @@ def make_cache_key(*args, **kwargs) -> str:
 def user_is_logged_in() -> bool:
     """Checks if the user is logged in"""
     return 'wikimedia_username' in session
+
+def get_seconds_until_midnight():
+    now = datetime.datetime.now(datetime.timezone.utc)
+    tomorrow = now + datetime.timedelta(days=1)
+    time_until_midnight = datetime.datetime.combine(tomorrow, datetime.time.min, tzinfo=datetime.timezone.utc) - now
+    seconds_until_midnight = int(time_until_midnight.total_seconds())
+    return seconds_until_midnight
 
 # Initialize Rate Limiter
 def get_user_identifier():
@@ -141,9 +150,20 @@ def print_field(field: str | dict | None) -> str:
 
 
 @app.route("/")
+@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key)
 def home():
+    today_d = datetime.date.today()
+
+    data = onthisday.get_today_authors(today_d.month, today_d.day)
+    born = data.get("born") or []
+    died = data.get("died") or []
+    today_widget = [
+        {"author": r, "event": tag}
+        for r, tag in onthisday.widget_entries(born, died, limit=4)
+    ]
     return render_template("home.html",
-                           title=_("Home")
+                           title=_("Home"),
+                           today_widget=today_widget
                            )
 
 
@@ -460,6 +480,43 @@ def countries_main():
                            title=_('Countries and terms'),
                            countries_info=print_field(countries_info)
                            )
+
+
+
+@app.route("/on-this-day/")
+@cache.cached(timeout=86400, make_cache_key=make_cache_key)
+def on_this_day_authors():
+    month, day = onthisday.parse_month_day_from_request(request.args)
+    data = onthisday.get_today_authors(month, day)
+    born = data.get("born") or []
+    died = data.get("died") or []
+
+    featured = onthisday.featured_authors(born, died)
+    featured_qids = {r["qid"] for r, _ in featured}
+    born = [r for r in born if r["qid"] not in featured_qids]
+    died = [r for r in died if r["qid"] not in featured_qids]
+
+    base_year = 2024 if (month == 2 and day == 29) else 2000
+    try:
+        current_d = datetime.date(base_year, month, day)
+    except ValueError:
+        current_d = datetime.date.today()
+    prev_d = current_d - datetime.timedelta(days=1)
+    next_d = current_d + datetime.timedelta(days=1)
+
+    today_d = datetime.date.today()
+
+    return render_template(
+        "on-this-day.html",
+        title=_("On this day"),
+        born=born,
+        died=died,
+        display_date=format_date(current_d, format="d MMMM"),
+        prev_month=prev_d.month, prev_day=prev_d.day,
+        next_month=next_d.month, next_day=next_d.day,
+        is_today=(month == today_d.month and day == today_d.day),
+        featured=featured,
+    )
 
 
 @app.route("/robots.txt")

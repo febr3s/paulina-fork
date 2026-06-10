@@ -28,7 +28,7 @@
         <h3>{{ _('Discover authors') }}</h3>
         <p>{{ _('Paulina is a simple search tool to discover authors from all over the world and learn about their works.') }}</p>
       </div>
-      <p class="my-4">
+      <p class="my-4 text-center">
         <a class="btn border-black rounded-pill pill-custom orange"
         href="{{ url_for('author_page', author_data='Q47152') }}">{{ _('Mary Shelley') }}</a>
         <a class="btn border-black rounded-pill pill-custom orange"
@@ -44,7 +44,7 @@
         <h3>{{ _('Find works') }}</h3>
         <p>{{ _('Easily find information on cultural works from all disciplines of art and knowledge found on Wikidata.') }}</p>
       </div>
-      <p class="my-4">
+      <p class="my-4 text-center">
         <a class="btn border-black rounded-pill pill-custom yellow"
         href="{{ url_for('work_page', work_data='Q2271021') }}">{{ _('The Araucaniad') }}</a>
         <a class="btn border-black rounded-pill pill-custom yellow"
@@ -60,11 +60,29 @@
         <h3>{{ _('Learn about the public domain') }}</h3>
         <p>{{ _('Find out which works are in the public domain in different countries and access the versions available online.') }}</p>
       </div>
-      <p class="my-4">
+      <p class="my-4 text-center">
         <a class="btn border-black rounded-pill pill-custom lightblue"
         href="{{ url_for('term_page', term_id='Q114763455') }}">{{ _('Countries with 50 years post mortem auctoris') }}</a>
         <a class="btn border-black rounded-pill pill-custom lightblue"
         href="{{ url_for('term_page', term_id='Q73560261') }}">{{ _('Countries with 70 years post mortem auctoris') }}</a>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md p-2 m-2">
+      <div class="text-center p-3 mb-3 border border-black h-75" style="background-color:#c095f5; max-height: 60%;">
+        <h3>{{ _('On this day') }}</h3>
+        <p>{{ _('Discover writers, musicians, visual artists and more who were born or died on this day.') }}</p>
+      </div>
+      <p class="my-4 text-center">
+        {% if today_widget %}
+          {% for item in today_widget %}
+          <a class="btn border-black rounded-pill pill-custom violet"
+             href="{{ url_for('author_page', author_data=item.author.qid) }}">{{ item.author.name }}</a>
+          {% endfor %}
+        {% endif %}
+        <a class="btn border-black rounded-pill pill-custom violet"
+           href="{{ url_for('on_this_day_authors') }}">{{ _('See all') }} &rarr;</a>
       </p>
     </div>
   </div>

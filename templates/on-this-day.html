@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="mb-4">
+  <h1 class="h2">{{ _('On this day') }} &mdash; {{ display_date }}</h1>
+  <p class="text-muted">{{ _('Authors who were born or died on this day, ranked by Wikimedia sitelinks.') }}</p>
+
+  <!-- Date navigation -->
+  <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <a href="{{ url_for('on_this_day_authors', month=prev_month, day=prev_day) }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
+      &laquo; {{ _("Previous day") }}
+    </a>
+    <a href="{{ url_for('on_this_day_authors', month=next_month, day=next_day) }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
+      {{ _("Next day") }} &raquo;
+    </a>
+    {% if not is_today %}
+    <a href="{{ url_for('on_this_day_authors') }}"
+       class="btn btn-sm border-black"
+       style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
+      {{ _("Today") }}
+    </a>
+    {% endif %}
+    {{ _('Or choose another date:') }}    
+    <form action="{{ url_for('on_this_day_authors') }}" method="GET">
+      <input type="number" class="mx-1" name="day" placeholder="DD" min="0" max="31" step="1" aria-label="{{ _('Day') }}"> -
+      <input type="number" class="mx-1" name="month" placeholder="MM" min="0" max="12" step="1" aria-label="{{ _('Month') }}">
+      <button type="submit"
+      class="btn btn-sm border-black mb-1"
+      style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
+      {{ _('Apply') }}</button>
+    </form>
+  </div>
+
+  {% if featured %}
+  <div class="row mb-4">
+    {% for author, event in featured %}
+    <div class="col-md-4 mb-2">
+      <div class="card border-black h-100" style="background-color: #fcdb1a;">
+        <div class="card-body">
+          <h2 class="h6 mb-1">
+            {{ _('Featured author') }} &mdash;
+            {% if event == 'born' %}{{ _('Born') }}{% else %}{{ _('Died') }}{% endif %}
+          </h2>
+          <h5 class="mb-0">
+            <a href="{{ url_for('author_page', author_data=author.qid) }}" class="fw-semibold link-dark">{{ author.name }}</a>
+            {% if author.year %} - {{ author.year }}{% endif %}
+            {% if author.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}
+          </h5>
+          {% if author.description %}<p class="small mb-0 mt-2">{{ author.description }}</p>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <h2 class="h4">{{ _('Born on this day') }}</h2>
+      {% if born %}
+      <div class="list-group">
+        {% for a in born %}
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
+              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}</h5>
+            <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+          </div>    
+          {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">{{ _('No authors found for this date.') }}</p>
+      {% endif %}
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <h2 class="h4">{{ _('Died on this day') }}</h2>
+      {% if died %}
+      <div class="list-group">
+        {% for a in died %}
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
+              {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="In public domain">✓</span>{% endif %}</h5>
+            <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+          </div>    
+          {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}
+        </a>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-muted">{{ _('No authors found for this date.') }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
