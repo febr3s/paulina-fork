@@ -152,7 +152,7 @@ def featured_authors(born: list[dict], died: list[dict]) -> list[tuple[dict, str
     return result
 
 
-def widget_entries(born: list[dict], died: list[dict], limit: int = 5) -> list[tuple[dict, str]]:
+def widget_entries(born: list[dict], died: list[dict], limit: int = 4) -> list[tuple[dict, str]]:
     """Merge born/died, sort by notability, tag with 'born'|'died'."""
     tagged: list[tuple[dict, str]] = [(r, "born") for r in born] + [(r, "died") for r in died]
     tagged.sort(key=lambda x: x[0].get("sitelinks") or 0, reverse=True)

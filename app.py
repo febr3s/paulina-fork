@@ -90,7 +90,8 @@ babel = Babel(app, locale_selector=languages.get_locale)  # Initializes Babel
 
 # Cache configuration
 app.config.update(CACHE_TYPE="SimpleCache",
-                  CACHE_DEFAULT_TIMEOUT=300)
+                  CACHE_DEFAULT_TIMEOUT=300,
+                  CACHE_THRESHOLD=1500)
 
 cache = Cache(app)  # Initializes Flask-Caching
 
@@ -108,6 +109,14 @@ def make_cache_key(*args, **kwargs) -> str:
 def user_is_logged_in() -> bool:
     """Checks if the user is logged in"""
     return 'wikimedia_username' in session
+
+def get_seconds_until_midnight():
+    now = datetime.datetime.now(datetime.timezone.utc)
+    tomorrow = now + datetime.timedelta(days=1)
+    time_until_midnight = datetime.datetime.combine(tomorrow, datetime.time.min, tzinfo=datetime.timezone.utc) - now
+    seconds_until_midnight = int(time_until_midnight.total_seconds())
+    print(seconds_until_midnight)
+    return seconds_until_midnight
 
 # Initialize Rate Limiter
 def get_user_identifier():
@@ -142,7 +151,7 @@ def print_field(field: str | dict | None) -> str:
 
 
 @app.route("/")
-@cache.cached(timeout=3600, make_cache_key=make_cache_key)
+@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key)
 def home():
     today_d = datetime.date.today()
     locale = languages.get_locale()
