@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, Response, url_for, abort, flash, session, jsonify
 from flask_caching import Cache
-from flask_babel import Babel, _, get_locale
+from flask_babel import Babel, _, get_locale, format_date
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from requests_oauthlib import OAuth2Session
@@ -115,7 +115,6 @@ def get_seconds_until_midnight():
     tomorrow = now + datetime.timedelta(days=1)
     time_until_midnight = datetime.datetime.combine(tomorrow, datetime.time.min, tzinfo=datetime.timezone.utc) - now
     seconds_until_midnight = int(time_until_midnight.total_seconds())
-    print(seconds_until_midnight)
     return seconds_until_midnight
 
 # Initialize Rate Limiter
@@ -154,11 +153,8 @@ def print_field(field: str | dict | None) -> str:
 @cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key)
 def home():
     today_d = datetime.date.today()
-    locale = languages.get_locale()
 
-    data = on_this_day.get_today_authors(
-        today_d.month, today_d.day, locale,
-    )
+    data = on_this_day.get_today_authors(today_d.month, today_d.day)
     born = data.get("born") or []
     died = data.get("died") or []
     today_widget = [
@@ -490,15 +486,8 @@ def countries_main():
 @app.route("/on-this-day/")
 @cache.cached(timeout=86400, make_cache_key=make_cache_key)
 def on_this_day_authors():
-    from flask_babel import format_date
     month, day = on_this_day.parse_month_day_from_request(request.args)
-    locale = languages.get_locale()
-    cache_root = os.path.join(app.root_path, "cache", "today")
-    data = on_this_day.get_today_authors(
-        month,
-        day,
-        locale,
-    )
+    data = on_this_day.get_today_authors(month, day)
     born = data.get("born") or []
     died = data.get("died") or []
 
@@ -527,8 +516,6 @@ def on_this_day_authors():
         next_month=next_d.month, next_day=next_d.day,
         is_today=(month == today_d.month and day == today_d.day),
         featured=featured,
-        fetched_at=data.get("fetched_at"),
-        fetch_error=data.get("fetch_error"),
     )
 
 

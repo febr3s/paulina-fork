@@ -26,12 +26,6 @@
     {% endif %}
   </div>
 
-  {% if fetch_error %}
-  <div class="alert alert-warning" role="alert">
-    {{ _('Could not refresh data from Wikidata. Showing last cached or empty results.') }}
-  </div>
-  {% endif %}
-
   {% if featured %}
   <div class="row mb-4">
     {% for author, event in featured %}
@@ -42,10 +36,10 @@
             {{ _('Featured author') }} &mdash;
             {% if event == 'born' %}{{ _('Born') }}{% else %}{{ _('Died') }}{% endif %}
           </h2>
-          <p class="mb-0">
+          <h5 class="mb-0">
             <a href="{{ url_for('author_page', author_data=author.qid) }}" class="fw-semibold link-dark">{{ author.name }}</a>
             {% if author.year %}<span class="text-muted"> - {{ author.year }}</span>{% endif %}
-          </p>
+          </h5>
           {% if author.description %}<p class="small mb-0 mt-2">{{ author.description }}</p>{% endif %}
         </div>
       </div>
@@ -58,18 +52,17 @@
     <div class="col-lg-6 mb-4">
       <h2 class="h4">{{ _('Born on this day') }}</h2>
       {% if born %}
-      <ul class="list-group list-group-flush border border-black">
+      <div class="list-group">
         {% for a in born %}
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div>
-            <a href="{{ url_for('author_page', author_data=a.qid) }}">{{ a.name }}</a>
-            {% if a.year %}<span class="text-muted ms-1">({{ a.year }})</span>{% endif %}
-            {% if a.description %}<br><small class="text-muted">{{ a.description }}</small>{% endif %}
-          </div>
-          <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
-        </li>
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}</h5>
+            <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+          </div>    
+          {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}
+        </a>
         {% endfor %}
-      </ul>
+      </div>
       {% else %}
       <p class="text-muted">{{ _('No authors found for this date.') }}</p>
       {% endif %}
@@ -78,16 +71,15 @@
     <div class="col-lg-6 mb-4">
       <h2 class="h4">{{ _('Died on this day') }}</h2>
       {% if died %}
-      <ul class="list-group list-group-flush border border-black">
+      <div class="list-group">
         {% for a in died %}
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div>
-            <a href="{{ url_for('author_page', author_data=a.qid) }}">{{ a.name }}</a>
-            {% if a.year %}<span class="text-muted ms-1">({{ a.year }})</span>{% endif %}
-            {% if a.description %}<br><small class="text-muted">{{ a.description }}</small>{% endif %}
-          </div>
-          <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
-        </li>
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}</h5>
+            <span class="badge bg-secondary rounded-pill">{{ a.sitelinks }}</span>
+          </div>    
+          {% if a.description %}<p class="text-muted mt-1 mb-0">{{ a.description }}</p>{% endif %}
+        </a>
         {% endfor %}
       </ul>
       {% else %}

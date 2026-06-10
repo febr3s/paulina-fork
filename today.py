@@ -12,6 +12,8 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from typing import Any
 
+import languages
+
 
 WIKIPEDIA_ONTHISDAY_URL = "https://en.wikipedia.org/api/rest_v1/feed/onthisday"
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
@@ -41,7 +43,7 @@ CREATIVE_KEYWORDS = frozenset({
     "philosopher", "historian", "scholar", "anthropologist", "folklorist", "theologian",
     "linguist", "literary", "intellectual", "academic", "professor", "teacher",
   
-    "politician", "activist", "reformer", "revolutionary", "nationalist", "statesman",
+    "activist", "reformer", "revolutionary", "nationalist", "statesman",
     "abolitionist", "suffragist",
 
     "naturalist", "explorer", "adventurer",
@@ -75,13 +77,12 @@ def entries_to_rows(entries: list[dict]) -> list[AuthorRow]:
         desc = page.get("description", "")
         if not is_creative(desc):
             continue
-        name = page.get("titles", {}).get("normalized") or page.get("title", "").replace("_", " ")
-        rows.append(AuthorRow(qid=qid, name=name, description=desc, year=entry.get("year"), sitelinks=0))
+        rows.append(AuthorRow(qid=qid, name="", description="", year=entry.get("year"), sitelinks=0))
     return rows
 
 
-def fetch_sitelinks(qids: list[str]) -> dict[str, int]:
-    result: dict[str, int] = {}
+def fetch_labels_desc_and_sitelinks(qids: list[str]) -> dict[str, int]:
+    result: dict = {}
     if not qids:
         return result
     for i in range(0, len(qids), 50):
@@ -89,13 +90,20 @@ def fetch_sitelinks(qids: list[str]) -> dict[str, int]:
 
         r = requests.get(
             WIKIDATA_API_URL,
-            params={"action": "wbgetentities", "ids": "|".join(batch), "props": "sitelinks", "format": "json"},
+            params={"action": "wbgetentities",
+                    "ids": "|".join(batch),
+                    "props": "labels|descriptions|sitelinks",
+                    "languages": languages.get_locale(),
+                    "languagefallback": "",
+                    "format": "json"},
             headers={"user-agent": current_app.config['USER_AGENT']},
             timeout=(10, 30),
         )
 
         for qid, entity in r.json().get("entities", {}).items():
-            result[qid] = len(entity.get("sitelinks", {})) 
+            result[qid] = {"sitelinks": len(entity.get("sitelinks", {})),
+                           "label": entity.get('labels', {}).get(languages.get_locale(), {}).get('value'),
+                           "description": entity.get('descriptions', {}).get(languages.get_locale(), {}).get('value')}
     return result
 
 
@@ -159,7 +167,7 @@ def widget_entries(born: list[dict], died: list[dict], limit: int = 4) -> list[t
     return tagged[:limit]
 
 
-def get_today_authors(month: int, day: int, locale:str) -> dict[str, Any]:
+def get_today_authors(month: int, day: int) -> dict[str, Any]:
 
     url_events = f"{WIKIPEDIA_ONTHISDAY_URL}/all/{month:02d}/{day:02d}"
 
@@ -170,9 +178,11 @@ def get_today_authors(month: int, day: int, locale:str) -> dict[str, Any]:
     died_rows = entries_to_rows(events.get("deaths", []))
 
     all_qids = list({r.qid for r in born_rows + died_rows})
-    sitelinks = fetch_sitelinks(all_qids)
+    item_info = fetch_labels_desc_and_sitelinks(all_qids)
     for r in born_rows + died_rows:
-        r.sitelinks = sitelinks.get(r.qid, 0)
+        r.sitelinks = item_info.get(r.qid, 0).get("sitelinks", 0)
+        r.name = item_info.get(r.qid, "").get("label", "")
+        r.description = item_info.get(r.qid, "").get("description", "")
 
     born_rows.sort(key=lambda r: r.sitelinks, reverse=True)
     died_rows.sort(key=lambda r: r.sitelinks, reverse=True)
@@ -180,9 +190,8 @@ def get_today_authors(month: int, day: int, locale:str) -> dict[str, Any]:
     return {
         "month": month,
         "day": day,
-        "locale": locale,
-        "born": [asdict(x) for x in born_rows[:30]],
-        "died": [asdict(x) for x in died_rows[:30]],
+        "born": [asdict(x) for x in born_rows],
+        "died": [asdict(x) for x in died_rows],
     }
 
 
