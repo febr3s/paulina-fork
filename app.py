@@ -484,7 +484,7 @@ def countries_main():
 
 
 @app.route("/on-this-day/")
-@cache.cached(timeout=86400, make_cache_key=make_cache_key, unless=user_is_logged_in)
+@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key, unless=user_is_logged_in)
 def on_this_day_authors():
     month, day = onthisday.parse_month_day_from_request(request.args)
     data = onthisday.get_today_authors(month, day)
