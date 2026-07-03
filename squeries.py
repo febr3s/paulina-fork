@@ -376,6 +376,50 @@ WHERE {{
 }}
 '''
 
+graphql_query_for_copyright_status_of_author = '''
+query copyrightStatusOfAuthor {{
+  item(id: "{qname}") {{
+    copyrightStatus: statements(propertyId: "P7763") {{
+      value {{
+        ... on ItemValue {{
+          id
+          labelWithLanguageFallback(languageCode: "{lang}") {{
+            languageCode
+            value
+          }}
+        }}
+      }}
+      jurisdiction: qualifiers(propertyId: "P1001") {{
+        value {{
+          ... on ItemValue {{
+            id
+            labelWithLanguageFallback(languageCode: "{lang}") {{
+              languageCode
+              value
+            }}
+          }}
+        }}
+      }}
+    }}
+  }}
+}}
+'''
+
+graphql_query_for_jurisdictions_are_instances_of = '''
+query jurisdictionsAreInstancesOf {{
+  itemsById(ids: {qlist}) {{
+    id
+    instanceOf: statements(propertyId: "P31") {{
+      value {{
+        ... on ItemValue {{
+          id
+        }}
+      }}
+    }}
+  }}
+}}
+'''
+
 query_for_authors_of_a_work = '''
 SELECT DISTINCT ?typeOfAuthor ?typeOfAuthorLabel ?author ?authorLabel 
 WHERE 
