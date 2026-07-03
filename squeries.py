@@ -363,6 +363,35 @@ WHERE {{
 }}
 '''
 
+graphql_query_for_copyright_status_of_work = '''
+query copyrightStatusOfWork {{
+  item(id: "{qname}") {{
+    copyrightStatus: statements(propertyId: "P6216") {{
+      value {{
+        ... on ItemValue {{
+          id
+          labelWithLanguageFallback(languageCode: "{lang}") {{
+            languageCode
+            value
+          }}
+        }}
+      }}
+      jurisdiction: qualifiers(propertyId: "P1001") {{
+        value {{
+          ... on ItemValue {{
+            id
+            labelWithLanguageFallback(languageCode: "{lang}") {{
+              languageCode
+              value
+            }}
+          }}
+        }}
+      }}
+    }}
+  }}
+}}
+'''
+
 query_for_copyright_status_of_author = '''
 SELECT DISTINCT ?cstatus ?cstatusLabel ?jurisdiction ?jurisdictionLabel ?jurisdictionIsInstanceOf ?jurisdictionIsInstanceOfLabel 
 WHERE {{ 

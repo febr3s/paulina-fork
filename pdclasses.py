@@ -298,7 +298,8 @@ class Author(Parent):
                         'applies_to_jurisdiction_label': jurisdiction.get("value", {}).get("labelWithLanguageFallback", {}).get("value"),
                         'applies_to_jurisdiction_id': jurisdiction.get("value", {}).get("id"),
                     }
-                    copyright_status.append(status_dict)
+                    if status_dict not in copyright_status:
+                        copyright_status.append(status_dict)
             
             list_of_jurisdictions = [status.get("applies_to_jurisdiction_id") for status in copyright_status]
 
@@ -496,26 +497,66 @@ class Work(Parent):
             self.full_work_link = full_work_available_at[0].get('value', {}).get('content')
 
     def getCopyrightStatus(self):  # Improve this: when copyright status is None, try to estimate it by author's death or publication date
-        copyright_status_response = squeries.retrieve_query(squeries.query_for_copyright_status_of_work,
+        # copyright_status_response = squeries.retrieve_query(squeries.query_for_copyright_status_of_work,
+        #                                            qname=self.wikidata_item_id,
+        #                                            lang=languages.get_locale()
+        #                                            )
+        
+        copyright_status_response = squeries.retrieve_graphql_query(squeries.graphql_query_for_copyright_status_of_work,
                                                    qname=self.wikidata_item_id,
                                                    lang=languages.get_locale()
                                                    )
+        try:
+            copyright_status_response["item"]["copyrightStatus"][0]["value"]["labelWithLanguageFallback"]["value"]
+        except:
+            copyright_status_response = None
+        
         if not copyright_status_response:
             return None
         else:
             copyright_status = []
-            for claim in copyright_status_response:
-                try:
+            copyright_status_response = copyright_status_response.get("item", {}).get("copyrightStatus")
+
+            for status in copyright_status_response:
+                for jurisdiction in status.get("jurisdiction"):
                     status_dict = {
-                        'status_label': claim.get('cstatusLabel', {}).get('value'),
-                        'status_id': claim.get('cstatus', {}).get('value').split("/")[-1],
-                        'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
-                        'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1] if claim.get('jurisdiction', {}).get('value') else None,
-                        'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1] if claim.get('jurisdictionIsInstanceOf', {}).get('value') else None
-                        }
-                    copyright_status.append(status_dict)
-                except:
-                    pass
+                        'status_label': status.get("value", {}).get("labelWithLanguageFallback", {}).get("value"),
+                        'status_id': status.get("value", {}).get("id"),
+                        'applies_to_jurisdiction_label': jurisdiction.get("value", {}).get("labelWithLanguageFallback", {}).get("value"),
+                        'applies_to_jurisdiction_id': jurisdiction.get("value", {}).get("id"),
+                    }
+                    if status_dict not in copyright_status:
+                        copyright_status.append(status_dict)
+            
+            list_of_jurisdictions = [status.get("applies_to_jurisdiction_id") for status in copyright_status]
+
+            jurisdictions_are_instances_of_response = squeries.retrieve_graphql_query(squeries.graphql_query_for_jurisdictions_are_instances_of,
+                                                   qlist=json.dumps(list_of_jurisdictions)
+                                                   )
+            
+            for status in copyright_status:
+                for jurisdiction in jurisdictions_are_instances_of_response["itemsById"]:
+                    if jurisdiction["id"] == status["applies_to_jurisdiction_id"]:
+                        instance_of = jurisdiction.get("instanceOf")
+                        for i in instance_of:
+                            if i.get("value", {}).get("id") in ["Q63705939", "Q6256"]:
+                                status["jurisdiction_is_instance_of"] = i.get("value", {}).get("id")
+            
+            ## ALTERNATIVE USING SPARQL QUERY
+            # copyright_status = []
+            # for claim in copyright_status_response:
+            #     try:
+            #         status_dict = {
+            #             'status_label': claim.get('cstatusLabel', {}).get('value'),
+            #             'status_id': claim.get('cstatus', {}).get('value').split("/")[-1],
+            #             'applies_to_jurisdiction_label': claim.get('jurisdictionLabel', {}).get('value'),
+            #             'applies_to_jurisdiction_id': claim.get('jurisdiction', {}).get('value').split("/")[-1] if claim.get('jurisdiction', {}).get('value') else None,
+            #             'jurisdiction_is_instance_of': claim.get('jurisdictionIsInstanceOf', {}).get('value').split("/")[-1] if claim.get('jurisdictionIsInstanceOf', {}).get('value') else None
+            #             }
+            #         copyright_status.append(status_dict)
+            #     except:
+            #         pass
+
             return copyright_status
         # Other attributes to be created: identifiers, form of creative work, genre, Gutenberg link, etc
 
