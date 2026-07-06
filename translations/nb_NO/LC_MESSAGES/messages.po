@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-06-10 18:20-0300\n"
-"PO-Revision-Date: 2025-10-14 22:05+0000\n"
+"PO-Revision-Date: 2026-06-26 22:01+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/paulina/"
+"paulina-app/nb_NO/>\n"
 "Language: nb_NO\n"
-"Language-Team: Norwegian Bokmål "
-"<https://hosted.weblate.org/projects/paulina/paulina-app/nb_NO/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: app.py:143
@@ -64,19 +65,19 @@ msgstr "Land og vilkår"
 #: app.py:511 templates/home.html:74 templates/layout.html:109
 #: templates/on-this-day.html:5
 msgid "On this day"
-msgstr ""
+msgstr "Dagen i dag"
 
 #: app.py:624
 msgid "Login failed. Please try again."
-msgstr ""
+msgstr "Kunne ikke logge på. Prøv på nytt."
 
 #: app.py:634 app.py:704
 msgid "Authentication failed. Please try again."
-msgstr ""
+msgstr "Autentisering feilet. Prøv på nytt."
 
 #: app.py:639
 msgid "Login session expired. Please try again."
-msgstr ""
+msgstr "Innlogginsøkten har løpt ut. Prøv på nytt."
 
 #: app.py:646
 msgid "Invalid state parameter. Please try again."
@@ -88,61 +89,60 @@ msgstr ""
 
 #: app.py:693
 msgid "Failed to get user profile. Please try again."
-msgstr ""
+msgstr "Kunne ikke hente brukerprofil. Prøv på nytt."
 
 #: app.py:717
 msgid "You have been logged out."
-msgstr ""
+msgstr "Du har blitt logget ut."
 
 #: app.py:730
 msgid "Please login to add an author."
-msgstr ""
+msgstr "Logg inn for å legge til en skaper."
 
 #: app.py:735 app.py:850
 msgid "Your session has expired. Please login again."
-msgstr ""
+msgstr "Økten din har utløpt. Logg inn på nytt."
 
 #: app.py:743 app.py:858 app.py:969 app.py:1070
 msgid "Session expired. Please log in again."
-msgstr ""
+msgstr "Økten har utløpt. Logg inn på nytt."
 
 #: app.py:782
-#, fuzzy, python-format
+#, python-format
 msgid "Error creating author: %(error)s"
-msgstr "Dødsdato"
+msgstr "Feil ved opprettelse av skaper: %(error)s"
 
 #: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:124
-#, fuzzy
 msgid "Add Author"
-msgstr "Skapere"
+msgstr "Legg til skaper"
 
 #: app.py:793
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
+"Det har oppstått en feil ved opprettelse av denne skaperen. Prøv på nytt."
 
 #: app.py:845
 msgid "Please login to add a work."
-msgstr ""
+msgstr "Logg inn for å legge til et verk."
 
 #: app.py:897
-#, fuzzy, python-format
+#, python-format
 msgid "Error creating work: %(error)s"
-msgstr "Dødsdato"
+msgstr "Feil ved opprettelse av verk: %(error)s"
 
 #: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:130
-#, fuzzy
 msgid "Add Work"
-msgstr "Finn verker"
+msgstr "Legg til verk"
 
 #: app.py:908
 msgid "An error occurred while creating the work. Please try again."
-msgstr ""
+msgstr "Det oppsto en feil ved opprettelse av verket. Prøv på nytt."
 
 #: app.py:962 app.py:1064
 msgid "You must be logged in to edit."
-msgstr ""
+msgstr "Du må være innlogget for å redigere."
 
 #: app.py:978 app.py:1076
 msgid "Invalid request data."
@@ -150,12 +150,12 @@ msgstr ""
 
 #: app.py:985 app.py:1080
 msgid "No changes provided."
-msgstr ""
+msgstr "Ingen endringer angitt."
 
 #: app.py:1005 app.py:1096
 #, python-format
 msgid "Missing property or value for field: %(field)s"
-msgstr ""
+msgstr "Mangler egenskap eller verdi for felt: %(field)s"
 
 #: app.py:1026 app.py:1114
 #, fuzzy, python-format
@@ -164,21 +164,20 @@ msgstr "Dødsdato"
 
 #: app.py:1034 app.py:1119
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Oppdatert!"
 
 #: app.py:1039 app.py:1121
-#, fuzzy
 msgid "Updated with some errors."
-msgstr "Fødselsdato"
+msgstr "Oppdatert med noen feil."
 
 #: app.py:1045 app.py:1123
 msgid "Failed to update fields."
-msgstr ""
+msgstr "Kunne ikke oppdatere felt."
 
 #: app.py:1052 app.py:1126
-#, fuzzy, python-format
+#, python-format
 msgid "Server error: %(error)s"
-msgstr "Fødselsdato"
+msgstr "Tjenestefeil: %(error)s"
 
 #: app.py:1140
 msgid "404 error"
@@ -206,48 +205,47 @@ msgstr "Ikke-binær"
 
 #: filters.py:16 filters.py:93
 msgid "Academia"
-msgstr ""
+msgstr "Akademisk"
 
 #: filters.py:24 filters.py:101
 msgid "Architecture"
-msgstr ""
+msgstr "Arkitektur"
 
 #: filters.py:30
 msgid "Cinema"
-msgstr ""
+msgstr "Film"
 
 #: filters.py:36 filters.py:123
 msgid "Journalism"
-msgstr ""
+msgstr "Journalistikk"
 
 #: filters.py:42 filters.py:129
 msgid "Music"
-msgstr ""
+msgstr "Musikk"
 
 #: filters.py:52 filters.py:139
 msgid "Performing arts"
-msgstr ""
+msgstr "Scenekunst"
 
 #: filters.py:58 filters.py:146
 msgid "Programming"
-msgstr ""
+msgstr "Programmering"
 
 #: filters.py:64 filters.py:152
 msgid "Visual arts"
-msgstr ""
+msgstr "Billedkunst"
 
 #: filters.py:76 filters.py:164
-#, fuzzy
 msgid "Writing"
-msgstr "Maleri"
+msgstr "Skrift"
 
 #: filters.py:107
 msgid "Cinema and audiovisual"
-msgstr ""
+msgstr "Film og audiovisuelt"
 
 #: filters.py:117
 msgid "Design and decorative arts"
-msgstr ""
+msgstr "Design og dekorativ kunst"
 
 #: pdclasses.py:98
 msgid "(decade)"
@@ -263,13 +261,13 @@ msgstr "(årtusen)"
 
 #: pdclasses.py:237
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that "
-"there is no free image of the person available, and that if you own one, "
-"you can click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that there "
+"is no free image of the person available, and that if you own one, you can "
+"click on the placeholder link."
 msgstr ""
-"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at "
-"det ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp"
-" et du eier ved å klikke på plassholderlenken."
+"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at det "
+"ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp et du "
+"eier ved å klikke på plassholderlenken."
 
 #: pdclasses.py:242
 #, python-format
@@ -278,9 +276,9 @@ msgstr "Bilde av %(name)s."
 
 #: pdclasses.py:413
 msgid ""
-"Image of a generic work. The text above it indicates that there is no "
-"free image of the work available, and that if you own one, you can click "
-"on the placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no free "
+"image of the work available, and that if you own one, you can click on the "
+"placeholder link to upload it."
 msgstr ""
 "Bilde av generisk verk. Teksten ovenfor indikerer at det ikke finnes noe "
 "fritt bilde av verket tilgjengelig, og at kan laste opp et du eier ved å "
@@ -298,7 +296,7 @@ msgstr "Flagg tilhørende %(country_name)s."
 
 #: wikidata_api.py:70 wikidata_api.py:98
 msgid "No OAuth session available"
-msgstr ""
+msgstr "Ingen OAuth-økt tilgjengelig"
 
 #: wikidata_api.py:87
 #, python-format
@@ -307,89 +305,81 @@ msgstr ""
 
 #: templates/add-author.html:591 wikidata_api.py:322
 msgid "Name is required"
-msgstr ""
+msgstr "Navn påkrevd"
 
 #: templates/add-author.html:592 wikidata_api.py:324
 msgid "Gender is required"
 msgstr ""
 
 #: templates/add-author.html:593 wikidata_api.py:326
-#, fuzzy
 msgid "Nationality is required"
-msgstr "Nasjonalitet"
+msgstr "Nasjonalitet påkrevd"
 
 #: templates/add-author.html:594 wikidata_api.py:328
-#, fuzzy
 msgid "Place of birth is required"
-msgstr "Fødested"
+msgstr "Fødested påkrevd"
 
 #: templates/add-author.html:595 wikidata_api.py:330
-#, fuzzy
 msgid "Occupation is required"
-msgstr "Virke"
+msgstr "Beskjeftigelse påkrevd"
 
 #: wikidata_api.py:337
-#, fuzzy, python-format
+#, python-format
 msgid "Date of birth: %(error)s"
-msgstr "Fødselsdato"
+msgstr "Fødselsdato: %(error)s"
 
 #: wikidata_api.py:343
-#, fuzzy, python-format
+#, python-format
 msgid "Date of death: %(error)s"
-msgstr "Dødsdato"
+msgstr "Dødsdato: %(error)s"
 
 #: wikidata_api.py:552
-#, fuzzy
 msgid "work"
-msgstr "Verk"
+msgstr "verk"
 
 #: templates/add-work.html:1557 wikidata_api.py:581
-#, fuzzy
 msgid "Title is required"
-msgstr "Nasjonalitet"
+msgstr "Tittel påkrevd"
 
 #: templates/add-work.html:1564 wikidata_api.py:586
-#, fuzzy
 msgid "Type of work is required"
-msgstr "Fødested"
+msgstr "Type verk er påkrevd"
 
 #: wikidata_api.py:597
-#, fuzzy
 msgid "Invalid type of work selected"
-msgstr "Fødested"
+msgstr "Ugyldig type verk valgt"
 
 #: wikidata_api.py:605
 msgid "Author"
-msgstr "Forfatter"
+msgstr "Skaper"
 
 #: wikidata_api.py:606
 msgid "Director"
-msgstr ""
+msgstr "Regissør"
 
 #: wikidata_api.py:607
-#, fuzzy
 msgid "Creator"
-msgstr "Publiseringsdato"
+msgstr "Skaper"
 
 #: wikidata_api.py:608
 msgid "Composer"
-msgstr ""
+msgstr "Komponist"
 
 #: wikidata_api.py:609
 msgid "Screenwriter"
-msgstr ""
+msgstr "Manusforfatter"
 
 #: wikidata_api.py:610
 msgid "Lyricist"
-msgstr ""
+msgstr "Lyriker"
 
 #: wikidata_api.py:611
 msgid "Performer"
-msgstr ""
+msgstr "Utøver"
 
 #: wikidata_api.py:612
 msgid "Producer"
-msgstr ""
+msgstr "Produsent"
 
 #: templates/add-work.html:350 templates/work.html:232 templates/work.html:416
 #: wikidata_api.py:613
@@ -397,9 +387,8 @@ msgid "Language"
 msgstr "Språk"
 
 #: templates/add-work.html:372 wikidata_api.py:614
-#, fuzzy
 msgid "Original language"
-msgstr "Språk"
+msgstr "Originalspråk"
 
 #: templates/add-work.html:508 templates/layout.html:282
 #: templates/work.html:292 templates/work.html:440 wikidata_api.py:615
@@ -407,23 +396,20 @@ msgid "Country of origin"
 msgstr "Opprinnelsesland"
 
 #: wikidata_api.py:616
-#, fuzzy
 msgid "Country of publication"
-msgstr "Fødeland"
+msgstr "Publiseringsland"
 
 #: templates/add-work.html:396 wikidata_api.py:617
-#, fuzzy
 msgid "Location"
-msgstr "Virke"
+msgstr "Sted"
 
 #: wikidata_api.py:618
-#, fuzzy
 msgid "Genre"
-msgstr "Kjønn"
+msgstr "Sjanger"
 
 #: templates/add-work.html:531 wikidata_api.py:619
 msgid "Record label"
-msgstr ""
+msgstr "Plateselskap"
 
 #: templates/add-work.html:474 templates/work.html:103 templates/work.html:357
 #: wikidata_api.py:620
@@ -432,61 +418,60 @@ msgstr "Publiseringsdato"
 
 #: templates/add-work.html:443 templates/work.html:167 templates/work.html:386
 #: wikidata_api.py:621
-#, fuzzy
 msgid "Creation date"
-msgstr "Publiseringsdato"
+msgstr "Skapelsesdato"
 
 #: wikidata_api.py:629
-#, fuzzy, python-format
+#, python-format
 msgid "%(field)s is required"
-msgstr "Nasjonalitet"
+msgstr "%(field)s er påkrevd"
 
 #: wikidata_api.py:636
-#, fuzzy, python-format
+#, python-format
 msgid "Publication date: %(error)s"
-msgstr "Publiseringsdato"
+msgstr "Publiseringsdato: %(error)s"
 
 #: wikidata_api.py:642
-#, fuzzy, python-format
+#, python-format
 msgid "Creation date: %(error)s"
-msgstr "Dødsdato"
+msgstr "Skapelsesdato: %(error)s"
 
 #: wikidata_api.py:1063
 #, python-format
 msgid "Invalid date: contains '%(pattern)s'"
-msgstr ""
+msgstr "Ugyldig dato: inneholder «%(pattern)s»"
 
 #: templates/author.html:1072 templates/work.html:753 wikidata_api.py:1069
 msgid "Invalid date format"
-msgstr ""
+msgstr "Ugyldig datoformat"
 
 #: wikidata_api.py:1077
 msgid "Year is required and must be a valid 4-digit number"
-msgstr ""
+msgstr "År er påkrevd og må være et gyldig firesifret tall"
 
 #: wikidata_api.py:1082
 #, python-format
 msgid "Invalid month: %(month)s. Must be 01-12 or 00 for unknown"
-msgstr ""
+msgstr "Ugyldig måned: %(month)s. Må være 01–12 eller 00 dersom den er ukjent"
 
 #: wikidata_api.py:1087
 #, python-format
 msgid "Invalid day: %(day)s. Must be 01-31 or 00 for unknown"
-msgstr ""
+msgstr "Ugyldig dag: %(day)s. Må være 01–31 eller 00 dersom den er ukjent"
 
 #: wikidata_api.py:1140
 #, python-format
 msgid "creator from %(nationality)s"
-msgstr ""
+msgstr "skaper fra %(nationality)s"
 
 #: wikidata_api.py:1142
 msgid "creator"
-msgstr ""
+msgstr "skaper"
 
 #: wikidata_api.py:1171
 #, python-format
 msgid "%(work_type)s by %(creator)s"
-msgstr ""
+msgstr "%(work_type)s av %(creator)s"
 
 #: wikidata_constants.py:136
 msgid "Literary work"
@@ -494,11 +479,11 @@ msgstr "Litterært verk"
 
 #: wikidata_constants.py:147
 msgid "Written work (not literary)"
-msgstr ""
+msgstr "Skriftverk (ikke litterært)"
 
 #: wikidata_constants.py:158
 msgid "Edition of a written work"
-msgstr ""
+msgstr "Utgave av et skrevet verk"
 
 #: wikidata_constants.py:171
 msgid "Film"
@@ -506,7 +491,7 @@ msgstr "Film"
 
 #: wikidata_constants.py:182
 msgid "Audiovisual work (other)"
-msgstr ""
+msgstr "Audiovisuelt verk (annet)"
 
 #: wikidata_constants.py:195
 msgid "Painting"
@@ -518,17 +503,15 @@ msgstr "Skulptur"
 
 #: wikidata_constants.py:217
 msgid "Visual artwork (other)"
-msgstr ""
+msgstr "Billedkunst (annet)"
 
 #: wikidata_constants.py:230
-#, fuzzy
 msgid "Musical work/composition"
-msgstr "Musikkverk"
+msgstr "Musikkverk/komposisjon"
 
 #: wikidata_constants.py:242
-#, fuzzy
 msgid "Album"
-msgstr "Om"
+msgstr "Plate"
 
 #: templates/404.html:7
 msgid "Page not found"
@@ -595,31 +578,30 @@ msgstr "liste over prosjektets bidragsytere"
 #: templates/about.html:19
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
-"search for people and find out if they have freely accessible works in "
-"the public domain. It also facilitates the understanding of copyright "
-"terms and helps to know when a work enters the public domain in each "
-"country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
+"for people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
-"Det er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater "
-"deg å søke etter folk og finne ut om de har fritt tilgjengelige verk i "
-"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
-"å finne ut når et verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
+"er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater deg å "
+"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
+"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg å "
+"finne ut når et verk går inn i allemannseie i hvert land."
 
 #: templates/about.html:21
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database"
-" maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database "
+"maintained by the Wikimedia Foundation."
 msgstr ""
 "Paulina henter data fra WIkidata, den frie og gemenskapsdrevne databasen "
 "vedlikeholdt av Wikimedia-stiftelsen."
 
 #: templates/about.html:22
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete."
-" Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete. "
+"Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
@@ -635,12 +617,12 @@ msgstr "Lokale verktøy"
 #: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the "
-"needs of each community."
+"national, regional or thematic versions of the tool, according to the needs "
+"of each community."
 msgstr ""
 "Nettsiden er en del av et større prosjekt for å hjelpe opprettelse av "
-"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold"
-" til behovene hver gemenskap måtte ha."
+"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold "
+"til behovene hver gemenskap måtte ha."
 
 #: templates/about.html:25
 msgid "Who makes Paulina"
@@ -667,11 +649,11 @@ msgstr "Innholdslisenser"
 #: templates/about.html:29
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from"
-" Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from "
+"Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata "
-"og er underlagt vilkårene i %(CC0_link)s."
+"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata og "
+"er underlagt vilkårene i %(CC0_link)s."
 
 #: templates/about.html:30
 #, python-format
@@ -685,10 +667,10 @@ msgstr ""
 #: templates/about.html:31
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and "
-"terms come from %(wm_commons_link)s and are under different free licenses"
-" or in the public domain. We recommend consulting the information of each"
-" content on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and terms "
+"come from %(wm_commons_link)s and are under different free licenses or in "
+"the public domain. We recommend consulting the information of each content "
+"on Wikimedia Commons."
 msgstr ""
 "Bildene og media på sidene om skapere, verk, land og vilkår kommer fra "
 "%(wm_commons_link)s og er underlagt forskjellige frie lisenser eller er "
@@ -697,17 +679,16 @@ msgstr ""
 
 #: templates/about.html:32
 msgid ""
-"The works accessible through links to external sites are available to the"
-" public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. "
-"We recommend consulting the information of each work on the websites "
-"where they are hosted."
+"The works accessible through links to external sites are available to the "
+"public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. We "
+"recommend consulting the information of each work on the websites where they "
+"are hosted."
 msgstr ""
 "Verk tilgjengelig gjennom lenker til eksterne sider er tilgjengelig for "
 "offentlig, for det meste fordi de eer i allemannseie, eller under frie "
-"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen "
-"lovområder. Det anbefales å sjekke info om hvert verk på nettsiden de "
-"vertstjenes fra."
+"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen lovområder. "
+"Det anbefales å sjekke info om hvert verk på nettsiden de vertstjenes fra."
 
 #: templates/about.html:33
 msgid "Free software"
@@ -716,52 +697,50 @@ msgstr "Fri programvare"
 #: templates/about.html:34
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit "
-"the %(repository_link)s."
-msgstr "Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
+"%(repository_link)s."
+msgstr ""
+"Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
 
 #: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
-msgstr ""
+msgstr "Løs feilene og send inn på nytt."
 
 #: templates/add-author.html:18 templates/add-work.html:17
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #: templates/add-author.html:19
 msgid "Author Created Successfully!"
-msgstr ""
+msgstr "Skaper opprettet!"
 
 #: templates/add-author.html:21
 msgid "The author has been added to Wikidata with ID:"
-msgstr ""
+msgstr "Skaperen har blitt lagt til Wikidata med ID-en:"
 
 #: templates/add-author.html:26 templates/add-work.html:26
-#, fuzzy
 msgid "View on Wikidata"
-msgstr "Wikidata"
+msgstr "Se på Wikidata"
 
 #: templates/add-author.html:29 templates/add-work.html:29
-#, fuzzy
 msgid "View on Paulina"
-msgstr "Om Paulina"
+msgstr "Se på Paulina"
 
 #: templates/add-author.html:53
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: templates/add-author.html:60
-#, fuzzy
 msgid "e.g., Paulina Luisi"
-msgstr "Paulina Luisi"
+msgstr "f.eks., Paulina Luisi"
 
 #: templates/add-author.html:64
 msgid "Please enter the author name"
-msgstr ""
+msgstr "Angi skapernavnet"
 
 #: templates/add-author.html:67
 msgid "Matching authors will appear as you type"
-msgstr ""
+msgstr "Samsvarende skapere dukker opp imens du skriver"
 
 #: templates/add-author.html:74 templates/add-work.html:86
 msgid "Description"
@@ -769,33 +748,32 @@ msgstr "Beskrivelse"
 
 #: templates/add-author.html:80
 msgid "e.g., Uruguayan doctor, writer, and politician"
-msgstr ""
+msgstr "f.eks., uruguayansk lege, forfatter og politiker"
 
 #: templates/add-author.html:82
 msgid "Please enter a brief description"
-msgstr ""
+msgstr "Angi en kort beskrivelse"
 
 #: templates/add-author.html:91 templates/add-work.html:66
 msgid "Possible matches on Wikidata:"
-msgstr ""
+msgstr "Mulige treff på Wikidata:"
 
 #: templates/add-author.html:98 templates/add-work.html:74
 msgid "None of these match - Continue"
-msgstr ""
+msgstr "Ingen av disse passer – fortsett"
 
 #: templates/add-author.html:103 templates/add-author.html:571
 #: templates/add-work.html:79
 msgid "No exact match found."
-msgstr ""
+msgstr "Intet eksakt treff funnet."
 
 #: templates/add-author.html:111 templates/author.html:116
 msgid "Biography"
 msgstr "Biografi"
 
 #: templates/add-author.html:114
-#, fuzzy
 msgid "Biographical Information"
-msgstr "Manglende info?"
+msgstr "Biografisk informasjon"
 
 #: templates/add-author.html:122 templates/author.html:146
 #: templates/author.html:599 templates/layout.html:237
@@ -805,7 +783,7 @@ msgstr "Nasjonalitet"
 #: templates/add-author.html:129 templates/add-work.html:512
 #: templates/add-work.html:560
 msgid "Search for a country..."
-msgstr ""
+msgstr "Søk etter land ..."
 
 #: templates/add-author.html:146 templates/add-author.html:182
 #: templates/add-author.html:221 templates/add-author.html:261
@@ -825,7 +803,7 @@ msgstr ""
 #: templates/author.html:738 templates/author.html:768 templates/work.html:375
 #: templates/work.html:404 templates/work.html:428 templates/work.html:452
 msgid "Add reference"
-msgstr ""
+msgstr "Legg til referanse"
 
 #: templates/add-author.html:159 templates/author.html:258
 #: templates/author.html:646 templates/layout.html:215
@@ -840,7 +818,7 @@ msgstr "Alle"
 
 #: templates/add-author.html:176 templates/author.html:1090
 msgid "Please select a gender"
-msgstr ""
+msgstr "Velg et kjønn"
 
 #: templates/add-author.html:197 templates/author.html:435
 #: templates/author.html:726
@@ -849,7 +827,7 @@ msgstr "Fødested"
 
 #: templates/add-author.html:204
 msgid "e.g., Buenos Aires, Tokyo, Lagos"
-msgstr ""
+msgstr "f.eks., Buenos Aires, Tokyo, Lagos"
 
 #: templates/add-author.html:234 templates/author.html:378
 #: templates/author.html:701
@@ -858,7 +836,7 @@ msgstr "Virke"
 
 #: templates/add-author.html:240
 msgid "e.g., writer, painter, sculptor"
-msgstr ""
+msgstr "f.eks., forfatter, maler, skulptør"
 
 #: templates/add-author.html:276 templates/author.html:202
 #: templates/author.html:623
@@ -867,12 +845,11 @@ msgstr "Etnisitet"
 
 #: templates/add-author.html:283
 msgid "e.g., Aymara, Inuit, Zulu"
-msgstr ""
+msgstr "f.eks., aymara, inuitt, zulu"
 
 #: templates/add-author.html:298
-#, fuzzy
 msgid "Type to search Wikidata"
-msgstr "Legg til på WIkidata"
+msgstr "Skriv for å søke gjennom Wikidata"
 
 #: templates/add-author.html:320 templates/author.html:312
 #: templates/author.html:671
@@ -885,9 +862,8 @@ msgstr "Fødselsdato"
 #: templates/author.html:676 templates/author.html:755
 #: templates/on-this-day.html:29 templates/work.html:131
 #: templates/work.html:195 templates/work.html:362 templates/work.html:391
-#, fuzzy
 msgid "Day"
-msgstr "Alle"
+msgstr "Dag"
 
 #: templates/add-author.html:342 templates/add-author.html:397
 #: templates/add-work.html:452 templates/add-work.html:483
@@ -896,16 +872,15 @@ msgstr "Alle"
 #: templates/on-this-day.html:30 templates/work.html:135
 #: templates/work.html:199 templates/work.html:366 templates/work.html:395
 msgid "Month"
-msgstr ""
+msgstr "Måned"
 
 #: templates/add-author.html:352 templates/add-author.html:407
 #: templates/add-work.html:456 templates/add-work.html:487
 #: templates/author.html:352 templates/author.html:565
 #: templates/author.html:684 templates/author.html:763 templates/work.html:139
 #: templates/work.html:203 templates/work.html:370 templates/work.html:399
-#, fuzzy
 msgid "Year"
-msgstr "Søk"
+msgstr "År"
 
 #: templates/add-author.html:374 templates/author.html:525
 #: templates/author.html:750
@@ -914,47 +889,48 @@ msgstr "Dødsdato"
 
 #: templates/add-author.html:375
 msgid "if applicable"
-msgstr ""
+msgstr "om passende"
 
 #: templates/add-author.html:428
 msgid "Add author image (optional)"
-msgstr ""
+msgstr "Legg til skaperbilde (valgfritt)"
 
 #: templates/add-author.html:438
 msgid ""
-"Search Wikimedia Commons for author's image, or enter the Commons image "
-"URL directly:"
+"Search Wikimedia Commons for author's image, or enter the Commons image URL "
+"directly:"
 msgstr ""
+"Søk på Wikimedia Commons for et bilde av skaperen eller legg til en URL til "
+"at bilde fra Commons direkte:"
 
 #: templates/add-author.html:446
-#, fuzzy
 msgid "Search Commons for"
-msgstr "Søk i verker"
+msgstr "Søk på Commons etter"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
-"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
-"below."
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
 msgstr ""
+"Åpner Wikimedia Commons i en ny fane. Kopier bilde-URL-en og lim den inn "
+"nedenfor."
 
 #: templates/add-author.html:455 templates/add-work.html:611
 msgid "Image URL"
-msgstr ""
+msgstr "Bilde-URL"
 
 #: templates/add-author.html:473 templates/add-author.html:481
 #: templates/add-author.html:601 templates/add-work.html:628
 #: templates/add-work.html:639
 msgid "Image preview"
-msgstr ""
+msgstr "Forhåndsvisning av bilde"
 
 #: templates/add-author.html:489 templates/add-work.html:647
 msgid "Could not load image"
-msgstr ""
+msgstr "Kunne ikke laste inn bilde"
 
 #: templates/add-author.html:502 templates/add-work.html:664
-#, fuzzy
 msgid "Add external links (optional)"
-msgstr "Ekstern lenke"
+msgstr "Legg til ekstern lenker (valgfritt)"
 
 #: templates/add-author.html:509 templates/author.html:107
 msgid "Official website"
@@ -962,212 +938,210 @@ msgstr "Offisielt nettsted"
 
 #: templates/add-author.html:517 templates/add-work.html:678
 msgid "Enter the full URL including https://, e.g. https://example.com"
-msgstr ""
+msgstr "Angi den fulle URL-en, inkludert https://, f.eks. https://eksempel.no"
 
 #: templates/add-author.html:537 templates/add-work.html:707
-#, fuzzy
 msgid "Reset"
-msgstr "Treff"
+msgstr "Tilbakestill"
 
 #: templates/add-author.html:540 templates/add-work.html:711
 msgid "Submit"
-msgstr ""
+msgstr "Send inn"
 
 #: templates/add-author.html:560 templates/author.html:817
 #: templates/work.html:570
 msgid "Searching Wikidata..."
-msgstr ""
+msgstr "Søker på Wikidata ..."
 
 #: templates/add-author.html:561 templates/author.html:818
 #: templates/work.html:571
-#, fuzzy
 msgid "No Wikidata results found"
-msgstr "Ingen treff"
+msgstr "Ingen treff på Wikidata"
 
 #: templates/add-author.html:562 templates/add-author.html:573
 #: templates/author.html:819 templates/work.html:572
 msgid "No description"
-msgstr ""
+msgstr "Ingen beskrivelse"
 
 #: templates/add-author.html:563 templates/add-author.html:572
 #: templates/author.html:820 templates/work.html:573
 msgid "Error searching Wikidata"
-msgstr ""
+msgstr "Feil ved søk på Wikidata"
 
 #: templates/add-author.html:564 templates/author.html:821
 #: templates/work.html:574
 msgid "This item is already added"
-msgstr ""
+msgstr "Dette elementet er allerede lagt til"
 
 #: templates/add-author.html:565 templates/author.html:822
 #: templates/work.html:575
 msgid "This item is already selected"
-msgstr ""
+msgstr "Dette elementet er allerede valgt"
 
 #: templates/add-author.html:566 templates/add-author.html:582
 #: templates/author.html:823 templates/author.html:834 templates/work.html:576
 #: templates/work.html:586
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: templates/add-author.html:570
-#, fuzzy
 msgid "Searching..."
-msgstr "Søk"
+msgstr "Søker ..."
 
 #: templates/add-author.html:577 templates/author.html:830
 #: templates/work.html:582
 msgid "Reference"
-msgstr ""
+msgstr "Referanse"
 
 #: templates/add-author.html:578 templates/author.html:831
 #: templates/work.html:583
 msgid "Reference URL"
-msgstr ""
+msgstr "Referanse-URL"
 
 #: templates/add-author.html:579 templates/add-work.html:50
 msgid "Title"
-msgstr ""
+msgstr "Tittel"
 
 #: templates/add-author.html:580 templates/author.html:832
 #: templates/work.html:584
 msgid "Date accessed"
-msgstr ""
+msgstr "Dato besøkt"
 
 #: templates/add-author.html:581
 msgid "Maximum 3 references per field"
-msgstr ""
+msgstr "Maks tre referanser for hvert felt"
 
 #: templates/add-author.html:586
 msgid "Please use an image from Wikimedia Commons."
-msgstr ""
+msgstr "Bruk et bilde fra Wikimedia Commons."
 
 #: templates/add-author.html:587
 msgid "Could not load image. Please check the URL."
-msgstr ""
+msgstr "Kunne ikke laste inn bilde. Sjekk URL-en."
 
 #: templates/add-author.html:596
-#, fuzzy
 msgid "Image must be from Wikimedia Commons"
-msgstr "Wikimedia Commons"
+msgstr "Bilde må være fra Wikimedia Commons"
 
 #: templates/add-author.html:597
 msgid "Please fill in all required fields:"
-msgstr ""
+msgstr "Fyll inn alle de påkrevde feltene:"
 
 #: templates/add-author.html:598 templates/add-work.html:1181
 msgid "Are you sure you want to reset the form? All entered data will be lost."
 msgstr ""
+"Er du sikker på at du vil tilbakestille skjemaet? All angitt data blir tapt."
 
 #: templates/add-author.html:599
 msgid "Please enter the author name first to search for images"
-msgstr ""
+msgstr "Angi skaperens navn først for å søke etter bilder"
 
 #: templates/add-author.html:600
-#, fuzzy
 msgid "author name"
-msgstr "Skapere"
+msgstr "skapernavn"
 
 #: templates/add-author.html:602 templates/author.html:1050
 #: templates/author.html:1452 templates/work.html:733 templates/work.html:1042
 msgid "Year is required"
-msgstr ""
+msgstr "år påkrevd"
 
 #: templates/add-author.html:603 templates/author.html:1051
 #: templates/author.html:1453 templates/work.html:734 templates/work.html:1043
 msgid "Year must be a valid 4-digit number"
-msgstr ""
+msgstr "År må være et gyldig firesifret tall"
 
 #: templates/add-author.html:604
 msgid "Month must be between 0-12 (use 0 for unknown)"
-msgstr ""
+msgstr "Måned må være mellom 0–13 (bruk 0 dersom den er ukjent)"
 
 #: templates/add-author.html:605
 msgid "Day must be between 0-31 (use 0 for unknown)"
-msgstr ""
+msgstr "Dag må være mellom 0–31 (bruk 0 dersom den er ukjent)"
 
 #: templates/add-author.html:606 templates/author.html:1054
 #: templates/author.html:1456 templates/work.html:737 templates/work.html:1046
 msgid "Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Måned kan ikke være 0 når dag er angitt"
 
 #: templates/add-author.html:763
 msgid "Date of birth: Year is required"
-msgstr ""
+msgstr "Fødselsdato: År påkrevd"
 
 #: templates/add-author.html:764
 msgid "Date of birth: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Fødselsdato: År må være et gyldig firesifret tall"
 
 #: templates/add-author.html:765
 msgid "Date of birth: Month must be between 0-12 (use 0 for unknown)"
-msgstr ""
+msgstr "Fødselsdato: Måned må være mellom 0–12 (bruk 0 dersom den er ukjent)"
 
 #: templates/add-author.html:766
 msgid "Date of birth: Day must be between 0-31 (use 0 for unknown)"
-msgstr ""
+msgstr "Fødselsdato: Dag må være mellom 0–31 (bruk 0 dersom den er ukjent)"
 
 #: templates/add-author.html:767
 msgid "Date of birth: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Fødselsdato: Måned kan ikke være 0 når dag er angitt"
 
 #: templates/add-author.html:768
 msgid "Date of birth: Month is required if you enter day"
-msgstr ""
+msgstr "Fødselsdato: Måned er påkrevd når du har angitt en dag"
 
 #: templates/add-author.html:790
 msgid "Date of death: Year is required if you enter month or day"
-msgstr ""
+msgstr "Dødsdato: År er påkrevd når du har angitt måned eller dag"
 
 #: templates/add-author.html:791
 msgid "Date of death: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Dødsdato: År må være et gyldig firesifret tall"
 
 #: templates/add-author.html:792
 msgid "Date of death: Month must be between 0-12 (use 0 for unknown)"
-msgstr ""
+msgstr "Dødsdato: Måned må være mellom 0–12 (bruk 0 dersom den er ukjent)"
 
 #: templates/add-author.html:793
 msgid "Date of death: Day must be between 0-31 (use 0 for unknown)"
-msgstr ""
+msgstr "Dødsdato: Dag må være mellom 0–31 (bruk 0 dersom det er ukjent)"
 
 #: templates/add-author.html:794
 msgid "Date of death: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Dødsdato: Måned kan ikke være 0 dersom dag er angitt"
 
 #: templates/add-author.html:795
 msgid "Date of death: Month is required if you enter day and year"
-msgstr ""
+msgstr "Dødsdato: Måned er påkrev om du har angitt dag og år"
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
-"Could not connect to server. Please refresh the page manually to clear "
-"all data."
+"Could not connect to server. Please refresh the page manually to clear all "
+"data."
 msgstr ""
+"Kunne ikke koble til tjeneren. Gjenoppfrisk siden manuelt for å klarere all "
+"data."
 
 #: templates/add-work.html:18
 msgid "Work Created Successfully!"
-msgstr ""
+msgstr "Verk opprettet!"
 
 #: templates/add-work.html:20
 msgid "The work has been added to Wikidata with ID:"
-msgstr ""
+msgstr "Verket er lagt til Wikidata med ID-en:"
 
 #: templates/add-work.html:54
 msgid "e.g., Don Quixote"
-msgstr ""
+msgstr "f.eks., Don Quijote"
 
 #: templates/add-work.html:56
 msgid "Please enter the work title"
-msgstr ""
+msgstr "Angi verkstittel"
 
 #: templates/add-work.html:59
 msgid "Matching works will appear as you type"
-msgstr ""
+msgstr "Samsvarende verk vises imens du skriver"
 
 #: templates/add-work.html:90
 msgid "e.g., Spanish novel by Miguel de Cervantes"
-msgstr ""
+msgstr "f.eks., spansk roman av Miguel de Cervantes"
 
 #: templates/add-work.html:101 templates/country.html:34
 #: templates/layout.html:271
@@ -1175,13 +1149,12 @@ msgid "Type of work"
 msgstr "Type verk"
 
 #: templates/add-work.html:105
-#, fuzzy
 msgid "Select type of work..."
-msgstr "Type verk"
+msgstr "Velg type verk ..."
 
 #: templates/add-work.html:118
 msgid "Please select a type of work."
-msgstr ""
+msgstr "Velg en verkstype."
 
 #: templates/add-work.html:138
 #, fuzzy
@@ -1194,9 +1167,8 @@ msgid "Author(s)"
 msgstr "Skapere"
 
 #: templates/add-work.html:148
-#, fuzzy
 msgid "Search for author..."
-msgstr "Oppdag forfattere"
+msgstr "Søk etter skaper ..."
 
 #: templates/add-work.html:169
 msgid "Director(s)"
@@ -1224,215 +1196,196 @@ msgstr ""
 
 #: templates/add-work.html:243
 msgid "Composer(s)"
-msgstr ""
+msgstr "Komponist(er)"
 
 #: templates/add-work.html:247
-#, fuzzy
 msgid "Search for composer..."
-msgstr "Søk i verker"
+msgstr "Søk etter komponist ..."
 
 #: templates/add-work.html:267
 msgid "Screenwriter(s)"
-msgstr ""
+msgstr "Manusforfatter(e)"
 
 #: templates/add-work.html:271
 msgid "Search for screenwriter..."
-msgstr ""
+msgstr "Søk etter manusforfatter ..."
 
 #: templates/add-work.html:291
 msgid "Lyricist(s)"
-msgstr ""
+msgstr "Lyriker(e)"
 
 #: templates/add-work.html:295
 msgid "Search for lyricist..."
-msgstr ""
+msgstr "Søk etter lyriker ..."
 
 #: templates/add-work.html:315
 msgid "Producer(s)"
-msgstr ""
+msgstr "Produsent(er)"
 
 #: templates/add-work.html:319
 msgid "Search for producer..."
-msgstr ""
+msgstr "Søk etter produsent ..."
 
 #: templates/add-work.html:341 templates/work.html:87
 msgid "Work details"
 msgstr "Verksdetaljer"
 
 #: templates/add-work.html:353 templates/add-work.html:376
-#, fuzzy
 msgid "Search for a language..."
-msgstr "Søk"
+msgstr "Søk etter et språk ..."
 
 #: templates/add-work.html:400
 msgid "e.g., Louvre Museum"
-msgstr ""
+msgstr "f.eks., Louvre-museet"
 
 #: templates/add-work.html:419
 msgid "Genre(s)"
-msgstr ""
+msgstr "Sjanger(e)"
 
 #: templates/add-work.html:423
-#, fuzzy
 msgid "Search for genre..."
-msgstr "Søk"
+msgstr "Søk etter sjanger ..."
 
 #: templates/add-work.html:535
 msgid "Search for record label..."
-msgstr ""
+msgstr "Søk etter plateselskap ..."
 
 #: templates/add-work.html:555
-#, fuzzy
 msgid "Country(ies) of publication"
-msgstr "Fødeland"
+msgstr "Publiseringsland"
 
 #: templates/add-work.html:584
 msgid "Add work image (optional)"
-msgstr ""
+msgstr "Legg til bilde av verk (valgfritt)"
 
 #: templates/add-work.html:594
 msgid ""
-"Search Wikimedia Commons for work's image, or enter the Commons image URL"
-" directly:"
+"Search Wikimedia Commons for work's image, or enter the Commons image URL "
+"directly:"
 msgstr ""
+"Søk på WIkimedia Commons etter et bilde av verket eller angi en URL til et "
+"bilde på Commons direkte:"
 
 #: templates/add-work.html:601
-#, fuzzy
 msgid "Search Wikimedia Commons for"
-msgstr "Søk i verker"
+msgstr "Søk på Wikimedia Commons etter"
 
 #: templates/add-work.html:602 templates/add-work.html:1122
 #: templates/add-work.html:1126
 msgid "work title"
-msgstr ""
+msgstr "verkstittel"
 
 #: templates/add-work.html:672
 msgid "Full work available at URL"
-msgstr ""
+msgstr "Fullstendig verk tilgjengelig ved URL"
 
 #: templates/add-work.html:684
-#, fuzzy
 msgid "Internet Archive ID"
-msgstr "Internet Archive"
+msgstr "Internet Archive-ID"
 
 #: templates/add-work.html:691
 msgid "The unique identifier from archive.org"
-msgstr ""
+msgstr "Den unike identifikatoren hos archive.org"
 
 #: templates/add-work.html:1583
-#, fuzzy
 msgid "At least one author is required"
-msgstr "Nasjonalitet"
+msgstr "Minst én skaper påkrevd"
 
 #: templates/add-work.html:1584
-#, fuzzy
 msgid "At least one director is required"
-msgstr "Fødested"
+msgstr "Minst én regissør påkrevd"
 
 #: templates/add-work.html:1585
-#, fuzzy
 msgid "At least one screenwriter is required"
-msgstr "Nasjonalitet"
+msgstr "Minst én manusforfatter påkrevd"
 
 #: templates/add-work.html:1586
-#, fuzzy
 msgid "At least one composer is required"
-msgstr "Fødested"
+msgstr "Minst én komponist påkrevd"
 
 #: templates/add-work.html:1587
-#, fuzzy
 msgid "At least one creator is required"
-msgstr "Nasjonalitet"
+msgstr "Minst én skaper påkrevd"
 
 #: templates/add-work.html:1588
-#, fuzzy
 msgid "At least one lyricist is required"
-msgstr "Nasjonalitet"
+msgstr "Minst én lyriker påkrevd"
 
 #: templates/add-work.html:1589
-#, fuzzy
 msgid "At least one performer is required"
-msgstr "Fødested"
+msgstr "Minst én utøver påkrevd"
 
 #: templates/add-work.html:1590
 msgid "At least one producer is required"
-msgstr ""
+msgstr "Minst én produsent påkrevd"
 
 #: templates/add-work.html:1591
-#, fuzzy
 msgid "Language is required"
-msgstr "Virke"
+msgstr "Språk påkrevd"
 
 #: templates/add-work.html:1592
-#, fuzzy
 msgid "Original language is required"
-msgstr "Nasjonalitet"
+msgstr "Originalspråk påkrevd"
 
 #: templates/add-work.html:1593
-#, fuzzy
 msgid "Country of origin is required"
-msgstr "Opprinnelsesland"
+msgstr "Opprinnelsesland påkrevd"
 
 #: templates/add-work.html:1594
-#, fuzzy
 msgid "Country of publication is required"
-msgstr "Virke"
+msgstr "Publiseringsland påkrevd"
 
 #: templates/add-work.html:1595
-#, fuzzy
 msgid "Location is required"
-msgstr "Virke"
+msgstr "Sted påkrevd"
 
 #: templates/add-work.html:1596
-#, fuzzy
 msgid "Genre is required"
-msgstr "Virke"
+msgstr "Sjanger påkrevd"
 
 #: templates/add-work.html:1613
-#, fuzzy
 msgid "Publication date: Year is required"
-msgstr "Nasjonalitet"
+msgstr "Publiseringsdato: År påkrevd"
 
 #: templates/add-work.html:1614
 msgid "Publication date: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Publiseringsdato: År må være et gyldig firesifret tall"
 
 #: templates/add-work.html:1615
 msgid "Publication date: Month must be between 0-12"
-msgstr ""
+msgstr "Publiseringsdato: Måned må være mellom 0–12"
 
 #: templates/add-work.html:1616
 msgid "Publication date: Day must be between 0-31"
-msgstr ""
+msgstr "Publiseringsdato: Dag må være mellom 0–31"
 
 #: templates/add-work.html:1617
 msgid "Publication date: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Publiseringsdato: Måned kan ikke være 0 dersom dag er angitt"
 
 #: templates/add-work.html:1643
-#, fuzzy
 msgid "Creation date: Year is required"
-msgstr "Nasjonalitet"
+msgstr "Skapelsesdato: År er påkrevd"
 
 #: templates/add-work.html:1644
 msgid "Creation date: Year must be a valid 4-digit number"
-msgstr ""
+msgstr "Skapelsesdato: År må være et gyldig firesifret tall"
 
 #: templates/add-work.html:1645
 msgid "Creation date: Month must be between 0-12"
-msgstr ""
+msgstr "Skapelsesdato: Måned må være mellom 0–12"
 
 #: templates/add-work.html:1646
 msgid "Creation date: Day must be between 0-31"
-msgstr ""
+msgstr "Skapelsesdato: Dag må være mellom 0–31"
 
 #: templates/add-work.html:1647
 msgid "Creation date: Month cannot be 0 if day is specified"
-msgstr ""
+msgstr "Skapelsesdato: Måned kan ikke være 0 dersom dag er angitt"
 
 #: templates/add-work.html:1665
 msgid "Please fix the following errors:"
-msgstr ""
+msgstr "Fiks de følgende feilene:"
 
 #: templates/author.html:12 templates/work.html:12
 msgid "Missing/wrong data?"
@@ -1440,7 +1393,7 @@ msgstr "Manglende/feilaktig data?"
 
 #: templates/author.html:13 templates/work.html:13
 msgid "Log in to edit"
-msgstr ""
+msgstr "Logg inn for å redigere"
 
 #: templates/author.html:38
 msgid "Search works"
@@ -1500,23 +1453,20 @@ msgid "Wikiquote"
 msgstr "Wikiquote"
 
 #: templates/author.html:121 templates/work.html:93
-#, fuzzy
 msgid "Add information"
-msgstr "Manglende info?"
+msgstr "Legg til informasjon"
 
 #: templates/author.html:132 templates/work.html:72
 msgid "Please enable JavaScript (it is required for inline editing), or"
-msgstr ""
+msgstr "Aktiver JavaScript (påkrevd for linjeredigering), eller"
 
 #: templates/author.html:134 templates/work.html:74
-#, fuzzy
 msgid "edit on Wikidata"
-msgstr "Legg til på WIkidata"
+msgstr "rediger på Wikidata"
 
 #: templates/author.html:153
-#, fuzzy
 msgid "Edit nationality"
-msgstr "Nasjonalitet"
+msgstr "Rediger nasjonalitet"
 
 #: templates/author.html:154 templates/author.html:210
 #: templates/author.html:265 templates/author.html:324
@@ -1524,7 +1474,7 @@ msgstr "Nasjonalitet"
 #: templates/author.html:537 templates/work.html:111 templates/work.html:175
 #: templates/work.html:240 templates/work.html:300
 msgid "Edit"
-msgstr ""
+msgstr "Rediger"
 
 #: templates/author.html:159 templates/author.html:215
 #: templates/author.html:270 templates/author.html:329
@@ -1532,27 +1482,24 @@ msgstr ""
 #: templates/author.html:542 templates/work.html:116 templates/work.html:180
 #: templates/work.html:245 templates/work.html:305
 msgid "This field has multiple values. Please edit directly on Wikidata."
-msgstr ""
+msgstr "Dette feltet har flere verdier. Rediger direkte på Wikidata."
 
 #: templates/author.html:162 templates/author.html:218
 #: templates/author.html:273 templates/author.html:332
 #: templates/author.html:394 templates/author.html:451
 #: templates/author.html:545 templates/work.html:119 templates/work.html:183
 #: templates/work.html:248 templates/work.html:308
-#, fuzzy
 msgid "Edit on Wikidata"
-msgstr "Legg til på WIkidata"
+msgstr "Rediger på Wikidata"
 
 #: templates/author.html:174 templates/author.html:508
 #: templates/author.html:604 templates/work.html:445
-#, fuzzy
 msgid "Search for country..."
-msgstr "Oppdag forfattere"
+msgstr "Søk etter land ..."
 
 #: templates/author.html:174
-#, fuzzy
 msgid "Search for nationality"
-msgstr "Oppdag forfattere"
+msgstr "Søk etter nasjonalitet"
 
 #: templates/author.html:185 templates/author.html:241
 #: templates/author.html:296 templates/author.html:360
@@ -1561,7 +1508,7 @@ msgstr "Oppdag forfattere"
 #: templates/work.html:213 templates/work.html:273 templates/work.html:333
 #: templates/work.html:467
 msgid "Publish"
-msgstr ""
+msgstr "Publiser"
 
 #: templates/author.html:189 templates/author.html:245
 #: templates/author.html:300 templates/author.html:364
@@ -1570,77 +1517,64 @@ msgstr ""
 #: templates/work.html:217 templates/work.html:277 templates/work.html:337
 #: templates/work.html:472
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: templates/author.html:209
-#, fuzzy
 msgid "Edit ethnicity"
-msgstr "Etnisitet"
+msgstr "Rediger etnisitet"
 
 #: templates/author.html:230 templates/author.html:628
-#, fuzzy
 msgid "Search for ethnicity..."
-msgstr "Søk"
+msgstr "Søk etter etnisitet ..."
 
 #: templates/author.html:230
-#, fuzzy
 msgid "Search for ethnicity"
-msgstr "Søk"
+msgstr "Søk etter etnisitet"
 
 #: templates/author.html:265
-#, fuzzy
 msgid "Edit gender"
-msgstr "Kjønn"
+msgstr "Rediger kjønn"
 
 #: templates/author.html:284 templates/author.html:650
-#, fuzzy
 msgid "Select gender"
-msgstr "Velg"
+msgstr "Velg kjønn"
 
 #: templates/author.html:285 templates/author.html:651
-#, fuzzy
 msgid "Select gender..."
-msgstr "Type verk"
+msgstr "Velg kjønn ..."
 
 #: templates/author.html:317
 #, python-format
 msgid "age %(author_age)s"
-msgstr ""
+msgstr "alder %(author_age)s"
 
 #: templates/author.html:323
-#, fuzzy
 msgid "Edit date of birth"
-msgstr "Fødselsdato"
+msgstr "Rediger fødselsdato"
 
 #: templates/author.html:385
-#, fuzzy
 msgid "Edit occupation"
-msgstr "Virke"
+msgstr "Rediger beskjeftigelse"
 
 #: templates/author.html:406 templates/author.html:706
-#, fuzzy
 msgid "Search for occupation(s)..."
-msgstr "Oppdag forfattere"
+msgstr "Søk etter beskjeftigelse(r) ..."
 
 #: templates/author.html:406
-#, fuzzy
 msgid "Search for occupation"
-msgstr "Oppdag forfattere"
+msgstr "Søk etter beskjeftigelse"
 
 #: templates/author.html:442
-#, fuzzy
 msgid "Edit place of birth"
-msgstr "Fødested"
+msgstr "Rediger fødested"
 
 #: templates/author.html:463 templates/author.html:731
-#, fuzzy
 msgid "Search for place..."
-msgstr "Søk"
+msgstr "Søk etter sted ..."
 
 #: templates/author.html:463
-#, fuzzy
 msgid "Search for place of birth"
-msgstr "Fødested"
+msgstr "Søk etter fødested"
 
 #: templates/author.html:491
 msgid "Country of birth"
@@ -1648,79 +1582,76 @@ msgstr "Fødeland"
 
 #: templates/author.html:497
 msgid "Country of birth is derived from place of birth."
-msgstr ""
+msgstr "Fødeland er hentet fra fødested."
 
 #: templates/author.html:508
-#, fuzzy
 msgid "Search for country of birth"
-msgstr "Fødeland"
+msgstr "Søk etter fødeland"
 
 #: templates/author.html:530
 #, python-format
 msgid "aged %(author_age)s"
-msgstr ""
+msgstr "%(author_age)s år gamle"
 
 #: templates/author.html:536
-#, fuzzy
 msgid "Edit date of death"
-msgstr "Dødsdato"
+msgstr "Rediger dødsdato"
 
 #: templates/author.html:591 templates/work.html:350
 msgid "Fill in any missing fields below."
-msgstr ""
+msgstr "Fyll de manglende feltene nedenfor."
 
 #: templates/author.html:833 templates/work.html:585
 msgid "Maximum 1 reference per field"
-msgstr ""
+msgstr "Maks én referanse for hvert felt"
 
 #: templates/author.html:1052 templates/author.html:1454
 #: templates/work.html:735 templates/work.html:1044
 msgid "Month must be between 0-12"
-msgstr ""
+msgstr "Måned må være mellom 0–12"
 
 #: templates/author.html:1053 templates/author.html:1455
 #: templates/work.html:736 templates/work.html:1045
 msgid "Day must be between 0-31"
-msgstr ""
+msgstr "Dag må være mellom 0–13"
 
 #: templates/author.html:1055 templates/author.html:1457
 #: templates/work.html:738 templates/work.html:1047
 msgid "Month is required if you enter day"
-msgstr ""
+msgstr "Måned er påkrevd hvis du angir dag"
 
 #: templates/author.html:1102
 msgid "Please select at least one value"
-msgstr ""
+msgstr "Velg minst én verdi"
 
 #: templates/author.html:1194 templates/author.html:1522
 #: templates/work.html:822 templates/work.html:1113
 msgid "Edit published successfully!"
-msgstr ""
+msgstr "Redigering publisert!"
 
 #: templates/author.html:1197 templates/author.html:1529
 #: templates/work.html:825 templates/work.html:1120
 msgid "Error publishing changes:"
-msgstr ""
+msgstr "Feil ved publisering av endringer:"
 
 #: templates/author.html:1197 templates/author.html:1529
 #: templates/work.html:825 templates/work.html:1120
-#, fuzzy
 msgid "Unknown error"
-msgstr "Ukjent søkeord"
+msgstr "Ukjent feil"
 
 #: templates/author.html:1204 templates/author.html:1535
 #: templates/work.html:832 templates/work.html:1126
 msgid "Network error. Please try again."
-msgstr ""
+msgstr "Nettverksfeil. Prøv på nytt."
 
 #: templates/author.html:1494 templates/work.html:1085
 msgid "Please fill in at least one field before publishing."
-msgstr ""
+msgstr "Fyll inn minst ett felt før publisering."
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain "
-"in each country."
+"This grid indicates the period after which works enter the public domain in "
+"each country."
 msgstr ""
 "Dette rutenettet indikerer tidsrommet etter at verkene går inn i "
 "allemannseie i hvert land."
@@ -1750,9 +1681,8 @@ msgid "Applies to %(countries)s"
 msgstr "Gjelder for %(countries)s"
 
 #: templates/country.html:29
-#, fuzzy
 msgid "Public domain statistics"
-msgstr "Falt i det fri"
+msgstr "Statistikk over offentlig eiendom"
 
 #: templates/country.html:30
 msgid "Number of works identified as being in the public domain on Wikidata"
@@ -1770,15 +1700,15 @@ msgstr "Paulina-logo"
 
 #: templates/home.html:28
 msgid "Discover authors"
-msgstr "Oppdag forfattere"
+msgstr "Oppdag skapere"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the "
-"world and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the world "
+"and learn about their works."
 msgstr ""
-"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og "
-"lære om verkene deres."
+"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og lære "
+"om verkene deres."
 
 #: templates/home.html:33
 msgid "Mary Shelley"
@@ -1802,11 +1732,11 @@ msgstr "Finn verker"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and"
-" knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and "
+"knowledge found on Wikidata."
 msgstr ""
-"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å "
-"finne på Wikidata."
+"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å finne "
+"på Wikidata."
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -1833,8 +1763,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Finn ut hvilke verk som er i allemannseie i forskjellige land og få "
-"tilgang til versjoner på nett."
+"Finn ut hvilke verk som er i allemannseie i forskjellige land og få tilgang "
+"til versjoner på nett."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -1846,13 +1776,15 @@ msgstr "Land med 70 års vernetid"
 
 #: templates/home.html:75
 msgid ""
-"Discover writers, musicians, visual artists and more who were born or "
-"died on this day."
+"Discover writers, musicians, visual artists and more who were born or died "
+"on this day."
 msgstr ""
+"Oppdag forfattere, musikere, billedkunstnere og flere som ble født eller "
+"døde på dagens dato."
 
 #: templates/home.html:85
 msgid "See all"
-msgstr ""
+msgstr "Se alle"
 
 #: templates/layout.html:12
 msgid "Paulina"
@@ -1860,17 +1792,17 @@ msgstr "Paulina"
 
 #: templates/layout.html:13 templates/layout.html:35
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It "
-"is a multilingual tool, powered by Wikidata, that allows you to search "
-"for people and find out if they have freely accessible works in the "
-"public domain. It also facilitates the understanding of copyright terms "
-"and helps to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It is "
+"a multilingual tool, powered by Wikidata, that allows you to search for "
+"people and find out if they have freely accessible works in the public "
+"domain. It also facilitates the understanding of copyright terms and helps "
+"to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
-"Det er et flerspråklig verktøy, drevet av Wikidata som tillater deg å "
-"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
-"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
-"å finne ut når et verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
+"er et flerspråklig verktøy, drevet av Wikidata som tillater deg å søke etter "
+"folk og finne ut om de har fritt tilgjengelige verk i allemannseie. Det "
+"hjelper også forståelsen av opphavsrett og hjelper deg å finne ut når et "
+"verk går inn i allemannseie i hvert land."
 
 #: templates/layout.html:31 templates/layout.html:382
 msgid "Paulina - Data for the Public Domain"
@@ -1878,19 +1810,19 @@ msgstr "Paulina — Data for allemanseie"
 
 #: templates/layout.html:79 templates/layout.html:136
 msgid "Logout"
-msgstr ""
+msgstr "Logg ut"
 
 #: templates/layout.html:86
 msgid "Login with Wikimedia"
-msgstr ""
+msgstr "Logg inn med Wikimedia"
 
 #: templates/layout.html:142
 msgid "Login with your Wikimedia account to add/edit data"
-msgstr ""
+msgstr "Logg inn med din Wikimedia-konto for å legge til eller endre data"
 
 #: templates/layout.html:144
 msgid "Login"
-msgstr ""
+msgstr "Logg in"
 
 #: templates/layout.html:162
 msgid "Select"
@@ -1917,9 +1849,8 @@ msgid "Advanced search"
 msgstr "Avansert søk"
 
 #: templates/layout.html:226
-#, fuzzy
 msgid "Creative Area"
-msgstr "Publiseringsdato"
+msgstr "Kreativt område"
 
 #: templates/layout.html:241 templates/layout.html:286
 msgid "Type to filter..."
@@ -1960,11 +1891,11 @@ msgstr "Drevet av Wikidata."
 
 #: templates/layout.html:439
 msgid "No matching option"
-msgstr ""
+msgstr "Intet passende valg"
 
 #: templates/layout.html:535
 msgid "Please select a valid option from the country dropdown."
-msgstr ""
+msgstr "Angi et gyldig valg fra landsmenyen."
 
 #: templates/no-results.html:6
 msgid "No results found. Try again."
@@ -1972,69 +1903,70 @@ msgstr "Ingen treff. Prøv igjen."
 
 #: templates/oauth-callback.html:2
 msgid "Authenticating..."
-msgstr ""
+msgstr "Autentiserer ..."
 
 #: templates/oauth-callback.html:10
 msgid "Loading..."
-msgstr ""
+msgstr "Laster inn ..."
 
 #: templates/oauth-callback.html:12
 msgid "Authenticating with Wikimedia..."
-msgstr ""
+msgstr "Autentiserer med Wikimedia ..."
 
 #: templates/oauth-callback.html:13
 msgid "Please wait while we complete your login."
-msgstr ""
+msgstr "Vent mens vi fullfører din innlogging."
 
 #: templates/on-this-day.html:6
-msgid "Authors who were born or died on this day, ranked by Wikimedia sitelinks."
+msgid ""
+"Authors who were born or died on this day, ranked by Wikimedia sitelinks."
 msgstr ""
+"Skapere som ble født eller døde på dagens dato, rangert etter Wikimedia-"
+"sidelenker."
 
 #: templates/on-this-day.html:13
 msgid "Previous day"
-msgstr ""
+msgstr "Forrige dag"
 
 #: templates/on-this-day.html:18
 msgid "Next day"
-msgstr ""
+msgstr "Neste dag"
 
 #: templates/on-this-day.html:24
-#, fuzzy
 msgid "Today"
-msgstr "Alle"
+msgstr "I dag"
 
 #: templates/on-this-day.html:27
 msgid "Or choose another date:"
-msgstr ""
+msgstr "Eller velg en annen dato:"
 
 #: templates/on-this-day.html:34
 msgid "Apply"
-msgstr ""
+msgstr "Bruk"
 
 #: templates/on-this-day.html:45
-#, fuzzy
 msgid "Featured author"
-msgstr "Skapere"
+msgstr "Populær skaper"
 
 #: templates/on-this-day.html:46
 msgid "Born"
-msgstr ""
+msgstr "Født"
 
 #: templates/on-this-day.html:46
 msgid "Died"
-msgstr ""
+msgstr "Døde"
 
 #: templates/on-this-day.html:63
 msgid "Born on this day"
-msgstr ""
+msgstr "Født i dag"
 
 #: templates/on-this-day.html:78 templates/on-this-day.html:98
 msgid "No authors found for this date."
-msgstr ""
+msgstr "Ingen skapere funnet for denne datoen."
 
 #: templates/on-this-day.html:83
 msgid "Died on this day"
-msgstr ""
+msgstr "Døde i dag"
 
 #: templates/results.html:6
 msgid "Search results"
@@ -2043,75 +1975,66 @@ msgstr "Søkeresultater"
 #: templates/results.html:7 templates/works-list.html:16
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
-msgstr ""
+msgstr "%(first)s–%(last)s av %(results_quantity)s treff"
 
 #: templates/results.html:30 templates/works-list.html:31
 msgid "Available for download"
 msgstr "Tilgjengelig for nedlastning"
 
 #: templates/results.html:43 templates/works-list.html:42
-#, fuzzy
 msgid "Pagination"
-msgstr "Maleri"
+msgstr "Paginering"
 
 #: templates/results.html:47 templates/results.html:51
 #: templates/works-list.html:46 templates/works-list.html:50
 msgid "Previous"
-msgstr ""
+msgstr "Forrige"
 
 #: templates/results.html:56 templates/works-list.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "Page %(page)s"
-msgstr ""
+msgstr "Side %(page)s"
 
 #: templates/results.html:61 templates/results.html:65
 #: templates/works-list.html:60 templates/works-list.html:64
 msgid "Next"
-msgstr ""
+msgstr "Neste"
 
 #: templates/work.html:38
 msgid "Author/s"
 msgstr "Skaper(e)"
 
 #: templates/work.html:110
-#, fuzzy
 msgid "Edit publication date"
-msgstr "Publiseringsdato"
+msgstr "Endre publiseringsdato"
 
 #: templates/work.html:174
-#, fuzzy
 msgid "Edit creation date"
-msgstr "Publiseringsdato"
+msgstr "Endre skapelsesdato"
 
 #: templates/work.html:239
-#, fuzzy
 msgid "Edit language"
-msgstr "Språk"
+msgstr "Endre språk"
 
 #: templates/work.html:260 templates/work.html:320
-#, fuzzy
 msgid "Search Wikidata..."
-msgstr "Legg til på WIkidata"
+msgstr "Søk på Wikidata ..."
 
 #: templates/work.html:260
-#, fuzzy
 msgid "Search for language"
-msgstr "Søk"
+msgstr "Søk etter språk"
 
 #: templates/work.html:299
-#, fuzzy
 msgid "Edit country of origin"
-msgstr "Opprinnelsesland"
+msgstr "Rediger opprinnelsesland"
 
 #: templates/work.html:320
-#, fuzzy
 msgid "Search for country of origin"
-msgstr "Opprinnelsesland"
+msgstr "Søk etter opprinnelsesland"
 
 #: templates/work.html:421
-#, fuzzy
 msgid "Search for language..."
-msgstr "Søk"
+msgstr "Søk etter språk ..."
 
 #: templates/work.html:488
 msgid "Copyright status"
@@ -2123,13 +2046,13 @@ msgstr "siden for land og vilkår"
 
 #: templates/work.html:513
 msgid ""
-"Copyright status information is not available for this work. The "
-"copyright status depends on the jurisdiction, the author's date of death "
-"and the date the work was created or published."
+"Copyright status information is not available for this work. The copyright "
+"status depends on the jurisdiction, the author's date of death and the date "
+"the work was created or published."
 msgstr ""
 "Informasjon om opphavsrettsstatus er ikke tilgjengelig for dette verket. "
-"Opphavsrettsstatusen kommer an på jurisdiksjon, skaperens dødsdato og "
-"datoen verket ble skapt eller utgitt."
+"Opphavsrettsstatusen kommer an på jurisdiksjon, skaperens dødsdato og datoen "
+"verket ble skapt eller utgitt."
 
 #: templates/work.html:514
 #, python-format
@@ -2182,6 +2105,7 @@ msgstr "Liste over verker av %(author_name)s"
 msgid "View this query on the Wikidata Query Service"
 msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
+#, python-format
 #~ msgid "(%(author_age)s years)"
 #~ msgstr "(%(author_age)s år)"
 
@@ -2216,14 +2140,17 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 #~ msgstr "Wikiquote-lenke"
 
 #~ msgid "Unknown due to lack of available dates of birth and death."
-#~ msgstr "Ukjent som følge av manglende tilgjengelige datoer for fødsel og død."
+#~ msgstr ""
+#~ "Ukjent som følge av manglende tilgjengelige datoer for fødsel og død."
 
 #~ msgid "Search filters"
 #~ msgstr "Søkeresultater"
 
+#, python-format
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)ss opphavsrettsvilkår"
 
+#, python-format
 #~ msgid "%(country_name)s's statistics"
 #~ msgstr "Statistikk for %(country_name)s"
 
@@ -2241,4 +2168,3 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
 #~ msgid "Musical work"
 #~ msgstr "Musikkverk"
-
