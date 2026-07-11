@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% if CURRENT_LANGUAGE in TRANSLATED_LANGUAGES %}
-<html lang="{{ CURRENT_LANGUAGE }}">
+<html lang="{{ CURRENT_LANGUAGE }}" {% if CURRENT_LANGUAGE == 'ar' %}dir="rtl"{% endif %}>
 {% else %}
 <html lang="en">
 {% endif %}
