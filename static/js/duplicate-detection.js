@@ -139,22 +139,29 @@ class DuplicateDetector {
     }
     
     let resultsHTML = '';
+
+    let itemPath;
+    if (this.entityType === "author") {
+      itemPath = "author";
+    } else if (this.entityType === "item") {
+      itemPath = "work";
+    }
     
     results.forEach(item => {
       const description = item.description || this.msg.noDescription;
       
       resultsHTML += `
         <div class="d-flex align-items-start mb-2 p-2 border rounded bg-white">
-          <a href="/author/${item.id}" class="text-decoration-none flex-grow-1 me-2">
+          <a href="/${itemPath}/${item.id}" target="_blank" class="text-decoration-none flex-grow-1 me-2">
             <div class="fw-semibold text-primary">${this.escapeHtml(item.label)}</div>
             <small class="text-muted">${this.escapeHtml(description)}</small>
             <small class="text-secondary d-block">${item.id}</small>
           </a>
           <a href="https://www.wikidata.org/wiki/${item.id}" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             class="btn btn-sm btn-outline-secondary flex-shrink-0" 
-             title="Wikidata">
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn btn-sm btn-outline-secondary flex-shrink-0" 
+            title="Wikidata">
             <i class="bi bi-box-arrow-up-right"></i>
           </a>
         </div>
