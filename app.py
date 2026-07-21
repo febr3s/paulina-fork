@@ -600,7 +600,7 @@ def search_wikidata_items():
 # OAuth Routes
 
 @app.route('/auth/login')
-@limiter.limit("5 per minute")
+@limiter.limit("10 per minute")
 def login():
     """Initiate OAuth 2.0 login with Wikimedia"""
     try:
@@ -721,7 +721,7 @@ def logout():
 
 # Add author route
 @app.route('/add-author', methods=['GET', 'POST'])
-@limiter.limit("20 per hour", methods=['POST'])
+@limiter.limit("60 per hour", methods=['POST'])
 def add_author():
     """Handle the Add Author form"""
     
@@ -836,7 +836,7 @@ def add_author():
 
 # Add work route
 @app.route('/add-work', methods=['GET', 'POST'])
-@limiter.limit("20 per hour", methods=['POST'])
+@limiter.limit("60 per hour", methods=['POST'])
 def add_work():
     """Handle the Add Work form"""
     
@@ -951,7 +951,7 @@ def add_work():
     
 # Update fields - author page
 @app.route('/update-author/<author_id>', methods=['PATCH'])
-@limiter.limit("30 per hour")
+@limiter.limit("60 per hour")
 def update_author(author_id):
     """Handle inline editing of author biography fields"""
     
@@ -1054,7 +1054,7 @@ def update_author(author_id):
 
 # Update fields - work page
 @app.route('/update-work/<work_id>', methods=['PATCH'])
-@limiter.limit("30 per hour")
+@limiter.limit("60 per hour")
 def update_work(work_id):
     """Handle inline editing of work fields"""
     
