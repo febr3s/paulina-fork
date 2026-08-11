@@ -11,9 +11,7 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
     headers = {'user-agent': current_app.config['USER_AGENT']}
-    query_results = requests.get(query_url, headers=headers
-                                 # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                 )
+    query_results = requests.get(query_url, headers=headers, timeout=5)
     query_results = query_results.json()
     query_results = query_results["results"]["bindings"]
     return query_results
@@ -25,7 +23,7 @@ def retrieve_graphql_query(query: str, **kwargs: str):
     query_dict = {}
     query_dict["query"] = query.format(**kwargs)
     headers = {'user-agent': current_app.config['USER_AGENT']}
-    query_results = requests.post(query_endpoint, json=query_dict, headers=headers)
+    query_results = requests.post(query_endpoint, json=query_dict, headers=headers, timeout=5)
     query_results = query_results.json()
     query_results = query_results["data"]
     return query_results

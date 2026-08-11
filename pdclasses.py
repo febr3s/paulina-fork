@@ -115,9 +115,7 @@ def retrieve_item(wikidata_item_id: str, data_type: str ="item") -> dict:
         item_url_suffix = ""
     item_url = item_url_prefix + wikidata_item_id + item_url_suffix
     headers = {'user-agent': current_app.config['USER_AGENT']}
-    item_response = requests.get(item_url, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
+    item_response = requests.get(item_url, headers=headers, timeout=5)
     item_attributes = item_response.json()
     return item_attributes
 
@@ -195,7 +193,7 @@ class Author(Parent):
                                             f"&languages={languages.get_locale()}&languagefallback=&format=json")
 
             headers = {'user-agent': current_app.config['USER_AGENT']}
-            occupations_labels_response = requests.get(url_for_occupations_labels, headers=headers)
+            occupations_labels_response = requests.get(url_for_occupations_labels, headers=headers, timeout=5)
             occupations_labels = occupations_labels_response.json()
             occupations_labels = occupations_labels.get("entities")
             occupations_labels = [occupation.get('labels', {}).get(languages.get_locale(), {}).get('value') 
@@ -379,9 +377,7 @@ class Author(Parent):
         search_format = "&format=json"
         search_url = search_url_prefix + works_by_this_author_filter + offset_param + search_format
         headers = {'user-agent': current_app.config['USER_AGENT']}
-        search_response = requests.get(search_url, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
+        search_response = requests.get(search_url, headers=headers, timeout=5)
         search_results = search_response.json()
 
         complete = not ("continue" in search_results)
@@ -397,9 +393,7 @@ class Author(Parent):
                                         f"&ids={search_results_qids}&props=labels|descriptions|sitelinks|claims"
                                         f"&languages={languages.get_locale()}&languagefallback=&format=json")
 
-        results_data_response = requests.get(url_for_results_data, headers=headers
-                                    # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                    )
+        results_data_response = requests.get(url_for_results_data, headers=headers, timeout=5)
         results_data = results_data_response.json()
         results_data = results_data.get("entities")
 

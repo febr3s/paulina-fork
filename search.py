@@ -9,9 +9,7 @@ import filters
 def make_api_request(parameters: dict) -> dict:
     API_URL = "https://www.wikidata.org/w/api.php"
     headers = {'user-agent': current_app.config['USER_AGENT']}    
-    api_response = requests.get(API_URL, params=parameters, headers=headers
-                                   # , timeout=1  # If IPv6 doesn't work, force time out and use IPv4
-                                   )
+    api_response = requests.get(API_URL, params=parameters, headers=headers, timeout=5)
     parsed_response = api_response.json()
     return parsed_response
 
