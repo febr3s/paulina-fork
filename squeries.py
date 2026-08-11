@@ -11,7 +11,7 @@ def retrieve_query(query: str, **kwargs: str) -> list[dict]:
     request_json_format = '&format=json'
     query_url = query_url_prefix + query + request_json_format
     headers = {'user-agent': current_app.config['USER_AGENT']}
-    query_results = requests.get(query_url, headers=headers, timeout=5)
+    query_results = requests.get(query_url, headers=headers)
     query_results = query_results.json()
     query_results = query_results["results"]["bindings"]
     return query_results
