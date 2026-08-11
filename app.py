@@ -150,20 +150,14 @@ def print_field(field: str | dict | None) -> str:
 
 
 @app.route("/")
-@cache.cached(timeout=get_seconds_until_midnight(), make_cache_key=make_cache_key, unless=user_is_logged_in)
 def home():
     today_d = datetime.date.today()
-
-    data = onthisday.get_today_authors(today_d.month, today_d.day)
-    born = data.get("born") or []
-    died = data.get("died") or []
-    today_widget = [
-        {"author": r, "event": tag}
-        for r, tag in onthisday.widget_entries(born, died, limit=4)
-    ]
+    prev_d = today_d - datetime.timedelta(days=1)
+    next_d = today_d + datetime.timedelta(days=1)   
     return render_template("home.html",
-                           title=_("Home"),
-                           today_widget=today_widget
+                           prev_month=prev_d.month, prev_day=prev_d.day,
+                           next_month=next_d.month, next_day=next_d.day,
+                           title=_("Home")
                            )
 
 

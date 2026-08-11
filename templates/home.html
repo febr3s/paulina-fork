@@ -75,14 +75,12 @@
         <p>{{ _('Discover writers, musicians, visual artists and more who were born or died on this day.') }}</p>
       </div>
       <p class="my-4 text-center">
-        {% if today_widget %}
-          {% for item in today_widget %}
-          <a class="btn border-black rounded-pill pill-custom violet"
-             href="{{ url_for('author_page', author_data=item.author.qid) }}">{{ item.author.name }}</a>
-          {% endfor %}
-        {% endif %}
         <a class="btn border-black rounded-pill pill-custom violet"
-           href="{{ url_for('on_this_day_authors') }}">{{ _('See all') }} &rarr;</a>
+        href="{{ url_for('on_this_day_authors', month=prev_month, day=prev_day) }}">{{ _('Yesterday') }}</a>
+        <a class="btn border-black rounded-pill pill-custom violet"
+        href="{{ url_for('on_this_day_authors') }}">{{ _('Today') }}</a>
+        <a class="btn border-black rounded-pill pill-custom violet"
+        href="{{ url_for('on_this_day_authors', month=next_month, day=next_day) }}">{{ _('Tomorrow') }}</a>
       </p>
     </div>
   </div>
