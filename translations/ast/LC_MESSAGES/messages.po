@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 18:20-0300\n"
+"POT-Creation-Date: 2026-08-11 15:28-0300\n"
 "PO-Revision-Date: 2025-07-17 19:34+0000\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: ast\n"
@@ -27,161 +27,161 @@ msgstr "Ensin valir"
 msgid "Unknown value"
 msgstr "Valir desconocíu"
 
-#: app.py:165 templates/layout.html:53 templates/layout.html:100
+#: app.py:160 templates/layout.html:53 templates/layout.html:100
 #, fuzzy
 msgid "Home"
 msgstr "Entamu"
 
-#: app.py:173 templates/layout.html:103 templates/layout.html:345
+#: app.py:167 templates/layout.html:103 templates/layout.html:345
 msgid "About"
 msgstr "Tocante a"
 
-#: app.py:226 app.py:257
+#: app.py:220 app.py:251
 msgid "Results"
 msgstr "Resultaos"
 
-#: app.py:238 app.py:269 app.py:274
+#: app.py:232 app.py:263 app.py:268
 msgid "No results found"
 msgstr "Nengún resultáu alcontráu"
 
-#: app.py:370
+#: app.py:364
 msgid "List of works"
 msgstr "Llista trabayos"
 
-#: app.py:461
+#: app.py:455
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Llista de %(term_name)s"
 
-#: app.py:478
+#: app.py:472
 msgid "Unknown term"
 msgstr "Términu desconocíu"
 
-#: app.py:480 templates/countries.html:7 templates/layout.html:106
+#: app.py:474 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:362
 msgid "Countries and terms"
 msgstr "Países y plazos"
 
-#: app.py:511 templates/home.html:74 templates/layout.html:109
+#: app.py:505 templates/home.html:74 templates/layout.html:109
 #: templates/on-this-day.html:5
 msgid "On this day"
 msgstr ""
 
-#: app.py:624
+#: app.py:618
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:634 app.py:704
+#: app.py:628 app.py:698
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:639
+#: app.py:633
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:646
+#: app.py:640
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:666
+#: app.py:660
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:693
+#: app.py:687
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:717
+#: app.py:711
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:730
+#: app.py:724
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:735 app.py:850
+#: app.py:729 app.py:844
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:743 app.py:858 app.py:969 app.py:1070
+#: app.py:737 app.py:852 app.py:963 app.py:1064
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:782
+#: app.py:776
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
+#: app.py:782 app.py:793 app.py:824 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:124
 #, fuzzy
 msgid "Add Author"
 msgstr "Descubrir autores"
 
-#: app.py:793
+#: app.py:787
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:845
+#: app.py:839
 msgid "Please login to add a work."
 msgstr ""
 
-#: app.py:897
+#: app.py:891
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
+#: app.py:897 app.py:908 app.py:939 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:130
 #, fuzzy
 msgid "Add Work"
 msgstr "Descubrir autores"
 
-#: app.py:908
+#: app.py:902
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:962 app.py:1064
+#: app.py:956 app.py:1058
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:978 app.py:1076
+#: app.py:972 app.py:1070
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:985 app.py:1080
+#: app.py:979 app.py:1074
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:1005 app.py:1096
+#: app.py:999 app.py:1090
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:1026 app.py:1114
+#: app.py:1020 app.py:1108
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Data de muerte"
 
-#: app.py:1034 app.py:1119
+#: app.py:1028 app.py:1113
 msgid "Successfully updated!"
 msgstr ""
 
-#: app.py:1039 app.py:1121
+#: app.py:1033 app.py:1115
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "Data de nacimientu"
 
-#: app.py:1045 app.py:1123
+#: app.py:1039 app.py:1117
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:1052 app.py:1126
+#: app.py:1046 app.py:1120
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "Data de nacimientu"
 
-#: app.py:1140
+#: app.py:1134
 msgid "404 error"
 msgstr "Error 404"
 
@@ -250,19 +250,19 @@ msgstr ""
 msgid "Design and decorative arts"
 msgstr ""
 
-#: pdclasses.py:98
+#: pdclasses.py:99
 msgid "(decade)"
 msgstr "(década)"
 
-#: pdclasses.py:100
+#: pdclasses.py:101
 msgid "(century)"
 msgstr "(sieglu)"
 
-#: pdclasses.py:102
+#: pdclasses.py:103
 msgid "(millennium)"
 msgstr "(mileniu)"
 
-#: pdclasses.py:237
+#: pdclasses.py:236
 #, fuzzy
 msgid ""
 "Image of a generic human silhouette. The text above it indicates that "
@@ -273,12 +273,12 @@ msgstr ""
 "hai disponible una imaxe llibre de la persona, y que si ties una, yes "
 "quien a facer click nel enllaz del cartelu."
 
-#: pdclasses.py:242
+#: pdclasses.py:241
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Imaxe de %(name)s."
 
-#: pdclasses.py:413
+#: pdclasses.py:457
 msgid ""
 "Image of a generic work. The text above it indicates that there is no "
 "free image of the work available, and that if you own one, you can click "
@@ -288,12 +288,12 @@ msgstr ""
 "llibre de la obra disponible y que, si ties una, pues facer clic nel "
 "enllaz del cartelu pa xubila."
 
-#: pdclasses.py:418
+#: pdclasses.py:462
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Imaxe de %(title)s."
 
-#: pdclasses.py:508 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:601 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Bandera de %(country_name)s."
@@ -1850,8 +1850,16 @@ msgid ""
 "died on this day."
 msgstr ""
 
-#: templates/home.html:85
-msgid "See all"
+#: templates/home.html:79
+msgid "Yesterday"
+msgstr ""
+
+#: templates/home.html:81 templates/on-this-day.html:24
+msgid "Today"
+msgstr ""
+
+#: templates/home.html:83
+msgid "Tomorrow"
 msgstr ""
 
 #: templates/layout.html:12
@@ -1992,10 +2000,6 @@ msgstr ""
 
 #: templates/on-this-day.html:18
 msgid "Next day"
-msgstr ""
-
-#: templates/on-this-day.html:24
-msgid "Today"
 msgstr ""
 
 #: templates/on-this-day.html:27
@@ -2234,4 +2238,7 @@ msgstr ""
 
 #~ msgid "Musical work"
 #~ msgstr "Obra musical"
+
+#~ msgid "See all"
+#~ msgstr ""
 

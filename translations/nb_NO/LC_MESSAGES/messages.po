@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-10 18:20-0300\n"
+"POT-Creation-Date: 2026-08-11 15:28-0300\n"
 "PO-Revision-Date: 2026-06-26 22:01+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/paulina/"
-"paulina-app/nb_NO/>\n"
 "Language: nb_NO\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Norwegian Bokmål "
+"<https://hosted.weblate.org/projects/paulina/paulina-app/nb_NO/>\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: app.py:143
@@ -28,158 +27,157 @@ msgstr "Ingen verdi"
 msgid "Unknown value"
 msgstr "Ukjent verdi"
 
-#: app.py:165 templates/layout.html:53 templates/layout.html:100
+#: app.py:160 templates/layout.html:53 templates/layout.html:100
 msgid "Home"
 msgstr "Hjem"
 
-#: app.py:173 templates/layout.html:103 templates/layout.html:345
+#: app.py:167 templates/layout.html:103 templates/layout.html:345
 msgid "About"
 msgstr "Om"
 
-#: app.py:226 app.py:257
+#: app.py:220 app.py:251
 msgid "Results"
 msgstr "Treff"
 
-#: app.py:238 app.py:269 app.py:274
+#: app.py:232 app.py:263 app.py:268
 msgid "No results found"
 msgstr "Ingen treff"
 
-#: app.py:370
+#: app.py:364
 msgid "List of works"
 msgstr "Liste over verk"
 
-#: app.py:461
+#: app.py:455
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "Liste over %(term_name)s"
 
-#: app.py:478
+#: app.py:472
 msgid "Unknown term"
 msgstr "Ukjent søkeord"
 
-#: app.py:480 templates/countries.html:7 templates/layout.html:106
+#: app.py:474 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:362
 msgid "Countries and terms"
 msgstr "Land og vilkår"
 
-#: app.py:511 templates/home.html:74 templates/layout.html:109
+#: app.py:505 templates/home.html:74 templates/layout.html:109
 #: templates/on-this-day.html:5
 msgid "On this day"
 msgstr "Dagen i dag"
 
-#: app.py:624
+#: app.py:618
 msgid "Login failed. Please try again."
 msgstr "Kunne ikke logge på. Prøv på nytt."
 
-#: app.py:634 app.py:704
+#: app.py:628 app.py:698
 msgid "Authentication failed. Please try again."
 msgstr "Autentisering feilet. Prøv på nytt."
 
-#: app.py:639
+#: app.py:633
 msgid "Login session expired. Please try again."
 msgstr "Innlogginsøkten har løpt ut. Prøv på nytt."
 
-#: app.py:646
+#: app.py:640
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:666
+#: app.py:660
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:693
+#: app.py:687
 msgid "Failed to get user profile. Please try again."
 msgstr "Kunne ikke hente brukerprofil. Prøv på nytt."
 
-#: app.py:717
+#: app.py:711
 msgid "You have been logged out."
 msgstr "Du har blitt logget ut."
 
-#: app.py:730
+#: app.py:724
 msgid "Please login to add an author."
 msgstr "Logg inn for å legge til en skaper."
 
-#: app.py:735 app.py:850
+#: app.py:729 app.py:844
 msgid "Your session has expired. Please login again."
 msgstr "Økten din har utløpt. Logg inn på nytt."
 
-#: app.py:743 app.py:858 app.py:969 app.py:1070
+#: app.py:737 app.py:852 app.py:963 app.py:1064
 msgid "Session expired. Please log in again."
 msgstr "Økten har utløpt. Logg inn på nytt."
 
-#: app.py:782
+#: app.py:776
 #, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Feil ved opprettelse av skaper: %(error)s"
 
-#: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
+#: app.py:782 app.py:793 app.py:824 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:124
 msgid "Add Author"
 msgstr "Legg til skaper"
 
-#: app.py:793
+#: app.py:787
 msgid "An error occurred while creating the author. Please try again."
-msgstr ""
-"Det har oppstått en feil ved opprettelse av denne skaperen. Prøv på nytt."
+msgstr "Det har oppstått en feil ved opprettelse av denne skaperen. Prøv på nytt."
 
-#: app.py:845
+#: app.py:839
 msgid "Please login to add a work."
 msgstr "Logg inn for å legge til et verk."
 
-#: app.py:897
+#: app.py:891
 #, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Feil ved opprettelse av verk: %(error)s"
 
-#: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
+#: app.py:897 app.py:908 app.py:939 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:130
 msgid "Add Work"
 msgstr "Legg til verk"
 
-#: app.py:908
+#: app.py:902
 msgid "An error occurred while creating the work. Please try again."
 msgstr "Det oppsto en feil ved opprettelse av verket. Prøv på nytt."
 
-#: app.py:962 app.py:1064
+#: app.py:956 app.py:1058
 msgid "You must be logged in to edit."
 msgstr "Du må være innlogget for å redigere."
 
-#: app.py:978 app.py:1076
+#: app.py:972 app.py:1070
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:985 app.py:1080
+#: app.py:979 app.py:1074
 msgid "No changes provided."
 msgstr "Ingen endringer angitt."
 
-#: app.py:1005 app.py:1096
+#: app.py:999 app.py:1090
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr "Mangler egenskap eller verdi for felt: %(field)s"
 
-#: app.py:1026 app.py:1114
+#: app.py:1020 app.py:1108
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Dødsdato"
 
-#: app.py:1034 app.py:1119
+#: app.py:1028 app.py:1113
 msgid "Successfully updated!"
 msgstr "Oppdatert!"
 
-#: app.py:1039 app.py:1121
+#: app.py:1033 app.py:1115
 msgid "Updated with some errors."
 msgstr "Oppdatert med noen feil."
 
-#: app.py:1045 app.py:1123
+#: app.py:1039 app.py:1117
 msgid "Failed to update fields."
 msgstr "Kunne ikke oppdatere felt."
 
-#: app.py:1052 app.py:1126
+#: app.py:1046 app.py:1120
 #, python-format
 msgid "Server error: %(error)s"
 msgstr "Tjenestefeil: %(error)s"
 
-#: app.py:1140
+#: app.py:1134
 msgid "404 error"
 msgstr "404-feil"
 
@@ -247,49 +245,49 @@ msgstr "Film og audiovisuelt"
 msgid "Design and decorative arts"
 msgstr "Design og dekorativ kunst"
 
-#: pdclasses.py:98
+#: pdclasses.py:99
 msgid "(decade)"
 msgstr "(tiår)"
 
-#: pdclasses.py:100
+#: pdclasses.py:101
 msgid "(century)"
 msgstr "(århundre)"
 
-#: pdclasses.py:102
+#: pdclasses.py:103
 msgid "(millennium)"
 msgstr "(årtusen)"
 
-#: pdclasses.py:237
+#: pdclasses.py:236
 msgid ""
-"Image of a generic human silhouette. The text above it indicates that there "
-"is no free image of the person available, and that if you own one, you can "
-"click on the placeholder link."
+"Image of a generic human silhouette. The text above it indicates that "
+"there is no free image of the person available, and that if you own one, "
+"you can click on the placeholder link."
 msgstr ""
-"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at det "
-"ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp et du "
-"eier ved å klikke på plassholderlenken."
+"Bilde av en generisk menneskelig silhuett. Teksten ovenfor indikerer at "
+"det ikke er noe fritt bilde av personen tilgjengelig, og at kan laste opp"
+" et du eier ved å klikke på plassholderlenken."
 
-#: pdclasses.py:242
+#: pdclasses.py:241
 #, python-format
 msgid "Image of %(name)s."
 msgstr "Bilde av %(name)s."
 
-#: pdclasses.py:413
+#: pdclasses.py:457
 msgid ""
-"Image of a generic work. The text above it indicates that there is no free "
-"image of the work available, and that if you own one, you can click on the "
-"placeholder link to upload it."
+"Image of a generic work. The text above it indicates that there is no "
+"free image of the work available, and that if you own one, you can click "
+"on the placeholder link to upload it."
 msgstr ""
 "Bilde av generisk verk. Teksten ovenfor indikerer at det ikke finnes noe "
 "fritt bilde av verket tilgjengelig, og at kan laste opp et du eier ved å "
 "klikke på plassholderlenken."
 
-#: pdclasses.py:418
+#: pdclasses.py:462
 #, python-format
 msgid "Image of %(title)s."
 msgstr "Bilde av %(title)s."
 
-#: pdclasses.py:508 templates/countries.html:20 templates/term.html:20
+#: pdclasses.py:601 templates/countries.html:20 templates/term.html:20
 #, python-format
 msgid "Flag of %(country_name)s."
 msgstr "Flagg tilhørende %(country_name)s."
@@ -578,30 +576,31 @@ msgstr "liste over prosjektets bidragsytere"
 #: templates/about.html:19
 #, python-format
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by %(wikidata_link)s, that allows you to search "
-"for people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by %(wikidata_link)s, that allows you to "
+"search for people and find out if they have freely accessible works in "
+"the public domain. It also facilitates the understanding of copyright "
+"terms and helps to know when a work enters the public domain in each "
+"country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
-"er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater deg å "
-"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
-"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg å "
-"finne ut når et verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
+"Det er et flerspråklig verktøy, drevet av %(wikidata_link)s som tillater "
+"deg å søke etter folk og finne ut om de har fritt tilgjengelige verk i "
+"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
+"å finne ut når et verk går inn i allemannseie i hvert land."
 
 #: templates/about.html:21
 msgid ""
-"Paulina is fed by data from Wikidata, the free and collaborative database "
-"maintained by the Wikimedia Foundation."
+"Paulina is fed by data from Wikidata, the free and collaborative database"
+" maintained by the Wikimedia Foundation."
 msgstr ""
 "Paulina henter data fra WIkidata, den frie og gemenskapsdrevne databasen "
 "vedlikeholdt av Wikimedia-stiftelsen."
 
 #: templates/about.html:22
 msgid ""
-"Sometimes, the information consulted may contain errors or be incomplete. "
-"Paulina helps to identify gaps and inaccuracies in information about "
+"Sometimes, the information consulted may contain errors or be incomplete."
+" Paulina helps to identify gaps and inaccuracies in information about "
 "cultural heritage and invites you to improve the data in Wikidata and, "
 "through it, on the Internet."
 msgstr ""
@@ -617,12 +616,12 @@ msgstr "Lokale verktøy"
 #: templates/about.html:24
 msgid ""
 "This website is part of a larger project to facilitate the creation of "
-"national, regional or thematic versions of the tool, according to the needs "
-"of each community."
+"national, regional or thematic versions of the tool, according to the "
+"needs of each community."
 msgstr ""
 "Nettsiden er en del av et større prosjekt for å hjelpe opprettelse av "
-"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold "
-"til behovene hver gemenskap måtte ha."
+"nasjonale, regionale, eller temamessige versjoner av verktøyet, i henhold"
+" til behovene hver gemenskap måtte ha."
 
 #: templates/about.html:25
 msgid "Who makes Paulina"
@@ -649,11 +648,11 @@ msgstr "Innholdslisenser"
 #: templates/about.html:29
 #, python-format
 msgid ""
-"All data in the pages about authors, works, countries and terms come from "
-"Wikidata and are under the terms of the %(CC0_link)s."
+"All data in the pages about authors, works, countries and terms come from"
+" Wikidata and are under the terms of the %(CC0_link)s."
 msgstr ""
-"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata og "
-"er underlagt vilkårene i %(CC0_link)s."
+"All data på sidene om skapere, verk, land og vilkår kommer fra Wikidata "
+"og er underlagt vilkårene i %(CC0_link)s."
 
 #: templates/about.html:30
 #, python-format
@@ -667,10 +666,10 @@ msgstr ""
 #: templates/about.html:31
 #, python-format
 msgid ""
-"The images and media in the pages about authors, works, countries and terms "
-"come from %(wm_commons_link)s and are under different free licenses or in "
-"the public domain. We recommend consulting the information of each content "
-"on Wikimedia Commons."
+"The images and media in the pages about authors, works, countries and "
+"terms come from %(wm_commons_link)s and are under different free licenses"
+" or in the public domain. We recommend consulting the information of each"
+" content on Wikimedia Commons."
 msgstr ""
 "Bildene og media på sidene om skapere, verk, land og vilkår kommer fra "
 "%(wm_commons_link)s og er underlagt forskjellige frie lisenser eller er "
@@ -679,16 +678,17 @@ msgstr ""
 
 #: templates/about.html:32
 msgid ""
-"The works accessible through links to external sites are available to the "
-"public, mostly because they are in the public domain, or under free "
-"licenses, but some of them may be under copyright in some jurisdictions. We "
-"recommend consulting the information of each work on the websites where they "
-"are hosted."
+"The works accessible through links to external sites are available to the"
+" public, mostly because they are in the public domain, or under free "
+"licenses, but some of them may be under copyright in some jurisdictions. "
+"We recommend consulting the information of each work on the websites "
+"where they are hosted."
 msgstr ""
 "Verk tilgjengelig gjennom lenker til eksterne sider er tilgjengelig for "
 "offentlig, for det meste fordi de eer i allemannseie, eller under frie "
-"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen lovområder. "
-"Det anbefales å sjekke info om hvert verk på nettsiden de vertstjenes fra."
+"lisenser, men noen av dem kan være opphavsrettsbeskyttet i noen "
+"lovområder. Det anbefales å sjekke info om hvert verk på nettsiden de "
+"vertstjenes fra."
 
 #: templates/about.html:33
 msgid "Free software"
@@ -697,10 +697,9 @@ msgstr "Fri programvare"
 #: templates/about.html:34
 #, python-format
 msgid ""
-"Paulina is free software. It is published under the %(agpl_link)s. Visit the "
-"%(repository_link)s."
-msgstr ""
-"Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
+"Paulina is free software. It is published under the %(agpl_link)s. Visit "
+"the %(repository_link)s."
+msgstr "Paulina er fri programvare under %(agpl_link)s. Besøk %(repository_link)s."
 
 #: templates/add-author.html:10 templates/add-work.html:9
 msgid "Please fix the errors and resubmit."
@@ -897,11 +896,11 @@ msgstr "Legg til skaperbilde (valgfritt)"
 
 #: templates/add-author.html:438
 msgid ""
-"Search Wikimedia Commons for author's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for author's image, or enter the Commons image "
+"URL directly:"
 msgstr ""
-"Søk på Wikimedia Commons for et bilde av skaperen eller legg til en URL til "
-"at bilde fra Commons direkte:"
+"Søk på Wikimedia Commons for et bilde av skaperen eller legg til en URL "
+"til at bilde fra Commons direkte:"
 
 #: templates/add-author.html:446
 msgid "Search Commons for"
@@ -909,7 +908,8 @@ msgstr "Søk på Commons etter"
 
 #: templates/add-author.html:449 templates/add-work.html:605
 msgid ""
-"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it below."
+"Opens Wikimedia Commons in a new tab. Copy the image URL and paste it "
+"below."
 msgstr ""
 "Åpner Wikimedia Commons i en ny fane. Kopier bilde-URL-en og lim den inn "
 "nedenfor."
@@ -1030,7 +1030,8 @@ msgstr "Fyll inn alle de påkrevde feltene:"
 #: templates/add-author.html:598 templates/add-work.html:1181
 msgid "Are you sure you want to reset the form? All entered data will be lost."
 msgstr ""
-"Er du sikker på at du vil tilbakestille skjemaet? All angitt data blir tapt."
+"Er du sikker på at du vil tilbakestille skjemaet? All angitt data blir "
+"tapt."
 
 #: templates/add-author.html:599
 msgid "Please enter the author name first to search for images"
@@ -1113,11 +1114,11 @@ msgstr "Dødsdato: Måned er påkrev om du har angitt dag og år"
 
 #: templates/add-author.html:847 templates/add-work.html:1199
 msgid ""
-"Could not connect to server. Please refresh the page manually to clear all "
-"data."
+"Could not connect to server. Please refresh the page manually to clear "
+"all data."
 msgstr ""
-"Kunne ikke koble til tjeneren. Gjenoppfrisk siden manuelt for å klarere all "
-"data."
+"Kunne ikke koble til tjeneren. Gjenoppfrisk siden manuelt for å klarere "
+"all data."
 
 #: templates/add-work.html:18
 msgid "Work Created Successfully!"
@@ -1260,11 +1261,11 @@ msgstr "Legg til bilde av verk (valgfritt)"
 
 #: templates/add-work.html:594
 msgid ""
-"Search Wikimedia Commons for work's image, or enter the Commons image URL "
-"directly:"
+"Search Wikimedia Commons for work's image, or enter the Commons image URL"
+" directly:"
 msgstr ""
-"Søk på WIkimedia Commons etter et bilde av verket eller angi en URL til et "
-"bilde på Commons direkte:"
+"Søk på WIkimedia Commons etter et bilde av verket eller angi en URL til "
+"et bilde på Commons direkte:"
 
 #: templates/add-work.html:601
 msgid "Search Wikimedia Commons for"
@@ -1650,8 +1651,8 @@ msgstr "Fyll inn minst ett felt før publisering."
 
 #: templates/countries.html:8
 msgid ""
-"This grid indicates the period after which works enter the public domain in "
-"each country."
+"This grid indicates the period after which works enter the public domain "
+"in each country."
 msgstr ""
 "Dette rutenettet indikerer tidsrommet etter at verkene går inn i "
 "allemannseie i hvert land."
@@ -1704,11 +1705,11 @@ msgstr "Oppdag skapere"
 
 #: templates/home.html:29
 msgid ""
-"Paulina is a simple search tool to discover authors from all over the world "
-"and learn about their works."
+"Paulina is a simple search tool to discover authors from all over the "
+"world and learn about their works."
 msgstr ""
-"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og lære "
-"om verkene deres."
+"Paulina er et enkelt verktøy for å oppdage skapere fra hele verden og "
+"lære om verkene deres."
 
 #: templates/home.html:33
 msgid "Mary Shelley"
@@ -1732,11 +1733,11 @@ msgstr "Finn verker"
 
 #: templates/home.html:45
 msgid ""
-"Easily find information on cultural works from all disciplines of art and "
-"knowledge found on Wikidata."
+"Easily find information on cultural works from all disciplines of art and"
+" knowledge found on Wikidata."
 msgstr ""
-"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å finne "
-"på Wikidata."
+"Finn info om kulturelle verk fra alle kunstarter og kunnskap som er å "
+"finne på Wikidata."
 
 #: templates/home.html:49
 msgid "The Araucaniad"
@@ -1763,8 +1764,8 @@ msgid ""
 "Find out which works are in the public domain in different countries and "
 "access the versions available online."
 msgstr ""
-"Finn ut hvilke verk som er i allemannseie i forskjellige land og få tilgang "
-"til versjoner på nett."
+"Finn ut hvilke verk som er i allemannseie i forskjellige land og få "
+"tilgang til versjoner på nett."
 
 #: templates/home.html:65
 msgid "Countries with 50 years post mortem auctoris"
@@ -1776,15 +1777,23 @@ msgstr "Land med 70 års vernetid"
 
 #: templates/home.html:75
 msgid ""
-"Discover writers, musicians, visual artists and more who were born or died "
-"on this day."
+"Discover writers, musicians, visual artists and more who were born or "
+"died on this day."
 msgstr ""
 "Oppdag forfattere, musikere, billedkunstnere og flere som ble født eller "
 "døde på dagens dato."
 
-#: templates/home.html:85
-msgid "See all"
-msgstr "Se alle"
+#: templates/home.html:79
+msgid "Yesterday"
+msgstr ""
+
+#: templates/home.html:81 templates/on-this-day.html:24
+msgid "Today"
+msgstr "I dag"
+
+#: templates/home.html:83
+msgid "Tomorrow"
+msgstr ""
 
 #: templates/layout.html:12
 msgid "Paulina"
@@ -1792,17 +1801,17 @@ msgstr "Paulina"
 
 #: templates/layout.html:13 templates/layout.html:35
 msgid ""
-"Paulina invites you to learn about the cultural heritage of humanity. It is "
-"a multilingual tool, powered by Wikidata, that allows you to search for "
-"people and find out if they have freely accessible works in the public "
-"domain. It also facilitates the understanding of copyright terms and helps "
-"to know when a work enters the public domain in each country."
+"Paulina invites you to learn about the cultural heritage of humanity. It "
+"is a multilingual tool, powered by Wikidata, that allows you to search "
+"for people and find out if they have freely accessible works in the "
+"public domain. It also facilitates the understanding of copyright terms "
+"and helps to know when a work enters the public domain in each country."
 msgstr ""
-"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. Det "
-"er et flerspråklig verktøy, drevet av Wikidata som tillater deg å søke etter "
-"folk og finne ut om de har fritt tilgjengelige verk i allemannseie. Det "
-"hjelper også forståelsen av opphavsrett og hjelper deg å finne ut når et "
-"verk går inn i allemannseie i hvert land."
+"Paulina inviterer deg til å lære mer om kulturarven til menneskeheten. "
+"Det er et flerspråklig verktøy, drevet av Wikidata som tillater deg å "
+"søke etter folk og finne ut om de har fritt tilgjengelige verk i "
+"allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
+"å finne ut når et verk går inn i allemannseie i hvert land."
 
 #: templates/layout.html:31 templates/layout.html:382
 msgid "Paulina - Data for the Public Domain"
@@ -1918,8 +1927,7 @@ msgid "Please wait while we complete your login."
 msgstr "Vent mens vi fullfører din innlogging."
 
 #: templates/on-this-day.html:6
-msgid ""
-"Authors who were born or died on this day, ranked by Wikimedia sitelinks."
+msgid "Authors who were born or died on this day, ranked by Wikimedia sitelinks."
 msgstr ""
 "Skapere som ble født eller døde på dagens dato, rangert etter Wikimedia-"
 "sidelenker."
@@ -1931,10 +1939,6 @@ msgstr "Forrige dag"
 #: templates/on-this-day.html:18
 msgid "Next day"
 msgstr "Neste dag"
-
-#: templates/on-this-day.html:24
-msgid "Today"
-msgstr "I dag"
 
 #: templates/on-this-day.html:27
 msgid "Or choose another date:"
@@ -2046,13 +2050,13 @@ msgstr "siden for land og vilkår"
 
 #: templates/work.html:513
 msgid ""
-"Copyright status information is not available for this work. The copyright "
-"status depends on the jurisdiction, the author's date of death and the date "
-"the work was created or published."
+"Copyright status information is not available for this work. The "
+"copyright status depends on the jurisdiction, the author's date of death "
+"and the date the work was created or published."
 msgstr ""
 "Informasjon om opphavsrettsstatus er ikke tilgjengelig for dette verket. "
-"Opphavsrettsstatusen kommer an på jurisdiksjon, skaperens dødsdato og datoen "
-"verket ble skapt eller utgitt."
+"Opphavsrettsstatusen kommer an på jurisdiksjon, skaperens dødsdato og "
+"datoen verket ble skapt eller utgitt."
 
 #: templates/work.html:514
 #, python-format
@@ -2105,7 +2109,6 @@ msgstr "Liste over verker av %(author_name)s"
 msgid "View this query on the Wikidata Query Service"
 msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
-#, python-format
 #~ msgid "(%(author_age)s years)"
 #~ msgstr "(%(author_age)s år)"
 
@@ -2140,17 +2143,14 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 #~ msgstr "Wikiquote-lenke"
 
 #~ msgid "Unknown due to lack of available dates of birth and death."
-#~ msgstr ""
-#~ "Ukjent som følge av manglende tilgjengelige datoer for fødsel og død."
+#~ msgstr "Ukjent som følge av manglende tilgjengelige datoer for fødsel og død."
 
 #~ msgid "Search filters"
 #~ msgstr "Søkeresultater"
 
-#, python-format
 #~ msgid "%(country_name)s's copyright term"
 #~ msgstr "%(country_name)ss opphavsrettsvilkår"
 
-#, python-format
 #~ msgid "%(country_name)s's statistics"
 #~ msgstr "Statistikk for %(country_name)s"
 
@@ -2168,3 +2168,7 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
 #~ msgid "Musical work"
 #~ msgstr "Musikkverk"
+
+#~ msgid "See all"
+#~ msgstr "Se alle"
+
