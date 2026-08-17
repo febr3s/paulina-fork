@@ -515,7 +515,7 @@ def on_this_day_authors():
 
 @app.route("/robots.txt")
 def show_robots_txt():
-    ROBOTS_TXT = "User-agent: *\nCrawl-Delay: 10\n"
+    ROBOTS_TXT = "User-agent: *\nDisallow: /\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
 
 
