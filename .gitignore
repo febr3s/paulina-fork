@@ -4,8 +4,8 @@ __pycache__/
 # Ignore virtual environment
 .venv/
 
-# Ignore main config file
-config.py
+# Ignore environment variables  file
+.env
 
 # Ignore vim session
 Session.vim
