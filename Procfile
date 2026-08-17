@@ -1,1 +1,1 @@
-web: gunicorn --bind=0.0.0.0 --workers=12 --threads=4 --worker-class=gthread --forwarded-allow-ips=* --backlog=1024 --timeout=30 --max-requests=1000 --max-requests-jitter=50 --limit-request-line=8192 app:app
+web: gunicorn --bind=0.0.0.0 --workers=12 --threads=4 --worker-class=gthread --forwarded-allow-ips=* --backlog=1024 --timeout=10 --max-requests=1000 --max-requests-jitter=50 --limit-request-line=8192 app:app
