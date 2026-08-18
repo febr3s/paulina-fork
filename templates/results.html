@@ -8,7 +8,8 @@
   <div class="list-group p-1">
     {% if list_of_authors %}
     {% for author in list_of_authors.values() %}
-    <a href="{{ url_for('author_page', author_data=author['id']) }}" class="list-group-item list-group-item-action">
+    <a href="{{ url_for('author_page', author_data=author['id']) }}" 
+    class="list-group-item list-group-item-action" rel="nofollow">
       <div class="d-flex w-100 justify-content-between">
         {% set author_label = author.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
         <h5 class="mb-1">{% if author_label %}{{ author_label }}{% else %}{{ author['id'] }}{% endif %}</h5>
@@ -21,7 +22,8 @@
     {% endif %}
     {% if list_of_works %}
     {% for work in list_of_works.values() %}
-    <a href="{{ url_for('work_page', work_data=work['id']) }}" class="list-group-item list-group-item-action">
+    <a href="{{ url_for('work_page', work_data=work['id']) }}" 
+    class="list-group-item list-group-item-action" rel="nofollow">
       <div class="d-flex w-100 justify-content-between">
         {% set work_label = work.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
         <h5 class="mb-1">
@@ -44,7 +46,8 @@
     <ul class="pagination justify-content-center">
       {% if has_prev %}
       <li class="page-item">
-        <a class="page-link" style="color: black;" href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page-1) }}">{{ _('Previous') }}</a>
+        <a class="page-link" style="color: black;" rel="nofollow"
+         href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page-1) }}">{{ _('Previous') }}</a>
       </li>
       {% else %}
       <li class="page-item disabled">
@@ -58,7 +61,8 @@
 
       {% if has_next %}
       <li class="page-item">
-        <a class="page-link" style="color: black;" href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page+1) }}">{{ _('Next') }}</a>
+        <a class="page-link" style="color: black;" rel="nofollow"
+         href="{{ url_for('results', type_of_search=request.args.get('type_of_search'), query=request.args.get('query'), gender=request.args.get('gender'), nationality=request.args.get('nationality'), creative_area=request.args.get('creative_area'), in_public_domain=request.args.get('in_public_domain'), type_of_work=request.args.get('type_of_work'), country_of_origin=request.args.get('country_of_origin'), page=page+1) }}">{{ _('Next') }}</a>
       </li>
       {% else %}
       <li class="page-item disabled">

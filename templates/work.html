@@ -39,7 +39,7 @@
         {% for type_of_author, authors in work_authors.items() %}
         <p class="mb-1"><span class="fw-semibold text-light-emphasis">{{ type_of_author }}:</span>
           {% for author in authors %}
-          <a href="{{ url_for('author_page', author_data=author['ID']) }}">{{ author['name'] }}</a>{% if not loop.last
+          <a href="{{ url_for('author_page', author_data=author['ID']) }}" rel="nofollow">{{ author['name'] }}</a>{% if not loop.last
           %}, {% endif %}
           {% endfor %}
         </p>
@@ -496,11 +496,11 @@
               {% endif %}
               {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %} {{ _('in') }}
               {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
-              <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
+              <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}" rel="nofollow">
                 {{ claim['applies_to_jurisdiction_label'] }}
               </a>
               {% else %}
-              <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+              <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}" rel="nofollow">
                 {{ claim['applies_to_jurisdiction_label'] }}
               </a>
               {% endif %}
@@ -508,7 +508,7 @@
             </div>
             {% endfor %}
             {% else %}
-            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}">{{ _('countries and terms page') }}</a>{% endset %}
+            {% set countries_and_terms_page_link %}<a href="{{ url_for('countries_main') }}" rel="nofollow">{{ _('countries and terms page') }}</a>{% endset %}
             <div class="copyright-status-unknown">
               <p>{{ _("Copyright status information is not available for this work. The copyright status depends on the jurisdiction, the author's date of death and the date the work was created or published.") }}</p>
               <p>{{ _('To learn more about copyright terms in different countries, visit the %(countries_and_terms_page_link)s.', countries_and_terms_page_link=countries_and_terms_page_link) }}</p>

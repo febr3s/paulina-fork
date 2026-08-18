@@ -8,18 +8,18 @@
   <!-- Date navigation -->
   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
     <a href="{{ url_for('on_this_day_authors', month=prev_month, day=prev_day) }}"
-       class="btn btn-sm border-black"
+       class="btn btn-sm border-black" rel="nofollow"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
       &laquo; {{ _("Previous day") }}
     </a>
     <a href="{{ url_for('on_this_day_authors', month=next_month, day=next_day) }}"
-       class="btn btn-sm border-black"
+       class="btn btn-sm border-black" rel="nofollow"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #29a4e2;">
       {{ _("Next day") }} &raquo;
     </a>
     {% if not is_today %}
     <a href="{{ url_for('on_this_day_authors') }}"
-       class="btn btn-sm border-black"
+       class="btn btn-sm border-black" rel="nofollow"
        style="--bs-btn-bg: white; --bs-btn-color: black; --bs-btn-hover-bg: #f46527;">
       {{ _("Today") }}
     </a>
@@ -46,7 +46,9 @@
             {% if event == 'born' %}{{ _('Born') }}{% else %}{{ _('Died') }}{% endif %}
           </h2>
           <h5 class="mb-0">
-            <a href="{{ url_for('author_page', author_data=author.qid) }}" class="fw-semibold link-dark">{{ author.name }}</a>
+            <a href="{{ url_for('author_page', author_data=author.qid) }}" 
+            class="fw-semibold link-dark" rel="nofollow">
+            {{ author.name }}</a>
             {% if author.year %} - {{ author.year }}{% endif %}
             {% if author.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}
           </h5>
@@ -64,7 +66,8 @@
       {% if born %}
       <div class="list-group">
         {% for a in born %}
-        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" 
+        class="list-group-item list-group-item-action" rel="nofollow">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
               {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}</h5>
@@ -84,7 +87,8 @@
       {% if died %}
       <div class="list-group">
         {% for a in died %}
-        <a href="{{ url_for('author_page', author_data=a.qid) }}" class="list-group-item list-group-item-action">
+        <a href="{{ url_for('author_page', author_data=a.qid) }}" 
+        class="list-group-item list-group-item-action" rel="nofollow">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-0">{{ a.name }} {% if a.year %}({{ a.year }}){% endif %}
               {% if a.in_public_domain %}<span class="pd-icon" style="background-color: #198754; color: white;" title="{{ _('In public domain') }}">✓</span>{% endif %}</h5>

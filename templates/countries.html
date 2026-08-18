@@ -13,7 +13,7 @@
       {% for country in countries_info %}
       <div class="col">
         <a href="{{ url_for('country_page', country_data=country['item']['value'].split('/')[-1]) }}"
-           class="list-group-item list-group-item-action">
+           class="list-group-item list-group-item-action" rel="nofollow">
           <div class="text-center border border-black country-card p-3 h-100">
             <p>
               <img src="{{ country.get('flag', {}).get('value') }}"

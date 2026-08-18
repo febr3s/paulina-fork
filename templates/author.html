@@ -34,7 +34,7 @@
         <p>{{author_description}}</p>
         <div class="my-4">
           <a href="{{ url_for('works_list', author_id=author_id) }}" role="button"
-            class="btn border-black rounded-pill pill-custom orange">
+            class="btn border-black rounded-pill pill-custom orange" rel="nofollow">
             {{ _('Search works') }}
           </a>
         </div>
@@ -48,15 +48,15 @@
           <div class="public-domain-badge pd-yes mb-2"><span class="pd-icon">&check;</span>{% endif %}
             {{ claim['status_label'] }}{% if not claim.get('applies_to_jurisdiction_id') %}{% else %}
             {% if claim['jurisdiction_is_instance_of'] == "Q63705939" %}
-            {{ _('in') }} <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}">
+            {{ _('in') }} <a href="{{ url_for('term_page', term_id=claim['applies_to_jurisdiction_id']) }}" rel="nofollow">
               {{ claim['applies_to_jurisdiction_label'] }}
             </a>
             {% elif claim['jurisdiction_is_instance_of'] == "Q6256" %}
-            {{ _('in') }} <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}">
+            {{ _('in') }} <a href="{{ url_for('country_page', country_data=claim['applies_to_jurisdiction_id']) }}" rel="nofollow">
               {{ claim['applies_to_jurisdiction_label'] }}
             </a>
             {% elif claim['applies_to_jurisdiction_id'] == "Q13780930" %}
-            <a href="{{ url_for('term_page', term_id='Q60332278') }}">
+            <a href="{{ url_for('term_page', term_id='Q60332278') }}" rel="nofollow">
               {{ _('everywhere in the world') }}
             </a>
             {% else %}

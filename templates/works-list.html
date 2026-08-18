@@ -22,7 +22,7 @@
   <!-- List of works -->
   <div class="list-group p-1">
     {% for work in author_works.values() %}
-    <a href="{{ url_for('work_page', work_data=work['id']) }}" class="list-group-item list-group-item-action">
+    <a href="{{ url_for('work_page', work_data=work['id']) }}" class="list-group-item list-group-item-action" rel="nofollow">
       <div class="d-flex w-100 justify-content-between">
         {% set work_label = work.get('labels', {}).get(CURRENT_LANGUAGE, {}).get('value') %}
         <h5 class="mb-1">
@@ -43,7 +43,8 @@
     <ul class="pagination justify-content-center">
       {% if has_prev %}
       <li class="page-item">
-        <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page-1) }}">{{ _('Previous') }}</a>
+        <a class="page-link" style="color: black;" rel="nofollow"
+         href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page-1) }}">{{ _('Previous') }}</a>
       </li>
       {% else %}
       <li class="page-item disabled">
@@ -52,12 +53,13 @@
       {% endif %}
 
       <li class="page-item active">
-        <span class="page-link">{{ _('Page %(page)s', page=page) }}</span>
+        <span class="page-link" style="color: black;">{{ _('Page %(page)s', page=page) }}</span>
       </li>
 
       {% if has_next %}
       <li class="page-item">
-        <a class="page-link" href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page+1) }}">{{ _('Next') }}</a>
+        <a class="page-link" style="color: black;" rel="nofollow"
+         href="{{ url_for('works_list', author_id=request.view_args.author_id, page=page+1) }}">{{ _('Next') }}</a>
       </li>
       {% else %}
       <li class="page-item disabled">

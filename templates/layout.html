@@ -103,10 +103,10 @@
           <a class="nav-link" href="{{ url_for('about') }}">{{ _('About') }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('countries_main') }}">{{ _('Countries and terms') }}</a>
+          <a class="nav-link" href="{{ url_for('countries_main') }}" rel="nofollow">{{ _('Countries and terms') }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('on_this_day_authors') }}">{{ _('On this day') }}</a>
+          <a class="nav-link" href="{{ url_for('on_this_day_authors') }}" rel="nofollow">{{ _('On this day') }}</a>
         </li>
       </ul>
       
@@ -359,7 +359,7 @@
               <a href="https://www.wikidata.org/wiki/Wikidata:Tools/Paulina" target="_blank" class="link-dark">{{ _('Documentation') }}</a>
             </li>
             <li>
-              <a href="{{ url_for('countries_main') }}" class="link-dark">{{ _('Countries and terms') }}</a>
+              <a href="{{ url_for('countries_main') }}" class="link-dark" rel="nofollow">{{ _('Countries and terms') }}</a>
             </li>
           </ul>
         </div>

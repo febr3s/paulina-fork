@@ -14,7 +14,7 @@
     {% if "itemLabel" in term %}
     <tr>
       <th scope="row">{{ _("%(country_name)s is part of", country_name=country_name) }}</th>
-      <td><a href="{{ url_for('term_page', term_id=term['item']['value'].split('/')[-1]) }}">
+      <td><a href="{{ url_for('term_page', term_id=term['item']['value'].split('/')[-1]) }}" rel="nofollow">
         {{ term['itemLabel']['value'] }}</a>
         {% if term['appliesToParts']['value'] != '' %}
         <br>

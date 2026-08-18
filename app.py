@@ -515,7 +515,9 @@ def on_this_day_authors():
 
 @app.route("/robots.txt")
 def show_robots_txt():
-    ROBOTS_TXT = "User-agent: *\nDisallow: /\n"
+    ROBOTS_TXT = "User-agent: *\nDisallow: /results\nDisallow: /author/\n" \
+    "Disallow: /works-list/\nDisallow: /work/\nDisallow: /country/\nDisallow: /term/\n" \
+    "Disallow: /countries/\nDisallow: /on-this-day/\nDisallow: /api/\nCrawl-delay: 10\n"
     return Response(ROBOTS_TXT, mimetype="text/plain")
 
 
