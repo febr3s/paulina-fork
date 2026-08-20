@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-11 15:28-0300\n"
+"POT-Creation-Date: 2026-08-20 16:37-0300\n"
 "PO-Revision-Date: 2026-06-26 22:01+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language: nb_NO\n"
@@ -66,118 +66,118 @@ msgstr "Land og vilkår"
 msgid "On this day"
 msgstr "Dagen i dag"
 
-#: app.py:618
+#: app.py:620
 msgid "Login failed. Please try again."
 msgstr "Kunne ikke logge på. Prøv på nytt."
 
-#: app.py:628 app.py:698
+#: app.py:630 app.py:700
 msgid "Authentication failed. Please try again."
 msgstr "Autentisering feilet. Prøv på nytt."
 
-#: app.py:633
+#: app.py:635
 msgid "Login session expired. Please try again."
 msgstr "Innlogginsøkten har løpt ut. Prøv på nytt."
 
-#: app.py:640
+#: app.py:642
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:660
+#: app.py:662
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:687
+#: app.py:689
 msgid "Failed to get user profile. Please try again."
 msgstr "Kunne ikke hente brukerprofil. Prøv på nytt."
 
-#: app.py:711
+#: app.py:713
 msgid "You have been logged out."
 msgstr "Du har blitt logget ut."
 
-#: app.py:724
+#: app.py:726
 msgid "Please login to add an author."
 msgstr "Logg inn for å legge til en skaper."
 
-#: app.py:729 app.py:844
+#: app.py:731 app.py:846
 msgid "Your session has expired. Please login again."
 msgstr "Økten din har utløpt. Logg inn på nytt."
 
-#: app.py:737 app.py:852 app.py:963 app.py:1064
+#: app.py:739 app.py:854 app.py:965 app.py:1066
 msgid "Session expired. Please log in again."
 msgstr "Økten har utløpt. Logg inn på nytt."
 
-#: app.py:776
+#: app.py:778
 #, python-format
 msgid "Error creating author: %(error)s"
 msgstr "Feil ved opprettelse av skaper: %(error)s"
 
-#: app.py:782 app.py:793 app.py:824 templates/add-author.html:39
+#: app.py:784 app.py:795 app.py:826 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:124
 msgid "Add Author"
 msgstr "Legg til skaper"
 
-#: app.py:787
+#: app.py:789
 msgid "An error occurred while creating the author. Please try again."
 msgstr "Det har oppstått en feil ved opprettelse av denne skaperen. Prøv på nytt."
 
-#: app.py:839
+#: app.py:841
 msgid "Please login to add a work."
 msgstr "Logg inn for å legge til et verk."
 
-#: app.py:891
+#: app.py:893
 #, python-format
 msgid "Error creating work: %(error)s"
 msgstr "Feil ved opprettelse av verk: %(error)s"
 
-#: app.py:897 app.py:908 app.py:939 templates/add-work.html:39
+#: app.py:899 app.py:910 app.py:941 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:130
 msgid "Add Work"
 msgstr "Legg til verk"
 
-#: app.py:902
+#: app.py:904
 msgid "An error occurred while creating the work. Please try again."
 msgstr "Det oppsto en feil ved opprettelse av verket. Prøv på nytt."
 
-#: app.py:956 app.py:1058
+#: app.py:958 app.py:1060
 msgid "You must be logged in to edit."
 msgstr "Du må være innlogget for å redigere."
 
-#: app.py:972 app.py:1070
+#: app.py:974 app.py:1072
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:979 app.py:1074
+#: app.py:981 app.py:1076
 msgid "No changes provided."
 msgstr "Ingen endringer angitt."
 
-#: app.py:999 app.py:1090
+#: app.py:1001 app.py:1092
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr "Mangler egenskap eller verdi for felt: %(field)s"
 
-#: app.py:1020 app.py:1108
+#: app.py:1022 app.py:1110
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "Dødsdato"
 
-#: app.py:1028 app.py:1113
+#: app.py:1030 app.py:1115
 msgid "Successfully updated!"
 msgstr "Oppdatert!"
 
-#: app.py:1033 app.py:1115
+#: app.py:1035 app.py:1117
 msgid "Updated with some errors."
 msgstr "Oppdatert med noen feil."
 
-#: app.py:1039 app.py:1117
+#: app.py:1041 app.py:1119
 msgid "Failed to update fields."
 msgstr "Kunne ikke oppdatere felt."
 
-#: app.py:1046 app.py:1120
+#: app.py:1048 app.py:1122
 #, python-format
 msgid "Server error: %(error)s"
 msgstr "Tjenestefeil: %(error)s"
 
-#: app.py:1134
+#: app.py:1136
 msgid "404 error"
 msgstr "404-feil"
 
@@ -301,23 +301,23 @@ msgstr "Ingen OAuth-økt tilgjengelig"
 msgid "Unexpected token response: %(data)s"
 msgstr ""
 
-#: templates/add-author.html:591 wikidata_api.py:322
+#: templates/add-author.html:590 wikidata_api.py:322
 msgid "Name is required"
 msgstr "Navn påkrevd"
 
-#: templates/add-author.html:592 wikidata_api.py:324
+#: templates/add-author.html:591 wikidata_api.py:324
 msgid "Gender is required"
 msgstr ""
 
-#: templates/add-author.html:593 wikidata_api.py:326
+#: templates/add-author.html:592 wikidata_api.py:326
 msgid "Nationality is required"
 msgstr "Nasjonalitet påkrevd"
 
-#: templates/add-author.html:594 wikidata_api.py:328
+#: templates/add-author.html:593 wikidata_api.py:328
 msgid "Place of birth is required"
 msgstr "Fødested påkrevd"
 
-#: templates/add-author.html:595 wikidata_api.py:330
+#: templates/add-author.html:594 wikidata_api.py:330
 msgid "Occupation is required"
 msgstr "Beskjeftigelse påkrevd"
 
@@ -335,11 +335,11 @@ msgstr "Dødsdato: %(error)s"
 msgid "work"
 msgstr "verk"
 
-#: templates/add-work.html:1557 wikidata_api.py:581
+#: templates/add-work.html:1609 wikidata_api.py:581
 msgid "Title is required"
 msgstr "Tittel påkrevd"
 
-#: templates/add-work.html:1564 wikidata_api.py:586
+#: templates/add-work.html:1616 wikidata_api.py:586
 msgid "Type of work is required"
 msgstr "Type verk er påkrevd"
 
@@ -762,7 +762,7 @@ msgid "None of these match - Continue"
 msgstr "Ingen av disse passer – fortsett"
 
 #: templates/add-author.html:103 templates/add-author.html:571
-#: templates/add-work.html:79
+#: templates/add-work.html:79 templates/add-work.html:742
 msgid "No exact match found."
 msgstr "Intet eksakt treff funnet."
 
@@ -919,7 +919,7 @@ msgid "Image URL"
 msgstr "Bilde-URL"
 
 #: templates/add-author.html:473 templates/add-author.html:481
-#: templates/add-author.html:601 templates/add-work.html:628
+#: templates/add-author.html:600 templates/add-work.html:628
 #: templates/add-work.html:639
 msgid "Image preview"
 msgstr "Forhåndsvisning av bilde"
@@ -948,171 +948,170 @@ msgstr "Tilbakestill"
 msgid "Submit"
 msgstr "Send inn"
 
-#: templates/add-author.html:560 templates/author.html:817
-#: templates/work.html:570
+#: templates/add-author.html:560 templates/add-work.html:731
+#: templates/author.html:817 templates/work.html:570
 msgid "Searching Wikidata..."
 msgstr "Søker på Wikidata ..."
 
-#: templates/add-author.html:561 templates/author.html:818
-#: templates/work.html:571
+#: templates/add-author.html:561 templates/add-work.html:732
+#: templates/author.html:818 templates/work.html:571
 msgid "No Wikidata results found"
 msgstr "Ingen treff på Wikidata"
 
 #: templates/add-author.html:562 templates/add-author.html:573
+#: templates/add-work.html:733 templates/add-work.html:744
 #: templates/author.html:819 templates/work.html:572
 msgid "No description"
 msgstr "Ingen beskrivelse"
 
 #: templates/add-author.html:563 templates/add-author.html:572
+#: templates/add-work.html:734 templates/add-work.html:743
 #: templates/author.html:820 templates/work.html:573
 msgid "Error searching Wikidata"
 msgstr "Feil ved søk på Wikidata"
 
-#: templates/add-author.html:564 templates/author.html:821
-#: templates/work.html:574
+#: templates/add-author.html:564 templates/add-work.html:735
+#: templates/author.html:821 templates/work.html:574
 msgid "This item is already added"
 msgstr "Dette elementet er allerede lagt til"
 
-#: templates/add-author.html:565 templates/author.html:822
-#: templates/work.html:575
+#: templates/add-author.html:565 templates/add-work.html:736
+#: templates/author.html:822 templates/work.html:575
 msgid "This item is already selected"
 msgstr "Dette elementet er allerede valgt"
 
-#: templates/add-author.html:566 templates/add-author.html:582
+#: templates/add-author.html:566 templates/add-author.html:581
+#: templates/add-work.html:737 templates/add-work.html:752
 #: templates/author.html:823 templates/author.html:834 templates/work.html:576
 #: templates/work.html:586
 msgid "Remove"
 msgstr "Fjern"
 
-#: templates/add-author.html:570
+#: templates/add-author.html:570 templates/add-work.html:741
 msgid "Searching..."
 msgstr "Søker ..."
 
-#: templates/add-author.html:577 templates/author.html:830
-#: templates/work.html:582
+#: templates/add-author.html:577 templates/add-work.html:748
+#: templates/author.html:830 templates/work.html:582
 msgid "Reference"
 msgstr "Referanse"
 
-#: templates/add-author.html:578 templates/author.html:831
-#: templates/work.html:583
+#: templates/add-author.html:578 templates/add-work.html:749
+#: templates/author.html:831 templates/work.html:583
 msgid "Reference URL"
 msgstr "Referanse-URL"
 
-#: templates/add-author.html:579 templates/add-work.html:50
-msgid "Title"
-msgstr "Tittel"
-
-#: templates/add-author.html:580 templates/author.html:832
-#: templates/work.html:584
+#: templates/add-author.html:579 templates/add-work.html:750
+#: templates/author.html:832 templates/work.html:584
 msgid "Date accessed"
 msgstr "Dato besøkt"
 
-#: templates/add-author.html:581
+#: templates/add-author.html:580 templates/add-work.html:751
 msgid "Maximum 3 references per field"
 msgstr "Maks tre referanser for hvert felt"
 
-#: templates/add-author.html:586
+#: templates/add-author.html:585 templates/add-work.html:756
 msgid "Please use an image from Wikimedia Commons."
 msgstr "Bruk et bilde fra Wikimedia Commons."
 
-#: templates/add-author.html:587
+#: templates/add-author.html:586 templates/add-work.html:757
 msgid "Could not load image. Please check the URL."
 msgstr "Kunne ikke laste inn bilde. Sjekk URL-en."
 
-#: templates/add-author.html:596
+#: templates/add-author.html:595
 msgid "Image must be from Wikimedia Commons"
 msgstr "Bilde må være fra Wikimedia Commons"
 
-#: templates/add-author.html:597
+#: templates/add-author.html:596
 msgid "Please fill in all required fields:"
 msgstr "Fyll inn alle de påkrevde feltene:"
 
-#: templates/add-author.html:598 templates/add-work.html:1181
+#: templates/add-author.html:597 templates/add-work.html:1233
 msgid "Are you sure you want to reset the form? All entered data will be lost."
 msgstr ""
 "Er du sikker på at du vil tilbakestille skjemaet? All angitt data blir "
 "tapt."
 
-#: templates/add-author.html:599
+#: templates/add-author.html:598
 msgid "Please enter the author name first to search for images"
 msgstr "Angi skaperens navn først for å søke etter bilder"
 
-#: templates/add-author.html:600
+#: templates/add-author.html:599
 msgid "author name"
 msgstr "skapernavn"
 
-#: templates/add-author.html:602 templates/author.html:1050
+#: templates/add-author.html:601 templates/author.html:1050
 #: templates/author.html:1452 templates/work.html:733 templates/work.html:1042
 msgid "Year is required"
 msgstr "år påkrevd"
 
-#: templates/add-author.html:603 templates/author.html:1051
+#: templates/add-author.html:602 templates/author.html:1051
 #: templates/author.html:1453 templates/work.html:734 templates/work.html:1043
 msgid "Year must be a valid 4-digit number"
 msgstr "År må være et gyldig firesifret tall"
 
-#: templates/add-author.html:604
+#: templates/add-author.html:603
 msgid "Month must be between 0-12 (use 0 for unknown)"
 msgstr "Måned må være mellom 0–13 (bruk 0 dersom den er ukjent)"
 
-#: templates/add-author.html:605
+#: templates/add-author.html:604
 msgid "Day must be between 0-31 (use 0 for unknown)"
 msgstr "Dag må være mellom 0–31 (bruk 0 dersom den er ukjent)"
 
-#: templates/add-author.html:606 templates/author.html:1054
+#: templates/add-author.html:605 templates/author.html:1054
 #: templates/author.html:1456 templates/work.html:737 templates/work.html:1046
 msgid "Month cannot be 0 if day is specified"
 msgstr "Måned kan ikke være 0 når dag er angitt"
 
-#: templates/add-author.html:763
+#: templates/add-author.html:762
 msgid "Date of birth: Year is required"
 msgstr "Fødselsdato: År påkrevd"
 
-#: templates/add-author.html:764
+#: templates/add-author.html:763
 msgid "Date of birth: Year must be a valid 4-digit number"
 msgstr "Fødselsdato: År må være et gyldig firesifret tall"
 
-#: templates/add-author.html:765
+#: templates/add-author.html:764
 msgid "Date of birth: Month must be between 0-12 (use 0 for unknown)"
 msgstr "Fødselsdato: Måned må være mellom 0–12 (bruk 0 dersom den er ukjent)"
 
-#: templates/add-author.html:766
+#: templates/add-author.html:765
 msgid "Date of birth: Day must be between 0-31 (use 0 for unknown)"
 msgstr "Fødselsdato: Dag må være mellom 0–31 (bruk 0 dersom den er ukjent)"
 
-#: templates/add-author.html:767
+#: templates/add-author.html:766
 msgid "Date of birth: Month cannot be 0 if day is specified"
 msgstr "Fødselsdato: Måned kan ikke være 0 når dag er angitt"
 
-#: templates/add-author.html:768
+#: templates/add-author.html:767
 msgid "Date of birth: Month is required if you enter day"
 msgstr "Fødselsdato: Måned er påkrevd når du har angitt en dag"
 
-#: templates/add-author.html:790
+#: templates/add-author.html:789
 msgid "Date of death: Year is required if you enter month or day"
 msgstr "Dødsdato: År er påkrevd når du har angitt måned eller dag"
 
-#: templates/add-author.html:791
+#: templates/add-author.html:790
 msgid "Date of death: Year must be a valid 4-digit number"
 msgstr "Dødsdato: År må være et gyldig firesifret tall"
 
-#: templates/add-author.html:792
+#: templates/add-author.html:791
 msgid "Date of death: Month must be between 0-12 (use 0 for unknown)"
 msgstr "Dødsdato: Måned må være mellom 0–12 (bruk 0 dersom den er ukjent)"
 
-#: templates/add-author.html:793
+#: templates/add-author.html:792
 msgid "Date of death: Day must be between 0-31 (use 0 for unknown)"
 msgstr "Dødsdato: Dag må være mellom 0–31 (bruk 0 dersom det er ukjent)"
 
-#: templates/add-author.html:794
+#: templates/add-author.html:793
 msgid "Date of death: Month cannot be 0 if day is specified"
 msgstr "Dødsdato: Måned kan ikke være 0 dersom dag er angitt"
 
-#: templates/add-author.html:795
+#: templates/add-author.html:794
 msgid "Date of death: Month is required if you enter day and year"
 msgstr "Dødsdato: Måned er påkrev om du har angitt dag og år"
 
-#: templates/add-author.html:847 templates/add-work.html:1199
+#: templates/add-author.html:846 templates/add-work.html:1251
 msgid ""
 "Could not connect to server. Please refresh the page manually to clear "
 "all data."
@@ -1127,6 +1126,10 @@ msgstr "Verk opprettet!"
 #: templates/add-work.html:20
 msgid "The work has been added to Wikidata with ID:"
 msgstr "Verket er lagt til Wikidata med ID-en:"
+
+#: templates/add-work.html:50
+msgid "Title"
+msgstr "Tittel"
 
 #: templates/add-work.html:54
 msgid "e.g., Don Quixote"
@@ -1271,8 +1274,8 @@ msgstr ""
 msgid "Search Wikimedia Commons for"
 msgstr "Søk på Wikimedia Commons etter"
 
-#: templates/add-work.html:602 templates/add-work.html:1122
-#: templates/add-work.html:1126
+#: templates/add-work.html:602 templates/add-work.html:1174
+#: templates/add-work.html:1178
 msgid "work title"
 msgstr "verkstittel"
 
@@ -1288,103 +1291,103 @@ msgstr "Internet Archive-ID"
 msgid "The unique identifier from archive.org"
 msgstr "Den unike identifikatoren hos archive.org"
 
-#: templates/add-work.html:1583
+#: templates/add-work.html:1635
 msgid "At least one author is required"
 msgstr "Minst én skaper påkrevd"
 
-#: templates/add-work.html:1584
+#: templates/add-work.html:1636
 msgid "At least one director is required"
 msgstr "Minst én regissør påkrevd"
 
-#: templates/add-work.html:1585
+#: templates/add-work.html:1637
 msgid "At least one screenwriter is required"
 msgstr "Minst én manusforfatter påkrevd"
 
-#: templates/add-work.html:1586
+#: templates/add-work.html:1638
 msgid "At least one composer is required"
 msgstr "Minst én komponist påkrevd"
 
-#: templates/add-work.html:1587
+#: templates/add-work.html:1639
 msgid "At least one creator is required"
 msgstr "Minst én skaper påkrevd"
 
-#: templates/add-work.html:1588
+#: templates/add-work.html:1640
 msgid "At least one lyricist is required"
 msgstr "Minst én lyriker påkrevd"
 
-#: templates/add-work.html:1589
+#: templates/add-work.html:1641
 msgid "At least one performer is required"
 msgstr "Minst én utøver påkrevd"
 
-#: templates/add-work.html:1590
+#: templates/add-work.html:1642
 msgid "At least one producer is required"
 msgstr "Minst én produsent påkrevd"
 
-#: templates/add-work.html:1591
+#: templates/add-work.html:1643
 msgid "Language is required"
 msgstr "Språk påkrevd"
 
-#: templates/add-work.html:1592
+#: templates/add-work.html:1644
 msgid "Original language is required"
 msgstr "Originalspråk påkrevd"
 
-#: templates/add-work.html:1593
+#: templates/add-work.html:1645
 msgid "Country of origin is required"
 msgstr "Opprinnelsesland påkrevd"
 
-#: templates/add-work.html:1594
+#: templates/add-work.html:1646
 msgid "Country of publication is required"
 msgstr "Publiseringsland påkrevd"
 
-#: templates/add-work.html:1595
+#: templates/add-work.html:1647
 msgid "Location is required"
 msgstr "Sted påkrevd"
 
-#: templates/add-work.html:1596
+#: templates/add-work.html:1648
 msgid "Genre is required"
 msgstr "Sjanger påkrevd"
 
-#: templates/add-work.html:1613
+#: templates/add-work.html:1665
 msgid "Publication date: Year is required"
 msgstr "Publiseringsdato: År påkrevd"
 
-#: templates/add-work.html:1614
+#: templates/add-work.html:1666
 msgid "Publication date: Year must be a valid 4-digit number"
 msgstr "Publiseringsdato: År må være et gyldig firesifret tall"
 
-#: templates/add-work.html:1615
+#: templates/add-work.html:1667
 msgid "Publication date: Month must be between 0-12"
 msgstr "Publiseringsdato: Måned må være mellom 0–12"
 
-#: templates/add-work.html:1616
+#: templates/add-work.html:1668
 msgid "Publication date: Day must be between 0-31"
 msgstr "Publiseringsdato: Dag må være mellom 0–31"
 
-#: templates/add-work.html:1617
+#: templates/add-work.html:1669
 msgid "Publication date: Month cannot be 0 if day is specified"
 msgstr "Publiseringsdato: Måned kan ikke være 0 dersom dag er angitt"
 
-#: templates/add-work.html:1643
+#: templates/add-work.html:1695
 msgid "Creation date: Year is required"
 msgstr "Skapelsesdato: År er påkrevd"
 
-#: templates/add-work.html:1644
+#: templates/add-work.html:1696
 msgid "Creation date: Year must be a valid 4-digit number"
 msgstr "Skapelsesdato: År må være et gyldig firesifret tall"
 
-#: templates/add-work.html:1645
+#: templates/add-work.html:1697
 msgid "Creation date: Month must be between 0-12"
 msgstr "Skapelsesdato: Måned må være mellom 0–12"
 
-#: templates/add-work.html:1646
+#: templates/add-work.html:1698
 msgid "Creation date: Day must be between 0-31"
 msgstr "Skapelsesdato: Dag må være mellom 0–31"
 
-#: templates/add-work.html:1647
+#: templates/add-work.html:1699
 msgid "Creation date: Month cannot be 0 if day is specified"
 msgstr "Skapelsesdato: Måned kan ikke være 0 dersom dag er angitt"
 
-#: templates/add-work.html:1665
+#: templates/add-work.html:1717
 msgid "Please fix the following errors:"
 msgstr "Fiks de følgende feilene:"
 
@@ -1865,8 +1868,8 @@ msgstr "Kreativt område"
 msgid "Type to filter..."
 msgstr "Skriv for å filtrere ..."
 
-#: templates/layout.html:263 templates/on-this-day.html:51
-#: templates/on-this-day.html:70 templates/on-this-day.html:90
+#: templates/layout.html:263 templates/on-this-day.html:53
+#: templates/on-this-day.html:73 templates/on-this-day.html:94
 msgid "In public domain"
 msgstr "Falt i det fri"
 
@@ -1909,6 +1912,22 @@ msgstr "Angi et gyldig valg fra landsmenyen."
 #: templates/no-results.html:6
 msgid "No results found. Try again."
 msgstr "Ingen treff. Prøv igjen."
+
+#: templates/no-results.html:8 templates/no-results.html:12
+#, fuzzy
+msgid "Not in Wikidata yet?"
+msgstr "Rediger på Wikidata"
+
+#: templates/no-results.html:9 templates/results.html:46
+#, fuzzy
+msgid "Add an author."
+msgstr "Legg til skaper"
+
+#: templates/no-results.html:13 templates/results.html:48
+#: templates/works-list.html:11 templates/works-list.html:42
+#, fuzzy
+msgid "Add a work."
+msgstr "Legg til verk"
 
 #: templates/oauth-callback.html:2
 msgid "Authenticating..."
@@ -1960,15 +1979,15 @@ msgstr "Født"
 msgid "Died"
 msgstr "Døde"
 
-#: templates/on-this-day.html:63
+#: templates/on-this-day.html:65
 msgid "Born on this day"
 msgstr "Født i dag"
 
-#: templates/on-this-day.html:78 templates/on-this-day.html:98
+#: templates/on-this-day.html:81 templates/on-this-day.html:102
 msgid "No authors found for this date."
 msgstr "Ingen skapere funnet for denne datoen."
 
-#: templates/on-this-day.html:83
+#: templates/on-this-day.html:86
 msgid "Died on this day"
 msgstr "Døde i dag"
 
@@ -1981,26 +2000,30 @@ msgstr "Søkeresultater"
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr "%(first)s–%(last)s av %(results_quantity)s treff"
 
-#: templates/results.html:30 templates/works-list.html:31
+#: templates/results.html:32 templates/works-list.html:31
 msgid "Available for download"
 msgstr "Tilgjengelig for nedlastning"
 
-#: templates/results.html:43 templates/works-list.html:42
+#: templates/results.html:44
+msgid "Can't find what you're looking for?"
+msgstr ""
+
+#: templates/results.html:52 templates/works-list.html:45
 msgid "Pagination"
 msgstr "Paginering"
 
-#: templates/results.html:47 templates/results.html:51
-#: templates/works-list.html:46 templates/works-list.html:50
+#: templates/results.html:57 templates/results.html:61
+#: templates/works-list.html:50 templates/works-list.html:54
 msgid "Previous"
 msgstr "Forrige"
 
-#: templates/results.html:56 templates/works-list.html:55
+#: templates/results.html:66 templates/works-list.html:59
 #, python-format
 msgid "Page %(page)s"
 msgstr "Side %(page)s"
 
-#: templates/results.html:61 templates/results.html:65
-#: templates/works-list.html:60 templates/works-list.html:64
+#: templates/results.html:72 templates/results.html:76
+#: templates/works-list.html:65 templates/works-list.html:69
 msgid "Next"
 msgstr "Neste"
 
@@ -2096,10 +2119,6 @@ msgstr "Ingen verk av %(author_name)s funnet"
 msgid "Missing information?"
 msgstr "Manglende info?"
 
-#: templates/works-list.html:11
-msgid "Add it to Wikidata"
-msgstr "Legg til på WIkidata"
-
 #: templates/works-list.html:14
 #, python-format
 msgid "List of works by %(author_name)s"
@@ -2108,6 +2127,11 @@ msgstr "Liste over verker av %(author_name)s"
 #: templates/works-list.html:20
 msgid "View this query on the Wikidata Query Service"
 msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
+
+#: templates/works-list.html:41
+#, fuzzy
+msgid "Missing a work?"
+msgstr "Manglende info?"
 
 #~ msgid "(%(author_age)s years)"
 #~ msgstr "(%(author_age)s år)"
@@ -2171,4 +2195,7 @@ msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
 #~ msgid "See all"
 #~ msgstr "Se alle"
+
+#~ msgid "Add it to Wikidata"
+#~ msgstr "Legg til på WIkidata"
 
