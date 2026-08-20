@@ -8,7 +8,8 @@
   <!-- No works message -->
   <h2 class="mb-4 p-1">{{ _('No works by %(author_name)s were found', author_name=author_name) }}</h2>
   <p>{{ _('Missing information?') }}
-    <a href="{{ url_for('add_work') }}">{{ _('Add a work.') }}</a>.</p>
+    <a href="{{ url_for('add_work') }}">{{ _('Add a work.') }}</a>
+  </p>
 
   {% else %}
   <h2 class="mb-2 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
