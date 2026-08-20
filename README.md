@@ -1,33 +1,31 @@
 # Paulina: Data for the Public Domain
+
 This project aims to build a global and multilingual search interface for authors
 and works in the public domain using Wikidata and Python.
 
 ## Requirements
+
 * Python 3.13 or later.
 * Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, python-dateutil, requests, requests-oauthlib.
 * A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
 
-## Server configuration
-Consider creating a `uwsgi.ini` file with these settings:
-
-    [uwsgi]
-    buffer-size = 8192
-    log-maxsize = 100000000
-
-The settings increase the default buffer limit to handle OAuth requests, and limits the `uwsgi.log` file size. On Toolforge, the path for the `uwsgi.ini` file should be `$HOME/www/python/uwsgi.ini`
-
 ## Config file
-You must copy the `config-sample.py` file to `config.py`. In this file you must uncomment the first line and enter a secret key, e.g.:
+
+By default, `config.py` looks for [environment variables](https://en.wikipedia.org/wiki/Environment_variable) and, if it doesn't find them, it fallbacks to dummy values. You can set your own values in your environment (for example, using an `.env` file) or you can modify your `config.py` file locally (if you choose this last option, please don't push you modified `config.py` file to the repository!).
+
+The only mandatory variables in the `config.py` file are `SECRET KEY` and `USER_AGENT`:
 
 `SECRET_KEY = "YourSecretKeyHere"`
 
-The secret key is for the session cookie. The session cookie is necessary so that the language choice is persistent throughout the session.
+The secret key is for the session cookie. The session cookie is necessary so that the language choice is persistent throughout the session. Replace `YourSecretKeyHere` with an actual key.
 
-If you'd like to run application in DEBUG mode, uncomment the second line and set it to `True`, i.e.:
+`USER_AGENT = "Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)"`
+
+The user agent is for the Wikimedia API calls made by the tool. Replace the placeholder email with your actual contact email.
+
+If you'd like to run the application in DEBUG mode, set:
 
 `DEBUG = True`
-
-By default, `DEBUG` is set to `False`.
 
 ### Setting Up OAuth for Local Development
 
@@ -82,11 +80,6 @@ Update the config.py file with the copied tokens:
 Update the redirect URL:
 
 `REDIRECT_URL = "http://localhost:5000/oauth-callback"`
-
-#### Step 4 Update User Agent
-Replace the placeholder email with your actual contact email:
-
-`USER_AGENT = 'Paulina/1.0 (https://paulina.toolforge.org/; your-email@example.com)'`
 
 
 ## Running Paulina: Test vs Production
