@@ -6,11 +6,11 @@
     <h5 class="mb-3 p-1">{{ _('No results found. Try again.') }}</h5>
     {% if type_of_search == 'author' %}
     <p class="p-1">{{ _('Not in Wikidata yet?') }}
-      <a href="{{ url_for('add_author') }}">{{ _('Add this author') }}</a>
+      <a href="{{ url_for('add_author') }}">{{ _('Add an author.') }}</a>
     </p>
     {% elif type_of_search == 'work' %}
     <p class="p-1">{{ _('Not in Wikidata yet?') }}
-      <a href="{{ url_for('add_work') }}">{{ _('Add this work') }}</a>
+      <a href="{{ url_for('add_work') }}">{{ _('Add a work.') }}</a>
     </p>
     {% endif %}
 </div>

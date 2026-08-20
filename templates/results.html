@@ -41,11 +41,11 @@
     {% endif %}
 
   </div>
-  <p class="p-1 mt-3 text-muted small">{{ _("Can't find what you're looking for?") }}
+  <p class="px-1 mt-3 text-muted small">{{ _("Can't find what you're looking for?") }}
     {% if type_of_search == 'author' %}
-    <a href="{{ url_for('add_author') }}">{{ _('Add this author') }}</a>
+    <a href="{{ url_for('add_author') }}">{{ _('Add an author.') }}</a>
     {% elif type_of_search == 'work' %}
-    <a href="{{ url_for('add_work') }}">{{ _('Add this work') }}</a>
+    <a href="{{ url_for('add_work') }}">{{ _('Add a work.') }}</a>
     {% endif %}
   </p>
   {% if has_prev or has_next %}

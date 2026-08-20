@@ -725,8 +725,43 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
+    // TRANSLATABLE MESSAGES
+
+    const wikidataMessages = {
+        searching: `{{ _("Searching Wikidata...") }}`,
+        noResults: `{{ _("No Wikidata results found") }}`,
+        noDescription: `{{ _("No description") }}`,
+        error: `{{ _("Error searching Wikidata") }}`,
+        alreadyAdded: `{{ _("This item is already added") }}`,
+        alreadySelected: `{{ _("This item is already selected") }}`,
+        remove: `{{ _("Remove") }}`
+    };
+  
+    const duplicateMessages = {
+        searching: `{{ _("Searching...") }}`,
+        noMatch: `{{ _("No exact match found.") }}`,
+        error: `{{ _("Error searching Wikidata") }}`,
+        noDescription: `{{ _("No description") }}`
+    };
+  
+    const referenceMessages = {
+        reference: `{{ _("Reference") }}`,
+        url: `{{ _("Reference URL") }}`,
+        retrieved: `{{ _("Date accessed") }}`,
+        maxReached: `{{ _("Maximum 3 references per field") }}`,
+        remove: `{{ _("Remove") }}`
+    };
+  
+    const imageMessages = {
+        invalidCommons: `{{ _("Please use an image from Wikimedia Commons.") }}`,
+        loadError: `{{ _("Could not load image. Please check the URL.") }}`
+    };
+
         // Initialize Reference Manager
-        window.refManager = new ReferenceManager();
+        window.refManager = new ReferenceManager({
+            maxReferences: 3,
+            messages: referenceMessages
+        });
 
         // Work Type Selection and Dynamic Fields
         const workTypeSelect = document.getElementById('work-type-select');
@@ -916,7 +951,8 @@
                 resultsId: 'work-author-results',
                 selectedItemsId: 'work-selected-authors',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -928,7 +964,8 @@
                 resultsId: 'work-director-results',
                 selectedItemsId: 'work-selected-directors',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -940,7 +977,8 @@
                 resultsId: 'work-creator-results',
                 selectedItemsId: 'work-selected-creators',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -952,7 +990,8 @@
                 resultsId: 'work-composer-results',
                 selectedItemsId: 'work-selected-composers',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -964,7 +1003,8 @@
                 resultsId: 'work-screenwriter-results',
                 selectedItemsId: 'work-selected-screenwriters',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -976,7 +1016,8 @@
                 resultsId: 'work-lyricist-results',
                 selectedItemsId: 'work-selected-lyricists',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -988,7 +1029,8 @@
                 resultsId: 'work-language-results',
                 selectedItemsId: 'work-language-selected',
                 multiSelect: false,
-                entityType: 'language'
+                entityType: 'language',
+                messages: wikidataMessages
             });
         }
 
@@ -1000,7 +1042,8 @@
                 resultsId: 'work-language-film-results',
                 selectedItemsId: 'work-language-film-selected',
                 multiSelect: false,
-                entityType: 'language'
+                entityType: 'language',
+                messages: wikidataMessages
             });
         }
 
@@ -1012,7 +1055,8 @@
                 resultsId: 'work-country-results',
                 selectedItemsId: 'work-country-selected',
                 multiSelect: false,
-                entityType: 'country'
+                entityType: 'country',
+                messages: wikidataMessages
             });
         }
 
@@ -1024,7 +1068,8 @@
                 resultsId: 'work-location-results',
                 selectedItemsId: 'work-location-selected',
                 multiSelect: false,
-                entityType: 'item'
+                entityType: 'item',
+                messages: wikidataMessages
             });
         }
 
@@ -1037,7 +1082,8 @@
                 resultsId: 'work-performer-results',
                 selectedItemsId: 'work-selected-performers',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -1050,7 +1096,8 @@
                 resultsId: 'work-producer-results',
                 selectedItemsId: 'work-selected-producers',
                 multiSelect: true,
-                entityType: 'human'
+                entityType: 'human',
+                messages: wikidataMessages
             });
         }
 
@@ -1063,7 +1110,8 @@
                 resultsId: 'work-genre-results',
                 selectedItemsId: 'work-selected-genres',
                 multiSelect: true,
-                entityType: 'item'
+                entityType: 'item',
+                messages: wikidataMessages
             });
         }
 
@@ -1076,7 +1124,8 @@
                 resultsId: 'work-record-label-results',
                 selectedItemsId: 'work-record-label-selected',
                 multiSelect: false,
-                entityType: 'item'
+                entityType: 'item',
+                messages: wikidataMessages
             });
         }
 
@@ -1089,7 +1138,8 @@
                 resultsId: 'work-country-publication-results',
                 selectedItemsId: 'work-country-publication-selected',
                 multiSelect: true,
-                entityType: 'country'
+                entityType: 'country',
+                messages: wikidataMessages
             });
         }
 
@@ -1100,7 +1150,8 @@
             containerId: 'work-duplicates-container',
             noneMatchBtnId: 'work-none-match-btn',
             noMatchId: 'work-no-matches-message',
-            entityType: 'item'
+            entityType: 'item',
+            messages: duplicateMessages
         });
 
         // Image Preview
@@ -1111,6 +1162,7 @@
             errorId: 'work-image-error-message',
             clearBtnId: 'work-clear-image-url',
             requireCommons: true,
+            messages: imageMessages
         });
 
         // Update Search Commons Button
