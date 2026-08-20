@@ -37,8 +37,8 @@ CREATIVE_KEYWORDS = frozenset({
    
     "architect", "designer", "craftsman", "jeweller",
    
-    "journalist", "reporter", "broadcaster", "editor", "columnist", "correspondent",
-    "publisher", "printer",
+    "journalist", "reporter", "broadcaster", "columnist", "correspondent",
+    " printer", # printer has a space to distiguish it from sprinter
    
     "philosopher", "historian", "scholar", "anthropologist", "folklorist", "theologian",
     "linguist", "literary", "intellectual", "academic", "professor", "teacher",
