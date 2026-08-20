@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-20 16:37-0300\n"
+"POT-Creation-Date: 2026-08-20 18:51-0300\n"
 "PO-Revision-Date: 2026-06-26 22:01+0000\n"
 "Last-Translator: EdoAug <edvardhaaland@gmail.com>\n"
 "Language: nb_NO\n"
@@ -1697,8 +1697,8 @@ msgid "Number of works in public domain"
 msgstr "Antall verk som er offentlig eiendom"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:375 templates/layout.html:377
-#: templates/layout.html:379
+#: templates/layout.html:378 templates/layout.html:380
+#: templates/layout.html:382
 msgid "Paulina logo"
 msgstr "Paulina-logo"
 
@@ -1816,7 +1816,7 @@ msgstr ""
 "allemannseie. Det hjelper også forståelsen av opphavsrett og hjelper deg "
 "å finne ut når et verk går inn i allemannseie i hvert land."
 
-#: templates/layout.html:31 templates/layout.html:382
+#: templates/layout.html:31 templates/layout.html:385
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina — Data for allemanseie"
 
@@ -1886,8 +1886,8 @@ msgid "Source code"
 msgstr "Kildekode"
 
 #: templates/layout.html:351
-msgid "Help translate"
-msgstr "Hjelp til å oversette"
+msgid "On Mastodon"
+msgstr ""
 
 #: templates/layout.html:356
 msgid "Help"
@@ -1897,15 +1897,19 @@ msgstr "Hjelp"
 msgid "Documentation"
 msgstr "Dokumentasjon"
 
-#: templates/layout.html:383
+#: templates/layout.html:365
+msgid "Help translate"
+msgstr "Hjelp til å oversette"
+
+#: templates/layout.html:386
 msgid "Powered by Wikidata."
 msgstr "Drevet av Wikidata."
 
-#: templates/layout.html:439
+#: templates/layout.html:442
 msgid "No matching option"
 msgstr "Intet passende valg"
 
-#: templates/layout.html:535
+#: templates/layout.html:538
 msgid "Please select a valid option from the country dropdown."
 msgstr "Angi et gyldig valg fra landsmenyen."
 
@@ -1924,7 +1928,7 @@ msgid "Add an author."
 msgstr "Legg til skaper"
 
 #: templates/no-results.html:13 templates/results.html:48
-#: templates/works-list.html:11 templates/works-list.html:42
+#: templates/works-list.html:11 templates/works-list.html:43
 #, fuzzy
 msgid "Add a work."
 msgstr "Legg til verk"
@@ -1995,12 +1999,12 @@ msgstr "Døde i dag"
 msgid "Search results"
 msgstr "Søkeresultater"
 
-#: templates/results.html:7 templates/works-list.html:16
+#: templates/results.html:7 templates/works-list.html:17
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr "%(first)s–%(last)s av %(results_quantity)s treff"
 
-#: templates/results.html:32 templates/works-list.html:31
+#: templates/results.html:32 templates/works-list.html:32
 msgid "Available for download"
 msgstr "Tilgjengelig for nedlastning"
 
@@ -2008,22 +2012,22 @@ msgstr "Tilgjengelig for nedlastning"
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: templates/results.html:52 templates/works-list.html:45
+#: templates/results.html:52 templates/works-list.html:46
 msgid "Pagination"
 msgstr "Paginering"
 
 #: templates/results.html:57 templates/results.html:61
-#: templates/works-list.html:50 templates/works-list.html:54
+#: templates/works-list.html:51 templates/works-list.html:55
 msgid "Previous"
 msgstr "Forrige"
 
-#: templates/results.html:66 templates/works-list.html:59
+#: templates/results.html:66 templates/works-list.html:60
 #, python-format
 msgid "Page %(page)s"
 msgstr "Side %(page)s"
 
 #: templates/results.html:72 templates/results.html:76
-#: templates/works-list.html:65 templates/works-list.html:69
+#: templates/works-list.html:66 templates/works-list.html:70
 msgid "Next"
 msgstr "Neste"
 
@@ -2119,16 +2123,16 @@ msgstr "Ingen verk av %(author_name)s funnet"
 msgid "Missing information?"
 msgstr "Manglende info?"
 
-#: templates/works-list.html:14
+#: templates/works-list.html:15
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Liste over verker av %(author_name)s"
 
-#: templates/works-list.html:20
+#: templates/works-list.html:21
 msgid "View this query on the Wikidata Query Service"
 msgstr "Se denne spørringen på Wikidatas spørringstjeneste"
 
-#: templates/works-list.html:41
+#: templates/works-list.html:42
 #, fuzzy
 msgid "Missing a work?"
 msgstr "Manglende info?"
@@ -2198,4 +2202,7 @@ msgstr "Manglende info?"
 
 #~ msgid "Add it to Wikidata"
 #~ msgstr "Legg til på WIkidata"
+
+#~ msgid "Follow on Mastodon"
+#~ msgstr ""
 

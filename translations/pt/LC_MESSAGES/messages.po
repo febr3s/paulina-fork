@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-20 16:37-0300\n"
+"POT-Creation-Date: 2026-08-20 18:51-0300\n"
 "PO-Revision-Date: 2026-08-11 15:20-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language: pt\n"
@@ -1759,8 +1759,8 @@ msgid "Number of works in public domain"
 msgstr "Número de obras em domínio público"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:375 templates/layout.html:377
-#: templates/layout.html:379
+#: templates/layout.html:378 templates/layout.html:380
+#: templates/layout.html:382
 msgid "Paulina logo"
 msgstr "Logotipo de Paulina"
 
@@ -1879,7 +1879,7 @@ msgstr ""
 "direitos autorais e ajuda a saber quando uma obra entra em domínio "
 "público em cada país."
 
-#: templates/layout.html:31 templates/layout.html:382
+#: templates/layout.html:31 templates/layout.html:385
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Dados para o Domínio Público"
 
@@ -1950,8 +1950,8 @@ msgid "Source code"
 msgstr "Código fonte"
 
 #: templates/layout.html:351
-msgid "Help translate"
-msgstr "Ajude a traduzir"
+msgid "On Mastodon"
+msgstr ""
 
 #: templates/layout.html:356
 msgid "Help"
@@ -1961,15 +1961,19 @@ msgstr "Ajuda"
 msgid "Documentation"
 msgstr "Documentação"
 
-#: templates/layout.html:383
+#: templates/layout.html:365
+msgid "Help translate"
+msgstr "Ajude a traduzir"
+
+#: templates/layout.html:386
 msgid "Powered by Wikidata."
 msgstr "Com base nos dados do Wikidata."
 
-#: templates/layout.html:439
+#: templates/layout.html:442
 msgid "No matching option"
 msgstr "Nenhuma opção corresponde"
 
-#: templates/layout.html:535
+#: templates/layout.html:538
 msgid "Please select a valid option from the country dropdown."
 msgstr "Por favor, selecione uma opção válida no menu suspenso de países."
 
@@ -1988,7 +1992,7 @@ msgid "Add an author."
 msgstr "Adicionar autor/a"
 
 #: templates/no-results.html:13 templates/results.html:48
-#: templates/works-list.html:11 templates/works-list.html:42
+#: templates/works-list.html:11 templates/works-list.html:43
 #, fuzzy
 msgid "Add a work."
 msgstr "Adicionar obra"
@@ -2060,12 +2064,12 @@ msgstr "Morreram neste dia"
 msgid "Search results"
 msgstr "Resultados da pesquisa"
 
-#: templates/results.html:7 templates/works-list.html:16
+#: templates/results.html:7 templates/works-list.html:17
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr ""
 
-#: templates/results.html:32 templates/works-list.html:31
+#: templates/results.html:32 templates/works-list.html:32
 msgid "Available for download"
 msgstr "Disponível para download"
 
@@ -2073,23 +2077,23 @@ msgstr "Disponível para download"
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: templates/results.html:52 templates/works-list.html:45
+#: templates/results.html:52 templates/works-list.html:46
 #, fuzzy
 msgid "Pagination"
 msgstr "Pintura"
 
 #: templates/results.html:57 templates/results.html:61
-#: templates/works-list.html:50 templates/works-list.html:54
+#: templates/works-list.html:51 templates/works-list.html:55
 msgid "Previous"
 msgstr "Anterior"
 
-#: templates/results.html:66 templates/works-list.html:59
+#: templates/results.html:66 templates/works-list.html:60
 #, python-format
 msgid "Page %(page)s"
 msgstr "Página %(page)s"
 
 #: templates/results.html:72 templates/results.html:76
-#: templates/works-list.html:65 templates/works-list.html:69
+#: templates/works-list.html:66 templates/works-list.html:70
 msgid "Next"
 msgstr "Próximo"
 
@@ -2194,16 +2198,16 @@ msgstr "Nenhuma obra de %(author_name)s foi encontrada"
 msgid "Missing information?"
 msgstr "Falta informação?"
 
-#: templates/works-list.html:14
+#: templates/works-list.html:15
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
 
-#: templates/works-list.html:20
+#: templates/works-list.html:21
 msgid "View this query on the Wikidata Query Service"
 msgstr "Veja esta consulta no Serviço de Consultas do Wikidata"
 
-#: templates/works-list.html:41
+#: templates/works-list.html:42
 #, fuzzy
 msgid "Missing a work?"
 msgstr "Falta informação?"
@@ -2287,4 +2291,7 @@ msgstr "Falta informação?"
 
 #~ msgid "Add it to Wikidata"
 #~ msgstr "Adicionar ao Wikidata"
+
+#~ msgid "Follow on Mastodon"
+#~ msgstr ""
 

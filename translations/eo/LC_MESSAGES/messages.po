@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-20 16:37-0300\n"
+"POT-Creation-Date: 2026-08-20 18:51-0300\n"
 "PO-Revision-Date: 2025-02-13 05:02+0000\n"
 "Last-Translator: Juan Sebastian Quintero Santacruz "
 "<juancho2291@hotmail.com>\n"
@@ -1733,8 +1733,8 @@ msgid "Number of works in public domain"
 msgstr ""
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:375 templates/layout.html:377
-#: templates/layout.html:379
+#: templates/layout.html:378 templates/layout.html:380
+#: templates/layout.html:382
 msgid "Paulina logo"
 msgstr "Emblemo de Paulina"
 
@@ -1840,7 +1840,7 @@ msgid ""
 "and helps to know when a work enters the public domain in each country."
 msgstr ""
 
-#: templates/layout.html:31 templates/layout.html:382
+#: templates/layout.html:31 templates/layout.html:385
 msgid "Paulina - Data for the Public Domain"
 msgstr ""
 
@@ -1913,8 +1913,8 @@ msgid "Source code"
 msgstr "Fontkodo"
 
 #: templates/layout.html:351
-msgid "Help translate"
-msgstr "Helpi traduki"
+msgid "On Mastodon"
+msgstr ""
 
 #: templates/layout.html:356
 msgid "Help"
@@ -1924,15 +1924,19 @@ msgstr "Helpo"
 msgid "Documentation"
 msgstr "Dokumentaro"
 
-#: templates/layout.html:383
+#: templates/layout.html:365
+msgid "Help translate"
+msgstr "Helpi traduki"
+
+#: templates/layout.html:386
 msgid "Powered by Wikidata."
 msgstr "Funkciante per Vikidatumoj."
 
-#: templates/layout.html:439
+#: templates/layout.html:442
 msgid "No matching option"
 msgstr ""
 
-#: templates/layout.html:535
+#: templates/layout.html:538
 msgid "Please select a valid option from the country dropdown."
 msgstr ""
 
@@ -1951,7 +1955,7 @@ msgid "Add an author."
 msgstr "Aŭtoro(j)"
 
 #: templates/no-results.html:13 templates/results.html:48
-#: templates/works-list.html:11 templates/works-list.html:42
+#: templates/works-list.html:11 templates/works-list.html:43
 #, fuzzy
 msgid "Add a work."
 msgstr "Aŭtoro(j)"
@@ -2021,12 +2025,12 @@ msgstr ""
 msgid "Search results"
 msgstr "Serĉrezultoj"
 
-#: templates/results.html:7 templates/works-list.html:16
+#: templates/results.html:7 templates/works-list.html:17
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr ""
 
-#: templates/results.html:32 templates/works-list.html:31
+#: templates/results.html:32 templates/works-list.html:32
 msgid "Available for download"
 msgstr ""
 
@@ -2034,23 +2038,23 @@ msgstr ""
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: templates/results.html:52 templates/works-list.html:45
+#: templates/results.html:52 templates/works-list.html:46
 #, fuzzy
 msgid "Pagination"
 msgstr "Pentraĵo"
 
 #: templates/results.html:57 templates/results.html:61
-#: templates/works-list.html:50 templates/works-list.html:54
+#: templates/works-list.html:51 templates/works-list.html:55
 msgid "Previous"
 msgstr ""
 
-#: templates/results.html:66 templates/works-list.html:59
+#: templates/results.html:66 templates/works-list.html:60
 #, fuzzy, python-format
 msgid "Page %(page)s"
 msgstr ""
 
 #: templates/results.html:72 templates/results.html:76
-#: templates/works-list.html:65 templates/works-list.html:69
+#: templates/works-list.html:66 templates/works-list.html:70
 msgid "Next"
 msgstr ""
 
@@ -2150,16 +2154,16 @@ msgstr ""
 msgid "Missing information?"
 msgstr "Ĉu informoj mankas?"
 
-#: templates/works-list.html:14
+#: templates/works-list.html:15
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Listo de verkoj de %(author_name)s"
 
-#: templates/works-list.html:20
+#: templates/works-list.html:21
 msgid "View this query on the Wikidata Query Service"
 msgstr ""
 
-#: templates/works-list.html:41
+#: templates/works-list.html:42
 #, fuzzy
 msgid "Missing a work?"
 msgstr "Ĉu informoj mankas?"
@@ -2213,5 +2217,8 @@ msgstr "Ĉu informoj mankas?"
 #~ msgstr ""
 
 #~ msgid "Add it to Wikidata"
+#~ msgstr ""
+
+#~ msgid "Follow on Mastodon"
 #~ msgstr ""
 

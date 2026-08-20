@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-20 16:37-0300\n"
-"PO-Revision-Date: 2026-08-20 16:40-0300\n"
+"POT-Creation-Date: 2026-08-20 18:51-0300\n"
+"PO-Revision-Date: 2026-08-20 18:51-0300\n"
 "Last-Translator: Jorge Gemetto <jorgemet@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/paulina/paulina-app/"
 "es/>\n"
@@ -1686,7 +1686,7 @@ msgid "Number of works in public domain"
 msgstr "Cantidad de obras en dominio público"
 
 #: templates/home.html:8 templates/home.html:12 templates/home.html:16
-#: templates/layout.html:375 templates/layout.html:377 templates/layout.html:379
+#: templates/layout.html:378 templates/layout.html:380 templates/layout.html:382
 msgid "Paulina logo"
 msgstr "Logo de Paulina"
 
@@ -1804,7 +1804,7 @@ msgstr ""
 "También facilita la comprensión de los plazos de derecho de autor y ayuda a "
 "saber cuándo una obra entra en dominio público en cada país."
 
-#: templates/layout.html:31 templates/layout.html:382
+#: templates/layout.html:31 templates/layout.html:385
 msgid "Paulina - Data for the Public Domain"
 msgstr "Paulina - Datos para el dominio público"
 
@@ -1875,8 +1875,8 @@ msgid "Source code"
 msgstr "Código fuente"
 
 #: templates/layout.html:351
-msgid "Help translate"
-msgstr "Ayudar a traducir"
+msgid "On Mastodon"
+msgstr "En Mastodon"
 
 #: templates/layout.html:356
 msgid "Help"
@@ -1886,15 +1886,19 @@ msgstr "Ayuda"
 msgid "Documentation"
 msgstr "Documentación"
 
-#: templates/layout.html:383
+#: templates/layout.html:365
+msgid "Help translate"
+msgstr "Ayudar a traducir"
+
+#: templates/layout.html:386
 msgid "Powered by Wikidata."
 msgstr "Basado en datos de Wikidata."
 
-#: templates/layout.html:439
+#: templates/layout.html:442
 msgid "No matching option"
 msgstr "Ninguna opción coincide"
 
-#: templates/layout.html:535
+#: templates/layout.html:538
 msgid "Please select a valid option from the country dropdown."
 msgstr "Por favor, selecciona una opción válida del menú desplegable de país."
 
@@ -1911,7 +1915,7 @@ msgid "Add an author."
 msgstr "Agregar autor/a."
 
 #: templates/no-results.html:13 templates/results.html:48
-#: templates/works-list.html:11 templates/works-list.html:42
+#: templates/works-list.html:11 templates/works-list.html:43
 msgid "Add a work."
 msgstr "Agregar obra."
 
@@ -1981,12 +1985,12 @@ msgstr "Murieron este día"
 msgid "Search results"
 msgstr "Resultados de búsqueda"
 
-#: templates/results.html:7 templates/works-list.html:16
+#: templates/results.html:7 templates/works-list.html:17
 #, python-format
 msgid "%(first)s-%(last)s of %(results_quantity)s results"
 msgstr "%(first)s-%(last)s de %(results_quantity)s resultados"
 
-#: templates/results.html:32 templates/works-list.html:31
+#: templates/results.html:32 templates/works-list.html:32
 msgid "Available for download"
 msgstr "Disponible para descargar"
 
@@ -1994,22 +1998,22 @@ msgstr "Disponible para descargar"
 msgid "Can't find what you're looking for?"
 msgstr "¿No encuentras lo que estás buscando?"
 
-#: templates/results.html:52 templates/works-list.html:45
+#: templates/results.html:52 templates/works-list.html:46
 msgid "Pagination"
 msgstr "Paginación"
 
 #: templates/results.html:57 templates/results.html:61
-#: templates/works-list.html:50 templates/works-list.html:54
+#: templates/works-list.html:51 templates/works-list.html:55
 msgid "Previous"
 msgstr "Anterior"
 
-#: templates/results.html:66 templates/works-list.html:59
+#: templates/results.html:66 templates/works-list.html:60
 #, python-format
 msgid "Page %(page)s"
 msgstr "Página %(page)s"
 
 #: templates/results.html:72 templates/results.html:76
-#: templates/works-list.html:65 templates/works-list.html:69
+#: templates/works-list.html:66 templates/works-list.html:70
 msgid "Next"
 msgstr "Siguiente"
 
@@ -2105,16 +2109,16 @@ msgstr "Sin obras para %(author_name)s"
 msgid "Missing information?"
 msgstr "¿Falta información?"
 
-#: templates/works-list.html:14
+#: templates/works-list.html:15
 #, python-format
 msgid "List of works by %(author_name)s"
 msgstr "Lista de obras de %(author_name)s"
 
-#: templates/works-list.html:20
+#: templates/works-list.html:21
 msgid "View this query on the Wikidata Query Service"
 msgstr "Ver esta consulta en el Servicio de Consultas de Wikidata"
 
-#: templates/works-list.html:41
+#: templates/works-list.html:42
 msgid "Missing a work?"
 msgstr "¿Falta una obra?"
 
