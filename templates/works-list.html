@@ -8,7 +8,7 @@
   <!-- No works message -->
   <h2 class="mb-4 p-1">{{ _('No works by %(author_name)s were found', author_name=author_name) }}</h2>
   <p>{{ _('Missing information?') }}
-    <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page" target="_blank">{{ _('Add it to Wikidata') }}</a>.</p>
+    <a href="{{ url_for('add_work') }}">{{ _('Add a work') }}</a>.</p>
 
   {% else %}
   <h2 class="mb-2 p-1">{{ _('List of works by %(author_name)s', author_name=author_name) }}</h2>
@@ -38,6 +38,9 @@
     </a>
     {% endfor %}
   </div>
+  <p class="mt-3 text-muted small">{{ _('Missing a work?') }}
+    <a href="{{ url_for('add_work') }}">{{ _('Add a work') }}</a>
+  </p>
   {% if has_prev or has_next %}
   <nav aria-label="{{ _('Pagination') }}" class="mt-4">
     <ul class="pagination justify-content-center">
