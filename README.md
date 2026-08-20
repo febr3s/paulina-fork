@@ -6,12 +6,12 @@ and works in the public domain using Wikidata and Python.
 ## Requirements
 
 * Python 3.13 or later.
-* Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, python-dateutil, requests, requests-oauthlib.
-* A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/My_first_Flask_OAuth_tool#Step_2:_Create_a_basic_Flask_WSGI_webservice).
+* Python modules: flask, Flask-Babel, Flask-Caching, Flask-Limiter, gunicorn, python-dateutil, requests, requests-oauthlib.
+* A basic Flask WSGI webservice. Read more about [how to set it up](https://wikitech.wikimedia.org/wiki/Help:Toolforge/Building_container_images/My_first_Buildpack_Python_tool).
 
 ## Config file
 
-By default, `config.py` looks for [environment variables](https://en.wikipedia.org/wiki/Environment_variable) and, if it doesn't find them, it fallbacks to dummy values. You can set your own values in your environment (for example, using an `.env` file) or you can modify your `config.py` file locally (if you choose this last option, please don't push you modified `config.py` file to the repository!).
+By default, `config.py` looks for [environment variables](https://en.wikipedia.org/wiki/Environment_variable) and, if it doesn't find them, it fallbacks to dummy values. You can set your own values in your environment (for example, using an `.env` file) or you can modify your `config.py` file locally (if you choose this last option, please don't push your modified `config.py` file to the repository!).
 
 The only mandatory variables in the `config.py` file are `SECRET KEY` and `USER_AGENT`:
 
