@@ -448,7 +448,7 @@ class Work(Parent):
     """A class for cultural works."""
     def __init__(self, wikidata_item_id):
         super().__init__(wikidata_item_id)
-        self.instance_of = build_field(self.wikidata_item.get('statements', {}).get('P31'))
+        self.instance_of_ID = build_field(self.wikidata_item.get('statements', {}).get('P31'), field_type="plain_value")
 
         image = build_field(self.wikidata_item.get('statements', {}).get('P18'), field_type="plain_value")
         if image is None:

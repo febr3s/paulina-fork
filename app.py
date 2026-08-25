@@ -382,6 +382,10 @@ def works_list(author_id):
 def work_page(work_data):
     try:
         work = pdclasses.Work(work_data)
+        
+        if work.instance_of_ID in ["Q5", "Q2107056"]:
+            return redirect(url_for('author_page', author_data=work_data))
+        
         work_edit_eligibility = pdclasses.get_work_field_edit_eligibility(work.wikidata_item)
 
         # Convert dates to ISO format for date inputs
