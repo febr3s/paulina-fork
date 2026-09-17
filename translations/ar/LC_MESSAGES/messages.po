@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-20 18:51-0300\n"
+"POT-Creation-Date: 2026-09-17 14:57-0300\n"
 "PO-Revision-Date: 2025-11-01 22:51+0000\n"
 "Last-Translator: حبيشان Hubaishan <s.hubaishan@gmail.com>\n"
 "Language: ar\n"
@@ -48,140 +48,140 @@ msgstr "لا توجد نتائج"
 msgid "List of works"
 msgstr "قائمة الأعمال"
 
-#: app.py:455
+#: app.py:459
 #, python-format
 msgid "List of %(term_name)s"
 msgstr "قائمة %(term_name)s"
 
-#: app.py:472
+#: app.py:476
 msgid "Unknown term"
 msgstr "شروط غير معروفة"
 
-#: app.py:474 templates/countries.html:7 templates/layout.html:106
+#: app.py:478 templates/countries.html:7 templates/layout.html:106
 #: templates/layout.html:362
 msgid "Countries and terms"
 msgstr "الدول والشروط"
 
-#: app.py:505 templates/home.html:74 templates/layout.html:109
+#: app.py:509 templates/home.html:74 templates/layout.html:109
 #: templates/on-this-day.html:5
 msgid "On this day"
 msgstr ""
 
-#: app.py:620
+#: app.py:624
 msgid "Login failed. Please try again."
 msgstr ""
 
-#: app.py:630 app.py:700
+#: app.py:634 app.py:704
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: app.py:635
+#: app.py:639
 msgid "Login session expired. Please try again."
 msgstr ""
 
-#: app.py:642
+#: app.py:646
 msgid "Invalid state parameter. Please try again."
 msgstr ""
 
-#: app.py:662
+#: app.py:666
 msgid "Failed to obtain access token. Please try again."
 msgstr ""
 
-#: app.py:689
+#: app.py:693
 msgid "Failed to get user profile. Please try again."
 msgstr ""
 
-#: app.py:713
+#: app.py:717
 msgid "You have been logged out."
 msgstr ""
 
-#: app.py:726
+#: app.py:730
 msgid "Please login to add an author."
 msgstr ""
 
-#: app.py:731 app.py:846
+#: app.py:735 app.py:850
 msgid "Your session has expired. Please login again."
 msgstr ""
 
-#: app.py:739 app.py:854 app.py:965 app.py:1066
+#: app.py:743 app.py:858 app.py:969 app.py:1070
 msgid "Session expired. Please log in again."
 msgstr ""
 
-#: app.py:778
+#: app.py:782
 #, fuzzy, python-format
 msgid "Error creating author: %(error)s"
 msgstr "تاريخ الوفاة"
 
-#: app.py:784 app.py:795 app.py:826 templates/add-author.html:39
+#: app.py:788 app.py:799 app.py:830 templates/add-author.html:39
 #: templates/layout.html:67 templates/layout.html:124
 #, fuzzy
 msgid "Add Author"
 msgstr "المؤلفون"
 
-#: app.py:789
+#: app.py:793
 msgid "An error occurred while creating the author. Please try again."
 msgstr ""
 
-#: app.py:841
+#: app.py:845
 msgid "Please login to add a work."
 msgstr ""
 
-#: app.py:893
+#: app.py:897
 #, fuzzy, python-format
 msgid "Error creating work: %(error)s"
 msgstr "تاريخ الوفاة"
 
-#: app.py:899 app.py:910 app.py:941 templates/add-work.html:39
+#: app.py:903 app.py:914 app.py:945 templates/add-work.html:39
 #: templates/layout.html:73 templates/layout.html:130
 #, fuzzy
 msgid "Add Work"
 msgstr "أوجد الأعمال"
 
-#: app.py:904
+#: app.py:908
 msgid "An error occurred while creating the work. Please try again."
 msgstr ""
 
-#: app.py:958 app.py:1060
+#: app.py:962 app.py:1064
 msgid "You must be logged in to edit."
 msgstr ""
 
-#: app.py:974 app.py:1072
+#: app.py:978 app.py:1076
 msgid "Invalid request data."
 msgstr ""
 
-#: app.py:981 app.py:1076
+#: app.py:985 app.py:1080
 msgid "No changes provided."
 msgstr ""
 
-#: app.py:1001 app.py:1092
+#: app.py:1005 app.py:1096
 #, python-format
 msgid "Missing property or value for field: %(field)s"
 msgstr ""
 
-#: app.py:1022 app.py:1110
+#: app.py:1026 app.py:1114
 #, fuzzy, python-format
 msgid "Error updating %(field)s: %(error)s"
 msgstr "تاريخ الوفاة"
 
-#: app.py:1030 app.py:1115
+#: app.py:1034 app.py:1119
 msgid "Successfully updated!"
 msgstr ""
 
-#: app.py:1035 app.py:1117
+#: app.py:1039 app.py:1121
 #, fuzzy
 msgid "Updated with some errors."
 msgstr "تاريخ الميلاد"
 
-#: app.py:1041 app.py:1119
+#: app.py:1045 app.py:1123
 msgid "Failed to update fields."
 msgstr ""
 
-#: app.py:1048 app.py:1122
+#: app.py:1052 app.py:1126
 #, fuzzy, python-format
 msgid "Server error: %(error)s"
 msgstr "تاريخ الميلاد"
 
-#: app.py:1136
+#: app.py:1140
 msgid "404 error"
 msgstr "خطأ 404"
 
